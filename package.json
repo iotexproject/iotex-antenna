@@ -1,0 +1,92 @@
+{
+  "name": "flowtype-boilerplate",
+  "version": "1.2.0",
+  "description": "field_description",
+  "main": "index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "npm run flow && npm run cover",
+    "check-coverage": "nyc check-coverage --lines 65 --functions 60 --Statements 65",
+    "ava": "NODE_ENV=test ava",
+    "server": "node server",
+    "lint": "eslint . --fix",
+    "cover": "NODE_ENV=test npm run lint && nyc npm run ava",
+    "flow": "flow",
+    "flow-install": "flow-typed install",
+    "size": "ls -lh dist/",
+    "bp": "npm run build && npm run size",
+    "build": "babel src/*.js src/**/*.js --ignore src/**/*.test.js -d dist",
+    "build:watch": "babel --watch src/**/*.js -d dist",
+    "build-proto": "protoc -I=./src/proto/ api.proto --js_out=import_style=commonjs:./src/proto/ && protoc -I=./src/proto/ api.proto --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./src/proto/",
+    "changelog-major": "build-changelog --major",
+    "changelog-minor": "build-changelog --minor",
+    "changelog-patch": "build-changelog --patch"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "src/**/*.test.js",
+      "src/**/__tests__/**"
+    ],
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary",
+      "cobertura"
+    ],
+    "extension": [
+      ".jsx"
+    ],
+    "cache": true,
+    "temp-directory": "./coverage/.nyc_output"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/puncsky/template_website.git"
+  },
+  "keywords": [],
+  "author": "field_author",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/puncsky/template_website/issues"
+  },
+  "homepage": "https://github.com/puncsky/template_website#readme",
+  "devDependencies": {
+    "@babel/cli": "7.2.3",
+    "@babel/core": "7.2.2",
+    "@babel/plugin-proposal-object-rest-spread": "7.2.0",
+    "@babel/plugin-transform-flow-strip-types": "7.2.3",
+    "@babel/polyfill": "7.2.5",
+    "@babel/preset-env": "7.2.3",
+    "@babel/preset-flow": "7.0.0",
+    "@babel/preset-react": "7.0.0",
+    "@babel/register": "7.0.0",
+    "ava": "1.0.1",
+    "babel-eslint": "9.0.0",
+    "babel-loader": "8.0.5",
+    "babel-plugin-module-resolver": "3.1.1",
+    "babel-plugin-react-require": "3.0.1",
+    "babel-plugin-transform-class-properties": "6.24.1",
+    "build-changelog": "2.1.2",
+    "eslint": "5.12.0",
+    "eslint-plugin-babel": "5.3.0",
+    "eslint-plugin-flowtype": "2.50.3",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-react": "7.12.3",
+    "flow-bin": "0.89.0",
+    "flow-typed": "2.5.1",
+    "global": "4.3.2",
+    "jsdom": "12.2.0",
+    "jsdom-global": "3.0.2",
+    "nyc": "13.1.0"
+  },
+  "engines": {
+    "node": "10.15.0",
+    "npm": "6.5.0"
+  },
+  "private": true
+}
