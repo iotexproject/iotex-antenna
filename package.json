@@ -13,11 +13,11 @@
     "server": "node server",
     "lint": "eslint . --fix",
     "cover": "NODE_ENV=test npm run lint && nyc npm run ava",
-    "flow": "flow",
+    "flow": "flow stop && flow",
     "flow-install": "flow-typed install",
     "size": "ls -lh dist/",
     "bp": "npm run build && npm run size",
-    "build": "babel src/*.js src/**/*.js --ignore src/**/*.test.js -d dist",
+    "build": "rm -rf ./dist && babel src/ --ignore **/__test__/**,src/**/**.test.js -d dist",
     "build:watch": "babel --watch src/**/*.js -d dist",
     "build-proto": "protoc -I=./src/proto/ api.proto --js_out=import_style=commonjs:./src/proto/ && protoc -I=./src/proto/ api.proto --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./src/proto/",
     "changelog-major": "build-changelog --major",
@@ -88,5 +88,12 @@
     "node": "10.15.0",
     "npm": "6.5.0"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@grpc/proto-loader": "^0.4.0",
+    "google-protobuf": "^3.7.0-rc.2",
+    "grpc": "^1.18.0",
+    "grpc-web": "^1.0.3",
+    "protobufjs": "^6.8.8"
+  }
 }
