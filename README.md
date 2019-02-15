@@ -1,4 +1,4 @@
-# flowtype-boilerplate
+# iotex-antenna
 
 ```bash
 nvm use 8.12.0
@@ -10,4 +10,3 @@ npm run build
 # publish
 npm publish
 ```
-# iotex-antenna
