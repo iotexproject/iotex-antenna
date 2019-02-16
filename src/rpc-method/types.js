@@ -36,6 +36,18 @@ export class GetAccountRequest {
   }
 
   static from(pbRes: any): IGetAccountResponse {
-    return pbRes.toObject();
+    const meta = pbRes.getAccountmeta();
+    const res = {
+      accountMeta: meta,
+    };
+    if (meta) {
+      res.accountMeta = {
+        address: meta.getAddress(),
+        balance: meta.getBalance(),
+        nonce: meta.getNonce(),
+        pendingNonce: meta.getPendingnonce(),
+      };
+    }
+    return res;
   }
 }
