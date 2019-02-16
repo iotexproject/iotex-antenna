@@ -19,7 +19,7 @@
     "bp": "npm run build && npm run size",
     "build": "rm -rf ./dist && babel src/ --ignore **/__test__/**,src/**/**.test.js -d dist",
     "build:watch": "babel --watch src/**/*.js -d dist",
-    "build-proto": "protoc -I=./src/proto/ api.proto --js_out=import_style=commonjs:./src/proto/ && protoc -I=./src/proto/ api.proto --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./src/proto/",
+    "build-proto": "protoc -I=./src/proto/ api.proto action.proto blockchain.proto endorsement.proto state.proto --js_out=import_style=commonjs:./src/proto/ && protoc -I=./src/proto/ api.proto action.proto blockchain.proto endorsement.proto state.proto --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./src/proto/",
     "changelog-major": "build-changelog --major",
     "changelog-minor": "build-changelog --minor",
     "changelog-patch": "build-changelog --patch"
@@ -71,6 +71,7 @@
     "babel-plugin-module-resolver": "3.1.1",
     "babel-plugin-react-require": "3.0.1",
     "babel-plugin-transform-class-properties": "6.24.1",
+    "browser-env": "^3.2.5",
     "build-changelog": "2.1.2",
     "eslint": "5.12.0",
     "eslint-plugin-babel": "5.3.0",
@@ -80,8 +81,6 @@
     "flow-bin": "0.89.0",
     "flow-typed": "2.5.1",
     "global": "4.3.2",
-    "jsdom": "12.2.0",
-    "jsdom-global": "3.0.2",
     "nyc": "13.1.0"
   },
   "engines": {

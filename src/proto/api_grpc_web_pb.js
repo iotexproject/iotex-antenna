@@ -15,8 +15,6 @@ grpc.web = require('grpc-web');
 var action_pb = require('./action_pb.js')
 
 var blockchain_pb = require('./blockchain_pb.js')
-
-var state_pb = require('./state_pb.js')
 const proto = {};
 proto.iotexapi = require('./api_pb.js');
 

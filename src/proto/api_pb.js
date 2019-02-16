@@ -13,13 +13,12 @@ var global = Function('return this')();
 
 var action_pb = require('./action_pb.js');
 var blockchain_pb = require('./blockchain_pb.js');
-var state_pb = require('./state_pb.js');
 goog.exportSymbol('proto.iotexapi.EstimateGasForActionRequest', null, global);
 goog.exportSymbol('proto.iotexapi.EstimateGasForActionResponse', null, global);
 goog.exportSymbol('proto.iotexapi.GetAccountRequest', null, global);
 goog.exportSymbol('proto.iotexapi.GetAccountResponse', null, global);
-goog.exportSymbol('proto.iotexapi.GetActionByAddressRequest', null, global);
 goog.exportSymbol('proto.iotexapi.GetActionByHashRequest', null, global);
+goog.exportSymbol('proto.iotexapi.GetActionsByAddressRequest', null, global);
 goog.exportSymbol('proto.iotexapi.GetActionsByBlockRequest', null, global);
 goog.exportSymbol('proto.iotexapi.GetActionsByIndexRequest', null, global);
 goog.exportSymbol('proto.iotexapi.GetActionsRequest', null, global);
@@ -228,7 +227,7 @@ proto.iotexapi.GetAccountResponse.prototype.toObject = function(opt_includeInsta
  */
 proto.iotexapi.GetAccountResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    accountmeta: (f = msg.getAccountmeta()) && state_pb.AccountMeta.toObject(includeInstance, f)
+    accountmeta: (f = msg.getAccountmeta()) && blockchain_pb.AccountMeta.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -266,8 +265,8 @@ proto.iotexapi.GetAccountResponse.deserializeBinaryFromReader = function(msg, re
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new state_pb.AccountMeta;
-      reader.readMessage(value,state_pb.AccountMeta.deserializeBinaryFromReader);
+      var value = new blockchain_pb.AccountMeta;
+      reader.readMessage(value,blockchain_pb.AccountMeta.deserializeBinaryFromReader);
       msg.setAccountmeta(value);
       break;
     default:
@@ -304,23 +303,23 @@ proto.iotexapi.GetAccountResponse.serializeBinaryToWriter = function(message, wr
     writer.writeMessage(
       1,
       f,
-      state_pb.AccountMeta.serializeBinaryToWriter
+      blockchain_pb.AccountMeta.serializeBinaryToWriter
     );
   }
 };
 
 
 /**
- * optional iproto.AccountMeta accountMeta = 1;
- * @return {?proto.iproto.AccountMeta}
+ * optional iotextypes.AccountMeta accountMeta = 1;
+ * @return {?proto.iotextypes.AccountMeta}
  */
 proto.iotexapi.GetAccountResponse.prototype.getAccountmeta = function() {
-  return /** @type{?proto.iproto.AccountMeta} */ (
-    jspb.Message.getWrapperField(this, state_pb.AccountMeta, 1));
+  return /** @type{?proto.iotextypes.AccountMeta} */ (
+    jspb.Message.getWrapperField(this, blockchain_pb.AccountMeta, 1));
 };
 
 
-/** @param {?proto.iproto.AccountMeta|undefined} value */
+/** @param {?proto.iotextypes.AccountMeta|undefined} value */
 proto.iotexapi.GetAccountResponse.prototype.setAccountmeta = function(value) {
   jspb.Message.setWrapperField(this, 1, value);
 };
@@ -418,7 +417,7 @@ proto.iotexapi.GetActionsRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     byindex: (f = msg.getByindex()) && proto.iotexapi.GetActionsByIndexRequest.toObject(includeInstance, f),
     byhash: (f = msg.getByhash()) && proto.iotexapi.GetActionByHashRequest.toObject(includeInstance, f),
-    byaddr: (f = msg.getByaddr()) && proto.iotexapi.GetActionByHashRequest.toObject(includeInstance, f),
+    byaddr: (f = msg.getByaddr()) && proto.iotexapi.GetActionsByAddressRequest.toObject(includeInstance, f),
     unconfirmedbyaddr: (f = msg.getUnconfirmedbyaddr()) && proto.iotexapi.GetUnconfirmedActionsByAddressRequest.toObject(includeInstance, f),
     byblk: (f = msg.getByblk()) && proto.iotexapi.GetActionsByBlockRequest.toObject(includeInstance, f)
   };
@@ -468,8 +467,8 @@ proto.iotexapi.GetActionsRequest.deserializeBinaryFromReader = function(msg, rea
       msg.setByhash(value);
       break;
     case 3:
-      var value = new proto.iotexapi.GetActionByHashRequest;
-      reader.readMessage(value,proto.iotexapi.GetActionByHashRequest.deserializeBinaryFromReader);
+      var value = new proto.iotexapi.GetActionsByAddressRequest;
+      reader.readMessage(value,proto.iotexapi.GetActionsByAddressRequest.deserializeBinaryFromReader);
       msg.setByaddr(value);
       break;
     case 4:
@@ -532,7 +531,7 @@ proto.iotexapi.GetActionsRequest.serializeBinaryToWriter = function(message, wri
     writer.writeMessage(
       3,
       f,
-      proto.iotexapi.GetActionByHashRequest.serializeBinaryToWriter
+      proto.iotexapi.GetActionsByAddressRequest.serializeBinaryToWriter
     );
   }
   f = message.getUnconfirmedbyaddr();
@@ -615,16 +614,16 @@ proto.iotexapi.GetActionsRequest.prototype.hasByhash = function() {
 
 
 /**
- * optional GetActionByHashRequest byAddr = 3;
- * @return {?proto.iotexapi.GetActionByHashRequest}
+ * optional GetActionsByAddressRequest byAddr = 3;
+ * @return {?proto.iotexapi.GetActionsByAddressRequest}
  */
 proto.iotexapi.GetActionsRequest.prototype.getByaddr = function() {
-  return /** @type{?proto.iotexapi.GetActionByHashRequest} */ (
-    jspb.Message.getWrapperField(this, proto.iotexapi.GetActionByHashRequest, 3));
+  return /** @type{?proto.iotexapi.GetActionsByAddressRequest} */ (
+    jspb.Message.getWrapperField(this, proto.iotexapi.GetActionsByAddressRequest, 3));
 };
 
 
-/** @param {?proto.iotexapi.GetActionByHashRequest|undefined} value */
+/** @param {?proto.iotexapi.GetActionsByAddressRequest|undefined} value */
 proto.iotexapi.GetActionsRequest.prototype.setByaddr = function(value) {
   jspb.Message.setOneofWrapperField(this, 3, proto.iotexapi.GetActionsRequest.oneofGroups_[0], value);
 };
@@ -1055,12 +1054,12 @@ proto.iotexapi.GetActionByHashRequest.prototype.setCheckpending = function(value
  * @extends {jspb.Message}
  * @constructor
  */
-proto.iotexapi.GetActionByAddressRequest = function(opt_data) {
+proto.iotexapi.GetActionsByAddressRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.iotexapi.GetActionByAddressRequest, jspb.Message);
+goog.inherits(proto.iotexapi.GetActionsByAddressRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetActionByAddressRequest.displayName = 'proto.iotexapi.GetActionByAddressRequest';
+  proto.iotexapi.GetActionsByAddressRequest.displayName = 'proto.iotexapi.GetActionsByAddressRequest';
 }
 
 
@@ -1075,8 +1074,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.iotexapi.GetActionByAddressRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.iotexapi.GetActionByAddressRequest.toObject(opt_includeInstance, this);
+proto.iotexapi.GetActionsByAddressRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetActionsByAddressRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -1085,11 +1084,11 @@ proto.iotexapi.GetActionByAddressRequest.prototype.toObject = function(opt_inclu
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.iotexapi.GetActionByAddressRequest} msg The msg instance to transform.
+ * @param {!proto.iotexapi.GetActionsByAddressRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetActionByAddressRequest.toObject = function(includeInstance, msg) {
+proto.iotexapi.GetActionsByAddressRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     address: jspb.Message.getFieldWithDefault(msg, 1, ""),
     start: jspb.Message.getFieldWithDefault(msg, 2, 0),
@@ -1107,23 +1106,23 @@ proto.iotexapi.GetActionByAddressRequest.toObject = function(includeInstance, ms
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.iotexapi.GetActionByAddressRequest}
+ * @return {!proto.iotexapi.GetActionsByAddressRequest}
  */
-proto.iotexapi.GetActionByAddressRequest.deserializeBinary = function(bytes) {
+proto.iotexapi.GetActionsByAddressRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetActionByAddressRequest;
-  return proto.iotexapi.GetActionByAddressRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.iotexapi.GetActionsByAddressRequest;
+  return proto.iotexapi.GetActionsByAddressRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.iotexapi.GetActionByAddressRequest} msg The message object to deserialize into.
+ * @param {!proto.iotexapi.GetActionsByAddressRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.iotexapi.GetActionByAddressRequest}
+ * @return {!proto.iotexapi.GetActionsByAddressRequest}
  */
-proto.iotexapi.GetActionByAddressRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.iotexapi.GetActionsByAddressRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -1155,9 +1154,9 @@ proto.iotexapi.GetActionByAddressRequest.deserializeBinaryFromReader = function(
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.iotexapi.GetActionByAddressRequest.prototype.serializeBinary = function() {
+proto.iotexapi.GetActionsByAddressRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.iotexapi.GetActionByAddressRequest.serializeBinaryToWriter(this, writer);
+  proto.iotexapi.GetActionsByAddressRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -1165,11 +1164,11 @@ proto.iotexapi.GetActionByAddressRequest.prototype.serializeBinary = function() 
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.iotexapi.GetActionByAddressRequest} message
+ * @param {!proto.iotexapi.GetActionsByAddressRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetActionByAddressRequest.serializeBinaryToWriter = function(message, writer) {
+proto.iotexapi.GetActionsByAddressRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getAddress();
   if (f.length > 0) {
@@ -1199,13 +1198,13 @@ proto.iotexapi.GetActionByAddressRequest.serializeBinaryToWriter = function(mess
  * optional string address = 1;
  * @return {string}
  */
-proto.iotexapi.GetActionByAddressRequest.prototype.getAddress = function() {
+proto.iotexapi.GetActionsByAddressRequest.prototype.getAddress = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /** @param {string} value */
-proto.iotexapi.GetActionByAddressRequest.prototype.setAddress = function(value) {
+proto.iotexapi.GetActionsByAddressRequest.prototype.setAddress = function(value) {
   jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -1214,13 +1213,13 @@ proto.iotexapi.GetActionByAddressRequest.prototype.setAddress = function(value) 
  * optional uint64 start = 2;
  * @return {number}
  */
-proto.iotexapi.GetActionByAddressRequest.prototype.getStart = function() {
+proto.iotexapi.GetActionsByAddressRequest.prototype.getStart = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
 
 /** @param {number} value */
-proto.iotexapi.GetActionByAddressRequest.prototype.setStart = function(value) {
+proto.iotexapi.GetActionsByAddressRequest.prototype.setStart = function(value) {
   jspb.Message.setProto3IntField(this, 2, value);
 };
 
@@ -1229,13 +1228,13 @@ proto.iotexapi.GetActionByAddressRequest.prototype.setStart = function(value) {
  * optional uint64 count = 3;
  * @return {number}
  */
-proto.iotexapi.GetActionByAddressRequest.prototype.getCount = function() {
+proto.iotexapi.GetActionsByAddressRequest.prototype.getCount = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
 /** @param {number} value */
-proto.iotexapi.GetActionByAddressRequest.prototype.setCount = function(value) {
+proto.iotexapi.GetActionsByAddressRequest.prototype.setCount = function(value) {
   jspb.Message.setProto3IntField(this, 3, value);
 };
 
@@ -1687,7 +1686,7 @@ proto.iotexapi.GetActionsResponse.prototype.toObject = function(opt_includeInsta
 proto.iotexapi.GetActionsResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     actionsList: jspb.Message.toObjectList(msg.getActionsList(),
-    action_pb.ActionPb.toObject, includeInstance)
+    action_pb.Action.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -1725,8 +1724,8 @@ proto.iotexapi.GetActionsResponse.deserializeBinaryFromReader = function(msg, re
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new action_pb.ActionPb;
-      reader.readMessage(value,action_pb.ActionPb.deserializeBinaryFromReader);
+      var value = new action_pb.Action;
+      reader.readMessage(value,action_pb.Action.deserializeBinaryFromReader);
       msg.addActions(value);
       break;
     default:
@@ -1763,35 +1762,35 @@ proto.iotexapi.GetActionsResponse.serializeBinaryToWriter = function(message, wr
     writer.writeRepeatedMessage(
       1,
       f,
-      action_pb.ActionPb.serializeBinaryToWriter
+      action_pb.Action.serializeBinaryToWriter
     );
   }
 };
 
 
 /**
- * repeated iproto.ActionPb actions = 1;
- * @return {!Array<!proto.iproto.ActionPb>}
+ * repeated iotextypes.Action actions = 1;
+ * @return {!Array<!proto.iotextypes.Action>}
  */
 proto.iotexapi.GetActionsResponse.prototype.getActionsList = function() {
-  return /** @type{!Array<!proto.iproto.ActionPb>} */ (
-    jspb.Message.getRepeatedWrapperField(this, action_pb.ActionPb, 1));
+  return /** @type{!Array<!proto.iotextypes.Action>} */ (
+    jspb.Message.getRepeatedWrapperField(this, action_pb.Action, 1));
 };
 
 
-/** @param {!Array<!proto.iproto.ActionPb>} value */
+/** @param {!Array<!proto.iotextypes.Action>} value */
 proto.iotexapi.GetActionsResponse.prototype.setActionsList = function(value) {
   jspb.Message.setRepeatedWrapperField(this, 1, value);
 };
 
 
 /**
- * @param {!proto.iproto.ActionPb=} opt_value
+ * @param {!proto.iotextypes.Action=} opt_value
  * @param {number=} opt_index
- * @return {!proto.iproto.ActionPb}
+ * @return {!proto.iotextypes.Action}
  */
 proto.iotexapi.GetActionsResponse.prototype.addActions = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.iproto.ActionPb, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.iotextypes.Action, opt_index);
 };
 
 
@@ -2478,28 +2477,28 @@ proto.iotexapi.GetBlockMetasResponse.serializeBinaryToWriter = function(message,
 
 
 /**
- * repeated iproto.BlockMeta blkMetas = 1;
- * @return {!Array<!proto.iproto.BlockMeta>}
+ * repeated iotextypes.BlockMeta blkMetas = 1;
+ * @return {!Array<!proto.iotextypes.BlockMeta>}
  */
 proto.iotexapi.GetBlockMetasResponse.prototype.getBlkmetasList = function() {
-  return /** @type{!Array<!proto.iproto.BlockMeta>} */ (
+  return /** @type{!Array<!proto.iotextypes.BlockMeta>} */ (
     jspb.Message.getRepeatedWrapperField(this, blockchain_pb.BlockMeta, 1));
 };
 
 
-/** @param {!Array<!proto.iproto.BlockMeta>} value */
+/** @param {!Array<!proto.iotextypes.BlockMeta>} value */
 proto.iotexapi.GetBlockMetasResponse.prototype.setBlkmetasList = function(value) {
   jspb.Message.setRepeatedWrapperField(this, 1, value);
 };
 
 
 /**
- * @param {!proto.iproto.BlockMeta=} opt_value
+ * @param {!proto.iotextypes.BlockMeta=} opt_value
  * @param {number=} opt_index
- * @return {!proto.iproto.BlockMeta}
+ * @return {!proto.iotextypes.BlockMeta}
  */
 proto.iotexapi.GetBlockMetasResponse.prototype.addBlkmetas = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.iproto.BlockMeta, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.iotextypes.BlockMeta, opt_index);
 };
 
 
@@ -2754,16 +2753,16 @@ proto.iotexapi.GetChainMetaResponse.serializeBinaryToWriter = function(message, 
 
 
 /**
- * optional iproto.ChainMeta chainMeta = 1;
- * @return {?proto.iproto.ChainMeta}
+ * optional iotextypes.ChainMeta chainMeta = 1;
+ * @return {?proto.iotextypes.ChainMeta}
  */
 proto.iotexapi.GetChainMetaResponse.prototype.getChainmeta = function() {
-  return /** @type{?proto.iproto.ChainMeta} */ (
+  return /** @type{?proto.iotextypes.ChainMeta} */ (
     jspb.Message.getWrapperField(this, blockchain_pb.ChainMeta, 1));
 };
 
 
-/** @param {?proto.iproto.ChainMeta|undefined} value */
+/** @param {?proto.iotextypes.ChainMeta|undefined} value */
 proto.iotexapi.GetChainMetaResponse.prototype.setChainmeta = function(value) {
   jspb.Message.setWrapperField(this, 1, value);
 };
@@ -2830,7 +2829,7 @@ proto.iotexapi.SendActionRequest.prototype.toObject = function(opt_includeInstan
  */
 proto.iotexapi.SendActionRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    action: (f = msg.getAction()) && action_pb.ActionPb.toObject(includeInstance, f)
+    action: (f = msg.getAction()) && action_pb.Action.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2868,8 +2867,8 @@ proto.iotexapi.SendActionRequest.deserializeBinaryFromReader = function(msg, rea
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new action_pb.ActionPb;
-      reader.readMessage(value,action_pb.ActionPb.deserializeBinaryFromReader);
+      var value = new action_pb.Action;
+      reader.readMessage(value,action_pb.Action.deserializeBinaryFromReader);
       msg.setAction(value);
       break;
     default:
@@ -2906,23 +2905,23 @@ proto.iotexapi.SendActionRequest.serializeBinaryToWriter = function(message, wri
     writer.writeMessage(
       1,
       f,
-      action_pb.ActionPb.serializeBinaryToWriter
+      action_pb.Action.serializeBinaryToWriter
     );
   }
 };
 
 
 /**
- * optional iproto.ActionPb action = 1;
- * @return {?proto.iproto.ActionPb}
+ * optional iotextypes.Action action = 1;
+ * @return {?proto.iotextypes.Action}
  */
 proto.iotexapi.SendActionRequest.prototype.getAction = function() {
-  return /** @type{?proto.iproto.ActionPb} */ (
-    jspb.Message.getWrapperField(this, action_pb.ActionPb, 1));
+  return /** @type{?proto.iotextypes.Action} */ (
+    jspb.Message.getWrapperField(this, action_pb.Action, 1));
 };
 
 
-/** @param {?proto.iproto.ActionPb|undefined} value */
+/** @param {?proto.iotextypes.Action|undefined} value */
 proto.iotexapi.SendActionRequest.prototype.setAction = function(value) {
   jspb.Message.setWrapperField(this, 1, value);
 };
@@ -3247,7 +3246,7 @@ proto.iotexapi.GetReceiptByActionResponse.prototype.toObject = function(opt_incl
  */
 proto.iotexapi.GetReceiptByActionResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    receipt: (f = msg.getReceipt()) && action_pb.ReceiptPb.toObject(includeInstance, f)
+    receipt: (f = msg.getReceipt()) && action_pb.Receipt.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -3285,8 +3284,8 @@ proto.iotexapi.GetReceiptByActionResponse.deserializeBinaryFromReader = function
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new action_pb.ReceiptPb;
-      reader.readMessage(value,action_pb.ReceiptPb.deserializeBinaryFromReader);
+      var value = new action_pb.Receipt;
+      reader.readMessage(value,action_pb.Receipt.deserializeBinaryFromReader);
       msg.setReceipt(value);
       break;
     default:
@@ -3323,23 +3322,23 @@ proto.iotexapi.GetReceiptByActionResponse.serializeBinaryToWriter = function(mes
     writer.writeMessage(
       1,
       f,
-      action_pb.ReceiptPb.serializeBinaryToWriter
+      action_pb.Receipt.serializeBinaryToWriter
     );
   }
 };
 
 
 /**
- * optional iproto.ReceiptPb receipt = 1;
- * @return {?proto.iproto.ReceiptPb}
+ * optional iotextypes.Receipt receipt = 1;
+ * @return {?proto.iotextypes.Receipt}
  */
 proto.iotexapi.GetReceiptByActionResponse.prototype.getReceipt = function() {
-  return /** @type{?proto.iproto.ReceiptPb} */ (
-    jspb.Message.getWrapperField(this, action_pb.ReceiptPb, 1));
+  return /** @type{?proto.iotextypes.Receipt} */ (
+    jspb.Message.getWrapperField(this, action_pb.Receipt, 1));
 };
 
 
-/** @param {?proto.iproto.ReceiptPb|undefined} value */
+/** @param {?proto.iotextypes.Receipt|undefined} value */
 proto.iotexapi.GetReceiptByActionResponse.prototype.setReceipt = function(value) {
   jspb.Message.setWrapperField(this, 1, value);
 };
@@ -3406,7 +3405,7 @@ proto.iotexapi.ReadContractRequest.prototype.toObject = function(opt_includeInst
  */
 proto.iotexapi.ReadContractRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    action: (f = msg.getAction()) && action_pb.ActionPb.toObject(includeInstance, f)
+    action: (f = msg.getAction()) && action_pb.Action.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -3444,8 +3443,8 @@ proto.iotexapi.ReadContractRequest.deserializeBinaryFromReader = function(msg, r
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new action_pb.ActionPb;
-      reader.readMessage(value,action_pb.ActionPb.deserializeBinaryFromReader);
+      var value = new action_pb.Action;
+      reader.readMessage(value,action_pb.Action.deserializeBinaryFromReader);
       msg.setAction(value);
       break;
     default:
@@ -3482,23 +3481,23 @@ proto.iotexapi.ReadContractRequest.serializeBinaryToWriter = function(message, w
     writer.writeMessage(
       1,
       f,
-      action_pb.ActionPb.serializeBinaryToWriter
+      action_pb.Action.serializeBinaryToWriter
     );
   }
 };
 
 
 /**
- * optional iproto.ActionPb action = 1;
- * @return {?proto.iproto.ActionPb}
+ * optional iotextypes.Action action = 1;
+ * @return {?proto.iotextypes.Action}
  */
 proto.iotexapi.ReadContractRequest.prototype.getAction = function() {
-  return /** @type{?proto.iproto.ActionPb} */ (
-    jspb.Message.getWrapperField(this, action_pb.ActionPb, 1));
+  return /** @type{?proto.iotextypes.Action} */ (
+    jspb.Message.getWrapperField(this, action_pb.Action, 1));
 };
 
 
-/** @param {?proto.iproto.ActionPb|undefined} value */
+/** @param {?proto.iotextypes.Action|undefined} value */
 proto.iotexapi.ReadContractRequest.prototype.setAction = function(value) {
   jspb.Message.setWrapperField(this, 1, value);
 };
@@ -3965,7 +3964,7 @@ proto.iotexapi.EstimateGasForActionRequest.prototype.toObject = function(opt_inc
  */
 proto.iotexapi.EstimateGasForActionRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    action: (f = msg.getAction()) && action_pb.ActionPb.toObject(includeInstance, f)
+    action: (f = msg.getAction()) && action_pb.Action.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -4003,8 +4002,8 @@ proto.iotexapi.EstimateGasForActionRequest.deserializeBinaryFromReader = functio
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new action_pb.ActionPb;
-      reader.readMessage(value,action_pb.ActionPb.deserializeBinaryFromReader);
+      var value = new action_pb.Action;
+      reader.readMessage(value,action_pb.Action.deserializeBinaryFromReader);
       msg.setAction(value);
       break;
     default:
@@ -4041,23 +4040,23 @@ proto.iotexapi.EstimateGasForActionRequest.serializeBinaryToWriter = function(me
     writer.writeMessage(
       1,
       f,
-      action_pb.ActionPb.serializeBinaryToWriter
+      action_pb.Action.serializeBinaryToWriter
     );
   }
 };
 
 
 /**
- * optional iproto.ActionPb action = 1;
- * @return {?proto.iproto.ActionPb}
+ * optional iotextypes.Action action = 1;
+ * @return {?proto.iotextypes.Action}
  */
 proto.iotexapi.EstimateGasForActionRequest.prototype.getAction = function() {
-  return /** @type{?proto.iproto.ActionPb} */ (
-    jspb.Message.getWrapperField(this, action_pb.ActionPb, 1));
+  return /** @type{?proto.iotextypes.Action} */ (
+    jspb.Message.getWrapperField(this, action_pb.Action, 1));
 };
 
 
-/** @param {?proto.iproto.ActionPb|undefined} value */
+/** @param {?proto.iotextypes.Action|undefined} value */
 proto.iotexapi.EstimateGasForActionRequest.prototype.setAction = function(value) {
   jspb.Message.setWrapperField(this, 1, value);
 };
@@ -4124,7 +4123,7 @@ proto.iotexapi.EstimateGasForActionResponse.prototype.toObject = function(opt_in
  */
 proto.iotexapi.EstimateGasForActionResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    gasprice: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    gas: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -4163,7 +4162,7 @@ proto.iotexapi.EstimateGasForActionResponse.deserializeBinaryFromReader = functi
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readUint64());
-      msg.setGasprice(value);
+      msg.setGas(value);
       break;
     default:
       reader.skipField();
@@ -4194,7 +4193,7 @@ proto.iotexapi.EstimateGasForActionResponse.prototype.serializeBinary = function
  */
 proto.iotexapi.EstimateGasForActionResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getGasprice();
+  f = message.getGas();
   if (f !== 0) {
     writer.writeUint64(
       1,
@@ -4205,16 +4204,16 @@ proto.iotexapi.EstimateGasForActionResponse.serializeBinaryToWriter = function(m
 
 
 /**
- * optional uint64 gasPrice = 1;
+ * optional uint64 gas = 1;
  * @return {number}
  */
-proto.iotexapi.EstimateGasForActionResponse.prototype.getGasprice = function() {
+proto.iotexapi.EstimateGasForActionResponse.prototype.getGas = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /** @param {number} value */
-proto.iotexapi.EstimateGasForActionResponse.prototype.setGasprice = function(value) {
+proto.iotexapi.EstimateGasForActionResponse.prototype.setGas = function(value) {
   jspb.Message.setProto3IntField(this, 1, value);
 };
 
