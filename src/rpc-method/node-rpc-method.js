@@ -1,4 +1,5 @@
 // @flow
+import {promisify} from 'util';
 import grpc from 'grpc';
 import * as protoLoader from '@grpc/proto-loader';
 import type {IGetAccountRequest, IGetAccountResponse} from './types';
@@ -21,14 +22,7 @@ export default class RpcMethod {
   }
 
   async getAccount(req: IGetAccountRequest): Promise<IGetAccountResponse> {
-    return new Promise<IGetAccountResponse>((resolve, reject) => {
-      this.client.getAccount(req, (err, pbResp) => {
-        if (err) {
-          return reject(err);
-        }
-
-        return resolve((pbResp));
-      });
-    });
+    const getAccount = promisify(this.client.getAccount.bind(this.client));
+    return await getAccount(req);
   }
 }
