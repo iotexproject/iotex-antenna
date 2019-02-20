@@ -28,6 +28,27 @@ export interface IGetAccountResponse {
   accountMeta?: IAccountMeta | null
 }
 
+interface IEpochData {
+  num?: number | null,
+  height?: number | null,
+  beaconChainHeight?: number | null,
+}
+
+interface IChainMeta {
+  height?: string | null,
+  supply?: string | null,
+  numActions?: string | null,
+  tps?: string | null,
+  epoch?: IEpochData | null,
+}
+
+export interface IGetChainMetaRequest {
+}
+
+export interface IGetChainMetaResponse {
+  chainMeta?: IChainMeta | null
+}
+
 export class GetAccountRequest {
   static to(req: IGetAccountRequest): any {
     const pbReq = new apiPb.GetAccountRequest();
