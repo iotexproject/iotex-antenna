@@ -2,7 +2,7 @@
 import {promisify} from 'util';
 import grpc from 'grpc';
 import * as protoLoader from '@grpc/proto-loader';
-import type {IGetAccountRequest, IGetAccountResponse} from './types';
+import type {IGetAccountRequest, IGetAccountResponse, IGetBlockMetasRequest, IGetBlockMetasResponse} from './types';
 
 export default class RpcMethod {
   client: any;
@@ -24,5 +24,10 @@ export default class RpcMethod {
   async getAccount(req: IGetAccountRequest): Promise<IGetAccountResponse> {
     const getAccount = promisify(this.client.getAccount.bind(this.client));
     return await getAccount(req);
+  }
+
+  async getBlockMetas(req: IGetBlockMetasRequest): Promise<IGetBlockMetasResponse> {
+    const getBlockMetas = promisify(this.client.getBlockMetas.bind(this.client));
+    return await getBlockMetas(req);
   }
 }

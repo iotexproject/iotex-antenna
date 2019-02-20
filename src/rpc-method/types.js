@@ -51,3 +51,104 @@ export class GetAccountRequest {
     return res;
   }
 }
+
+/** Properties of a GetBlockMetasByIndexRequest. */
+export interface IGetBlockMetasByIndexRequest {
+  /** GetBlockMetasByIndexRequest start*/
+  start?: number | null,
+
+  /** GetBlockMetasByIndexRequest count*/
+  count?: number | null,
+}
+
+/** Properties of a GetBlockMetasByHashRequest. */
+export interface IGetBlockMetasByHashRequest {
+  /** GetBlockMetasByHashRequest address */
+  blkHash?: string | null
+}
+
+/** Properties of a GetBlockMetasRequest. */
+export interface IGetBlockMetasRequest {
+  /** GetBlockMetasRequest byIndex */
+  byIndex?: IGetBlockMetasByIndexRequest | null,
+
+  /** GetBlockMetasRequest byHash */
+  byHash?: IGetBlockMetasByHashRequest | null,
+}
+
+/** Properties of an blockMeta. */
+export interface IBlockMeta {
+  /** BlockMeta hash */
+  hash?: string | null,
+
+  /** BlockMeta height */
+  height?: number | null,
+
+  /** BlockMeta timestamp */
+  timestamp?: number | null,
+
+  /** BlockMeta numActions */
+  numActions?: number | null,
+
+  /** BlockMeta producerAddress */
+  producerAddress?: string | null,
+
+  /** BlockMeta transferAmount */
+  transferAmount?: string | null,
+
+  /** BlockMeta txRoot */
+  txRoot?: string | null,
+
+  /** BlockMeta receiptRoot */
+  receiptRoot?: string | null,
+
+  /** BlockMeta deltaStateDigest */
+  deltaStateDigest?: string | null,
+}
+
+/** Properties of a GetBlockMetasResponse. */
+export interface IGetBlockMetasResponse {
+  /** GetBlockMetasResponse blockMetas */
+  blkMetas?: IBlockMeta[] | null
+}
+
+export class GetBlockMetasRequest {
+  static to(req: IGetBlockMetasRequest): any {
+    const pbReq = new apiPb.GetBlockMetasRequest();
+    if (req.byIndex != null) {
+      const pbReqByIndex = new apiPb.GetBlockMetasByIndexRequest();
+      pbReqByIndex.setStart(req.byIndex.start);
+      pbReqByIndex.setCount(req.byIndex.count);
+      pbReq.setByindex(pbReqByIndex);
+    }
+    if (req.byHash != null) {
+      const pbReqByHash = new apiPb.GetBlockMetaByHashRequest();
+      pbReqByHash.setBlkhash(req.byHash.blkHash);
+      pbReq.setByhash(pbReqByHash);
+    }
+    return pbReq;
+  }
+
+  static from(pbRes: any): IGetBlockMetasResponse {
+    const metas = pbRes.getBlkmetasList();
+    const res = {
+      blkMetas: metas,
+    };
+    if (metas) {
+      for (let i = 0; i < metas.length; i++) {
+        res.blkMetas[i] = {
+          hash: metas[i].getHash(),
+          height: metas[i].getHeight(),
+          timestamp: metas[i].getTimestamp(),
+          numActions: metas[i].getNumactions(),
+          producerAddress: metas[i].getProduceraddress(),
+          transferAmount: metas[i].getTransferamount(),
+          txRoot: metas[i].getTxroot(),
+          receiptRoot: metas[i].getReceiptroot(),
+          deltaStateDigest: metas[i].getDeltastatedigest(),
+        };
+      }
+    }
+    return res;
+  }
+}
