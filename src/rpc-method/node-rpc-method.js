@@ -9,6 +9,8 @@ import type {
   IGetChainMetaResponse,
   IGetBlockMetasRequest,
   IGetBlockMetasResponse,
+  IGetActionsRequest,
+  IGetActionsResponse,
   ISuggestGasPriceRequest,
   ISuggestGasPriceResponse,
   IGetReceiptByActionRequest,
@@ -47,6 +49,11 @@ export default class RpcMethod {
     return await getChainMeta(req);
   }
 
+  async getActions(req: IGetActionsRequest): Promise<IGetActionsResponse> {
+    const getActions = promisify(this.client.getActions.bind(this.client));
+    return await getActions(req);
+  }
+  
   async suggestGasPrice(req: ISuggestGasPriceRequest): Promise<ISuggestGasPriceResponse> {
     const suggestGasPrice = promisify(this.client.suggestGasPrice.bind(this.client));
     return await suggestGasPrice(req);
