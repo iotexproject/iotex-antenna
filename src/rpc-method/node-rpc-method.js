@@ -8,7 +8,9 @@ import type {
   IGetChainMetaRequest,
   IGetChainMetaResponse,
   IGetBlockMetasRequest,
-  IGetBlockMetasResponse} from './types';
+  IGetBlockMetasResponse,
+  IGetActionsRequest,
+  IGetActionsResponse} from './types';
 
 export default class RpcMethod {
   client: any;
@@ -40,5 +42,10 @@ export default class RpcMethod {
   async getChainMeta(req: IGetChainMetaRequest): Promise<IGetChainMetaResponse> {
     const getChainMeta = promisify(this.client.getChainMeta.bind(this.client));
     return await getChainMeta(req);
+  }
+
+  async getActions(req: IGetActionsRequest): Promise<IGetActionsResponse> {
+    const getActions = promisify(this.client.getActions.bind(this.client));
+    return await getActions(req);
   }
 }

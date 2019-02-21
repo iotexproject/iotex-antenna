@@ -1,6 +1,16 @@
 // @flow
 import apiPb from '../proto/api_pb';
 
+/** Properties of a Timestamp. */
+export interface ITimestamp {
+  /** Timestamp seconds */
+  seconds?: number | null,
+
+  /** Timestamp nanos */
+  nanos?: number | null,
+}
+
+// interface for get account
 /** Properties of a GetAccountRequest. */
 export interface IGetAccountRequest {
   /** GetAccountRequest address */
@@ -28,27 +38,6 @@ export interface IGetAccountResponse {
   accountMeta?: IAccountMeta | null
 }
 
-interface IEpochData {
-  num?: number | null,
-  height?: number | null,
-  beaconChainHeight?: number | null,
-}
-
-interface IChainMeta {
-  height?: string | null,
-  supply?: string | null,
-  numActions?: string | null,
-  tps?: string | null,
-  epoch?: IEpochData | null,
-}
-
-export interface IGetChainMetaRequest {
-}
-
-export interface IGetChainMetaResponse {
-  chainMeta?: IChainMeta | null
-}
-
 export class GetAccountRequest {
   static to(req: IGetAccountRequest): any {
     const pbReq = new apiPb.GetAccountRequest();
@@ -73,6 +62,29 @@ export class GetAccountRequest {
   }
 }
 
+// interface for get chain meta
+interface IEpochData {
+  num?: number | null,
+  height?: number | null,
+  beaconChainHeight?: number | null,
+}
+
+interface IChainMeta {
+  height?: string | null,
+  supply?: string | null,
+  numActions?: string | null,
+  tps?: string | null,
+  epoch?: IEpochData | null,
+}
+
+export interface IGetChainMetaRequest {
+}
+
+export interface IGetChainMetaResponse {
+  chainMeta?: IChainMeta | null
+}
+
+// interface for get block metas
 /** Properties of a GetBlockMetasByIndexRequest. */
 export interface IGetBlockMetasByIndexRequest {
   /** GetBlockMetasByIndexRequest start*/
@@ -172,4 +184,151 @@ export class GetBlockMetasRequest {
     }
     return res;
   }
+}
+
+// interface for get actions
+/** Properties of a GetActionsByIndexRequest. */
+export interface IGetActionsByIndexRequest {
+  /** GetActionsByIndexRequest start */
+  start?: number | null,
+
+  /** GetActionsByIndexRequest count */
+  count?: number | null,
+}
+
+/** Properties of a GetActionsByHashRequest. */
+export interface IGetActionsByHashRequest {
+  /** GetActionsByHashRequest actionHash */
+  actionHash?: string | null,
+
+  /** GetActionsByHashRequest checkingPending */
+  checkingPending?: boolean | null,
+}
+
+/** Properties of a GetActionsByAddressRequest. */
+export interface IGetActionsByAddressRequest {
+  /** GetActionsByAddressRequest address */
+  address?: string | null,
+
+  /** GetActionsByAddressRequest start */
+  start?: number | null,
+
+  /** GetActionsByAddressRequest count */
+  count?: number | null,
+}
+
+/** Properties of a GetUnconfirmedActionsByAddressRequest. */
+export interface IGetUnconfirmedActionsByAddressRequest {
+  /** GetUnconfirmedActionsByAddressRequest address */
+  address?: string | null,
+
+  /** GetUnconfirmedActionsByAddressRequest start */
+  start?: number | null,
+
+  /** GetUnconfirmedActionsByAddressRequest count */
+  count?: number | null,
+}
+
+/** Properties of a GetActionsByBlockRequest. */
+export interface IGetActionsByBlockRequest {
+  /** GetActionsByBlockRequest blkHash */
+  blkHash?: string | null,
+
+  /** GetActionsByBlockRequest start */
+  start?: number | null,
+
+  /** GetActionsByBlockRequest count */
+  count?: number | null,
+}
+
+/** Properties of a GetActionsRequest. */
+export interface IGetActionsRequest {
+  /** GetActionsRequest byIndex */
+  byIndex?: IGetActionsByIndexRequest | null,
+
+  /** GetActionsRequest byHash */
+  byHash?: IGetActionsByHashRequest | null,
+
+  /** GetActionsRequest byAddr */
+  byAddr?: IGetActionsByAddressRequest | null,
+
+  /** GetUnconfirmedActionsByAddressRequest unconfirmedByAddr */
+  unconfirmedByAddr?: IGetUnconfirmedActionsByAddressRequest | null,
+
+  /** GetActionsByBlockRequest byBlk */
+  byBlk?: IGetActionsByBlockRequest | null,
+}
+
+/** Properties of a Transfer. */
+export interface ITransfer {
+  /** Transfer amount */
+  amount?: Uint8Array | null,
+
+  /** Transfer recipient */
+  recipient?: string | null,
+
+  /** Transfer payload */
+  payload?: Uint8Array | null,
+}
+
+/** Properties of a Vote. */
+export interface IVote {
+  /** Vote timestamp */
+  timestamp?: ITimestamp | null,
+
+  /** Vote voteeAddress */
+  voteeAddress?: string | null,
+}
+
+/** Properties of a Execution. */
+export interface IExecution {
+  /** Execution amount */
+  amount?: Uint8Array | null,
+
+  /** Execution contract */
+  contract?: string | null,
+
+  /** Execution data */
+  data?: Uint8Array | null,
+}
+
+/** Properties of an ActionCore. */
+export interface IActionCore {
+  /** ActionCore version */
+  version?: number | null,
+
+  /** ActionCore nonce */
+  nonce?: number | null,
+
+  /** ActionCore gasLimit */
+  gasLimit?: number | null,
+
+  /** ActionCore gasPrice */
+  gasPrice?: Uint8Array | null,
+
+  // Action detail fields
+  /** ActionCore transfer */
+  transfer?: ITransfer | null,
+  /** ActionCore vote */
+  vote?: IVote | null,
+  /** ActionCore execution */
+  execution?: IExecution | null,
+}
+
+/** Properties of an Action. */
+export interface IAction {
+  /** Action core */
+  core?: IActionCore | null,
+
+  /** Action senderPubkey */
+  senderPubkey?: Uint8Array | null,
+
+  /** Action signature */
+  signature?: Uint8Array | null,
+}
+
+/** Properties of a GetActionsResponse. */
+export interface IGetActionsResponse {
+  /** GetActionsResponse actions */
+  actions?: IAction[] | null
 }
