@@ -10,7 +10,12 @@ import type {
   IGetBlockMetasRequest,
   IGetBlockMetasResponse,
   IGetActionsRequest,
-  IGetActionsResponse} from './types';
+  IGetActionsResponse,
+  ISuggestGasPriceRequest,
+  ISuggestGasPriceResponse,
+  IGetReceiptByActionRequest,
+  IGetReceiptByActionResponse,
+} from './types';
 
 export default class RpcMethod {
   client: any;
@@ -47,5 +52,15 @@ export default class RpcMethod {
   async getActions(req: IGetActionsRequest): Promise<IGetActionsResponse> {
     const getActions = promisify(this.client.getActions.bind(this.client));
     return await getActions(req);
+  }
+  
+  async suggestGasPrice(req: ISuggestGasPriceRequest): Promise<ISuggestGasPriceResponse> {
+    const suggestGasPrice = promisify(this.client.suggestGasPrice.bind(this.client));
+    return await suggestGasPrice(req);
+  }
+  
+  async getReceiptByAction(req: IGetReceiptByActionRequest): Promise<IGetReceiptByActionResponse> {
+    const getReceiptByAction = promisify(this.client.getReceiptByAction.bind(this.client));
+    return await getReceiptByAction(req);
   }
 }

@@ -332,3 +332,80 @@ export interface IGetActionsResponse {
   /** GetActionsResponse actions */
   actions?: IAction[] | null
 }
+  
+/** Properties of a SuggestGasPrice Request. */
+export interface ISuggestGasPriceRequest {
+}
+
+/** Properties of a SuggestGasPriceResponse. */
+export interface ISuggestGasPriceResponse {
+  /** SuggestGasPriceResponse gasPrice */
+  gasPrice?: number | null
+}
+
+export class SuggestGasPriceRequest {
+  static to(req: ISuggestGasPriceRequest): any {
+    return new apiPb.SuggestGasPriceRequest();
+  }
+
+  static from(pbRes: any): ISuggestGasPriceResponse {
+    const gasPrice = pbRes.getGasprice();
+    return {
+      gasPrice,
+    };
+  }
+}
+
+/** Properties of a GetReceiptByActionRequest. */
+export interface IGetReceiptByActionRequest {
+  /** GetReceiptByActionRequest actionHash */
+  actionHash?: string | null,
+}
+
+/** Properties of an Log. */
+export interface ILog {
+  /** Log address */
+  address?: string | null,
+
+  /** Log topics */
+  topics?: Uint8Array[] | null,
+
+  /** Log data */
+  data?: Uint8Array | null,
+
+  /** Log blockNumber */
+  blockNumber?: number | null,
+
+  /** Log txnHash */
+  txnHash?: Uint8Array | null,
+
+  /** Log index */
+  index?: number | null,
+}
+
+/** Properties of an Receipt. */
+export interface IReceipt {
+  /** Receipt returnValue */
+  returnValue?: Uint8Array | null,
+
+  /** Receipt status */
+  status?: number | null,
+
+  /** Receipt actHash */
+  actHash?: Uint8Array | null,
+
+  /** Receipt gasConsumed */
+  gasConsumed?: number | null,
+
+  /** Receipt contractAddress */
+  contractAddress?: string | null,
+
+  /** Receipt logs */
+  logs?: ILog[] | null,
+}
+
+/** Properties of a GetReceiptByActionResponse. */
+export interface IGetReceiptByActionResponse {
+  /** GetReceiptByActionResponse receipt */
+  receipt?: IReceipt | null,
+}
