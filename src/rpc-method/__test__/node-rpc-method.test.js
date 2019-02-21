@@ -9,7 +9,7 @@ test('RpcMethod.getAccount', async t => {
   t.deepEqual(resp, {
     accountMeta: {
       address: 'io126xcrjhtp27end76ac9nmx6px2072c3vgz6suw',
-      balance: '100000000000000000000000000',
+      balance: '0',
       nonce: '0',
       pendingNonce: '1',
     },
@@ -35,4 +35,10 @@ test('RpcMethod.getBlockMetas', async t => {
   // test getMetasByBlkHash
   const resp4 = await client.getBlockMetas({byHash: {blkHash: resp1.blkMetas[0].hash}});
   t.deepEqual(resp1.blkMetas[0], resp4.blkMetas[0]);
+});
+
+test('RpcMethod.getReceiptByAction', async t => {
+  const client = new RpcMethod('localhost:14014');
+  const resp = await client.getReceiptByAction({actionHash: '01d5c895f3b066e695d516884bec9977404875aeb15216bc087dbc0a1ef9aed1'});
+  t.deepEqual(resp.receipt, 1);
 });
