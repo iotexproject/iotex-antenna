@@ -174,6 +174,29 @@ export class GetBlockMetasRequest {
   }
 }
 
+/** Properties of a SuggestGasPrice Request. */
+export interface ISuggestGasPriceRequest {
+}
+
+/** Properties of a SuggestGasPriceResponse. */
+export interface ISuggestGasPriceResponse {
+  /** SuggestGasPriceResponse gasPrice */
+  gasPrice?: number | null
+}
+
+export class SuggestGasPriceRequest {
+  static to(req: ISuggestGasPriceRequest): any {
+    return new apiPb.SuggestGasPriceRequest();
+  }
+
+  static from(pbRes: any): ISuggestGasPriceResponse {
+    const gasPrice = pbRes.getGasprice();
+    return {
+      gasPrice,
+    };
+  }
+}
+
 /** Properties of a GetReceiptByActionRequest. */
 export interface IGetReceiptByActionRequest {
   /** GetReceiptByActionRequest actionHash */
