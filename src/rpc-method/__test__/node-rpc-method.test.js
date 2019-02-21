@@ -9,7 +9,7 @@ test('RpcMethod.getAccount', async t => {
   t.deepEqual(resp, {
     accountMeta: {
       address: 'io126xcrjhtp27end76ac9nmx6px2072c3vgz6suw',
-      balance: '100000000000000000000000000',
+      balance: '0',
       nonce: '0',
       pendingNonce: '1',
     },
@@ -25,14 +25,20 @@ test('RpcMethod.getChainMeta', async t => {
 test('RpcMethod.getBlockMetas', async t => {
   const client = new RpcMethod('35.247.36.38:31500');
   // test getMetasByIndex
-  const resp1 = await client.getBlockMetas({byIndex: {start: 100, count: 1}});
+  const resp1 = await client.getBlockMetas({byIndex: {start: 10, count: 1}});
   t.deepEqual(resp1.blkMetas.length, 1);
-  const resp2 = await client.getBlockMetas({byIndex: {start: 100, count: 10}});
+  const resp2 = await client.getBlockMetas({byIndex: {start: 10, count: 10}});
   t.deepEqual(resp2.blkMetas.length, 10);
-  const resp3 = await client.getBlockMetas({byIndex: {start: 100, count: 0}});
+  const resp3 = await client.getBlockMetas({byIndex: {start: 10, count: 0}});
   t.deepEqual(resp3.blkMetas.length, 0);
 
   // test getMetasByBlkHash
   const resp4 = await client.getBlockMetas({byHash: {blkHash: resp1.blkMetas[0].hash}});
   t.deepEqual(resp1.blkMetas[0], resp4.blkMetas[0]);
+});
+
+test('RpcMethod.suggestGasPrice', async t => {
+  const client = new RpcMethod('35.247.36.38:31500');
+  const resp = await client.suggestGasPrice({});
+  t.deepEqual(resp.gasPrice.toString(), '1');
 });

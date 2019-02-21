@@ -1,7 +1,16 @@
 // @flow
 import grpcWeb from '../proto/api_grpc_web_pb';
-import type {IGetAccountRequest, IGetAccountResponse, IGetBlockMetasRequest, IGetBlockMetasResponse} from './types';
-import {GetAccountRequest, GetBlockMetasRequest} from './types';
+import type {
+  IGetAccountRequest,
+  IGetAccountResponse,
+  IGetBlockMetasRequest,
+  IGetBlockMetasResponse,
+  ISuggestGasPriceRequest,
+  ISuggestGasPriceResponse} from './types';
+import {
+  GetAccountRequest,
+  GetBlockMetasRequest,
+  SuggestGasPriceRequest} from './types';
 import {promisify} from "util";
 
 export default class RpcMethod {
@@ -21,5 +30,11 @@ export default class RpcMethod {
     const pbReq = GetBlockMetasRequest.to(req);
     const pbResp = await this.client.getBlockMetas(pbReq);
     return GetBlockMetasRequest.from(pbResp);
+  }
+
+  async suggestGasPrice(req: ISuggestGasPriceRequest): Promise<ISuggestGasPriceResponse> {
+    const pbReq = SuggestGasPriceRequest.to(req);
+    const pbResp = await this.client.suggestGasPrice(pbReq);
+    return SuggestGasPriceRequest.from(pbResp);
   }
 }
