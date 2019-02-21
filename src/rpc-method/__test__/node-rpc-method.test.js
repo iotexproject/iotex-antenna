@@ -37,8 +37,15 @@ test('RpcMethod.getBlockMetas', async t => {
   t.deepEqual(resp1.blkMetas[0], resp4.blkMetas[0]);
 });
 
+
 test('RpcMethod.suggestGasPrice', async t => {
   const client = new RpcMethod('35.247.36.38:31500');
   const resp = await client.suggestGasPrice({});
   t.deepEqual(resp.gasPrice.toString(), '1');
+});
+
+test('RpcMethod.getReceiptByAction', async t => {
+  const client = new RpcMethod('localhost:14014');
+  const resp = await client.getReceiptByAction({actionHash: '01d5c895f3b066e695d516884bec9977404875aeb15216bc087dbc0a1ef9aed1'});
+  t.deepEqual(resp.receipt, 1);
 });
