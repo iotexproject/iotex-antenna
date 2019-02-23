@@ -372,7 +372,7 @@ export interface ILog {
   address?: string | null,
 
   /** Log topics */
-  topics?: Uint8Array[] | null,
+  topics: Uint8Array[],
 
   /** Log data */
   data?: Uint8Array | null,
