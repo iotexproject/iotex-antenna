@@ -142,7 +142,7 @@ export interface IBlockMeta {
 /** Properties of a GetBlockMetasResponse. */
 export interface IGetBlockMetasResponse {
   /** GetBlockMetasResponse blockMetas */
-  blkMetas?: IBlockMeta[] | null
+  blkMetas: IBlockMeta[]
 }
 
 export class GetBlockMetasRequest {
@@ -173,19 +173,17 @@ export class GetBlockMetasRequest {
     };
     if (metas) {
       for (let i = 0; i < metas.length; i++) {
-        if (res.blkMetas != null) {
-          res.blkMetas[i] = {
-            hash: metas[i].getHash(),
-            height: metas[i].getHeight(),
-            timestamp: metas[i].getTimestamp(),
-            numActions: metas[i].getNumactions(),
-            producerAddress: metas[i].getProduceraddress(),
-            transferAmount: metas[i].getTransferamount(),
-            txRoot: metas[i].getTxroot(),
-            receiptRoot: metas[i].getReceiptroot(),
-            deltaStateDigest: metas[i].getDeltastatedigest(),
-          };
-        }
+        res.blkMetas[i] = {
+          hash: metas[i].getHash(),
+          height: metas[i].getHeight(),
+          timestamp: metas[i].getTimestamp(),
+          numActions: metas[i].getNumactions(),
+          producerAddress: metas[i].getProduceraddress(),
+          transferAmount: metas[i].getTransferamount(),
+          txRoot: metas[i].getTxroot(),
+          receiptRoot: metas[i].getReceiptroot(),
+          deltaStateDigest: metas[i].getDeltastatedigest(),
+        };
       }
     }
     return res;
