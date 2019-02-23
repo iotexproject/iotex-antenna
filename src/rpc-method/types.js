@@ -171,19 +171,21 @@ export class GetBlockMetasRequest {
     const res = {
       blkMetas: metas,
     };
-    if (res.blkMetas != null && metas != null) {
+    if (metas) {
       for (let i = 0; i < metas.length; i++) {
-        res.blkMetas[i] = {
-          hash: metas[i].getHash(),
-          height: metas[i].getHeight(),
-          timestamp: metas[i].getTimestamp(),
-          numActions: metas[i].getNumactions(),
-          producerAddress: metas[i].getProduceraddress(),
-          transferAmount: metas[i].getTransferamount(),
-          txRoot: metas[i].getTxroot(),
-          receiptRoot: metas[i].getReceiptroot(),
-          deltaStateDigest: metas[i].getDeltastatedigest(),
-        };
+        if (res.blkMetas[i] != null) {
+          res.blkMetas[i] = {
+            hash: metas[i].getHash(),
+            height: metas[i].getHeight(),
+            timestamp: metas[i].getTimestamp(),
+            numActions: metas[i].getNumactions(),
+            producerAddress: metas[i].getProduceraddress(),
+            transferAmount: metas[i].getTransferamount(),
+            txRoot: metas[i].getTxroot(),
+            receiptRoot: metas[i].getReceiptroot(),
+            deltaStateDigest: metas[i].getDeltastatedigest(),
+          };
+        }
       }
     }
     return res;
