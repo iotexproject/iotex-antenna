@@ -150,8 +150,12 @@ export class GetBlockMetasRequest {
     const pbReq = new apiPb.GetBlockMetasRequest();
     if (req.byIndex != null) {
       const pbReqByIndex = new apiPb.GetBlockMetasByIndexRequest();
-      pbReqByIndex.setStart(req.byIndex.start);
-      pbReqByIndex.setCount(req.byIndex.count);
+      if (req.byIndex.start != null) {
+        pbReqByIndex.setStart(req.byIndex.start);
+      }
+      if (req.byIndex.count != null) {
+        pbReqByIndex.setCount(req.byIndex.count);
+      }
       pbReq.setByindex(pbReqByIndex);
     }
     if (req.byHash != null) {
@@ -167,7 +171,7 @@ export class GetBlockMetasRequest {
     const res = {
       blkMetas: metas,
     };
-    if (metas) {
+    if (res.blkMetas != null && metas != null) {
       for (let i = 0; i < metas.length; i++) {
         res.blkMetas[i] = {
           hash: metas[i].getHash(),
@@ -332,7 +336,7 @@ export interface IGetActionsResponse {
   /** GetActionsResponse actions */
   actions?: IAction[] | null
 }
-  
+
 /** Properties of a SuggestGasPrice Request. */
 export interface ISuggestGasPriceRequest {
 }
