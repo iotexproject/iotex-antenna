@@ -173,7 +173,7 @@ export class GetBlockMetasRequest {
     };
     if (metas) {
       for (let i = 0; i < metas.length; i++) {
-        if (res.blkMetas[i] != null) {
+        if (res.blkMetas != null) {
           res.blkMetas[i] = {
             hash: metas[i].getHash(),
             height: metas[i].getHeight(),
