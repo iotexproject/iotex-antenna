@@ -53,12 +53,12 @@ export default class RpcMethod {
     const getActions = promisify(this.client.getActions.bind(this.client));
     return await getActions(req);
   }
-  
+
   async suggestGasPrice(req: ISuggestGasPriceRequest): Promise<ISuggestGasPriceResponse> {
     const suggestGasPrice = promisify(this.client.suggestGasPrice.bind(this.client));
     return await suggestGasPrice(req);
   }
-  
+
   async getReceiptByAction(req: IGetReceiptByActionRequest): Promise<IGetReceiptByActionResponse> {
     const getReceiptByAction = promisify(this.client.getReceiptByAction.bind(this.client));
     return await getReceiptByAction(req);

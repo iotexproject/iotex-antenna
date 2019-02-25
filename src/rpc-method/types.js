@@ -142,19 +142,22 @@ export interface IBlockMeta {
 /** Properties of a GetBlockMetasResponse. */
 export interface IGetBlockMetasResponse {
   /** GetBlockMetasResponse blockMetas */
-  blkMetas?: IBlockMeta[] | null
+  blkMetas: IBlockMeta[] | null,
 }
 
 export class GetBlockMetasRequest {
   static to(req: IGetBlockMetasRequest): any {
     const pbReq = new apiPb.GetBlockMetasRequest();
-    if (req.byIndex != null) {
+    if (req.byIndex) {
       const pbReqByIndex = new apiPb.GetBlockMetasByIndexRequest();
-      pbReqByIndex.setStart(req.byIndex.start);
-      pbReqByIndex.setCount(req.byIndex.count);
+      if (req.byIndex.start) {
+        pbReqByIndex.setStart(req.byIndex.start);
+      }
+      if (req.byIndex.count) {
+        pbReqByIndex.setCount(req.byIndex.count);
+      }
       pbReq.setByindex(pbReqByIndex);
-    }
-    if (req.byHash != null) {
+    } else if (req.byHash) {
       const pbReqByHash = new apiPb.GetBlockMetaByHashRequest();
       pbReqByHash.setBlkhash(req.byHash.blkHash);
       pbReq.setByhash(pbReqByHash);
@@ -169,7 +172,8 @@ export class GetBlockMetasRequest {
     };
     if (metas) {
       for (let i = 0; i < metas.length; i++) {
-        res.blkMetas[i] = {
+        const parsedMetas = [];
+        parsedMetas[i] = {
           hash: metas[i].getHash(),
           height: metas[i].getHeight(),
           timestamp: metas[i].getTimestamp(),
@@ -180,6 +184,7 @@ export class GetBlockMetasRequest {
           receiptRoot: metas[i].getReceiptroot(),
           deltaStateDigest: metas[i].getDeltastatedigest(),
         };
+        res.blkMetas = parsedMetas;
       }
     }
     return res;
@@ -332,7 +337,7 @@ export interface IGetActionsResponse {
   /** GetActionsResponse actions */
   actions?: IAction[] | null
 }
-  
+
 /** Properties of a SuggestGasPrice Request. */
 export interface ISuggestGasPriceRequest {
 }
@@ -368,7 +373,7 @@ export interface ILog {
   address?: string | null,
 
   /** Log topics */
-  topics?: Uint8Array[] | null,
+  topics: Uint8Array[],
 
   /** Log data */
   data?: Uint8Array | null,

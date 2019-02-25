@@ -11,7 +11,6 @@ import {
   GetAccountRequest,
   GetBlockMetasRequest,
   SuggestGasPriceRequest} from './types';
-import {promisify} from "util";
 
 export default class RpcMethod {
   client: grpcWeb.APIServicePromiseClient;

@@ -4,7 +4,7 @@ import RpcMethod from '../browser-rpc-method';
 browserEnv();
 
 test('RpcMethod.getAccount', async t => {
-  const client = new RpcMethod('http://35.247.36.38:31501');
+  const client = new RpcMethod('http://35.192.119.63:31501');
   const resp = await client.getAccount({address: 'io126xcrjhtp27end76ac9nmx6px2072c3vgz6suw'}, {});
   t.deepEqual(resp, {
     accountMeta: {
@@ -17,7 +17,7 @@ test('RpcMethod.getAccount', async t => {
 });
 
 test('RpcMethod.getBlockMetas', async t => {
-  const client = new RpcMethod('http://35.247.36.38:31501');
+  const client = new RpcMethod('http://35.192.119.63:31501');
   // test getMetasByIndex
   const resp1 = await client.getBlockMetas({byIndex: {start: 100, count: 1}});
   t.deepEqual(resp1.blkMetas.length, 1);
@@ -32,7 +32,7 @@ test('RpcMethod.getBlockMetas', async t => {
 });
 
 test('RpcMethod.suggestGasPrice', async t => {
-  const client = new RpcMethod('http://35.247.36.38:31501');
+  const client = new RpcMethod('http://35.192.119.63:31501');
   const resp = await client.suggestGasPrice({});
   t.deepEqual(resp, {
     gasPrice: 1,
