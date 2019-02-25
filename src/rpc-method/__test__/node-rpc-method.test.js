@@ -37,7 +37,7 @@ test('RpcMethod.getBlockMetas', async t => {
   t.deepEqual(resp1.blkMetas[0], resp4.blkMetas[0]);
 });
 
-test.skip('RpcMethod.getActions', async t => {
+test.skip('RpcMethod.getActionsByIndex', async t => {
   const client = new RpcMethod('35.192.119.63:31500');
   // test getActionsByIndex
   const resp1 = await client.getActions({byIndex: {start: 10, count: 1}});
@@ -46,19 +46,31 @@ test.skip('RpcMethod.getActions', async t => {
   t.deepEqual(resp2.actions.length, 10);
   const resp3 = await client.getActions({byIndex: {start: 10, count: 0}});
   t.deepEqual(resp3.actions.length, 0);
+});
 
+test.skip('RpcMethod.getActionsByAddress', async t => {
+  const client = new RpcMethod('35.192.119.63:31500');
   // test getActionByAddress
   const resp5 = await client.getActions({byAddr: {address: 'io1hc6ndjzm3frn5e7a83qhm7m3a9gxsyg9teg9j8', start: 0, count: 1}});
   t.deepEqual(resp5.actions.length, 1);
+});
 
+test.skip('RpcMethod.getUnconfirmedActionsByAddress', async t => {
+  const client = new RpcMethod('35.192.119.63:31500');
   // test getUnconfirmedActionsByAddress
   const resp6 = await client.getActions({unconfirmedByAddr: {address: 'io1hc6ndjzm3frn5e7a83qhm7m3a9gxsyg9teg9j8', start: 0, count: 1}});
   t.deepEqual(resp6.actions.length, 0);
+});
 
+test.skip('RpcMethod.getActionsByHash', async t => {
+  const client = new RpcMethod('35.192.119.63:31500');
   // test getActionsByHash
   const resp4 = await client.getActions({byHash: {actionHash: '5526eea2aac8f22afebb67058c45e55d1ddc9c4c1f8db055ec04c52edb8ed23f', checkingPending: false}});
   t.deepEqual(resp4.actions.length, 0);
+});
 
+test.skip('RpcMethod.getActionsByBlock', async t => {
+  const client = new RpcMethod('35.192.119.63:31500');
   // test getActionsByBlock
   const blks = await client.getBlockMetas({byIndex: {start: 10, count: 1}});
   t.deepEqual(blks.blkMetas.length, 1);
