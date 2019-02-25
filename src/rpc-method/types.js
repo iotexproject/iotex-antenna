@@ -142,23 +142,22 @@ export interface IBlockMeta {
 /** Properties of a GetBlockMetasResponse. */
 export interface IGetBlockMetasResponse {
   /** GetBlockMetasResponse blockMetas */
-  blkMetas: IBlockMeta[]
+  blkMetas: IBlockMeta[] | null,
 }
 
 export class GetBlockMetasRequest {
   static to(req: IGetBlockMetasRequest): any {
     const pbReq = new apiPb.GetBlockMetasRequest();
-    if (req.byIndex != null) {
+    if (req.byIndex) {
       const pbReqByIndex = new apiPb.GetBlockMetasByIndexRequest();
-      if (req.byIndex.start != null) {
+      if (req.byIndex.start) {
         pbReqByIndex.setStart(req.byIndex.start);
       }
-      if (req.byIndex.count != null) {
+      if (req.byIndex.count) {
         pbReqByIndex.setCount(req.byIndex.count);
       }
       pbReq.setByindex(pbReqByIndex);
-    }
-    if (req.byHash != null) {
+    } else if (req.byHash) {
       const pbReqByHash = new apiPb.GetBlockMetaByHashRequest();
       pbReqByHash.setBlkhash(req.byHash.blkHash);
       pbReq.setByhash(pbReqByHash);
