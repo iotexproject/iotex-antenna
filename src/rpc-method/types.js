@@ -172,7 +172,8 @@ export class GetBlockMetasRequest {
     };
     if (metas) {
       for (let i = 0; i < metas.length; i++) {
-        res.blkMetas[i] = {
+        const parsedMetas = [];
+        parsedMetas[i] = {
           hash: metas[i].getHash(),
           height: metas[i].getHeight(),
           timestamp: metas[i].getTimestamp(),
@@ -183,6 +184,7 @@ export class GetBlockMetasRequest {
           receiptRoot: metas[i].getReceiptroot(),
           deltaStateDigest: metas[i].getDeltastatedigest(),
         };
+        res.blkMetas = parsedMetas;
       }
     }
     return res;
