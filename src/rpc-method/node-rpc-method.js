@@ -17,6 +17,8 @@ import type {
   IGetReceiptByActionResponse,
   IReadContractRequest,
   IReadContractResponse,
+  ISendActionRequest,
+  ISendActionResponse,
 } from './types';
 
 export default class RpcMethod {
@@ -69,5 +71,9 @@ export default class RpcMethod {
   async readContract(req: IReadContractRequest): Promise<IReadContractResponse> {
     const readContract = promisify(this.client.readContract.bind(this.client));
     return await readContract(req);
+
+  async sendAction(req: ISendActionRequest): Promise<ISendActionResponse> {
+    const sendAction = promisify(this.client.sendAction.bind(this.client));
+    return await sendAction(req);
   }
 }

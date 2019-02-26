@@ -103,3 +103,46 @@ test('RpcMethod.readContract', async t => {
     }
   }
 });
+
+test.skip('RpcMethod.sendActionTransfer', async t => {
+  const client = new RpcMethod('35.192.119.63:31500');
+  const blks = await client.getBlockMetas({byIndex: {start: 10, count: 1}});
+  t.deepEqual(blks.blkMetas.length, 1);
+  const resp1 = await client.getActions({byBlk: {blkHash: blks.blkMetas[0].hash, start: 0, count: 15}});
+
+  let transfer = null;
+  for (let index = 0; index < resp1.actions.length; index++) {
+    if (resp1.actions[index].core.transfer) {
+      transfer = resp1.actions[index];
+      break;
+    }
+  }
+
+  if (transfer) {
+    const accountOld = await client.getAccount({
+      address: transfer.core.transfer.recipient,
+    });
+    transfer.core.nonce++;
+    await client.sendAction({action: transfer});
+    const accountNew = await client.getAccount({
+      address: transfer.core.transfer.recipient,
+    });
+    t.notDeepEqual(accountNew.accountMeta.balance, accountOld.accountMeta.balance);
+  }
+});
+
+test('RpcMethod.sendAction', async t => {
+  const client = new RpcMethod('35.192.119.63:31500');
+  const blks = await client.getBlockMetas({byIndex: {start: 10, count: 1}});
+  t.deepEqual(blks.blkMetas.length, 1);
+  const resp1 = await client.getActions({byBlk: {blkHash: blks.blkMetas[0].hash, start: 0, count: 15}});
+
+  for (let index = 0; index < resp1.actions.length; index++) {
+    if (resp1.actions[index].core.execution) {
+      await client.sendAction({action: resp1.actions[index]});
+    }
+    if (resp1.actions[index].core.vote) {
+      await client.sendAction({action: resp1.actions[index]});
+    }
+  }
+});
