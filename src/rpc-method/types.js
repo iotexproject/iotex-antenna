@@ -326,7 +326,7 @@ export interface IAction {
   core?: IActionCore | null,
 
   /** Action senderPubkey */
-  senderPubkey?: Uint8Array | null,
+  senderPubKey?: Uint8Array | null,
 
   /** Action signature */
   signature?: Uint8Array | null,
@@ -414,3 +414,12 @@ export interface IGetReceiptByActionResponse {
   /** GetReceiptByActionResponse receipt */
   receipt?: IReceipt | null,
 }
+
+/** Properties of a SendActionRequest. */
+export interface ISendActionRequest {
+  /** SendActionRequest action */
+  action?: IAction | null,
+}
+
+/** Properties of a SendActionResponse. */
+export interface ISendActionResponse {}
