@@ -15,6 +15,8 @@ import type {
   ISuggestGasPriceResponse,
   IGetReceiptByActionRequest,
   IGetReceiptByActionResponse,
+  ISendActionRequest,
+  ISendActionResponse,
 } from './types';
 
 export default class RpcMethod {
@@ -62,5 +64,10 @@ export default class RpcMethod {
   async getReceiptByAction(req: IGetReceiptByActionRequest): Promise<IGetReceiptByActionResponse> {
     const getReceiptByAction = promisify(this.client.getReceiptByAction.bind(this.client));
     return await getReceiptByAction(req);
+  }
+
+  async sendAction(req: ISendActionRequest): Promise<ISendActionResponse> {
+    const sendAction = promisify(this.client.sendAction.bind(this.client));
+    return await sendAction(req);
   }
 }
