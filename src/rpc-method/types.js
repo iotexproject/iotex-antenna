@@ -142,7 +142,7 @@ export interface IBlockMeta {
 /** Properties of a GetBlockMetasResponse. */
 export interface IGetBlockMetasResponse {
   /** GetBlockMetasResponse blockMetas */
-  blkMetas: IBlockMeta[] | null,
+  blkMetas?: IBlockMeta[] | null,
 }
 
 export class GetBlockMetasRequest {
@@ -297,6 +297,254 @@ export interface IExecution {
   data?: Uint8Array | null,
 }
 
+/** Properties of a StartSubChain. */
+export interface IStartSubChain {
+  /** StartSubChain chainID */
+  chainID?: number | null,
+
+  /** StartSubChain securityDeposit */
+  securityDeposit?: Uint8Array | null,
+
+  /** StartSubChain operationDeposit */
+  operationDeposit?: Uint8Array | null,
+
+  /** StartSubChain startHeight */
+  startHeight?: number | null,
+
+  /** StartSubChain parentHeightOffset */
+  parentHeightOffset?: number | null,
+}
+
+/** Properties of a StopSubChain. */
+export interface IStopSubChain {
+  /** StopSubChain chainID */
+  chainID?: number | null,
+
+  /** StopSubChain stopHeight */
+  stopHeight?: number | null,
+
+  /** StopSubChain subChainAddress */
+  subChainAddress?: string | null,
+}
+
+/** Properties of a MerkleRoot. */
+export interface IMerkleRoot {
+  /** MerkleRoot name */
+  name?: string | null,
+
+  /** MerkleRoot value */
+  value?: Uint8Array | null,
+}
+
+/** Properties of a PutBlock. */
+export interface IPutBlock {
+  /** PutBlock subChainAddress */
+  subChainAddress?: string | null,
+
+  /** PutBlock height */
+  height?: number | null,
+
+  /** PutBlock roots */
+  roots?: IMerkleRoot[] | null,
+}
+
+/** Properties of a CreateDeposit. */
+export interface ICreateDeposit {
+  /** CreateDeposit chainID */
+  chainID?: number | null,
+
+  /** CreateDeposit amount */
+  amount?: Uint8Array | null,
+
+  /** CreateDeposit receipt */
+  recipient?: string | null,
+}
+
+/** Properties of a SettleDeposit. */
+export interface ISettleDeposit {
+  /** SettleDeposit amount */
+  amount?: Uint8Array | null,
+
+  /** SettleDeposit recipient */
+  recipient?: string | null,
+
+  /** SettleDeposit index */
+  index?: number | null,
+}
+
+/** Properties of a CreatePlumChain. */
+export interface ICreatePlumChain {
+}
+
+/** Properties of a TerminatePlumChain. */
+export interface ITerminatePlumChain {
+  /** TerminatePlumChain subChainAddress */
+  subChainAddress?: string | null,
+}
+
+/** Properties of a PlumPutBlock. */
+export interface IPlumPutBlock {
+  /** PlumPutBlock subChainAddress */
+  subChainAddress?: string | null,
+
+  /** PlumPutBlock height */
+  height?: number | null,
+
+  /** PlumPutBlock height */
+  roots?: Map<string, Uint8Array> | null,
+}
+
+/** Properties of a PlumCreateDeposit. */
+export interface IPlumCreateDeposit {
+  /** PlumCreateDeposit subChainAddress */
+  subChainAddress?: string | null,
+
+  /** PlumCreateDeposit amount */
+  amount?: Uint8Array | null,
+
+  /** PlumCreateDeposit recipient */
+  recipient?: string | null,
+}
+
+/** Properties of a PlumStartExit. */
+export interface IPlumStartExit {
+  /** PlumStartExit subChainAddress */
+  subChainAddress?: string | null,
+
+  /** PlumStartExit previousTransfer */
+  previousTransfer?: Uint8Array | null,
+
+  /** PlumStartExit previousTransferBlockProof */
+  previousTransferBlockProof?: Uint8Array | null,
+
+  /** PlumStartExit previousTransferBlockHeight */
+  previousTransferBlockHeight?: number | null,
+
+  /** PlumStartExit exitTransfer */
+  exitTransfer?: Uint8Array | null,
+
+  /** PlumStartExit exitTransferBlockProof */
+  exitTransferBlockProof?: Uint8Array | null,
+
+  /** PlumStartExit exitTransferBlockHeight */
+  exitTransferBlockHeight?: number | null,
+}
+
+/** Properties of a PlumChallengeExit. */
+export interface IPlumChallengeExit {
+  /** PlumChallengeExit subChainAddress */
+  subChainAddress?: string | null,
+
+  /** PlumChallengeExit chainID */
+  coinID?: number | null,
+
+  /** PlumChallengeExit challengeTransfer */
+  challengeTransfer?: Uint8Array | null,
+
+  /** PlumChallengeExit challengeTransferBlockProof */
+  challengeTransferBlockProof?: Uint8Array | null,
+
+  /** PlumChallengeExit challengeTransferBlockHeight */
+  challengeTransferBlockHeight?: number | null,
+}
+
+/** Properties of a PlumResponseChallengeExit. */
+export interface IPlumResponseChallengeExit {
+  /** PlumResponseChallengeExit subChainAddress */
+  subChainAddress?: string | null,
+
+  /** PlumResponseChallengeExit coinID */
+  coinID?: number | null,
+
+  /** PlumResponseChallengeExit challengeTransfer */
+  challengeTransfer?: Uint8Array | null,
+
+  /** PlumResponseChallengeExit responseTransfer */
+  responseTransfer?: Uint8Array | null,
+
+  /** PlumResponseChallengeExit responseTransferBlockProof */
+  responseTransferBlockProof?: Uint8Array | null,
+
+  /** PlumResponseChallengeExit previousTransferBlockHeight */
+  previousTransferBlockHeight?: number | null,
+}
+
+/** Properties of a PlumFinalizeExit. */
+export interface IPlumFinalizeExit {
+  /** PlumFinalizeExit subChainAddress */
+  subChainAddress?: string | null,
+
+  /** PlumFinalizeExit coinID */
+  coinID?: number | null,
+}
+
+// plum sub chain APIs
+/** Properties of a PlumSettleDeposit. */
+export interface IPlumSettleDeposit {
+  /** PlumSettleDeposit coinID */
+  coinID?: number | null,
+}
+
+/** Properties of a PlumTransfer. */
+export interface IPlumTransfer {
+  /** PlumTransfer coinID */
+  coinID?: number | null,
+
+  /** PlumTransfer denomination */
+  denomination?: Uint8Array | null,
+
+  /** PlumTransfer owner */
+  owner?: string | null,
+
+  /** PlumTransfer recipient */
+  recipient?: string | null,
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// BELOW ARE DEFINITIONS FOR BLOCK PRODUCER PROTOCOL
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/** Properties of a DepositToRewardingFund. */
+export interface IDepositToRewardingFund {
+  /** DepositToRewardingFund amount */
+  amount?: Uint8Array | null,
+
+  /** DepositToRewardingFund data */
+  data?: Uint8Array | null,
+}
+
+/** Properties of a ClaimFromRewardingFund. */
+export interface IClaimFromRewardingFund {
+  /** ClaimFromRewardingFund amount */
+  amount?: Uint8Array | null,
+
+  /** ClaimFromRewardingFund data */
+  data?: Uint8Array | null,
+}
+
+/* const RewardType = {
+  BlockReward: 0,
+  EpochReward: 1,
+}; */
+
+/** Properties of a SetReward. */
+export interface ISetReward {
+  /** SetReward amount */
+  amount?: Uint8Array | null,
+
+  /** SetReward data */
+  data?: Uint8Array | null,
+
+  /** SetReward type */
+  type?: number | null,
+}
+
+/** Properties of a GrantReward. */
+export interface IGrantReward {
+  /** GrantReward type */
+  type?: number | null,
+}
+
 /** Properties of an ActionCore. */
 export interface IActionCore {
   /** ActionCore version */
@@ -318,6 +566,49 @@ export interface IActionCore {
   vote?: IVote | null,
   /** ActionCore execution */
   execution?: IExecution | null,
+  // FedChain
+  /** ActionCore startSubChain */
+  startSubChain?: IStartSubChain | null,
+  /** ActionCore stopSubChain */
+  stopSubChain?: IStopSubChain | null,
+  /** ActionCore putBlock */
+  putBlock?: IPutBlock | null,
+  /** ActionCore createDeposit */
+  createDeposit?: ICreateDeposit | null,
+  /** ActionCore settleDeposit */
+  settleDeposit?: ISettleDeposit | null,
+
+// PlumChain
+  /** ActionCore createPlumChain */
+  createPlumChain?: ICreatePlumChain | null,
+  /** ActionCore terminatePlumChain */
+  terminatePlumChain?: ITerminatePlumChain | null,
+  /** ActionCore plumPutBlock */
+  plumPutBlock?: IPlumPutBlock | null,
+  /** ActionCore plumCreateDeposit */
+  plumCreateDeposit?: IPlumCreateDeposit | null,
+  /** ActionCore plumStartExit */
+  plumStartExit?: IPlumStartExit | null,
+  /** ActionCore plumChallengeExit */
+  plumChallengeExit?: IPlumChallengeExit | null,
+  /** ActionCore plumResponseChallengeExit */
+  plumResponseChallengeExit?: IPlumResponseChallengeExit | null,
+  /** ActionCore plumFinalizeExit */
+  plumFinalizeExit?: IPlumFinalizeExit | null,
+  /** ActionCore plumSettleDeposit */
+  plumSettleDeposit?: IPlumSettleDeposit | null,
+  /** ActionCore plumTransfer */
+  plumTransfer?: IPlumTransfer | null,
+
+  // Rewarding protocol actions
+  /** ActionCore depositToRewardingFund */
+  depositToRewardingFund?: IDepositToRewardingFund | null,
+  /** ActionCore claimFromRewardingFund */
+  claimFromRewardingFund?: IClaimFromRewardingFund | null,
+  /** ActionCore setReward */
+  setReward?: ISetReward | null,
+  /** ActionCore grantReward */
+  grantReward?: IGrantReward | null,
 }
 
 /** Properties of an Action. */
