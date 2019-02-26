@@ -75,10 +75,10 @@
     "build-changelog": "2.1.2",
     "eslint": "5.14.1",
     "eslint-plugin-babel": "5.3.0",
-    "eslint-plugin-flowtype": "2.50.3",
+    "eslint-plugin-flowtype": "3.4.2",
     "eslint-plugin-import": "2.16.0",
-    "eslint-plugin-react": "7.12.4",
-    "flow-bin": "0.89.0",
+    "eslint-plugin-react": "7.12.3",
+    "flow-bin": "0.93.0",
     "flow-typed": "2.5.1",
     "global": "4.3.2",
     "nyc": "13.3.0"
