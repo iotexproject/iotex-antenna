@@ -297,6 +297,12 @@ export interface IExecution {
   data?: Uint8Array | null,
 }
 
+/** Properties of a GrantReward. */
+export interface IGrantReward {
+  /** GrantReward type */
+  type?: number | null,
+}
+
 /** Properties of an ActionCore. */
 export interface IActionCore {
   /** ActionCore version */
@@ -318,6 +324,9 @@ export interface IActionCore {
   vote?: IVote | null,
   /** ActionCore execution */
   execution?: IExecution | null,
+
+  /** ActionCore grantReward */
+  //grantReward?: IGrantReward | null,
 }
 
 /** Properties of an Action. */
@@ -413,4 +422,15 @@ export interface IReceipt {
 export interface IGetReceiptByActionResponse {
   /** GetReceiptByActionResponse receipt */
   receipt?: IReceipt | null,
+}
+
+/** Properties of a ReadContractRequest. */
+export interface IReadContractRequest {
+  /** ReadContractRequest action */
+  action?: IAction | null,
+}
+
+/** Properties of a ReadContractResponse. */
+export interface IReadContractResponse {
+  data?: string | null,
 }
