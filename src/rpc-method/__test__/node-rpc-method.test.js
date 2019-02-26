@@ -78,7 +78,7 @@ test('RpcMethod.getActionsByBlock', async t => {
   t.deepEqual(resp7.actions.length, 1);
 });
 
-test('RpcMethod.suggestGasPrice', async t => {
+test.skip('RpcMethod.suggestGasPrice', async t => {
   const client = new RpcMethod('35.192.119.63:31500');
   const resp = await client.suggestGasPrice({});
   t.deepEqual(resp.gasPrice.toString(), '1');
