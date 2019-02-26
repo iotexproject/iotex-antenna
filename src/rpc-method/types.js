@@ -522,10 +522,10 @@ export interface IClaimFromRewardingFund {
   data?: Uint8Array | null,
 }
 
-const RewardType = {
+/* const RewardType = {
   BlockReward: 0,
   EpochReward: 1,
-};
+}; */
 
 /** Properties of a SetReward. */
 export interface ISetReward {
