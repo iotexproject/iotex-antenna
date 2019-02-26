@@ -78,7 +78,7 @@
     "eslint-plugin-flowtype": "2.50.3",
     "eslint-plugin-import": "2.16.0",
     "eslint-plugin-react": "7.12.3",
-    "flow-bin": "0.89.0",
+    "flow-bin": "0.93.0",
     "flow-typed": "2.5.1",
     "global": "4.3.2",
     "nyc": "13.3.0"
