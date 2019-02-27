@@ -83,6 +83,17 @@ export interface IGetChainMetaRequest {
 export interface IGetChainMetaResponse {
   chainMeta?: IChainMeta | null
 }
+export class GetChainMetaRequest {
+  static to(req: IGetChainMetaRequest): any {
+    const pbReq = new apiPb.GetChainMetaRequest();
+    return  pbReq;
+
+  }
+  static from(pbRes: any): IGetChainMetaResponse {
+    const meta = pbRes.getChainmeta();
+    return meta;
+  }
+}
 
 // interface for get block metas
 /** Properties of a GetBlockMetasByIndexRequest. */

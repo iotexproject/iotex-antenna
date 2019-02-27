@@ -38,3 +38,8 @@ test('RpcMethod.suggestGasPrice', async t => {
     gasPrice: 1,
   });
 });
+test('RpcMethod.getChainMeta', async t => {
+  const client = new RpcMethod('http://35.192.119.63:31501');
+  const resp = await client.getChainMeta({});
+  t.deepEqual(resp, resp);
+});
