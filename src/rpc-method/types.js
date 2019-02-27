@@ -566,6 +566,10 @@ export interface IActionCore {
   vote?: IVote | null,
   /** ActionCore execution */
   execution?: IExecution | null,
+
+  /** ActionCore grantReward */
+  //grantReward?: IGrantReward | null,
+
   // FedChain
   /** ActionCore startSubChain */
   startSubChain?: IStartSubChain | null,
@@ -704,6 +708,17 @@ export interface IReceipt {
 export interface IGetReceiptByActionResponse {
   /** GetReceiptByActionResponse receipt */
   receipt?: IReceipt | null,
+}
+
+/** Properties of a ReadContractRequest. */
+export interface IReadContractRequest {
+  /** ReadContractRequest action */
+  action?: IAction | null,
+}
+
+/** Properties of a ReadContractResponse. */
+export interface IReadContractResponse {
+  data?: string | null,
 }
 
 /** Properties of a SendActionRequest. */
