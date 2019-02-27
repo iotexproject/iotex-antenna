@@ -63,13 +63,13 @@ export class GetAccountRequest {
 }
 
 // interface for get chain meta
-interface IEpochData {
+export interface IEpochData {
   num?: number | null,
   height?: number | null,
   beaconChainHeight?: number | null,
 }
 
-interface IChainMeta {
+export interface IChainMeta {
   height?: string | null,
   supply?: string | null,
   numActions?: string | null,
@@ -82,6 +82,30 @@ export interface IGetChainMetaRequest {
 
 export interface IGetChainMetaResponse {
   chainMeta?: IChainMeta | null
+}
+
+export class GetChainMetaRequest {
+  static to(req: IGetChainMetaRequest): any {
+    return new apiPb.GetChainMetaRequest();
+  }
+
+  static from(pbRes: any): IGetChainMetaResponse {
+    const meta = pbRes.getChainMeta();
+    const res = {
+      chainMeta: meta,
+    };
+    if (meta) {
+      const epochData = meta.getEpoch();
+      res.chainMeta = {
+        height: meta.getHeight(),
+        supply: meta.getSupply(),
+        numActions: meta.getNumactions(),
+        tps: meta.getTps(),
+        epoch: epochData,
+      };
+    }
+    return res;
+  }
 }
 
 // interface for get block metas

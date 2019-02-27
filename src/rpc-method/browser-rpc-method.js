@@ -5,11 +5,14 @@ import type {
   IGetAccountResponse,
   IGetBlockMetasRequest,
   IGetBlockMetasResponse,
+  IGetChainMetaRequest,
+  IGetChainMetaResponse,
   ISuggestGasPriceRequest,
   ISuggestGasPriceResponse} from './types';
 import {
   GetAccountRequest,
   GetBlockMetasRequest,
+  GetChainMetaRequest,
   SuggestGasPriceRequest} from './types';
 
 export default class RpcMethod {
@@ -29,6 +32,12 @@ export default class RpcMethod {
     const pbReq = GetBlockMetasRequest.to(req);
     const pbResp = await this.client.getBlockMetas(pbReq);
     return GetBlockMetasRequest.from(pbResp);
+  }
+
+  async getChainMeta(req: IGetChainMetaRequest): Promise<IGetChainMetaResponse> {
+    const pbReq = GetChainMetaRequest.to(req);
+    const pbResp = await this.client.getBlockMetas(pbReq);
+    return GetChainMetaRequest.from(pbResp);
   }
 
   async suggestGasPrice(req: ISuggestGasPriceRequest): Promise<ISuggestGasPriceResponse> {
