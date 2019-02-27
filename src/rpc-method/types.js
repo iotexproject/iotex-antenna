@@ -90,7 +90,7 @@ export class GetChainMetaRequest {
   }
 
   static from(pbRes: any): IGetChainMetaResponse {
-    const meta = pbRes.getChainMeta();
+    const meta = pbRes.getChainmeta();
     const res = {
       chainMeta: meta,
     };
