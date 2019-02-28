@@ -745,6 +745,21 @@ export interface IReadContractResponse {
   data?: string | null,
 }
 
+export class ReadContractRequest {
+  static to(req: IReadContractRequest): any {
+    const pbReq = new apiPb.ReadContractRequest();
+    pbReq.setAction(req.action);
+    return pbReq;
+  }
+
+  static from(pbRes: any): IReadContractResponse {
+    const data = pbRes.getData();
+    return {
+      data,
+    };
+  }
+}
+
 /** Properties of a SendActionRequest. */
 export interface ISendActionRequest {
   /** SendActionRequest action */

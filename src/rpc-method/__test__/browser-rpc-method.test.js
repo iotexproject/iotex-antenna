@@ -38,3 +38,14 @@ test('RpcMethod.suggestGasPrice', async t => {
     gasPrice: 1,
   });
 });
+
+test('RpcMethod.readContract', async t => {
+  const client = new RpcMethod('http://35.192.119.63:31501');
+  const blks = await client.getBlockMetas({byIndex: {start: 10, count: 1}});
+  t.deepEqual(blks.blkMetas.length, 1);
+  const resp1 = await client.getActions({byBlk: {blkHash: blks.blkMetas[0].hash, start: 0, count: 15}});
+  const resp = await client.readContract({action: resp1[0]});
+  t.deepEqual(resp, {
+    data: '',
+  });
+});
