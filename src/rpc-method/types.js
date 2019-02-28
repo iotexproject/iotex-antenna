@@ -546,10 +546,10 @@ export interface IClaimFromRewardingFund {
   data?: Uint8Array | null,
 }
 
-/* const RewardType = {
+/*export RewardType {
   BlockReward: 0,
   EpochReward: 1,
-}; */
+}*/
 
 /** Properties of a SetReward. */
 export interface ISetReward {
@@ -590,9 +590,6 @@ export interface IActionCore {
   vote?: IVote | null,
   /** ActionCore execution */
   execution?: IExecution | null,
-
-  /** ActionCore grantReward */
-  // grantReward?: IGrantReward | null,
 
   // FedChain
   /** ActionCore startSubChain */
@@ -655,6 +652,142 @@ export interface IAction {
 export interface IGetActionsResponse {
   /** GetActionsResponse actions */
   actions?: IAction[] | null
+}
+
+export class GetActionsRequest {
+  static byAddrTo(byAddr: IGetActionsByAddressRequest): any {
+    const pbReqByAddr = new apiPb.GetActionsByAddressRequest();
+    if (byAddr.address) {
+      pbReqByAddr.setAddress(byAddr.address);
+    }
+    if (byAddr.start) {
+      pbReqByAddr.setStart(byAddr.start);
+    }
+    if (byAddr.count) {
+      pbReqByAddr.setCount(byAddr.count);
+    }
+    return pbReqByAddr;
+  }
+
+  static byBlkTo(byBlk: IGetActionsByBlockRequest): any {
+    const pbReqByBlk = new apiPb.GetActionsByBlockRequest();
+    if (byBlk.blkHash) {
+      pbReqByBlk.setBlkhash(byBlk.blkHash);
+    }
+    if (byBlk.start) {
+      pbReqByBlk.setStart(byBlk.start);
+    }
+    if (byBlk.count) {
+      pbReqByBlk.setCount(byBlk.count);
+    }
+    return pbReqByBlk;
+  }
+
+  static byHashTo(byHash: IGetActionsByHashRequest): any {
+    const pbReqByHash = new apiPb.GetActionsByHashRequest();
+    if (byHash.actionHash) {
+      pbReqByHash.setActionhash(byHash.actionHash);
+    }
+    if (byHash.checkingPending) {
+      pbReqByHash.setCheckingpending(byHash.checkingPending);
+    }
+    return pbReqByHash;
+  }
+
+  static byIndexTo(byIndex: IGetActionsByIndexRequest): any {
+    const pbReqByIndex = new apiPb.GetActionsByIndexRequest();
+    if (byIndex.start) {
+      pbReqByIndex.setStart(byIndex.start);
+    }
+    if (byIndex.count) {
+      pbReqByIndex.setCount(byIndex.count);
+    }
+    return pbReqByIndex;
+  }
+
+  static unconfirmedByAddrTo(unconfirmedByAddr: IGetUnconfirmedActionsByAddressRequest): any {
+    const pbReqUnconfirmedByAddr = new apiPb.GetUnconfirmedActionsByAddressRequest();
+    if (unconfirmedByAddr.start) {
+      pbReqUnconfirmedByAddr.setStart(unconfirmedByAddr.start);
+    }
+    if (unconfirmedByAddr.count) {
+      pbReqUnconfirmedByAddr.setCount(unconfirmedByAddr.count);
+    }
+    if (unconfirmedByAddr.address) {
+      pbReqUnconfirmedByAddr.setAddress(unconfirmedByAddr.address);
+    }
+    return pbReqUnconfirmedByAddr;
+  }
+
+  static to(req: IGetActionsRequest): any {
+    const pbReq = new apiPb.GetActionsRequest();
+    if (req.byAddr) {
+      pbReq.setByaddr(this.byAddrTo(req.byAddr));
+    }
+    if (req.byBlk) {
+      pbReq.setByblk(this.byBlkTo(req.byBlk));
+    }
+    if (req.byHash) {
+      pbReq.setByhash(this.byHashTo(req.byHash));
+    }
+    if (req.byIndex) {
+      pbReq.setByindex(this.byIndexTo(req.byIndex));
+    }
+    if (req.unconfirmedByAddr) {
+      pbReq.setUnconfirmedbyaddr(this.unconfirmedByAddrTo(req.unconfirmedByAddr));
+    }
+    return pbReq;
+  }
+
+  static from(pbRes: any): IGetActionsResponse {
+    const rawActions = pbRes.getActionsList();
+    const res = {
+      actions: rawActions,
+    };
+    if (rawActions) {
+      for (let i = 0; i < rawActions.length; i++) {
+        const parsedActions = [];
+        let actionCore = rawActions[i].getCore();
+        if (actionCore) {
+          actionCore = {
+            version: rawActions[i].getCore().getVersion(),
+            nonce: rawActions[i].getCore().getNonce(),
+            gasLimit: rawActions[i].getCore().getGaslimit(),
+            gasPrice: rawActions[i].getCore().getGasprice(),
+            transfer: rawActions[i].getCore().getTransfer(),
+            vote: rawActions[i].getCore().getVote(),
+            execution: rawActions[i].getCore().getExecution(),
+            startSubChain: rawActions[i].getCore().getStartsubchain(),
+            stopSubChain: rawActions[i].getCore().getStopsubchain(),
+            putBlock: rawActions[i].getCore().getPutblock(),
+            createDeposit: rawActions[i].getCore().getCreatedeposit(),
+            settleDeposit: rawActions[i].getCore().getSettledeposit(),
+            createPlumChain: rawActions[i].getCore().getCreateplumchain(),
+            terminatePlumChain: rawActions[i].getCore().getTerminateplumchain(),
+            plumPutBlock: rawActions[i].getCore().getPlumputblock(),
+            plumCreateDeposit: rawActions[i].getCore().getPlumcreatedeposit(),
+            plumStartExit: rawActions[i].getCore().getPlumstartexit(),
+            plumChallengeExit: rawActions[i].getCore().getPlumchallengeexit(),
+            plumResponseChallengeExit: rawActions[i].getCore().getPlumresponsechallengeexit(),
+            plumFinalizeExit: rawActions[i].getCore().getPlumfinalizeexit(),
+            plumSettleDeposit: rawActions[i].getCore().getPlumsettledeposit(),
+            plumTransfer: rawActions[i].getCore().getPlumtransfer(),
+            depositToRewardingFund: rawActions[i].getCore().getDeposittorewardingfund(),
+            claimFromRewardingFund: rawActions[i].getCore().getClaimfromrewardingfund(),
+            setReward: rawActions[i].getCore().getSetreward(),
+            grantReward: rawActions[i].getCore().getGrantreward(),
+          };
+        }
+        parsedActions[i] = {
+          core: actionCore,
+          senderPubKey: rawActions[i].getSenderpubkey(),
+          signature: rawActions[i].getSignature(),
+        };
+        res.actions = parsedActions;
+      }
+    }
+    return res;
+  }
 }
 
 /** Properties of a SuggestGasPrice Request. */
