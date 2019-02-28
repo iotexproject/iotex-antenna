@@ -87,11 +87,22 @@ export class GetChainMetaRequest {
   static to(req: IGetChainMetaRequest): any {
     const pbReq = new apiPb.GetChainMetaRequest();
     return  pbReq;
-
   }
   static from(pbRes: any): IGetChainMetaResponse {
     const meta = pbRes.getChainmeta();
-    return meta;
+    const res = {
+      chainMeta: meta,
+    };
+    if (meta) {
+      res.chainMeta = {
+        height: meta.getHeight(),
+        supply: meta.getSupply(),
+        numActions: meta.getNumactions(),
+        tps: meta.getTps(),
+        // epoch: ???
+      };
+    }
+    return res;
   }
 }
 
