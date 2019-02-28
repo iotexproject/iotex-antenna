@@ -546,10 +546,10 @@ export interface IClaimFromRewardingFund {
   data?: Uint8Array | null,
 }
 
-/* const RewardType = {
+/*export RewardType {
   BlockReward: 0,
   EpochReward: 1,
-}; */
+}*/
 
 /** Properties of a SetReward. */
 export interface ISetReward {
@@ -590,9 +590,6 @@ export interface IActionCore {
   vote?: IVote | null,
   /** ActionCore execution */
   execution?: IExecution | null,
-
-  /** ActionCore grantReward */
-  // grantReward?: IGrantReward | null,
 
   // FedChain
   /** ActionCore startSubChain */
@@ -655,6 +652,93 @@ export interface IAction {
 export interface IGetActionsResponse {
   /** GetActionsResponse actions */
   actions?: IAction[] | null
+}
+
+export class GetActionsRequest {
+  static to(req: IGetActionsRequest): any {
+    const pbReq = new apiPb.GetActionsRequest();
+    if (req.byAddr) {
+      const pbReqByAddr = new apiPb.GetActionsByAddressRequest();
+      pbReqByAddr.setAddress(req.byAddr.address);
+      pbReqByAddr.setStart(req.byAddr.start);
+      pbReqByAddr.setCount(req.byAddr.count);
+      pbReq.setByaddr(pbReqByAddr);
+    }
+    if (req.byBlk) {
+      const pbReqByBlk = new apiPb.GetActionsByBlockRequest();
+      pbReqByBlk.setBlkhash(req.byBlk.blkHash);
+      pbReqByBlk.setStart(req.byBlk.start);
+      pbReqByBlk.setCount(req.byBlk.count);
+      pbReq.setByblk(pbReqByBlk);
+    }
+    if (req.byHash) {
+      const pbReqByHash = new apiPb.GetActionsByHashRequest();
+      pbReqByHash.setActionhash(req.byHash.actionHash);
+      pbReqByHash.setCheckingpending(req.byHash.checkingPending);
+      pbReq.setByhash(pbReqByHash);
+    }
+    if (req.byIndex) {
+      const pbReqByIndex = new apiPb.GetActionsByIndexRequest();
+      pbReqByIndex.setStart(req.byIndex.start);
+      pbReqByIndex.setCount(req.byIndex.count);
+      pbReq.setByindex(pbReqByIndex);
+    }
+    if (req.unconfirmedByAddr) {
+      const pbReqUnconfirmedByAddr = new apiPb.GetUnconfirmedActionsByAddressRequest();
+      pbReqUnconfirmedByAddr.setStart(req.unconfirmedByAddr.start);
+      pbReqUnconfirmedByAddr.setCount(req.unconfirmedByAddr.count);
+      pbReqUnconfirmedByAddr.setAddress(req.unconfirmedByAddr.address);
+      pbReq.setUnconfirmedbyaddr(pbReqUnconfirmedByAddr);
+    }
+    return pbReq;
+  }
+
+  static from(pbRes: any): IGetActionsResponse {
+    const rawActions = pbRes.getActionsList();
+    const res = {
+      actions: rawActions,
+    };
+    if (rawActions) {
+      for (let i = 0; i < rawActions.length; i++) {
+        const parsedActions = [];
+        const actionCore = {
+          version: rawActions[i].getCore().getVersion(),
+          nonce: rawActions[i].getCore().getNonce(),
+          gasLimit: rawActions[i].getCore().getGaslimit(),
+          gasPrice: rawActions[i].getCore().getGasprice(),
+          transfer: rawActions[i].getCore().getTransfer(),
+          vote: rawActions[i].getCore().getVote(),
+          execution: rawActions[i].getCore().getExecution(),
+          startSubChain: rawActions[i].getCore().getStartsubchain(),
+          stopSubChain: rawActions[i].getCore().getStopsubchain(),
+          putBlock: rawActions[i].getCore().getPutblock(),
+          createDeposit: rawActions[i].getCore().getCreatedeposit(),
+          settleDeposit: rawActions[i].getCore().getSettledeposit(),
+          createPlumChain: rawActions[i].getCore().getCreateplumchain(),
+          terminatePlumChain: rawActions[i].getCore().getTerminateplumchain(),
+          plumPutBlock: rawActions[i].getCore().getPlumputblock(),
+          plumCreateDeposit: rawActions[i].getCore().getPlumcreatedeposit(),
+          plumStartExit: rawActions[i].getCore().getPlumstartexit(),
+          plumChallengeExit: rawActions[i].getCore().getPlumchallengeexit(),
+          plumResponseChallengeExit: rawActions[i].getCore().getPlumresponsechallengeexit(),
+          plumFinalizeExit: rawActions[i].getCore().getPlumfinalizeexit(),
+          plumSettleDeposit: rawActions[i].getCore().getPlumsettledeposit(),
+          plumTransfer: rawActions[i].getCore().getPlumtransfer(),
+          depositToRewardingFund: rawActions[i].getCore().getDeposittorewardingfund(),
+          claimFromRewardingFund: rawActions[i].getCore().getClaimfromrewardingfund(),
+          setReward: rawActions[i].getCore().getSetreward(),
+          grantReward: rawActions[i].getCore().getGrantreward(),
+        }
+        parsedActions[i] = {
+          core: actionCore,
+          senderPubKey: rawActions[i].getSenderpubkey(),
+          signature: rawActions[i].getSignature(),
+        };
+        res.actions = parsedActions;
+      }
+    }
+    return res;
+  }
 }
 
 /** Properties of a SuggestGasPrice Request. */
