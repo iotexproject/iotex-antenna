@@ -19,6 +19,8 @@ import type {
   IReadContractResponse,
   ISendActionRequest,
   ISendActionResponse,
+  IEstimateGasForActionRequest,
+  IEstimateGasForActionResponse,
 } from './types';
 
 export default class RpcMethod {
@@ -76,5 +78,10 @@ export default class RpcMethod {
   async sendAction(req: ISendActionRequest): Promise<ISendActionResponse> {
     const sendAction = promisify(this.client.sendAction.bind(this.client));
     return await sendAction(req);
+  }
+
+  async estimateGasForAction(req: IEstimateGasForActionRequest): Promise<IEstimateGasForActionResponse> {
+    const estimateGasForAction = promisify(this.client.estimateGasForAction.bind(this.client));
+    return await estimateGasForAction(req);
   }
 }

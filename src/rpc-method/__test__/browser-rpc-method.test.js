@@ -19,11 +19,11 @@ test('RpcMethod.getAccount', async t => {
 test('RpcMethod.getBlockMetas', async t => {
   const client = new RpcMethod('http://35.192.119.63:31501');
   // test getMetasByIndex
-  const resp1 = await client.getBlockMetas({byIndex: {start: 100, count: 1}});
+  const resp1 = await client.getBlockMetas({byIndex: {start: 10, count: 1}});
   t.deepEqual(resp1.blkMetas.length, 1);
-  const resp2 = await client.getBlockMetas({byIndex: {start: 100, count: 10}});
+  const resp2 = await client.getBlockMetas({byIndex: {start: 10, count: 10}});
   t.deepEqual(resp2.blkMetas.length, 10);
-  const resp3 = await client.getBlockMetas({byIndex: {start: 100, count: 0}});
+  const resp3 = await client.getBlockMetas({byIndex: {start: 10, count: 0}});
   t.deepEqual(resp3.blkMetas.length, 0);
 
   // test getMetasByBlkHash

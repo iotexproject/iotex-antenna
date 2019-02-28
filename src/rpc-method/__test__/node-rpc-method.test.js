@@ -146,3 +146,17 @@ test('RpcMethod.sendAction', async t => {
     }
   }
 });
+
+test('RpcMethod.estimateGasForAction', async t => {
+  const client = new RpcMethod('35.192.119.63:31501');
+  const blks = await client.getBlockMetas({byIndex: {start: 10, count: 1}});
+  t.deepEqual(blks.blkMetas.length, 1);
+  const resp1 = await client.getActions({byBlk: {blkHash: blks.blkMetas[0].hash, start: 0, count: 15}});
+
+  for (let index = 0; index < resp1.actions.length; index++) {
+    if (resp1.actions[index].core.execution) {
+      const resp2 = await client.estimateGasForAction({action: resp1.actions[index]});
+      t.deepEqual(resp2.gas, 1);
+    }
+  }
+});
