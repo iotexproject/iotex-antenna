@@ -90,6 +90,10 @@
   "private": true,
   "dependencies": {
     "@grpc/proto-loader": "0.4.0",
+    "bech32": "^1.1.3",
+    "blakejs": "^1.1.0",
+    "elliptic": "^6.4.1",
+    "eth-lib": "^0.2.8",
     "google-protobuf": "3.7.0-rc.3",
     "grpc": "1.18.0",
     "grpc-web": "1.0.3",
