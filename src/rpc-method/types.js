@@ -745,8 +745,8 @@ export class GetActionsRequest {
       actions: rawActions,
     };
     if (rawActions) {
+      const parsedActions = [];
       for (let i = 0; i < rawActions.length; i++) {
-        const parsedActions = [];
         let actionCore = rawActions[i].getCore();
         if (actionCore) {
           actionCore = {
@@ -783,8 +783,8 @@ export class GetActionsRequest {
           senderPubKey: rawActions[i].getSenderpubkey(),
           signature: rawActions[i].getSignature(),
         };
-        res.actions = parsedActions;
       }
+      res.actions = parsedActions;
     }
     return res;
   }
