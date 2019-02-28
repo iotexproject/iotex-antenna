@@ -659,35 +659,61 @@ export class GetActionsRequest {
     const pbReq = new apiPb.GetActionsRequest();
     if (req.byAddr) {
       const pbReqByAddr = new apiPb.GetActionsByAddressRequest();
-      pbReqByAddr.setAddress(req.byAddr.address);
-      pbReqByAddr.setStart(req.byAddr.start);
-      pbReqByAddr.setCount(req.byAddr.count);
+      if (req.byAddr.address) {
+        pbReqByAddr.setAddress(req.byAddr.address);
+      }
+      if (req.byAddr.start) {
+        pbReqByAddr.setStart(req.byAddr.start);
+      }
+      if (req.byAddr.count) {
+        pbReqByAddr.setCount(req.byAddr.count);
+      }
       pbReq.setByaddr(pbReqByAddr);
     }
     if (req.byBlk) {
       const pbReqByBlk = new apiPb.GetActionsByBlockRequest();
-      pbReqByBlk.setBlkhash(req.byBlk.blkHash);
-      pbReqByBlk.setStart(req.byBlk.start);
-      pbReqByBlk.setCount(req.byBlk.count);
+      if (req.byBlk.blkHash) {
+        pbReqByBlk.setBlkhash(req.byBlk.blkHash);
+      }
+      if (req.byBlk.start) {
+        pbReqByBlk.setStart(req.byBlk.start);
+      }
+      if (req.byBlk.count) {
+        pbReqByBlk.setCount(req.byBlk.count);
+      }
       pbReq.setByblk(pbReqByBlk);
     }
     if (req.byHash) {
       const pbReqByHash = new apiPb.GetActionsByHashRequest();
-      pbReqByHash.setActionhash(req.byHash.actionHash);
-      pbReqByHash.setCheckingpending(req.byHash.checkingPending);
+      if (req.byHash.actionHash) {
+        pbReqByHash.setActionhash(req.byHash.actionHash);
+      }
+      if (req.byHash.checkingPending) {
+        pbReqByHash.setCheckingpending(req.byHash.checkingPending);
+      }
       pbReq.setByhash(pbReqByHash);
     }
     if (req.byIndex) {
       const pbReqByIndex = new apiPb.GetActionsByIndexRequest();
-      pbReqByIndex.setStart(req.byIndex.start);
-      pbReqByIndex.setCount(req.byIndex.count);
+      if (req.byIndex.start) {
+        pbReqByIndex.setStart(req.byIndex.start);
+      }
+      if (req.byIndex.count) {
+        pbReqByIndex.setCount(req.byIndex.count);
+      }
       pbReq.setByindex(pbReqByIndex);
     }
     if (req.unconfirmedByAddr) {
       const pbReqUnconfirmedByAddr = new apiPb.GetUnconfirmedActionsByAddressRequest();
-      pbReqUnconfirmedByAddr.setStart(req.unconfirmedByAddr.start);
-      pbReqUnconfirmedByAddr.setCount(req.unconfirmedByAddr.count);
-      pbReqUnconfirmedByAddr.setAddress(req.unconfirmedByAddr.address);
+      if (req.unconfirmedByAddr.start) {
+        pbReqUnconfirmedByAddr.setStart(req.unconfirmedByAddr.start);
+      }
+      if (req.unconfirmedByAddr.count) {
+        pbReqUnconfirmedByAddr.setCount(req.unconfirmedByAddr.count);
+      }
+      if (req.unconfirmedByAddr.address) {
+        pbReqUnconfirmedByAddr.setAddress(req.unconfirmedByAddr.address);
+      }
       pbReq.setUnconfirmedbyaddr(pbReqUnconfirmedByAddr);
     }
     return pbReq;
@@ -701,33 +727,36 @@ export class GetActionsRequest {
     if (rawActions) {
       for (let i = 0; i < rawActions.length; i++) {
         const parsedActions = [];
-        const actionCore = {
-          version: rawActions[i].getCore().getVersion(),
-          nonce: rawActions[i].getCore().getNonce(),
-          gasLimit: rawActions[i].getCore().getGaslimit(),
-          gasPrice: rawActions[i].getCore().getGasprice(),
-          transfer: rawActions[i].getCore().getTransfer(),
-          vote: rawActions[i].getCore().getVote(),
-          execution: rawActions[i].getCore().getExecution(),
-          startSubChain: rawActions[i].getCore().getStartsubchain(),
-          stopSubChain: rawActions[i].getCore().getStopsubchain(),
-          putBlock: rawActions[i].getCore().getPutblock(),
-          createDeposit: rawActions[i].getCore().getCreatedeposit(),
-          settleDeposit: rawActions[i].getCore().getSettledeposit(),
-          createPlumChain: rawActions[i].getCore().getCreateplumchain(),
-          terminatePlumChain: rawActions[i].getCore().getTerminateplumchain(),
-          plumPutBlock: rawActions[i].getCore().getPlumputblock(),
-          plumCreateDeposit: rawActions[i].getCore().getPlumcreatedeposit(),
-          plumStartExit: rawActions[i].getCore().getPlumstartexit(),
-          plumChallengeExit: rawActions[i].getCore().getPlumchallengeexit(),
-          plumResponseChallengeExit: rawActions[i].getCore().getPlumresponsechallengeexit(),
-          plumFinalizeExit: rawActions[i].getCore().getPlumfinalizeexit(),
-          plumSettleDeposit: rawActions[i].getCore().getPlumsettledeposit(),
-          plumTransfer: rawActions[i].getCore().getPlumtransfer(),
-          depositToRewardingFund: rawActions[i].getCore().getDeposittorewardingfund(),
-          claimFromRewardingFund: rawActions[i].getCore().getClaimfromrewardingfund(),
-          setReward: rawActions[i].getCore().getSetreward(),
-          grantReward: rawActions[i].getCore().getGrantreward(),
+        let actionCore = rawActions[i].getCore();
+        if (actionCore) {
+          actionCore = {
+            version: rawActions[i].getCore().getVersion(),
+            nonce: rawActions[i].getCore().getNonce(),
+            gasLimit: rawActions[i].getCore().getGaslimit(),
+            gasPrice: rawActions[i].getCore().getGasprice(),
+            transfer: rawActions[i].getCore().getTransfer(),
+            vote: rawActions[i].getCore().getVote(),
+            execution: rawActions[i].getCore().getExecution(),
+            startSubChain: rawActions[i].getCore().getStartsubchain(),
+            stopSubChain: rawActions[i].getCore().getStopsubchain(),
+            putBlock: rawActions[i].getCore().getPutblock(),
+            createDeposit: rawActions[i].getCore().getCreatedeposit(),
+            settleDeposit: rawActions[i].getCore().getSettledeposit(),
+            createPlumChain: rawActions[i].getCore().getCreateplumchain(),
+            terminatePlumChain: rawActions[i].getCore().getTerminateplumchain(),
+            plumPutBlock: rawActions[i].getCore().getPlumputblock(),
+            plumCreateDeposit: rawActions[i].getCore().getPlumcreatedeposit(),
+            plumStartExit: rawActions[i].getCore().getPlumstartexit(),
+            plumChallengeExit: rawActions[i].getCore().getPlumchallengeexit(),
+            plumResponseChallengeExit: rawActions[i].getCore().getPlumresponsechallengeexit(),
+            plumFinalizeExit: rawActions[i].getCore().getPlumfinalizeexit(),
+            plumSettleDeposit: rawActions[i].getCore().getPlumsettledeposit(),
+            plumTransfer: rawActions[i].getCore().getPlumtransfer(),
+            depositToRewardingFund: rawActions[i].getCore().getDeposittorewardingfund(),
+            claimFromRewardingFund: rawActions[i].getCore().getClaimfromrewardingfund(),
+            setReward: rawActions[i].getCore().getSetreward(),
+            grantReward: rawActions[i].getCore().getGrantreward(),
+          };
         }
         parsedActions[i] = {
           core: actionCore,
