@@ -655,66 +655,86 @@ export interface IGetActionsResponse {
 }
 
 export class GetActionsRequest {
+  static byAddrTo(byAddr: IGetActionsByAddressRequest): any {
+    const pbReqByAddr = new apiPb.GetActionsByAddressRequest();
+    if (byAddr.address) {
+      pbReqByAddr.setAddress(byAddr.address);
+    }
+    if (byAddr.start) {
+      pbReqByAddr.setStart(byAddr.start);
+    }
+    if (byAddr.count) {
+      pbReqByAddr.setCount(byAddr.count);
+    }
+    return pbReqByAddr;
+  }
+
+  static byBlkTo(byBlk: IGetActionsByBlockRequest): any {
+    const pbReqByBlk = new apiPb.GetActionsByBlockRequest();
+    if (byBlk.blkHash) {
+      pbReqByBlk.setBlkhash(byBlk.blkHash);
+    }
+    if (byBlk.start) {
+      pbReqByBlk.setStart(byBlk.start);
+    }
+    if (byBlk.count) {
+      pbReqByBlk.setCount(byBlk.count);
+    }
+    return pbReqByBlk;
+  }
+
+  static byHashTo(byHash: IGetActionsByHashRequest): any {
+    const pbReqByHash = new apiPb.GetActionsByHashRequest();
+    if (byHash.actionHash) {
+      pbReqByHash.setActionhash(byHash.actionHash);
+    }
+    if (byHash.checkingPending) {
+      pbReqByHash.setCheckingpending(byHash.checkingPending);
+    }
+    return pbReqByHash;
+  }
+
+  static byIndexTo(byIndex: IGetActionsByIndexRequest): any {
+    const pbReqByIndex = new apiPb.GetActionsByIndexRequest();
+    if (byIndex.start) {
+      pbReqByIndex.setStart(byIndex.start);
+    }
+    if (byIndex.count) {
+      pbReqByIndex.setCount(byIndex.count);
+    }
+    return pbReqByIndex;
+  }
+
+  static unconfirmedByAddrTo(unconfirmedByAddr: IGetUnconfirmedActionsByAddressRequest): any {
+    const pbReqUnconfirmedByAddr = new apiPb.GetUnconfirmedActionsByAddressRequest();
+    if (unconfirmedByAddr.start) {
+      pbReqUnconfirmedByAddr.setStart(unconfirmedByAddr.start);
+    }
+    if (unconfirmedByAddr.count) {
+      pbReqUnconfirmedByAddr.setCount(unconfirmedByAddr.count);
+    }
+    if (unconfirmedByAddr.address) {
+      pbReqUnconfirmedByAddr.setAddress(unconfirmedByAddr.address);
+    }
+    return pbReqUnconfirmedByAddr;
+  }
+
   static to(req: IGetActionsRequest): any {
     const pbReq = new apiPb.GetActionsRequest();
     if (req.byAddr) {
-      const pbReqByAddr = new apiPb.GetActionsByAddressRequest();
-      if (req.byAddr.address) {
-        pbReqByAddr.setAddress(req.byAddr.address);
-      }
-      if (req.byAddr.start) {
-        pbReqByAddr.setStart(req.byAddr.start);
-      }
-      if (req.byAddr.count) {
-        pbReqByAddr.setCount(req.byAddr.count);
-      }
-      pbReq.setByaddr(pbReqByAddr);
+      pbReq.setByaddr(this.byAddrTo(req.byAddr));
     }
     if (req.byBlk) {
-      const pbReqByBlk = new apiPb.GetActionsByBlockRequest();
-      if (req.byBlk.blkHash) {
-        pbReqByBlk.setBlkhash(req.byBlk.blkHash);
-      }
-      if (req.byBlk.start) {
-        pbReqByBlk.setStart(req.byBlk.start);
-      }
-      if (req.byBlk.count) {
-        pbReqByBlk.setCount(req.byBlk.count);
-      }
-      pbReq.setByblk(pbReqByBlk);
+      pbReq.setByblk(this.byBlkTo(req.byBlk));
     }
     if (req.byHash) {
-      const pbReqByHash = new apiPb.GetActionsByHashRequest();
-      if (req.byHash.actionHash) {
-        pbReqByHash.setActionhash(req.byHash.actionHash);
-      }
-      if (req.byHash.checkingPending) {
-        pbReqByHash.setCheckingpending(req.byHash.checkingPending);
-      }
-      pbReq.setByhash(pbReqByHash);
+      pbReq.setByhash(this.byHashTo(req.byHash));
     }
     if (req.byIndex) {
-      const pbReqByIndex = new apiPb.GetActionsByIndexRequest();
-      if (req.byIndex.start) {
-        pbReqByIndex.setStart(req.byIndex.start);
-      }
-      if (req.byIndex.count) {
-        pbReqByIndex.setCount(req.byIndex.count);
-      }
-      pbReq.setByindex(pbReqByIndex);
+      pbReq.setByindex(this.byIndexTo(req.byIndex));
     }
     if (req.unconfirmedByAddr) {
-      const pbReqUnconfirmedByAddr = new apiPb.GetUnconfirmedActionsByAddressRequest();
-      if (req.unconfirmedByAddr.start) {
-        pbReqUnconfirmedByAddr.setStart(req.unconfirmedByAddr.start);
-      }
-      if (req.unconfirmedByAddr.count) {
-        pbReqUnconfirmedByAddr.setCount(req.unconfirmedByAddr.count);
-      }
-      if (req.unconfirmedByAddr.address) {
-        pbReqUnconfirmedByAddr.setAddress(req.unconfirmedByAddr.address);
-      }
-      pbReq.setUnconfirmedbyaddr(pbReqUnconfirmedByAddr);
+      pbReq.setUnconfirmedbyaddr(this.unconfirmedByAddrTo(req.unconfirmedByAddr));
     }
     return pbReq;
   }
