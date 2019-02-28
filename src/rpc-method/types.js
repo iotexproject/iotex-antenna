@@ -1,5 +1,6 @@
 // @flow
 import apiPb from '../proto/api_pb';
+import actionPb from '../proto/action_pb';
 
 /** Properties of a Timestamp. */
 export interface ITimestamp {
@@ -745,8 +746,8 @@ export class GetActionsRequest {
       actions: rawActions,
     };
     if (rawActions) {
+      const parsedActions = [];
       for (let i = 0; i < rawActions.length; i++) {
-        const parsedActions = [];
         let actionCore = rawActions[i].getCore();
         if (actionCore) {
           actionCore = {
@@ -783,8 +784,8 @@ export class GetActionsRequest {
           senderPubKey: rawActions[i].getSenderpubkey(),
           signature: rawActions[i].getSignature(),
         };
-        res.actions = parsedActions;
       }
+      res.actions = parsedActions;
     }
     return res;
   }
@@ -878,6 +879,21 @@ export interface IReadContractResponse {
   data?: string | null,
 }
 
+export class ReadContractRequest {
+  static to(req: IReadContractRequest): any {
+    const pbReq = new apiPb.ReadContractRequest();
+    pbReq.setAction(req.action);
+    return pbReq;
+  }
+
+  static from(pbRes: any): IReadContractResponse {
+    const data = pbRes.getData();
+    return {
+      data,
+    };
+  }
+}
+
 /** Properties of a SendActionRequest. */
 export interface ISendActionRequest {
   /** SendActionRequest action */
@@ -896,5 +912,92 @@ export class SendActionRequest {
 
   static from(pbRes: any): ISendActionResponse {
     return {};
+  }
+}
+
+/** Properties of a EstimateGasForActionRequest. */
+export interface IEstimateGasForActionRequest {
+  action?: IAction,
+}
+
+/** Properties of a EstimateGasForActionResponse. */
+export interface IEstimateGasForActionResponse {
+  gas?: number | null,
+}
+
+export class EstimateGasForActionRequest {
+  // $FlowFixMe
+  static to(req: IEstimateGasForActionRequest): any {
+    const pbActionCore = new actionPb.ActionCore();
+
+    // $FlowFixMe
+    if (req.action.core) {
+      pbActionCore.setVersion(req.action.core.version);
+      // $FlowFixMe
+      pbActionCore.setNonce(req.action.core.nonce);
+      // $FlowFixMe
+      pbActionCore.setGaslimit(req.action.core.gasLimit);
+      // $FlowFixMe
+      pbActionCore.setGasprice(req.action.core.gasPrice);
+      // $FlowFixMe
+      pbActionCore.setTransfer(req.action.core.transfer);
+      // $FlowFixMe
+      pbActionCore.setVote(req.action.core.vote);
+      // $FlowFixMe
+      pbActionCore.setExecution(req.action.core.execution);
+      // $FlowFixMe
+      pbActionCore.setStartsubchain(req.action.core.startSubChain);
+      // $FlowFixMe
+      pbActionCore.setStopsubchain(req.action.core.stopSubChain);
+      // $FlowFixMe
+      pbActionCore.setPutblock(req.action.core.putBlock);
+      // $FlowFixMe
+      pbActionCore.setCreatedeposit(req.action.core.createDeposit);
+      // $FlowFixMe
+      pbActionCore.setSettledeposit(req.action.core.settleDeposit);
+      // $FlowFixMe
+      pbActionCore.setCreateplumchain(req.action.core.createPlumChain);
+      // $FlowFixMe
+      pbActionCore.setTerminateplumchain(req.action.core.terminatePlumChain);
+      // $FlowFixMe
+      pbActionCore.setPlumputblock(req.action.core.plumPutBlock);
+      // $FlowFixMe
+      pbActionCore.setPlumcreatedeposit(req.action.core.plumCreateDeposit);
+      // $FlowFixMe
+      pbActionCore.setPlumstartexit(req.action.core.plumStartExit);
+      // $FlowFixMe
+      pbActionCore.setPlumchallengeexit(req.action.core.plumChallengeExit);
+      // $FlowFixMe
+      pbActionCore.setPlumresponsechallengeexit(req.action.core.plumResponseChallengeExit);
+      // $FlowFixMe
+      pbActionCore.setPlumfinalizeexit(req.action.core.plumFinalizeExit);
+      // $FlowFixMe
+      pbActionCore.setPlumsettledeposit(req.action.core.plumSettleDeposit);
+      // $FlowFixMe
+      pbActionCore.setPlumtransfer(req.action.core.plumTransfer);
+      // $FlowFixMe
+      pbActionCore.setDeposittorewardingfund(req.action.core.depositToRewardingFund);
+      // $FlowFixMe
+      pbActionCore.setClaimfromrewardingfund(req.action.core.claimFromRewardingFund);
+      // $FlowFixMe
+      pbActionCore.setSetreward(req.action.core.setReward);
+      // $FlowFixMe
+      pbActionCore.setGrantreward(req.action.core.grantReward);
+    }
+
+    const pbAction = new actionPb.Action();
+    pbAction.setCore(pbActionCore);
+    // $FlowFixMe
+    pbAction.setSenderpubkey(req.action.senderPubKey);
+    // $FlowFixMe
+    pbAction.setSignature(req.action.signature);
+
+    const pbReq = new apiPb.EstimateGasForActionRequest();
+    pbReq.setAction(pbAction);
+    return pbReq;
+  }
+
+  static from(pbRes: any): IEstimateGasForActionResponse {
+    return {gas: pbRes.getGas()};
   }
 }

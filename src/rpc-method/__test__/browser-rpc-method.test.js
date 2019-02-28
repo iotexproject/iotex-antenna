@@ -19,11 +19,11 @@ test('RpcMethod.getAccount', async t => {
 test('RpcMethod.getBlockMetas', async t => {
   const client = new RpcMethod('http://35.192.119.63:31501');
   // test getMetasByIndex
-  const resp1 = await client.getBlockMetas({byIndex: {start: 100, count: 1}});
+  const resp1 = await client.getBlockMetas({byIndex: {start: 10, count: 1}});
   t.deepEqual(resp1.blkMetas.length, 1);
-  const resp2 = await client.getBlockMetas({byIndex: {start: 100, count: 10}});
+  const resp2 = await client.getBlockMetas({byIndex: {start: 10, count: 10}});
   t.deepEqual(resp2.blkMetas.length, 10);
-  const resp3 = await client.getBlockMetas({byIndex: {start: 100, count: 0}});
+  const resp3 = await client.getBlockMetas({byIndex: {start: 10, count: 0}});
   t.deepEqual(resp3.blkMetas.length, 0);
 
   // test getMetasByBlkHash
@@ -37,6 +37,22 @@ test('RpcMethod.suggestGasPrice', async t => {
   t.deepEqual(resp, {
     gasPrice: 1,
   });
+});
+
+test('RpcMethod.readContract', async t => {
+  const client = new RpcMethod('http://35.192.119.63:31501');
+  const blks = await client.getBlockMetas({byIndex: {start: 10, count: 1}});
+  t.deepEqual(blks.blkMetas.length, 1);
+  const resp1 = await client.getActions({byIndex: {start: 0, count: 30}});
+  t.deepEqual(resp1.actions.length, 30);
+  for (let index = 0; index < resp1.actions.length; index++) {
+    if (resp1.actions[index].core) {
+      if (resp1.actions[index].core.execution) {
+        const resp2 = await client.readContract({action: resp1.actions[index]});
+        t.deepEqual(resp2.data, '');
+      }
+    }
+  }
 });
 
 test('RpcMethod.getActionsByIndex', async t => {
