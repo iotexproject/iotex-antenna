@@ -79,3 +79,10 @@ test('RpcMethod.getActionsByBlock', async t => {
   const resp7 = await client.getActions({byBlk: {blkHash: blks.blkMetas[0].hash, start: 0, count: 1}});
   t.deepEqual(resp7.actions.length, 1);
 });
+
+test('RpcMethod.getChainMeta', async t => {
+  const client = new RpcMethod('http://35.192.119.63:31501');
+  const resp = await client.getChainMeta({});
+  t.truthy(resp, resp && resp.chainMeta);
+  t.deepEqual(resp.chainMeta.supply, "10000000000000000000000000000")
+});
