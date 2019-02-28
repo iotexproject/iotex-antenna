@@ -10,13 +10,17 @@ import type {
   ISuggestGasPriceRequest,
   ISuggestGasPriceResponse,
   IReadContractRequest,
-  IReadContractResponse} from './types';
+  IReadContractResponse,
+  IGetActionsRequest,
+  IGetActionsResponse} from './types';
+
 import {
   GetAccountRequest,
   GetBlockMetasRequest,
   GetChainMetaRequest,
   SuggestGasPriceRequest,
-  ReadContractRequest} from './types';
+  ReadContractRequest,
+  GetActionsRequest} from './types';
 
 export default class RpcMethod {
   client: grpcWeb.APIServicePromiseClient;
@@ -41,6 +45,12 @@ export default class RpcMethod {
     const pbReq = GetChainMetaRequest.to(req);
     const pbResp = await this.client.getBlockMetas(pbReq);
     return GetChainMetaRequest.from(pbResp);
+  }
+
+  async getActions(req: IGetActionsRequest): Promise<IGetActionsResponse> {
+    const pbReq = GetActionsRequest.to(req);
+    const pbResp = await this.client.getActions(pbReq);
+    return GetActionsRequest.from(pbResp);
   }
 
   async suggestGasPrice(req: ISuggestGasPriceRequest): Promise<ISuggestGasPriceResponse> {
