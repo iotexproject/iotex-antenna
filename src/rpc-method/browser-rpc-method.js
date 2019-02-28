@@ -9,15 +9,19 @@ import type {
   IGetChainMetaResponse,
   ISuggestGasPriceRequest,
   ISuggestGasPriceResponse,
+  IReadContractRequest,
+  IReadContractResponse,
   IGetActionsRequest,
   IGetActionsResponse,
   ISendActionRequest,
   ISendActionResponse} from './types';
+
 import {
   GetAccountRequest,
   GetBlockMetasRequest,
   GetChainMetaRequest,
   SuggestGasPriceRequest,
+  ReadContractRequest,
   GetActionsRequest, SendActionRequest,
 } from './types';
 
@@ -56,6 +60,12 @@ export default class RpcMethod {
     const pbReq = SuggestGasPriceRequest.to(req);
     const pbResp = await this.client.suggestGasPrice(pbReq);
     return SuggestGasPriceRequest.from(pbResp);
+  }
+
+  async readContract(req: IReadContractRequest): Promise<IReadContractResponse> {
+    const pbReq = ReadContractRequest.to(req);
+    const pbResp = await this.client.readContract(pbReq);
+    return ReadContractRequest.from(pbResp);
   }
 
   async sendAction(req: ISendActionRequest): Promise<ISendActionResponse> {

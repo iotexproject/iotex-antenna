@@ -39,6 +39,22 @@ test('RpcMethod.suggestGasPrice', async t => {
   });
 });
 
+test('RpcMethod.readContract', async t => {
+  const client = new RpcMethod('http://35.192.119.63:31501');
+  const blks = await client.getBlockMetas({byIndex: {start: 10, count: 1}});
+  t.deepEqual(blks.blkMetas.length, 1);
+  const resp1 = await client.getActions({byIndex: {start: 0, count: 30}});
+  t.deepEqual(resp1.actions.length, 30);
+  for (let index = 0; index < resp1.actions.length; index++) {
+    if (resp1.actions[index].core) {
+      if (resp1.actions[index].core.execution) {
+        const resp2 = await client.readContract({action: resp1.actions[index]});
+        t.deepEqual(resp2.data, '');
+      }
+    }
+  }
+});
+
 test('RpcMethod.getActionsByIndex', async t => {
   const client = new RpcMethod('http://35.192.119.63:31501');
   // test getActionsByIndex
