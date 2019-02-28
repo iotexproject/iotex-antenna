@@ -12,16 +12,13 @@ import type {
   IGetActionsRequest,
   IGetActionsResponse,
   ISendActionRequest,
-  ISendActionResponse,
-  IEstimateGasForActionRequest,
-  IEstimateGasForActionResponse} from './types';
+  ISendActionResponse} from './types';
 import {
   GetAccountRequest,
   GetBlockMetasRequest,
   GetChainMetaRequest,
   SuggestGasPriceRequest,
   GetActionsRequest, SendActionRequest,
-  EstimateGasForActionRequest,
 } from './types';
 
 export default class RpcMethod {
