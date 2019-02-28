@@ -96,7 +96,7 @@ export class GetChainMetaRequest {
       chainMeta: meta,
     };
     if (meta) {
-      const epochData = meta.getEpoch();
+      const epochData = meta.Epoch;
       res.chainMeta = {
         height: meta.getHeight(),
         supply: meta.getSupply(),
@@ -547,7 +547,7 @@ export interface IClaimFromRewardingFund {
   data?: Uint8Array | null,
 }
 
-/*export RewardType {
+/* export RewardType {
   BlockReward: 0,
   EpochReward: 1,
 }*/
