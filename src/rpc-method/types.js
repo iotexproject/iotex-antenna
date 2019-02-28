@@ -886,3 +886,15 @@ export interface ISendActionRequest {
 
 /** Properties of a SendActionResponse. */
 export interface ISendActionResponse {}
+
+export class SendActionRequest {
+  static to(req: ISendActionRequest): any {
+    const pbReq = new apiPb.SendActionRequest();
+    pbReq.setAction(req.action);
+    return pbReq;
+  }
+
+  static from(pbRes: any): ISendActionResponse {
+    return {};
+  }
+}
