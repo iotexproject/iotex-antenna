@@ -18,10 +18,10 @@ goog.exportSymbol('proto.iotextypes.AccountMeta', null, global);
 goog.exportSymbol('proto.iotextypes.Block', null, global);
 goog.exportSymbol('proto.iotextypes.BlockFooter', null, global);
 goog.exportSymbol('proto.iotextypes.BlockHeader', null, global);
+goog.exportSymbol('proto.iotextypes.BlockHeaderCore', null, global);
 goog.exportSymbol('proto.iotextypes.BlockMeta', null, global);
-goog.exportSymbol('proto.iotextypes.Candidate', null, global);
-goog.exportSymbol('proto.iotextypes.CandidateList', null, global);
 goog.exportSymbol('proto.iotextypes.ChainMeta', null, global);
+goog.exportSymbol('proto.iotextypes.EpochData', null, global);
 goog.exportSymbol('proto.iotextypes.Receipts', null, global);
 
 /**
@@ -70,18 +70,9 @@ proto.iotextypes.BlockHeader.prototype.toObject = function(opt_includeInstance) 
  */
 proto.iotextypes.BlockHeader.toObject = function(includeInstance, msg) {
   var f, obj = {
-    version: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    chainid: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    height: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    prevblockhash: msg.getPrevblockhash_asB64(),
-    txroot: msg.getTxroot_asB64(),
-    stateroot: msg.getStateroot_asB64(),
-    deltastatedigest: msg.getDeltastatedigest_asB64(),
-    receiptroot: msg.getReceiptroot_asB64(),
-    reserved: msg.getReserved_asB64(),
-    signature: msg.getSignature_asB64(),
-    pubkey: msg.getPubkey_asB64()
+    core: (f = msg.getCore()) && proto.iotextypes.BlockHeaderCore.toObject(includeInstance, f),
+    producerpubkey: msg.getProducerpubkey_asB64(),
+    signature: msg.getSignature_asB64()
   };
 
   if (includeInstance) {
@@ -119,53 +110,17 @@ proto.iotextypes.BlockHeader.deserializeBinaryFromReader = function(msg, reader)
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setVersion(value);
+      var value = new proto.iotextypes.BlockHeaderCore;
+      reader.readMessage(value,proto.iotextypes.BlockHeaderCore.deserializeBinaryFromReader);
+      msg.setCore(value);
       break;
     case 2:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setChainid(value);
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setProducerpubkey(value);
       break;
     case 3:
-      var value = /** @type {number} */ (reader.readUint64());
-      msg.setHeight(value);
-      break;
-    case 4:
-      var value = new google_protobuf_timestamp_pb.Timestamp;
-      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
-      msg.setTimestamp(value);
-      break;
-    case 5:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setPrevblockhash(value);
-      break;
-    case 6:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setTxroot(value);
-      break;
-    case 7:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setStateroot(value);
-      break;
-    case 8:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setDeltastatedigest(value);
-      break;
-    case 9:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setReceiptroot(value);
-      break;
-    case 10:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setReserved(value);
-      break;
-    case 11:
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setSignature(value);
-      break;
-    case 12:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setPubkey(value);
       break;
     default:
       reader.skipField();
@@ -196,88 +151,25 @@ proto.iotextypes.BlockHeader.prototype.serializeBinary = function() {
  */
 proto.iotextypes.BlockHeader.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getVersion();
-  if (f !== 0) {
-    writer.writeUint32(
-      1,
-      f
-    );
-  }
-  f = message.getChainid();
-  if (f !== 0) {
-    writer.writeUint32(
-      2,
-      f
-    );
-  }
-  f = message.getHeight();
-  if (f !== 0) {
-    writer.writeUint64(
-      3,
-      f
-    );
-  }
-  f = message.getTimestamp();
+  f = message.getCore();
   if (f != null) {
     writer.writeMessage(
-      4,
+      1,
       f,
-      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
+      proto.iotextypes.BlockHeaderCore.serializeBinaryToWriter
     );
   }
-  f = message.getPrevblockhash_asU8();
+  f = message.getProducerpubkey_asU8();
   if (f.length > 0) {
     writer.writeBytes(
-      5,
-      f
-    );
-  }
-  f = message.getTxroot_asU8();
-  if (f.length > 0) {
-    writer.writeBytes(
-      6,
-      f
-    );
-  }
-  f = message.getStateroot_asU8();
-  if (f.length > 0) {
-    writer.writeBytes(
-      7,
-      f
-    );
-  }
-  f = message.getDeltastatedigest_asU8();
-  if (f.length > 0) {
-    writer.writeBytes(
-      8,
-      f
-    );
-  }
-  f = message.getReceiptroot_asU8();
-  if (f.length > 0) {
-    writer.writeBytes(
-      9,
-      f
-    );
-  }
-  f = message.getReserved_asU8();
-  if (f.length > 0) {
-    writer.writeBytes(
-      10,
+      2,
       f
     );
   }
   f = message.getSignature_asU8();
   if (f.length > 0) {
     writer.writeBytes(
-      11,
-      f
-    );
-  }
-  f = message.getPubkey_asU8();
-  if (f.length > 0) {
-    writer.writeBytes(
-      12,
+      3,
       f
     );
   }
@@ -285,68 +177,23 @@ proto.iotextypes.BlockHeader.serializeBinaryToWriter = function(message, writer)
 
 
 /**
- * optional uint32 version = 1;
- * @return {number}
+ * optional BlockHeaderCore core = 1;
+ * @return {?proto.iotextypes.BlockHeaderCore}
  */
-proto.iotextypes.BlockHeader.prototype.getVersion = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.iotextypes.BlockHeader.prototype.getCore = function() {
+  return /** @type{?proto.iotextypes.BlockHeaderCore} */ (
+    jspb.Message.getWrapperField(this, proto.iotextypes.BlockHeaderCore, 1));
 };
 
 
-/** @param {number} value */
-proto.iotextypes.BlockHeader.prototype.setVersion = function(value) {
-  jspb.Message.setProto3IntField(this, 1, value);
+/** @param {?proto.iotextypes.BlockHeaderCore|undefined} value */
+proto.iotextypes.BlockHeader.prototype.setCore = function(value) {
+  jspb.Message.setWrapperField(this, 1, value);
 };
 
 
-/**
- * optional uint32 chainID = 2;
- * @return {number}
- */
-proto.iotextypes.BlockHeader.prototype.getChainid = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
-};
-
-
-/** @param {number} value */
-proto.iotextypes.BlockHeader.prototype.setChainid = function(value) {
-  jspb.Message.setProto3IntField(this, 2, value);
-};
-
-
-/**
- * optional uint64 height = 3;
- * @return {number}
- */
-proto.iotextypes.BlockHeader.prototype.getHeight = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
-};
-
-
-/** @param {number} value */
-proto.iotextypes.BlockHeader.prototype.setHeight = function(value) {
-  jspb.Message.setProto3IntField(this, 3, value);
-};
-
-
-/**
- * optional google.protobuf.Timestamp timestamp = 4;
- * @return {?proto.google.protobuf.Timestamp}
- */
-proto.iotextypes.BlockHeader.prototype.getTimestamp = function() {
-  return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 4));
-};
-
-
-/** @param {?proto.google.protobuf.Timestamp|undefined} value */
-proto.iotextypes.BlockHeader.prototype.setTimestamp = function(value) {
-  jspb.Message.setWrapperField(this, 4, value);
-};
-
-
-proto.iotextypes.BlockHeader.prototype.clearTimestamp = function() {
-  this.setTimestamp(undefined);
+proto.iotextypes.BlockHeader.prototype.clearCore = function() {
+  this.setCore(undefined);
 };
 
 
@@ -354,256 +201,61 @@ proto.iotextypes.BlockHeader.prototype.clearTimestamp = function() {
  * Returns whether this field is set.
  * @return {!boolean}
  */
-proto.iotextypes.BlockHeader.prototype.hasTimestamp = function() {
-  return jspb.Message.getField(this, 4) != null;
+proto.iotextypes.BlockHeader.prototype.hasCore = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 
 /**
- * optional bytes prevBlockHash = 5;
+ * optional bytes producerPubkey = 2;
  * @return {string}
  */
-proto.iotextypes.BlockHeader.prototype.getPrevblockhash = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+proto.iotextypes.BlockHeader.prototype.getProducerpubkey = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
- * optional bytes prevBlockHash = 5;
- * This is a type-conversion wrapper around `getPrevblockhash()`
+ * optional bytes producerPubkey = 2;
+ * This is a type-conversion wrapper around `getProducerpubkey()`
  * @return {string}
  */
-proto.iotextypes.BlockHeader.prototype.getPrevblockhash_asB64 = function() {
+proto.iotextypes.BlockHeader.prototype.getProducerpubkey_asB64 = function() {
   return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getPrevblockhash()));
+      this.getProducerpubkey()));
 };
 
 
 /**
- * optional bytes prevBlockHash = 5;
+ * optional bytes producerPubkey = 2;
  * Note that Uint8Array is not supported on all browsers.
  * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getPrevblockhash()`
+ * This is a type-conversion wrapper around `getProducerpubkey()`
  * @return {!Uint8Array}
  */
-proto.iotextypes.BlockHeader.prototype.getPrevblockhash_asU8 = function() {
+proto.iotextypes.BlockHeader.prototype.getProducerpubkey_asU8 = function() {
   return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getPrevblockhash()));
+      this.getProducerpubkey()));
 };
 
 
 /** @param {!(string|Uint8Array)} value */
-proto.iotextypes.BlockHeader.prototype.setPrevblockhash = function(value) {
-  jspb.Message.setProto3BytesField(this, 5, value);
+proto.iotextypes.BlockHeader.prototype.setProducerpubkey = function(value) {
+  jspb.Message.setProto3BytesField(this, 2, value);
 };
 
 
 /**
- * optional bytes txRoot = 6;
- * @return {string}
- */
-proto.iotextypes.BlockHeader.prototype.getTxroot = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
-};
-
-
-/**
- * optional bytes txRoot = 6;
- * This is a type-conversion wrapper around `getTxroot()`
- * @return {string}
- */
-proto.iotextypes.BlockHeader.prototype.getTxroot_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getTxroot()));
-};
-
-
-/**
- * optional bytes txRoot = 6;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getTxroot()`
- * @return {!Uint8Array}
- */
-proto.iotextypes.BlockHeader.prototype.getTxroot_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getTxroot()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
-proto.iotextypes.BlockHeader.prototype.setTxroot = function(value) {
-  jspb.Message.setProto3BytesField(this, 6, value);
-};
-
-
-/**
- * optional bytes stateRoot = 7;
- * @return {string}
- */
-proto.iotextypes.BlockHeader.prototype.getStateroot = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
-};
-
-
-/**
- * optional bytes stateRoot = 7;
- * This is a type-conversion wrapper around `getStateroot()`
- * @return {string}
- */
-proto.iotextypes.BlockHeader.prototype.getStateroot_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getStateroot()));
-};
-
-
-/**
- * optional bytes stateRoot = 7;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getStateroot()`
- * @return {!Uint8Array}
- */
-proto.iotextypes.BlockHeader.prototype.getStateroot_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getStateroot()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
-proto.iotextypes.BlockHeader.prototype.setStateroot = function(value) {
-  jspb.Message.setProto3BytesField(this, 7, value);
-};
-
-
-/**
- * optional bytes deltaStateDigest = 8;
- * @return {string}
- */
-proto.iotextypes.BlockHeader.prototype.getDeltastatedigest = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
-};
-
-
-/**
- * optional bytes deltaStateDigest = 8;
- * This is a type-conversion wrapper around `getDeltastatedigest()`
- * @return {string}
- */
-proto.iotextypes.BlockHeader.prototype.getDeltastatedigest_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getDeltastatedigest()));
-};
-
-
-/**
- * optional bytes deltaStateDigest = 8;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getDeltastatedigest()`
- * @return {!Uint8Array}
- */
-proto.iotextypes.BlockHeader.prototype.getDeltastatedigest_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getDeltastatedigest()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
-proto.iotextypes.BlockHeader.prototype.setDeltastatedigest = function(value) {
-  jspb.Message.setProto3BytesField(this, 8, value);
-};
-
-
-/**
- * optional bytes receiptRoot = 9;
- * @return {string}
- */
-proto.iotextypes.BlockHeader.prototype.getReceiptroot = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
-};
-
-
-/**
- * optional bytes receiptRoot = 9;
- * This is a type-conversion wrapper around `getReceiptroot()`
- * @return {string}
- */
-proto.iotextypes.BlockHeader.prototype.getReceiptroot_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getReceiptroot()));
-};
-
-
-/**
- * optional bytes receiptRoot = 9;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getReceiptroot()`
- * @return {!Uint8Array}
- */
-proto.iotextypes.BlockHeader.prototype.getReceiptroot_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getReceiptroot()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
-proto.iotextypes.BlockHeader.prototype.setReceiptroot = function(value) {
-  jspb.Message.setProto3BytesField(this, 9, value);
-};
-
-
-/**
- * optional bytes reserved = 10;
- * @return {string}
- */
-proto.iotextypes.BlockHeader.prototype.getReserved = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
-};
-
-
-/**
- * optional bytes reserved = 10;
- * This is a type-conversion wrapper around `getReserved()`
- * @return {string}
- */
-proto.iotextypes.BlockHeader.prototype.getReserved_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getReserved()));
-};
-
-
-/**
- * optional bytes reserved = 10;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getReserved()`
- * @return {!Uint8Array}
- */
-proto.iotextypes.BlockHeader.prototype.getReserved_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getReserved()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
-proto.iotextypes.BlockHeader.prototype.setReserved = function(value) {
-  jspb.Message.setProto3BytesField(this, 10, value);
-};
-
-
-/**
- * optional bytes signature = 11;
+ * optional bytes signature = 3;
  * @return {string}
  */
 proto.iotextypes.BlockHeader.prototype.getSignature = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
- * optional bytes signature = 11;
+ * optional bytes signature = 3;
  * This is a type-conversion wrapper around `getSignature()`
  * @return {string}
  */
@@ -614,7 +266,7 @@ proto.iotextypes.BlockHeader.prototype.getSignature_asB64 = function() {
 
 
 /**
- * optional bytes signature = 11;
+ * optional bytes signature = 3;
  * Note that Uint8Array is not supported on all browsers.
  * @see http://caniuse.com/Uint8Array
  * This is a type-conversion wrapper around `getSignature()`
@@ -628,46 +280,424 @@ proto.iotextypes.BlockHeader.prototype.getSignature_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.iotextypes.BlockHeader.prototype.setSignature = function(value) {
-  jspb.Message.setProto3BytesField(this, 11, value);
+  jspb.Message.setProto3BytesField(this, 3, value);
 };
 
 
+
 /**
- * optional bytes pubkey = 12;
- * @return {string}
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
  */
-proto.iotextypes.BlockHeader.prototype.getPubkey = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 12, ""));
+proto.iotextypes.BlockHeaderCore = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
+goog.inherits(proto.iotextypes.BlockHeaderCore, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.iotextypes.BlockHeaderCore.displayName = 'proto.iotextypes.BlockHeaderCore';
+}
 
 
+if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * optional bytes pubkey = 12;
- * This is a type-conversion wrapper around `getPubkey()`
- * @return {string}
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
  */
-proto.iotextypes.BlockHeader.prototype.getPubkey_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getPubkey()));
+proto.iotextypes.BlockHeaderCore.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotextypes.BlockHeaderCore.toObject(opt_includeInstance, this);
 };
 
 
 /**
- * optional bytes pubkey = 12;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getPubkey()`
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotextypes.BlockHeaderCore} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotextypes.BlockHeaderCore.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    version: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    height: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+    prevblockhash: msg.getPrevblockhash_asB64(),
+    txroot: msg.getTxroot_asB64(),
+    deltastatedigest: msg.getDeltastatedigest_asB64(),
+    receiptroot: msg.getReceiptroot_asB64()
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.iotextypes.BlockHeaderCore}
+ */
+proto.iotextypes.BlockHeaderCore.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.iotextypes.BlockHeaderCore;
+  return proto.iotextypes.BlockHeaderCore.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.iotextypes.BlockHeaderCore} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.iotextypes.BlockHeaderCore}
+ */
+proto.iotextypes.BlockHeaderCore.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setVersion(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setHeight(value);
+      break;
+    case 3:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setTimestamp(value);
+      break;
+    case 4:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setPrevblockhash(value);
+      break;
+    case 5:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setTxroot(value);
+      break;
+    case 6:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setDeltastatedigest(value);
+      break;
+    case 7:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setReceiptroot(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.iotextypes.BlockHeader.prototype.getPubkey_asU8 = function() {
+proto.iotextypes.BlockHeaderCore.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.iotextypes.BlockHeaderCore.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.iotextypes.BlockHeaderCore} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotextypes.BlockHeaderCore.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getVersion();
+  if (f !== 0) {
+    writer.writeUint32(
+      1,
+      f
+    );
+  }
+  f = message.getHeight();
+  if (f !== 0) {
+    writer.writeUint64(
+      2,
+      f
+    );
+  }
+  f = message.getTimestamp();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
+    );
+  }
+  f = message.getPrevblockhash_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      4,
+      f
+    );
+  }
+  f = message.getTxroot_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      5,
+      f
+    );
+  }
+  f = message.getDeltastatedigest_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      6,
+      f
+    );
+  }
+  f = message.getReceiptroot_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      7,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional uint32 version = 1;
+ * @return {number}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getVersion = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/** @param {number} value */
+proto.iotextypes.BlockHeaderCore.prototype.setVersion = function(value) {
+  jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional uint64 height = 2;
+ * @return {number}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getHeight = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/** @param {number} value */
+proto.iotextypes.BlockHeaderCore.prototype.setHeight = function(value) {
+  jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+/**
+ * optional google.protobuf.Timestamp timestamp = 3;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getTimestamp = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 3));
+};
+
+
+/** @param {?proto.google.protobuf.Timestamp|undefined} value */
+proto.iotextypes.BlockHeaderCore.prototype.setTimestamp = function(value) {
+  jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+proto.iotextypes.BlockHeaderCore.prototype.clearTimestamp = function() {
+  this.setTimestamp(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.hasTimestamp = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
+/**
+ * optional bytes prevBlockHash = 4;
+ * @return {string}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getPrevblockhash = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * optional bytes prevBlockHash = 4;
+ * This is a type-conversion wrapper around `getPrevblockhash()`
+ * @return {string}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getPrevblockhash_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getPrevblockhash()));
+};
+
+
+/**
+ * optional bytes prevBlockHash = 4;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getPrevblockhash()`
+ * @return {!Uint8Array}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getPrevblockhash_asU8 = function() {
   return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getPubkey()));
+      this.getPrevblockhash()));
 };
 
 
 /** @param {!(string|Uint8Array)} value */
-proto.iotextypes.BlockHeader.prototype.setPubkey = function(value) {
-  jspb.Message.setProto3BytesField(this, 12, value);
+proto.iotextypes.BlockHeaderCore.prototype.setPrevblockhash = function(value) {
+  jspb.Message.setProto3BytesField(this, 4, value);
+};
+
+
+/**
+ * optional bytes txRoot = 5;
+ * @return {string}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getTxroot = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * optional bytes txRoot = 5;
+ * This is a type-conversion wrapper around `getTxroot()`
+ * @return {string}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getTxroot_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getTxroot()));
+};
+
+
+/**
+ * optional bytes txRoot = 5;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getTxroot()`
+ * @return {!Uint8Array}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getTxroot_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getTxroot()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.iotextypes.BlockHeaderCore.prototype.setTxroot = function(value) {
+  jspb.Message.setProto3BytesField(this, 5, value);
+};
+
+
+/**
+ * optional bytes deltaStateDigest = 6;
+ * @return {string}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getDeltastatedigest = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * optional bytes deltaStateDigest = 6;
+ * This is a type-conversion wrapper around `getDeltastatedigest()`
+ * @return {string}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getDeltastatedigest_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getDeltastatedigest()));
+};
+
+
+/**
+ * optional bytes deltaStateDigest = 6;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getDeltastatedigest()`
+ * @return {!Uint8Array}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getDeltastatedigest_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getDeltastatedigest()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.iotextypes.BlockHeaderCore.prototype.setDeltastatedigest = function(value) {
+  jspb.Message.setProto3BytesField(this, 6, value);
+};
+
+
+/**
+ * optional bytes receiptRoot = 7;
+ * @return {string}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getReceiptroot = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/**
+ * optional bytes receiptRoot = 7;
+ * This is a type-conversion wrapper around `getReceiptroot()`
+ * @return {string}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getReceiptroot_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getReceiptroot()));
+};
+
+
+/**
+ * optional bytes receiptRoot = 7;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getReceiptroot()`
+ * @return {!Uint8Array}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getReceiptroot_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getReceiptroot()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.iotextypes.BlockHeaderCore.prototype.setReceiptroot = function(value) {
+  jspb.Message.setProto3BytesField(this, 7, value);
 };
 
 
@@ -1292,12 +1322,12 @@ proto.iotextypes.Receipts.prototype.clearReceiptsList = function() {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.iotextypes.Candidate = function(opt_data) {
+proto.iotextypes.EpochData = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.iotextypes.Candidate, jspb.Message);
+goog.inherits(proto.iotextypes.EpochData, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotextypes.Candidate.displayName = 'proto.iotextypes.Candidate';
+  proto.iotextypes.EpochData.displayName = 'proto.iotextypes.EpochData';
 }
 
 
@@ -1312,8 +1342,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.iotextypes.Candidate.prototype.toObject = function(opt_includeInstance) {
-  return proto.iotextypes.Candidate.toObject(opt_includeInstance, this);
+proto.iotextypes.EpochData.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotextypes.EpochData.toObject(opt_includeInstance, this);
 };
 
 
@@ -1322,17 +1352,14 @@ proto.iotextypes.Candidate.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.iotextypes.Candidate} msg The msg instance to transform.
+ * @param {!proto.iotextypes.EpochData} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotextypes.Candidate.toObject = function(includeInstance, msg) {
+proto.iotextypes.EpochData.toObject = function(includeInstance, msg) {
   var f, obj = {
-    address: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    votes: msg.getVotes_asB64(),
-    pubkey: msg.getPubkey_asB64(),
-    creationheight: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    lastupdateheight: jspb.Message.getFieldWithDefault(msg, 5, 0)
+    num: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    height: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -1346,23 +1373,23 @@ proto.iotextypes.Candidate.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.iotextypes.Candidate}
+ * @return {!proto.iotextypes.EpochData}
  */
-proto.iotextypes.Candidate.deserializeBinary = function(bytes) {
+proto.iotextypes.EpochData.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotextypes.Candidate;
-  return proto.iotextypes.Candidate.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.iotextypes.EpochData;
+  return proto.iotextypes.EpochData.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.iotextypes.Candidate} msg The message object to deserialize into.
+ * @param {!proto.iotextypes.EpochData} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.iotextypes.Candidate}
+ * @return {!proto.iotextypes.EpochData}
  */
-proto.iotextypes.Candidate.deserializeBinaryFromReader = function(msg, reader) {
+proto.iotextypes.EpochData.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -1370,24 +1397,12 @@ proto.iotextypes.Candidate.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setAddress(value);
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setNum(value);
       break;
     case 2:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setVotes(value);
-      break;
-    case 3:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setPubkey(value);
-      break;
-    case 4:
       var value = /** @type {number} */ (reader.readUint64());
-      msg.setCreationheight(value);
-      break;
-    case 5:
-      var value = /** @type {number} */ (reader.readUint64());
-      msg.setLastupdateheight(value);
+      msg.setHeight(value);
       break;
     default:
       reader.skipField();
@@ -1402,9 +1417,9 @@ proto.iotextypes.Candidate.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.iotextypes.Candidate.prototype.serializeBinary = function() {
+proto.iotextypes.EpochData.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.iotextypes.Candidate.serializeBinaryToWriter(this, writer);
+  proto.iotextypes.EpochData.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -1412,338 +1427,56 @@ proto.iotextypes.Candidate.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.iotextypes.Candidate} message
+ * @param {!proto.iotextypes.EpochData} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotextypes.Candidate.serializeBinaryToWriter = function(message, writer) {
+proto.iotextypes.EpochData.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getAddress();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getNum();
+  if (f !== 0) {
+    writer.writeUint64(
       1,
       f
     );
   }
-  f = message.getVotes_asU8();
-  if (f.length > 0) {
-    writer.writeBytes(
+  f = message.getHeight();
+  if (f !== 0) {
+    writer.writeUint64(
       2,
       f
     );
   }
-  f = message.getPubkey_asU8();
-  if (f.length > 0) {
-    writer.writeBytes(
-      3,
-      f
-    );
-  }
-  f = message.getCreationheight();
-  if (f !== 0) {
-    writer.writeUint64(
-      4,
-      f
-    );
-  }
-  f = message.getLastupdateheight();
-  if (f !== 0) {
-    writer.writeUint64(
-      5,
-      f
-    );
-  }
 };
 
 
 /**
- * optional string address = 1;
- * @return {string}
- */
-proto.iotextypes.Candidate.prototype.getAddress = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
-};
-
-
-/** @param {string} value */
-proto.iotextypes.Candidate.prototype.setAddress = function(value) {
-  jspb.Message.setProto3StringField(this, 1, value);
-};
-
-
-/**
- * optional bytes votes = 2;
- * @return {string}
- */
-proto.iotextypes.Candidate.prototype.getVotes = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * optional bytes votes = 2;
- * This is a type-conversion wrapper around `getVotes()`
- * @return {string}
- */
-proto.iotextypes.Candidate.prototype.getVotes_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getVotes()));
-};
-
-
-/**
- * optional bytes votes = 2;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getVotes()`
- * @return {!Uint8Array}
- */
-proto.iotextypes.Candidate.prototype.getVotes_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getVotes()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
-proto.iotextypes.Candidate.prototype.setVotes = function(value) {
-  jspb.Message.setProto3BytesField(this, 2, value);
-};
-
-
-/**
- * optional bytes pubKey = 3;
- * @return {string}
- */
-proto.iotextypes.Candidate.prototype.getPubkey = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
-};
-
-
-/**
- * optional bytes pubKey = 3;
- * This is a type-conversion wrapper around `getPubkey()`
- * @return {string}
- */
-proto.iotextypes.Candidate.prototype.getPubkey_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getPubkey()));
-};
-
-
-/**
- * optional bytes pubKey = 3;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getPubkey()`
- * @return {!Uint8Array}
- */
-proto.iotextypes.Candidate.prototype.getPubkey_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getPubkey()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
-proto.iotextypes.Candidate.prototype.setPubkey = function(value) {
-  jspb.Message.setProto3BytesField(this, 3, value);
-};
-
-
-/**
- * optional uint64 creationHeight = 4;
+ * optional uint64 num = 1;
  * @return {number}
  */
-proto.iotextypes.Candidate.prototype.getCreationheight = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+proto.iotextypes.EpochData.prototype.getNum = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /** @param {number} value */
-proto.iotextypes.Candidate.prototype.setCreationheight = function(value) {
-  jspb.Message.setProto3IntField(this, 4, value);
+proto.iotextypes.EpochData.prototype.setNum = function(value) {
+  jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
 /**
- * optional uint64 lastUpdateHeight = 5;
+ * optional uint64 height = 2;
  * @return {number}
  */
-proto.iotextypes.Candidate.prototype.getLastupdateheight = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+proto.iotextypes.EpochData.prototype.getHeight = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
 
 /** @param {number} value */
-proto.iotextypes.Candidate.prototype.setLastupdateheight = function(value) {
-  jspb.Message.setProto3IntField(this, 5, value);
-};
-
-
-
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
-proto.iotextypes.CandidateList = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.iotextypes.CandidateList.repeatedFields_, null);
-};
-goog.inherits(proto.iotextypes.CandidateList, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  proto.iotextypes.CandidateList.displayName = 'proto.iotextypes.CandidateList';
-}
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.iotextypes.CandidateList.repeatedFields_ = [1];
-
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto suitable for use in Soy templates.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
- * @return {!Object}
- */
-proto.iotextypes.CandidateList.prototype.toObject = function(opt_includeInstance) {
-  return proto.iotextypes.CandidateList.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.iotextypes.CandidateList} msg The msg instance to transform.
- * @return {!Object}
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.iotextypes.CandidateList.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    candidatesList: jspb.Message.toObjectList(msg.getCandidatesList(),
-    proto.iotextypes.Candidate.toObject, includeInstance)
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
-}
-
-
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.iotextypes.CandidateList}
- */
-proto.iotextypes.CandidateList.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotextypes.CandidateList;
-  return proto.iotextypes.CandidateList.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.iotextypes.CandidateList} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.iotextypes.CandidateList}
- */
-proto.iotextypes.CandidateList.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 1:
-      var value = new proto.iotextypes.Candidate;
-      reader.readMessage(value,proto.iotextypes.Candidate.deserializeBinaryFromReader);
-      msg.addCandidates(value);
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.iotextypes.CandidateList.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  proto.iotextypes.CandidateList.serializeBinaryToWriter(this, writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the given message to binary data (in protobuf wire
- * format), writing to the given BinaryWriter.
- * @param {!proto.iotextypes.CandidateList} message
- * @param {!jspb.BinaryWriter} writer
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.iotextypes.CandidateList.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
-  f = message.getCandidatesList();
-  if (f.length > 0) {
-    writer.writeRepeatedMessage(
-      1,
-      f,
-      proto.iotextypes.Candidate.serializeBinaryToWriter
-    );
-  }
-};
-
-
-/**
- * repeated Candidate candidates = 1;
- * @return {!Array<!proto.iotextypes.Candidate>}
- */
-proto.iotextypes.CandidateList.prototype.getCandidatesList = function() {
-  return /** @type{!Array<!proto.iotextypes.Candidate>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.iotextypes.Candidate, 1));
-};
-
-
-/** @param {!Array<!proto.iotextypes.Candidate>} value */
-proto.iotextypes.CandidateList.prototype.setCandidatesList = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 1, value);
-};
-
-
-/**
- * @param {!proto.iotextypes.Candidate=} opt_value
- * @param {number=} opt_index
- * @return {!proto.iotextypes.Candidate}
- */
-proto.iotextypes.CandidateList.prototype.addCandidates = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.iotextypes.Candidate, opt_index);
-};
-
-
-proto.iotextypes.CandidateList.prototype.clearCandidatesList = function() {
-  this.setCandidatesList([]);
+proto.iotextypes.EpochData.prototype.setHeight = function(value) {
+  jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -1797,7 +1530,8 @@ proto.iotextypes.ChainMeta.toObject = function(includeInstance, msg) {
     height: jspb.Message.getFieldWithDefault(msg, 1, 0),
     supply: jspb.Message.getFieldWithDefault(msg, 2, ""),
     numactions: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    tps: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    tps: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    epoch: (f = msg.getEpoch()) && proto.iotextypes.EpochData.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1849,6 +1583,11 @@ proto.iotextypes.ChainMeta.deserializeBinaryFromReader = function(msg, reader) {
     case 4:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setTps(value);
+      break;
+    case 5:
+      var value = new proto.iotextypes.EpochData;
+      reader.readMessage(value,proto.iotextypes.EpochData.deserializeBinaryFromReader);
+      msg.setEpoch(value);
       break;
     default:
       reader.skipField();
@@ -1905,6 +1644,14 @@ proto.iotextypes.ChainMeta.serializeBinaryToWriter = function(message, writer) {
     writer.writeInt64(
       4,
       f
+    );
+  }
+  f = message.getEpoch();
+  if (f != null) {
+    writer.writeMessage(
+      5,
+      f,
+      proto.iotextypes.EpochData.serializeBinaryToWriter
     );
   }
 };
@@ -1967,6 +1714,36 @@ proto.iotextypes.ChainMeta.prototype.getTps = function() {
 /** @param {number} value */
 proto.iotextypes.ChainMeta.prototype.setTps = function(value) {
   jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional EpochData epoch = 5;
+ * @return {?proto.iotextypes.EpochData}
+ */
+proto.iotextypes.ChainMeta.prototype.getEpoch = function() {
+  return /** @type{?proto.iotextypes.EpochData} */ (
+    jspb.Message.getWrapperField(this, proto.iotextypes.EpochData, 5));
+};
+
+
+/** @param {?proto.iotextypes.EpochData|undefined} value */
+proto.iotextypes.ChainMeta.prototype.setEpoch = function(value) {
+  jspb.Message.setWrapperField(this, 5, value);
+};
+
+
+proto.iotextypes.ChainMeta.prototype.clearEpoch = function() {
+  this.setEpoch(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.iotextypes.ChainMeta.prototype.hasEpoch = function() {
+  return jspb.Message.getField(this, 5) != null;
 };
 
 

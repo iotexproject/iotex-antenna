@@ -19,7 +19,7 @@
     "bp": "npm run build && npm run size",
     "build": "rm -rf ./dist && babel src/ --ignore **/__test__/**,src/**/**.test.js -d dist",
     "build:watch": "babel --watch src/**/*.js -d dist",
-    "build-proto": "protoc -I=./src/proto/ api.proto action.proto blockchain.proto endorsement.proto state.proto --js_out=import_style=commonjs:./src/proto/ && protoc -I=./src/proto/ api.proto action.proto blockchain.proto endorsement.proto state.proto --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./src/proto/",
+    "build-proto": "protoc -I=./src/proto/ api.proto action.proto blockchain.proto endorsement.proto account.proto --js_out=import_style=commonjs:./src/proto/ && protoc -I=./src/proto/ api.proto action.proto blockchain.proto endorsement.proto state.proto --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./src/proto/",
     "changelog-major": "build-changelog --major",
     "changelog-minor": "build-changelog --minor",
     "changelog-patch": "build-changelog --patch"
@@ -81,7 +81,8 @@
     "flow-bin": "0.93.0",
     "flow-typed": "2.5.1",
     "global": "4.3.2",
-    "nyc": "13.3.0"
+    "nyc": "13.3.0",
+    "proto-build": "^0.2.3"
   },
   "engines": {
     "node": "10.15.1",
@@ -96,7 +97,7 @@
     "eth-lib": "0.2.8",
     "google-protobuf": "3.7.0-rc.3",
     "grpc": "1.18.0",
-    "grpc-web": "1.0.3",
+    "grpc-web": "^1.0.3",
     "protobufjs": "6.8.8"
   }
 }
