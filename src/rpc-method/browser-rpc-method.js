@@ -46,7 +46,7 @@ export default class RpcMethod {
 
   async getChainMeta(req: IGetChainMetaRequest): Promise<IGetChainMetaResponse> {
     const pbReq = GetChainMetaRequest.to(req);
-    const pbResp = await this.client.getBlockMetas(pbReq);
+    const pbResp = await this.client.getChainMeta(pbReq);
     return GetChainMetaRequest.from(pbResp);
   }
 
