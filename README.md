@@ -24,3 +24,35 @@ To run a single test case, follow instructions [here](https://github.com/avajs/a
 - `npm run changelog-patch` bump version patch (bug fixes)
 - `npm run changelog-minor` bump version minor (new features)
 - `npm run changelog-major` bump version major (breaking change)
+
+
+## Update Proto
+0. pre request
+```bash
+npm install grpc
+npm install grpc-web
+npm install protoc
+
+npm i grpc-web
+```
+ (original link: https://github.com/grpc/grpc-web/tree/master/packages/grpc-web)
+ Download protoc and the protoc-gen-grpc-web protoc plugin.
+ You can download the protoc binary from the official protocolbuffers release page.
+
+ You can download the protoc-gen-grpc-web protoc plugin from our Github release page.
+
+ Make sure they are both executable and are discoverable from your PATH.
+
+ For example, in MacOS, you can do:
+```bash
+$ sudo mv ~/Downloads/protoc-gen-grpc-web-1.0.3-darwin-x86_64 \
+  /usr/local/bin/protoc-gen-grpc-web
+$ chmod +x /usr/local/bin/protoc-gen-grpc-web
+```
+
+1. copy proto files(api.proto,action.proto,blockchain.proto,endorsement.proto,account.proto) from iotex-core master branch to /iotex-antenna/src/proto/
+
+2. Run
+```bash
+npm run build-proto
+```

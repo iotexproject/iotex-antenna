@@ -315,7 +315,7 @@ rules:
     allowBlockEnd: true
   max-statements:
   - 2
-  - 15
+  - 50
   object-shorthand:
   - 2
   - always
