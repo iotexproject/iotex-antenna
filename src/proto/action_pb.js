@@ -14,6 +14,8 @@ var global = Function('return this')();
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 goog.exportSymbol('proto.iotextypes.Action', null, global);
 goog.exportSymbol('proto.iotextypes.ActionCore', null, global);
+goog.exportSymbol('proto.iotextypes.Candidate', null, global);
+goog.exportSymbol('proto.iotextypes.CandidateList', null, global);
 goog.exportSymbol('proto.iotextypes.ClaimFromRewardingFund', null, global);
 goog.exportSymbol('proto.iotextypes.CreateDeposit', null, global);
 goog.exportSymbol('proto.iotextypes.CreatePlumChain', null, global);
@@ -31,6 +33,7 @@ goog.exportSymbol('proto.iotextypes.PlumSettleDeposit', null, global);
 goog.exportSymbol('proto.iotextypes.PlumStartExit', null, global);
 goog.exportSymbol('proto.iotextypes.PlumTransfer', null, global);
 goog.exportSymbol('proto.iotextypes.PutBlock', null, global);
+goog.exportSymbol('proto.iotextypes.PutPollResult', null, global);
 goog.exportSymbol('proto.iotextypes.Receipt', null, global);
 goog.exportSymbol('proto.iotextypes.RewardType', null, global);
 goog.exportSymbol('proto.iotextypes.SetReward', null, global);
@@ -87,7 +90,7 @@ proto.iotextypes.Transfer.prototype.toObject = function(opt_includeInstance) {
  */
 proto.iotextypes.Transfer.toObject = function(includeInstance, msg) {
   var f, obj = {
-    amount: msg.getAmount_asB64(),
+    amount: jspb.Message.getFieldWithDefault(msg, 1, ""),
     recipient: jspb.Message.getFieldWithDefault(msg, 2, ""),
     payload: msg.getPayload_asB64()
   };
@@ -127,7 +130,7 @@ proto.iotextypes.Transfer.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      var value = /** @type {string} */ (reader.readString());
       msg.setAmount(value);
       break;
     case 2:
@@ -167,9 +170,9 @@ proto.iotextypes.Transfer.prototype.serializeBinary = function() {
  */
 proto.iotextypes.Transfer.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getAmount_asU8();
+  f = message.getAmount();
   if (f.length > 0) {
-    writer.writeBytes(
+    writer.writeString(
       1,
       f
     );
@@ -192,7 +195,7 @@ proto.iotextypes.Transfer.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional bytes amount = 1;
+ * optional string amount = 1;
  * @return {string}
  */
 proto.iotextypes.Transfer.prototype.getAmount = function() {
@@ -200,33 +203,9 @@ proto.iotextypes.Transfer.prototype.getAmount = function() {
 };
 
 
-/**
- * optional bytes amount = 1;
- * This is a type-conversion wrapper around `getAmount()`
- * @return {string}
- */
-proto.iotextypes.Transfer.prototype.getAmount_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getAmount()));
-};
-
-
-/**
- * optional bytes amount = 1;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getAmount()`
- * @return {!Uint8Array}
- */
-proto.iotextypes.Transfer.prototype.getAmount_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getAmount()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
+/** @param {string} value */
 proto.iotextypes.Transfer.prototype.setAmount = function(value) {
-  jspb.Message.setProto3BytesField(this, 1, value);
+  jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
@@ -481,6 +460,685 @@ proto.iotextypes.Vote.prototype.setVoteeaddress = function(value) {
  * @extends {jspb.Message}
  * @constructor
  */
+proto.iotextypes.Candidate = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.iotextypes.Candidate, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.iotextypes.Candidate.displayName = 'proto.iotextypes.Candidate';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotextypes.Candidate.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotextypes.Candidate.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotextypes.Candidate} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotextypes.Candidate.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    address: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    votes: msg.getVotes_asB64(),
+    pubkey: msg.getPubkey_asB64(),
+    creationheight: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    lastupdateheight: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    rewardaddress: jspb.Message.getFieldWithDefault(msg, 6, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.iotextypes.Candidate}
+ */
+proto.iotextypes.Candidate.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.iotextypes.Candidate;
+  return proto.iotextypes.Candidate.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.iotextypes.Candidate} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.iotextypes.Candidate}
+ */
+proto.iotextypes.Candidate.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAddress(value);
+      break;
+    case 2:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setVotes(value);
+      break;
+    case 3:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setPubkey(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setCreationheight(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setLastupdateheight(value);
+      break;
+    case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRewardaddress(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.iotextypes.Candidate.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.iotextypes.Candidate.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.iotextypes.Candidate} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotextypes.Candidate.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getAddress();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getVotes_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      2,
+      f
+    );
+  }
+  f = message.getPubkey_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      3,
+      f
+    );
+  }
+  f = message.getCreationheight();
+  if (f !== 0) {
+    writer.writeUint64(
+      4,
+      f
+    );
+  }
+  f = message.getLastupdateheight();
+  if (f !== 0) {
+    writer.writeUint64(
+      5,
+      f
+    );
+  }
+  f = message.getRewardaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string address = 1;
+ * @return {string}
+ */
+proto.iotextypes.Candidate.prototype.getAddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/** @param {string} value */
+proto.iotextypes.Candidate.prototype.setAddress = function(value) {
+  jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional bytes votes = 2;
+ * @return {string}
+ */
+proto.iotextypes.Candidate.prototype.getVotes = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * optional bytes votes = 2;
+ * This is a type-conversion wrapper around `getVotes()`
+ * @return {string}
+ */
+proto.iotextypes.Candidate.prototype.getVotes_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getVotes()));
+};
+
+
+/**
+ * optional bytes votes = 2;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getVotes()`
+ * @return {!Uint8Array}
+ */
+proto.iotextypes.Candidate.prototype.getVotes_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getVotes()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.iotextypes.Candidate.prototype.setVotes = function(value) {
+  jspb.Message.setProto3BytesField(this, 2, value);
+};
+
+
+/**
+ * optional bytes pubKey = 3;
+ * @return {string}
+ */
+proto.iotextypes.Candidate.prototype.getPubkey = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * optional bytes pubKey = 3;
+ * This is a type-conversion wrapper around `getPubkey()`
+ * @return {string}
+ */
+proto.iotextypes.Candidate.prototype.getPubkey_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getPubkey()));
+};
+
+
+/**
+ * optional bytes pubKey = 3;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getPubkey()`
+ * @return {!Uint8Array}
+ */
+proto.iotextypes.Candidate.prototype.getPubkey_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getPubkey()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.iotextypes.Candidate.prototype.setPubkey = function(value) {
+  jspb.Message.setProto3BytesField(this, 3, value);
+};
+
+
+/**
+ * optional uint64 creationHeight = 4;
+ * @return {number}
+ */
+proto.iotextypes.Candidate.prototype.getCreationheight = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/** @param {number} value */
+proto.iotextypes.Candidate.prototype.setCreationheight = function(value) {
+  jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional uint64 lastUpdateHeight = 5;
+ * @return {number}
+ */
+proto.iotextypes.Candidate.prototype.getLastupdateheight = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/** @param {number} value */
+proto.iotextypes.Candidate.prototype.setLastupdateheight = function(value) {
+  jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+/**
+ * optional string rewardAddress = 6;
+ * @return {string}
+ */
+proto.iotextypes.Candidate.prototype.getRewardaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/** @param {string} value */
+proto.iotextypes.Candidate.prototype.setRewardaddress = function(value) {
+  jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.iotextypes.CandidateList = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.iotextypes.CandidateList.repeatedFields_, null);
+};
+goog.inherits(proto.iotextypes.CandidateList, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.iotextypes.CandidateList.displayName = 'proto.iotextypes.CandidateList';
+}
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.iotextypes.CandidateList.repeatedFields_ = [1];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotextypes.CandidateList.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotextypes.CandidateList.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotextypes.CandidateList} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotextypes.CandidateList.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    candidatesList: jspb.Message.toObjectList(msg.getCandidatesList(),
+    proto.iotextypes.Candidate.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.iotextypes.CandidateList}
+ */
+proto.iotextypes.CandidateList.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.iotextypes.CandidateList;
+  return proto.iotextypes.CandidateList.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.iotextypes.CandidateList} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.iotextypes.CandidateList}
+ */
+proto.iotextypes.CandidateList.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.iotextypes.Candidate;
+      reader.readMessage(value,proto.iotextypes.Candidate.deserializeBinaryFromReader);
+      msg.addCandidates(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.iotextypes.CandidateList.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.iotextypes.CandidateList.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.iotextypes.CandidateList} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotextypes.CandidateList.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getCandidatesList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      1,
+      f,
+      proto.iotextypes.Candidate.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * repeated Candidate candidates = 1;
+ * @return {!Array<!proto.iotextypes.Candidate>}
+ */
+proto.iotextypes.CandidateList.prototype.getCandidatesList = function() {
+  return /** @type{!Array<!proto.iotextypes.Candidate>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.iotextypes.Candidate, 1));
+};
+
+
+/** @param {!Array<!proto.iotextypes.Candidate>} value */
+proto.iotextypes.CandidateList.prototype.setCandidatesList = function(value) {
+  jspb.Message.setRepeatedWrapperField(this, 1, value);
+};
+
+
+/**
+ * @param {!proto.iotextypes.Candidate=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.iotextypes.Candidate}
+ */
+proto.iotextypes.CandidateList.prototype.addCandidates = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.iotextypes.Candidate, opt_index);
+};
+
+
+proto.iotextypes.CandidateList.prototype.clearCandidatesList = function() {
+  this.setCandidatesList([]);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.iotextypes.PutPollResult = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.iotextypes.PutPollResult, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.iotextypes.PutPollResult.displayName = 'proto.iotextypes.PutPollResult';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotextypes.PutPollResult.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotextypes.PutPollResult.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotextypes.PutPollResult} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotextypes.PutPollResult.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    height: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    candidates: (f = msg.getCandidates()) && proto.iotextypes.CandidateList.toObject(includeInstance, f)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.iotextypes.PutPollResult}
+ */
+proto.iotextypes.PutPollResult.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.iotextypes.PutPollResult;
+  return proto.iotextypes.PutPollResult.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.iotextypes.PutPollResult} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.iotextypes.PutPollResult}
+ */
+proto.iotextypes.PutPollResult.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setHeight(value);
+      break;
+    case 2:
+      var value = new proto.iotextypes.CandidateList;
+      reader.readMessage(value,proto.iotextypes.CandidateList.deserializeBinaryFromReader);
+      msg.setCandidates(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.iotextypes.PutPollResult.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.iotextypes.PutPollResult.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.iotextypes.PutPollResult} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotextypes.PutPollResult.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getHeight();
+  if (f !== 0) {
+    writer.writeUint64(
+      1,
+      f
+    );
+  }
+  f = message.getCandidates();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      proto.iotextypes.CandidateList.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional uint64 height = 1;
+ * @return {number}
+ */
+proto.iotextypes.PutPollResult.prototype.getHeight = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/** @param {number} value */
+proto.iotextypes.PutPollResult.prototype.setHeight = function(value) {
+  jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional CandidateList candidates = 2;
+ * @return {?proto.iotextypes.CandidateList}
+ */
+proto.iotextypes.PutPollResult.prototype.getCandidates = function() {
+  return /** @type{?proto.iotextypes.CandidateList} */ (
+    jspb.Message.getWrapperField(this, proto.iotextypes.CandidateList, 2));
+};
+
+
+/** @param {?proto.iotextypes.CandidateList|undefined} value */
+proto.iotextypes.PutPollResult.prototype.setCandidates = function(value) {
+  jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+proto.iotextypes.PutPollResult.prototype.clearCandidates = function() {
+  this.setCandidates(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.iotextypes.PutPollResult.prototype.hasCandidates = function() {
+  return jspb.Message.getField(this, 2) != null;
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
 proto.iotextypes.Execution = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
@@ -517,7 +1175,7 @@ proto.iotextypes.Execution.prototype.toObject = function(opt_includeInstance) {
  */
 proto.iotextypes.Execution.toObject = function(includeInstance, msg) {
   var f, obj = {
-    amount: msg.getAmount_asB64(),
+    amount: jspb.Message.getFieldWithDefault(msg, 1, ""),
     contract: jspb.Message.getFieldWithDefault(msg, 2, ""),
     data: msg.getData_asB64()
   };
@@ -557,7 +1215,7 @@ proto.iotextypes.Execution.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      var value = /** @type {string} */ (reader.readString());
       msg.setAmount(value);
       break;
     case 2:
@@ -597,9 +1255,9 @@ proto.iotextypes.Execution.prototype.serializeBinary = function() {
  */
 proto.iotextypes.Execution.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getAmount_asU8();
+  f = message.getAmount();
   if (f.length > 0) {
-    writer.writeBytes(
+    writer.writeString(
       1,
       f
     );
@@ -622,7 +1280,7 @@ proto.iotextypes.Execution.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional bytes amount = 1;
+ * optional string amount = 1;
  * @return {string}
  */
 proto.iotextypes.Execution.prototype.getAmount = function() {
@@ -630,33 +1288,9 @@ proto.iotextypes.Execution.prototype.getAmount = function() {
 };
 
 
-/**
- * optional bytes amount = 1;
- * This is a type-conversion wrapper around `getAmount()`
- * @return {string}
- */
-proto.iotextypes.Execution.prototype.getAmount_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getAmount()));
-};
-
-
-/**
- * optional bytes amount = 1;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getAmount()`
- * @return {!Uint8Array}
- */
-proto.iotextypes.Execution.prototype.getAmount_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getAmount()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
+/** @param {string} value */
 proto.iotextypes.Execution.prototype.setAmount = function(value) {
-  jspb.Message.setProto3BytesField(this, 1, value);
+  jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
@@ -762,8 +1396,8 @@ proto.iotextypes.StartSubChain.prototype.toObject = function(opt_includeInstance
 proto.iotextypes.StartSubChain.toObject = function(includeInstance, msg) {
   var f, obj = {
     chainid: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    securitydeposit: msg.getSecuritydeposit_asB64(),
-    operationdeposit: msg.getOperationdeposit_asB64(),
+    securitydeposit: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    operationdeposit: jspb.Message.getFieldWithDefault(msg, 3, ""),
     startheight: jspb.Message.getFieldWithDefault(msg, 4, 0),
     parentheightoffset: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
@@ -807,11 +1441,11 @@ proto.iotextypes.StartSubChain.deserializeBinaryFromReader = function(msg, reade
       msg.setChainid(value);
       break;
     case 2:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSecuritydeposit(value);
       break;
     case 3:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      var value = /** @type {string} */ (reader.readString());
       msg.setOperationdeposit(value);
       break;
     case 4:
@@ -858,16 +1492,16 @@ proto.iotextypes.StartSubChain.serializeBinaryToWriter = function(message, write
       f
     );
   }
-  f = message.getSecuritydeposit_asU8();
+  f = message.getSecuritydeposit();
   if (f.length > 0) {
-    writer.writeBytes(
+    writer.writeString(
       2,
       f
     );
   }
-  f = message.getOperationdeposit_asU8();
+  f = message.getOperationdeposit();
   if (f.length > 0) {
-    writer.writeBytes(
+    writer.writeString(
       3,
       f
     );
@@ -905,7 +1539,7 @@ proto.iotextypes.StartSubChain.prototype.setChainid = function(value) {
 
 
 /**
- * optional bytes securityDeposit = 2;
+ * optional string securityDeposit = 2;
  * @return {string}
  */
 proto.iotextypes.StartSubChain.prototype.getSecuritydeposit = function() {
@@ -913,38 +1547,14 @@ proto.iotextypes.StartSubChain.prototype.getSecuritydeposit = function() {
 };
 
 
-/**
- * optional bytes securityDeposit = 2;
- * This is a type-conversion wrapper around `getSecuritydeposit()`
- * @return {string}
- */
-proto.iotextypes.StartSubChain.prototype.getSecuritydeposit_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getSecuritydeposit()));
-};
-
-
-/**
- * optional bytes securityDeposit = 2;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getSecuritydeposit()`
- * @return {!Uint8Array}
- */
-proto.iotextypes.StartSubChain.prototype.getSecuritydeposit_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getSecuritydeposit()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
+/** @param {string} value */
 proto.iotextypes.StartSubChain.prototype.setSecuritydeposit = function(value) {
-  jspb.Message.setProto3BytesField(this, 2, value);
+  jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional bytes operationDeposit = 3;
+ * optional string operationDeposit = 3;
  * @return {string}
  */
 proto.iotextypes.StartSubChain.prototype.getOperationdeposit = function() {
@@ -952,33 +1562,9 @@ proto.iotextypes.StartSubChain.prototype.getOperationdeposit = function() {
 };
 
 
-/**
- * optional bytes operationDeposit = 3;
- * This is a type-conversion wrapper around `getOperationdeposit()`
- * @return {string}
- */
-proto.iotextypes.StartSubChain.prototype.getOperationdeposit_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getOperationdeposit()));
-};
-
-
-/**
- * optional bytes operationDeposit = 3;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getOperationdeposit()`
- * @return {!Uint8Array}
- */
-proto.iotextypes.StartSubChain.prototype.getOperationdeposit_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getOperationdeposit()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
+/** @param {string} value */
 proto.iotextypes.StartSubChain.prototype.setOperationdeposit = function(value) {
-  jspb.Message.setProto3BytesField(this, 3, value);
+  jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
@@ -1671,7 +2257,7 @@ proto.iotextypes.CreateDeposit.prototype.toObject = function(opt_includeInstance
 proto.iotextypes.CreateDeposit.toObject = function(includeInstance, msg) {
   var f, obj = {
     chainid: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    amount: msg.getAmount_asB64(),
+    amount: jspb.Message.getFieldWithDefault(msg, 2, ""),
     recipient: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
@@ -1714,7 +2300,7 @@ proto.iotextypes.CreateDeposit.deserializeBinaryFromReader = function(msg, reade
       msg.setChainid(value);
       break;
     case 2:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      var value = /** @type {string} */ (reader.readString());
       msg.setAmount(value);
       break;
     case 3:
@@ -1757,9 +2343,9 @@ proto.iotextypes.CreateDeposit.serializeBinaryToWriter = function(message, write
       f
     );
   }
-  f = message.getAmount_asU8();
+  f = message.getAmount();
   if (f.length > 0) {
-    writer.writeBytes(
+    writer.writeString(
       2,
       f
     );
@@ -1790,7 +2376,7 @@ proto.iotextypes.CreateDeposit.prototype.setChainid = function(value) {
 
 
 /**
- * optional bytes amount = 2;
+ * optional string amount = 2;
  * @return {string}
  */
 proto.iotextypes.CreateDeposit.prototype.getAmount = function() {
@@ -1798,33 +2384,9 @@ proto.iotextypes.CreateDeposit.prototype.getAmount = function() {
 };
 
 
-/**
- * optional bytes amount = 2;
- * This is a type-conversion wrapper around `getAmount()`
- * @return {string}
- */
-proto.iotextypes.CreateDeposit.prototype.getAmount_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getAmount()));
-};
-
-
-/**
- * optional bytes amount = 2;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getAmount()`
- * @return {!Uint8Array}
- */
-proto.iotextypes.CreateDeposit.prototype.getAmount_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getAmount()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
+/** @param {string} value */
 proto.iotextypes.CreateDeposit.prototype.setAmount = function(value) {
-  jspb.Message.setProto3BytesField(this, 2, value);
+  jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
@@ -1890,7 +2452,7 @@ proto.iotextypes.SettleDeposit.prototype.toObject = function(opt_includeInstance
  */
 proto.iotextypes.SettleDeposit.toObject = function(includeInstance, msg) {
   var f, obj = {
-    amount: msg.getAmount_asB64(),
+    amount: jspb.Message.getFieldWithDefault(msg, 1, ""),
     recipient: jspb.Message.getFieldWithDefault(msg, 2, ""),
     index: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
@@ -1930,7 +2492,7 @@ proto.iotextypes.SettleDeposit.deserializeBinaryFromReader = function(msg, reade
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      var value = /** @type {string} */ (reader.readString());
       msg.setAmount(value);
       break;
     case 2:
@@ -1970,9 +2532,9 @@ proto.iotextypes.SettleDeposit.prototype.serializeBinary = function() {
  */
 proto.iotextypes.SettleDeposit.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getAmount_asU8();
+  f = message.getAmount();
   if (f.length > 0) {
-    writer.writeBytes(
+    writer.writeString(
       1,
       f
     );
@@ -1995,7 +2557,7 @@ proto.iotextypes.SettleDeposit.serializeBinaryToWriter = function(message, write
 
 
 /**
- * optional bytes amount = 1;
+ * optional string amount = 1;
  * @return {string}
  */
 proto.iotextypes.SettleDeposit.prototype.getAmount = function() {
@@ -2003,33 +2565,9 @@ proto.iotextypes.SettleDeposit.prototype.getAmount = function() {
 };
 
 
-/**
- * optional bytes amount = 1;
- * This is a type-conversion wrapper around `getAmount()`
- * @return {string}
- */
-proto.iotextypes.SettleDeposit.prototype.getAmount_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getAmount()));
-};
-
-
-/**
- * optional bytes amount = 1;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getAmount()`
- * @return {!Uint8Array}
- */
-proto.iotextypes.SettleDeposit.prototype.getAmount_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getAmount()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
+/** @param {string} value */
 proto.iotextypes.SettleDeposit.prototype.setAmount = function(value) {
-  jspb.Message.setProto3BytesField(this, 1, value);
+  jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
@@ -2567,7 +3105,7 @@ proto.iotextypes.PlumCreateDeposit.prototype.toObject = function(opt_includeInst
 proto.iotextypes.PlumCreateDeposit.toObject = function(includeInstance, msg) {
   var f, obj = {
     subchainaddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    amount: msg.getAmount_asB64(),
+    amount: jspb.Message.getFieldWithDefault(msg, 2, ""),
     recipient: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
@@ -2610,7 +3148,7 @@ proto.iotextypes.PlumCreateDeposit.deserializeBinaryFromReader = function(msg, r
       msg.setSubchainaddress(value);
       break;
     case 2:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      var value = /** @type {string} */ (reader.readString());
       msg.setAmount(value);
       break;
     case 3:
@@ -2653,9 +3191,9 @@ proto.iotextypes.PlumCreateDeposit.serializeBinaryToWriter = function(message, w
       f
     );
   }
-  f = message.getAmount_asU8();
+  f = message.getAmount();
   if (f.length > 0) {
-    writer.writeBytes(
+    writer.writeString(
       2,
       f
     );
@@ -2686,7 +3224,7 @@ proto.iotextypes.PlumCreateDeposit.prototype.setSubchainaddress = function(value
 
 
 /**
- * optional bytes amount = 2;
+ * optional string amount = 2;
  * @return {string}
  */
 proto.iotextypes.PlumCreateDeposit.prototype.getAmount = function() {
@@ -2694,33 +3232,9 @@ proto.iotextypes.PlumCreateDeposit.prototype.getAmount = function() {
 };
 
 
-/**
- * optional bytes amount = 2;
- * This is a type-conversion wrapper around `getAmount()`
- * @return {string}
- */
-proto.iotextypes.PlumCreateDeposit.prototype.getAmount_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getAmount()));
-};
-
-
-/**
- * optional bytes amount = 2;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getAmount()`
- * @return {!Uint8Array}
- */
-proto.iotextypes.PlumCreateDeposit.prototype.getAmount_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getAmount()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
+/** @param {string} value */
 proto.iotextypes.PlumCreateDeposit.prototype.setAmount = function(value) {
-  jspb.Message.setProto3BytesField(this, 2, value);
+  jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
@@ -4370,7 +4884,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<!Array<number>>}
  * @const
  */
-proto.iotextypes.ActionCore.oneofGroups_ = [[10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,30,31,32,33]];
+proto.iotextypes.ActionCore.oneofGroups_ = [[10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,30,31,32,33,50]];
 
 /**
  * @enum {number}
@@ -4398,7 +4912,8 @@ proto.iotextypes.ActionCore.ActionCase = {
   DEPOSITTOREWARDINGFUND: 30,
   CLAIMFROMREWARDINGFUND: 31,
   SETREWARD: 32,
-  GRANTREWARD: 33
+  GRANTREWARD: 33,
+  PUTPOLLRESULT: 50
 };
 
 /**
@@ -4440,7 +4955,7 @@ proto.iotextypes.ActionCore.toObject = function(includeInstance, msg) {
     version: jspb.Message.getFieldWithDefault(msg, 1, 0),
     nonce: jspb.Message.getFieldWithDefault(msg, 2, 0),
     gaslimit: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    gasprice: msg.getGasprice_asB64(),
+    gasprice: jspb.Message.getFieldWithDefault(msg, 4, ""),
     transfer: (f = msg.getTransfer()) && proto.iotextypes.Transfer.toObject(includeInstance, f),
     vote: (f = msg.getVote()) && proto.iotextypes.Vote.toObject(includeInstance, f),
     execution: (f = msg.getExecution()) && proto.iotextypes.Execution.toObject(includeInstance, f),
@@ -4462,7 +4977,8 @@ proto.iotextypes.ActionCore.toObject = function(includeInstance, msg) {
     deposittorewardingfund: (f = msg.getDeposittorewardingfund()) && proto.iotextypes.DepositToRewardingFund.toObject(includeInstance, f),
     claimfromrewardingfund: (f = msg.getClaimfromrewardingfund()) && proto.iotextypes.ClaimFromRewardingFund.toObject(includeInstance, f),
     setreward: (f = msg.getSetreward()) && proto.iotextypes.SetReward.toObject(includeInstance, f),
-    grantreward: (f = msg.getGrantreward()) && proto.iotextypes.GrantReward.toObject(includeInstance, f)
+    grantreward: (f = msg.getGrantreward()) && proto.iotextypes.GrantReward.toObject(includeInstance, f),
+    putpollresult: (f = msg.getPutpollresult()) && proto.iotextypes.PutPollResult.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -4512,7 +5028,7 @@ proto.iotextypes.ActionCore.deserializeBinaryFromReader = function(msg, reader) 
       msg.setGaslimit(value);
       break;
     case 4:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      var value = /** @type {string} */ (reader.readString());
       msg.setGasprice(value);
       break;
     case 10:
@@ -4625,6 +5141,11 @@ proto.iotextypes.ActionCore.deserializeBinaryFromReader = function(msg, reader) 
       reader.readMessage(value,proto.iotextypes.GrantReward.deserializeBinaryFromReader);
       msg.setGrantreward(value);
       break;
+    case 50:
+      var value = new proto.iotextypes.PutPollResult;
+      reader.readMessage(value,proto.iotextypes.PutPollResult.deserializeBinaryFromReader);
+      msg.setPutpollresult(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -4675,9 +5196,9 @@ proto.iotextypes.ActionCore.serializeBinaryToWriter = function(message, writer) 
       f
     );
   }
-  f = message.getGasprice_asU8();
+  f = message.getGasprice();
   if (f.length > 0) {
-    writer.writeBytes(
+    writer.writeString(
       4,
       f
     );
@@ -4858,6 +5379,14 @@ proto.iotextypes.ActionCore.serializeBinaryToWriter = function(message, writer) 
       proto.iotextypes.GrantReward.serializeBinaryToWriter
     );
   }
+  f = message.getPutpollresult();
+  if (f != null) {
+    writer.writeMessage(
+      50,
+      f,
+      proto.iotextypes.PutPollResult.serializeBinaryToWriter
+    );
+  }
 };
 
 
@@ -4907,7 +5436,7 @@ proto.iotextypes.ActionCore.prototype.setGaslimit = function(value) {
 
 
 /**
- * optional bytes gasPrice = 4;
+ * optional string gasPrice = 4;
  * @return {string}
  */
 proto.iotextypes.ActionCore.prototype.getGasprice = function() {
@@ -4915,33 +5444,9 @@ proto.iotextypes.ActionCore.prototype.getGasprice = function() {
 };
 
 
-/**
- * optional bytes gasPrice = 4;
- * This is a type-conversion wrapper around `getGasprice()`
- * @return {string}
- */
-proto.iotextypes.ActionCore.prototype.getGasprice_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getGasprice()));
-};
-
-
-/**
- * optional bytes gasPrice = 4;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getGasprice()`
- * @return {!Uint8Array}
- */
-proto.iotextypes.ActionCore.prototype.getGasprice_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getGasprice()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
+/** @param {string} value */
 proto.iotextypes.ActionCore.prototype.setGasprice = function(value) {
-  jspb.Message.setProto3BytesField(this, 4, value);
+  jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
@@ -5602,6 +6107,36 @@ proto.iotextypes.ActionCore.prototype.clearGrantreward = function() {
  */
 proto.iotextypes.ActionCore.prototype.hasGrantreward = function() {
   return jspb.Message.getField(this, 33) != null;
+};
+
+
+/**
+ * optional PutPollResult putPollResult = 50;
+ * @return {?proto.iotextypes.PutPollResult}
+ */
+proto.iotextypes.ActionCore.prototype.getPutpollresult = function() {
+  return /** @type{?proto.iotextypes.PutPollResult} */ (
+    jspb.Message.getWrapperField(this, proto.iotextypes.PutPollResult, 50));
+};
+
+
+/** @param {?proto.iotextypes.PutPollResult|undefined} value */
+proto.iotextypes.ActionCore.prototype.setPutpollresult = function(value) {
+  jspb.Message.setOneofWrapperField(this, 50, proto.iotextypes.ActionCore.oneofGroups_[0], value);
+};
+
+
+proto.iotextypes.ActionCore.prototype.clearPutpollresult = function() {
+  this.setPutpollresult(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.iotextypes.ActionCore.prototype.hasPutpollresult = function() {
+  return jspb.Message.getField(this, 50) != null;
 };
 
 
@@ -6634,7 +7169,7 @@ proto.iotextypes.DepositToRewardingFund.prototype.toObject = function(opt_includ
  */
 proto.iotextypes.DepositToRewardingFund.toObject = function(includeInstance, msg) {
   var f, obj = {
-    amount: msg.getAmount_asB64(),
+    amount: jspb.Message.getFieldWithDefault(msg, 1, ""),
     data: msg.getData_asB64()
   };
 
@@ -6673,7 +7208,7 @@ proto.iotextypes.DepositToRewardingFund.deserializeBinaryFromReader = function(m
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      var value = /** @type {string} */ (reader.readString());
       msg.setAmount(value);
       break;
     case 2:
@@ -6709,9 +7244,9 @@ proto.iotextypes.DepositToRewardingFund.prototype.serializeBinary = function() {
  */
 proto.iotextypes.DepositToRewardingFund.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getAmount_asU8();
+  f = message.getAmount();
   if (f.length > 0) {
-    writer.writeBytes(
+    writer.writeString(
       1,
       f
     );
@@ -6727,7 +7262,7 @@ proto.iotextypes.DepositToRewardingFund.serializeBinaryToWriter = function(messa
 
 
 /**
- * optional bytes amount = 1;
+ * optional string amount = 1;
  * @return {string}
  */
 proto.iotextypes.DepositToRewardingFund.prototype.getAmount = function() {
@@ -6735,33 +7270,9 @@ proto.iotextypes.DepositToRewardingFund.prototype.getAmount = function() {
 };
 
 
-/**
- * optional bytes amount = 1;
- * This is a type-conversion wrapper around `getAmount()`
- * @return {string}
- */
-proto.iotextypes.DepositToRewardingFund.prototype.getAmount_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getAmount()));
-};
-
-
-/**
- * optional bytes amount = 1;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getAmount()`
- * @return {!Uint8Array}
- */
-proto.iotextypes.DepositToRewardingFund.prototype.getAmount_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getAmount()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
+/** @param {string} value */
 proto.iotextypes.DepositToRewardingFund.prototype.setAmount = function(value) {
-  jspb.Message.setProto3BytesField(this, 1, value);
+  jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
@@ -6851,7 +7362,7 @@ proto.iotextypes.ClaimFromRewardingFund.prototype.toObject = function(opt_includ
  */
 proto.iotextypes.ClaimFromRewardingFund.toObject = function(includeInstance, msg) {
   var f, obj = {
-    amount: msg.getAmount_asB64(),
+    amount: jspb.Message.getFieldWithDefault(msg, 1, ""),
     data: msg.getData_asB64()
   };
 
@@ -6890,7 +7401,7 @@ proto.iotextypes.ClaimFromRewardingFund.deserializeBinaryFromReader = function(m
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      var value = /** @type {string} */ (reader.readString());
       msg.setAmount(value);
       break;
     case 2:
@@ -6926,9 +7437,9 @@ proto.iotextypes.ClaimFromRewardingFund.prototype.serializeBinary = function() {
  */
 proto.iotextypes.ClaimFromRewardingFund.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getAmount_asU8();
+  f = message.getAmount();
   if (f.length > 0) {
-    writer.writeBytes(
+    writer.writeString(
       1,
       f
     );
@@ -6944,7 +7455,7 @@ proto.iotextypes.ClaimFromRewardingFund.serializeBinaryToWriter = function(messa
 
 
 /**
- * optional bytes amount = 1;
+ * optional string amount = 1;
  * @return {string}
  */
 proto.iotextypes.ClaimFromRewardingFund.prototype.getAmount = function() {
@@ -6952,33 +7463,9 @@ proto.iotextypes.ClaimFromRewardingFund.prototype.getAmount = function() {
 };
 
 
-/**
- * optional bytes amount = 1;
- * This is a type-conversion wrapper around `getAmount()`
- * @return {string}
- */
-proto.iotextypes.ClaimFromRewardingFund.prototype.getAmount_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getAmount()));
-};
-
-
-/**
- * optional bytes amount = 1;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getAmount()`
- * @return {!Uint8Array}
- */
-proto.iotextypes.ClaimFromRewardingFund.prototype.getAmount_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getAmount()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
+/** @param {string} value */
 proto.iotextypes.ClaimFromRewardingFund.prototype.setAmount = function(value) {
-  jspb.Message.setProto3BytesField(this, 1, value);
+  jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
@@ -7068,7 +7555,7 @@ proto.iotextypes.SetReward.prototype.toObject = function(opt_includeInstance) {
  */
 proto.iotextypes.SetReward.toObject = function(includeInstance, msg) {
   var f, obj = {
-    amount: msg.getAmount_asB64(),
+    amount: jspb.Message.getFieldWithDefault(msg, 1, ""),
     data: msg.getData_asB64(),
     type: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
@@ -7108,7 +7595,7 @@ proto.iotextypes.SetReward.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      var value = /** @type {string} */ (reader.readString());
       msg.setAmount(value);
       break;
     case 2:
@@ -7148,9 +7635,9 @@ proto.iotextypes.SetReward.prototype.serializeBinary = function() {
  */
 proto.iotextypes.SetReward.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getAmount_asU8();
+  f = message.getAmount();
   if (f.length > 0) {
-    writer.writeBytes(
+    writer.writeString(
       1,
       f
     );
@@ -7173,7 +7660,7 @@ proto.iotextypes.SetReward.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional bytes amount = 1;
+ * optional string amount = 1;
  * @return {string}
  */
 proto.iotextypes.SetReward.prototype.getAmount = function() {
@@ -7181,33 +7668,9 @@ proto.iotextypes.SetReward.prototype.getAmount = function() {
 };
 
 
-/**
- * optional bytes amount = 1;
- * This is a type-conversion wrapper around `getAmount()`
- * @return {string}
- */
-proto.iotextypes.SetReward.prototype.getAmount_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getAmount()));
-};
-
-
-/**
- * optional bytes amount = 1;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getAmount()`
- * @return {!Uint8Array}
- */
-proto.iotextypes.SetReward.prototype.getAmount_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getAmount()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
+/** @param {string} value */
 proto.iotextypes.SetReward.prototype.setAmount = function(value) {
-  jspb.Message.setProto3BytesField(this, 1, value);
+  jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
