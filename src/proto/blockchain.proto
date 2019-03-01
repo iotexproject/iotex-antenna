@@ -16,18 +16,19 @@ import "google/protobuf/timestamp.proto";
 
 // header of a block
 message BlockHeader {
+  BlockHeaderCore core = 1;
+  bytes producerPubkey = 2;
+  bytes signature = 3;
+}
+
+message BlockHeaderCore {
   uint32 version = 1;
-  uint32 chainID = 2;
-  uint64 height = 3;
-  google.protobuf.Timestamp timestamp = 4;
-  bytes prevBlockHash = 5;
-  bytes txRoot = 6;
-  bytes stateRoot = 7;
-  bytes deltaStateDigest = 8;
-  bytes receiptRoot = 9;
-  bytes reserved = 10;
-  bytes signature = 11;
-  bytes pubkey = 12;
+  uint64 height = 2;
+  google.protobuf.Timestamp timestamp = 3;
+  bytes prevBlockHash = 4;
+  bytes txRoot = 5;
+  bytes deltaStateDigest = 6;
+  bytes receiptRoot = 7;
 }
 
 // footer of a block
@@ -49,18 +50,9 @@ message Receipts {
   repeated Receipt receipts = 1;
 }
 
-
-// Candidates and list of candidates
-message Candidate {
-  string address = 1;
-  bytes votes = 2;
-  bytes pubKey = 3;
-  uint64 creationHeight = 4;
-  uint64 lastUpdateHeight = 5;
-}
-
-message CandidateList {
-  repeated Candidate candidates = 1;
+message EpochData {
+  uint64 num = 1;
+  uint64 height = 2;
 }
 
 // Blockchain Metadata
@@ -69,6 +61,7 @@ message ChainMeta {
   string supply = 2;
   int64 numActions = 3;
   int64 tps = 4;
+  EpochData epoch = 5;
 }
 
 // Block Metadata
