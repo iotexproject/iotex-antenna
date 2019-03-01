@@ -35,7 +35,7 @@ npm install protoc
 
 npm i grpc-web
 ```
-(original link: https://github.com/grpc/grpc-web/tree/master/packages/grpc-web)
+ (original link: https://github.com/grpc/grpc-web/tree/master/packages/grpc-web)
  Download protoc and the protoc-gen-grpc-web protoc plugin.
  You can download the protoc binary from the official protocolbuffers release page.
 
