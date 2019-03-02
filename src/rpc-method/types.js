@@ -649,7 +649,7 @@ export interface IAction {
   signature?: Uint8Array | null,
 }
 
-export function toActionTransfer(req: ITransfer): any {
+export function toActionTransfer(req?: ITransfer): any {
   let pbTransfer = req;
   if (req) {
     pbTransfer = new actionPb.Transfer();
@@ -660,7 +660,7 @@ export function toActionTransfer(req: ITransfer): any {
   return pbTransfer;
 }
 
-export function toActionVote(req: IVote): any {
+export function toActionVote(req?: IVote): any {
   let pbVote = req;
   if (req) {
     pbVote = new actionPb.Vote();
@@ -670,7 +670,7 @@ export function toActionVote(req: IVote): any {
   return pbVote;
 }
 
-export function toActionExecution(req: IExecution): any {
+export function toActionExecution(req?: IExecution): any {
   let pbExecution = req;
   if (req) {
     pbExecution = new actionPb.Execution();
@@ -681,7 +681,7 @@ export function toActionExecution(req: IExecution): any {
   return pbExecution;
 }
 
-export function toActionStartSubChain(req: IStartSubChain): any {
+export function toActionStartSubChain(req?: IStartSubChain): any {
   let pbStartSubChain = req;
   if (req) {
     pbStartSubChain = new actionPb.StartSubChain();
@@ -694,7 +694,7 @@ export function toActionStartSubChain(req: IStartSubChain): any {
   return pbStartSubChain;
 }
 
-export function toActionStopSubChain(req: IStopSubChain): any {
+export function toActionStopSubChain(req?: IStopSubChain): any {
   let pbStopSubChain = req;
   if (req) {
     pbStopSubChain = new actionPb.StopSubChain();
@@ -839,9 +839,9 @@ export class GetActionsRequest {
     return pbReq;
   }
 
-  static fromTransfer(pbRes: ITransfer): any {
+  static fromTransfer(pbRes?: any): any {
     let transferData = pbRes;
-    if (transferData) {
+    if (pbRes) {
       transferData = {
         amount: pbRes.getAmount(),
         recipient: pbRes.getRecipient(),
@@ -851,7 +851,7 @@ export class GetActionsRequest {
     return transferData;
   }
 
-  static fromVote(pbRes: IVote): any {
+  static fromVote(pbRes: any): any {
     let voteData = pbRes;
     if (voteData) {
       voteData = {
@@ -862,7 +862,7 @@ export class GetActionsRequest {
     return voteData;
   }
 
-  static fromExecution(pbRes: IExecution): any {
+  static fromExecution(pbRes: any): any {
     let executionData = pbRes;
     if (executionData) {
       executionData = {
@@ -874,7 +874,7 @@ export class GetActionsRequest {
     return executionData;
   }
 
-  static fromStartSubChain(pbRes: IStartSubChain): any {
+  static fromStartSubChain(pbRes: any): any {
     let startSubChainData = pbRes;
     if (startSubChainData) {
       startSubChainData = {
@@ -888,7 +888,7 @@ export class GetActionsRequest {
     return startSubChainData;
   }
 
-  static fromStopSubChain(pbRes: IStopSubChain): any {
+  static fromStopSubChain(pbRes: any): any {
     let stopSubChainData = pbRes;
     if (stopSubChainData) {
       stopSubChainData = {
