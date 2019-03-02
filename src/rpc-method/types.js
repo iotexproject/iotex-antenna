@@ -649,6 +649,49 @@ export interface IAction {
   signature?: Uint8Array | null,
 }
 
+export function toAction(req: IAction): any {
+  const pbActionCore = new actionPb.ActionCore();
+
+  const core = req && req.core;
+  if (core) {
+    pbActionCore.setVersion(core.version);
+    pbActionCore.setNonce(core.nonce);
+    pbActionCore.setGaslimit(core.gasLimit);
+    pbActionCore.setGasprice(core.gasPrice);
+    pbActionCore.setTransfer(core.transfer);
+    pbActionCore.setVote(core.vote);
+    pbActionCore.setExecution(core.execution);
+    pbActionCore.setStartsubchain(core.startSubChain);
+    pbActionCore.setStopsubchain(core.stopSubChain);
+    pbActionCore.setPutblock(core.putBlock);
+    pbActionCore.setCreatedeposit(core.createDeposit);
+    pbActionCore.setSettledeposit(core.settleDeposit);
+    pbActionCore.setCreateplumchain(core.createPlumChain);
+    pbActionCore.setTerminateplumchain(core.terminatePlumChain);
+    pbActionCore.setPlumputblock(core.plumPutBlock);
+    pbActionCore.setPlumcreatedeposit(core.plumCreateDeposit);
+    pbActionCore.setPlumstartexit(core.plumStartExit);
+    pbActionCore.setPlumchallengeexit(core.plumChallengeExit);
+    pbActionCore.setPlumresponsechallengeexit(core.plumResponseChallengeExit);
+    pbActionCore.setPlumfinalizeexit(core.plumFinalizeExit);
+    pbActionCore.setPlumsettledeposit(core.plumSettleDeposit);
+    pbActionCore.setPlumtransfer(core.plumTransfer);
+    pbActionCore.setDeposittorewardingfund(core.depositToRewardingFund);
+    pbActionCore.setClaimfromrewardingfund(core.claimFromRewardingFund);
+    pbActionCore.setSetreward(core.setReward);
+    pbActionCore.setGrantreward(core.grantReward);
+  }
+
+  const pbAction = new actionPb.Action();
+  pbAction.setCore(pbActionCore);
+  // $FlowFixMe
+  pbAction.setSenderpubkey(req.senderPubKey);
+  // $FlowFixMe
+  pbAction.setSignature(req.signature);
+
+  return pbAction;
+}
+
 /** Properties of a GetActionsResponse. */
 export interface IGetActionsResponse {
   /** GetActionsResponse actions */
@@ -882,7 +925,9 @@ export interface IReadContractResponse {
 export class ReadContractRequest {
   static to(req: IReadContractRequest): any {
     const pbReq = new apiPb.ReadContractRequest();
-    pbReq.setAction(req.action);
+    if (req.action) {
+      pbReq.setAction(toAction(req.action));
+    }
     return pbReq;
   }
 
@@ -906,7 +951,9 @@ export interface ISendActionResponse {}
 export class SendActionRequest {
   static to(req: ISendActionRequest): any {
     const pbReq = new apiPb.SendActionRequest();
-    pbReq.setAction(req.action);
+    if (req.action) {
+      pbReq.setAction(toAction(req.action));
+    }
     return pbReq;
   }
 
@@ -926,74 +973,11 @@ export interface IEstimateGasForActionResponse {
 }
 
 export class EstimateGasForActionRequest {
-  // $FlowFixMe
   static to(req: IEstimateGasForActionRequest): any {
-    const pbActionCore = new actionPb.ActionCore();
-
-    // $FlowFixMe
-    if (req.action.core) {
-      pbActionCore.setVersion(req.action.core.version);
-      // $FlowFixMe
-      pbActionCore.setNonce(req.action.core.nonce);
-      // $FlowFixMe
-      pbActionCore.setGaslimit(req.action.core.gasLimit);
-      // $FlowFixMe
-      pbActionCore.setGasprice(req.action.core.gasPrice);
-      // $FlowFixMe
-      pbActionCore.setTransfer(req.action.core.transfer);
-      // $FlowFixMe
-      pbActionCore.setVote(req.action.core.vote);
-      // $FlowFixMe
-      pbActionCore.setExecution(req.action.core.execution);
-      // $FlowFixMe
-      pbActionCore.setStartsubchain(req.action.core.startSubChain);
-      // $FlowFixMe
-      pbActionCore.setStopsubchain(req.action.core.stopSubChain);
-      // $FlowFixMe
-      pbActionCore.setPutblock(req.action.core.putBlock);
-      // $FlowFixMe
-      pbActionCore.setCreatedeposit(req.action.core.createDeposit);
-      // $FlowFixMe
-      pbActionCore.setSettledeposit(req.action.core.settleDeposit);
-      // $FlowFixMe
-      pbActionCore.setCreateplumchain(req.action.core.createPlumChain);
-      // $FlowFixMe
-      pbActionCore.setTerminateplumchain(req.action.core.terminatePlumChain);
-      // $FlowFixMe
-      pbActionCore.setPlumputblock(req.action.core.plumPutBlock);
-      // $FlowFixMe
-      pbActionCore.setPlumcreatedeposit(req.action.core.plumCreateDeposit);
-      // $FlowFixMe
-      pbActionCore.setPlumstartexit(req.action.core.plumStartExit);
-      // $FlowFixMe
-      pbActionCore.setPlumchallengeexit(req.action.core.plumChallengeExit);
-      // $FlowFixMe
-      pbActionCore.setPlumresponsechallengeexit(req.action.core.plumResponseChallengeExit);
-      // $FlowFixMe
-      pbActionCore.setPlumfinalizeexit(req.action.core.plumFinalizeExit);
-      // $FlowFixMe
-      pbActionCore.setPlumsettledeposit(req.action.core.plumSettleDeposit);
-      // $FlowFixMe
-      pbActionCore.setPlumtransfer(req.action.core.plumTransfer);
-      // $FlowFixMe
-      pbActionCore.setDeposittorewardingfund(req.action.core.depositToRewardingFund);
-      // $FlowFixMe
-      pbActionCore.setClaimfromrewardingfund(req.action.core.claimFromRewardingFund);
-      // $FlowFixMe
-      pbActionCore.setSetreward(req.action.core.setReward);
-      // $FlowFixMe
-      pbActionCore.setGrantreward(req.action.core.grantReward);
-    }
-
-    const pbAction = new actionPb.Action();
-    pbAction.setCore(pbActionCore);
-    // $FlowFixMe
-    pbAction.setSenderpubkey(req.action.senderPubKey);
-    // $FlowFixMe
-    pbAction.setSignature(req.action.signature);
-
     const pbReq = new apiPb.EstimateGasForActionRequest();
-    pbReq.setAction(pbAction);
+    if (req.action) {
+      pbReq.setAction(toAction(req.action));
+    }
     return pbReq;
   }
 
