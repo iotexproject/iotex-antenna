@@ -82,7 +82,7 @@
     "flow-typed": "2.5.1",
     "global": "4.3.2",
     "nyc": "13.3.0",
-    "proto-build": "^0.2.3"
+    "proto-build": "0.2.3"
   },
   "engines": {
     "node": "10.15.2",
@@ -97,8 +97,8 @@
     "eth-lib": "0.2.8",
     "google-protobuf": "3.7.0-rc.3",
     "grpc": "1.18.0",
-    "grpc-web": "^1.0.3",
+    "grpc-web": "1.0.3",
     "protobufjs": "6.8.8",
-    "protoc": "^1.0.3"
+    "protoc": "1.0.3"
   }
 }
