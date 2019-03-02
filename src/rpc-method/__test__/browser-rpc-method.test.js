@@ -66,7 +66,7 @@ test('RpcMethod.getActionsByIndex', async t => {
   t.deepEqual(resp3.actions.length, 0);
 });
 
-test.skip('RpcMethod.getActionsByAddress', async t => {
+test('RpcMethod.getActionsByAddress', async t => {
   const client = new RpcMethod('http://35.230.103.170:10000');
   const blks = await client.getBlockMetas({byIndex: {start: 10, count: 1}});
   t.deepEqual(blks.blkMetas.length, 1);
@@ -81,10 +81,9 @@ test.skip('RpcMethod.getActionsByAddress', async t => {
   }
   if (transfer) {
     // test getActionByAddress
-    t.deepEqual(transfer.core.transfer, 'a');
     const resp5 = await client.getActions({
       byAddr: {
-        address: 'io1djxfexfvvpjn9mfc34l2yhhv20xvd3tdzn9drp',
+        address: transfer.core.transfer.recipient,
         start: 0,
         count: 1,
       },
