@@ -649,6 +649,62 @@ export interface IAction {
   signature?: Uint8Array | null,
 }
 
+export function toActionTransfer(req: ITransfer): any {
+  let pbTransfer = req;
+  if (req) {
+    pbTransfer = new actionPb.Transfer();
+    pbTransfer.setAmount(req.amount);
+    pbTransfer.setRecipient(req.recipient);
+    pbTransfer.setPayload(req.payload);
+  }
+  return pbTransfer;
+}
+
+export function toActionVote(req: IVote): any {
+  let pbVote = req;
+  if (req) {
+    pbVote = new actionPb.Vote();
+    pbVote.setTimestamp(req.timestamp);
+    pbVote.setVoteeaddress(req.voteeAddress);
+  }
+  return pbVote;
+}
+
+export function toActionExecution(req: IExecution): any {
+  let pbExecution = req;
+  if (req) {
+    pbExecution = new actionPb.Execution();
+    pbExecution.setAmount(req.amount);
+    pbExecution.setContract(req.contract);
+    pbExecution.setData(req.data);
+  }
+  return pbExecution;
+}
+
+export function toActionStartSubChain(req: IStartSubChain): any {
+  let pbStartSubChain = req;
+  if (req) {
+    pbStartSubChain = new actionPb.StartSubChain();
+    pbStartSubChain.setChainid(req.chainID);
+    pbStartSubChain.setSecuritydeposit(req.securityDeposit);
+    pbStartSubChain.setOperationdeposit(req.operationDeposit);
+    pbStartSubChain.setStartheight(req.startHeight);
+    pbStartSubChain.setParentheightoffset(req.parentHeightOffset);
+  }
+  return pbStartSubChain;
+}
+
+export function toActionStopSubChain(req: IStopSubChain): any {
+  let pbStopSubChain = req;
+  if (req) {
+    pbStopSubChain = new actionPb.StopSubChain();
+    pbStopSubChain.setChainid(req.chainID);
+    pbStopSubChain.setStopheight(req.stopHeight);
+    pbStopSubChain.setSubchainaddress(req.subChainAddress);
+  }
+  return pbStopSubChain;
+}
+
 export function toAction(req: IAction): any {
   const pbActionCore = new actionPb.ActionCore();
 
@@ -658,11 +714,11 @@ export function toAction(req: IAction): any {
     pbActionCore.setNonce(core.nonce);
     pbActionCore.setGaslimit(core.gasLimit);
     pbActionCore.setGasprice(core.gasPrice);
-    pbActionCore.setTransfer(core.transfer);
-    pbActionCore.setVote(core.vote);
-    pbActionCore.setExecution(core.execution);
-    pbActionCore.setStartsubchain(core.startSubChain);
-    pbActionCore.setStopsubchain(core.stopSubChain);
+    pbActionCore.setTransfer(toActionTransfer(core.transfer));
+    pbActionCore.setVote(toActionVote(core.vote));
+    pbActionCore.setExecution(toActionExecution(core.execution));
+    pbActionCore.setStartsubchain(toActionStartSubChain(core.startSubChain));
+    pbActionCore.setStopsubchain(toActionStopSubChain(core.stopSubChain));
     pbActionCore.setPutblock(core.putBlock);
     pbActionCore.setCreatedeposit(core.createDeposit);
     pbActionCore.setSettledeposit(core.settleDeposit);
@@ -783,6 +839,67 @@ export class GetActionsRequest {
     return pbReq;
   }
 
+  static fromTransfer(pbRes: ITransfer): any {
+    let transferData = pbRes;
+    if (transferData) {
+      transferData = {
+        amount: pbRes.getAmount(),
+        recipient: pbRes.getRecipient(),
+        payload: pbRes.getPayload(),
+      };
+    }
+    return transferData;
+  }
+
+  static fromVote(pbRes: IVote): any {
+    let voteData = pbRes;
+    if (voteData) {
+      voteData = {
+        timestamp: pbRes.getTimestamp(),
+        voteeAddress: pbRes.getVoteeaddress(),
+      };
+    }
+    return voteData;
+  }
+
+  static fromExecution(pbRes: IExecution): any {
+    let executionData = pbRes;
+    if (executionData) {
+      executionData = {
+        amount: pbRes.getAmount(),
+        contract: pbRes.getContract(),
+        data: pbRes.getData(),
+      };
+    }
+    return executionData;
+  }
+
+  static fromStartSubChain(pbRes: IStartSubChain): any {
+    let startSubChainData = pbRes;
+    if (startSubChainData) {
+      startSubChainData = {
+        chainID: pbRes.chainID,
+        securityDeposit: pbRes.securityDeposit,
+        operationDeposit: pbRes.operationDeposit,
+        startHeight: pbRes.startHeight,
+        parentHeightOffset: pbRes.parentHeightOffset,
+      };
+    }
+    return startSubChainData;
+  }
+
+  static fromStopSubChain(pbRes: IStopSubChain): any {
+    let stopSubChainData = pbRes;
+    if (stopSubChainData) {
+      stopSubChainData = {
+        chainID: pbRes.chainID,
+        stopHeight: pbRes.stopHeight,
+        subChainAddress: pbRes.subChainAddress,
+      };
+    }
+    return stopSubChainData;
+  }
+
   static from(pbRes: any): IGetActionsResponse {
     const rawActions = pbRes.getActionsList();
     const res = {
@@ -793,16 +910,26 @@ export class GetActionsRequest {
       for (let i = 0; i < rawActions.length; i++) {
         let actionCore = rawActions[i].getCore();
         if (actionCore) {
+          let executionData = rawActions[i].getCore().getExecution();
+          if (executionData) {
+            executionData = {
+              amount: rawActions[i].getCore().getExecution().getAmount(),
+              contract: rawActions[i].getCore().getExecution().getContract(),
+              data: rawActions[i].getCore().getExecution().getData(),
+            };
+          }
+
+
           actionCore = {
             version: rawActions[i].getCore().getVersion(),
             nonce: rawActions[i].getCore().getNonce(),
             gasLimit: rawActions[i].getCore().getGaslimit(),
             gasPrice: rawActions[i].getCore().getGasprice(),
-            transfer: rawActions[i].getCore().getTransfer(),
-            vote: rawActions[i].getCore().getVote(),
-            execution: rawActions[i].getCore().getExecution(),
-            startSubChain: rawActions[i].getCore().getStartsubchain(),
-            stopSubChain: rawActions[i].getCore().getStopsubchain(),
+            transfer: this.fromTransfer(rawActions[i].getCore().getTransfer()),
+            vote: this.fromVote(rawActions[i].getCore().getVote()),
+            execution: this.fromExecution(rawActions[i].getCore().getExecution()),
+            startSubChain: this.fromStartSubChain(rawActions[i].getCore().getStartsubchain()),
+            stopSubChain: this.fromStopSubChain(rawActions[i].getCore().getStopsubchain()),
             putBlock: rawActions[i].getCore().getPutblock(),
             createDeposit: rawActions[i].getCore().getCreatedeposit(),
             settleDeposit: rawActions[i].getCore().getSettledeposit(),
