@@ -21,9 +21,10 @@ import type {
   ISendActionResponse,
   IEstimateGasForActionRequest,
   IEstimateGasForActionResponse,
+  IRpcMethod,
 } from './types';
 
-export default class RpcMethod {
+export default class RpcMethod implements IRpcMethod {
   client: any;
 
   constructor(hostname: string) {

@@ -919,7 +919,6 @@ export class GetActionsRequest {
             };
           }
 
-
           actionCore = {
             version: rawActions[i].getCore().getVersion(),
             nonce: rawActions[i].getCore().getNonce(),
@@ -1073,7 +1072,8 @@ export interface ISendActionRequest {
 }
 
 /** Properties of a SendActionResponse. */
-export interface ISendActionResponse {}
+export interface ISendActionResponse {
+}
 
 export class SendActionRequest {
   static to(req: ISendActionRequest): any {
@@ -1111,4 +1111,17 @@ export class EstimateGasForActionRequest {
   static from(pbRes: any): IEstimateGasForActionResponse {
     return {gas: pbRes.getGas()};
   }
+}
+
+export interface IRpcMethod {
+  constructor(hostname: string): void;
+  getAccount(req: IGetAccountRequest): Promise<IGetAccountResponse>;
+  getBlockMetas(req: IGetBlockMetasRequest): Promise<IGetBlockMetasResponse>;
+  getChainMeta(req: IGetChainMetaRequest): Promise<IGetChainMetaResponse>;
+  getActions(req: IGetActionsRequest): Promise<IGetActionsResponse>;
+  suggestGasPrice(req: ISuggestGasPriceRequest): Promise<ISuggestGasPriceResponse>;
+  getReceiptByAction(req: IGetReceiptByActionRequest): Promise<IGetReceiptByActionResponse>;
+  readContract(req: IReadContractRequest): Promise<IReadContractResponse>;
+  sendAction(req: ISendActionRequest): Promise<ISendActionResponse>;
+  estimateGasForAction(req: IEstimateGasForActionRequest): Promise<IEstimateGasForActionResponse>;
 }

@@ -16,7 +16,9 @@ import type {
   IGetActionsRequest,
   IGetActionsResponse,
   ISendActionRequest,
-  ISendActionResponse} from './types';
+  ISendActionResponse,
+  IRpcMethod, IGetReceiptByActionRequest, IGetReceiptByActionResponse,
+} from './types';
 
 import {
   GetAccountRequest,
@@ -28,7 +30,7 @@ import {
   GetActionsRequest, SendActionRequest,
 } from './types';
 
-export default class RpcMethod {
+export default class RpcMethod implements IRpcMethod {
   client: grpcWeb.APIServicePromiseClient;
 
   constructor(hostname: string) {
@@ -81,5 +83,10 @@ export default class RpcMethod {
     const pbReq = SendActionRequest.to(req);
     const pbResp = await this.client.sendAction(pbReq);
     return SendActionRequest.from(pbResp);
+  }
+
+  // $FlowFixMe
+  async getReceiptByAction(req: IGetReceiptByActionRequest): Promise<IGetReceiptByActionResponse> {
+    throw new Error('not implemented');
   }
 }
