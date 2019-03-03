@@ -1,26 +1,37 @@
 // @flow
-import account from 'eth-lib/lib/account';
-import type {IRpcMethod} from '../rpc-method/types';
-import {privateKeyToAccount} from '../crypto/crypto';
+import {makeSigner, privateKeyToAccount} from '../crypto/crypto';
+import {hash256b} from '../crypto/hash';
 
-interface IAccount {
+export interface IAccount {
   address: string;
   privateKey: string;
   publicKey: string;
+
+  sign(data: string | Buffer | Uint8Array): Buffer;
 }
 
-export class Accounts {
-  constructor(rpcMethod: IRpcMethod) {
+export class Account implements IAccount {
+  address: string;
+  privateKey: string;
+  publicKey: string;
 
+  static fromPrivateKey(privateKey: string): IAccount {
+    const obj = privateKeyToAccount(privateKey);
+    const act = new Account();
+    act.address = obj.address;
+    act.privateKey = obj.privateKey;
+    act.publicKey = obj.publicKey;
+    return act;
   }
 
-  create(entropy?: string): IAccount {
-    const acct = account.create(entropy);
-    const privateKey = acct.privateKey.substr(2);
-    return privateKeyToAccount(privateKey);
-  }
-
-  privateKeyToAccount(privateKey: string) {
-    return privateKeyToAccount(privateKey);
+  sign(bytes: string | Buffer | Uint8Array): Buffer {
+    const h = hash256b(bytes);
+    return Buffer.from(
+      makeSigner(0)(
+        h.toString('hex'),
+        this.privateKey,
+      ),
+      'hex'
+    );
   }
 }

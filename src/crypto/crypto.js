@@ -1,6 +1,8 @@
 // @flow
 import {Buffer} from 'global';
 import elliptic from 'elliptic';
+import {encodeSignature} from 'eth-lib/lib/account';
+import Bytes from 'eth-lib/lib/bytes';
 import {hash160b} from './hash';
 import {fromBytes} from './address';
 
@@ -19,3 +21,15 @@ export function privateKeyToAccount(privateKey: string) {
     privateKey,
   };
 }
+
+export const makeSigner = (addToV: number) => (hash: string, privateKey: string) => {
+  const signature = secp256k1
+    .keyFromPrivate(Buffer.from(privateKey, 'hex'))
+    .sign(Buffer.from(hash, 'hex'), {canonical: true});
+
+  const signed = encodeSignature([
+    Bytes.fromNumber(addToV + signature.recoveryParam),
+    Bytes.pad(32, Bytes.fromNat(`0x${ signature.r.toString(16)}`)),
+    Bytes.pad(32, Bytes.fromNat(`0x${ signature.s.toString(16)}`))]);
+  return signed.slice(2);
+};
