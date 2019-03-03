@@ -11,7 +11,7 @@ export function privateKeyToAccount(privateKey: string) {
   const ecKey = secp256k1.keyFromPrivate(buffer);
   const publicKey = ecKey.getPublic(false, 'hex');
   const publicKeyBytes = ecKey.getPublic(false, 'ByteArray');
-  const hashBytes = hash160b(Buffer.from(publicKeyBytes));
+  const hashBytes = hash160b((publicKeyBytes.slice(1)));
   const adObj = fromBytes(hashBytes);
   return {
     address: adObj.string(),

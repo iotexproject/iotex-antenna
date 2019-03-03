@@ -1,5 +1,5 @@
 // @flow
-import blake from 'blakejs';
+import {Keccak} from 'sha3';
 
 // Computes the BLAKE2B hash of a string or byte array, and returns a Uint8Array
 //
@@ -10,6 +10,8 @@ import blake from 'blakejs';
 // - key - optional key Uint8Array, up to 64 bytes
 // - outlen - optional output length in bytes, default 64
 export function hash160b(input: string | Buffer | Uint8Array): Uint8Array {
-  const digest = blake.blake2b(input, null, 32);
-  return digest.slice(7, 27);
+  const k = new Keccak(256);
+  k.update(Buffer.from(input));
+  const digest = k.digest();
+  return digest.slice(12);
 }
