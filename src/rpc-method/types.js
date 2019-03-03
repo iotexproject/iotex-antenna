@@ -705,6 +705,200 @@ export function toActionStopSubChain(req?: IStopSubChain): any {
   return pbStopSubChain;
 }
 
+export function toActionPutBlock(req?: IPutBlock): any {
+  let pbPutBlock = req;
+  if (req) {
+    const roots = req.roots;
+    if (req.roots && roots) {
+      for (let i = 0; i < req.roots.length; i++) {
+        const rootItem = req.roots && req.roots[i];
+        const mkroot = new actionPb.MerkleRoot();
+        mkroot.setName(rootItem.name);
+        mkroot.setValue(rootItem.value);
+        roots[i] = mkroot;
+      }
+    }
+    pbPutBlock = new actionPb.PutBlock();
+    pbPutBlock.setSubchainaddress(req.subChainAddress);
+    pbPutBlock.setHeight(req.height);
+    pbPutBlock.setRoots(roots);
+  }
+  return pbPutBlock;
+}
+
+export function toActionCreateDeposit(req?: ICreateDeposit): any {
+  let pbCreateDeposit = req;
+  if (req) {
+    pbCreateDeposit = new actionPb.CreateDeposit();
+    pbCreateDeposit.setChainid(req.chainID);
+    pbCreateDeposit.setAmount(req.amount);
+    pbCreateDeposit.setRecipient(req.recipient);
+  }
+  return pbCreateDeposit;
+}
+
+export function toActionSettleDeposit(req?: ISettleDeposit): any {
+  let pbSettleDeposit = req;
+  if (req) {
+    pbSettleDeposit = new actionPb.SettleDeposit();
+    pbSettleDeposit.setAmount(req.amount);
+    pbSettleDeposit.setRecipient(req.recipient);
+    pbSettleDeposit.setIndex(req.index);
+  }
+  return pbSettleDeposit;
+}
+
+export function toActionCreatePlumChain(req?: ICreatePlumChain): any {
+  let pbCreatePlumChain = req;
+  if (req) {
+    pbCreatePlumChain = new actionPb.CreatePlumChain();
+  }
+  return pbCreatePlumChain;
+}
+
+export function toActionTerminatePlumChain(req?: ITerminatePlumChain): any {
+  let pbTerminatePlumChain = req;
+  if (req) {
+    pbTerminatePlumChain = new actionPb.TerminatePlumChain();
+    pbTerminatePlumChain.setSubchainaddress(req.subChainAddress);
+  }
+  return pbTerminatePlumChain;
+}
+
+export function toActionPlumPutBlock(req?: IPlumPutBlock): any {
+  let pbPlumPutBlock = req;
+  if (req) {
+    pbPlumPutBlock = new actionPb.PlumPutBlock();
+    pbPlumPutBlock.setSubchainaddress(req.subChainAddress);
+    pbPlumPutBlock.setHeight(req.height);
+    pbPlumPutBlock.setRoots(req.roots);
+  }
+  return pbPlumPutBlock;
+}
+
+export function toActionPlumCreateDeposit(req?: IPlumCreateDeposit): any {
+  let pbPlumCreateDeposit = req;
+  if (req) {
+    pbPlumCreateDeposit = new actionPb.PlumCreateDeposit();
+    pbPlumCreateDeposit.setSubchainaddress(req.subChainAddress);
+    pbPlumCreateDeposit.setAmount(req.amount);
+    pbPlumCreateDeposit.setRecipient(req.recipient);
+  }
+  return pbPlumCreateDeposit;
+}
+
+export function toActionPlumStartExit(req?: IPlumStartExit): any {
+  let pbPlumStartExit = req;
+  if (req) {
+    pbPlumStartExit = new actionPb.PlumStartExit();
+    pbPlumStartExit.setSubchainaddress(req.subChainAddress);
+    pbPlumStartExit.setPrevioustransfer(req.previousTransfer);
+    pbPlumStartExit.setPrevioustransferblockproof(req.previousTransferBlockProof);
+    pbPlumStartExit.setPrevioustransferblockheight(req.previousTransferBlockHeight);
+    pbPlumStartExit.setExittransfer(req.exitTransfer);
+    pbPlumStartExit.setExittransferblockproof(req.exitTransferBlockProof);
+    pbPlumStartExit.setExittransferblockheight(req.exitTransferBlockHeight);
+  }
+  return pbPlumStartExit;
+}
+
+export function toActionPlumChallengeExit(req?: IPlumChallengeExit): any {
+  let pbPlumChallengeExit = req;
+  if (req) {
+    pbPlumChallengeExit = new actionPb.PlumChallengeExit();
+    pbPlumChallengeExit.setSubchainaddress(req.subChainAddress);
+    pbPlumChallengeExit.setCoinid(req.coinID);
+    pbPlumChallengeExit.setChallengetransfer(req.challengeTransfer);
+    pbPlumChallengeExit.setChallengetransferblockproof(req.challengeTransferBlockProof);
+    pbPlumChallengeExit.setChallengetransferblockheight(req.challengeTransferBlockHeight);
+  }
+  return pbPlumChallengeExit;
+}
+
+export function toActionPlumResponseChallengeExit(req?: IPlumResponseChallengeExit): any {
+  let pbPlumResponseChallengeExit = req;
+  if (req) {
+    pbPlumResponseChallengeExit = new actionPb.PlumResponseChallengeExit();
+    pbPlumResponseChallengeExit.setSubchainaddress(req.subChainAddress);
+    pbPlumResponseChallengeExit.setCoinid(req.coinID);
+    pbPlumResponseChallengeExit.setChallengetransfer(req.challengeTransfer);
+    pbPlumResponseChallengeExit.setResponsetransfer(req.responseTransfer);
+    pbPlumResponseChallengeExit.setResponsetransferblockproof(req.responseTransferBlockProof);
+  }
+  return pbPlumResponseChallengeExit;
+}
+
+export function toActionPlumFinalizeExit(req?: IPlumFinalizeExit): any {
+  let pbPlumFinalizeExit = req;
+  if (req) {
+    pbPlumFinalizeExit = new actionPb.PlumFinalizeExit();
+    pbPlumFinalizeExit.setSubchainaddress(req.subChainAddress);
+    pbPlumFinalizeExit.setCoinid(req.coinID);
+  }
+  return pbPlumFinalizeExit;
+}
+
+export function toActionPlumSettleDeposit(req?: IPlumSettleDeposit): any {
+  let pbPlumSettleDeposit = req;
+  if (req) {
+    pbPlumSettleDeposit = new actionPb.PlumSettleDeposit();
+    pbPlumSettleDeposit.setCoinid(req.coinID);
+  }
+  return pbPlumSettleDeposit;
+}
+
+export function toActionPlumTransfer(req?: IPlumTransfer): any {
+  let pbPlumTransfer = req;
+  if (req) {
+    pbPlumTransfer = new actionPb.PlumTransfer();
+    pbPlumTransfer.setCoinid(req.coinID);
+    pbPlumTransfer.setDenomination(req.denomination);
+    pbPlumTransfer.setOwner(req.owner);
+    pbPlumTransfer.setRecipient(req.recipient);
+  }
+  return pbPlumTransfer;
+}
+
+export function toActionDepositToRewardingFund(req?: IDepositToRewardingFund): any {
+  let pbDepositToRewardingFund = req;
+  if (req) {
+    pbDepositToRewardingFund = new actionPb.DepositToRewardingFund();
+    pbDepositToRewardingFund.setAmount(req.amount);
+    pbDepositToRewardingFund.setData(req.data);
+  }
+  return pbDepositToRewardingFund;
+}
+
+export function toActionClaimFromRewardingFund(req?: IClaimFromRewardingFund): any {
+  let pbClaimFromRewardingFund = req;
+  if (req) {
+    pbClaimFromRewardingFund = new actionPb.ClaimFromRewardingFund();
+    pbClaimFromRewardingFund.setAmount(req.amount);
+    pbClaimFromRewardingFund.setData(req.data);
+  }
+  return pbClaimFromRewardingFund;
+}
+
+export function toActionSetReward(req?: ISetReward): any {
+  let pbSetReward = req;
+  if (req) {
+    pbSetReward = new actionPb.SetReward();
+    pbSetReward.setAmount(req.amount);
+    pbSetReward.setData(req.data);
+    pbSetReward.setType(req.type);
+  }
+  return pbSetReward;
+}
+
+export function toActionGrantReward(req?: IGrantReward): any {
+  let pbGrantReward = req;
+  if (req) {
+    pbGrantReward = new actionPb.GrantReward();
+    pbGrantReward.setType(req.type);
+  }
+  return pbGrantReward;
+}
+
 export function toAction(req: IAction): any {
   const pbActionCore = new actionPb.ActionCore();
 
@@ -719,23 +913,23 @@ export function toAction(req: IAction): any {
     pbActionCore.setExecution(toActionExecution(core.execution));
     pbActionCore.setStartsubchain(toActionStartSubChain(core.startSubChain));
     pbActionCore.setStopsubchain(toActionStopSubChain(core.stopSubChain));
-    pbActionCore.setPutblock(core.putBlock);
-    pbActionCore.setCreatedeposit(core.createDeposit);
-    pbActionCore.setSettledeposit(core.settleDeposit);
-    pbActionCore.setCreateplumchain(core.createPlumChain);
-    pbActionCore.setTerminateplumchain(core.terminatePlumChain);
-    pbActionCore.setPlumputblock(core.plumPutBlock);
-    pbActionCore.setPlumcreatedeposit(core.plumCreateDeposit);
-    pbActionCore.setPlumstartexit(core.plumStartExit);
-    pbActionCore.setPlumchallengeexit(core.plumChallengeExit);
-    pbActionCore.setPlumresponsechallengeexit(core.plumResponseChallengeExit);
-    pbActionCore.setPlumfinalizeexit(core.plumFinalizeExit);
-    pbActionCore.setPlumsettledeposit(core.plumSettleDeposit);
-    pbActionCore.setPlumtransfer(core.plumTransfer);
-    pbActionCore.setDeposittorewardingfund(core.depositToRewardingFund);
-    pbActionCore.setClaimfromrewardingfund(core.claimFromRewardingFund);
-    pbActionCore.setSetreward(core.setReward);
-    pbActionCore.setGrantreward(core.grantReward);
+    pbActionCore.setPutblock(toActionPutBlock(core.putBlock));
+    pbActionCore.setCreatedeposit(toActionCreateDeposit(core.createDeposit));
+    pbActionCore.setSettledeposit(toActionSettleDeposit(core.settleDeposit));
+    pbActionCore.setCreateplumchain(toActionCreatePlumChain(core.createPlumChain));
+    pbActionCore.setTerminateplumchain(toActionTerminatePlumChain(core.terminatePlumChain));
+    pbActionCore.setPlumputblock(toActionPlumPutBlock(core.plumPutBlock));
+    pbActionCore.setPlumcreatedeposit(toActionPlumCreateDeposit(core.plumCreateDeposit));
+    pbActionCore.setPlumstartexit(toActionPlumStartExit(core.plumStartExit));
+    pbActionCore.setPlumchallengeexit(toActionPlumChallengeExit(core.plumChallengeExit));
+    pbActionCore.setPlumresponsechallengeexit(toActionPlumResponseChallengeExit(core.plumResponseChallengeExit));
+    pbActionCore.setPlumfinalizeexit(toActionPlumFinalizeExit(core.plumFinalizeExit));
+    pbActionCore.setPlumsettledeposit(toActionPlumSettleDeposit(core.plumSettleDeposit));
+    pbActionCore.setPlumtransfer(toActionPlumTransfer(core.plumTransfer));
+    pbActionCore.setDeposittorewardingfund(toActionDepositToRewardingFund(core.depositToRewardingFund));
+    pbActionCore.setClaimfromrewardingfund(toActionClaimFromRewardingFund(core.claimFromRewardingFund));
+    pbActionCore.setSetreward(toActionSetReward(core.setReward));
+    pbActionCore.setGrantreward(toActionGrantReward(core.grantReward));
   }
 
   const pbAction = new actionPb.Action();
@@ -900,6 +1094,216 @@ export class GetActionsRequest {
     return stopSubChainData;
   }
 
+  static fromPutBlock(pbRes: any): any {
+    let putBlockData = pbRes;
+    if (putBlockData) {
+      const rootsData = pbRes.roots;
+      if (rootsData) {
+        for (let i = 0; i < pbRes.roots.length; i++) {
+          rootsData[i] = {
+            name: pbRes.roots[i].name,
+            value: pbRes.roots[i].value,
+          };
+        }
+      }
+      putBlockData = {
+        subChainAddress: pbRes.subChainAddress,
+        height: pbRes.height,
+        roots: rootsData,
+      };
+    }
+    return putBlockData;
+  }
+
+  static fromCreateDeposit(pbRes: any): any {
+    let createDepositData = pbRes;
+    if (createDepositData) {
+      createDepositData = {
+        chainID: pbRes.chainID,
+        amount: pbRes.amount,
+        recipient: pbRes.recipient,
+      };
+    }
+    return createDepositData;
+  }
+
+  static fromSettleDeposit(pbRes: any): any {
+    let settleDepositData = pbRes;
+    if (settleDepositData) {
+      settleDepositData = {
+        amount: pbRes.amount,
+        recipient: pbRes.recipient,
+        index: pbRes.index,
+      };
+    }
+    return settleDepositData;
+  }
+
+  static fromCreatePlumChain(pbRes: any): any {
+    let createPlumChainData = pbRes;
+    if (createPlumChainData) {
+      createPlumChainData = {};
+    }
+    return createPlumChainData;
+  }
+
+  static fromTerminatePlumChain(pbRes: any): any {
+    let terminatePlumChainData = pbRes;
+    if (terminatePlumChainData) {
+      terminatePlumChainData = {
+        subChainAddress: pbRes.subChainAddress,
+      };
+    }
+    return terminatePlumChainData;
+  }
+
+  static fromPlumPutBlock(pbRes: any): any {
+    let plumPutBlockData = pbRes;
+    if (plumPutBlockData) {
+      plumPutBlockData = {
+        subChainAddress: pbRes.subChainAddress,
+        height: pbRes.height,
+        roots: pbRes.roots,
+      };
+    }
+    return plumPutBlockData;
+  }
+
+  static fromPlumCreateDeposit(pbRes: any): any {
+    let plumCreateDepositData = pbRes;
+    if (plumCreateDepositData) {
+      plumCreateDepositData = {
+        subChainAddress: pbRes.subChainAddress,
+        amount: pbRes.amount,
+        recipient: pbRes.recipient,
+      };
+    }
+    return plumCreateDepositData;
+  }
+
+  static fromPlumStartExit(pbRes: any): any {
+    let plumStartExitData = pbRes;
+    if (plumStartExitData) {
+      plumStartExitData = {
+        subChainAddress: pbRes.subChainAddress,
+        previousTransfer: pbRes.previousTransfer,
+        previousTransferBlockProof: pbRes.previousTransferBlockProof,
+        previousTransferBlockHeight: pbRes.previousTransferBlockHeight,
+        exitTransfer: pbRes.exitTransfer,
+        exitTransferBlockProof: pbRes.exitTransferBlockProof,
+        exitTransferBlockHeight: pbRes.exitTransferBlockHeight,
+      };
+    }
+    return plumStartExitData;
+  }
+
+  static fromPlumChallengeExit(pbRes: any): any {
+    let plumChallengeExitData = pbRes;
+    if (plumChallengeExitData) {
+      plumChallengeExitData = {
+        subChainAddress: pbRes.subChainAddress,
+        coinID: pbRes.coinID,
+        challengeTransfer: pbRes.challengeTransfer,
+        challengeTransferBlockProof: pbRes.challengeTransferBlockProof,
+        challengeTransferBlockHeight: pbRes.challengeTransferBlockHeight,
+      };
+    }
+    return plumChallengeExitData;
+  }
+
+  static fromPlumResponseChallengeExit(pbRes: any): any {
+    let plumResponseChallengeExitData = pbRes;
+    if (plumResponseChallengeExitData) {
+      plumResponseChallengeExitData = {
+        subChainAddress: pbRes.subChainAddress,
+        coinID: pbRes.coinID,
+        challengeTransfer: pbRes.challengeTransfer,
+        responseTransfer: pbRes.responseTransfer,
+        responseTransferBlockProof: pbRes.responseTransferBlockProof,
+        previousTransferBlockHeight: pbRes.previousTransferBlockHeight,
+      };
+    }
+    return plumResponseChallengeExitData;
+  }
+
+  static fromPlumFinalizeExit(pbRes: any): any {
+    let plumFinalizeExitData = pbRes;
+    if (plumFinalizeExitData) {
+      plumFinalizeExitData = {
+        subChainAddress: pbRes.subChainAddress,
+        coinID: pbRes.coinID,
+      };
+    }
+    return plumFinalizeExitData;
+  }
+
+  static fromPlumSettleDeposit(pbRes: any): any {
+    let plumSettleDepositData = pbRes;
+    if (plumSettleDepositData) {
+      plumSettleDepositData = {
+        coinID: pbRes.coinID,
+      };
+    }
+    return plumSettleDepositData;
+  }
+
+  static fromPlumTransfer(pbRes: any): any {
+    let plumTransferData = pbRes;
+    if (plumTransferData) {
+      plumTransferData = {
+        coinID: pbRes.coinID,
+        denomination: pbRes.denomination,
+        owner: pbRes.owner,
+        recipient: pbRes.recipient,
+      };
+    }
+    return plumTransferData;
+  }
+
+  static fromDepositToRewardingFund(pbRes: any): any {
+    let depositToRewardingFundData = pbRes;
+    if (depositToRewardingFundData) {
+      depositToRewardingFundData = {
+        amount: pbRes.amount,
+        data: pbRes.data,
+      };
+    }
+    return depositToRewardingFundData;
+  }
+
+  static fromClaimFromRewardingFund(pbRes: any): any {
+    let claimFromRewardingFundData = pbRes;
+    if (claimFromRewardingFundData) {
+      claimFromRewardingFundData = {
+        amount: pbRes.amount,
+        data: pbRes.data,
+      };
+    }
+    return claimFromRewardingFundData;
+  }
+
+  static fromSetReward(pbRes: any): any {
+    let setRewardData = pbRes;
+    if (setRewardData) {
+      setRewardData = {
+        amount: pbRes.amount,
+        data: pbRes.data,
+        type: pbRes.type,
+      };
+    }
+    return setRewardData;
+  }
+
+  static fromGrantReward(pbRes: any): any {
+    let grantRewardData = pbRes;
+    if (grantRewardData) {
+      grantRewardData = {
+        type: pbRes.type,
+      };
+    }
+    return grantRewardData;
+  }
+
   static from(pbRes: any): IGetActionsResponse {
     const rawActions = pbRes.getActionsList();
     const res = {
@@ -929,23 +1333,23 @@ export class GetActionsRequest {
             execution: this.fromExecution(rawActions[i].getCore().getExecution()),
             startSubChain: this.fromStartSubChain(rawActions[i].getCore().getStartsubchain()),
             stopSubChain: this.fromStopSubChain(rawActions[i].getCore().getStopsubchain()),
-            putBlock: rawActions[i].getCore().getPutblock(),
-            createDeposit: rawActions[i].getCore().getCreatedeposit(),
-            settleDeposit: rawActions[i].getCore().getSettledeposit(),
-            createPlumChain: rawActions[i].getCore().getCreateplumchain(),
-            terminatePlumChain: rawActions[i].getCore().getTerminateplumchain(),
-            plumPutBlock: rawActions[i].getCore().getPlumputblock(),
-            plumCreateDeposit: rawActions[i].getCore().getPlumcreatedeposit(),
-            plumStartExit: rawActions[i].getCore().getPlumstartexit(),
-            plumChallengeExit: rawActions[i].getCore().getPlumchallengeexit(),
-            plumResponseChallengeExit: rawActions[i].getCore().getPlumresponsechallengeexit(),
-            plumFinalizeExit: rawActions[i].getCore().getPlumfinalizeexit(),
-            plumSettleDeposit: rawActions[i].getCore().getPlumsettledeposit(),
-            plumTransfer: rawActions[i].getCore().getPlumtransfer(),
-            depositToRewardingFund: rawActions[i].getCore().getDeposittorewardingfund(),
-            claimFromRewardingFund: rawActions[i].getCore().getClaimfromrewardingfund(),
-            setReward: rawActions[i].getCore().getSetreward(),
-            grantReward: rawActions[i].getCore().getGrantreward(),
+            putBlock: this.fromPutBlock(rawActions[i].getCore().getPutblock()),
+            createDeposit: this.fromCreateDeposit(rawActions[i].getCore().getCreatedeposit()),
+            settleDeposit: this.fromSettleDeposit(rawActions[i].getCore().getSettledeposit()),
+            createPlumChain: this.fromCreatePlumChain(rawActions[i].getCore().getCreateplumchain()),
+            terminatePlumChain: this.fromTerminatePlumChain(rawActions[i].getCore().getTerminateplumchain()),
+            plumPutBlock: this.fromPlumPutBlock(rawActions[i].getCore().getPlumputblock()),
+            plumCreateDeposit: this.fromPlumCreateDeposit(rawActions[i].getCore().getPlumcreatedeposit()),
+            plumStartExit: this.fromPlumStartExit(rawActions[i].getCore().getPlumstartexit()),
+            plumChallengeExit: this.fromPlumChallengeExit(rawActions[i].getCore().getPlumchallengeexit()),
+            plumResponseChallengeExit: this.fromPlumResponseChallengeExit(rawActions[i].getCore().getPlumresponsechallengeexit()),
+            plumFinalizeExit: this.fromPlumFinalizeExit(rawActions[i].getCore().getPlumfinalizeexit()),
+            plumSettleDeposit: this.fromPlumSettleDeposit(rawActions[i].getCore().getPlumsettledeposit()),
+            plumTransfer: this.fromPlumTransfer(rawActions[i].getCore().getPlumtransfer()),
+            depositToRewardingFund: this.fromDepositToRewardingFund(rawActions[i].getCore().getDeposittorewardingfund()),
+            claimFromRewardingFund: this.fromClaimFromRewardingFund(rawActions[i].getCore().getClaimfromrewardingfund()),
+            setReward: this.fromSetReward(rawActions[i].getCore().getSetreward()),
+            grantReward: this.fromGrantReward(rawActions[i].getCore().getGrantreward()),
           };
         }
         parsedActions[i] = {
