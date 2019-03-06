@@ -256,7 +256,7 @@ rules:
   - global
   use-isnan: 2
   valid-jsdoc:
-  - 2
+  - 0
   - requireReturn: false
     requireParamDescription: false
   valid-typeof: 2
