@@ -1,10 +1,21 @@
 import test from 'ava';
 import {Buffer} from 'global';
-import {hash160b} from '../hash';
+import {hash160b, hash256b} from '../hash';
 
-const SAMPLE_STR = 'IoTeX is the auto-scalable and privacy-centric blockchain infrastructure for the Internet of Things (IoT).';
+const TEXT = 'IoTeX is the auto-scalable and privacy-centric blockchain.';
 
 test('hash160b', async t => {
-  const hash = hash160b(SAMPLE_STR);
-  t.deepEqual(Buffer.from(hash).toString('hex'), '7977cabf1bf30d5cf0f629ad7fc76316e4db80aa');
+  const hash = hash160b(Buffer.from(TEXT));
+  t.deepEqual(
+    Buffer.from(hash).toString('hex'),
+    '93988dc3d2d879f703c7d3f54dcc1b473b27d015',
+  );
+});
+
+test('hash256b', async t => {
+  const hash = hash256b(Buffer.from(TEXT));
+  t.deepEqual(
+    Buffer.from(hash).toString('hex'),
+    'aada23f93a5ed1829ebf1c0693988dc3d2d879f703c7d3f54dcc1b473b27d015',
+  );
 });
