@@ -1453,31 +1453,31 @@ export class GetReceiptByActionRequest {
   static from(pbRes: any): IGetReceiptByActionResponse {
     const receiptData = pbRes.getReceiptByAction();
     const res = {
-      receipt: receiptData
+      receipt: receiptData,
     };
     if (receiptData) {
+      const logsData = receiptData.getLogs();
       res.receipt = {
         returnValue: receiptData.getReturnValue(),
         status: receiptData.getStatus(),
         actHash: receiptData.getActHash(),
         gasConsumed: receiptData.getGasConsumed(),
         contractAddress: receiptData.getContractAddress(),
-        logs: receiptData.getLogs(),
+        logs: logsData,
       };
-
-      if (res.receipt.logs) {
-        const logsData = [];
+      if (logsData) {
+        const parsedLogsData = [];
         for (let i = 0; i < res.receipt.logs.length; i++) {
-          logsData[i] = {
-            address: res.receipt.logs[i].getAddress(),
-            topics: res.receipt.logs[i].getTopics(),
-            data: res.receipt.logs[i].getData(),
-            blockNumber: res.receipt.logs[i].getBlockNumber(),
-            txnHash: res.receipt.logs[i].getTxnHash(),
-            index: res.receipt.logs[i].getIndex(),
+          parsedLogsData[i] = {
+            address: logsData[i].getAddress(),
+            topics: logsData[i].getTopics(),
+            data: logsData[i].getData(),
+            blockNumber: logsData[i].getBlockNumber(),
+            txnHash: logsData[i].getTxnHash(),
+            index: logsData[i].getIndex(),
           };
         }
-        res.receipt.logs = logsData;
+        res.receipt.logs = parsedLogsData;
       }
     }
     return res;
