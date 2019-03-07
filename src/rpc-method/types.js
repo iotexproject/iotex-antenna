@@ -1441,6 +1441,49 @@ export interface IGetReceiptByActionResponse {
   receipt?: IReceipt | null,
 }
 
+export class GetReceiptByActionRequest {
+  static to(req: IGetReceiptByActionRequest): any {
+    const pbReq = new apiPb.GetReceiptByActionRequest();
+    if (req.actionHash) {
+      pbReq.setActionhash(req.actionHash);
+    }
+    return pbReq;
+  }
+
+  static from(pbRes: any): IGetReceiptByActionResponse {
+    const receiptData = pbRes.getReceiptByAction();
+    const res = {
+      receipt: receiptData
+    };
+    if (receiptData) {
+      res.receipt = {
+        returnValue: receiptData.getReturnValue(),
+        status: receiptData.getStatus(),
+        actHash: receiptData.getActHash(),
+        gasConsumed: receiptData.getGasConsumed(),
+        contractAddress: receiptData.getContractAddress(),
+        logs: receiptData.getLogs(),
+      };
+
+      if (res.receipt.logs) {
+        const logsData = [];
+        for (let i = 0; i < res.receipt.logs.length; i++) {
+          logsData[i] = {
+            address: res.receipt.logs[i].getAddress(),
+            topics: res.receipt.logs[i].getTopics(),
+            data: res.receipt.logs[i].getData(),
+            blockNumber: res.receipt.logs[i].getBlockNumber(),
+            txnHash: res.receipt.logs[i].getTxnHash(),
+            index: res.receipt.logs[i].getIndex(),
+          };
+        }
+        res.receipt.logs = logsData;
+      }
+    }
+    return res;
+  }
+}
+
 /** Properties of a ReadContractRequest. */
 export interface IReadContractRequest {
   /** ReadContractRequest action */
