@@ -1467,7 +1467,7 @@ export class GetReceiptByActionRequest {
       };
       if (logsData) {
         const parsedLogsData = [];
-        for (let i = 0; i < res.receipt.logs.length; i++) {
+        for (let i = 0; i < logsData.length; i++) {
           parsedLogsData[i] = {
             address: logsData[i].getAddress(),
             topics: logsData[i].getTopics(),
