@@ -36,7 +36,6 @@ goog.exportSymbol('proto.iotextypes.PutBlock', null, global);
 goog.exportSymbol('proto.iotextypes.PutPollResult', null, global);
 goog.exportSymbol('proto.iotextypes.Receipt', null, global);
 goog.exportSymbol('proto.iotextypes.RewardType', null, global);
-goog.exportSymbol('proto.iotextypes.SetReward', null, global);
 goog.exportSymbol('proto.iotextypes.SettleDeposit', null, global);
 goog.exportSymbol('proto.iotextypes.StartSubChain', null, global);
 goog.exportSymbol('proto.iotextypes.StopSubChain', null, global);
@@ -4884,7 +4883,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<!Array<number>>}
  * @const
  */
-proto.iotextypes.ActionCore.oneofGroups_ = [[10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,30,31,32,33,50]];
+proto.iotextypes.ActionCore.oneofGroups_ = [[10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,30,31,32,50]];
 
 /**
  * @enum {number}
@@ -4911,8 +4910,7 @@ proto.iotextypes.ActionCore.ActionCase = {
   PLUMTRANSFER: 27,
   DEPOSITTOREWARDINGFUND: 30,
   CLAIMFROMREWARDINGFUND: 31,
-  SETREWARD: 32,
-  GRANTREWARD: 33,
+  GRANTREWARD: 32,
   PUTPOLLRESULT: 50
 };
 
@@ -4976,7 +4974,6 @@ proto.iotextypes.ActionCore.toObject = function(includeInstance, msg) {
     plumtransfer: (f = msg.getPlumtransfer()) && proto.iotextypes.PlumTransfer.toObject(includeInstance, f),
     deposittorewardingfund: (f = msg.getDeposittorewardingfund()) && proto.iotextypes.DepositToRewardingFund.toObject(includeInstance, f),
     claimfromrewardingfund: (f = msg.getClaimfromrewardingfund()) && proto.iotextypes.ClaimFromRewardingFund.toObject(includeInstance, f),
-    setreward: (f = msg.getSetreward()) && proto.iotextypes.SetReward.toObject(includeInstance, f),
     grantreward: (f = msg.getGrantreward()) && proto.iotextypes.GrantReward.toObject(includeInstance, f),
     putpollresult: (f = msg.getPutpollresult()) && proto.iotextypes.PutPollResult.toObject(includeInstance, f)
   };
@@ -5132,11 +5129,6 @@ proto.iotextypes.ActionCore.deserializeBinaryFromReader = function(msg, reader) 
       msg.setClaimfromrewardingfund(value);
       break;
     case 32:
-      var value = new proto.iotextypes.SetReward;
-      reader.readMessage(value,proto.iotextypes.SetReward.deserializeBinaryFromReader);
-      msg.setSetreward(value);
-      break;
-    case 33:
       var value = new proto.iotextypes.GrantReward;
       reader.readMessage(value,proto.iotextypes.GrantReward.deserializeBinaryFromReader);
       msg.setGrantreward(value);
@@ -5363,18 +5355,10 @@ proto.iotextypes.ActionCore.serializeBinaryToWriter = function(message, writer) 
       proto.iotextypes.ClaimFromRewardingFund.serializeBinaryToWriter
     );
   }
-  f = message.getSetreward();
-  if (f != null) {
-    writer.writeMessage(
-      32,
-      f,
-      proto.iotextypes.SetReward.serializeBinaryToWriter
-    );
-  }
   f = message.getGrantreward();
   if (f != null) {
     writer.writeMessage(
-      33,
+      32,
       f,
       proto.iotextypes.GrantReward.serializeBinaryToWriter
     );
@@ -6051,48 +6035,18 @@ proto.iotextypes.ActionCore.prototype.hasClaimfromrewardingfund = function() {
 
 
 /**
- * optional SetReward setReward = 32;
- * @return {?proto.iotextypes.SetReward}
- */
-proto.iotextypes.ActionCore.prototype.getSetreward = function() {
-  return /** @type{?proto.iotextypes.SetReward} */ (
-    jspb.Message.getWrapperField(this, proto.iotextypes.SetReward, 32));
-};
-
-
-/** @param {?proto.iotextypes.SetReward|undefined} value */
-proto.iotextypes.ActionCore.prototype.setSetreward = function(value) {
-  jspb.Message.setOneofWrapperField(this, 32, proto.iotextypes.ActionCore.oneofGroups_[0], value);
-};
-
-
-proto.iotextypes.ActionCore.prototype.clearSetreward = function() {
-  this.setSetreward(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {!boolean}
- */
-proto.iotextypes.ActionCore.prototype.hasSetreward = function() {
-  return jspb.Message.getField(this, 32) != null;
-};
-
-
-/**
- * optional GrantReward grantReward = 33;
+ * optional GrantReward grantReward = 32;
  * @return {?proto.iotextypes.GrantReward}
  */
 proto.iotextypes.ActionCore.prototype.getGrantreward = function() {
   return /** @type{?proto.iotextypes.GrantReward} */ (
-    jspb.Message.getWrapperField(this, proto.iotextypes.GrantReward, 33));
+    jspb.Message.getWrapperField(this, proto.iotextypes.GrantReward, 32));
 };
 
 
 /** @param {?proto.iotextypes.GrantReward|undefined} value */
 proto.iotextypes.ActionCore.prototype.setGrantreward = function(value) {
-  jspb.Message.setOneofWrapperField(this, 33, proto.iotextypes.ActionCore.oneofGroups_[0], value);
+  jspb.Message.setOneofWrapperField(this, 32, proto.iotextypes.ActionCore.oneofGroups_[0], value);
 };
 
 
@@ -6106,7 +6060,7 @@ proto.iotextypes.ActionCore.prototype.clearGrantreward = function() {
  * @return {!boolean}
  */
 proto.iotextypes.ActionCore.prototype.hasGrantreward = function() {
-  return jspb.Message.getField(this, 33) != null;
+  return jspb.Message.getField(this, 32) != null;
 };
 
 
@@ -7505,226 +7459,6 @@ proto.iotextypes.ClaimFromRewardingFund.prototype.getData_asU8 = function() {
 /** @param {!(string|Uint8Array)} value */
 proto.iotextypes.ClaimFromRewardingFund.prototype.setData = function(value) {
   jspb.Message.setProto3BytesField(this, 2, value);
-};
-
-
-
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
-proto.iotextypes.SetReward = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
-};
-goog.inherits(proto.iotextypes.SetReward, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  proto.iotextypes.SetReward.displayName = 'proto.iotextypes.SetReward';
-}
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto suitable for use in Soy templates.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
- * @return {!Object}
- */
-proto.iotextypes.SetReward.prototype.toObject = function(opt_includeInstance) {
-  return proto.iotextypes.SetReward.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.iotextypes.SetReward} msg The msg instance to transform.
- * @return {!Object}
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.iotextypes.SetReward.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    amount: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    data: msg.getData_asB64(),
-    type: jspb.Message.getFieldWithDefault(msg, 3, 0)
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
-}
-
-
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.iotextypes.SetReward}
- */
-proto.iotextypes.SetReward.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotextypes.SetReward;
-  return proto.iotextypes.SetReward.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.iotextypes.SetReward} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.iotextypes.SetReward}
- */
-proto.iotextypes.SetReward.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setAmount(value);
-      break;
-    case 2:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setData(value);
-      break;
-    case 3:
-      var value = /** @type {!proto.iotextypes.RewardType} */ (reader.readEnum());
-      msg.setType(value);
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.iotextypes.SetReward.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  proto.iotextypes.SetReward.serializeBinaryToWriter(this, writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the given message to binary data (in protobuf wire
- * format), writing to the given BinaryWriter.
- * @param {!proto.iotextypes.SetReward} message
- * @param {!jspb.BinaryWriter} writer
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.iotextypes.SetReward.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
-  f = message.getAmount();
-  if (f.length > 0) {
-    writer.writeString(
-      1,
-      f
-    );
-  }
-  f = message.getData_asU8();
-  if (f.length > 0) {
-    writer.writeBytes(
-      2,
-      f
-    );
-  }
-  f = message.getType();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      3,
-      f
-    );
-  }
-};
-
-
-/**
- * optional string amount = 1;
- * @return {string}
- */
-proto.iotextypes.SetReward.prototype.getAmount = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
-};
-
-
-/** @param {string} value */
-proto.iotextypes.SetReward.prototype.setAmount = function(value) {
-  jspb.Message.setProto3StringField(this, 1, value);
-};
-
-
-/**
- * optional bytes data = 2;
- * @return {string}
- */
-proto.iotextypes.SetReward.prototype.getData = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * optional bytes data = 2;
- * This is a type-conversion wrapper around `getData()`
- * @return {string}
- */
-proto.iotextypes.SetReward.prototype.getData_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getData()));
-};
-
-
-/**
- * optional bytes data = 2;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getData()`
- * @return {!Uint8Array}
- */
-proto.iotextypes.SetReward.prototype.getData_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getData()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
-proto.iotextypes.SetReward.prototype.setData = function(value) {
-  jspb.Message.setProto3BytesField(this, 2, value);
-};
-
-
-/**
- * optional RewardType type = 3;
- * @return {!proto.iotextypes.RewardType}
- */
-proto.iotextypes.SetReward.prototype.getType = function() {
-  return /** @type {!proto.iotextypes.RewardType} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
-};
-
-
-/** @param {!proto.iotextypes.RewardType} value */
-proto.iotextypes.SetReward.prototype.setType = function(value) {
-  jspb.Message.setProto3EnumField(this, 3, value);
 };
 
 
