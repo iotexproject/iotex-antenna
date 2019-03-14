@@ -119,7 +119,6 @@ test('RpcMethod.getChainMeta', async t => {
   const client = new RpcMethod('http://35.230.103.170:10000');
   const resp = await client.getChainMeta({});
   t.truthy(resp, resp && resp.chainMeta);
-  t.deepEqual(resp.chainMeta.supply, '10000000000000000000000000000');
 });
 
 test('RpcMethod.estimateGasForAction', async t => {

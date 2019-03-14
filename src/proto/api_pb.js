@@ -13,6 +13,7 @@ var global = Function('return this')();
 
 var action_pb = require('./action_pb.js');
 var blockchain_pb = require('./blockchain_pb.js');
+var node_pb = require('./node_pb.js');
 goog.exportSymbol('proto.iotexapi.EstimateGasForActionRequest', null, global);
 goog.exportSymbol('proto.iotexapi.EstimateGasForActionResponse', null, global);
 goog.exportSymbol('proto.iotexapi.GetAccountRequest', null, global);
@@ -29,8 +30,12 @@ goog.exportSymbol('proto.iotexapi.GetBlockMetasRequest', null, global);
 goog.exportSymbol('proto.iotexapi.GetBlockMetasResponse', null, global);
 goog.exportSymbol('proto.iotexapi.GetChainMetaRequest', null, global);
 goog.exportSymbol('proto.iotexapi.GetChainMetaResponse', null, global);
+goog.exportSymbol('proto.iotexapi.GetProductivityRequest', null, global);
+goog.exportSymbol('proto.iotexapi.GetProductivityResponse', null, global);
 goog.exportSymbol('proto.iotexapi.GetReceiptByActionRequest', null, global);
 goog.exportSymbol('proto.iotexapi.GetReceiptByActionResponse', null, global);
+goog.exportSymbol('proto.iotexapi.GetServerMetaRequest', null, global);
+goog.exportSymbol('proto.iotexapi.GetServerMetaResponse', null, global);
 goog.exportSymbol('proto.iotexapi.GetUnconfirmedActionsByAddressRequest', null, global);
 goog.exportSymbol('proto.iotexapi.ReadContractRequest', null, global);
 goog.exportSymbol('proto.iotexapi.ReadContractResponse', null, global);
@@ -2795,6 +2800,281 @@ proto.iotexapi.GetChainMetaResponse.prototype.hasChainmeta = function() {
  * @extends {jspb.Message}
  * @constructor
  */
+proto.iotexapi.GetServerMetaRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.iotexapi.GetServerMetaRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.iotexapi.GetServerMetaRequest.displayName = 'proto.iotexapi.GetServerMetaRequest';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetServerMetaRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetServerMetaRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetServerMetaRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetServerMetaRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.iotexapi.GetServerMetaRequest}
+ */
+proto.iotexapi.GetServerMetaRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.iotexapi.GetServerMetaRequest;
+  return proto.iotexapi.GetServerMetaRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.iotexapi.GetServerMetaRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.iotexapi.GetServerMetaRequest}
+ */
+proto.iotexapi.GetServerMetaRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.iotexapi.GetServerMetaRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.iotexapi.GetServerMetaRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.iotexapi.GetServerMetaRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetServerMetaRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.iotexapi.GetServerMetaResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.iotexapi.GetServerMetaResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.iotexapi.GetServerMetaResponse.displayName = 'proto.iotexapi.GetServerMetaResponse';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetServerMetaResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetServerMetaResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetServerMetaResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetServerMetaResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    servermeta: (f = msg.getServermeta()) && node_pb.ServerMeta.toObject(includeInstance, f)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.iotexapi.GetServerMetaResponse}
+ */
+proto.iotexapi.GetServerMetaResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.iotexapi.GetServerMetaResponse;
+  return proto.iotexapi.GetServerMetaResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.iotexapi.GetServerMetaResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.iotexapi.GetServerMetaResponse}
+ */
+proto.iotexapi.GetServerMetaResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new node_pb.ServerMeta;
+      reader.readMessage(value,node_pb.ServerMeta.deserializeBinaryFromReader);
+      msg.setServermeta(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.iotexapi.GetServerMetaResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.iotexapi.GetServerMetaResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.iotexapi.GetServerMetaResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetServerMetaResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getServermeta();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      node_pb.ServerMeta.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional iotextypes.ServerMeta serverMeta = 1;
+ * @return {?proto.iotextypes.ServerMeta}
+ */
+proto.iotexapi.GetServerMetaResponse.prototype.getServermeta = function() {
+  return /** @type{?proto.iotextypes.ServerMeta} */ (
+    jspb.Message.getWrapperField(this, node_pb.ServerMeta, 1));
+};
+
+
+/** @param {?proto.iotextypes.ServerMeta|undefined} value */
+proto.iotexapi.GetServerMetaResponse.prototype.setServermeta = function(value) {
+  jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+proto.iotexapi.GetServerMetaResponse.prototype.clearServermeta = function() {
+  this.setServermeta(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.iotexapi.GetServerMetaResponse.prototype.hasServermeta = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
 proto.iotexapi.SendActionRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
@@ -4672,6 +4952,319 @@ proto.iotexapi.ReadStateResponse.prototype.getData_asU8 = function() {
 /** @param {!(string|Uint8Array)} value */
 proto.iotexapi.ReadStateResponse.prototype.setData = function(value) {
   jspb.Message.setProto3BytesField(this, 1, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.iotexapi.GetProductivityRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.iotexapi.GetProductivityRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.iotexapi.GetProductivityRequest.displayName = 'proto.iotexapi.GetProductivityRequest';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetProductivityRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetProductivityRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetProductivityRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetProductivityRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    epochnumber: jspb.Message.getFieldWithDefault(msg, 1, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.iotexapi.GetProductivityRequest}
+ */
+proto.iotexapi.GetProductivityRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.iotexapi.GetProductivityRequest;
+  return proto.iotexapi.GetProductivityRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.iotexapi.GetProductivityRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.iotexapi.GetProductivityRequest}
+ */
+proto.iotexapi.GetProductivityRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setEpochnumber(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.iotexapi.GetProductivityRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.iotexapi.GetProductivityRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.iotexapi.GetProductivityRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetProductivityRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getEpochnumber();
+  if (f !== 0) {
+    writer.writeUint64(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional uint64 epochNumber = 1;
+ * @return {number}
+ */
+proto.iotexapi.GetProductivityRequest.prototype.getEpochnumber = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/** @param {number} value */
+proto.iotexapi.GetProductivityRequest.prototype.setEpochnumber = function(value) {
+  jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.iotexapi.GetProductivityResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.iotexapi.GetProductivityResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.iotexapi.GetProductivityResponse.displayName = 'proto.iotexapi.GetProductivityResponse';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetProductivityResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetProductivityResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetProductivityResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetProductivityResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    totalblks: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    blksperdelegateMap: (f = msg.getBlksperdelegateMap()) ? f.toObject(includeInstance, undefined) : []
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.iotexapi.GetProductivityResponse}
+ */
+proto.iotexapi.GetProductivityResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.iotexapi.GetProductivityResponse;
+  return proto.iotexapi.GetProductivityResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.iotexapi.GetProductivityResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.iotexapi.GetProductivityResponse}
+ */
+proto.iotexapi.GetProductivityResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setTotalblks(value);
+      break;
+    case 2:
+      var value = msg.getBlksperdelegateMap();
+      reader.readMessage(value, function(message, reader) {
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readUint64, null, "");
+         });
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.iotexapi.GetProductivityResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.iotexapi.GetProductivityResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.iotexapi.GetProductivityResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetProductivityResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTotalblks();
+  if (f !== 0) {
+    writer.writeUint64(
+      1,
+      f
+    );
+  }
+  f = message.getBlksperdelegateMap(true);
+  if (f && f.getLength() > 0) {
+    f.serializeBinary(2, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeUint64);
+  }
+};
+
+
+/**
+ * optional uint64 totalBlks = 1;
+ * @return {number}
+ */
+proto.iotexapi.GetProductivityResponse.prototype.getTotalblks = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/** @param {number} value */
+proto.iotexapi.GetProductivityResponse.prototype.setTotalblks = function(value) {
+  jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * map<string, uint64> blksPerDelegate = 2;
+ * @param {boolean=} opt_noLazyCreate Do not create the map if
+ * empty, instead returning `undefined`
+ * @return {!jspb.Map<string,number>}
+ */
+proto.iotexapi.GetProductivityResponse.prototype.getBlksperdelegateMap = function(opt_noLazyCreate) {
+  return /** @type {!jspb.Map<string,number>} */ (
+      jspb.Message.getMapField(this, 2, opt_noLazyCreate,
+      null));
+};
+
+
+proto.iotexapi.GetProductivityResponse.prototype.clearBlksperdelegateMap = function() {
+  this.getBlksperdelegateMap().clear();
 };
 
 

@@ -1528,9 +1528,8 @@ proto.iotextypes.ChainMeta.prototype.toObject = function(opt_includeInstance) {
 proto.iotextypes.ChainMeta.toObject = function(includeInstance, msg) {
   var f, obj = {
     height: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    supply: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    numactions: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    tps: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    numactions: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    tps: jspb.Message.getFieldWithDefault(msg, 3, 0),
     epoch: (f = msg.getEpoch()) && proto.iotextypes.EpochData.toObject(includeInstance, f)
   };
 
@@ -1573,18 +1572,14 @@ proto.iotextypes.ChainMeta.deserializeBinaryFromReader = function(msg, reader) {
       msg.setHeight(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setSupply(value);
-      break;
-    case 3:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setNumactions(value);
       break;
-    case 4:
+    case 3:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setTps(value);
       break;
-    case 5:
+    case 4:
       var value = new proto.iotextypes.EpochData;
       reader.readMessage(value,proto.iotextypes.EpochData.deserializeBinaryFromReader);
       msg.setEpoch(value);
@@ -1625,31 +1620,24 @@ proto.iotextypes.ChainMeta.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getSupply();
-  if (f.length > 0) {
-    writer.writeString(
-      2,
-      f
-    );
-  }
   f = message.getNumactions();
   if (f !== 0) {
     writer.writeInt64(
-      3,
+      2,
       f
     );
   }
   f = message.getTps();
   if (f !== 0) {
     writer.writeInt64(
-      4,
+      3,
       f
     );
   }
   f = message.getEpoch();
   if (f != null) {
     writer.writeMessage(
-      5,
+      4,
       f,
       proto.iotextypes.EpochData.serializeBinaryToWriter
     );
@@ -1673,63 +1661,48 @@ proto.iotextypes.ChainMeta.prototype.setHeight = function(value) {
 
 
 /**
- * optional string supply = 2;
- * @return {string}
- */
-proto.iotextypes.ChainMeta.prototype.getSupply = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/** @param {string} value */
-proto.iotextypes.ChainMeta.prototype.setSupply = function(value) {
-  jspb.Message.setProto3StringField(this, 2, value);
-};
-
-
-/**
- * optional int64 numActions = 3;
+ * optional int64 numActions = 2;
  * @return {number}
  */
 proto.iotextypes.ChainMeta.prototype.getNumactions = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
 
 /** @param {number} value */
 proto.iotextypes.ChainMeta.prototype.setNumactions = function(value) {
-  jspb.Message.setProto3IntField(this, 3, value);
+  jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
 /**
- * optional int64 tps = 4;
+ * optional int64 tps = 3;
  * @return {number}
  */
 proto.iotextypes.ChainMeta.prototype.getTps = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
 /** @param {number} value */
 proto.iotextypes.ChainMeta.prototype.setTps = function(value) {
-  jspb.Message.setProto3IntField(this, 4, value);
+  jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
 /**
- * optional EpochData epoch = 5;
+ * optional EpochData epoch = 4;
  * @return {?proto.iotextypes.EpochData}
  */
 proto.iotextypes.ChainMeta.prototype.getEpoch = function() {
   return /** @type{?proto.iotextypes.EpochData} */ (
-    jspb.Message.getWrapperField(this, proto.iotextypes.EpochData, 5));
+    jspb.Message.getWrapperField(this, proto.iotextypes.EpochData, 4));
 };
 
 
 /** @param {?proto.iotextypes.EpochData|undefined} value */
 proto.iotextypes.ChainMeta.prototype.setEpoch = function(value) {
-  jspb.Message.setWrapperField(this, 5, value);
+  jspb.Message.setWrapperField(this, 4, value);
 };
 
 
@@ -1743,7 +1716,7 @@ proto.iotextypes.ChainMeta.prototype.clearEpoch = function() {
  * @return {!boolean}
  */
 proto.iotextypes.ChainMeta.prototype.hasEpoch = function() {
-  return jspb.Message.getField(this, 5) != null;
+  return jspb.Message.getField(this, 4) != null;
 };
 
 

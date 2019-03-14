@@ -5,17 +5,16 @@
 // License 2.0 that can be found in the LICENSE file.
 
 // To compile the proto, run:
-//      protoc --go_out=plugins=grpc:. *.proto
+//      protoc --go_out=plugins=grpc:$GOPATH/src *.proto
 syntax = "proto3";
-package accountpb;
+package iotextypes;
+option go_package = "github.com/iotexproject/iotex-core/protogen/iotextypes";
 
-message Account {
-  // used by state-based model
-  uint64 nonce  = 1;
-  string balance  = 2;
-  bytes root  = 3;
-  bytes codeHash  = 4;
-  bool isCandidate = 5;
-  bytes votingWeight  = 6;
-  string votee = 7;
+ // Server Metadata
+message ServerMeta {
+    string packageVersion = 1;
+    string packageCommitID = 2;
+    string gitStatus = 3;
+    string goVersion = 4;
+    string buidTime = 5;
 }
