@@ -1,6 +1,6 @@
 {
   "name": "iotex-antenna",
-  "version": "1.2.0",
+  "version": "0.2.0",
   "description": "field_description",
   "main": "index.js",
   "files": [
@@ -88,7 +88,6 @@
     "node": "10.15.3",
     "npm": "6.9.0"
   },
-  "private": true,
   "dependencies": {
     "@grpc/proto-loader": "0.4.0",
     "bech32": "1.1.3",
