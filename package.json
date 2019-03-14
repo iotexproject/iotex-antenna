@@ -4,7 +4,7 @@
   "description": "field_description",
   "main": "index.js",
   "files": [
-    "dist"
+    "lib"
   ],
   "scripts": {
     "test": "npm run flow && npm run cover",
@@ -15,10 +15,10 @@
     "cover": "NODE_ENV=test npm run lint && nyc npm run ava",
     "flow": "flow stop && flow",
     "flow-install": "flow-typed install",
-    "size": "ls -lh dist/",
+    "size": "ls -lh lib/",
     "bp": "npm run build && npm run size",
-    "build": "rm -rf ./dist && babel src/ --ignore **/__test__/**,src/**/**.test.js -d dist --copy-files",
-    "build:watch": "babel --watch src/**/*.js -d dist",
+    "build": "rm -rf ./lib && babel src/ --ignore **/__test__/**,src/**/**.test.js -d lib --copy-files",
+    "build:watch": "babel --watch src/**/*.js -d lib",
     "build-proto": "protoc -I=./src/proto/ api.proto action.proto blockchain.proto endorsement.proto account.proto node.proto --js_out=import_style=commonjs:./src/proto/ && protoc -I=./src/proto/ api.proto action.proto blockchain.proto endorsement.proto account.proto node.proto --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./src/proto/",
     "changelog-major": "build-changelog --major",
     "changelog-minor": "build-changelog --minor",
