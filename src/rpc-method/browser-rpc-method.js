@@ -28,6 +28,7 @@ import {
   EstimateGasForActionRequest,
   ReadContractRequest,
   GetActionsRequest, SendActionRequest,
+  GetReceiptByActionRequest,
 } from './types';
 
 export default class RpcMethod implements IRpcMethod {
@@ -85,8 +86,9 @@ export default class RpcMethod implements IRpcMethod {
     return SendActionRequest.from(pbResp);
   }
 
-  // $FlowFixMe
   async getReceiptByAction(req: IGetReceiptByActionRequest): Promise<IGetReceiptByActionResponse> {
-    throw new Error('not implemented');
+    const pbReq = GetReceiptByActionRequest.to(req);
+    const pbResp = await this.client.getReceiptByAction(pbReq);
+    return GetReceiptByActionRequest.from(pbResp);
   }
 }

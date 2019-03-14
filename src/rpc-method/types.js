@@ -1441,6 +1441,49 @@ export interface IGetReceiptByActionResponse {
   receipt?: IReceipt | null,
 }
 
+export class GetReceiptByActionRequest {
+  static to(req: IGetReceiptByActionRequest): any {
+    const pbReq = new apiPb.GetReceiptByActionRequest();
+    if (req.actionHash) {
+      pbReq.setActionhash(req.actionHash);
+    }
+    return pbReq;
+  }
+
+  static from(pbRes: any): IGetReceiptByActionResponse {
+    const receiptData = pbRes.getReceiptByAction();
+    const res = {
+      receipt: receiptData,
+    };
+    if (receiptData) {
+      const logsData = receiptData.getLogs();
+      res.receipt = {
+        returnValue: receiptData.getReturnValue(),
+        status: receiptData.getStatus(),
+        actHash: receiptData.getActHash(),
+        gasConsumed: receiptData.getGasConsumed(),
+        contractAddress: receiptData.getContractAddress(),
+        logs: logsData,
+      };
+      if (logsData) {
+        const parsedLogsData = [];
+        for (let i = 0; i < logsData.length; i++) {
+          parsedLogsData[i] = {
+            address: logsData[i].getAddress(),
+            topics: logsData[i].getTopics(),
+            data: logsData[i].getData(),
+            blockNumber: logsData[i].getBlockNumber(),
+            txnHash: logsData[i].getTxnHash(),
+            index: logsData[i].getIndex(),
+          };
+        }
+        res.receipt.logs = parsedLogsData;
+      }
+    }
+    return res;
+  }
+}
+
 /** Properties of a ReadContractRequest. */
 export interface IReadContractRequest {
   /** ReadContractRequest action */
