@@ -72,7 +72,6 @@ export interface IEpochData {
 
 export interface IChainMeta {
   height?: string | null,
-  supply?: string | null,
   numActions?: string | null,
   tps?: string | null,
   epoch?: IEpochData | null,
@@ -99,7 +98,6 @@ export class GetChainMetaRequest {
       const epochData = meta.Epoch;
       res.chainMeta = {
         height: meta.getHeight(),
-        supply: meta.getSupply(),
         numActions: meta.getNumactions(),
         tps: meta.getTps(),
         epoch: epochData,
@@ -928,7 +926,6 @@ export function toAction(req: IAction): any {
     pbActionCore.setPlumtransfer(toActionPlumTransfer(core.plumTransfer));
     pbActionCore.setDeposittorewardingfund(toActionDepositToRewardingFund(core.depositToRewardingFund));
     pbActionCore.setClaimfromrewardingfund(toActionClaimFromRewardingFund(core.claimFromRewardingFund));
-    pbActionCore.setSetreward(toActionSetReward(core.setReward));
     pbActionCore.setGrantreward(toActionGrantReward(core.grantReward));
   }
 
@@ -1348,7 +1345,6 @@ export class GetActionsRequest {
             plumTransfer: this.fromPlumTransfer(rawActions[i].getCore().getPlumtransfer()),
             depositToRewardingFund: this.fromDepositToRewardingFund(rawActions[i].getCore().getDeposittorewardingfund()),
             claimFromRewardingFund: this.fromClaimFromRewardingFund(rawActions[i].getCore().getClaimfromrewardingfund()),
-            setReward: this.fromSetReward(rawActions[i].getCore().getSetreward()),
             grantReward: this.fromGrantReward(rawActions[i].getCore().getGrantreward()),
           };
         }

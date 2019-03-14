@@ -19,7 +19,7 @@
     "bp": "npm run build && npm run size",
     "build": "rm -rf ./dist && babel src/ --ignore **/__test__/**,src/**/**.test.js -d dist",
     "build:watch": "babel --watch src/**/*.js -d dist",
-    "build-proto": "protoc -I=./src/proto/ api.proto action.proto blockchain.proto endorsement.proto account.proto --js_out=import_style=commonjs:./src/proto/ && protoc -I=./src/proto/ api.proto action.proto blockchain.proto endorsement.proto account.proto --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./src/proto/",
+    "build-proto": "protoc -I=./src/proto/ api.proto action.proto blockchain.proto endorsement.proto account.proto node.proto --js_out=import_style=commonjs:./src/proto/ && protoc -I=./src/proto/ api.proto action.proto blockchain.proto endorsement.proto account.proto node.proto --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./src/proto/",
     "changelog-major": "build-changelog --major",
     "changelog-minor": "build-changelog --minor",
     "changelog-patch": "build-changelog --patch"
