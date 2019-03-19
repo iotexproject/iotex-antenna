@@ -1,6 +1,5 @@
-// @flow
-import {makeSigner, privateKeyToAccount} from '../crypto/crypto';
-import {hash256b} from '../crypto/hash';
+import { makeSigner, privateKeyToAccount } from "../crypto/crypto";
+import { hash256b } from "../crypto/hash";
 
 export interface IAccount {
   address: string;
@@ -11,11 +10,11 @@ export interface IAccount {
 }
 
 export class Account implements IAccount {
-  address: string;
-  privateKey: string;
-  publicKey: string;
+  public address: string;
+  public privateKey: string;
+  public publicKey: string;
 
-  static fromPrivateKey(privateKey: string): IAccount {
+  public static fromPrivateKey(privateKey: string): IAccount {
     const obj = privateKeyToAccount(privateKey);
     const act = new Account();
     act.address = obj.address;
@@ -24,14 +23,11 @@ export class Account implements IAccount {
     return act;
   }
 
-  sign(bytes: string | Buffer | Uint8Array): Buffer {
+  public sign(bytes: string | Buffer | Uint8Array): Buffer {
     const h = hash256b(bytes);
     return Buffer.from(
-      makeSigner(0)(
-        h.toString('hex'),
-        this.privateKey,
-      ),
-      'hex'
+      makeSigner(0)(h.toString("hex"), this.privateKey),
+      "hex"
     );
   }
 }

@@ -1,5 +1,5 @@
-// @flow
-import {Keccak} from 'sha3';
+// @ts-ignore
+import { Keccak } from "sha3";
 
 // Computes the BLAKE2B hash of a string or byte array, and returns a Uint8Array
 //
@@ -16,6 +16,7 @@ export function hash160b(input: string | Buffer | Uint8Array): Buffer {
 
 export function hash256b(input: string | Buffer | Uint8Array): Buffer {
   const k = new Keccak(256);
+  // @ts-ignore
   k.update(Buffer.from(input));
   return k.digest();
 }

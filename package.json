@@ -7,29 +7,29 @@
     "lib"
   ],
   "scripts": {
-    "test": "npm run flow && npm run cover",
+    "test": "npm run cover",
     "check-coverage": "nyc check-coverage --lines 65 --functions 60 --Statements 65",
     "ava": "NODE_ENV=test ava",
     "server": "node server",
-    "lint": "eslint . --fix",
-    "cover": "NODE_ENV=test npm run lint && nyc npm run ava",
-    "flow": "flow stop && flow",
-    "flow-install": "flow-typed install",
+    "lint": "tslint --fix --project tsconfig.json -t stylish",
+    "qualitycheck": "npm-run-all typecheck tslint",
+    "cover": "tsc && NODE_ENV=test npm run lint && nyc npm run ava",
     "size": "ls -lh lib/",
     "bp": "npm run build && npm run size",
-    "build": "rm -rf ./lib && babel src/ --ignore **/__test__/**,src/**/**.test.js -d lib --copy-files",
-    "build:watch": "babel --watch src/**/*.js -d lib",
-    "build-proto": "protoc -I=./src/proto/ api.proto action.proto blockchain.proto endorsement.proto account.proto node.proto --js_out=import_style=commonjs:./src/proto/ && protoc -I=./src/proto/ api.proto action.proto blockchain.proto endorsement.proto account.proto node.proto --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./src/proto/",
+    "build:js": "rm -rf ./lib && babel src/ --source-maps inline --extensions \".ts,.tsx,.js,.jsx\" --ignore **/__test__/**,src/**/**.test.ts -d lib --copy-files",
+    "build:watch": "babel --watch src/**/*.ts -d lib",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build": "npm run build:js && npm run build:types",
     "changelog-major": "build-changelog --major",
     "changelog-minor": "build-changelog --minor",
     "changelog-patch": "build-changelog --patch"
   },
   "nyc": {
     "include": [
-      "src/**/*.js"
+      "src/**/*.ts"
     ],
     "exclude": [
-      "src/**/*.test.js",
+      "src/**/*.test.ts",
       "src/**/__tests__/**"
     ],
     "reporter": [
@@ -39,18 +39,24 @@
       "cobertura"
     ],
     "extension": [
-      ".jsx"
+      ".tsx",
+      ".ts"
     ],
     "cache": true,
     "temp-directory": "./coverage/.nyc_output"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/puncsky/template_website.git"
   },
   "keywords": [],
-  "author": "field_author",
-  "license": "UNLICENSED",
+  "author": "Tian Pan (tian@iotex.io)",
+  "license": "APACHE",
   "bugs": {
     "url": "https://github.com/puncsky/template_website/issues"
   },
@@ -58,35 +64,31 @@
   "devDependencies": {
     "@babel/cli": "7.2.3",
     "@babel/core": "7.3.4",
-    "@babel/plugin-proposal-object-rest-spread": "7.3.4",
-    "@babel/plugin-transform-flow-strip-types": "7.3.4",
-    "@babel/polyfill": "7.2.5",
     "@babel/preset-env": "7.3.4",
-    "@babel/preset-flow": "7.0.0",
     "@babel/preset-react": "7.0.0",
+    "@babel/preset-typescript": "7.3.3",
     "@babel/register": "7.0.0",
+    "@types/bech32": "^1.1.1",
+    "@types/elliptic": "^6.4.5",
+    "@types/node": "11.11.3",
     "ava": "1.3.1",
-    "babel-eslint": "10.0.1",
     "babel-loader": "8.0.5",
     "babel-plugin-module-resolver": "3.2.0",
     "babel-plugin-react-require": "3.1.1",
     "babel-plugin-transform-class-properties": "6.24.1",
-    "browser-env": "3.2.6",
     "build-changelog": "2.1.2",
-    "eslint": "5.15.3",
-    "eslint-plugin-babel": "5.3.0",
-    "eslint-plugin-flowtype": "3.4.2",
-    "eslint-plugin-import": "2.16.0",
-    "eslint-plugin-react": "7.12.3",
-    "flow-bin": "0.95.1",
-    "flow-typed": "2.5.1",
     "global": "4.3.2",
+    "husky": "^1.3.1",
     "nyc": "13.3.0",
-    "proto-build": "0.2.3"
-  },
-  "engines": {
-    "node": "10.15.3",
-    "npm": "6.9.0"
+    "prettier": "1.16.4",
+    "pretty-quick": "^1.10.0",
+    "proto-build": "0.2.3",
+    "ts-node": "8.0.3",
+    "tslint": "5.14.0",
+    "tslint-config-prettier": "1.18.0",
+    "tslint-microsoft-contrib": "6.1.0",
+    "tslint-require-connnect-typing": "1.0.1",
+    "typescript": "3.3.3333"
   },
   "dependencies": {
     "@grpc/proto-loader": "0.4.0",
