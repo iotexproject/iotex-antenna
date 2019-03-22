@@ -51,6 +51,7 @@ export default class RpcMethod implements IRpcMethod {
     req: IGetAccountRequest
   ): Promise<IGetAccountResponse> {
     const getAccount = promisify(this.client.getAccount.bind(this.client));
+    // @ts-ignore
     return getAccount(req);
   }
 
@@ -60,6 +61,7 @@ export default class RpcMethod implements IRpcMethod {
     const getBlockMetas = promisify(
       this.client.getBlockMetas.bind(this.client)
     );
+    // @ts-ignore
     return getBlockMetas(req);
   }
 
@@ -75,6 +77,7 @@ export default class RpcMethod implements IRpcMethod {
     req: IGetActionsRequest
   ): Promise<IGetActionsResponse> {
     const getActions = promisify(this.client.getActions.bind(this.client));
+    // @ts-ignore
     return getActions(req);
   }
 
@@ -94,6 +97,7 @@ export default class RpcMethod implements IRpcMethod {
     const getReceiptByAction = promisify(
       this.client.getReceiptByAction.bind(this.client)
     );
+    // @ts-ignore
     return getReceiptByAction(req);
   }
 
@@ -101,6 +105,7 @@ export default class RpcMethod implements IRpcMethod {
     req: IReadContractRequest
   ): Promise<IReadContractResponse> {
     const readContract = promisify(this.client.readContract.bind(this.client));
+    // @ts-ignore
     return readContract(req);
   }
 
@@ -117,6 +122,7 @@ export default class RpcMethod implements IRpcMethod {
     const estimateGasForAction = promisify(
       this.client.estimateGasForAction.bind(this.client)
     );
+    // @ts-ignore
     return estimateGasForAction(req);
   }
 }

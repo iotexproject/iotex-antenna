@@ -1,7 +1,7 @@
 import test from "ava";
 // @ts-ignore
 import account from "eth-lib/lib/account";
-import { privateKeyToAccount } from "../crypto";
+import { privateKeyToAccount, publicKeyToAddress } from "../crypto";
 
 const ACCOUNT = {
   address: "io187wzp08vnhjjpkydnr97qlh8kh0dpkkytfam8j",
@@ -21,4 +21,8 @@ test("create account and privateKeyToAccount", async t => {
 test("privateKeyToAccount", async t => {
   const actual = privateKeyToAccount(ACCOUNT.privateKey);
   t.deepEqual(actual, ACCOUNT);
+});
+
+test("publicKeyToAddress", async t => {
+  t.deepEqual(publicKeyToAddress(ACCOUNT.publicKey), ACCOUNT.address);
 });

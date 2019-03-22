@@ -9,6 +9,13 @@ import { hash160b } from "./hash";
 
 const secp256k1 = new elliptic.ec("secp256k1"); // eslint-disable-line
 
+export function publicKeyToAddress(publicKey: string): string {
+  const key = secp256k1.keyFromPublic(publicKey, "hex");
+  const publicKeyBytes = key.getPublic(false, "ByteArray");
+  const hashBytes = hash160b(publicKeyBytes.slice(1));
+  return fromBytes(hashBytes).string();
+}
+
 export function privateKeyToAccount(
   privateKey: string
 ): { address: string; publicKey: string; privateKey: string } {

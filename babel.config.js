@@ -10,6 +10,6 @@ module.exports = {
     ],
     ["@babel/preset-typescript"]
   ],
-  plugins: [],
+  plugins: ["@babel/plugin-proposal-class-properties"],
   ignore: [/node_modules\//g]
 };

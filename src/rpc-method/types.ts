@@ -1,45 +1,44 @@
 /* tslint:disable:no-any */
 
-// @ts-ignore
-import actionPb from "../proto/action_pb";
-// @ts-ignore
-import apiPb from "../proto/api_pb";
+import { Timestamp } from "google-protobuf/google/protobuf/timestamp_pb";
+import actionPb from "../proto/generated/action_pb";
+import apiPb from "../proto/generated/api_pb";
 
 // Properties of a Timestamp.
 export interface ITimestamp {
   // Timestamp seconds
-  seconds?: number | null;
+  seconds: number;
 
   // Timestamp nanos
-  nanos?: number | null;
+  nanos: number;
 }
 
 // interface for get account
 // Properties of a GetAccountRequest.
 export interface IGetAccountRequest {
   // GetAccountRequest address
-  address?: string | null;
+  address: string;
 }
 
 // Properties of an AccountMeta.
 export interface IAccountMeta {
   // AccountMeta address
-  address?: string | null;
+  address: string;
 
   // AccountMeta balance
-  balance?: string | null;
+  balance: string;
 
   // AccountMeta nonce
-  nonce?: number | null;
+  nonce: number;
 
   // AccountMeta pendingNonce
-  pendingNonce?: number | null;
+  pendingNonce: number;
 }
 
 // Properties of a GetAccountResponse.
 export interface IGetAccountResponse {
   // GetAccountResponse accountMeta
-  accountMeta?: IAccountMeta | null;
+  accountMeta: IAccountMeta;
 }
 
 export const GetAccountRequest = {
@@ -68,22 +67,22 @@ export const GetAccountRequest = {
 
 // interface for get chain meta
 export interface IEpochData {
-  num?: number | null;
-  height?: number | null;
-  beaconChainHeight?: number | null;
+  num: number;
+  height: number;
+  beaconChainHeight: number;
 }
 
 export interface IChainMeta {
-  height?: string | null;
-  numActions?: string | null;
-  tps?: string | null;
-  epoch?: IEpochData | null;
+  height: string;
+  numActions: string;
+  tps: string;
+  epoch: IEpochData;
 }
 
 export interface IGetChainMetaRequest {}
 
 export interface IGetChainMetaResponse {
-  chainMeta?: IChainMeta | null;
+  chainMeta: IChainMeta;
 }
 
 export const GetChainMetaRequest = {
@@ -114,61 +113,61 @@ export const GetChainMetaRequest = {
 // Properties of a GetBlockMetasByIndexRequest.
 export interface IGetBlockMetasByIndexRequest {
   // GetBlockMetasByIndexRequest start
-  start?: number | null;
+  start: number;
 
   // GetBlockMetasByIndexRequest count
-  count?: number | null;
+  count: number;
 }
 
 // Properties of a GetBlockMetasByHashRequest.
 export interface IGetBlockMetasByHashRequest {
   // GetBlockMetasByHashRequest address
-  blkHash?: string | null;
+  blkHash: string;
 }
 
 // Properties of a GetBlockMetasRequest.
 export interface IGetBlockMetasRequest {
   // GetBlockMetasRequest byIndex
-  byIndex?: IGetBlockMetasByIndexRequest | null;
+  byIndex: IGetBlockMetasByIndexRequest;
 
   // GetBlockMetasRequest byHash
-  byHash?: IGetBlockMetasByHashRequest | null;
+  byHash: IGetBlockMetasByHashRequest;
 }
 
 // Properties of an blockMeta.
 export interface IBlockMeta {
   // BlockMeta hash
-  hash?: string | null;
+  hash: string;
 
   // BlockMeta height
-  height?: number | null;
+  height: number;
 
   // BlockMeta timestamp
-  timestamp?: number | null;
+  timestamp: number;
 
   // BlockMeta numActions
-  numActions?: number | null;
+  numActions: number;
 
   // BlockMeta producerAddress
-  producerAddress?: string | null;
+  producerAddress: string;
 
   // BlockMeta transferAmount
-  transferAmount?: string | null;
+  transferAmount: string;
 
   // BlockMeta txRoot
-  txRoot?: string | null;
+  txRoot: string;
 
   // BlockMeta receiptRoot
-  receiptRoot?: string | null;
+  receiptRoot: string;
 
   // BlockMeta deltaStateDigest
-  deltaStateDigest?: string | null;
+  deltaStateDigest: string;
 }
 
 // Properties of a GetBlockMetasResponse.
 export interface IGetBlockMetasResponse {
   // GetBlockMetasResponse blockMetas
-  blkMetas?: Array<IBlockMeta> | null;
+  blkMetas: Array<IBlockMeta>;
 }
 
 export const GetBlockMetasRequest = {
@@ -221,181 +220,181 @@ export const GetBlockMetasRequest = {
 // Properties of a GetActionsByIndexRequest.
 export interface IGetActionsByIndexRequest {
   // GetActionsByIndexRequest start
-  start?: number | null;
+  start: number;
 
   // GetActionsByIndexRequest count
-  count?: number | null;
+  count: number;
 }
 
 // Properties of a GetActionsByHashRequest.
 export interface IGetActionsByHashRequest {
   // GetActionsByHashRequest actionHash
-  actionHash?: string | null;
+  actionHash: string;
 
   // GetActionsByHashRequest checkingPending
-  checkingPending?: boolean | null;
+  checkingPending: boolean;
 }
 
 // Properties of a GetActionsByAddressRequest.
 export interface IGetActionsByAddressRequest {
   // GetActionsByAddressRequest address
-  address?: string | null;
+  address: string;
 
   // GetActionsByAddressRequest start
-  start?: number | null;
+  start: number;
 
   // GetActionsByAddressRequest count
-  count?: number | null;
+  count: number;
 }
 
 // Properties of a GetUnconfirmedActionsByAddressRequest.
 export interface IGetUnconfirmedActionsByAddressRequest {
   // GetUnconfirmedActionsByAddressRequest address
-  address?: string | null;
+  address: string;
 
   // GetUnconfirmedActionsByAddressRequest start
-  start?: number | null;
+  start: number;
 
   // GetUnconfirmedActionsByAddressRequest count
-  count?: number | null;
+  count: number;
 }
 
 // Properties of a GetActionsByBlockRequest.
 export interface IGetActionsByBlockRequest {
   // GetActionsByBlockRequest blkHash
-  blkHash?: string | null;
+  blkHash: string;
 
   // GetActionsByBlockRequest start
-  start?: number | null;
+  start: number;
 
   // GetActionsByBlockRequest count
-  count?: number | null;
+  count: number;
 }
 
 // Properties of a GetActionsRequest.
 export interface IGetActionsRequest {
   // GetActionsRequest byIndex
-  byIndex?: IGetActionsByIndexRequest | null;
+  byIndex: IGetActionsByIndexRequest;
 
   // GetActionsRequest byHash
-  byHash?: IGetActionsByHashRequest | null;
+  byHash: IGetActionsByHashRequest;
 
   // GetActionsRequest byAddr
-  byAddr?: IGetActionsByAddressRequest | null;
+  byAddr: IGetActionsByAddressRequest;
 
   // GetUnconfirmedActionsByAddressRequest unconfirmedByAddr
-  unconfirmedByAddr?: IGetUnconfirmedActionsByAddressRequest | null;
+  unconfirmedByAddr: IGetUnconfirmedActionsByAddressRequest;
 
   // GetActionsByBlockRequest byBlk
-  byBlk?: IGetActionsByBlockRequest | null;
+  byBlk: IGetActionsByBlockRequest;
 }
 
 // Properties of a Transfer.
 export interface ITransfer {
   // Transfer amount
-  amount?: Uint8Array | null;
+  amount: string;
 
   // Transfer recipient
-  recipient?: string | null;
+  recipient: string;
 
   // Transfer payload
-  payload?: Uint8Array | null;
+  payload: Uint8Array;
 }
 
 // Properties of a Vote.
 export interface IVote {
   // Vote timestamp
-  timestamp?: ITimestamp | null;
+  timestamp: ITimestamp;
 
   // Vote voteeAddress
-  voteeAddress?: string | null;
+  voteeAddress: string;
 }
 
 // Properties of a Execution.
 export interface IExecution {
   // Execution amount
-  amount?: Uint8Array | null;
+  amount: string;
 
   // Execution contract
-  contract?: string | null;
+  contract: string;
 
   // Execution data
-  data?: Uint8Array | null;
+  data: Uint8Array;
 }
 
 // Properties of a StartSubChain.
 export interface IStartSubChain {
   // StartSubChain chainID
-  chainID?: number | null;
+  chainID: number;
 
   // StartSubChain securityDeposit
-  securityDeposit?: Uint8Array | null;
+  securityDeposit: string;
 
   // StartSubChain operationDeposit
-  operationDeposit?: Uint8Array | null;
+  operationDeposit: string;
 
   // StartSubChain startHeight
-  startHeight?: number | null;
+  startHeight: number;
 
   // StartSubChain parentHeightOffset
-  parentHeightOffset?: number | null;
+  parentHeightOffset: number;
 }
 
 // Properties of a StopSubChain.
 export interface IStopSubChain {
   // StopSubChain chainID
-  chainID?: number | null;
+  chainID: number;
 
   // StopSubChain stopHeight
-  stopHeight?: number | null;
+  stopHeight: number;
 
   // StopSubChain subChainAddress
-  subChainAddress?: string | null;
+  subChainAddress: string;
 }
 
 // Properties of a MerkleRoot.
 export interface IMerkleRoot {
   // MerkleRoot name
-  name?: string | null;
+  name: string;
 
   // MerkleRoot value
-  value?: Uint8Array | null;
+  value: Uint8Array;
 }
 
 // Properties of a PutBlock.
 export interface IPutBlock {
   // PutBlock subChainAddress
-  subChainAddress?: string | null;
+  subChainAddress: string;
 
   // PutBlock height
-  height?: number | null;
+  height: number;
 
   // PutBlock roots
-  roots?: Array<IMerkleRoot> | null;
+  roots: Array<IMerkleRoot>;
 }
 
 // Properties of a CreateDeposit.
 export interface ICreateDeposit {
   // CreateDeposit chainID
-  chainID?: number | null;
+  chainID: number;
 
   // CreateDeposit amount
-  amount?: Uint8Array | null;
+  amount: string;
 
   // CreateDeposit receipt
-  recipient?: string | null;
+  recipient: string;
 }
 
 // Properties of a SettleDeposit.
 export interface ISettleDeposit {
   // SettleDeposit amount
-  amount?: Uint8Array | null;
+  amount: string;
 
   // SettleDeposit recipient
-  recipient?: string | null;
+  recipient: string;
 
   // SettleDeposit index
-  index?: number | null;
+  index: number;
 }
 
 // Properties of a CreatePlumChain.
@@ -404,125 +403,125 @@ export interface ICreatePlumChain {}
 // Properties of a TerminatePlumChain.
 export interface ITerminatePlumChain {
   // TerminatePlumChain subChainAddress
-  subChainAddress?: string | null;
+  subChainAddress: string;
 }
 
 // Properties of a PlumPutBlock.
 export interface IPlumPutBlock {
   // PlumPutBlock subChainAddress
-  subChainAddress?: string | null;
+  subChainAddress: string;
 
   // PlumPutBlock height
-  height?: number | null;
+  height: number;
 
   // PlumPutBlock height
-  roots?: Map<string, Uint8Array> | null;
+  roots: Map<string, Uint8Array>;
 }
 
 // Properties of a PlumCreateDeposit.
 export interface IPlumCreateDeposit {
   // PlumCreateDeposit subChainAddress
-  subChainAddress?: string | null;
+  subChainAddress: string;
 
   // PlumCreateDeposit amount
-  amount?: Uint8Array | null;
+  amount: string;
 
   // PlumCreateDeposit recipient
-  recipient?: string | null;
+  recipient: string;
 }
 
 // Properties of a PlumStartExit.
 export interface IPlumStartExit {
   // PlumStartExit subChainAddress
-  subChainAddress?: string | null;
+  subChainAddress: string;
 
   // PlumStartExit previousTransfer
-  previousTransfer?: Uint8Array | null;
+  previousTransfer: Uint8Array;
 
   // PlumStartExit previousTransferBlockProof
-  previousTransferBlockProof?: Uint8Array | null;
+  previousTransferBlockProof: Uint8Array;
 
   // PlumStartExit previousTransferBlockHeight
-  previousTransferBlockHeight?: number | null;
+  previousTransferBlockHeight: number;
 
   // PlumStartExit exitTransfer
-  exitTransfer?: Uint8Array | null;
+  exitTransfer: Uint8Array;
 
   // PlumStartExit exitTransferBlockProof
-  exitTransferBlockProof?: Uint8Array | null;
+  exitTransferBlockProof: Uint8Array;
 
   // PlumStartExit exitTransferBlockHeight
-  exitTransferBlockHeight?: number | null;
+  exitTransferBlockHeight: number;
 }
 
 // Properties of a PlumChallengeExit.
 export interface IPlumChallengeExit {
   // PlumChallengeExit subChainAddress
-  subChainAddress?: string | null;
+  subChainAddress: string;
 
   // PlumChallengeExit chainID
-  coinID?: number | null;
+  coinID: number;
 
   // PlumChallengeExit challengeTransfer
-  challengeTransfer?: Uint8Array | null;
+  challengeTransfer: Uint8Array;
 
   // PlumChallengeExit challengeTransferBlockProof
-  challengeTransferBlockProof?: Uint8Array | null;
+  challengeTransferBlockProof: Uint8Array;
 
   // PlumChallengeExit challengeTransferBlockHeight
-  challengeTransferBlockHeight?: number | null;
+  challengeTransferBlockHeight: number;
 }
 
 // Properties of a PlumResponseChallengeExit.
 export interface IPlumResponseChallengeExit {
   // PlumResponseChallengeExit subChainAddress
-  subChainAddress?: string | null;
+  subChainAddress: string;
 
   // PlumResponseChallengeExit coinID
-  coinID?: number | null;
+  coinID: number;
 
   // PlumResponseChallengeExit challengeTransfer
-  challengeTransfer?: Uint8Array | null;
+  challengeTransfer: Uint8Array;
 
   // PlumResponseChallengeExit responseTransfer
-  responseTransfer?: Uint8Array | null;
+  responseTransfer: Uint8Array;
 
   // PlumResponseChallengeExit responseTransferBlockProof
-  responseTransferBlockProof?: Uint8Array | null;
+  responseTransferBlockProof: Uint8Array;
 
   // PlumResponseChallengeExit previousTransferBlockHeight
-  previousTransferBlockHeight?: number | null;
+  previousTransferBlockHeight: number;
 }
 
 // Properties of a PlumFinalizeExit.
 export interface IPlumFinalizeExit {
   // PlumFinalizeExit subChainAddress
-  subChainAddress?: string | null;
+  subChainAddress: string;
 
   // PlumFinalizeExit coinID
-  coinID?: number | null;
+  coinID: number;
 }
 
 // plum sub chain APIs
 // Properties of a PlumSettleDeposit.
 export interface IPlumSettleDeposit {
   // PlumSettleDeposit coinID
-  coinID?: number | null;
+  coinID: number;
 }
 
 // Properties of a PlumTransfer.
 export interface IPlumTransfer {
   // PlumTransfer coinID
-  coinID?: number | null;
+  coinID: number;
 
   // PlumTransfer denomination
-  denomination?: Uint8Array | null;
+  denomination: Uint8Array;
 
   // PlumTransfer owner
-  owner?: string | null;
+  owner: string;
 
   // PlumTransfer recipient
-  recipient?: string | null;
+  recipient: string;
 }
 
 // //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -532,19 +531,19 @@ export interface IPlumTransfer {
 // Properties of a DepositToRewardingFund.
 export interface IDepositToRewardingFund {
   // DepositToRewardingFund amount
-  amount?: Uint8Array | null;
+  amount: string;
 
   // DepositToRewardingFund data
-  data?: Uint8Array | null;
+  data: Uint8Array;
 }
 
 // Properties of a ClaimFromRewardingFund.
 export interface IClaimFromRewardingFund {
   // ClaimFromRewardingFund amount
-  amount?: Uint8Array | null;
+  amount: string;
 
   // ClaimFromRewardingFund data
-  data?: Uint8Array | null;
+  data: Uint8Array;
 }
 
 export interface RewardType {
@@ -555,427 +554,373 @@ export interface RewardType {
 // Properties of a SetReward.
 export interface ISetReward {
   // SetReward amount
-  amount?: Uint8Array | null;
+  amount: string;
 
   // SetReward data
-  data?: Uint8Array | null;
+  data: Uint8Array;
 
   // SetReward type
-  type?: number | null;
+  type: number;
 }
 
 // Properties of a GrantReward.
 export interface IGrantReward {
   // GrantReward type
-  type?: number | null;
+  type: number;
 }
 
 // Properties of an ActionCore.
 export interface IActionCore {
   // ActionCore version
-  version?: number | null;
+  version: number;
 
   // ActionCore nonce
-  nonce?: number | null;
+  nonce: number;
 
   // ActionCore gasLimit
-  gasLimit?: number | null;
+  gasLimit: number;
 
   // ActionCore gasPrice
-  gasPrice?: Uint8Array | null;
+  gasPrice: string;
 
   // Action detail fields
   // ActionCore transfer
-  transfer?: ITransfer | null;
+  transfer: ITransfer;
   // ActionCore vote
-  vote?: IVote | null;
+  vote: IVote;
   // ActionCore execution
-  execution?: IExecution | null;
+  execution: IExecution;
 
   // FedChain
   // ActionCore startSubChain
-  startSubChain?: IStartSubChain | null;
+  startSubChain: IStartSubChain;
   // ActionCore stopSubChain
-  stopSubChain?: IStopSubChain | null;
+  stopSubChain: IStopSubChain;
   // ActionCore putBlock
-  putBlock?: IPutBlock | null;
+  putBlock: IPutBlock;
   // ActionCore createDeposit
-  createDeposit?: ICreateDeposit | null;
+  createDeposit: ICreateDeposit;
   // ActionCore settleDeposit
-  settleDeposit?: ISettleDeposit | null;
+  settleDeposit: ISettleDeposit;
 
   // PlumChain
   // ActionCore createPlumChain
-  createPlumChain?: ICreatePlumChain | null;
+  createPlumChain: ICreatePlumChain;
   // ActionCore terminatePlumChain
-  terminatePlumChain?: ITerminatePlumChain | null;
+  terminatePlumChain: ITerminatePlumChain;
   // ActionCore plumPutBlock
-  plumPutBlock?: IPlumPutBlock | null;
+  plumPutBlock: IPlumPutBlock;
   // ActionCore plumCreateDeposit
-  plumCreateDeposit?: IPlumCreateDeposit | null;
+  plumCreateDeposit: IPlumCreateDeposit;
   // ActionCore plumStartExit
-  plumStartExit?: IPlumStartExit | null;
+  plumStartExit: IPlumStartExit;
   // ActionCore plumChallengeExit
-  plumChallengeExit?: IPlumChallengeExit | null;
+  plumChallengeExit: IPlumChallengeExit;
   // ActionCore plumResponseChallengeExit
-  plumResponseChallengeExit?: IPlumResponseChallengeExit | null;
+  plumResponseChallengeExit: IPlumResponseChallengeExit;
   // ActionCore plumFinalizeExit
-  plumFinalizeExit?: IPlumFinalizeExit | null;
+  plumFinalizeExit: IPlumFinalizeExit;
   // ActionCore plumSettleDeposit
-  plumSettleDeposit?: IPlumSettleDeposit | null;
+  plumSettleDeposit: IPlumSettleDeposit;
   // ActionCore plumTransfer
-  plumTransfer?: IPlumTransfer | null;
+  plumTransfer: IPlumTransfer;
 
   // Rewarding protocol actions
   // ActionCore depositToRewardingFund
-  depositToRewardingFund?: IDepositToRewardingFund | null;
+  depositToRewardingFund: IDepositToRewardingFund;
   // ActionCore claimFromRewardingFund
-  claimFromRewardingFund?: IClaimFromRewardingFund | null;
+  claimFromRewardingFund: IClaimFromRewardingFund;
   // ActionCore setReward
-  setReward?: ISetReward | null;
+  setReward: ISetReward;
   // ActionCore grantReward
-  grantReward?: IGrantReward | null;
+  grantReward: IGrantReward;
 }
 
 // Properties of an Action.
 export interface IAction {
   // Action core
-  core?: IActionCore | null;
+  core: IActionCore;
 
   // Action senderPubkey
-  senderPubKey?: Uint8Array | null;
+  senderPubKey: Uint8Array;
 
   // Action signature
-  signature?: Uint8Array | null;
+  signature: Uint8Array;
 }
 
-export function toActionTransfer(req?: ITransfer): any {
-  let pbTransfer = req;
-  if (req) {
-    pbTransfer = new actionPb.Transfer();
-    // @ts-ignore
-    pbTransfer.setAmount(req.amount);
-    // @ts-ignore
-    pbTransfer.setRecipient(req.recipient);
-    // @ts-ignore
-    pbTransfer.setPayload(req.payload);
+export function toActionTransfer(req: ITransfer): any {
+  if (!req) {
+    return null;
   }
+  const pbTransfer = new actionPb.Transfer();
+  pbTransfer.setAmount(req.amount);
+  pbTransfer.setRecipient(req.recipient);
+  pbTransfer.setPayload(req.payload);
   return pbTransfer;
 }
 
-export function toActionVote(req?: IVote): any {
-  let pbVote = req;
-  if (req) {
-    pbVote = new actionPb.Vote();
-    // @ts-ignore
-    pbVote.setTimestamp(req.timestamp);
-    // @ts-ignore
-    pbVote.setVoteeaddress(req.voteeAddress);
+function toTimestamp(timestamp: ITimestamp): Timestamp {
+  const ts = new Timestamp();
+  if (timestamp) {
+    ts.setSeconds(timestamp.seconds);
+    ts.setNanos(timestamp.nanos);
   }
+  return ts;
+}
+
+export function toActionVote(req: IVote): any {
+  if (!req) {
+    return null;
+  }
+  const pbVote = new actionPb.Vote();
+  const ts = new Timestamp();
+  ts.setSeconds(req.timestamp.seconds);
+  pbVote.setTimestamp(toTimestamp(req.timestamp));
+  pbVote.setVoteeaddress(req.voteeAddress);
   return pbVote;
 }
 
-export function toActionExecution(req?: IExecution): any {
-  let pbExecution = req;
-  if (req) {
-    pbExecution = new actionPb.Execution();
-    // @ts-ignore
-    pbExecution.setAmount(req.amount);
-    // @ts-ignore
-    pbExecution.setContract(req.contract);
-    // @ts-ignore
-    pbExecution.setData(req.data);
+export function toActionExecution(req: IExecution): any {
+  if (!req) {
+    return null;
   }
+  const pbExecution = new actionPb.Execution();
+  pbExecution.setAmount(req.amount);
+  pbExecution.setContract(req.contract);
+  pbExecution.setData(req.data);
   return pbExecution;
 }
 
-export function toActionStartSubChain(req?: IStartSubChain): any {
-  let pbStartSubChain = req;
-  if (req) {
-    pbStartSubChain = new actionPb.StartSubChain();
-    // @ts-ignore
-    pbStartSubChain.setChainid(req.chainID);
-    // @ts-ignore
-    pbStartSubChain.setSecuritydeposit(req.securityDeposit);
-    // @ts-ignore
-    pbStartSubChain.setOperationdeposit(req.operationDeposit);
-    // @ts-ignore
-    pbStartSubChain.setStartheight(req.startHeight);
-    // @ts-ignore
-    pbStartSubChain.setParentheightoffset(req.parentHeightOffset);
+export function toActionStartSubChain(req: IStartSubChain): any {
+  if (!req) {
+    return null;
   }
+
+  const pbStartSubChain = new actionPb.StartSubChain();
+  pbStartSubChain.setChainid(req.chainID);
+  pbStartSubChain.setSecuritydeposit(req.securityDeposit);
+  pbStartSubChain.setOperationdeposit(req.operationDeposit);
+  pbStartSubChain.setStartheight(req.startHeight);
+  pbStartSubChain.setParentheightoffset(req.parentHeightOffset);
   return pbStartSubChain;
 }
 
-export function toActionStopSubChain(req?: IStopSubChain): any {
-  let pbStopSubChain = req;
-  if (req) {
-    pbStopSubChain = new actionPb.StopSubChain();
-    // @ts-ignore
-    pbStopSubChain.setChainid(req.chainID);
-    // @ts-ignore
-    pbStopSubChain.setStopheight(req.stopHeight);
-    // @ts-ignore
-    pbStopSubChain.setSubchainaddress(req.subChainAddress);
+export function toActionStopSubChain(req: IStopSubChain): any {
+  if (!req) {
+    return null;
   }
+  const pbStopSubChain = new actionPb.StopSubChain();
+  // @ts-ignore
+  pbStopSubChain.setChainid(req.chainID);
+  // @ts-ignore
+  pbStopSubChain.setStopheight(req.stopHeight);
+  // @ts-ignore
+  pbStopSubChain.setSubchainaddress(req.subChainAddress);
   return pbStopSubChain;
 }
 
-export function toActionPutBlock(req?: IPutBlock): any {
-  let pbPutBlock = req;
-  if (req) {
-    const roots = req.roots;
-    if (req.roots && roots) {
-      for (let i = 0; i < req.roots.length; i++) {
-        const rootItem = req.roots && req.roots[i];
-        const mkroot = new actionPb.MerkleRoot();
-        mkroot.setName(rootItem.name);
-        mkroot.setValue(rootItem.value);
-        roots[i] = mkroot;
-      }
-    }
-    pbPutBlock = new actionPb.PutBlock();
-    // @ts-ignore
-    pbPutBlock.setSubchainaddress(req.subChainAddress);
-    // @ts-ignore
-    pbPutBlock.setHeight(req.height);
-    // @ts-ignore
-    pbPutBlock.setRoots(roots);
+export function toActionPutBlock(req: IPutBlock): any {
+  if (!req) {
+    return null;
   }
+  const roots = req.roots;
+  const rootList = [];
+  if (req.roots && roots) {
+    for (let i = 0; i < req.roots.length; i++) {
+      const rootItem = req.roots && req.roots[i];
+      const mkroot = new actionPb.MerkleRoot();
+      mkroot.setName(rootItem.name);
+      mkroot.setValue(rootItem.value);
+      rootList[i] = mkroot;
+    }
+  }
+  const pbPutBlock = new actionPb.PutBlock();
+  pbPutBlock.setSubchainaddress(req.subChainAddress);
+  pbPutBlock.setHeight(req.height);
+  pbPutBlock.setRootsList(rootList);
   return pbPutBlock;
 }
 
-export function toActionCreateDeposit(req?: ICreateDeposit): any {
-  let pbCreateDeposit = req;
-  if (req) {
-    pbCreateDeposit = new actionPb.CreateDeposit();
-    // @ts-ignore
-    pbCreateDeposit.setChainid(req.chainID);
-    // @ts-ignore
-    pbCreateDeposit.setAmount(req.amount);
-    // @ts-ignore
-    pbCreateDeposit.setRecipient(req.recipient);
+export function toActionCreateDeposit(req: ICreateDeposit): any {
+  if (!req) {
+    return null;
   }
+  const pbCreateDeposit = new actionPb.CreateDeposit();
+  pbCreateDeposit.setChainid(req.chainID);
+  pbCreateDeposit.setAmount(req.amount);
+  pbCreateDeposit.setRecipient(req.recipient);
   return pbCreateDeposit;
 }
 
-export function toActionSettleDeposit(req?: ISettleDeposit): any {
-  let pbSettleDeposit = req;
-  if (req) {
-    pbSettleDeposit = new actionPb.SettleDeposit();
-    // @ts-ignore
-    pbSettleDeposit.setAmount(req.amount);
-    // @ts-ignore
-    pbSettleDeposit.setRecipient(req.recipient);
-    // @ts-ignore
-    pbSettleDeposit.setIndex(req.index);
+export function toActionSettleDeposit(req: ISettleDeposit): any {
+  if (!req) {
+    return null;
   }
+  const pbSettleDeposit = new actionPb.SettleDeposit();
+  pbSettleDeposit.setAmount(req.amount);
+  pbSettleDeposit.setRecipient(req.recipient);
+  pbSettleDeposit.setIndex(req.index);
   return pbSettleDeposit;
 }
 
-export function toActionCreatePlumChain(req?: ICreatePlumChain): any {
-  let pbCreatePlumChain = req;
-  if (req) {
-    pbCreatePlumChain = new actionPb.CreatePlumChain();
+export function toActionCreatePlumChain(req: ICreatePlumChain): any {
+  if (!req) {
+    return null;
   }
-  return pbCreatePlumChain;
+  return new actionPb.CreatePlumChain();
 }
 
-export function toActionTerminatePlumChain(req?: ITerminatePlumChain): any {
-  let pbTerminatePlumChain = req;
-  if (req) {
-    pbTerminatePlumChain = new actionPb.TerminatePlumChain();
-    // @ts-ignore
-    pbTerminatePlumChain.setSubchainaddress(req.subChainAddress);
+export function toActionTerminatePlumChain(req: ITerminatePlumChain): any {
+  if (!req) {
+    return null;
   }
+  const pbTerminatePlumChain = new actionPb.TerminatePlumChain();
+  pbTerminatePlumChain.setSubchainaddress(req.subChainAddress);
   return pbTerminatePlumChain;
 }
 
-export function toActionPlumPutBlock(req?: IPlumPutBlock): any {
-  let pbPlumPutBlock = req;
-  if (req) {
-    pbPlumPutBlock = new actionPb.PlumPutBlock();
-    // @ts-ignore
-    pbPlumPutBlock.setSubchainaddress(req.subChainAddress);
-    // @ts-ignore
-    pbPlumPutBlock.setHeight(req.height);
-    // @ts-ignore
-    pbPlumPutBlock.setRoots(req.roots);
+export function toActionPlumPutBlock(req: IPlumPutBlock): any {
+  if (!req) {
+    return null;
   }
+  const pbPlumPutBlock = new actionPb.PlumPutBlock();
+  pbPlumPutBlock.setSubchainaddress(req.subChainAddress);
+  pbPlumPutBlock.setHeight(req.height);
   return pbPlumPutBlock;
 }
 
-export function toActionPlumCreateDeposit(req?: IPlumCreateDeposit): any {
-  let pbPlumCreateDeposit = req;
-  if (req) {
-    pbPlumCreateDeposit = new actionPb.PlumCreateDeposit();
-    // @ts-ignore
-    pbPlumCreateDeposit.setSubchainaddress(req.subChainAddress);
-    // @ts-ignore
-    pbPlumCreateDeposit.setAmount(req.amount);
-    // @ts-ignore
-    pbPlumCreateDeposit.setRecipient(req.recipient);
+export function toActionPlumCreateDeposit(req: IPlumCreateDeposit): any {
+  if (!req) {
+    return null;
   }
+
+  const pbPlumCreateDeposit = new actionPb.PlumCreateDeposit();
+  // @ts-ignore
+  pbPlumCreateDeposit.setSubchainaddress(req.subChainAddress);
+  // @ts-ignore
+  pbPlumCreateDeposit.setAmount(req.amount);
+  // @ts-ignore
+  pbPlumCreateDeposit.setRecipient(req.recipient);
   return pbPlumCreateDeposit;
 }
 
-export function toActionPlumStartExit(req?: IPlumStartExit): any {
-  let pbPlumStartExit = req;
-  if (req) {
-    pbPlumStartExit = new actionPb.PlumStartExit();
-    // @ts-ignore
-    pbPlumStartExit.setSubchainaddress(req.subChainAddress);
-    // @ts-ignore
-    pbPlumStartExit.setPrevioustransfer(req.previousTransfer);
-    // @ts-ignore
-    pbPlumStartExit.setPrevioustransferblockproof(
-      req.previousTransferBlockProof
-    );
-    // @ts-ignore
-    pbPlumStartExit.setPrevioustransferblockheight(
-      req.previousTransferBlockHeight
-    );
-    // @ts-ignore
-    pbPlumStartExit.setExittransfer(req.exitTransfer);
-    // @ts-ignore
-    pbPlumStartExit.setExittransferblockproof(req.exitTransferBlockProof);
-    // @ts-ignore
-    pbPlumStartExit.setExittransferblockheight(req.exitTransferBlockHeight);
+export function toActionPlumStartExit(req: IPlumStartExit): any {
+  if (!req) {
+    return null;
   }
+
+  const pbPlumStartExit = new actionPb.PlumStartExit();
+  pbPlumStartExit.setSubchainaddress(req.subChainAddress);
+  pbPlumStartExit.setPrevioustransfer(req.previousTransfer);
+  pbPlumStartExit.setPrevioustransferblockproof(req.previousTransferBlockProof);
+  pbPlumStartExit.setPrevioustransferblockheight(
+    req.previousTransferBlockHeight
+  );
+  pbPlumStartExit.setExittransfer(req.exitTransfer);
+  pbPlumStartExit.setExittransferblockproof(req.exitTransferBlockProof);
+  pbPlumStartExit.setExittransferblockheight(req.exitTransferBlockHeight);
   return pbPlumStartExit;
 }
 
-export function toActionPlumChallengeExit(req?: IPlumChallengeExit): any {
-  let pbPlumChallengeExit = req;
-  if (req) {
-    pbPlumChallengeExit = new actionPb.PlumChallengeExit();
-    // @ts-ignore
-    pbPlumChallengeExit.setSubchainaddress(req.subChainAddress);
-    // @ts-ignore
-    pbPlumChallengeExit.setCoinid(req.coinID);
-    // @ts-ignore
-    pbPlumChallengeExit.setChallengetransfer(req.challengeTransfer);
-    // @ts-ignore
-    pbPlumChallengeExit.setChallengetransferblockproof(
-      req.challengeTransferBlockProof
-    );
-    // @ts-ignore
-    pbPlumChallengeExit.setChallengetransferblockheight(
-      req.challengeTransferBlockHeight
-    );
+export function toActionPlumChallengeExit(req: IPlumChallengeExit): any {
+  if (!req) {
+    return null;
   }
+
+  const pbPlumChallengeExit = new actionPb.PlumChallengeExit();
+  pbPlumChallengeExit.setSubchainaddress(req.subChainAddress);
+  pbPlumChallengeExit.setCoinid(req.coinID);
+  pbPlumChallengeExit.setChallengetransfer(req.challengeTransfer);
+  pbPlumChallengeExit.setChallengetransferblockproof(
+    req.challengeTransferBlockProof
+  );
+  pbPlumChallengeExit.setChallengetransferblockheight(
+    req.challengeTransferBlockHeight
+  );
   return pbPlumChallengeExit;
 }
 
 export function toActionPlumResponseChallengeExit(
-  req?: IPlumResponseChallengeExit
+  req: IPlumResponseChallengeExit
 ): any {
-  let pbPlumResponseChallengeExit = req;
-  if (req) {
-    pbPlumResponseChallengeExit = new actionPb.PlumResponseChallengeExit();
-    // @ts-ignore
-    pbPlumResponseChallengeExit.setSubchainaddress(req.subChainAddress);
-    // @ts-ignore
-    pbPlumResponseChallengeExit.setCoinid(req.coinID);
-    // @ts-ignore
-    pbPlumResponseChallengeExit.setChallengetransfer(req.challengeTransfer);
-    // @ts-ignore
-    pbPlumResponseChallengeExit.setResponsetransfer(req.responseTransfer);
-    // @ts-ignore
-    pbPlumResponseChallengeExit.setResponsetransferblockproof(
-      req.responseTransferBlockProof
-    );
+  if (!req) {
+    return null;
   }
+
+  const pbPlumResponseChallengeExit = new actionPb.PlumResponseChallengeExit();
+  pbPlumResponseChallengeExit.setSubchainaddress(req.subChainAddress);
+  pbPlumResponseChallengeExit.setCoinid(req.coinID);
+  pbPlumResponseChallengeExit.setChallengetransfer(req.challengeTransfer);
+  pbPlumResponseChallengeExit.setResponsetransfer(req.responseTransfer);
+  pbPlumResponseChallengeExit.setResponsetransferblockproof(
+    req.responseTransferBlockProof
+  );
   return pbPlumResponseChallengeExit;
 }
 
-export function toActionPlumFinalizeExit(req?: IPlumFinalizeExit): any {
-  let pbPlumFinalizeExit = req;
-  if (req) {
-    pbPlumFinalizeExit = new actionPb.PlumFinalizeExit();
-    // @ts-ignore
-    pbPlumFinalizeExit.setSubchainaddress(req.subChainAddress);
-    // @ts-ignore
-    pbPlumFinalizeExit.setCoinid(req.coinID);
+export function toActionPlumFinalizeExit(req: IPlumFinalizeExit): any {
+  if (!req) {
+    return null;
   }
+  const pbPlumFinalizeExit = new actionPb.PlumFinalizeExit();
+  pbPlumFinalizeExit.setSubchainaddress(req.subChainAddress);
+  pbPlumFinalizeExit.setCoinid(req.coinID);
   return pbPlumFinalizeExit;
 }
 
-export function toActionPlumSettleDeposit(req?: IPlumSettleDeposit): any {
-  let pbPlumSettleDeposit = req;
-  if (req) {
-    pbPlumSettleDeposit = new actionPb.PlumSettleDeposit();
-    // @ts-ignore
-    pbPlumSettleDeposit.setCoinid(req.coinID);
+export function toActionPlumSettleDeposit(req: IPlumSettleDeposit): any {
+  if (!req) {
+    return null;
   }
+  const pbPlumSettleDeposit = new actionPb.PlumSettleDeposit();
+  pbPlumSettleDeposit.setCoinid(req.coinID);
   return pbPlumSettleDeposit;
 }
 
-export function toActionPlumTransfer(req?: IPlumTransfer | null): any {
-  let pbPlumTransfer = req;
-  if (req) {
-    pbPlumTransfer = new actionPb.PlumTransfer();
-    // @ts-ignore
-    pbPlumTransfer.setCoinid(req.coinID);
-    // @ts-ignore
-    pbPlumTransfer.setDenomination(req.denomination);
-    // @ts-ignore
-    pbPlumTransfer.setOwner(req.owner);
-    // @ts-ignore
-    pbPlumTransfer.setRecipient(req.recipient);
+export function toActionPlumTransfer(req: IPlumTransfer): any {
+  if (!req) {
+    return null;
   }
+  const pbPlumTransfer = new actionPb.PlumTransfer();
+  pbPlumTransfer.setCoinid(req.coinID);
+  pbPlumTransfer.setDenomination(req.denomination);
+  pbPlumTransfer.setOwner(req.owner);
+  pbPlumTransfer.setRecipient(req.recipient);
   return pbPlumTransfer;
 }
 
 export function toActionDepositToRewardingFund(
-  req?: IDepositToRewardingFund
+  req: IDepositToRewardingFund
 ): any {
-  let pbDepositToRewardingFund = req;
-  if (req) {
-    pbDepositToRewardingFund = new actionPb.DepositToRewardingFund();
-    // @ts-ignore
-    pbDepositToRewardingFund.setAmount(req.amount);
-    // @ts-ignore
-    pbDepositToRewardingFund.setData(req.data);
+  if (!req) {
+    return null;
   }
+  const pbDepositToRewardingFund = new actionPb.DepositToRewardingFund();
+  pbDepositToRewardingFund.setAmount(req.amount);
+  pbDepositToRewardingFund.setData(req.data);
   return pbDepositToRewardingFund;
 }
 
 export function toActionClaimFromRewardingFund(
-  req?: IClaimFromRewardingFund
+  req: IClaimFromRewardingFund
 ): any {
-  let pbClaimFromRewardingFund = req;
-  if (req) {
-    pbClaimFromRewardingFund = new actionPb.ClaimFromRewardingFund();
-    // @ts-ignore
-    pbClaimFromRewardingFund.setAmount(req.amount);
-    // @ts-ignore
-    pbClaimFromRewardingFund.setData(req.data);
+  if (!req) {
+    return null;
   }
+  const pbClaimFromRewardingFund = new actionPb.ClaimFromRewardingFund();
+  // @ts-ignore
+  pbClaimFromRewardingFund.setAmount(req.amount);
+  // @ts-ignore
+  pbClaimFromRewardingFund.setData(req.data);
   return pbClaimFromRewardingFund;
 }
 
-export function toActionSetReward(req?: ISetReward): any {
-  let pbSetReward = req;
-  if (req) {
-    pbSetReward = new actionPb.SetReward();
-    // @ts-ignore
-    pbSetReward.setAmount(req.amount);
-    // @ts-ignore
-    pbSetReward.setData(req.data);
-    // @ts-ignore
-    pbSetReward.setType(req.type);
+export function toActionGrantReward(req: IGrantReward): any {
+  if (!req) {
+    return null;
   }
-  return pbSetReward;
-}
-
-export function toActionGrantReward(req?: IGrantReward): any {
-  let pbGrantReward = req;
-  if (req) {
-    pbGrantReward = new actionPb.GrantReward();
-    // @ts-ignore
-    pbGrantReward.setType(req.type);
-  }
+  const pbGrantReward = new actionPb.GrantReward();
+  pbGrantReward.setType(req.type);
   return pbGrantReward;
 }
 
@@ -988,7 +933,6 @@ export function toAction(req: IAction): any {
     pbActionCore.setNonce(core.nonce);
     pbActionCore.setGaslimit(core.gasLimit);
     pbActionCore.setGasprice(core.gasPrice);
-    // @ts-ignore
     pbActionCore.setTransfer(toActionTransfer(core.transfer));
     // @ts-ignore
     pbActionCore.setVote(toActionVote(core.vote));
@@ -1062,7 +1006,7 @@ export function toAction(req: IAction): any {
 // Properties of a GetActionsResponse.
 export interface IGetActionsResponse {
   // GetActionsResponse actions
-  actions?: Array<IAction> | null;
+  actions: Array<IAction>;
 }
 
 export const GetActionsRequest = {
@@ -1095,12 +1039,12 @@ export const GetActionsRequest = {
   },
 
   byHashTo(byHash: IGetActionsByHashRequest): any {
-    const pbReqByHash = new apiPb.GetActionsByHashRequest();
+    const pbReqByHash = new apiPb.GetActionByHashRequest();
     if (byHash.actionHash) {
       pbReqByHash.setActionhash(byHash.actionHash);
     }
     if (byHash.checkingPending) {
-      pbReqByHash.setCheckingpending(byHash.checkingPending);
+      pbReqByHash.setCheckpending(byHash.checkingPending);
     }
     return pbReqByHash;
   },
@@ -1153,7 +1097,7 @@ export const GetActionsRequest = {
     return pbReq;
   },
 
-  fromTransfer(pbRes?: any): any {
+  fromTransfer(pbRes: any): any {
     let transferData = pbRes;
     if (pbRes) {
       transferData = {
@@ -1424,6 +1368,7 @@ export const GetActionsRequest = {
     return grantRewardData;
   },
 
+  // tslint:disable-next-line:max-func-body-length
   from(pbRes: any): IGetActionsResponse {
     const rawActions = pbRes.getActionsList();
     const res = {
@@ -1538,7 +1483,7 @@ export interface ISuggestGasPriceRequest {}
 // Properties of a SuggestGasPriceResponse.
 export interface ISuggestGasPriceResponse {
   // SuggestGasPriceResponse gasPrice
-  gasPrice?: number | null;
+  gasPrice: number;
 }
 
 export const SuggestGasPriceRequest = {
@@ -1558,55 +1503,55 @@ export const SuggestGasPriceRequest = {
 // Properties of a GetReceiptByActionRequest.
 export interface IGetReceiptByActionRequest {
   // GetReceiptByActionRequest actionHash
-  actionHash?: string | null;
+  actionHash: string;
 }
 
 // Properties of an Log.
 export interface ILog {
   // Log address
-  address?: string | null;
+  address: string;
 
   // Log topics
   topics: Array<Uint8Array>;
 
   // Log data
-  data?: Uint8Array | null;
+  data: Uint8Array;
 
   // Log blockNumber
-  blockNumber?: number | null;
+  blockNumber: number;
 
   // Log txnHash
-  txnHash?: Uint8Array | null;
+  txnHash: Uint8Array;
 
   // Log index
-  index?: number | null;
+  index: number;
 }
 
 // Properties of an Receipt.
 export interface IReceipt {
   // Receipt returnValue
-  returnValue?: Uint8Array | null;
+  returnValue: Uint8Array;
 
   // Receipt status
-  status?: number | null;
+  status: number;
 
   // Receipt actHash
-  actHash?: Uint8Array | null;
+  actHash: Uint8Array;
 
   // Receipt gasConsumed
-  gasConsumed?: number | null;
+  gasConsumed: number;
 
   // Receipt contractAddress
-  contractAddress?: string | null;
+  contractAddress: string;
 
   // Receipt logs
-  logs?: Array<ILog> | null;
+  logs: Array<ILog>;
 }
 
 // Properties of a GetReceiptByActionResponse.
 export interface IGetReceiptByActionResponse {
   // GetReceiptByActionResponse receipt
-  receipt?: IReceipt | null;
+  receipt: IReceipt;
 }
 
 export const GetReceiptByActionRequest = {
@@ -1655,12 +1600,12 @@ export const GetReceiptByActionRequest = {
 // Properties of a ReadContractRequest.
 export interface IReadContractRequest {
   // ReadContractRequest action
-  action?: IAction | null;
+  action: IAction;
 }
 
 // Properties of a ReadContractResponse.
 export interface IReadContractResponse {
-  data?: string | null;
+  data: string;
 }
 
 export const ReadContractRequest = {
@@ -1683,7 +1628,7 @@ export const ReadContractRequest = {
 // Properties of a SendActionRequest.
 export interface ISendActionRequest {
   // SendActionRequest action
-  action?: IAction | null;
+  action: IAction;
 }
 
 // Properties of a SendActionResponse.
@@ -1707,12 +1652,12 @@ export const SendActionRequest = {
 
 // Properties of a EstimateGasForActionRequest.
 export interface IEstimateGasForActionRequest {
-  action?: IAction;
+  action: IAction;
 }
 
 // Properties of a EstimateGasForActionResponse.
 export interface IEstimateGasForActionResponse {
-  gas?: number | null;
+  gas: number;
 }
 
 export const EstimateGasForActionRequest = {

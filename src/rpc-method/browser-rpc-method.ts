@@ -1,5 +1,4 @@
-// @ts-ignore
-import grpcWeb from "../proto/api_grpc_web_pb";
+import grpcWeb from "../proto/generated/api_grpc_web_pb";
 import {
   IEstimateGasForActionRequest,
   IEstimateGasForActionResponse,
