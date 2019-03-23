@@ -1,7 +1,7 @@
 import test from "ava";
+import RpcMethod from "../../rpc-method/node-rpc-method";
 import { Accounts } from "../accounts";
 import { TEST_ACCOUNT } from "./account.test";
-import RpcMethod from "../../../lib/rpc-method/node-rpc-method";
 
 test("Accounts create", async t => {
   const acts = new Accounts(new RpcMethod(""));
