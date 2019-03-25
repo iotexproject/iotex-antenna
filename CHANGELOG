@@ -1,3 +1,17 @@
+2019-03-25 - 0.5.0 (55ebbf1)
+55ebbf1 (HEAD -> master, origin/master, origin/HEAD) bump proto
+6499fee Update circleci/node:10.15.3-browsers-legacy Docker digest to 470041b
+f48fea6 Update dependency ava to v1.4.0
+95a55bc Update circleci/node:10.15.3-browsers-legacy Docker digest to cc7b0cf
+037cd7a Update dependency @types/node to v11.11.6
+70db792 Update babel monorepo
+095d7bd Pin dependencies
+ca5d627 fix browser-env import
+c818006 fix test
+61b04de bump circle ci
+8e820ed (tag: v0.4.0) 0.4.0
+
+
 2019-03-22 - 0.4.0 (c88f80a)
 c88f80a (HEAD -> master, origin/master, origin/HEAD) enforce protobuf types
 f5055a7 migrate to typescript
