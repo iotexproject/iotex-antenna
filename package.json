@@ -23,7 +23,9 @@
     "changelog-major": "build-changelog --major",
     "changelog-minor": "build-changelog --minor",
     "changelog-patch": "build-changelog --patch",
-    "build-proto": "protoc -I=./src/proto/ api.proto action.proto blockchain.proto endorsement.proto account.proto node.proto --js_out=import_style=commonjs:./src/proto/generated/ && protoc -I=./src/proto/ api.proto action.proto blockchain.proto endorsement.proto account.proto node.proto --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:./src/proto/generated/"
+    "build-proto": "npm run build-proto:js && npm run build-proto:grpc",
+    "build-proto:js": "protoc -I=./ proto/api/api.proto proto/rpc/rpc.proto proto/types/action.proto proto/types/blockchain.proto proto/types/consensus.proto proto/types/endorsement.proto proto/types/genesis.proto proto/types/node.proto --js_out=import_style=commonjs:./protogen/",
+    "build-proto:grpc": "protoc -I=./  proto/api/api.proto proto/rpc/rpc.proto proto/types/action.proto proto/types/blockchain.proto proto/types/consensus.proto proto/types/endorsement.proto proto/types/genesis.proto proto/types/node.proto --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:./protogen/"
   },
   "nyc": {
     "include": [
@@ -74,12 +76,14 @@
     "@types/google-protobuf": "3.2.7",
     "@types/node": "11.11.6",
     "ava": "1.4.0",
+    "@types/dottie": "^2.0.3",
     "babel-loader": "8.0.5",
     "babel-plugin-module-resolver": "3.2.0",
     "babel-plugin-react-require": "3.1.1",
     "babel-plugin-transform-class-properties": "6.24.1",
     "browser-env": "3.2.6",
     "build-changelog": "2.1.2",
+    "dottie": "^2.0.1",
     "global": "4.3.2",
     "husky": "1.3.1",
     "nyc": "13.3.0",

@@ -1,4 +1,4 @@
-import grpcWeb from "../proto/generated/api_grpc_web_pb";
+import grpcWeb from "../../protogen/proto/api/api_grpc_web_pb";
 import {
   IEstimateGasForActionRequest,
   IEstimateGasForActionResponse,

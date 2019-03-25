@@ -1,8 +1,11 @@
 /* tslint:disable:no-any */
 
 import { Timestamp } from "google-protobuf/google/protobuf/timestamp_pb";
-import actionPb from "../proto/generated/action_pb";
-import apiPb from "../proto/generated/api_pb";
+import apiPb, {
+  GetActionsResponse,
+  GetReceiptByActionResponse
+} from "../../protogen/proto/api/api_pb";
+import actionPb, { PutPollResult } from "../../protogen/proto/types/action_pb";
 
 // Properties of a Timestamp.
 export interface ITimestamp {
@@ -28,11 +31,11 @@ export interface IAccountMeta {
   // AccountMeta balance
   balance: string;
 
-  // AccountMeta nonce
-  nonce: number;
+  // AccountMeta nonce. Type is string in node but number in browser.
+  nonce: string | number;
 
-  // AccountMeta pendingNonce
-  pendingNonce: number;
+  // AccountMeta pendingNonce. Type is string in node but number in browser.
+  pendingNonce: string | number;
 }
 
 // Properties of a GetAccountResponse.
@@ -128,10 +131,10 @@ export interface IGetBlockMetasByHashRequest {
 // Properties of a GetBlockMetasRequest.
 export interface IGetBlockMetasRequest {
   // GetBlockMetasRequest byIndex
-  byIndex: IGetBlockMetasByIndexRequest;
+  byIndex?: IGetBlockMetasByIndexRequest;
 
   // GetBlockMetasRequest byHash
-  byHash: IGetBlockMetasByHashRequest;
+  byHash?: IGetBlockMetasByHashRequest;
 }
 
 // Properties of an blockMeta.
@@ -274,19 +277,19 @@ export interface IGetActionsByBlockRequest {
 // Properties of a GetActionsRequest.
 export interface IGetActionsRequest {
   // GetActionsRequest byIndex
-  byIndex: IGetActionsByIndexRequest;
+  byIndex?: IGetActionsByIndexRequest;
 
   // GetActionsRequest byHash
-  byHash: IGetActionsByHashRequest;
+  byHash?: IGetActionsByHashRequest;
 
   // GetActionsRequest byAddr
-  byAddr: IGetActionsByAddressRequest;
+  byAddr?: IGetActionsByAddressRequest;
 
   // GetUnconfirmedActionsByAddressRequest unconfirmedByAddr
-  unconfirmedByAddr: IGetUnconfirmedActionsByAddressRequest;
+  unconfirmedByAddr?: IGetUnconfirmedActionsByAddressRequest;
 
   // GetActionsByBlockRequest byBlk
-  byBlk: IGetActionsByBlockRequest;
+  byBlk?: IGetActionsByBlockRequest;
 }
 
 // Properties of a Transfer.
@@ -298,7 +301,7 @@ export interface ITransfer {
   recipient: string;
 
   // Transfer payload
-  payload: Uint8Array;
+  payload: Buffer | {};
 }
 
 // Properties of a Vote.
@@ -319,7 +322,7 @@ export interface IExecution {
   contract: string;
 
   // Execution data
-  data: Uint8Array;
+  data: Buffer | {};
 }
 
 // Properties of a StartSubChain.
@@ -358,7 +361,7 @@ export interface IMerkleRoot {
   name: string;
 
   // MerkleRoot value
-  value: Uint8Array;
+  value: Buffer | {};
 }
 
 // Properties of a PutBlock.
@@ -415,7 +418,7 @@ export interface IPlumPutBlock {
   height: number;
 
   // PlumPutBlock height
-  roots: Map<string, Uint8Array>;
+  roots: Map<string, Buffer | {}>;
 }
 
 // Properties of a PlumCreateDeposit.
@@ -436,19 +439,19 @@ export interface IPlumStartExit {
   subChainAddress: string;
 
   // PlumStartExit previousTransfer
-  previousTransfer: Uint8Array;
+  previousTransfer: Buffer | {};
 
   // PlumStartExit previousTransferBlockProof
-  previousTransferBlockProof: Uint8Array;
+  previousTransferBlockProof: Buffer | {};
 
   // PlumStartExit previousTransferBlockHeight
   previousTransferBlockHeight: number;
 
   // PlumStartExit exitTransfer
-  exitTransfer: Uint8Array;
+  exitTransfer: Buffer | {};
 
   // PlumStartExit exitTransferBlockProof
-  exitTransferBlockProof: Uint8Array;
+  exitTransferBlockProof: Buffer | {};
 
   // PlumStartExit exitTransferBlockHeight
   exitTransferBlockHeight: number;
@@ -463,10 +466,10 @@ export interface IPlumChallengeExit {
   coinID: number;
 
   // PlumChallengeExit challengeTransfer
-  challengeTransfer: Uint8Array;
+  challengeTransfer: Buffer | {};
 
   // PlumChallengeExit challengeTransferBlockProof
-  challengeTransferBlockProof: Uint8Array;
+  challengeTransferBlockProof: Buffer | {};
 
   // PlumChallengeExit challengeTransferBlockHeight
   challengeTransferBlockHeight: number;
@@ -481,13 +484,13 @@ export interface IPlumResponseChallengeExit {
   coinID: number;
 
   // PlumResponseChallengeExit challengeTransfer
-  challengeTransfer: Uint8Array;
+  challengeTransfer: Buffer | {};
 
   // PlumResponseChallengeExit responseTransfer
-  responseTransfer: Uint8Array;
+  responseTransfer: Buffer | {};
 
   // PlumResponseChallengeExit responseTransferBlockProof
-  responseTransferBlockProof: Uint8Array;
+  responseTransferBlockProof: Buffer | {};
 
   // PlumResponseChallengeExit previousTransferBlockHeight
   previousTransferBlockHeight: number;
@@ -515,7 +518,7 @@ export interface IPlumTransfer {
   coinID: number;
 
   // PlumTransfer denomination
-  denomination: Uint8Array;
+  denomination: Buffer | {};
 
   // PlumTransfer owner
   owner: string;
@@ -534,7 +537,7 @@ export interface IDepositToRewardingFund {
   amount: string;
 
   // DepositToRewardingFund data
-  data: Uint8Array;
+  data: Buffer | {};
 }
 
 // Properties of a ClaimFromRewardingFund.
@@ -543,7 +546,7 @@ export interface IClaimFromRewardingFund {
   amount: string;
 
   // ClaimFromRewardingFund data
-  data: Uint8Array;
+  data: Buffer | {};
 }
 
 export interface RewardType {
@@ -557,7 +560,7 @@ export interface ISetReward {
   amount: string;
 
   // SetReward data
-  data: Uint8Array;
+  data: Buffer | {};
 
   // SetReward type
   type: number;
@@ -569,16 +572,32 @@ export interface IGrantReward {
   type: number;
 }
 
+export interface ICandidate {
+  address: string;
+  votes: Buffer | {};
+  pubKey: Buffer | {};
+  rewardAddress: string;
+}
+
+export interface ICandidateList {
+  candidates: Array<ICandidate>;
+}
+
+export interface IPutPollResult {
+  height: number | string;
+  candidates: ICandidateList | undefined;
+}
+
 // Properties of an ActionCore.
 export interface IActionCore {
   // ActionCore version
   version: number;
 
   // ActionCore nonce
-  nonce: number;
+  nonce: string;
 
   // ActionCore gasLimit
-  gasLimit: number;
+  gasLimit: string;
 
   // ActionCore gasPrice
   gasPrice: string;
@@ -589,7 +608,7 @@ export interface IActionCore {
   // ActionCore vote
   vote: IVote;
   // ActionCore execution
-  execution: IExecution;
+  execution: IExecution | undefined;
 
   // FedChain
   // ActionCore startSubChain
@@ -630,27 +649,27 @@ export interface IActionCore {
   depositToRewardingFund: IDepositToRewardingFund;
   // ActionCore claimFromRewardingFund
   claimFromRewardingFund: IClaimFromRewardingFund;
-  // ActionCore setReward
-  setReward: ISetReward;
   // ActionCore grantReward
   grantReward: IGrantReward;
+
+  putPollResult: IPutPollResult | undefined;
 }
 
 // Properties of an Action.
 export interface IAction {
   // Action core
-  core: IActionCore;
+  core: IActionCore | undefined;
 
   // Action senderPubkey
-  senderPubKey: Uint8Array;
+  senderPubKey: Buffer | {};
 
   // Action signature
-  signature: Uint8Array;
+  signature: Buffer | {};
 }
 
 export function toActionTransfer(req: ITransfer): any {
   if (!req) {
-    return null;
+    return undefined;
   }
   const pbTransfer = new actionPb.Transfer();
   pbTransfer.setAmount(req.amount);
@@ -670,7 +689,7 @@ function toTimestamp(timestamp: ITimestamp): Timestamp {
 
 export function toActionVote(req: IVote): any {
   if (!req) {
-    return null;
+    return undefined;
   }
   const pbVote = new actionPb.Vote();
   const ts = new Timestamp();
@@ -680,9 +699,11 @@ export function toActionVote(req: IVote): any {
   return pbVote;
 }
 
-export function toActionExecution(req: IExecution): any {
+export function toActionExecution(
+  req: IExecution | undefined
+): actionPb.Execution | undefined {
   if (!req) {
-    return null;
+    return undefined;
   }
   const pbExecution = new actionPb.Execution();
   pbExecution.setAmount(req.amount);
@@ -693,7 +714,7 @@ export function toActionExecution(req: IExecution): any {
 
 export function toActionStartSubChain(req: IStartSubChain): any {
   if (!req) {
-    return null;
+    return undefined;
   }
 
   const pbStartSubChain = new actionPb.StartSubChain();
@@ -707,7 +728,7 @@ export function toActionStartSubChain(req: IStartSubChain): any {
 
 export function toActionStopSubChain(req: IStopSubChain): any {
   if (!req) {
-    return null;
+    return undefined;
   }
   const pbStopSubChain = new actionPb.StopSubChain();
   // @ts-ignore
@@ -721,7 +742,7 @@ export function toActionStopSubChain(req: IStopSubChain): any {
 
 export function toActionPutBlock(req: IPutBlock): any {
   if (!req) {
-    return null;
+    return undefined;
   }
   const roots = req.roots;
   const rootList = [];
@@ -743,7 +764,7 @@ export function toActionPutBlock(req: IPutBlock): any {
 
 export function toActionCreateDeposit(req: ICreateDeposit): any {
   if (!req) {
-    return null;
+    return undefined;
   }
   const pbCreateDeposit = new actionPb.CreateDeposit();
   pbCreateDeposit.setChainid(req.chainID);
@@ -754,7 +775,7 @@ export function toActionCreateDeposit(req: ICreateDeposit): any {
 
 export function toActionSettleDeposit(req: ISettleDeposit): any {
   if (!req) {
-    return null;
+    return undefined;
   }
   const pbSettleDeposit = new actionPb.SettleDeposit();
   pbSettleDeposit.setAmount(req.amount);
@@ -765,14 +786,14 @@ export function toActionSettleDeposit(req: ISettleDeposit): any {
 
 export function toActionCreatePlumChain(req: ICreatePlumChain): any {
   if (!req) {
-    return null;
+    return undefined;
   }
   return new actionPb.CreatePlumChain();
 }
 
 export function toActionTerminatePlumChain(req: ITerminatePlumChain): any {
   if (!req) {
-    return null;
+    return undefined;
   }
   const pbTerminatePlumChain = new actionPb.TerminatePlumChain();
   pbTerminatePlumChain.setSubchainaddress(req.subChainAddress);
@@ -781,7 +802,7 @@ export function toActionTerminatePlumChain(req: ITerminatePlumChain): any {
 
 export function toActionPlumPutBlock(req: IPlumPutBlock): any {
   if (!req) {
-    return null;
+    return undefined;
   }
   const pbPlumPutBlock = new actionPb.PlumPutBlock();
   pbPlumPutBlock.setSubchainaddress(req.subChainAddress);
@@ -791,7 +812,7 @@ export function toActionPlumPutBlock(req: IPlumPutBlock): any {
 
 export function toActionPlumCreateDeposit(req: IPlumCreateDeposit): any {
   if (!req) {
-    return null;
+    return undefined;
   }
 
   const pbPlumCreateDeposit = new actionPb.PlumCreateDeposit();
@@ -806,7 +827,7 @@ export function toActionPlumCreateDeposit(req: IPlumCreateDeposit): any {
 
 export function toActionPlumStartExit(req: IPlumStartExit): any {
   if (!req) {
-    return null;
+    return undefined;
   }
 
   const pbPlumStartExit = new actionPb.PlumStartExit();
@@ -824,7 +845,7 @@ export function toActionPlumStartExit(req: IPlumStartExit): any {
 
 export function toActionPlumChallengeExit(req: IPlumChallengeExit): any {
   if (!req) {
-    return null;
+    return undefined;
   }
 
   const pbPlumChallengeExit = new actionPb.PlumChallengeExit();
@@ -844,7 +865,7 @@ export function toActionPlumResponseChallengeExit(
   req: IPlumResponseChallengeExit
 ): any {
   if (!req) {
-    return null;
+    return undefined;
   }
 
   const pbPlumResponseChallengeExit = new actionPb.PlumResponseChallengeExit();
@@ -860,7 +881,7 @@ export function toActionPlumResponseChallengeExit(
 
 export function toActionPlumFinalizeExit(req: IPlumFinalizeExit): any {
   if (!req) {
-    return null;
+    return undefined;
   }
   const pbPlumFinalizeExit = new actionPb.PlumFinalizeExit();
   pbPlumFinalizeExit.setSubchainaddress(req.subChainAddress);
@@ -870,7 +891,7 @@ export function toActionPlumFinalizeExit(req: IPlumFinalizeExit): any {
 
 export function toActionPlumSettleDeposit(req: IPlumSettleDeposit): any {
   if (!req) {
-    return null;
+    return undefined;
   }
   const pbPlumSettleDeposit = new actionPb.PlumSettleDeposit();
   pbPlumSettleDeposit.setCoinid(req.coinID);
@@ -879,7 +900,7 @@ export function toActionPlumSettleDeposit(req: IPlumSettleDeposit): any {
 
 export function toActionPlumTransfer(req: IPlumTransfer): any {
   if (!req) {
-    return null;
+    return undefined;
   }
   const pbPlumTransfer = new actionPb.PlumTransfer();
   pbPlumTransfer.setCoinid(req.coinID);
@@ -893,7 +914,7 @@ export function toActionDepositToRewardingFund(
   req: IDepositToRewardingFund
 ): any {
   if (!req) {
-    return null;
+    return undefined;
   }
   const pbDepositToRewardingFund = new actionPb.DepositToRewardingFund();
   pbDepositToRewardingFund.setAmount(req.amount);
@@ -905,7 +926,7 @@ export function toActionClaimFromRewardingFund(
   req: IClaimFromRewardingFund
 ): any {
   if (!req) {
-    return null;
+    return undefined;
   }
   const pbClaimFromRewardingFund = new actionPb.ClaimFromRewardingFund();
   // @ts-ignore
@@ -917,7 +938,7 @@ export function toActionClaimFromRewardingFund(
 
 export function toActionGrantReward(req: IGrantReward): any {
   if (!req) {
-    return null;
+    return undefined;
   }
   const pbGrantReward = new actionPb.GrantReward();
   pbGrantReward.setType(req.type);
@@ -930,66 +951,47 @@ export function toAction(req: IAction): any {
   const core = req && req.core;
   if (core) {
     pbActionCore.setVersion(core.version);
-    pbActionCore.setNonce(core.nonce);
-    pbActionCore.setGaslimit(core.gasLimit);
+    pbActionCore.setNonce(Number(core.nonce));
+    pbActionCore.setGaslimit(Number(core.gasLimit));
     pbActionCore.setGasprice(core.gasPrice);
     pbActionCore.setTransfer(toActionTransfer(core.transfer));
-    // @ts-ignore
     pbActionCore.setVote(toActionVote(core.vote));
-    // @ts-ignore
     pbActionCore.setExecution(toActionExecution(core.execution));
-    // @ts-ignore
     pbActionCore.setStartsubchain(toActionStartSubChain(core.startSubChain));
-    // @ts-ignore
     pbActionCore.setStopsubchain(toActionStopSubChain(core.stopSubChain));
-    // @ts-ignore
     pbActionCore.setPutblock(toActionPutBlock(core.putBlock));
-    // @ts-ignore
     pbActionCore.setCreatedeposit(toActionCreateDeposit(core.createDeposit));
-    // @ts-ignore
     pbActionCore.setSettledeposit(toActionSettleDeposit(core.settleDeposit));
-    // @ts-ignore
     pbActionCore.setCreateplumchain(
       toActionCreatePlumChain(core.createPlumChain)
     );
-    // @ts-ignore
     pbActionCore.setTerminateplumchain(
       toActionTerminatePlumChain(core.terminatePlumChain)
     );
-    // @ts-ignore
     pbActionCore.setPlumputblock(toActionPlumPutBlock(core.plumPutBlock));
-    // @ts-ignore
     pbActionCore.setPlumcreatedeposit(
       toActionPlumCreateDeposit(core.plumCreateDeposit)
     );
-    // @ts-ignore
     pbActionCore.setPlumstartexit(toActionPlumStartExit(core.plumStartExit));
-    // @ts-ignore
     pbActionCore.setPlumchallengeexit(
       toActionPlumChallengeExit(core.plumChallengeExit)
     );
-    // @ts-ignore
     pbActionCore.setPlumresponsechallengeexit(
       toActionPlumResponseChallengeExit(core.plumResponseChallengeExit)
     );
-    // @ts-ignore
     pbActionCore.setPlumfinalizeexit(
       toActionPlumFinalizeExit(core.plumFinalizeExit)
     );
-    // @ts-ignore
     pbActionCore.setPlumsettledeposit(
       toActionPlumSettleDeposit(core.plumSettleDeposit)
     );
     pbActionCore.setPlumtransfer(toActionPlumTransfer(core.plumTransfer));
-    // @ts-ignore
     pbActionCore.setDeposittorewardingfund(
       toActionDepositToRewardingFund(core.depositToRewardingFund)
     );
-    // @ts-ignore
     pbActionCore.setClaimfromrewardingfund(
       toActionClaimFromRewardingFund(core.claimFromRewardingFund)
     );
-    // @ts-ignore
     pbActionCore.setGrantreward(toActionGrantReward(core.grantReward));
   }
 
@@ -1003,10 +1005,14 @@ export function toAction(req: IAction): any {
   return pbAction;
 }
 
-// Properties of a GetActionsResponse.
+export interface IActionInfo {
+  action: IAction;
+  actHash: string;
+  blkHash: string;
+}
+
 export interface IGetActionsResponse {
-  // GetActionsResponse actions
-  actions: Array<IAction>;
+  actionInfo: Array<IActionInfo>;
 }
 
 export const GetActionsRequest = {
@@ -1368,111 +1374,137 @@ export const GetActionsRequest = {
     return grantRewardData;
   },
 
-  // tslint:disable-next-line:max-func-body-length
-  from(pbRes: any): IGetActionsResponse {
-    const rawActions = pbRes.getActionsList();
-    const res = {
-      actions: rawActions
+  getPutPollResult(req: PutPollResult | undefined): IPutPollResult | undefined {
+    if (!req) {
+      return undefined;
+    }
+    let candidateList: ICandidateList | undefined;
+    const rawCandidates = req.getCandidates();
+    if (rawCandidates) {
+      candidateList = {
+        candidates: []
+      };
+      const rawCandidatesList = rawCandidates.getCandidatesList();
+      if (rawCandidatesList) {
+        for (const rawCandidate of rawCandidatesList) {
+          candidateList.candidates.push({
+            address: rawCandidate.getAddress(),
+            votes: rawCandidate.getVotes(),
+            pubKey: rawCandidate.getPubkey(),
+            rewardAddress: rawCandidate.getRewardaddress()
+          });
+        }
+      }
+    }
+    return {
+      height: req.getHeight(),
+      candidates: candidateList
     };
-    if (rawActions) {
-      const parsedActions = [];
-      for (let i = 0; i < rawActions.length; i++) {
-        let actionCore = rawActions[i].getCore();
-        if (actionCore) {
-          let executionData = rawActions[i].getCore().getExecution();
-          if (executionData) {
-            executionData = {
-              amount: rawActions[i]
-                .getCore()
-                .getExecution()
-                .getAmount(),
-              contract: rawActions[i]
-                .getCore()
-                .getExecution()
-                .getContract(),
-              data: rawActions[i]
-                .getCore()
-                .getExecution()
-                .getData()
-            };
-          }
+  },
 
+  // tslint:disable-next-line:max-func-body-length
+  from(pbRes: GetActionsResponse): IGetActionsResponse {
+    const res = ({
+      actionInfo: []
+    } as any) as IGetActionsResponse;
+    const rawActionInfoList = pbRes.getActioninfoList();
+    if (!rawActionInfoList) {
+      return res;
+    }
+
+    for (const rawActionInfo of rawActionInfoList) {
+      const actionInfo = ({
+        actHash: rawActionInfo.getActhash(),
+        blkHash: rawActionInfo.getBlkhash()
+      } as any) as IActionInfo;
+
+      const rawAction = rawActionInfo.getAction();
+      if (rawAction) {
+        const rawActionCore = rawAction.getCore();
+        let actionCore: IActionCore | undefined;
+        if (rawActionCore) {
           actionCore = {
-            version: rawActions[i].getCore().getVersion(),
-            nonce: rawActions[i].getCore().getNonce(),
-            gasLimit: rawActions[i].getCore().getGaslimit(),
-            gasPrice: rawActions[i].getCore().getGasprice(),
+            version: rawActionCore.getVersion(),
+            nonce: String(rawActionCore.getNonce()),
+            gasLimit: String(rawActionCore.getGaslimit()),
+            gasPrice: rawActionCore.getGasprice(),
             transfer: GetActionsRequest.fromTransfer(
-              rawActions[i].getCore().getTransfer()
+              rawActionCore.getTransfer()
             ),
-            vote: GetActionsRequest.fromVote(rawActions[i].getCore().getVote()),
+            vote: GetActionsRequest.fromVote(rawActionCore.getVote()),
             execution: GetActionsRequest.fromExecution(
-              rawActions[i].getCore().getExecution()
+              rawActionCore.getExecution()
             ),
             startSubChain: GetActionsRequest.fromStartSubChain(
-              rawActions[i].getCore().getStartsubchain()
+              rawActionCore.getStartsubchain()
             ),
             stopSubChain: GetActionsRequest.fromStopSubChain(
-              rawActions[i].getCore().getStopsubchain()
+              rawActionCore.getStopsubchain()
             ),
             putBlock: GetActionsRequest.fromPutBlock(
-              rawActions[i].getCore().getPutblock()
+              rawActionCore.getPutblock()
             ),
             createDeposit: GetActionsRequest.fromCreateDeposit(
-              rawActions[i].getCore().getCreatedeposit()
+              rawActionCore.getCreatedeposit()
             ),
             settleDeposit: GetActionsRequest.fromSettleDeposit(
-              rawActions[i].getCore().getSettledeposit()
+              rawActionCore.getSettledeposit()
             ),
             createPlumChain: GetActionsRequest.fromCreatePlumChain(
-              rawActions[i].getCore().getCreateplumchain()
+              rawActionCore.getCreateplumchain()
             ),
             terminatePlumChain: GetActionsRequest.fromTerminatePlumChain(
-              rawActions[i].getCore().getTerminateplumchain()
+              rawActionCore.getTerminateplumchain()
             ),
             plumPutBlock: GetActionsRequest.fromPlumPutBlock(
-              rawActions[i].getCore().getPlumputblock()
+              rawActionCore.getPlumputblock()
             ),
             plumCreateDeposit: GetActionsRequest.fromPlumCreateDeposit(
-              rawActions[i].getCore().getPlumcreatedeposit()
+              rawActionCore.getPlumcreatedeposit()
             ),
             plumStartExit: GetActionsRequest.fromPlumStartExit(
-              rawActions[i].getCore().getPlumstartexit()
+              rawActionCore.getPlumstartexit()
             ),
             plumChallengeExit: GetActionsRequest.fromPlumChallengeExit(
-              rawActions[i].getCore().getPlumchallengeexit()
+              rawActionCore.getPlumchallengeexit()
             ),
             plumResponseChallengeExit: GetActionsRequest.fromPlumResponseChallengeExit(
-              rawActions[i].getCore().getPlumresponsechallengeexit()
+              rawActionCore.getPlumresponsechallengeexit()
             ),
             plumFinalizeExit: GetActionsRequest.fromPlumFinalizeExit(
-              rawActions[i].getCore().getPlumfinalizeexit()
+              rawActionCore.getPlumfinalizeexit()
             ),
             plumSettleDeposit: GetActionsRequest.fromPlumSettleDeposit(
-              rawActions[i].getCore().getPlumsettledeposit()
+              rawActionCore.getPlumsettledeposit()
             ),
             plumTransfer: GetActionsRequest.fromPlumTransfer(
-              rawActions[i].getCore().getPlumtransfer()
+              rawActionCore.getPlumtransfer()
             ),
             depositToRewardingFund: GetActionsRequest.fromDepositToRewardingFund(
-              rawActions[i].getCore().getDeposittorewardingfund()
+              rawActionCore.getDeposittorewardingfund()
             ),
             claimFromRewardingFund: GetActionsRequest.fromClaimFromRewardingFund(
-              rawActions[i].getCore().getClaimfromrewardingfund()
+              rawActionCore.getClaimfromrewardingfund()
             ),
             grantReward: GetActionsRequest.fromGrantReward(
-              rawActions[i].getCore().getGrantreward()
+              rawActionCore.getGrantreward()
+            ),
+            putPollResult: GetActionsRequest.getPutPollResult(
+              rawActionCore.getPutpollresult()
             )
           };
         }
-        parsedActions[i] = {
+
+        actionInfo.action = {
           core: actionCore,
-          senderPubKey: rawActions[i].getSenderpubkey(),
-          signature: rawActions[i].getSignature()
+          senderPubKey: rawAction.getSenderpubkey(),
+          signature: rawAction.getSignature()
         };
       }
-      res.actions = parsedActions;
+
+      res.actionInfo.push(actionInfo);
     }
+
     return res;
   }
 };
@@ -1512,16 +1544,16 @@ export interface ILog {
   address: string;
 
   // Log topics
-  topics: Array<Uint8Array>;
+  topics: Array<Buffer | {}>;
 
   // Log data
-  data: Uint8Array;
+  data: Buffer | {};
 
   // Log blockNumber
   blockNumber: number;
 
   // Log txnHash
-  txnHash: Uint8Array;
+  txnHash: Buffer | {};
 
   // Log index
   index: number;
@@ -1530,13 +1562,13 @@ export interface ILog {
 // Properties of an Receipt.
 export interface IReceipt {
   // Receipt returnValue
-  returnValue: Uint8Array;
+  returnValue: Buffer | {};
 
   // Receipt status
   status: number;
 
   // Receipt actHash
-  actHash: Uint8Array;
+  actHash: Buffer | {};
 
   // Receipt gasConsumed
   gasConsumed: number;
@@ -1563,34 +1595,46 @@ export const GetReceiptByActionRequest = {
     return pbReq;
   },
 
-  from(pbRes: any): IGetReceiptByActionResponse {
-    const receiptData = pbRes.getReceiptByAction();
-    const res = {
-      receipt: receiptData
-    };
-    if (receiptData) {
-      const logsData = receiptData.getLogs();
-      res.receipt = {
-        returnValue: receiptData.getReturnValue(),
-        status: receiptData.getStatus(),
-        actHash: receiptData.getActHash(),
-        gasConsumed: receiptData.getGasConsumed(),
-        contractAddress: receiptData.getContractAddress(),
-        logs: logsData
-      };
-      if (logsData) {
-        const parsedLogsData = [];
-        for (let i = 0; i < logsData.length; i++) {
-          parsedLogsData[i] = {
-            address: logsData[i].getAddress(),
-            topics: logsData[i].getTopics(),
-            data: logsData[i].getData(),
-            blockNumber: logsData[i].getBlockNumber(),
-            txnHash: logsData[i].getTxnHash(),
-            index: logsData[i].getIndex()
-          };
+  from(pbRes: GetReceiptByActionResponse): IGetReceiptByActionResponse {
+    const receiptData = pbRes.getReceipt();
+    if (!receiptData) {
+      return {
+        receipt: {
+          returnValue: Buffer.from(""),
+          // Receipt statu,
+          status: 0,
+          // Receipt actHas,
+          actHash: Buffer.from(""),
+          // Receipt gasConsume,
+          gasConsumed: 0,
+          // Receipt contractAddres,
+          contractAddress: "",
+          // Receipt log,
+          logs: []
         }
-        res.receipt.logs = parsedLogsData;
+      };
+    }
+    const res = {
+      receipt: {
+        returnValue: receiptData.getReturnvalue(),
+        status: receiptData.getStatus(),
+        actHash: receiptData.getActhash(),
+        gasConsumed: receiptData.getGasconsumed(),
+        contractAddress: receiptData.getContractaddress(),
+        logs: [] as Array<ILog>
+      }
+    };
+    const logsData = receiptData.getLogsList();
+    if (logsData) {
+      for (const log of logsData) {
+        res.receipt.logs.push({
+          address: log.getAddress(),
+          topics: log.getTopicsList(),
+          data: log.getData(),
+          blockNumber: log.getBlocknumber(),
+          txnHash: log.getTxnhash(),
+          index: log.getIndex()
+        });
       }
     }
     return res;
@@ -1657,7 +1701,7 @@ export interface IEstimateGasForActionRequest {
 
 // Properties of a EstimateGasForActionResponse.
 export interface IEstimateGasForActionResponse {
-  gas: number;
+  gas: string;
 }
 
 export const EstimateGasForActionRequest = {

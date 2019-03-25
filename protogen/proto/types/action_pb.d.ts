@@ -1,9 +1,9 @@
-import * as jspb from "google-protobuf";
+import * as jspb from "google-protobuf"
 
-import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
+import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
 
 export class Transfer extends jspb.Message {
-  constructor();
+  constructor ();
   getAmount(): string;
   setAmount(value: string): void;
   getRecipient(): string;
@@ -13,27 +13,21 @@ export class Transfer extends jspb.Message {
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Transfer.AsObject;
   static toObject(includeInstance: boolean, msg: Transfer): Transfer.AsObject;
-  static serializeBinaryToWriter(
-    message: Transfer,
-    writer: jspb.BinaryWriter
-  ): void;
+  static serializeBinaryToWriter(message: Transfer, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): Transfer;
-  static deserializeBinaryFromReader(
-    message: Transfer,
-    reader: jspb.BinaryReader
-  ): Transfer;
+  static deserializeBinaryFromReader(message: Transfer, reader: jspb.BinaryReader): Transfer;
 }
 
-export declare namespace Transfer {
+export namespace Transfer {
   export type AsObject = {
     amount: string;
     recipient: string;
     payload: {};
-  };
+  }
 }
 
 export class Vote extends jspb.Message {
-  constructor();
+  constructor ();
   getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
   setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): void;
   clearTimestamp(): void;
@@ -42,93 +36,66 @@ export class Vote extends jspb.Message {
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Vote.AsObject;
   static toObject(includeInstance: boolean, msg: Vote): Vote.AsObject;
-  static serializeBinaryToWriter(
-    message: Vote,
-    writer: jspb.BinaryWriter
-  ): void;
+  static serializeBinaryToWriter(message: Vote, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): Vote;
-  static deserializeBinaryFromReader(
-    message: Vote,
-    reader: jspb.BinaryReader
-  ): Vote;
+  static deserializeBinaryFromReader(message: Vote, reader: jspb.BinaryReader): Vote;
 }
 
-export declare namespace Vote {
+export namespace Vote {
   export type AsObject = {
     timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject;
     voteeaddress: string;
-  };
+  }
 }
 
 export class Candidate extends jspb.Message {
-  constructor();
+  constructor ();
   getAddress(): string;
   setAddress(value: string): void;
   getVotes(): {};
   setVotes(value: {}): void;
   getPubkey(): {};
   setPubkey(value: {}): void;
-  getCreationheight(): number;
-  setCreationheight(value: number): void;
-  getLastupdateheight(): number;
-  setLastupdateheight(value: number): void;
   getRewardaddress(): string;
   setRewardaddress(value: string): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Candidate.AsObject;
   static toObject(includeInstance: boolean, msg: Candidate): Candidate.AsObject;
-  static serializeBinaryToWriter(
-    message: Candidate,
-    writer: jspb.BinaryWriter
-  ): void;
+  static serializeBinaryToWriter(message: Candidate, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): Candidate;
-  static deserializeBinaryFromReader(
-    message: Candidate,
-    reader: jspb.BinaryReader
-  ): Candidate;
+  static deserializeBinaryFromReader(message: Candidate, reader: jspb.BinaryReader): Candidate;
 }
 
-export declare namespace Candidate {
+export namespace Candidate {
   export type AsObject = {
     address: string;
     votes: {};
     pubkey: {};
-    creationheight: number;
-    lastupdateheight: number;
     rewardaddress: string;
-  };
+  }
 }
 
 export class CandidateList extends jspb.Message {
-  constructor();
+  constructor ();
   getCandidatesList(): Candidate[] | undefined;
   setCandidatesList(value?: Candidate[]): void;
   clearCandidatesList(): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CandidateList.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: CandidateList
-  ): CandidateList.AsObject;
-  static serializeBinaryToWriter(
-    message: CandidateList,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: CandidateList): CandidateList.AsObject;
+  static serializeBinaryToWriter(message: CandidateList, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): CandidateList;
-  static deserializeBinaryFromReader(
-    message: CandidateList,
-    reader: jspb.BinaryReader
-  ): CandidateList;
+  static deserializeBinaryFromReader(message: CandidateList, reader: jspb.BinaryReader): CandidateList;
 }
 
-export declare namespace CandidateList {
+export namespace CandidateList {
   export type AsObject = {
     candidatesList?: Candidate.AsObject[];
-  };
+  }
 }
 
 export class PutPollResult extends jspb.Message {
-  constructor();
+  constructor ();
   getHeight(): number;
   setHeight(value: number): void;
   getCandidates(): CandidateList | undefined;
@@ -136,30 +103,21 @@ export class PutPollResult extends jspb.Message {
   clearCandidates(): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PutPollResult.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: PutPollResult
-  ): PutPollResult.AsObject;
-  static serializeBinaryToWriter(
-    message: PutPollResult,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: PutPollResult): PutPollResult.AsObject;
+  static serializeBinaryToWriter(message: PutPollResult, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): PutPollResult;
-  static deserializeBinaryFromReader(
-    message: PutPollResult,
-    reader: jspb.BinaryReader
-  ): PutPollResult;
+  static deserializeBinaryFromReader(message: PutPollResult, reader: jspb.BinaryReader): PutPollResult;
 }
 
-export declare namespace PutPollResult {
+export namespace PutPollResult {
   export type AsObject = {
     height: number;
     candidates?: CandidateList.AsObject;
-  };
+  }
 }
 
 export class Execution extends jspb.Message {
-  constructor();
+  constructor ();
   getAmount(): string;
   setAmount(value: string): void;
   getContract(): string;
@@ -169,27 +127,21 @@ export class Execution extends jspb.Message {
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Execution.AsObject;
   static toObject(includeInstance: boolean, msg: Execution): Execution.AsObject;
-  static serializeBinaryToWriter(
-    message: Execution,
-    writer: jspb.BinaryWriter
-  ): void;
+  static serializeBinaryToWriter(message: Execution, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): Execution;
-  static deserializeBinaryFromReader(
-    message: Execution,
-    reader: jspb.BinaryReader
-  ): Execution;
+  static deserializeBinaryFromReader(message: Execution, reader: jspb.BinaryReader): Execution;
 }
 
-export declare namespace Execution {
+export namespace Execution {
   export type AsObject = {
     amount: string;
     contract: string;
     data: {};
-  };
+  }
 }
 
 export class StartSubChain extends jspb.Message {
-  constructor();
+  constructor ();
   getChainid(): number;
   setChainid(value: number): void;
   getSecuritydeposit(): string;
@@ -202,33 +154,24 @@ export class StartSubChain extends jspb.Message {
   setParentheightoffset(value: number): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): StartSubChain.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: StartSubChain
-  ): StartSubChain.AsObject;
-  static serializeBinaryToWriter(
-    message: StartSubChain,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: StartSubChain): StartSubChain.AsObject;
+  static serializeBinaryToWriter(message: StartSubChain, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): StartSubChain;
-  static deserializeBinaryFromReader(
-    message: StartSubChain,
-    reader: jspb.BinaryReader
-  ): StartSubChain;
+  static deserializeBinaryFromReader(message: StartSubChain, reader: jspb.BinaryReader): StartSubChain;
 }
 
-export declare namespace StartSubChain {
+export namespace StartSubChain {
   export type AsObject = {
     chainid: number;
     securitydeposit: string;
     operationdeposit: string;
     startheight: number;
     parentheightoffset: number;
-  };
+  }
 }
 
 export class StopSubChain extends jspb.Message {
-  constructor();
+  constructor ();
   getChainid(): number;
   setChainid(value: number): void;
   getStopheight(): number;
@@ -237,61 +180,43 @@ export class StopSubChain extends jspb.Message {
   setSubchainaddress(value: string): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): StopSubChain.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: StopSubChain
-  ): StopSubChain.AsObject;
-  static serializeBinaryToWriter(
-    message: StopSubChain,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: StopSubChain): StopSubChain.AsObject;
+  static serializeBinaryToWriter(message: StopSubChain, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): StopSubChain;
-  static deserializeBinaryFromReader(
-    message: StopSubChain,
-    reader: jspb.BinaryReader
-  ): StopSubChain;
+  static deserializeBinaryFromReader(message: StopSubChain, reader: jspb.BinaryReader): StopSubChain;
 }
 
-export declare namespace StopSubChain {
+export namespace StopSubChain {
   export type AsObject = {
     chainid: number;
     stopheight: number;
     subchainaddress: string;
-  };
+  }
 }
 
 export class MerkleRoot extends jspb.Message {
-  constructor();
+  constructor ();
   getName(): string;
   setName(value: string): void;
   getValue(): {};
   setValue(value: {}): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): MerkleRoot.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: MerkleRoot
-  ): MerkleRoot.AsObject;
-  static serializeBinaryToWriter(
-    message: MerkleRoot,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: MerkleRoot): MerkleRoot.AsObject;
+  static serializeBinaryToWriter(message: MerkleRoot, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): MerkleRoot;
-  static deserializeBinaryFromReader(
-    message: MerkleRoot,
-    reader: jspb.BinaryReader
-  ): MerkleRoot;
+  static deserializeBinaryFromReader(message: MerkleRoot, reader: jspb.BinaryReader): MerkleRoot;
 }
 
-export declare namespace MerkleRoot {
+export namespace MerkleRoot {
   export type AsObject = {
     name: string;
     value: {};
-  };
+  }
 }
 
 export class PutBlock extends jspb.Message {
-  constructor();
+  constructor ();
   getSubchainaddress(): string;
   setSubchainaddress(value: string): void;
   getHeight(): number;
@@ -302,27 +227,21 @@ export class PutBlock extends jspb.Message {
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PutBlock.AsObject;
   static toObject(includeInstance: boolean, msg: PutBlock): PutBlock.AsObject;
-  static serializeBinaryToWriter(
-    message: PutBlock,
-    writer: jspb.BinaryWriter
-  ): void;
+  static serializeBinaryToWriter(message: PutBlock, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): PutBlock;
-  static deserializeBinaryFromReader(
-    message: PutBlock,
-    reader: jspb.BinaryReader
-  ): PutBlock;
+  static deserializeBinaryFromReader(message: PutBlock, reader: jspb.BinaryReader): PutBlock;
 }
 
-export declare namespace PutBlock {
+export namespace PutBlock {
   export type AsObject = {
     subchainaddress: string;
     height: number;
     rootsList?: MerkleRoot.AsObject[];
-  };
+  }
 }
 
 export class CreateDeposit extends jspb.Message {
-  constructor();
+  constructor ();
   getChainid(): number;
   setChainid(value: number): void;
   getAmount(): string;
@@ -331,31 +250,22 @@ export class CreateDeposit extends jspb.Message {
   setRecipient(value: string): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CreateDeposit.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: CreateDeposit
-  ): CreateDeposit.AsObject;
-  static serializeBinaryToWriter(
-    message: CreateDeposit,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: CreateDeposit): CreateDeposit.AsObject;
+  static serializeBinaryToWriter(message: CreateDeposit, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): CreateDeposit;
-  static deserializeBinaryFromReader(
-    message: CreateDeposit,
-    reader: jspb.BinaryReader
-  ): CreateDeposit;
+  static deserializeBinaryFromReader(message: CreateDeposit, reader: jspb.BinaryReader): CreateDeposit;
 }
 
-export declare namespace CreateDeposit {
+export namespace CreateDeposit {
   export type AsObject = {
     chainid: number;
     amount: string;
     recipient: string;
-  };
+  }
 }
 
 export class SettleDeposit extends jspb.Message {
-  constructor();
+  constructor ();
   getAmount(): string;
   setAmount(value: string): void;
   getRecipient(): string;
@@ -364,81 +274,55 @@ export class SettleDeposit extends jspb.Message {
   setIndex(value: number): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): SettleDeposit.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: SettleDeposit
-  ): SettleDeposit.AsObject;
-  static serializeBinaryToWriter(
-    message: SettleDeposit,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: SettleDeposit): SettleDeposit.AsObject;
+  static serializeBinaryToWriter(message: SettleDeposit, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): SettleDeposit;
-  static deserializeBinaryFromReader(
-    message: SettleDeposit,
-    reader: jspb.BinaryReader
-  ): SettleDeposit;
+  static deserializeBinaryFromReader(message: SettleDeposit, reader: jspb.BinaryReader): SettleDeposit;
 }
 
-export declare namespace SettleDeposit {
+export namespace SettleDeposit {
   export type AsObject = {
     amount: string;
     recipient: string;
     index: number;
-  };
+  }
 }
 
 export class CreatePlumChain extends jspb.Message {
-  constructor();
+  constructor ();
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CreatePlumChain.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: CreatePlumChain
-  ): CreatePlumChain.AsObject;
-  static serializeBinaryToWriter(
-    message: CreatePlumChain,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: CreatePlumChain): CreatePlumChain.AsObject;
+  static serializeBinaryToWriter(message: CreatePlumChain, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): CreatePlumChain;
-  static deserializeBinaryFromReader(
-    message: CreatePlumChain,
-    reader: jspb.BinaryReader
-  ): CreatePlumChain;
+  static deserializeBinaryFromReader(message: CreatePlumChain, reader: jspb.BinaryReader): CreatePlumChain;
 }
 
-export declare namespace CreatePlumChain {
-  export type AsObject = {};
+export namespace CreatePlumChain {
+  export type AsObject = {
+  }
 }
 
 export class TerminatePlumChain extends jspb.Message {
-  constructor();
+  constructor ();
   getSubchainaddress(): string;
   setSubchainaddress(value: string): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): TerminatePlumChain.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: TerminatePlumChain
-  ): TerminatePlumChain.AsObject;
-  static serializeBinaryToWriter(
-    message: TerminatePlumChain,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: TerminatePlumChain): TerminatePlumChain.AsObject;
+  static serializeBinaryToWriter(message: TerminatePlumChain, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): TerminatePlumChain;
-  static deserializeBinaryFromReader(
-    message: TerminatePlumChain,
-    reader: jspb.BinaryReader
-  ): TerminatePlumChain;
+  static deserializeBinaryFromReader(message: TerminatePlumChain, reader: jspb.BinaryReader): TerminatePlumChain;
 }
 
-export declare namespace TerminatePlumChain {
+export namespace TerminatePlumChain {
   export type AsObject = {
     subchainaddress: string;
-  };
+  }
 }
 
 export class PlumPutBlock extends jspb.Message {
-  constructor();
+  constructor ();
   getSubchainaddress(): string;
   setSubchainaddress(value: string): void;
   getHeight(): number;
@@ -447,61 +331,44 @@ export class PlumPutBlock extends jspb.Message {
   clearRootsMap(): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PlumPutBlock.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: PlumPutBlock
-  ): PlumPutBlock.AsObject;
-  static serializeBinaryToWriter(
-    message: PlumPutBlock,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: PlumPutBlock): PlumPutBlock.AsObject;
+  static serializeBinaryToWriter(message: PlumPutBlock, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): PlumPutBlock;
-  static deserializeBinaryFromReader(
-    message: PlumPutBlock,
-    reader: jspb.BinaryReader
-  ): PlumPutBlock;
+  static deserializeBinaryFromReader(message: PlumPutBlock, reader: jspb.BinaryReader): PlumPutBlock;
 }
 
-export declare namespace PlumPutBlock {
+export namespace PlumPutBlock {
   export type AsObject = {
     subchainaddress: string;
     height: number;
     rootsMap?: PlumPutBlock.RootsEntry.AsObject[];
-  };
+  }
 
   export class RootsEntry extends jspb.Message {
-    constructor();
+    constructor ();
     getKey(): string;
     setKey(value: string): void;
     getValue(): {};
     setValue(value: {}): void;
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): RootsEntry.AsObject;
-    static toObject(
-      includeInstance: boolean,
-      msg: RootsEntry
-    ): RootsEntry.AsObject;
-    static serializeBinaryToWriter(
-      message: RootsEntry,
-      writer: jspb.BinaryWriter
-    ): void;
+    static toObject(includeInstance: boolean, msg: RootsEntry): RootsEntry.AsObject;
+    static serializeBinaryToWriter(message: RootsEntry, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): RootsEntry;
-    static deserializeBinaryFromReader(
-      message: RootsEntry,
-      reader: jspb.BinaryReader
-    ): RootsEntry;
+    static deserializeBinaryFromReader(message: RootsEntry, reader: jspb.BinaryReader): RootsEntry;
   }
 
   export namespace RootsEntry {
     export type AsObject = {
       key: string;
       value: {};
-    };
+    }
   }
+
 }
 
 export class PlumCreateDeposit extends jspb.Message {
-  constructor();
+  constructor ();
   getSubchainaddress(): string;
   setSubchainaddress(value: string): void;
   getAmount(): string;
@@ -510,31 +377,22 @@ export class PlumCreateDeposit extends jspb.Message {
   setRecipient(value: string): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PlumCreateDeposit.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: PlumCreateDeposit
-  ): PlumCreateDeposit.AsObject;
-  static serializeBinaryToWriter(
-    message: PlumCreateDeposit,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: PlumCreateDeposit): PlumCreateDeposit.AsObject;
+  static serializeBinaryToWriter(message: PlumCreateDeposit, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): PlumCreateDeposit;
-  static deserializeBinaryFromReader(
-    message: PlumCreateDeposit,
-    reader: jspb.BinaryReader
-  ): PlumCreateDeposit;
+  static deserializeBinaryFromReader(message: PlumCreateDeposit, reader: jspb.BinaryReader): PlumCreateDeposit;
 }
 
-export declare namespace PlumCreateDeposit {
+export namespace PlumCreateDeposit {
   export type AsObject = {
     subchainaddress: string;
     amount: string;
     recipient: string;
-  };
+  }
 }
 
 export class PlumStartExit extends jspb.Message {
-  constructor();
+  constructor ();
   getSubchainaddress(): string;
   setSubchainaddress(value: string): void;
   getPrevioustransfer(): {};
@@ -551,22 +409,13 @@ export class PlumStartExit extends jspb.Message {
   setExittransferblockheight(value: number): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PlumStartExit.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: PlumStartExit
-  ): PlumStartExit.AsObject;
-  static serializeBinaryToWriter(
-    message: PlumStartExit,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: PlumStartExit): PlumStartExit.AsObject;
+  static serializeBinaryToWriter(message: PlumStartExit, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): PlumStartExit;
-  static deserializeBinaryFromReader(
-    message: PlumStartExit,
-    reader: jspb.BinaryReader
-  ): PlumStartExit;
+  static deserializeBinaryFromReader(message: PlumStartExit, reader: jspb.BinaryReader): PlumStartExit;
 }
 
-export declare namespace PlumStartExit {
+export namespace PlumStartExit {
   export type AsObject = {
     subchainaddress: string;
     previoustransfer: {};
@@ -575,11 +424,11 @@ export declare namespace PlumStartExit {
     exittransfer: {};
     exittransferblockproof: {};
     exittransferblockheight: number;
-  };
+  }
 }
 
 export class PlumChallengeExit extends jspb.Message {
-  constructor();
+  constructor ();
   getSubchainaddress(): string;
   setSubchainaddress(value: string): void;
   getCoinid(): number;
@@ -592,33 +441,24 @@ export class PlumChallengeExit extends jspb.Message {
   setChallengetransferblockheight(value: number): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PlumChallengeExit.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: PlumChallengeExit
-  ): PlumChallengeExit.AsObject;
-  static serializeBinaryToWriter(
-    message: PlumChallengeExit,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: PlumChallengeExit): PlumChallengeExit.AsObject;
+  static serializeBinaryToWriter(message: PlumChallengeExit, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): PlumChallengeExit;
-  static deserializeBinaryFromReader(
-    message: PlumChallengeExit,
-    reader: jspb.BinaryReader
-  ): PlumChallengeExit;
+  static deserializeBinaryFromReader(message: PlumChallengeExit, reader: jspb.BinaryReader): PlumChallengeExit;
 }
 
-export declare namespace PlumChallengeExit {
+export namespace PlumChallengeExit {
   export type AsObject = {
     subchainaddress: string;
     coinid: number;
     challengetransfer: {};
     challengetransferblockproof: {};
     challengetransferblockheight: number;
-  };
+  }
 }
 
 export class PlumResponseChallengeExit extends jspb.Message {
-  constructor();
+  constructor ();
   getSubchainaddress(): string;
   setSubchainaddress(value: string): void;
   getCoinid(): number;
@@ -633,22 +473,13 @@ export class PlumResponseChallengeExit extends jspb.Message {
   setPrevioustransferblockheight(value: number): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PlumResponseChallengeExit.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: PlumResponseChallengeExit
-  ): PlumResponseChallengeExit.AsObject;
-  static serializeBinaryToWriter(
-    message: PlumResponseChallengeExit,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: PlumResponseChallengeExit): PlumResponseChallengeExit.AsObject;
+  static serializeBinaryToWriter(message: PlumResponseChallengeExit, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): PlumResponseChallengeExit;
-  static deserializeBinaryFromReader(
-    message: PlumResponseChallengeExit,
-    reader: jspb.BinaryReader
-  ): PlumResponseChallengeExit;
+  static deserializeBinaryFromReader(message: PlumResponseChallengeExit, reader: jspb.BinaryReader): PlumResponseChallengeExit;
 }
 
-export declare namespace PlumResponseChallengeExit {
+export namespace PlumResponseChallengeExit {
   export type AsObject = {
     subchainaddress: string;
     coinid: number;
@@ -656,68 +487,50 @@ export declare namespace PlumResponseChallengeExit {
     responsetransfer: {};
     responsetransferblockproof: {};
     previoustransferblockheight: number;
-  };
+  }
 }
 
 export class PlumFinalizeExit extends jspb.Message {
-  constructor();
+  constructor ();
   getSubchainaddress(): string;
   setSubchainaddress(value: string): void;
   getCoinid(): number;
   setCoinid(value: number): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PlumFinalizeExit.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: PlumFinalizeExit
-  ): PlumFinalizeExit.AsObject;
-  static serializeBinaryToWriter(
-    message: PlumFinalizeExit,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: PlumFinalizeExit): PlumFinalizeExit.AsObject;
+  static serializeBinaryToWriter(message: PlumFinalizeExit, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): PlumFinalizeExit;
-  static deserializeBinaryFromReader(
-    message: PlumFinalizeExit,
-    reader: jspb.BinaryReader
-  ): PlumFinalizeExit;
+  static deserializeBinaryFromReader(message: PlumFinalizeExit, reader: jspb.BinaryReader): PlumFinalizeExit;
 }
 
-export declare namespace PlumFinalizeExit {
+export namespace PlumFinalizeExit {
   export type AsObject = {
     subchainaddress: string;
     coinid: number;
-  };
+  }
 }
 
 export class PlumSettleDeposit extends jspb.Message {
-  constructor();
+  constructor ();
   getCoinid(): number;
   setCoinid(value: number): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PlumSettleDeposit.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: PlumSettleDeposit
-  ): PlumSettleDeposit.AsObject;
-  static serializeBinaryToWriter(
-    message: PlumSettleDeposit,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: PlumSettleDeposit): PlumSettleDeposit.AsObject;
+  static serializeBinaryToWriter(message: PlumSettleDeposit, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): PlumSettleDeposit;
-  static deserializeBinaryFromReader(
-    message: PlumSettleDeposit,
-    reader: jspb.BinaryReader
-  ): PlumSettleDeposit;
+  static deserializeBinaryFromReader(message: PlumSettleDeposit, reader: jspb.BinaryReader): PlumSettleDeposit;
 }
 
-export declare namespace PlumSettleDeposit {
+export namespace PlumSettleDeposit {
   export type AsObject = {
     coinid: number;
-  };
+  }
 }
 
 export class PlumTransfer extends jspb.Message {
-  constructor();
+  constructor ();
   getCoinid(): number;
   setCoinid(value: number): void;
   getDenomination(): {};
@@ -728,32 +541,23 @@ export class PlumTransfer extends jspb.Message {
   setRecipient(value: string): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PlumTransfer.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: PlumTransfer
-  ): PlumTransfer.AsObject;
-  static serializeBinaryToWriter(
-    message: PlumTransfer,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: PlumTransfer): PlumTransfer.AsObject;
+  static serializeBinaryToWriter(message: PlumTransfer, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): PlumTransfer;
-  static deserializeBinaryFromReader(
-    message: PlumTransfer,
-    reader: jspb.BinaryReader
-  ): PlumTransfer;
+  static deserializeBinaryFromReader(message: PlumTransfer, reader: jspb.BinaryReader): PlumTransfer;
 }
 
-export declare namespace PlumTransfer {
+export namespace PlumTransfer {
   export type AsObject = {
     coinid: number;
     denomination: {};
     owner: string;
     recipient: string;
-  };
+  }
 }
 
 export class ActionCore extends jspb.Message {
-  constructor();
+  constructor ();
   getVersion(): number;
   setVersion(value: number): void;
   getNonce(): number;
@@ -830,22 +634,13 @@ export class ActionCore extends jspb.Message {
   clearPutpollresult(): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ActionCore.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: ActionCore
-  ): ActionCore.AsObject;
-  static serializeBinaryToWriter(
-    message: ActionCore,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: ActionCore): ActionCore.AsObject;
+  static serializeBinaryToWriter(message: ActionCore, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): ActionCore;
-  static deserializeBinaryFromReader(
-    message: ActionCore,
-    reader: jspb.BinaryReader
-  ): ActionCore;
+  static deserializeBinaryFromReader(message: ActionCore, reader: jspb.BinaryReader): ActionCore;
 }
 
-export declare namespace ActionCore {
+export namespace ActionCore {
   export type AsObject = {
     version: number;
     nonce: number;
@@ -873,11 +668,11 @@ export declare namespace ActionCore {
     claimfromrewardingfund?: ClaimFromRewardingFund.AsObject;
     grantreward?: GrantReward.AsObject;
     putpollresult?: PutPollResult.AsObject;
-  };
+  }
 }
 
 export class Action extends jspb.Message {
-  constructor();
+  constructor ();
   getCore(): ActionCore | undefined;
   setCore(value?: ActionCore): void;
   clearCore(): void;
@@ -888,27 +683,21 @@ export class Action extends jspb.Message {
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Action.AsObject;
   static toObject(includeInstance: boolean, msg: Action): Action.AsObject;
-  static serializeBinaryToWriter(
-    message: Action,
-    writer: jspb.BinaryWriter
-  ): void;
+  static serializeBinaryToWriter(message: Action, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): Action;
-  static deserializeBinaryFromReader(
-    message: Action,
-    reader: jspb.BinaryReader
-  ): Action;
+  static deserializeBinaryFromReader(message: Action, reader: jspb.BinaryReader): Action;
 }
 
-export declare namespace Action {
+export namespace Action {
   export type AsObject = {
     core?: ActionCore.AsObject;
     senderpubkey: {};
     signature: {};
-  };
+  }
 }
 
 export class Receipt extends jspb.Message {
-  constructor();
+  constructor ();
   getReturnvalue(): {};
   setReturnvalue(value: {}): void;
   getStatus(): number;
@@ -925,18 +714,12 @@ export class Receipt extends jspb.Message {
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Receipt.AsObject;
   static toObject(includeInstance: boolean, msg: Receipt): Receipt.AsObject;
-  static serializeBinaryToWriter(
-    message: Receipt,
-    writer: jspb.BinaryWriter
-  ): void;
+  static serializeBinaryToWriter(message: Receipt, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): Receipt;
-  static deserializeBinaryFromReader(
-    message: Receipt,
-    reader: jspb.BinaryReader
-  ): Receipt;
+  static deserializeBinaryFromReader(message: Receipt, reader: jspb.BinaryReader): Receipt;
 }
 
-export declare namespace Receipt {
+export namespace Receipt {
   export type AsObject = {
     returnvalue: {};
     status: number;
@@ -944,11 +727,11 @@ export declare namespace Receipt {
     gasconsumed: number;
     contractaddress: string;
     logsList?: Log.AsObject[];
-  };
+  }
 }
 
 export class Log extends jspb.Message {
-  constructor();
+  constructor ();
   getAddress(): string;
   setAddress(value: string): void;
   getTopicsList(): {}[];
@@ -967,13 +750,10 @@ export class Log extends jspb.Message {
   static toObject(includeInstance: boolean, msg: Log): Log.AsObject;
   static serializeBinaryToWriter(message: Log, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): Log;
-  static deserializeBinaryFromReader(
-    message: Log,
-    reader: jspb.BinaryReader
-  ): Log;
+  static deserializeBinaryFromReader(message: Log, reader: jspb.BinaryReader): Log;
 }
 
-export declare namespace Log {
+export namespace Log {
   export type AsObject = {
     address: string;
     topicsList: {}[];
@@ -981,97 +761,70 @@ export declare namespace Log {
     blocknumber: number;
     txnhash: {};
     index: number;
-  };
+  }
 }
 
 export class DepositToRewardingFund extends jspb.Message {
-  constructor();
+  constructor ();
   getAmount(): string;
   setAmount(value: string): void;
   getData(): {};
   setData(value: {}): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): DepositToRewardingFund.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: DepositToRewardingFund
-  ): DepositToRewardingFund.AsObject;
-  static serializeBinaryToWriter(
-    message: DepositToRewardingFund,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: DepositToRewardingFund): DepositToRewardingFund.AsObject;
+  static serializeBinaryToWriter(message: DepositToRewardingFund, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): DepositToRewardingFund;
-  static deserializeBinaryFromReader(
-    message: DepositToRewardingFund,
-    reader: jspb.BinaryReader
-  ): DepositToRewardingFund;
+  static deserializeBinaryFromReader(message: DepositToRewardingFund, reader: jspb.BinaryReader): DepositToRewardingFund;
 }
 
-export declare namespace DepositToRewardingFund {
+export namespace DepositToRewardingFund {
   export type AsObject = {
     amount: string;
     data: {};
-  };
+  }
 }
 
 export class ClaimFromRewardingFund extends jspb.Message {
-  constructor();
+  constructor ();
   getAmount(): string;
   setAmount(value: string): void;
   getData(): {};
   setData(value: {}): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ClaimFromRewardingFund.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: ClaimFromRewardingFund
-  ): ClaimFromRewardingFund.AsObject;
-  static serializeBinaryToWriter(
-    message: ClaimFromRewardingFund,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: ClaimFromRewardingFund): ClaimFromRewardingFund.AsObject;
+  static serializeBinaryToWriter(message: ClaimFromRewardingFund, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): ClaimFromRewardingFund;
-  static deserializeBinaryFromReader(
-    message: ClaimFromRewardingFund,
-    reader: jspb.BinaryReader
-  ): ClaimFromRewardingFund;
+  static deserializeBinaryFromReader(message: ClaimFromRewardingFund, reader: jspb.BinaryReader): ClaimFromRewardingFund;
 }
 
-export declare namespace ClaimFromRewardingFund {
+export namespace ClaimFromRewardingFund {
   export type AsObject = {
     amount: string;
     data: {};
-  };
+  }
 }
 
 export class GrantReward extends jspb.Message {
-  constructor();
+  constructor ();
   getType(): RewardType;
   setType(value: RewardType): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GrantReward.AsObject;
-  static toObject(
-    includeInstance: boolean,
-    msg: GrantReward
-  ): GrantReward.AsObject;
-  static serializeBinaryToWriter(
-    message: GrantReward,
-    writer: jspb.BinaryWriter
-  ): void;
+  static toObject(includeInstance: boolean, msg: GrantReward): GrantReward.AsObject;
+  static serializeBinaryToWriter(message: GrantReward, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): GrantReward;
-  static deserializeBinaryFromReader(
-    message: GrantReward,
-    reader: jspb.BinaryReader
-  ): GrantReward;
+  static deserializeBinaryFromReader(message: GrantReward, reader: jspb.BinaryReader): GrantReward;
 }
 
-export declare namespace GrantReward {
+export namespace GrantReward {
   export type AsObject = {
     type: RewardType;
-  };
+  }
 }
 
-export enum RewardType {
+export enum RewardType { 
   BlockReward = 0,
-  EpochReward = 1
+  EpochReward = 1,
 }

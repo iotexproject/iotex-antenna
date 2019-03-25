@@ -6,16 +6,19 @@
 
 // GENERATED CODE -- DO NOT EDIT!
 
+
+
 const grpc = {};
-grpc.web = require("grpc-web");
+grpc.web = require('grpc-web');
 
-var action_pb = require("./action_pb.js");
 
-var blockchain_pb = require("./blockchain_pb.js");
+var proto_types_action_pb = require('../../proto/types/action_pb.js')
 
-var node_pb = require("./node_pb.js");
+var proto_types_blockchain_pb = require('../../proto/types/blockchain_pb.js')
+
+var proto_types_node_pb = require('../../proto/types/node_pb.js')
 const proto = {};
-proto.iotexapi = require("./api_pb.js");
+proto.iotexapi = require('./api_pb.js');
 
 /**
  * @param {string} hostname
@@ -25,9 +28,10 @@ proto.iotexapi = require("./api_pb.js");
  * @struct
  * @final
  */
-proto.iotexapi.APIServiceClient = function(hostname, credentials, options) {
+proto.iotexapi.APIServiceClient =
+    function(hostname, credentials, options) {
   if (!options) options = {};
-  options["format"] = "text";
+  options['format'] = 'text';
 
   /**
    * @private @const {!grpc.web.GrpcWebClientBase} The client
@@ -51,6 +55,7 @@ proto.iotexapi.APIServiceClient = function(hostname, credentials, options) {
   this.options_ = options;
 };
 
+
 /**
  * @param {string} hostname
  * @param {?Object} credentials
@@ -59,23 +64,19 @@ proto.iotexapi.APIServiceClient = function(hostname, credentials, options) {
  * @struct
  * @final
  */
-proto.iotexapi.APIServicePromiseClient = function(
-  hostname,
-  credentials,
-  options
-) {
+proto.iotexapi.APIServicePromiseClient =
+    function(hostname, credentials, options) {
   if (!options) options = {};
-  options["format"] = "text";
+  options['format'] = 'text';
 
   /**
    * @private @const {!proto.iotexapi.APIServiceClient} The delegate callback based client
    */
   this.delegateClient_ = new proto.iotexapi.APIServiceClient(
-    hostname,
-    credentials,
-    options
-  );
+      hostname, credentials, options);
+
 };
+
 
 /**
  * @const
@@ -92,6 +93,7 @@ const methodInfo_APIService_GetAccount = new grpc.web.AbstractClientBase.MethodI
   proto.iotexapi.GetAccountResponse.deserializeBinary
 );
 
+
 /**
  * @param {!proto.iotexapi.GetAccountRequest} request The
  *     request proto
@@ -102,19 +104,16 @@ const methodInfo_APIService_GetAccount = new grpc.web.AbstractClientBase.MethodI
  * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetAccountResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServiceClient.prototype.getAccount = function(
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/iotexapi.APIService/GetAccount",
-    request,
-    metadata || {},
-    methodInfo_APIService_GetAccount,
-    callback
-  );
+proto.iotexapi.APIServiceClient.prototype.getAccount =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/GetAccount',
+      request,
+      metadata || {},
+      methodInfo_APIService_GetAccount,
+      callback);
 };
+
 
 /**
  * @param {!proto.iotexapi.GetAccountRequest} request The
@@ -124,20 +123,17 @@ proto.iotexapi.APIServiceClient.prototype.getAccount = function(
  * @return {!Promise<!proto.iotexapi.GetAccountResponse>}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServicePromiseClient.prototype.getAccount = function(
-  request,
-  metadata
-) {
+proto.iotexapi.APIServicePromiseClient.prototype.getAccount =
+    function(request, metadata) {
   var _this = this;
-  return new Promise(function(resolve, reject) {
-    _this.delegateClient_.getAccount(request, metadata, function(
-      error,
-      response
-    ) {
-      error ? reject(error) : resolve(response);
-    });
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.getAccount(
+      request, metadata, function (error, response) {
+        error ? reject(error) : resolve(response);
+      });
   });
 };
+
 
 /**
  * @const
@@ -154,6 +150,7 @@ const methodInfo_APIService_GetActions = new grpc.web.AbstractClientBase.MethodI
   proto.iotexapi.GetActionsResponse.deserializeBinary
 );
 
+
 /**
  * @param {!proto.iotexapi.GetActionsRequest} request The
  *     request proto
@@ -164,19 +161,16 @@ const methodInfo_APIService_GetActions = new grpc.web.AbstractClientBase.MethodI
  * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetActionsResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServiceClient.prototype.getActions = function(
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/iotexapi.APIService/GetActions",
-    request,
-    metadata || {},
-    methodInfo_APIService_GetActions,
-    callback
-  );
+proto.iotexapi.APIServiceClient.prototype.getActions =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/GetActions',
+      request,
+      metadata || {},
+      methodInfo_APIService_GetActions,
+      callback);
 };
+
 
 /**
  * @param {!proto.iotexapi.GetActionsRequest} request The
@@ -186,20 +180,17 @@ proto.iotexapi.APIServiceClient.prototype.getActions = function(
  * @return {!Promise<!proto.iotexapi.GetActionsResponse>}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServicePromiseClient.prototype.getActions = function(
-  request,
-  metadata
-) {
+proto.iotexapi.APIServicePromiseClient.prototype.getActions =
+    function(request, metadata) {
   var _this = this;
-  return new Promise(function(resolve, reject) {
-    _this.delegateClient_.getActions(request, metadata, function(
-      error,
-      response
-    ) {
-      error ? reject(error) : resolve(response);
-    });
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.getActions(
+      request, metadata, function (error, response) {
+        error ? reject(error) : resolve(response);
+      });
   });
 };
+
 
 /**
  * @const
@@ -216,6 +207,7 @@ const methodInfo_APIService_GetBlockMetas = new grpc.web.AbstractClientBase.Meth
   proto.iotexapi.GetBlockMetasResponse.deserializeBinary
 );
 
+
 /**
  * @param {!proto.iotexapi.GetBlockMetasRequest} request The
  *     request proto
@@ -226,19 +218,16 @@ const methodInfo_APIService_GetBlockMetas = new grpc.web.AbstractClientBase.Meth
  * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetBlockMetasResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServiceClient.prototype.getBlockMetas = function(
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/iotexapi.APIService/GetBlockMetas",
-    request,
-    metadata || {},
-    methodInfo_APIService_GetBlockMetas,
-    callback
-  );
+proto.iotexapi.APIServiceClient.prototype.getBlockMetas =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/GetBlockMetas',
+      request,
+      metadata || {},
+      methodInfo_APIService_GetBlockMetas,
+      callback);
 };
+
 
 /**
  * @param {!proto.iotexapi.GetBlockMetasRequest} request The
@@ -248,20 +237,17 @@ proto.iotexapi.APIServiceClient.prototype.getBlockMetas = function(
  * @return {!Promise<!proto.iotexapi.GetBlockMetasResponse>}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServicePromiseClient.prototype.getBlockMetas = function(
-  request,
-  metadata
-) {
+proto.iotexapi.APIServicePromiseClient.prototype.getBlockMetas =
+    function(request, metadata) {
   var _this = this;
-  return new Promise(function(resolve, reject) {
-    _this.delegateClient_.getBlockMetas(request, metadata, function(
-      error,
-      response
-    ) {
-      error ? reject(error) : resolve(response);
-    });
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.getBlockMetas(
+      request, metadata, function (error, response) {
+        error ? reject(error) : resolve(response);
+      });
   });
 };
+
 
 /**
  * @const
@@ -278,6 +264,7 @@ const methodInfo_APIService_GetChainMeta = new grpc.web.AbstractClientBase.Metho
   proto.iotexapi.GetChainMetaResponse.deserializeBinary
 );
 
+
 /**
  * @param {!proto.iotexapi.GetChainMetaRequest} request The
  *     request proto
@@ -288,19 +275,16 @@ const methodInfo_APIService_GetChainMeta = new grpc.web.AbstractClientBase.Metho
  * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetChainMetaResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServiceClient.prototype.getChainMeta = function(
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/iotexapi.APIService/GetChainMeta",
-    request,
-    metadata || {},
-    methodInfo_APIService_GetChainMeta,
-    callback
-  );
+proto.iotexapi.APIServiceClient.prototype.getChainMeta =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/GetChainMeta',
+      request,
+      metadata || {},
+      methodInfo_APIService_GetChainMeta,
+      callback);
 };
+
 
 /**
  * @param {!proto.iotexapi.GetChainMetaRequest} request The
@@ -310,20 +294,17 @@ proto.iotexapi.APIServiceClient.prototype.getChainMeta = function(
  * @return {!Promise<!proto.iotexapi.GetChainMetaResponse>}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServicePromiseClient.prototype.getChainMeta = function(
-  request,
-  metadata
-) {
+proto.iotexapi.APIServicePromiseClient.prototype.getChainMeta =
+    function(request, metadata) {
   var _this = this;
-  return new Promise(function(resolve, reject) {
-    _this.delegateClient_.getChainMeta(request, metadata, function(
-      error,
-      response
-    ) {
-      error ? reject(error) : resolve(response);
-    });
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.getChainMeta(
+      request, metadata, function (error, response) {
+        error ? reject(error) : resolve(response);
+      });
   });
 };
+
 
 /**
  * @const
@@ -340,6 +321,7 @@ const methodInfo_APIService_GetServerMeta = new grpc.web.AbstractClientBase.Meth
   proto.iotexapi.GetServerMetaResponse.deserializeBinary
 );
 
+
 /**
  * @param {!proto.iotexapi.GetServerMetaRequest} request The
  *     request proto
@@ -350,19 +332,16 @@ const methodInfo_APIService_GetServerMeta = new grpc.web.AbstractClientBase.Meth
  * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetServerMetaResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServiceClient.prototype.getServerMeta = function(
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/iotexapi.APIService/GetServerMeta",
-    request,
-    metadata || {},
-    methodInfo_APIService_GetServerMeta,
-    callback
-  );
+proto.iotexapi.APIServiceClient.prototype.getServerMeta =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/GetServerMeta',
+      request,
+      metadata || {},
+      methodInfo_APIService_GetServerMeta,
+      callback);
 };
+
 
 /**
  * @param {!proto.iotexapi.GetServerMetaRequest} request The
@@ -372,20 +351,17 @@ proto.iotexapi.APIServiceClient.prototype.getServerMeta = function(
  * @return {!Promise<!proto.iotexapi.GetServerMetaResponse>}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServicePromiseClient.prototype.getServerMeta = function(
-  request,
-  metadata
-) {
+proto.iotexapi.APIServicePromiseClient.prototype.getServerMeta =
+    function(request, metadata) {
   var _this = this;
-  return new Promise(function(resolve, reject) {
-    _this.delegateClient_.getServerMeta(request, metadata, function(
-      error,
-      response
-    ) {
-      error ? reject(error) : resolve(response);
-    });
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.getServerMeta(
+      request, metadata, function (error, response) {
+        error ? reject(error) : resolve(response);
+      });
   });
 };
+
 
 /**
  * @const
@@ -402,6 +378,7 @@ const methodInfo_APIService_SendAction = new grpc.web.AbstractClientBase.MethodI
   proto.iotexapi.SendActionResponse.deserializeBinary
 );
 
+
 /**
  * @param {!proto.iotexapi.SendActionRequest} request The
  *     request proto
@@ -412,19 +389,16 @@ const methodInfo_APIService_SendAction = new grpc.web.AbstractClientBase.MethodI
  * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.SendActionResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServiceClient.prototype.sendAction = function(
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/iotexapi.APIService/SendAction",
-    request,
-    metadata || {},
-    methodInfo_APIService_SendAction,
-    callback
-  );
+proto.iotexapi.APIServiceClient.prototype.sendAction =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/SendAction',
+      request,
+      metadata || {},
+      methodInfo_APIService_SendAction,
+      callback);
 };
+
 
 /**
  * @param {!proto.iotexapi.SendActionRequest} request The
@@ -434,20 +408,17 @@ proto.iotexapi.APIServiceClient.prototype.sendAction = function(
  * @return {!Promise<!proto.iotexapi.SendActionResponse>}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServicePromiseClient.prototype.sendAction = function(
-  request,
-  metadata
-) {
+proto.iotexapi.APIServicePromiseClient.prototype.sendAction =
+    function(request, metadata) {
   var _this = this;
-  return new Promise(function(resolve, reject) {
-    _this.delegateClient_.sendAction(request, metadata, function(
-      error,
-      response
-    ) {
-      error ? reject(error) : resolve(response);
-    });
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.sendAction(
+      request, metadata, function (error, response) {
+        error ? reject(error) : resolve(response);
+      });
   });
 };
+
 
 /**
  * @const
@@ -464,6 +435,7 @@ const methodInfo_APIService_GetReceiptByAction = new grpc.web.AbstractClientBase
   proto.iotexapi.GetReceiptByActionResponse.deserializeBinary
 );
 
+
 /**
  * @param {!proto.iotexapi.GetReceiptByActionRequest} request The
  *     request proto
@@ -474,19 +446,16 @@ const methodInfo_APIService_GetReceiptByAction = new grpc.web.AbstractClientBase
  * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetReceiptByActionResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServiceClient.prototype.getReceiptByAction = function(
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/iotexapi.APIService/GetReceiptByAction",
-    request,
-    metadata || {},
-    methodInfo_APIService_GetReceiptByAction,
-    callback
-  );
+proto.iotexapi.APIServiceClient.prototype.getReceiptByAction =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/GetReceiptByAction',
+      request,
+      metadata || {},
+      methodInfo_APIService_GetReceiptByAction,
+      callback);
 };
+
 
 /**
  * @param {!proto.iotexapi.GetReceiptByActionRequest} request The
@@ -496,20 +465,17 @@ proto.iotexapi.APIServiceClient.prototype.getReceiptByAction = function(
  * @return {!Promise<!proto.iotexapi.GetReceiptByActionResponse>}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServicePromiseClient.prototype.getReceiptByAction = function(
-  request,
-  metadata
-) {
+proto.iotexapi.APIServicePromiseClient.prototype.getReceiptByAction =
+    function(request, metadata) {
   var _this = this;
-  return new Promise(function(resolve, reject) {
-    _this.delegateClient_.getReceiptByAction(request, metadata, function(
-      error,
-      response
-    ) {
-      error ? reject(error) : resolve(response);
-    });
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.getReceiptByAction(
+      request, metadata, function (error, response) {
+        error ? reject(error) : resolve(response);
+      });
   });
 };
+
 
 /**
  * @const
@@ -526,6 +492,7 @@ const methodInfo_APIService_ReadContract = new grpc.web.AbstractClientBase.Metho
   proto.iotexapi.ReadContractResponse.deserializeBinary
 );
 
+
 /**
  * @param {!proto.iotexapi.ReadContractRequest} request The
  *     request proto
@@ -536,19 +503,16 @@ const methodInfo_APIService_ReadContract = new grpc.web.AbstractClientBase.Metho
  * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.ReadContractResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServiceClient.prototype.readContract = function(
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/iotexapi.APIService/ReadContract",
-    request,
-    metadata || {},
-    methodInfo_APIService_ReadContract,
-    callback
-  );
+proto.iotexapi.APIServiceClient.prototype.readContract =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/ReadContract',
+      request,
+      metadata || {},
+      methodInfo_APIService_ReadContract,
+      callback);
 };
+
 
 /**
  * @param {!proto.iotexapi.ReadContractRequest} request The
@@ -558,20 +522,17 @@ proto.iotexapi.APIServiceClient.prototype.readContract = function(
  * @return {!Promise<!proto.iotexapi.ReadContractResponse>}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServicePromiseClient.prototype.readContract = function(
-  request,
-  metadata
-) {
+proto.iotexapi.APIServicePromiseClient.prototype.readContract =
+    function(request, metadata) {
   var _this = this;
-  return new Promise(function(resolve, reject) {
-    _this.delegateClient_.readContract(request, metadata, function(
-      error,
-      response
-    ) {
-      error ? reject(error) : resolve(response);
-    });
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.readContract(
+      request, metadata, function (error, response) {
+        error ? reject(error) : resolve(response);
+      });
   });
 };
+
 
 /**
  * @const
@@ -588,6 +549,7 @@ const methodInfo_APIService_SuggestGasPrice = new grpc.web.AbstractClientBase.Me
   proto.iotexapi.SuggestGasPriceResponse.deserializeBinary
 );
 
+
 /**
  * @param {!proto.iotexapi.SuggestGasPriceRequest} request The
  *     request proto
@@ -598,19 +560,16 @@ const methodInfo_APIService_SuggestGasPrice = new grpc.web.AbstractClientBase.Me
  * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.SuggestGasPriceResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServiceClient.prototype.suggestGasPrice = function(
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/iotexapi.APIService/SuggestGasPrice",
-    request,
-    metadata || {},
-    methodInfo_APIService_SuggestGasPrice,
-    callback
-  );
+proto.iotexapi.APIServiceClient.prototype.suggestGasPrice =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/SuggestGasPrice',
+      request,
+      metadata || {},
+      methodInfo_APIService_SuggestGasPrice,
+      callback);
 };
+
 
 /**
  * @param {!proto.iotexapi.SuggestGasPriceRequest} request The
@@ -620,20 +579,17 @@ proto.iotexapi.APIServiceClient.prototype.suggestGasPrice = function(
  * @return {!Promise<!proto.iotexapi.SuggestGasPriceResponse>}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServicePromiseClient.prototype.suggestGasPrice = function(
-  request,
-  metadata
-) {
+proto.iotexapi.APIServicePromiseClient.prototype.suggestGasPrice =
+    function(request, metadata) {
   var _this = this;
-  return new Promise(function(resolve, reject) {
-    _this.delegateClient_.suggestGasPrice(request, metadata, function(
-      error,
-      response
-    ) {
-      error ? reject(error) : resolve(response);
-    });
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.suggestGasPrice(
+      request, metadata, function (error, response) {
+        error ? reject(error) : resolve(response);
+      });
   });
 };
+
 
 /**
  * @const
@@ -650,6 +606,7 @@ const methodInfo_APIService_EstimateGasForAction = new grpc.web.AbstractClientBa
   proto.iotexapi.EstimateGasForActionResponse.deserializeBinary
 );
 
+
 /**
  * @param {!proto.iotexapi.EstimateGasForActionRequest} request The
  *     request proto
@@ -660,19 +617,16 @@ const methodInfo_APIService_EstimateGasForAction = new grpc.web.AbstractClientBa
  * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.EstimateGasForActionResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServiceClient.prototype.estimateGasForAction = function(
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/iotexapi.APIService/EstimateGasForAction",
-    request,
-    metadata || {},
-    methodInfo_APIService_EstimateGasForAction,
-    callback
-  );
+proto.iotexapi.APIServiceClient.prototype.estimateGasForAction =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/EstimateGasForAction',
+      request,
+      metadata || {},
+      methodInfo_APIService_EstimateGasForAction,
+      callback);
 };
+
 
 /**
  * @param {!proto.iotexapi.EstimateGasForActionRequest} request The
@@ -682,20 +636,17 @@ proto.iotexapi.APIServiceClient.prototype.estimateGasForAction = function(
  * @return {!Promise<!proto.iotexapi.EstimateGasForActionResponse>}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServicePromiseClient.prototype.estimateGasForAction = function(
-  request,
-  metadata
-) {
+proto.iotexapi.APIServicePromiseClient.prototype.estimateGasForAction =
+    function(request, metadata) {
   var _this = this;
-  return new Promise(function(resolve, reject) {
-    _this.delegateClient_.estimateGasForAction(request, metadata, function(
-      error,
-      response
-    ) {
-      error ? reject(error) : resolve(response);
-    });
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.estimateGasForAction(
+      request, metadata, function (error, response) {
+        error ? reject(error) : resolve(response);
+      });
   });
 };
+
 
 /**
  * @const
@@ -712,6 +663,7 @@ const methodInfo_APIService_ReadState = new grpc.web.AbstractClientBase.MethodIn
   proto.iotexapi.ReadStateResponse.deserializeBinary
 );
 
+
 /**
  * @param {!proto.iotexapi.ReadStateRequest} request The
  *     request proto
@@ -722,19 +674,16 @@ const methodInfo_APIService_ReadState = new grpc.web.AbstractClientBase.MethodIn
  * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.ReadStateResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServiceClient.prototype.readState = function(
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/iotexapi.APIService/ReadState",
-    request,
-    metadata || {},
-    methodInfo_APIService_ReadState,
-    callback
-  );
+proto.iotexapi.APIServiceClient.prototype.readState =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/ReadState',
+      request,
+      metadata || {},
+      methodInfo_APIService_ReadState,
+      callback);
 };
+
 
 /**
  * @param {!proto.iotexapi.ReadStateRequest} request The
@@ -744,20 +693,17 @@ proto.iotexapi.APIServiceClient.prototype.readState = function(
  * @return {!Promise<!proto.iotexapi.ReadStateResponse>}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServicePromiseClient.prototype.readState = function(
-  request,
-  metadata
-) {
+proto.iotexapi.APIServicePromiseClient.prototype.readState =
+    function(request, metadata) {
   var _this = this;
-  return new Promise(function(resolve, reject) {
-    _this.delegateClient_.readState(request, metadata, function(
-      error,
-      response
-    ) {
-      error ? reject(error) : resolve(response);
-    });
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.readState(
+      request, metadata, function (error, response) {
+        error ? reject(error) : resolve(response);
+      });
   });
 };
+
 
 /**
  * @const
@@ -774,6 +720,7 @@ const methodInfo_APIService_GetProductivity = new grpc.web.AbstractClientBase.Me
   proto.iotexapi.GetProductivityResponse.deserializeBinary
 );
 
+
 /**
  * @param {!proto.iotexapi.GetProductivityRequest} request The
  *     request proto
@@ -784,19 +731,16 @@ const methodInfo_APIService_GetProductivity = new grpc.web.AbstractClientBase.Me
  * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetProductivityResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServiceClient.prototype.getProductivity = function(
-  request,
-  metadata,
-  callback
-) {
-  return this.client_.rpcCall(
-    this.hostname_ + "/iotexapi.APIService/GetProductivity",
-    request,
-    metadata || {},
-    methodInfo_APIService_GetProductivity,
-    callback
-  );
+proto.iotexapi.APIServiceClient.prototype.getProductivity =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/GetProductivity',
+      request,
+      metadata || {},
+      methodInfo_APIService_GetProductivity,
+      callback);
 };
+
 
 /**
  * @param {!proto.iotexapi.GetProductivityRequest} request The
@@ -806,19 +750,17 @@ proto.iotexapi.APIServiceClient.prototype.getProductivity = function(
  * @return {!Promise<!proto.iotexapi.GetProductivityResponse>}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServicePromiseClient.prototype.getProductivity = function(
-  request,
-  metadata
-) {
+proto.iotexapi.APIServicePromiseClient.prototype.getProductivity =
+    function(request, metadata) {
   var _this = this;
-  return new Promise(function(resolve, reject) {
-    _this.delegateClient_.getProductivity(request, metadata, function(
-      error,
-      response
-    ) {
-      error ? reject(error) : resolve(response);
-    });
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.getProductivity(
+      request, metadata, function (error, response) {
+        error ? reject(error) : resolve(response);
+      });
   });
 };
 
+
 module.exports = proto.iotexapi;
+

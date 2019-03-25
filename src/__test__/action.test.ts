@@ -1,5 +1,5 @@
 import test from "ava";
-import actionPb from "../generated/action_pb";
+import actionPb from "../../protogen/proto/types/action_pb";
 
 test.skip("transfer serialization and deserialization", async t => {
   const expectedBytes = Uint8Array.from([

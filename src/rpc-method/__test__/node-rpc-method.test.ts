@@ -1,12 +1,9 @@
 import test from "ava";
-// @ts-ignore
-import browserEnv from "browser-env";
 import { get } from "dottie";
-import RpcMethod from "../browser-rpc-method";
+import RpcMethod from "../node-rpc-method";
 import { ITransfer } from "../types";
-browserEnv();
 
-const TEST_HOSTNAME = "http://35.239.122.109:80";
+const TEST_HOSTNAME = "35.239.122.109:80";
 
 test("RpcMethod.getAccount", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
@@ -17,10 +14,16 @@ test("RpcMethod.getAccount", async t => {
     accountMeta: {
       address: "io126xcrjhtp27end76ac9nmx6px2072c3vgz6suw",
       balance: "0",
-      nonce: 0,
-      pendingNonce: 1
+      nonce: "0",
+      pendingNonce: "1"
     }
   });
+});
+
+test("RpcMethod.getChainMeta", async t => {
+  const client = new RpcMethod(TEST_HOSTNAME);
+  const resp = await client.getChainMeta({});
+  t.truthy(resp);
 });
 
 test("RpcMethod.getBlockMetas", async t => {
@@ -41,38 +44,16 @@ test("RpcMethod.getBlockMetas", async t => {
 
   // test getMetasByBlkHash
   const resp4 = await client.getBlockMetas({
-    byHash: { blkHash: resp1.blkMetas[0].hash }
+    byHash: { blkHash: String(resp1.blkMetas[0].hash) }
   });
   t.deepEqual(resp1.blkMetas[0], resp4.blkMetas[0]);
-});
-
-test("RpcMethod.suggestGasPrice", async t => {
-  const client = new RpcMethod(TEST_HOSTNAME);
-  const resp = await client.suggestGasPrice({});
-  t.deepEqual(resp, {
-    gasPrice: 1
-  });
-});
-
-test("RpcMethod.readContract", async t => {
-  const client = new RpcMethod(TEST_HOSTNAME);
-  const resp1 = await client.getActions({ byIndex: { start: 0, count: 30 } });
-  const actionInfo = resp1 && resp1.actionInfo;
-  t.deepEqual(actionInfo && actionInfo.length, 30);
-  for (const infoItem of actionInfo) {
-    t.truthy(infoItem.actHash, "infoItem.actHash");
-    t.truthy(infoItem.blkHash, "infoItem.blkHash");
-    t.truthy(infoItem.action.core);
-    t.truthy(infoItem.action.senderPubKey);
-    t.truthy(infoItem.action.signature);
-  }
 });
 
 test("RpcMethod.getActionsByIndex", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   // test getActionsByIndex
-  const resp1 = await client.getActions({ byIndex: { start: 10, count: 1 } });
-  t.deepEqual(get(resp1, "actionInfo.length"), 1);
+  const resp1 = await client.getActions({ byIndex: { start: 0, count: 10 } });
+  t.deepEqual(get(resp1, "actionInfo.length"), 10);
   const resp2 = await client.getActions({ byIndex: { start: 10, count: 10 } });
   t.deepEqual(get(resp2, "actionInfo.length"), 10);
   const resp3 = await client.getActions({ byIndex: { start: 10, count: 0 } });
@@ -145,10 +126,59 @@ test("RpcMethod.getActionsByBlock", async t => {
   t.deepEqual(resp7.actionInfo.length, 1);
 });
 
-test("RpcMethod.getChainMeta", async t => {
+test("RpcMethod.suggestGasPrice", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
-  const resp = await client.getChainMeta({});
-  t.truthy(resp.chainMeta);
+  const resp = await client.suggestGasPrice({});
+  t.deepEqual(resp.gasPrice.toString(), "1");
+});
+
+test.skip("RpcMethod.getReceiptByAction", async t => {
+  const client = new RpcMethod(TEST_HOSTNAME);
+  const resp = await client.getReceiptByAction({
+    actionHash:
+      "01d5c895f3b066e695d516884bec9977404875aeb15216bc087dbc0a1ef9aed1"
+  });
+  t.deepEqual(resp.receipt, {});
+});
+
+test("RpcMethod.readContract", async t => {
+  const client = new RpcMethod(TEST_HOSTNAME);
+  // test getActionsByBlock
+  const blks = await client.getBlockMetas({ byIndex: { start: 10, count: 1 } });
+  t.deepEqual(blks.blkMetas.length, 1);
+  const resp1 = await client.getActions({
+    byBlk: { blkHash: blks.blkMetas[0].hash, start: 0, count: 30 }
+  });
+  for (let index = 0; index < resp1.actionInfo.length; index++) {
+    if (get(resp1, `actionInfo.${index}.action.core.execution`)) {
+      const resp2 = await client.readContract({
+        action: get(resp1, `actionInfo.${index}.action`)
+      });
+      t.deepEqual(resp2.data, "");
+    }
+  }
+});
+
+test("RpcMethod.sendAction", async t => {
+  const client = new RpcMethod(TEST_HOSTNAME);
+  const blks = await client.getBlockMetas({ byIndex: { start: 10, count: 1 } });
+  t.deepEqual(blks.blkMetas.length, 1);
+  const resp1 = await client.getActions({
+    byBlk: { blkHash: blks.blkMetas[0].hash, start: 0, count: 15 }
+  });
+
+  for (let index = 0; index < resp1.actionInfo.length; index++) {
+    if (get(resp1, `actionInfo.${index}.action.core.execution`)) {
+      await client.sendAction({
+        action: get(resp1, `actionInfo.${index}.action`)
+      });
+    }
+    if (get(resp1, `actionInfo.${index}.action.core.vote`)) {
+      await client.sendAction({
+        action: get(resp1, `actionInfo.${index}.action`)
+      });
+    }
+  }
 });
 
 test("RpcMethod.estimateGasForAction", async t => {
@@ -159,12 +189,9 @@ test("RpcMethod.estimateGasForAction", async t => {
     byBlk: { blkHash: blks.blkMetas[0].hash, start: 0, count: 15 }
   });
 
-  for (let index = 0; index < resp1.actionInfo.length; index++) {
-    const execution = get(resp1, `actionInfo.${index}.action.core.execution`);
-    if (execution) {
-      const resp2 = await client.estimateGasForAction({
-        action: get(resp1, `actionInfo.${index}`)
-      });
+  for (const info of resp1.actionInfo) {
+    if (get(info, "action.core.execution")) {
+      const resp2 = await client.estimateGasForAction({ action: info.action });
       t.deepEqual(resp2.gas, "10400");
     }
   }

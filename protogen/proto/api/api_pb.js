@@ -7,48 +7,45 @@
  */
 // GENERATED CODE -- DO NOT EDIT!
 
-var jspb = require("google-protobuf");
+var jspb = require('google-protobuf');
 var goog = jspb;
-var global = Function("return this")();
+var global = Function('return this')();
 
-var action_pb = require("./action_pb.js");
-var blockchain_pb = require("./blockchain_pb.js");
-var node_pb = require("./node_pb.js");
-goog.exportSymbol("proto.iotexapi.EstimateGasForActionRequest", null, global);
-goog.exportSymbol("proto.iotexapi.EstimateGasForActionResponse", null, global);
-goog.exportSymbol("proto.iotexapi.GetAccountRequest", null, global);
-goog.exportSymbol("proto.iotexapi.GetAccountResponse", null, global);
-goog.exportSymbol("proto.iotexapi.GetActionByHashRequest", null, global);
-goog.exportSymbol("proto.iotexapi.GetActionsByAddressRequest", null, global);
-goog.exportSymbol("proto.iotexapi.GetActionsByBlockRequest", null, global);
-goog.exportSymbol("proto.iotexapi.GetActionsByIndexRequest", null, global);
-goog.exportSymbol("proto.iotexapi.GetActionsRequest", null, global);
-goog.exportSymbol("proto.iotexapi.GetActionsResponse", null, global);
-goog.exportSymbol("proto.iotexapi.GetBlockMetaByHashRequest", null, global);
-goog.exportSymbol("proto.iotexapi.GetBlockMetasByIndexRequest", null, global);
-goog.exportSymbol("proto.iotexapi.GetBlockMetasRequest", null, global);
-goog.exportSymbol("proto.iotexapi.GetBlockMetasResponse", null, global);
-goog.exportSymbol("proto.iotexapi.GetChainMetaRequest", null, global);
-goog.exportSymbol("proto.iotexapi.GetChainMetaResponse", null, global);
-goog.exportSymbol("proto.iotexapi.GetProductivityRequest", null, global);
-goog.exportSymbol("proto.iotexapi.GetProductivityResponse", null, global);
-goog.exportSymbol("proto.iotexapi.GetReceiptByActionRequest", null, global);
-goog.exportSymbol("proto.iotexapi.GetReceiptByActionResponse", null, global);
-goog.exportSymbol("proto.iotexapi.GetServerMetaRequest", null, global);
-goog.exportSymbol("proto.iotexapi.GetServerMetaResponse", null, global);
-goog.exportSymbol(
-  "proto.iotexapi.GetUnconfirmedActionsByAddressRequest",
-  null,
-  global
-);
-goog.exportSymbol("proto.iotexapi.ReadContractRequest", null, global);
-goog.exportSymbol("proto.iotexapi.ReadContractResponse", null, global);
-goog.exportSymbol("proto.iotexapi.ReadStateRequest", null, global);
-goog.exportSymbol("proto.iotexapi.ReadStateResponse", null, global);
-goog.exportSymbol("proto.iotexapi.SendActionRequest", null, global);
-goog.exportSymbol("proto.iotexapi.SendActionResponse", null, global);
-goog.exportSymbol("proto.iotexapi.SuggestGasPriceRequest", null, global);
-goog.exportSymbol("proto.iotexapi.SuggestGasPriceResponse", null, global);
+var proto_types_action_pb = require('../../proto/types/action_pb.js');
+var proto_types_blockchain_pb = require('../../proto/types/blockchain_pb.js');
+var proto_types_node_pb = require('../../proto/types/node_pb.js');
+goog.exportSymbol('proto.iotexapi.ActionInfo', null, global);
+goog.exportSymbol('proto.iotexapi.EstimateGasForActionRequest', null, global);
+goog.exportSymbol('proto.iotexapi.EstimateGasForActionResponse', null, global);
+goog.exportSymbol('proto.iotexapi.GetAccountRequest', null, global);
+goog.exportSymbol('proto.iotexapi.GetAccountResponse', null, global);
+goog.exportSymbol('proto.iotexapi.GetActionByHashRequest', null, global);
+goog.exportSymbol('proto.iotexapi.GetActionsByAddressRequest', null, global);
+goog.exportSymbol('proto.iotexapi.GetActionsByBlockRequest', null, global);
+goog.exportSymbol('proto.iotexapi.GetActionsByIndexRequest', null, global);
+goog.exportSymbol('proto.iotexapi.GetActionsRequest', null, global);
+goog.exportSymbol('proto.iotexapi.GetActionsResponse', null, global);
+goog.exportSymbol('proto.iotexapi.GetBlockMetaByHashRequest', null, global);
+goog.exportSymbol('proto.iotexapi.GetBlockMetasByIndexRequest', null, global);
+goog.exportSymbol('proto.iotexapi.GetBlockMetasRequest', null, global);
+goog.exportSymbol('proto.iotexapi.GetBlockMetasResponse', null, global);
+goog.exportSymbol('proto.iotexapi.GetChainMetaRequest', null, global);
+goog.exportSymbol('proto.iotexapi.GetChainMetaResponse', null, global);
+goog.exportSymbol('proto.iotexapi.GetProductivityRequest', null, global);
+goog.exportSymbol('proto.iotexapi.GetProductivityResponse', null, global);
+goog.exportSymbol('proto.iotexapi.GetReceiptByActionRequest', null, global);
+goog.exportSymbol('proto.iotexapi.GetReceiptByActionResponse', null, global);
+goog.exportSymbol('proto.iotexapi.GetServerMetaRequest', null, global);
+goog.exportSymbol('proto.iotexapi.GetServerMetaResponse', null, global);
+goog.exportSymbol('proto.iotexapi.GetUnconfirmedActionsByAddressRequest', null, global);
+goog.exportSymbol('proto.iotexapi.ReadContractRequest', null, global);
+goog.exportSymbol('proto.iotexapi.ReadContractResponse', null, global);
+goog.exportSymbol('proto.iotexapi.ReadStateRequest', null, global);
+goog.exportSymbol('proto.iotexapi.ReadStateResponse', null, global);
+goog.exportSymbol('proto.iotexapi.SendActionRequest', null, global);
+goog.exportSymbol('proto.iotexapi.SendActionResponse', null, global);
+goog.exportSymbol('proto.iotexapi.SuggestGasPriceRequest', null, global);
+goog.exportSymbol('proto.iotexapi.SuggestGasPriceResponse', null, global);
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -65,48 +62,47 @@ proto.iotexapi.GetAccountRequest = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.GetAccountRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetAccountRequest.displayName =
-    "proto.iotexapi.GetAccountRequest";
+  proto.iotexapi.GetAccountRequest.displayName = 'proto.iotexapi.GetAccountRequest';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetAccountRequest.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetAccountRequest.toObject(opt_includeInstance, this);
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetAccountRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetAccountRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetAccountRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetAccountRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    address: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetAccountRequest} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetAccountRequest.toObject = function(includeInstance, msg) {
-    var f,
-      obj = {
-        address: jspb.Message.getFieldWithDefault(msg, 1, "")
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -115,12 +111,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetAccountRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetAccountRequest();
-  return proto.iotexapi.GetAccountRequest.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetAccountRequest;
+  return proto.iotexapi.GetAccountRequest.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -129,27 +123,25 @@ proto.iotexapi.GetAccountRequest.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetAccountRequest}
  */
-proto.iotexapi.GetAccountRequest.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetAccountRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = /** @type {string} */ (reader.readString());
-        msg.setAddress(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAddress(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -161,6 +153,7 @@ proto.iotexapi.GetAccountRequest.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -168,16 +161,17 @@ proto.iotexapi.GetAccountRequest.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetAccountRequest.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetAccountRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getAddress();
   if (f.length > 0) {
-    writer.writeString(1, f);
+    writer.writeString(
+      1,
+      f
+    );
   }
 };
+
 
 /**
  * optional string address = 1;
@@ -187,10 +181,13 @@ proto.iotexapi.GetAccountRequest.prototype.getAddress = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
+
 /** @param {string} value */
 proto.iotexapi.GetAccountRequest.prototype.setAddress = function(value) {
   jspb.Message.setProto3StringField(this, 1, value);
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -207,53 +204,47 @@ proto.iotexapi.GetAccountResponse = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.GetAccountResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetAccountResponse.displayName =
-    "proto.iotexapi.GetAccountResponse";
+  proto.iotexapi.GetAccountResponse.displayName = 'proto.iotexapi.GetAccountResponse';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetAccountResponse.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetAccountResponse.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetAccountResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetAccountResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetAccountResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetAccountResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    accountmeta: (f = msg.getAccountmeta()) && proto_types_blockchain_pb.AccountMeta.toObject(includeInstance, f)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetAccountResponse} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetAccountResponse.toObject = function(includeInstance, msg) {
-    var f,
-      obj = {
-        accountmeta:
-          (f = msg.getAccountmeta()) &&
-          blockchain_pb.AccountMeta.toObject(includeInstance, f)
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -262,12 +253,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetAccountResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetAccountResponse();
-  return proto.iotexapi.GetAccountResponse.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetAccountResponse;
+  return proto.iotexapi.GetAccountResponse.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -276,31 +265,26 @@ proto.iotexapi.GetAccountResponse.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetAccountResponse}
  */
-proto.iotexapi.GetAccountResponse.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetAccountResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = new blockchain_pb.AccountMeta();
-        reader.readMessage(
-          value,
-          blockchain_pb.AccountMeta.deserializeBinaryFromReader
-        );
-        msg.setAccountmeta(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = new proto_types_blockchain_pb.AccountMeta;
+      reader.readMessage(value,proto_types_blockchain_pb.AccountMeta.deserializeBinaryFromReader);
+      msg.setAccountmeta(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -312,6 +296,7 @@ proto.iotexapi.GetAccountResponse.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -319,41 +304,39 @@ proto.iotexapi.GetAccountResponse.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetAccountResponse.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetAccountResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getAccountmeta();
   if (f != null) {
     writer.writeMessage(
       1,
       f,
-      blockchain_pb.AccountMeta.serializeBinaryToWriter
+      proto_types_blockchain_pb.AccountMeta.serializeBinaryToWriter
     );
   }
 };
+
 
 /**
  * optional iotextypes.AccountMeta accountMeta = 1;
  * @return {?proto.iotextypes.AccountMeta}
  */
 proto.iotexapi.GetAccountResponse.prototype.getAccountmeta = function() {
-  return /** @type{?proto.iotextypes.AccountMeta} */ (jspb.Message.getWrapperField(
-    this,
-    blockchain_pb.AccountMeta,
-    1
-  ));
+  return /** @type{?proto.iotextypes.AccountMeta} */ (
+    jspb.Message.getWrapperField(this, proto_types_blockchain_pb.AccountMeta, 1));
 };
+
 
 /** @param {?proto.iotextypes.AccountMeta|undefined} value */
 proto.iotexapi.GetAccountResponse.prototype.setAccountmeta = function(value) {
   jspb.Message.setWrapperField(this, 1, value);
 };
 
+
 proto.iotexapi.GetAccountResponse.prototype.clearAccountmeta = function() {
   this.setAccountmeta(undefined);
 };
+
 
 /**
  * Returns whether this field is set.
@@ -362,6 +345,8 @@ proto.iotexapi.GetAccountResponse.prototype.clearAccountmeta = function() {
 proto.iotexapi.GetAccountResponse.prototype.hasAccountmeta = function() {
   return jspb.Message.getField(this, 1) != null;
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -374,19 +359,11 @@ proto.iotexapi.GetAccountResponse.prototype.hasAccountmeta = function() {
  * @constructor
  */
 proto.iotexapi.GetActionsRequest = function(opt_data) {
-  jspb.Message.initialize(
-    this,
-    opt_data,
-    0,
-    -1,
-    null,
-    proto.iotexapi.GetActionsRequest.oneofGroups_
-  );
+  jspb.Message.initialize(this, opt_data, 0, -1, null, proto.iotexapi.GetActionsRequest.oneofGroups_);
 };
 goog.inherits(proto.iotexapi.GetActionsRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetActionsRequest.displayName =
-    "proto.iotexapi.GetActionsRequest";
+  proto.iotexapi.GetActionsRequest.displayName = 'proto.iotexapi.GetActionsRequest';
 }
 /**
  * Oneof group definitions for this message. Each group defines the field
@@ -396,7 +373,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<!Array<number>>}
  * @const
  */
-proto.iotexapi.GetActionsRequest.oneofGroups_ = [[1, 2, 3, 4, 5]];
+proto.iotexapi.GetActionsRequest.oneofGroups_ = [[1,2,3,4,5]];
 
 /**
  * @enum {number}
@@ -414,70 +391,52 @@ proto.iotexapi.GetActionsRequest.LookupCase = {
  * @return {proto.iotexapi.GetActionsRequest.LookupCase}
  */
 proto.iotexapi.GetActionsRequest.prototype.getLookupCase = function() {
-  return /** @type {proto.iotexapi.GetActionsRequest.LookupCase} */ (jspb.Message.computeOneofCase(
-    this,
-    proto.iotexapi.GetActionsRequest.oneofGroups_[0]
-  ));
+  return /** @type {proto.iotexapi.GetActionsRequest.LookupCase} */(jspb.Message.computeOneofCase(this, proto.iotexapi.GetActionsRequest.oneofGroups_[0]));
 };
 
+
+
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetActionsRequest.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetActionsRequest.toObject(opt_includeInstance, this);
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetActionsRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetActionsRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetActionsRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetActionsRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    byindex: (f = msg.getByindex()) && proto.iotexapi.GetActionsByIndexRequest.toObject(includeInstance, f),
+    byhash: (f = msg.getByhash()) && proto.iotexapi.GetActionByHashRequest.toObject(includeInstance, f),
+    byaddr: (f = msg.getByaddr()) && proto.iotexapi.GetActionsByAddressRequest.toObject(includeInstance, f),
+    unconfirmedbyaddr: (f = msg.getUnconfirmedbyaddr()) && proto.iotexapi.GetUnconfirmedActionsByAddressRequest.toObject(includeInstance, f),
+    byblk: (f = msg.getByblk()) && proto.iotexapi.GetActionsByBlockRequest.toObject(includeInstance, f)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetActionsRequest} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetActionsRequest.toObject = function(includeInstance, msg) {
-    var f,
-      obj = {
-        byindex:
-          (f = msg.getByindex()) &&
-          proto.iotexapi.GetActionsByIndexRequest.toObject(includeInstance, f),
-        byhash:
-          (f = msg.getByhash()) &&
-          proto.iotexapi.GetActionByHashRequest.toObject(includeInstance, f),
-        byaddr:
-          (f = msg.getByaddr()) &&
-          proto.iotexapi.GetActionsByAddressRequest.toObject(
-            includeInstance,
-            f
-          ),
-        unconfirmedbyaddr:
-          (f = msg.getUnconfirmedbyaddr()) &&
-          proto.iotexapi.GetUnconfirmedActionsByAddressRequest.toObject(
-            includeInstance,
-            f
-          ),
-        byblk:
-          (f = msg.getByblk()) &&
-          proto.iotexapi.GetActionsByBlockRequest.toObject(includeInstance, f)
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -486,12 +445,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetActionsRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetActionsRequest();
-  return proto.iotexapi.GetActionsRequest.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetActionsRequest;
+  return proto.iotexapi.GetActionsRequest.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -500,64 +457,46 @@ proto.iotexapi.GetActionsRequest.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetActionsRequest}
  */
-proto.iotexapi.GetActionsRequest.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetActionsRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = new proto.iotexapi.GetActionsByIndexRequest();
-        reader.readMessage(
-          value,
-          proto.iotexapi.GetActionsByIndexRequest.deserializeBinaryFromReader
-        );
-        msg.setByindex(value);
-        break;
-      case 2:
-        var value = new proto.iotexapi.GetActionByHashRequest();
-        reader.readMessage(
-          value,
-          proto.iotexapi.GetActionByHashRequest.deserializeBinaryFromReader
-        );
-        msg.setByhash(value);
-        break;
-      case 3:
-        var value = new proto.iotexapi.GetActionsByAddressRequest();
-        reader.readMessage(
-          value,
-          proto.iotexapi.GetActionsByAddressRequest.deserializeBinaryFromReader
-        );
-        msg.setByaddr(value);
-        break;
-      case 4:
-        var value = new proto.iotexapi.GetUnconfirmedActionsByAddressRequest();
-        reader.readMessage(
-          value,
-          proto.iotexapi.GetUnconfirmedActionsByAddressRequest
-            .deserializeBinaryFromReader
-        );
-        msg.setUnconfirmedbyaddr(value);
-        break;
-      case 5:
-        var value = new proto.iotexapi.GetActionsByBlockRequest();
-        reader.readMessage(
-          value,
-          proto.iotexapi.GetActionsByBlockRequest.deserializeBinaryFromReader
-        );
-        msg.setByblk(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = new proto.iotexapi.GetActionsByIndexRequest;
+      reader.readMessage(value,proto.iotexapi.GetActionsByIndexRequest.deserializeBinaryFromReader);
+      msg.setByindex(value);
+      break;
+    case 2:
+      var value = new proto.iotexapi.GetActionByHashRequest;
+      reader.readMessage(value,proto.iotexapi.GetActionByHashRequest.deserializeBinaryFromReader);
+      msg.setByhash(value);
+      break;
+    case 3:
+      var value = new proto.iotexapi.GetActionsByAddressRequest;
+      reader.readMessage(value,proto.iotexapi.GetActionsByAddressRequest.deserializeBinaryFromReader);
+      msg.setByaddr(value);
+      break;
+    case 4:
+      var value = new proto.iotexapi.GetUnconfirmedActionsByAddressRequest;
+      reader.readMessage(value,proto.iotexapi.GetUnconfirmedActionsByAddressRequest.deserializeBinaryFromReader);
+      msg.setUnconfirmedbyaddr(value);
+      break;
+    case 5:
+      var value = new proto.iotexapi.GetActionsByBlockRequest;
+      reader.readMessage(value,proto.iotexapi.GetActionsByBlockRequest.deserializeBinaryFromReader);
+      msg.setByblk(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -569,6 +508,7 @@ proto.iotexapi.GetActionsRequest.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -576,10 +516,7 @@ proto.iotexapi.GetActionsRequest.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetActionsRequest.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetActionsRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getByindex();
   if (f != null) {
@@ -610,8 +547,7 @@ proto.iotexapi.GetActionsRequest.serializeBinaryToWriter = function(
     writer.writeMessage(
       4,
       f,
-      proto.iotexapi.GetUnconfirmedActionsByAddressRequest
-        .serializeBinaryToWriter
+      proto.iotexapi.GetUnconfirmedActionsByAddressRequest.serializeBinaryToWriter
     );
   }
   f = message.getByblk();
@@ -624,31 +560,27 @@ proto.iotexapi.GetActionsRequest.serializeBinaryToWriter = function(
   }
 };
 
+
 /**
  * optional GetActionsByIndexRequest byIndex = 1;
  * @return {?proto.iotexapi.GetActionsByIndexRequest}
  */
 proto.iotexapi.GetActionsRequest.prototype.getByindex = function() {
-  return /** @type{?proto.iotexapi.GetActionsByIndexRequest} */ (jspb.Message.getWrapperField(
-    this,
-    proto.iotexapi.GetActionsByIndexRequest,
-    1
-  ));
+  return /** @type{?proto.iotexapi.GetActionsByIndexRequest} */ (
+    jspb.Message.getWrapperField(this, proto.iotexapi.GetActionsByIndexRequest, 1));
 };
+
 
 /** @param {?proto.iotexapi.GetActionsByIndexRequest|undefined} value */
 proto.iotexapi.GetActionsRequest.prototype.setByindex = function(value) {
-  jspb.Message.setOneofWrapperField(
-    this,
-    1,
-    proto.iotexapi.GetActionsRequest.oneofGroups_[0],
-    value
-  );
+  jspb.Message.setOneofWrapperField(this, 1, proto.iotexapi.GetActionsRequest.oneofGroups_[0], value);
 };
+
 
 proto.iotexapi.GetActionsRequest.prototype.clearByindex = function() {
   this.setByindex(undefined);
 };
+
 
 /**
  * Returns whether this field is set.
@@ -658,31 +590,27 @@ proto.iotexapi.GetActionsRequest.prototype.hasByindex = function() {
   return jspb.Message.getField(this, 1) != null;
 };
 
+
 /**
  * optional GetActionByHashRequest byHash = 2;
  * @return {?proto.iotexapi.GetActionByHashRequest}
  */
 proto.iotexapi.GetActionsRequest.prototype.getByhash = function() {
-  return /** @type{?proto.iotexapi.GetActionByHashRequest} */ (jspb.Message.getWrapperField(
-    this,
-    proto.iotexapi.GetActionByHashRequest,
-    2
-  ));
+  return /** @type{?proto.iotexapi.GetActionByHashRequest} */ (
+    jspb.Message.getWrapperField(this, proto.iotexapi.GetActionByHashRequest, 2));
 };
+
 
 /** @param {?proto.iotexapi.GetActionByHashRequest|undefined} value */
 proto.iotexapi.GetActionsRequest.prototype.setByhash = function(value) {
-  jspb.Message.setOneofWrapperField(
-    this,
-    2,
-    proto.iotexapi.GetActionsRequest.oneofGroups_[0],
-    value
-  );
+  jspb.Message.setOneofWrapperField(this, 2, proto.iotexapi.GetActionsRequest.oneofGroups_[0], value);
 };
+
 
 proto.iotexapi.GetActionsRequest.prototype.clearByhash = function() {
   this.setByhash(undefined);
 };
+
 
 /**
  * Returns whether this field is set.
@@ -692,31 +620,27 @@ proto.iotexapi.GetActionsRequest.prototype.hasByhash = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
+
 /**
  * optional GetActionsByAddressRequest byAddr = 3;
  * @return {?proto.iotexapi.GetActionsByAddressRequest}
  */
 proto.iotexapi.GetActionsRequest.prototype.getByaddr = function() {
-  return /** @type{?proto.iotexapi.GetActionsByAddressRequest} */ (jspb.Message.getWrapperField(
-    this,
-    proto.iotexapi.GetActionsByAddressRequest,
-    3
-  ));
+  return /** @type{?proto.iotexapi.GetActionsByAddressRequest} */ (
+    jspb.Message.getWrapperField(this, proto.iotexapi.GetActionsByAddressRequest, 3));
 };
+
 
 /** @param {?proto.iotexapi.GetActionsByAddressRequest|undefined} value */
 proto.iotexapi.GetActionsRequest.prototype.setByaddr = function(value) {
-  jspb.Message.setOneofWrapperField(
-    this,
-    3,
-    proto.iotexapi.GetActionsRequest.oneofGroups_[0],
-    value
-  );
+  jspb.Message.setOneofWrapperField(this, 3, proto.iotexapi.GetActionsRequest.oneofGroups_[0], value);
 };
+
 
 proto.iotexapi.GetActionsRequest.prototype.clearByaddr = function() {
   this.setByaddr(undefined);
 };
+
 
 /**
  * Returns whether this field is set.
@@ -726,33 +650,27 @@ proto.iotexapi.GetActionsRequest.prototype.hasByaddr = function() {
   return jspb.Message.getField(this, 3) != null;
 };
 
+
 /**
  * optional GetUnconfirmedActionsByAddressRequest unconfirmedByAddr = 4;
  * @return {?proto.iotexapi.GetUnconfirmedActionsByAddressRequest}
  */
 proto.iotexapi.GetActionsRequest.prototype.getUnconfirmedbyaddr = function() {
-  return /** @type{?proto.iotexapi.GetUnconfirmedActionsByAddressRequest} */ (jspb.Message.getWrapperField(
-    this,
-    proto.iotexapi.GetUnconfirmedActionsByAddressRequest,
-    4
-  ));
+  return /** @type{?proto.iotexapi.GetUnconfirmedActionsByAddressRequest} */ (
+    jspb.Message.getWrapperField(this, proto.iotexapi.GetUnconfirmedActionsByAddressRequest, 4));
 };
 
+
 /** @param {?proto.iotexapi.GetUnconfirmedActionsByAddressRequest|undefined} value */
-proto.iotexapi.GetActionsRequest.prototype.setUnconfirmedbyaddr = function(
-  value
-) {
-  jspb.Message.setOneofWrapperField(
-    this,
-    4,
-    proto.iotexapi.GetActionsRequest.oneofGroups_[0],
-    value
-  );
+proto.iotexapi.GetActionsRequest.prototype.setUnconfirmedbyaddr = function(value) {
+  jspb.Message.setOneofWrapperField(this, 4, proto.iotexapi.GetActionsRequest.oneofGroups_[0], value);
 };
+
 
 proto.iotexapi.GetActionsRequest.prototype.clearUnconfirmedbyaddr = function() {
   this.setUnconfirmedbyaddr(undefined);
 };
+
 
 /**
  * Returns whether this field is set.
@@ -762,31 +680,27 @@ proto.iotexapi.GetActionsRequest.prototype.hasUnconfirmedbyaddr = function() {
   return jspb.Message.getField(this, 4) != null;
 };
 
+
 /**
  * optional GetActionsByBlockRequest byBlk = 5;
  * @return {?proto.iotexapi.GetActionsByBlockRequest}
  */
 proto.iotexapi.GetActionsRequest.prototype.getByblk = function() {
-  return /** @type{?proto.iotexapi.GetActionsByBlockRequest} */ (jspb.Message.getWrapperField(
-    this,
-    proto.iotexapi.GetActionsByBlockRequest,
-    5
-  ));
+  return /** @type{?proto.iotexapi.GetActionsByBlockRequest} */ (
+    jspb.Message.getWrapperField(this, proto.iotexapi.GetActionsByBlockRequest, 5));
 };
+
 
 /** @param {?proto.iotexapi.GetActionsByBlockRequest|undefined} value */
 proto.iotexapi.GetActionsRequest.prototype.setByblk = function(value) {
-  jspb.Message.setOneofWrapperField(
-    this,
-    5,
-    proto.iotexapi.GetActionsRequest.oneofGroups_[0],
-    value
-  );
+  jspb.Message.setOneofWrapperField(this, 5, proto.iotexapi.GetActionsRequest.oneofGroups_[0], value);
 };
+
 
 proto.iotexapi.GetActionsRequest.prototype.clearByblk = function() {
   this.setByblk(undefined);
 };
+
 
 /**
  * Returns whether this field is set.
@@ -795,6 +709,8 @@ proto.iotexapi.GetActionsRequest.prototype.clearByblk = function() {
 proto.iotexapi.GetActionsRequest.prototype.hasByblk = function() {
   return jspb.Message.getField(this, 5) != null;
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -811,55 +727,48 @@ proto.iotexapi.GetActionsByIndexRequest = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.GetActionsByIndexRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetActionsByIndexRequest.displayName =
-    "proto.iotexapi.GetActionsByIndexRequest";
+  proto.iotexapi.GetActionsByIndexRequest.displayName = 'proto.iotexapi.GetActionsByIndexRequest';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetActionsByIndexRequest.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetActionsByIndexRequest.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetActionsByIndexRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetActionsByIndexRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetActionsByIndexRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetActionsByIndexRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    start: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    count: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetActionsByIndexRequest} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetActionsByIndexRequest.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {
-        start: jspb.Message.getFieldWithDefault(msg, 1, 0),
-        count: jspb.Message.getFieldWithDefault(msg, 2, 0)
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -868,12 +777,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetActionsByIndexRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetActionsByIndexRequest();
-  return proto.iotexapi.GetActionsByIndexRequest.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetActionsByIndexRequest;
+  return proto.iotexapi.GetActionsByIndexRequest.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -882,31 +789,29 @@ proto.iotexapi.GetActionsByIndexRequest.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetActionsByIndexRequest}
  */
-proto.iotexapi.GetActionsByIndexRequest.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetActionsByIndexRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = /** @type {number} */ (reader.readUint64());
-        msg.setStart(value);
-        break;
-      case 2:
-        var value = /** @type {number} */ (reader.readUint64());
-        msg.setCount(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setStart(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setCount(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -918,6 +823,7 @@ proto.iotexapi.GetActionsByIndexRequest.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -925,20 +831,24 @@ proto.iotexapi.GetActionsByIndexRequest.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetActionsByIndexRequest.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetActionsByIndexRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getStart();
   if (f !== 0) {
-    writer.writeUint64(1, f);
+    writer.writeUint64(
+      1,
+      f
+    );
   }
   f = message.getCount();
   if (f !== 0) {
-    writer.writeUint64(2, f);
+    writer.writeUint64(
+      2,
+      f
+    );
   }
 };
+
 
 /**
  * optional uint64 start = 1;
@@ -948,10 +858,12 @@ proto.iotexapi.GetActionsByIndexRequest.prototype.getStart = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
+
 /** @param {number} value */
 proto.iotexapi.GetActionsByIndexRequest.prototype.setStart = function(value) {
   jspb.Message.setProto3IntField(this, 1, value);
 };
+
 
 /**
  * optional uint64 count = 2;
@@ -961,10 +873,13 @@ proto.iotexapi.GetActionsByIndexRequest.prototype.getCount = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
+
 /** @param {number} value */
 proto.iotexapi.GetActionsByIndexRequest.prototype.setCount = function(value) {
   jspb.Message.setProto3IntField(this, 2, value);
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -981,55 +896,48 @@ proto.iotexapi.GetActionByHashRequest = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.GetActionByHashRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetActionByHashRequest.displayName =
-    "proto.iotexapi.GetActionByHashRequest";
+  proto.iotexapi.GetActionByHashRequest.displayName = 'proto.iotexapi.GetActionByHashRequest';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetActionByHashRequest.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetActionByHashRequest.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetActionByHashRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetActionByHashRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetActionByHashRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetActionByHashRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    actionhash: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    checkpending: jspb.Message.getFieldWithDefault(msg, 2, false)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetActionByHashRequest} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetActionByHashRequest.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {
-        actionhash: jspb.Message.getFieldWithDefault(msg, 1, ""),
-        checkpending: jspb.Message.getFieldWithDefault(msg, 2, false)
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -1038,12 +946,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetActionByHashRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetActionByHashRequest();
-  return proto.iotexapi.GetActionByHashRequest.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetActionByHashRequest;
+  return proto.iotexapi.GetActionByHashRequest.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -1052,31 +958,29 @@ proto.iotexapi.GetActionByHashRequest.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetActionByHashRequest}
  */
-proto.iotexapi.GetActionByHashRequest.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetActionByHashRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = /** @type {string} */ (reader.readString());
-        msg.setActionhash(value);
-        break;
-      case 2:
-        var value = /** @type {boolean} */ (reader.readBool());
-        msg.setCheckpending(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setActionhash(value);
+      break;
+    case 2:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setCheckpending(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -1088,6 +992,7 @@ proto.iotexapi.GetActionByHashRequest.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -1095,20 +1000,24 @@ proto.iotexapi.GetActionByHashRequest.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetActionByHashRequest.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetActionByHashRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getActionhash();
   if (f.length > 0) {
-    writer.writeString(1, f);
+    writer.writeString(
+      1,
+      f
+    );
   }
   f = message.getCheckpending();
   if (f) {
-    writer.writeBool(2, f);
+    writer.writeBool(
+      2,
+      f
+    );
   }
 };
+
 
 /**
  * optional string actionHash = 1;
@@ -1118,12 +1027,12 @@ proto.iotexapi.GetActionByHashRequest.prototype.getActionhash = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
+
 /** @param {string} value */
-proto.iotexapi.GetActionByHashRequest.prototype.setActionhash = function(
-  value
-) {
+proto.iotexapi.GetActionByHashRequest.prototype.setActionhash = function(value) {
   jspb.Message.setProto3StringField(this, 1, value);
 };
+
 
 /**
  * optional bool checkPending = 2;
@@ -1132,19 +1041,16 @@ proto.iotexapi.GetActionByHashRequest.prototype.setActionhash = function(
  * @return {boolean}
  */
 proto.iotexapi.GetActionByHashRequest.prototype.getCheckpending = function() {
-  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(
-    this,
-    2,
-    false
-  ));
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 2, false));
 };
 
+
 /** @param {boolean} value */
-proto.iotexapi.GetActionByHashRequest.prototype.setCheckpending = function(
-  value
-) {
+proto.iotexapi.GetActionByHashRequest.prototype.setCheckpending = function(value) {
   jspb.Message.setProto3BooleanField(this, 2, value);
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -1161,56 +1067,49 @@ proto.iotexapi.GetActionsByAddressRequest = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.GetActionsByAddressRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetActionsByAddressRequest.displayName =
-    "proto.iotexapi.GetActionsByAddressRequest";
+  proto.iotexapi.GetActionsByAddressRequest.displayName = 'proto.iotexapi.GetActionsByAddressRequest';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetActionsByAddressRequest.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetActionsByAddressRequest.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetActionsByAddressRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetActionsByAddressRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetActionsByAddressRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetActionsByAddressRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    address: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    start: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    count: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetActionsByAddressRequest} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetActionsByAddressRequest.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {
-        address: jspb.Message.getFieldWithDefault(msg, 1, ""),
-        start: jspb.Message.getFieldWithDefault(msg, 2, 0),
-        count: jspb.Message.getFieldWithDefault(msg, 3, 0)
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -1219,12 +1118,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetActionsByAddressRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetActionsByAddressRequest();
-  return proto.iotexapi.GetActionsByAddressRequest.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetActionsByAddressRequest;
+  return proto.iotexapi.GetActionsByAddressRequest.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -1233,35 +1130,33 @@ proto.iotexapi.GetActionsByAddressRequest.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetActionsByAddressRequest}
  */
-proto.iotexapi.GetActionsByAddressRequest.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetActionsByAddressRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = /** @type {string} */ (reader.readString());
-        msg.setAddress(value);
-        break;
-      case 2:
-        var value = /** @type {number} */ (reader.readUint64());
-        msg.setStart(value);
-        break;
-      case 3:
-        var value = /** @type {number} */ (reader.readUint64());
-        msg.setCount(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAddress(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setStart(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setCount(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -1269,12 +1164,10 @@ proto.iotexapi.GetActionsByAddressRequest.deserializeBinaryFromReader = function
  */
 proto.iotexapi.GetActionsByAddressRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.iotexapi.GetActionsByAddressRequest.serializeBinaryToWriter(
-    this,
-    writer
-  );
+  proto.iotexapi.GetActionsByAddressRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
+
 
 /**
  * Serializes the given message to binary data (in protobuf wire
@@ -1283,24 +1176,31 @@ proto.iotexapi.GetActionsByAddressRequest.prototype.serializeBinary = function()
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetActionsByAddressRequest.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetActionsByAddressRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getAddress();
   if (f.length > 0) {
-    writer.writeString(1, f);
+    writer.writeString(
+      1,
+      f
+    );
   }
   f = message.getStart();
   if (f !== 0) {
-    writer.writeUint64(2, f);
+    writer.writeUint64(
+      2,
+      f
+    );
   }
   f = message.getCount();
   if (f !== 0) {
-    writer.writeUint64(3, f);
+    writer.writeUint64(
+      3,
+      f
+    );
   }
 };
+
 
 /**
  * optional string address = 1;
@@ -1310,12 +1210,12 @@ proto.iotexapi.GetActionsByAddressRequest.prototype.getAddress = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
+
 /** @param {string} value */
-proto.iotexapi.GetActionsByAddressRequest.prototype.setAddress = function(
-  value
-) {
+proto.iotexapi.GetActionsByAddressRequest.prototype.setAddress = function(value) {
   jspb.Message.setProto3StringField(this, 1, value);
 };
+
 
 /**
  * optional uint64 start = 2;
@@ -1325,10 +1225,12 @@ proto.iotexapi.GetActionsByAddressRequest.prototype.getStart = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
+
 /** @param {number} value */
 proto.iotexapi.GetActionsByAddressRequest.prototype.setStart = function(value) {
   jspb.Message.setProto3IntField(this, 2, value);
 };
+
 
 /**
  * optional uint64 count = 3;
@@ -1338,10 +1240,13 @@ proto.iotexapi.GetActionsByAddressRequest.prototype.getCount = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
+
 /** @param {number} value */
 proto.iotexapi.GetActionsByAddressRequest.prototype.setCount = function(value) {
   jspb.Message.setProto3IntField(this, 3, value);
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -1356,77 +1261,63 @@ proto.iotexapi.GetActionsByAddressRequest.prototype.setCount = function(value) {
 proto.iotexapi.GetUnconfirmedActionsByAddressRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(
-  proto.iotexapi.GetUnconfirmedActionsByAddressRequest,
-  jspb.Message
-);
+goog.inherits(proto.iotexapi.GetUnconfirmedActionsByAddressRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetUnconfirmedActionsByAddressRequest.displayName =
-    "proto.iotexapi.GetUnconfirmedActionsByAddressRequest";
+  proto.iotexapi.GetUnconfirmedActionsByAddressRequest.displayName = 'proto.iotexapi.GetUnconfirmedActionsByAddressRequest';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetUnconfirmedActionsByAddressRequest.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetUnconfirmedActionsByAddressRequest.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetUnconfirmedActionsByAddressRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetUnconfirmedActionsByAddressRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetUnconfirmedActionsByAddressRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetUnconfirmedActionsByAddressRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    address: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    start: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    count: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetUnconfirmedActionsByAddressRequest} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetUnconfirmedActionsByAddressRequest.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {
-        address: jspb.Message.getFieldWithDefault(msg, 1, ""),
-        start: jspb.Message.getFieldWithDefault(msg, 2, 0),
-        count: jspb.Message.getFieldWithDefault(msg, 3, 0)
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotexapi.GetUnconfirmedActionsByAddressRequest}
  */
-proto.iotexapi.GetUnconfirmedActionsByAddressRequest.deserializeBinary = function(
-  bytes
-) {
+proto.iotexapi.GetUnconfirmedActionsByAddressRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetUnconfirmedActionsByAddressRequest();
-  return proto.iotexapi.GetUnconfirmedActionsByAddressRequest.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetUnconfirmedActionsByAddressRequest;
+  return proto.iotexapi.GetUnconfirmedActionsByAddressRequest.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -1435,35 +1326,33 @@ proto.iotexapi.GetUnconfirmedActionsByAddressRequest.deserializeBinary = functio
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetUnconfirmedActionsByAddressRequest}
  */
-proto.iotexapi.GetUnconfirmedActionsByAddressRequest.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetUnconfirmedActionsByAddressRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = /** @type {string} */ (reader.readString());
-        msg.setAddress(value);
-        break;
-      case 2:
-        var value = /** @type {number} */ (reader.readUint64());
-        msg.setStart(value);
-        break;
-      case 3:
-        var value = /** @type {number} */ (reader.readUint64());
-        msg.setCount(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAddress(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setStart(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setCount(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -1471,12 +1360,10 @@ proto.iotexapi.GetUnconfirmedActionsByAddressRequest.deserializeBinaryFromReader
  */
 proto.iotexapi.GetUnconfirmedActionsByAddressRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.iotexapi.GetUnconfirmedActionsByAddressRequest.serializeBinaryToWriter(
-    this,
-    writer
-  );
+  proto.iotexapi.GetUnconfirmedActionsByAddressRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
+
 
 /**
  * Serializes the given message to binary data (in protobuf wire
@@ -1485,24 +1372,31 @@ proto.iotexapi.GetUnconfirmedActionsByAddressRequest.prototype.serializeBinary =
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetUnconfirmedActionsByAddressRequest.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetUnconfirmedActionsByAddressRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getAddress();
   if (f.length > 0) {
-    writer.writeString(1, f);
+    writer.writeString(
+      1,
+      f
+    );
   }
   f = message.getStart();
   if (f !== 0) {
-    writer.writeUint64(2, f);
+    writer.writeUint64(
+      2,
+      f
+    );
   }
   f = message.getCount();
   if (f !== 0) {
-    writer.writeUint64(3, f);
+    writer.writeUint64(
+      3,
+      f
+    );
   }
 };
+
 
 /**
  * optional string address = 1;
@@ -1512,12 +1406,12 @@ proto.iotexapi.GetUnconfirmedActionsByAddressRequest.prototype.getAddress = func
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
+
 /** @param {string} value */
-proto.iotexapi.GetUnconfirmedActionsByAddressRequest.prototype.setAddress = function(
-  value
-) {
+proto.iotexapi.GetUnconfirmedActionsByAddressRequest.prototype.setAddress = function(value) {
   jspb.Message.setProto3StringField(this, 1, value);
 };
+
 
 /**
  * optional uint64 start = 2;
@@ -1527,12 +1421,12 @@ proto.iotexapi.GetUnconfirmedActionsByAddressRequest.prototype.getStart = functi
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
+
 /** @param {number} value */
-proto.iotexapi.GetUnconfirmedActionsByAddressRequest.prototype.setStart = function(
-  value
-) {
+proto.iotexapi.GetUnconfirmedActionsByAddressRequest.prototype.setStart = function(value) {
   jspb.Message.setProto3IntField(this, 2, value);
 };
+
 
 /**
  * optional uint64 count = 3;
@@ -1542,12 +1436,13 @@ proto.iotexapi.GetUnconfirmedActionsByAddressRequest.prototype.getCount = functi
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
+
 /** @param {number} value */
-proto.iotexapi.GetUnconfirmedActionsByAddressRequest.prototype.setCount = function(
-  value
-) {
+proto.iotexapi.GetUnconfirmedActionsByAddressRequest.prototype.setCount = function(value) {
   jspb.Message.setProto3IntField(this, 3, value);
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -1564,56 +1459,49 @@ proto.iotexapi.GetActionsByBlockRequest = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.GetActionsByBlockRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetActionsByBlockRequest.displayName =
-    "proto.iotexapi.GetActionsByBlockRequest";
+  proto.iotexapi.GetActionsByBlockRequest.displayName = 'proto.iotexapi.GetActionsByBlockRequest';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetActionsByBlockRequest.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetActionsByBlockRequest.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetActionsByBlockRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetActionsByBlockRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetActionsByBlockRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetActionsByBlockRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    blkhash: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    start: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    count: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetActionsByBlockRequest} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetActionsByBlockRequest.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {
-        blkhash: jspb.Message.getFieldWithDefault(msg, 1, ""),
-        start: jspb.Message.getFieldWithDefault(msg, 2, 0),
-        count: jspb.Message.getFieldWithDefault(msg, 3, 0)
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -1622,12 +1510,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetActionsByBlockRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetActionsByBlockRequest();
-  return proto.iotexapi.GetActionsByBlockRequest.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetActionsByBlockRequest;
+  return proto.iotexapi.GetActionsByBlockRequest.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -1636,35 +1522,33 @@ proto.iotexapi.GetActionsByBlockRequest.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetActionsByBlockRequest}
  */
-proto.iotexapi.GetActionsByBlockRequest.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetActionsByBlockRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = /** @type {string} */ (reader.readString());
-        msg.setBlkhash(value);
-        break;
-      case 2:
-        var value = /** @type {number} */ (reader.readUint64());
-        msg.setStart(value);
-        break;
-      case 3:
-        var value = /** @type {number} */ (reader.readUint64());
-        msg.setCount(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setBlkhash(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setStart(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setCount(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -1676,6 +1560,7 @@ proto.iotexapi.GetActionsByBlockRequest.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -1683,24 +1568,31 @@ proto.iotexapi.GetActionsByBlockRequest.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetActionsByBlockRequest.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetActionsByBlockRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getBlkhash();
   if (f.length > 0) {
-    writer.writeString(1, f);
+    writer.writeString(
+      1,
+      f
+    );
   }
   f = message.getStart();
   if (f !== 0) {
-    writer.writeUint64(2, f);
+    writer.writeUint64(
+      2,
+      f
+    );
   }
   f = message.getCount();
   if (f !== 0) {
-    writer.writeUint64(3, f);
+    writer.writeUint64(
+      3,
+      f
+    );
   }
 };
+
 
 /**
  * optional string blkHash = 1;
@@ -1710,10 +1602,12 @@ proto.iotexapi.GetActionsByBlockRequest.prototype.getBlkhash = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
+
 /** @param {string} value */
 proto.iotexapi.GetActionsByBlockRequest.prototype.setBlkhash = function(value) {
   jspb.Message.setProto3StringField(this, 1, value);
 };
+
 
 /**
  * optional uint64 start = 2;
@@ -1723,10 +1617,12 @@ proto.iotexapi.GetActionsByBlockRequest.prototype.getStart = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
+
 /** @param {number} value */
 proto.iotexapi.GetActionsByBlockRequest.prototype.setStart = function(value) {
   jspb.Message.setProto3IntField(this, 2, value);
 };
+
 
 /**
  * optional uint64 count = 3;
@@ -1736,10 +1632,226 @@ proto.iotexapi.GetActionsByBlockRequest.prototype.getCount = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
+
 /** @param {number} value */
 proto.iotexapi.GetActionsByBlockRequest.prototype.setCount = function(value) {
   jspb.Message.setProto3IntField(this, 3, value);
 };
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.iotexapi.ActionInfo = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.iotexapi.ActionInfo, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.iotexapi.ActionInfo.displayName = 'proto.iotexapi.ActionInfo';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.ActionInfo.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.ActionInfo.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.ActionInfo} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.ActionInfo.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    action: (f = msg.getAction()) && proto_types_action_pb.Action.toObject(includeInstance, f),
+    acthash: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    blkhash: jspb.Message.getFieldWithDefault(msg, 3, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.iotexapi.ActionInfo}
+ */
+proto.iotexapi.ActionInfo.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.iotexapi.ActionInfo;
+  return proto.iotexapi.ActionInfo.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.iotexapi.ActionInfo} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.iotexapi.ActionInfo}
+ */
+proto.iotexapi.ActionInfo.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto_types_action_pb.Action;
+      reader.readMessage(value,proto_types_action_pb.Action.deserializeBinaryFromReader);
+      msg.setAction(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setActhash(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setBlkhash(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.iotexapi.ActionInfo.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.iotexapi.ActionInfo.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.iotexapi.ActionInfo} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.ActionInfo.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getAction();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto_types_action_pb.Action.serializeBinaryToWriter
+    );
+  }
+  f = message.getActhash();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getBlkhash();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional iotextypes.Action action = 1;
+ * @return {?proto.iotextypes.Action}
+ */
+proto.iotexapi.ActionInfo.prototype.getAction = function() {
+  return /** @type{?proto.iotextypes.Action} */ (
+    jspb.Message.getWrapperField(this, proto_types_action_pb.Action, 1));
+};
+
+
+/** @param {?proto.iotextypes.Action|undefined} value */
+proto.iotexapi.ActionInfo.prototype.setAction = function(value) {
+  jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+proto.iotexapi.ActionInfo.prototype.clearAction = function() {
+  this.setAction(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.iotexapi.ActionInfo.prototype.hasAction = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional string actHash = 2;
+ * @return {string}
+ */
+proto.iotexapi.ActionInfo.prototype.getActhash = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/** @param {string} value */
+proto.iotexapi.ActionInfo.prototype.setActhash = function(value) {
+  jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string blkHash = 3;
+ * @return {string}
+ */
+proto.iotexapi.ActionInfo.prototype.getBlkhash = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/** @param {string} value */
+proto.iotexapi.ActionInfo.prototype.setBlkhash = function(value) {
+  jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -1752,19 +1864,11 @@ proto.iotexapi.GetActionsByBlockRequest.prototype.setCount = function(value) {
  * @constructor
  */
 proto.iotexapi.GetActionsResponse = function(opt_data) {
-  jspb.Message.initialize(
-    this,
-    opt_data,
-    0,
-    -1,
-    proto.iotexapi.GetActionsResponse.repeatedFields_,
-    null
-  );
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.iotexapi.GetActionsResponse.repeatedFields_, null);
 };
 goog.inherits(proto.iotexapi.GetActionsResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetActionsResponse.displayName =
-    "proto.iotexapi.GetActionsResponse";
+  proto.iotexapi.GetActionsResponse.displayName = 'proto.iotexapi.GetActionsResponse';
 }
 /**
  * List of repeated fields within this message type.
@@ -1773,51 +1877,46 @@ if (goog.DEBUG && !COMPILED) {
  */
 proto.iotexapi.GetActionsResponse.repeatedFields_ = [1];
 
+
+
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetActionsResponse.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetActionsResponse.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetActionsResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetActionsResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetActionsResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetActionsResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    actioninfoList: jspb.Message.toObjectList(msg.getActioninfoList(),
+    proto.iotexapi.ActionInfo.toObject, includeInstance)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetActionsResponse} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetActionsResponse.toObject = function(includeInstance, msg) {
-    var f,
-      obj = {
-        actionsList: jspb.Message.toObjectList(
-          msg.getActionsList(),
-          action_pb.Action.toObject,
-          includeInstance
-        )
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -1826,12 +1925,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetActionsResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetActionsResponse();
-  return proto.iotexapi.GetActionsResponse.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetActionsResponse;
+  return proto.iotexapi.GetActionsResponse.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -1840,28 +1937,26 @@ proto.iotexapi.GetActionsResponse.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetActionsResponse}
  */
-proto.iotexapi.GetActionsResponse.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetActionsResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = new action_pb.Action();
-        reader.readMessage(value, action_pb.Action.deserializeBinaryFromReader);
-        msg.addActions(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = new proto.iotexapi.ActionInfo;
+      reader.readMessage(value,proto.iotexapi.ActionInfo.deserializeBinaryFromReader);
+      msg.addActioninfo(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -1873,6 +1968,7 @@ proto.iotexapi.GetActionsResponse.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -1880,55 +1976,50 @@ proto.iotexapi.GetActionsResponse.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetActionsResponse.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetActionsResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getActionsList();
+  f = message.getActioninfoList();
   if (f.length > 0) {
-    writer.writeRepeatedMessage(1, f, action_pb.Action.serializeBinaryToWriter);
+    writer.writeRepeatedMessage(
+      1,
+      f,
+      proto.iotexapi.ActionInfo.serializeBinaryToWriter
+    );
   }
 };
 
+
 /**
- * repeated iotextypes.Action actions = 1;
- * @return {!Array<!proto.iotextypes.Action>}
+ * repeated ActionInfo actionInfo = 1;
+ * @return {!Array<!proto.iotexapi.ActionInfo>}
  */
-proto.iotexapi.GetActionsResponse.prototype.getActionsList = function() {
-  return /** @type{!Array<!proto.iotextypes.Action>} */ (jspb.Message.getRepeatedWrapperField(
-    this,
-    action_pb.Action,
-    1
-  ));
+proto.iotexapi.GetActionsResponse.prototype.getActioninfoList = function() {
+  return /** @type{!Array<!proto.iotexapi.ActionInfo>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.iotexapi.ActionInfo, 1));
 };
 
-/** @param {!Array<!proto.iotextypes.Action>} value */
-proto.iotexapi.GetActionsResponse.prototype.setActionsList = function(value) {
+
+/** @param {!Array<!proto.iotexapi.ActionInfo>} value */
+proto.iotexapi.GetActionsResponse.prototype.setActioninfoList = function(value) {
   jspb.Message.setRepeatedWrapperField(this, 1, value);
 };
 
+
 /**
- * @param {!proto.iotextypes.Action=} opt_value
+ * @param {!proto.iotexapi.ActionInfo=} opt_value
  * @param {number=} opt_index
- * @return {!proto.iotextypes.Action}
+ * @return {!proto.iotexapi.ActionInfo}
  */
-proto.iotexapi.GetActionsResponse.prototype.addActions = function(
-  opt_value,
-  opt_index
-) {
-  return jspb.Message.addToRepeatedWrapperField(
-    this,
-    1,
-    opt_value,
-    proto.iotextypes.Action,
-    opt_index
-  );
+proto.iotexapi.GetActionsResponse.prototype.addActioninfo = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.iotexapi.ActionInfo, opt_index);
 };
 
-proto.iotexapi.GetActionsResponse.prototype.clearActionsList = function() {
-  this.setActionsList([]);
+
+proto.iotexapi.GetActionsResponse.prototype.clearActioninfoList = function() {
+  this.setActioninfoList([]);
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -1941,19 +2032,11 @@ proto.iotexapi.GetActionsResponse.prototype.clearActionsList = function() {
  * @constructor
  */
 proto.iotexapi.GetBlockMetasRequest = function(opt_data) {
-  jspb.Message.initialize(
-    this,
-    opt_data,
-    0,
-    -1,
-    null,
-    proto.iotexapi.GetBlockMetasRequest.oneofGroups_
-  );
+  jspb.Message.initialize(this, opt_data, 0, -1, null, proto.iotexapi.GetBlockMetasRequest.oneofGroups_);
 };
 goog.inherits(proto.iotexapi.GetBlockMetasRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetBlockMetasRequest.displayName =
-    "proto.iotexapi.GetBlockMetasRequest";
+  proto.iotexapi.GetBlockMetasRequest.displayName = 'proto.iotexapi.GetBlockMetasRequest';
 }
 /**
  * Oneof group definitions for this message. Each group defines the field
@@ -1963,7 +2046,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<!Array<number>>}
  * @const
  */
-proto.iotexapi.GetBlockMetasRequest.oneofGroups_ = [[1, 2]];
+proto.iotexapi.GetBlockMetasRequest.oneofGroups_ = [[1,2]];
 
 /**
  * @enum {number}
@@ -1978,64 +2061,49 @@ proto.iotexapi.GetBlockMetasRequest.LookupCase = {
  * @return {proto.iotexapi.GetBlockMetasRequest.LookupCase}
  */
 proto.iotexapi.GetBlockMetasRequest.prototype.getLookupCase = function() {
-  return /** @type {proto.iotexapi.GetBlockMetasRequest.LookupCase} */ (jspb.Message.computeOneofCase(
-    this,
-    proto.iotexapi.GetBlockMetasRequest.oneofGroups_[0]
-  ));
+  return /** @type {proto.iotexapi.GetBlockMetasRequest.LookupCase} */(jspb.Message.computeOneofCase(this, proto.iotexapi.GetBlockMetasRequest.oneofGroups_[0]));
 };
 
+
+
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetBlockMetasRequest.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetBlockMetasRequest.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetBlockMetasRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetBlockMetasRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetBlockMetasRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetBlockMetasRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    byindex: (f = msg.getByindex()) && proto.iotexapi.GetBlockMetasByIndexRequest.toObject(includeInstance, f),
+    byhash: (f = msg.getByhash()) && proto.iotexapi.GetBlockMetaByHashRequest.toObject(includeInstance, f)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetBlockMetasRequest} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetBlockMetasRequest.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {
-        byindex:
-          (f = msg.getByindex()) &&
-          proto.iotexapi.GetBlockMetasByIndexRequest.toObject(
-            includeInstance,
-            f
-          ),
-        byhash:
-          (f = msg.getByhash()) &&
-          proto.iotexapi.GetBlockMetaByHashRequest.toObject(includeInstance, f)
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -2044,12 +2112,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetBlockMetasRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetBlockMetasRequest();
-  return proto.iotexapi.GetBlockMetasRequest.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetBlockMetasRequest;
+  return proto.iotexapi.GetBlockMetasRequest.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -2058,39 +2124,31 @@ proto.iotexapi.GetBlockMetasRequest.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetBlockMetasRequest}
  */
-proto.iotexapi.GetBlockMetasRequest.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetBlockMetasRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = new proto.iotexapi.GetBlockMetasByIndexRequest();
-        reader.readMessage(
-          value,
-          proto.iotexapi.GetBlockMetasByIndexRequest.deserializeBinaryFromReader
-        );
-        msg.setByindex(value);
-        break;
-      case 2:
-        var value = new proto.iotexapi.GetBlockMetaByHashRequest();
-        reader.readMessage(
-          value,
-          proto.iotexapi.GetBlockMetaByHashRequest.deserializeBinaryFromReader
-        );
-        msg.setByhash(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = new proto.iotexapi.GetBlockMetasByIndexRequest;
+      reader.readMessage(value,proto.iotexapi.GetBlockMetasByIndexRequest.deserializeBinaryFromReader);
+      msg.setByindex(value);
+      break;
+    case 2:
+      var value = new proto.iotexapi.GetBlockMetaByHashRequest;
+      reader.readMessage(value,proto.iotexapi.GetBlockMetaByHashRequest.deserializeBinaryFromReader);
+      msg.setByhash(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -2102,6 +2160,7 @@ proto.iotexapi.GetBlockMetasRequest.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -2109,10 +2168,7 @@ proto.iotexapi.GetBlockMetasRequest.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetBlockMetasRequest.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetBlockMetasRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getByindex();
   if (f != null) {
@@ -2132,31 +2188,27 @@ proto.iotexapi.GetBlockMetasRequest.serializeBinaryToWriter = function(
   }
 };
 
+
 /**
  * optional GetBlockMetasByIndexRequest byIndex = 1;
  * @return {?proto.iotexapi.GetBlockMetasByIndexRequest}
  */
 proto.iotexapi.GetBlockMetasRequest.prototype.getByindex = function() {
-  return /** @type{?proto.iotexapi.GetBlockMetasByIndexRequest} */ (jspb.Message.getWrapperField(
-    this,
-    proto.iotexapi.GetBlockMetasByIndexRequest,
-    1
-  ));
+  return /** @type{?proto.iotexapi.GetBlockMetasByIndexRequest} */ (
+    jspb.Message.getWrapperField(this, proto.iotexapi.GetBlockMetasByIndexRequest, 1));
 };
+
 
 /** @param {?proto.iotexapi.GetBlockMetasByIndexRequest|undefined} value */
 proto.iotexapi.GetBlockMetasRequest.prototype.setByindex = function(value) {
-  jspb.Message.setOneofWrapperField(
-    this,
-    1,
-    proto.iotexapi.GetBlockMetasRequest.oneofGroups_[0],
-    value
-  );
+  jspb.Message.setOneofWrapperField(this, 1, proto.iotexapi.GetBlockMetasRequest.oneofGroups_[0], value);
 };
+
 
 proto.iotexapi.GetBlockMetasRequest.prototype.clearByindex = function() {
   this.setByindex(undefined);
 };
+
 
 /**
  * Returns whether this field is set.
@@ -2166,31 +2218,27 @@ proto.iotexapi.GetBlockMetasRequest.prototype.hasByindex = function() {
   return jspb.Message.getField(this, 1) != null;
 };
 
+
 /**
  * optional GetBlockMetaByHashRequest byHash = 2;
  * @return {?proto.iotexapi.GetBlockMetaByHashRequest}
  */
 proto.iotexapi.GetBlockMetasRequest.prototype.getByhash = function() {
-  return /** @type{?proto.iotexapi.GetBlockMetaByHashRequest} */ (jspb.Message.getWrapperField(
-    this,
-    proto.iotexapi.GetBlockMetaByHashRequest,
-    2
-  ));
+  return /** @type{?proto.iotexapi.GetBlockMetaByHashRequest} */ (
+    jspb.Message.getWrapperField(this, proto.iotexapi.GetBlockMetaByHashRequest, 2));
 };
+
 
 /** @param {?proto.iotexapi.GetBlockMetaByHashRequest|undefined} value */
 proto.iotexapi.GetBlockMetasRequest.prototype.setByhash = function(value) {
-  jspb.Message.setOneofWrapperField(
-    this,
-    2,
-    proto.iotexapi.GetBlockMetasRequest.oneofGroups_[0],
-    value
-  );
+  jspb.Message.setOneofWrapperField(this, 2, proto.iotexapi.GetBlockMetasRequest.oneofGroups_[0], value);
 };
+
 
 proto.iotexapi.GetBlockMetasRequest.prototype.clearByhash = function() {
   this.setByhash(undefined);
 };
+
 
 /**
  * Returns whether this field is set.
@@ -2199,6 +2247,8 @@ proto.iotexapi.GetBlockMetasRequest.prototype.clearByhash = function() {
 proto.iotexapi.GetBlockMetasRequest.prototype.hasByhash = function() {
   return jspb.Message.getField(this, 2) != null;
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -2215,55 +2265,48 @@ proto.iotexapi.GetBlockMetasByIndexRequest = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.GetBlockMetasByIndexRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetBlockMetasByIndexRequest.displayName =
-    "proto.iotexapi.GetBlockMetasByIndexRequest";
+  proto.iotexapi.GetBlockMetasByIndexRequest.displayName = 'proto.iotexapi.GetBlockMetasByIndexRequest';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetBlockMetasByIndexRequest.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetBlockMetasByIndexRequest.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetBlockMetasByIndexRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetBlockMetasByIndexRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetBlockMetasByIndexRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetBlockMetasByIndexRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    start: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    count: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetBlockMetasByIndexRequest} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetBlockMetasByIndexRequest.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {
-        start: jspb.Message.getFieldWithDefault(msg, 1, 0),
-        count: jspb.Message.getFieldWithDefault(msg, 2, 0)
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -2272,12 +2315,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetBlockMetasByIndexRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetBlockMetasByIndexRequest();
-  return proto.iotexapi.GetBlockMetasByIndexRequest.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetBlockMetasByIndexRequest;
+  return proto.iotexapi.GetBlockMetasByIndexRequest.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -2286,31 +2327,29 @@ proto.iotexapi.GetBlockMetasByIndexRequest.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetBlockMetasByIndexRequest}
  */
-proto.iotexapi.GetBlockMetasByIndexRequest.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetBlockMetasByIndexRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = /** @type {number} */ (reader.readUint64());
-        msg.setStart(value);
-        break;
-      case 2:
-        var value = /** @type {number} */ (reader.readUint64());
-        msg.setCount(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setStart(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setCount(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -2318,12 +2357,10 @@ proto.iotexapi.GetBlockMetasByIndexRequest.deserializeBinaryFromReader = functio
  */
 proto.iotexapi.GetBlockMetasByIndexRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.iotexapi.GetBlockMetasByIndexRequest.serializeBinaryToWriter(
-    this,
-    writer
-  );
+  proto.iotexapi.GetBlockMetasByIndexRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
+
 
 /**
  * Serializes the given message to binary data (in protobuf wire
@@ -2332,20 +2369,24 @@ proto.iotexapi.GetBlockMetasByIndexRequest.prototype.serializeBinary = function(
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetBlockMetasByIndexRequest.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetBlockMetasByIndexRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getStart();
   if (f !== 0) {
-    writer.writeUint64(1, f);
+    writer.writeUint64(
+      1,
+      f
+    );
   }
   f = message.getCount();
   if (f !== 0) {
-    writer.writeUint64(2, f);
+    writer.writeUint64(
+      2,
+      f
+    );
   }
 };
+
 
 /**
  * optional uint64 start = 1;
@@ -2355,12 +2396,12 @@ proto.iotexapi.GetBlockMetasByIndexRequest.prototype.getStart = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
+
 /** @param {number} value */
-proto.iotexapi.GetBlockMetasByIndexRequest.prototype.setStart = function(
-  value
-) {
+proto.iotexapi.GetBlockMetasByIndexRequest.prototype.setStart = function(value) {
   jspb.Message.setProto3IntField(this, 1, value);
 };
+
 
 /**
  * optional uint64 count = 2;
@@ -2370,12 +2411,13 @@ proto.iotexapi.GetBlockMetasByIndexRequest.prototype.getCount = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
+
 /** @param {number} value */
-proto.iotexapi.GetBlockMetasByIndexRequest.prototype.setCount = function(
-  value
-) {
+proto.iotexapi.GetBlockMetasByIndexRequest.prototype.setCount = function(value) {
   jspb.Message.setProto3IntField(this, 2, value);
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -2392,54 +2434,47 @@ proto.iotexapi.GetBlockMetaByHashRequest = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.GetBlockMetaByHashRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetBlockMetaByHashRequest.displayName =
-    "proto.iotexapi.GetBlockMetaByHashRequest";
+  proto.iotexapi.GetBlockMetaByHashRequest.displayName = 'proto.iotexapi.GetBlockMetaByHashRequest';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetBlockMetaByHashRequest.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetBlockMetaByHashRequest.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetBlockMetaByHashRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetBlockMetaByHashRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetBlockMetaByHashRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetBlockMetaByHashRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    blkhash: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetBlockMetaByHashRequest} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetBlockMetaByHashRequest.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {
-        blkhash: jspb.Message.getFieldWithDefault(msg, 1, "")
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -2448,12 +2483,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetBlockMetaByHashRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetBlockMetaByHashRequest();
-  return proto.iotexapi.GetBlockMetaByHashRequest.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetBlockMetaByHashRequest;
+  return proto.iotexapi.GetBlockMetaByHashRequest.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -2462,27 +2495,25 @@ proto.iotexapi.GetBlockMetaByHashRequest.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetBlockMetaByHashRequest}
  */
-proto.iotexapi.GetBlockMetaByHashRequest.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetBlockMetaByHashRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = /** @type {string} */ (reader.readString());
-        msg.setBlkhash(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setBlkhash(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -2490,12 +2521,10 @@ proto.iotexapi.GetBlockMetaByHashRequest.deserializeBinaryFromReader = function(
  */
 proto.iotexapi.GetBlockMetaByHashRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.iotexapi.GetBlockMetaByHashRequest.serializeBinaryToWriter(
-    this,
-    writer
-  );
+  proto.iotexapi.GetBlockMetaByHashRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
+
 
 /**
  * Serializes the given message to binary data (in protobuf wire
@@ -2504,16 +2533,17 @@ proto.iotexapi.GetBlockMetaByHashRequest.prototype.serializeBinary = function() 
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetBlockMetaByHashRequest.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetBlockMetaByHashRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getBlkhash();
   if (f.length > 0) {
-    writer.writeString(1, f);
+    writer.writeString(
+      1,
+      f
+    );
   }
 };
+
 
 /**
  * optional string blkHash = 1;
@@ -2523,12 +2553,13 @@ proto.iotexapi.GetBlockMetaByHashRequest.prototype.getBlkhash = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
+
 /** @param {string} value */
-proto.iotexapi.GetBlockMetaByHashRequest.prototype.setBlkhash = function(
-  value
-) {
+proto.iotexapi.GetBlockMetaByHashRequest.prototype.setBlkhash = function(value) {
   jspb.Message.setProto3StringField(this, 1, value);
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -2541,19 +2572,11 @@ proto.iotexapi.GetBlockMetaByHashRequest.prototype.setBlkhash = function(
  * @constructor
  */
 proto.iotexapi.GetBlockMetasResponse = function(opt_data) {
-  jspb.Message.initialize(
-    this,
-    opt_data,
-    0,
-    -1,
-    proto.iotexapi.GetBlockMetasResponse.repeatedFields_,
-    null
-  );
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.iotexapi.GetBlockMetasResponse.repeatedFields_, null);
 };
 goog.inherits(proto.iotexapi.GetBlockMetasResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetBlockMetasResponse.displayName =
-    "proto.iotexapi.GetBlockMetasResponse";
+  proto.iotexapi.GetBlockMetasResponse.displayName = 'proto.iotexapi.GetBlockMetasResponse';
 }
 /**
  * List of repeated fields within this message type.
@@ -2562,54 +2585,46 @@ if (goog.DEBUG && !COMPILED) {
  */
 proto.iotexapi.GetBlockMetasResponse.repeatedFields_ = [1];
 
+
+
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetBlockMetasResponse.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetBlockMetasResponse.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetBlockMetasResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetBlockMetasResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetBlockMetasResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetBlockMetasResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    blkmetasList: jspb.Message.toObjectList(msg.getBlkmetasList(),
+    proto_types_blockchain_pb.BlockMeta.toObject, includeInstance)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetBlockMetasResponse} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetBlockMetasResponse.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {
-        blkmetasList: jspb.Message.toObjectList(
-          msg.getBlkmetasList(),
-          blockchain_pb.BlockMeta.toObject,
-          includeInstance
-        )
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -2618,12 +2633,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetBlockMetasResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetBlockMetasResponse();
-  return proto.iotexapi.GetBlockMetasResponse.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetBlockMetasResponse;
+  return proto.iotexapi.GetBlockMetasResponse.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -2632,31 +2645,26 @@ proto.iotexapi.GetBlockMetasResponse.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetBlockMetasResponse}
  */
-proto.iotexapi.GetBlockMetasResponse.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetBlockMetasResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = new blockchain_pb.BlockMeta();
-        reader.readMessage(
-          value,
-          blockchain_pb.BlockMeta.deserializeBinaryFromReader
-        );
-        msg.addBlkmetas(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = new proto_types_blockchain_pb.BlockMeta;
+      reader.readMessage(value,proto_types_blockchain_pb.BlockMeta.deserializeBinaryFromReader);
+      msg.addBlkmetas(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -2668,6 +2676,7 @@ proto.iotexapi.GetBlockMetasResponse.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -2675,61 +2684,50 @@ proto.iotexapi.GetBlockMetasResponse.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetBlockMetasResponse.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetBlockMetasResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getBlkmetasList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       1,
       f,
-      blockchain_pb.BlockMeta.serializeBinaryToWriter
+      proto_types_blockchain_pb.BlockMeta.serializeBinaryToWriter
     );
   }
 };
+
 
 /**
  * repeated iotextypes.BlockMeta blkMetas = 1;
  * @return {!Array<!proto.iotextypes.BlockMeta>}
  */
 proto.iotexapi.GetBlockMetasResponse.prototype.getBlkmetasList = function() {
-  return /** @type{!Array<!proto.iotextypes.BlockMeta>} */ (jspb.Message.getRepeatedWrapperField(
-    this,
-    blockchain_pb.BlockMeta,
-    1
-  ));
+  return /** @type{!Array<!proto.iotextypes.BlockMeta>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto_types_blockchain_pb.BlockMeta, 1));
 };
 
+
 /** @param {!Array<!proto.iotextypes.BlockMeta>} value */
-proto.iotexapi.GetBlockMetasResponse.prototype.setBlkmetasList = function(
-  value
-) {
+proto.iotexapi.GetBlockMetasResponse.prototype.setBlkmetasList = function(value) {
   jspb.Message.setRepeatedWrapperField(this, 1, value);
 };
+
 
 /**
  * @param {!proto.iotextypes.BlockMeta=} opt_value
  * @param {number=} opt_index
  * @return {!proto.iotextypes.BlockMeta}
  */
-proto.iotexapi.GetBlockMetasResponse.prototype.addBlkmetas = function(
-  opt_value,
-  opt_index
-) {
-  return jspb.Message.addToRepeatedWrapperField(
-    this,
-    1,
-    opt_value,
-    proto.iotextypes.BlockMeta,
-    opt_index
-  );
+proto.iotexapi.GetBlockMetasResponse.prototype.addBlkmetas = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.iotextypes.BlockMeta, opt_index);
 };
+
 
 proto.iotexapi.GetBlockMetasResponse.prototype.clearBlkmetasList = function() {
   this.setBlkmetasList([]);
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -2746,49 +2744,47 @@ proto.iotexapi.GetChainMetaRequest = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.GetChainMetaRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetChainMetaRequest.displayName =
-    "proto.iotexapi.GetChainMetaRequest";
+  proto.iotexapi.GetChainMetaRequest.displayName = 'proto.iotexapi.GetChainMetaRequest';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetChainMetaRequest.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetChainMetaRequest.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetChainMetaRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetChainMetaRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetChainMetaRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetChainMetaRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetChainMetaRequest} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetChainMetaRequest.toObject = function(includeInstance, msg) {
-    var f,
-      obj = {};
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -2797,12 +2793,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetChainMetaRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetChainMetaRequest();
-  return proto.iotexapi.GetChainMetaRequest.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetChainMetaRequest;
+  return proto.iotexapi.GetChainMetaRequest.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -2811,23 +2805,21 @@ proto.iotexapi.GetChainMetaRequest.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetChainMetaRequest}
  */
-proto.iotexapi.GetChainMetaRequest.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetChainMetaRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      default:
-        reader.skipField();
-        break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -2839,6 +2831,7 @@ proto.iotexapi.GetChainMetaRequest.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -2846,12 +2839,11 @@ proto.iotexapi.GetChainMetaRequest.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetChainMetaRequest.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetChainMetaRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -2868,56 +2860,47 @@ proto.iotexapi.GetChainMetaResponse = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.GetChainMetaResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetChainMetaResponse.displayName =
-    "proto.iotexapi.GetChainMetaResponse";
+  proto.iotexapi.GetChainMetaResponse.displayName = 'proto.iotexapi.GetChainMetaResponse';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetChainMetaResponse.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetChainMetaResponse.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetChainMetaResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetChainMetaResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetChainMetaResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetChainMetaResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    chainmeta: (f = msg.getChainmeta()) && proto_types_blockchain_pb.ChainMeta.toObject(includeInstance, f)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetChainMetaResponse} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetChainMetaResponse.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {
-        chainmeta:
-          (f = msg.getChainmeta()) &&
-          blockchain_pb.ChainMeta.toObject(includeInstance, f)
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -2926,12 +2909,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetChainMetaResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetChainMetaResponse();
-  return proto.iotexapi.GetChainMetaResponse.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetChainMetaResponse;
+  return proto.iotexapi.GetChainMetaResponse.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -2940,31 +2921,26 @@ proto.iotexapi.GetChainMetaResponse.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetChainMetaResponse}
  */
-proto.iotexapi.GetChainMetaResponse.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetChainMetaResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = new blockchain_pb.ChainMeta();
-        reader.readMessage(
-          value,
-          blockchain_pb.ChainMeta.deserializeBinaryFromReader
-        );
-        msg.setChainmeta(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = new proto_types_blockchain_pb.ChainMeta;
+      reader.readMessage(value,proto_types_blockchain_pb.ChainMeta.deserializeBinaryFromReader);
+      msg.setChainmeta(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -2976,6 +2952,7 @@ proto.iotexapi.GetChainMetaResponse.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -2983,37 +2960,39 @@ proto.iotexapi.GetChainMetaResponse.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetChainMetaResponse.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetChainMetaResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getChainmeta();
   if (f != null) {
-    writer.writeMessage(1, f, blockchain_pb.ChainMeta.serializeBinaryToWriter);
+    writer.writeMessage(
+      1,
+      f,
+      proto_types_blockchain_pb.ChainMeta.serializeBinaryToWriter
+    );
   }
 };
+
 
 /**
  * optional iotextypes.ChainMeta chainMeta = 1;
  * @return {?proto.iotextypes.ChainMeta}
  */
 proto.iotexapi.GetChainMetaResponse.prototype.getChainmeta = function() {
-  return /** @type{?proto.iotextypes.ChainMeta} */ (jspb.Message.getWrapperField(
-    this,
-    blockchain_pb.ChainMeta,
-    1
-  ));
+  return /** @type{?proto.iotextypes.ChainMeta} */ (
+    jspb.Message.getWrapperField(this, proto_types_blockchain_pb.ChainMeta, 1));
 };
+
 
 /** @param {?proto.iotextypes.ChainMeta|undefined} value */
 proto.iotexapi.GetChainMetaResponse.prototype.setChainmeta = function(value) {
   jspb.Message.setWrapperField(this, 1, value);
 };
 
+
 proto.iotexapi.GetChainMetaResponse.prototype.clearChainmeta = function() {
   this.setChainmeta(undefined);
 };
+
 
 /**
  * Returns whether this field is set.
@@ -3022,6 +3001,8 @@ proto.iotexapi.GetChainMetaResponse.prototype.clearChainmeta = function() {
 proto.iotexapi.GetChainMetaResponse.prototype.hasChainmeta = function() {
   return jspb.Message.getField(this, 1) != null;
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -3038,52 +3019,47 @@ proto.iotexapi.GetServerMetaRequest = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.GetServerMetaRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetServerMetaRequest.displayName =
-    "proto.iotexapi.GetServerMetaRequest";
+  proto.iotexapi.GetServerMetaRequest.displayName = 'proto.iotexapi.GetServerMetaRequest';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetServerMetaRequest.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetServerMetaRequest.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetServerMetaRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetServerMetaRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetServerMetaRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetServerMetaRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetServerMetaRequest} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetServerMetaRequest.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {};
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -3092,12 +3068,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetServerMetaRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetServerMetaRequest();
-  return proto.iotexapi.GetServerMetaRequest.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetServerMetaRequest;
+  return proto.iotexapi.GetServerMetaRequest.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -3106,23 +3080,21 @@ proto.iotexapi.GetServerMetaRequest.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetServerMetaRequest}
  */
-proto.iotexapi.GetServerMetaRequest.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetServerMetaRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      default:
-        reader.skipField();
-        break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -3134,6 +3106,7 @@ proto.iotexapi.GetServerMetaRequest.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -3141,12 +3114,11 @@ proto.iotexapi.GetServerMetaRequest.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetServerMetaRequest.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetServerMetaRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -3163,56 +3135,47 @@ proto.iotexapi.GetServerMetaResponse = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.GetServerMetaResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetServerMetaResponse.displayName =
-    "proto.iotexapi.GetServerMetaResponse";
+  proto.iotexapi.GetServerMetaResponse.displayName = 'proto.iotexapi.GetServerMetaResponse';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetServerMetaResponse.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetServerMetaResponse.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetServerMetaResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetServerMetaResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetServerMetaResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetServerMetaResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    servermeta: (f = msg.getServermeta()) && proto_types_node_pb.ServerMeta.toObject(includeInstance, f)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetServerMetaResponse} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetServerMetaResponse.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {
-        servermeta:
-          (f = msg.getServermeta()) &&
-          node_pb.ServerMeta.toObject(includeInstance, f)
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -3221,12 +3184,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetServerMetaResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetServerMetaResponse();
-  return proto.iotexapi.GetServerMetaResponse.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetServerMetaResponse;
+  return proto.iotexapi.GetServerMetaResponse.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -3235,31 +3196,26 @@ proto.iotexapi.GetServerMetaResponse.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetServerMetaResponse}
  */
-proto.iotexapi.GetServerMetaResponse.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetServerMetaResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = new node_pb.ServerMeta();
-        reader.readMessage(
-          value,
-          node_pb.ServerMeta.deserializeBinaryFromReader
-        );
-        msg.setServermeta(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = new proto_types_node_pb.ServerMeta;
+      reader.readMessage(value,proto_types_node_pb.ServerMeta.deserializeBinaryFromReader);
+      msg.setServermeta(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -3271,6 +3227,7 @@ proto.iotexapi.GetServerMetaResponse.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -3278,37 +3235,39 @@ proto.iotexapi.GetServerMetaResponse.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetServerMetaResponse.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetServerMetaResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getServermeta();
   if (f != null) {
-    writer.writeMessage(1, f, node_pb.ServerMeta.serializeBinaryToWriter);
+    writer.writeMessage(
+      1,
+      f,
+      proto_types_node_pb.ServerMeta.serializeBinaryToWriter
+    );
   }
 };
+
 
 /**
  * optional iotextypes.ServerMeta serverMeta = 1;
  * @return {?proto.iotextypes.ServerMeta}
  */
 proto.iotexapi.GetServerMetaResponse.prototype.getServermeta = function() {
-  return /** @type{?proto.iotextypes.ServerMeta} */ (jspb.Message.getWrapperField(
-    this,
-    node_pb.ServerMeta,
-    1
-  ));
+  return /** @type{?proto.iotextypes.ServerMeta} */ (
+    jspb.Message.getWrapperField(this, proto_types_node_pb.ServerMeta, 1));
 };
+
 
 /** @param {?proto.iotextypes.ServerMeta|undefined} value */
 proto.iotexapi.GetServerMetaResponse.prototype.setServermeta = function(value) {
   jspb.Message.setWrapperField(this, 1, value);
 };
 
+
 proto.iotexapi.GetServerMetaResponse.prototype.clearServermeta = function() {
   this.setServermeta(undefined);
 };
+
 
 /**
  * Returns whether this field is set.
@@ -3317,6 +3276,8 @@ proto.iotexapi.GetServerMetaResponse.prototype.clearServermeta = function() {
 proto.iotexapi.GetServerMetaResponse.prototype.hasServermeta = function() {
   return jspb.Message.getField(this, 1) != null;
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -3333,49 +3294,47 @@ proto.iotexapi.SendActionRequest = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.SendActionRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.SendActionRequest.displayName =
-    "proto.iotexapi.SendActionRequest";
+  proto.iotexapi.SendActionRequest.displayName = 'proto.iotexapi.SendActionRequest';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.SendActionRequest.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.SendActionRequest.toObject(opt_includeInstance, this);
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.SendActionRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.SendActionRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.SendActionRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.SendActionRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    action: (f = msg.getAction()) && proto_types_action_pb.Action.toObject(includeInstance, f)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.SendActionRequest} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.SendActionRequest.toObject = function(includeInstance, msg) {
-    var f,
-      obj = {
-        action:
-          (f = msg.getAction()) && action_pb.Action.toObject(includeInstance, f)
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -3384,12 +3343,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.SendActionRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.SendActionRequest();
-  return proto.iotexapi.SendActionRequest.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.SendActionRequest;
+  return proto.iotexapi.SendActionRequest.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -3398,28 +3355,26 @@ proto.iotexapi.SendActionRequest.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.SendActionRequest}
  */
-proto.iotexapi.SendActionRequest.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.SendActionRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = new action_pb.Action();
-        reader.readMessage(value, action_pb.Action.deserializeBinaryFromReader);
-        msg.setAction(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = new proto_types_action_pb.Action;
+      reader.readMessage(value,proto_types_action_pb.Action.deserializeBinaryFromReader);
+      msg.setAction(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -3431,6 +3386,7 @@ proto.iotexapi.SendActionRequest.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -3438,37 +3394,39 @@ proto.iotexapi.SendActionRequest.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.SendActionRequest.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.SendActionRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getAction();
   if (f != null) {
-    writer.writeMessage(1, f, action_pb.Action.serializeBinaryToWriter);
+    writer.writeMessage(
+      1,
+      f,
+      proto_types_action_pb.Action.serializeBinaryToWriter
+    );
   }
 };
+
 
 /**
  * optional iotextypes.Action action = 1;
  * @return {?proto.iotextypes.Action}
  */
 proto.iotexapi.SendActionRequest.prototype.getAction = function() {
-  return /** @type{?proto.iotextypes.Action} */ (jspb.Message.getWrapperField(
-    this,
-    action_pb.Action,
-    1
-  ));
+  return /** @type{?proto.iotextypes.Action} */ (
+    jspb.Message.getWrapperField(this, proto_types_action_pb.Action, 1));
 };
+
 
 /** @param {?proto.iotextypes.Action|undefined} value */
 proto.iotexapi.SendActionRequest.prototype.setAction = function(value) {
   jspb.Message.setWrapperField(this, 1, value);
 };
 
+
 proto.iotexapi.SendActionRequest.prototype.clearAction = function() {
   this.setAction(undefined);
 };
+
 
 /**
  * Returns whether this field is set.
@@ -3477,6 +3435,8 @@ proto.iotexapi.SendActionRequest.prototype.clearAction = function() {
 proto.iotexapi.SendActionRequest.prototype.hasAction = function() {
   return jspb.Message.getField(this, 1) != null;
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -3493,49 +3453,47 @@ proto.iotexapi.SendActionResponse = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.SendActionResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.SendActionResponse.displayName =
-    "proto.iotexapi.SendActionResponse";
+  proto.iotexapi.SendActionResponse.displayName = 'proto.iotexapi.SendActionResponse';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.SendActionResponse.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.SendActionResponse.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.SendActionResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.SendActionResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.SendActionResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.SendActionResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.SendActionResponse} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.SendActionResponse.toObject = function(includeInstance, msg) {
-    var f,
-      obj = {};
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -3544,12 +3502,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.SendActionResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.SendActionResponse();
-  return proto.iotexapi.SendActionResponse.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.SendActionResponse;
+  return proto.iotexapi.SendActionResponse.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -3558,23 +3514,21 @@ proto.iotexapi.SendActionResponse.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.SendActionResponse}
  */
-proto.iotexapi.SendActionResponse.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.SendActionResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      default:
-        reader.skipField();
-        break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -3586,6 +3540,7 @@ proto.iotexapi.SendActionResponse.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -3593,12 +3548,11 @@ proto.iotexapi.SendActionResponse.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.SendActionResponse.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.SendActionResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -3615,54 +3569,47 @@ proto.iotexapi.GetReceiptByActionRequest = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.GetReceiptByActionRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetReceiptByActionRequest.displayName =
-    "proto.iotexapi.GetReceiptByActionRequest";
+  proto.iotexapi.GetReceiptByActionRequest.displayName = 'proto.iotexapi.GetReceiptByActionRequest';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetReceiptByActionRequest.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetReceiptByActionRequest.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetReceiptByActionRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetReceiptByActionRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetReceiptByActionRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetReceiptByActionRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    actionhash: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetReceiptByActionRequest} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetReceiptByActionRequest.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {
-        actionhash: jspb.Message.getFieldWithDefault(msg, 1, "")
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -3671,12 +3618,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetReceiptByActionRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetReceiptByActionRequest();
-  return proto.iotexapi.GetReceiptByActionRequest.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetReceiptByActionRequest;
+  return proto.iotexapi.GetReceiptByActionRequest.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -3685,27 +3630,25 @@ proto.iotexapi.GetReceiptByActionRequest.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetReceiptByActionRequest}
  */
-proto.iotexapi.GetReceiptByActionRequest.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetReceiptByActionRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = /** @type {string} */ (reader.readString());
-        msg.setActionhash(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setActionhash(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -3713,12 +3656,10 @@ proto.iotexapi.GetReceiptByActionRequest.deserializeBinaryFromReader = function(
  */
 proto.iotexapi.GetReceiptByActionRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.iotexapi.GetReceiptByActionRequest.serializeBinaryToWriter(
-    this,
-    writer
-  );
+  proto.iotexapi.GetReceiptByActionRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
+
 
 /**
  * Serializes the given message to binary data (in protobuf wire
@@ -3727,16 +3668,17 @@ proto.iotexapi.GetReceiptByActionRequest.prototype.serializeBinary = function() 
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetReceiptByActionRequest.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetReceiptByActionRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getActionhash();
   if (f.length > 0) {
-    writer.writeString(1, f);
+    writer.writeString(
+      1,
+      f
+    );
   }
 };
+
 
 /**
  * optional string actionHash = 1;
@@ -3746,12 +3688,13 @@ proto.iotexapi.GetReceiptByActionRequest.prototype.getActionhash = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
+
 /** @param {string} value */
-proto.iotexapi.GetReceiptByActionRequest.prototype.setActionhash = function(
-  value
-) {
+proto.iotexapi.GetReceiptByActionRequest.prototype.setActionhash = function(value) {
   jspb.Message.setProto3StringField(this, 1, value);
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -3768,56 +3711,47 @@ proto.iotexapi.GetReceiptByActionResponse = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.GetReceiptByActionResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetReceiptByActionResponse.displayName =
-    "proto.iotexapi.GetReceiptByActionResponse";
+  proto.iotexapi.GetReceiptByActionResponse.displayName = 'proto.iotexapi.GetReceiptByActionResponse';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetReceiptByActionResponse.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetReceiptByActionResponse.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetReceiptByActionResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetReceiptByActionResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetReceiptByActionResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetReceiptByActionResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    receipt: (f = msg.getReceipt()) && proto_types_action_pb.Receipt.toObject(includeInstance, f)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetReceiptByActionResponse} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetReceiptByActionResponse.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {
-        receipt:
-          (f = msg.getReceipt()) &&
-          action_pb.Receipt.toObject(includeInstance, f)
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -3826,12 +3760,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetReceiptByActionResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetReceiptByActionResponse();
-  return proto.iotexapi.GetReceiptByActionResponse.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetReceiptByActionResponse;
+  return proto.iotexapi.GetReceiptByActionResponse.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -3840,31 +3772,26 @@ proto.iotexapi.GetReceiptByActionResponse.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetReceiptByActionResponse}
  */
-proto.iotexapi.GetReceiptByActionResponse.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetReceiptByActionResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = new action_pb.Receipt();
-        reader.readMessage(
-          value,
-          action_pb.Receipt.deserializeBinaryFromReader
-        );
-        msg.setReceipt(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = new proto_types_action_pb.Receipt;
+      reader.readMessage(value,proto_types_action_pb.Receipt.deserializeBinaryFromReader);
+      msg.setReceipt(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -3872,12 +3799,10 @@ proto.iotexapi.GetReceiptByActionResponse.deserializeBinaryFromReader = function
  */
 proto.iotexapi.GetReceiptByActionResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.iotexapi.GetReceiptByActionResponse.serializeBinaryToWriter(
-    this,
-    writer
-  );
+  proto.iotexapi.GetReceiptByActionResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
+
 
 /**
  * Serializes the given message to binary data (in protobuf wire
@@ -3886,39 +3811,39 @@ proto.iotexapi.GetReceiptByActionResponse.prototype.serializeBinary = function()
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetReceiptByActionResponse.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetReceiptByActionResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getReceipt();
   if (f != null) {
-    writer.writeMessage(1, f, action_pb.Receipt.serializeBinaryToWriter);
+    writer.writeMessage(
+      1,
+      f,
+      proto_types_action_pb.Receipt.serializeBinaryToWriter
+    );
   }
 };
+
 
 /**
  * optional iotextypes.Receipt receipt = 1;
  * @return {?proto.iotextypes.Receipt}
  */
 proto.iotexapi.GetReceiptByActionResponse.prototype.getReceipt = function() {
-  return /** @type{?proto.iotextypes.Receipt} */ (jspb.Message.getWrapperField(
-    this,
-    action_pb.Receipt,
-    1
-  ));
+  return /** @type{?proto.iotextypes.Receipt} */ (
+    jspb.Message.getWrapperField(this, proto_types_action_pb.Receipt, 1));
 };
 
+
 /** @param {?proto.iotextypes.Receipt|undefined} value */
-proto.iotexapi.GetReceiptByActionResponse.prototype.setReceipt = function(
-  value
-) {
+proto.iotexapi.GetReceiptByActionResponse.prototype.setReceipt = function(value) {
   jspb.Message.setWrapperField(this, 1, value);
 };
+
 
 proto.iotexapi.GetReceiptByActionResponse.prototype.clearReceipt = function() {
   this.setReceipt(undefined);
 };
+
 
 /**
  * Returns whether this field is set.
@@ -3927,6 +3852,8 @@ proto.iotexapi.GetReceiptByActionResponse.prototype.clearReceipt = function() {
 proto.iotexapi.GetReceiptByActionResponse.prototype.hasReceipt = function() {
   return jspb.Message.getField(this, 1) != null;
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -3943,52 +3870,47 @@ proto.iotexapi.ReadContractRequest = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.ReadContractRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.ReadContractRequest.displayName =
-    "proto.iotexapi.ReadContractRequest";
+  proto.iotexapi.ReadContractRequest.displayName = 'proto.iotexapi.ReadContractRequest';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.ReadContractRequest.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.ReadContractRequest.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.ReadContractRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.ReadContractRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.ReadContractRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.ReadContractRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    action: (f = msg.getAction()) && proto_types_action_pb.Action.toObject(includeInstance, f)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.ReadContractRequest} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.ReadContractRequest.toObject = function(includeInstance, msg) {
-    var f,
-      obj = {
-        action:
-          (f = msg.getAction()) && action_pb.Action.toObject(includeInstance, f)
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -3997,12 +3919,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.ReadContractRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.ReadContractRequest();
-  return proto.iotexapi.ReadContractRequest.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.ReadContractRequest;
+  return proto.iotexapi.ReadContractRequest.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -4011,28 +3931,26 @@ proto.iotexapi.ReadContractRequest.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.ReadContractRequest}
  */
-proto.iotexapi.ReadContractRequest.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.ReadContractRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = new action_pb.Action();
-        reader.readMessage(value, action_pb.Action.deserializeBinaryFromReader);
-        msg.setAction(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = new proto_types_action_pb.Action;
+      reader.readMessage(value,proto_types_action_pb.Action.deserializeBinaryFromReader);
+      msg.setAction(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -4044,6 +3962,7 @@ proto.iotexapi.ReadContractRequest.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -4051,37 +3970,39 @@ proto.iotexapi.ReadContractRequest.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.ReadContractRequest.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.ReadContractRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getAction();
   if (f != null) {
-    writer.writeMessage(1, f, action_pb.Action.serializeBinaryToWriter);
+    writer.writeMessage(
+      1,
+      f,
+      proto_types_action_pb.Action.serializeBinaryToWriter
+    );
   }
 };
+
 
 /**
  * optional iotextypes.Action action = 1;
  * @return {?proto.iotextypes.Action}
  */
 proto.iotexapi.ReadContractRequest.prototype.getAction = function() {
-  return /** @type{?proto.iotextypes.Action} */ (jspb.Message.getWrapperField(
-    this,
-    action_pb.Action,
-    1
-  ));
+  return /** @type{?proto.iotextypes.Action} */ (
+    jspb.Message.getWrapperField(this, proto_types_action_pb.Action, 1));
 };
+
 
 /** @param {?proto.iotextypes.Action|undefined} value */
 proto.iotexapi.ReadContractRequest.prototype.setAction = function(value) {
   jspb.Message.setWrapperField(this, 1, value);
 };
 
+
 proto.iotexapi.ReadContractRequest.prototype.clearAction = function() {
   this.setAction(undefined);
 };
+
 
 /**
  * Returns whether this field is set.
@@ -4090,6 +4011,8 @@ proto.iotexapi.ReadContractRequest.prototype.clearAction = function() {
 proto.iotexapi.ReadContractRequest.prototype.hasAction = function() {
   return jspb.Message.getField(this, 1) != null;
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -4106,54 +4029,47 @@ proto.iotexapi.ReadContractResponse = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.ReadContractResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.ReadContractResponse.displayName =
-    "proto.iotexapi.ReadContractResponse";
+  proto.iotexapi.ReadContractResponse.displayName = 'proto.iotexapi.ReadContractResponse';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.ReadContractResponse.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.ReadContractResponse.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.ReadContractResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.ReadContractResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.ReadContractResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.ReadContractResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    data: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.ReadContractResponse} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.ReadContractResponse.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {
-        data: jspb.Message.getFieldWithDefault(msg, 1, "")
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -4162,12 +4078,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.ReadContractResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.ReadContractResponse();
-  return proto.iotexapi.ReadContractResponse.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.ReadContractResponse;
+  return proto.iotexapi.ReadContractResponse.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -4176,27 +4090,25 @@ proto.iotexapi.ReadContractResponse.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.ReadContractResponse}
  */
-proto.iotexapi.ReadContractResponse.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.ReadContractResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = /** @type {string} */ (reader.readString());
-        msg.setData(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setData(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -4208,6 +4120,7 @@ proto.iotexapi.ReadContractResponse.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -4215,16 +4128,17 @@ proto.iotexapi.ReadContractResponse.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.ReadContractResponse.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.ReadContractResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getData();
   if (f.length > 0) {
-    writer.writeString(1, f);
+    writer.writeString(
+      1,
+      f
+    );
   }
 };
+
 
 /**
  * optional string data = 1;
@@ -4234,10 +4148,13 @@ proto.iotexapi.ReadContractResponse.prototype.getData = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
+
 /** @param {string} value */
 proto.iotexapi.ReadContractResponse.prototype.setData = function(value) {
   jspb.Message.setProto3StringField(this, 1, value);
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -4254,52 +4171,47 @@ proto.iotexapi.SuggestGasPriceRequest = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.SuggestGasPriceRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.SuggestGasPriceRequest.displayName =
-    "proto.iotexapi.SuggestGasPriceRequest";
+  proto.iotexapi.SuggestGasPriceRequest.displayName = 'proto.iotexapi.SuggestGasPriceRequest';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.SuggestGasPriceRequest.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.SuggestGasPriceRequest.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.SuggestGasPriceRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.SuggestGasPriceRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.SuggestGasPriceRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.SuggestGasPriceRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.SuggestGasPriceRequest} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.SuggestGasPriceRequest.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {};
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -4308,12 +4220,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.SuggestGasPriceRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.SuggestGasPriceRequest();
-  return proto.iotexapi.SuggestGasPriceRequest.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.SuggestGasPriceRequest;
+  return proto.iotexapi.SuggestGasPriceRequest.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -4322,23 +4232,21 @@ proto.iotexapi.SuggestGasPriceRequest.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.SuggestGasPriceRequest}
  */
-proto.iotexapi.SuggestGasPriceRequest.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.SuggestGasPriceRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      default:
-        reader.skipField();
-        break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -4350,6 +4258,7 @@ proto.iotexapi.SuggestGasPriceRequest.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -4357,12 +4266,11 @@ proto.iotexapi.SuggestGasPriceRequest.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.SuggestGasPriceRequest.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.SuggestGasPriceRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -4379,54 +4287,47 @@ proto.iotexapi.SuggestGasPriceResponse = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.SuggestGasPriceResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.SuggestGasPriceResponse.displayName =
-    "proto.iotexapi.SuggestGasPriceResponse";
+  proto.iotexapi.SuggestGasPriceResponse.displayName = 'proto.iotexapi.SuggestGasPriceResponse';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.SuggestGasPriceResponse.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.SuggestGasPriceResponse.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.SuggestGasPriceResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.SuggestGasPriceResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.SuggestGasPriceResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.SuggestGasPriceResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    gasprice: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.SuggestGasPriceResponse} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.SuggestGasPriceResponse.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {
-        gasprice: jspb.Message.getFieldWithDefault(msg, 1, 0)
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -4435,12 +4336,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.SuggestGasPriceResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.SuggestGasPriceResponse();
-  return proto.iotexapi.SuggestGasPriceResponse.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.SuggestGasPriceResponse;
+  return proto.iotexapi.SuggestGasPriceResponse.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -4449,27 +4348,25 @@ proto.iotexapi.SuggestGasPriceResponse.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.SuggestGasPriceResponse}
  */
-proto.iotexapi.SuggestGasPriceResponse.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.SuggestGasPriceResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = /** @type {number} */ (reader.readUint64());
-        msg.setGasprice(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setGasprice(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -4481,6 +4378,7 @@ proto.iotexapi.SuggestGasPriceResponse.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -4488,16 +4386,17 @@ proto.iotexapi.SuggestGasPriceResponse.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.SuggestGasPriceResponse.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.SuggestGasPriceResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getGasprice();
   if (f !== 0) {
-    writer.writeUint64(1, f);
+    writer.writeUint64(
+      1,
+      f
+    );
   }
 };
+
 
 /**
  * optional uint64 gasPrice = 1;
@@ -4507,10 +4406,13 @@ proto.iotexapi.SuggestGasPriceResponse.prototype.getGasprice = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
+
 /** @param {number} value */
 proto.iotexapi.SuggestGasPriceResponse.prototype.setGasprice = function(value) {
   jspb.Message.setProto3IntField(this, 1, value);
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -4527,55 +4429,47 @@ proto.iotexapi.EstimateGasForActionRequest = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.EstimateGasForActionRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.EstimateGasForActionRequest.displayName =
-    "proto.iotexapi.EstimateGasForActionRequest";
+  proto.iotexapi.EstimateGasForActionRequest.displayName = 'proto.iotexapi.EstimateGasForActionRequest';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.EstimateGasForActionRequest.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.EstimateGasForActionRequest.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.EstimateGasForActionRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.EstimateGasForActionRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.EstimateGasForActionRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.EstimateGasForActionRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    action: (f = msg.getAction()) && proto_types_action_pb.Action.toObject(includeInstance, f)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.EstimateGasForActionRequest} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.EstimateGasForActionRequest.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {
-        action:
-          (f = msg.getAction()) && action_pb.Action.toObject(includeInstance, f)
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -4584,12 +4478,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.EstimateGasForActionRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.EstimateGasForActionRequest();
-  return proto.iotexapi.EstimateGasForActionRequest.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.EstimateGasForActionRequest;
+  return proto.iotexapi.EstimateGasForActionRequest.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -4598,28 +4490,26 @@ proto.iotexapi.EstimateGasForActionRequest.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.EstimateGasForActionRequest}
  */
-proto.iotexapi.EstimateGasForActionRequest.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.EstimateGasForActionRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = new action_pb.Action();
-        reader.readMessage(value, action_pb.Action.deserializeBinaryFromReader);
-        msg.setAction(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = new proto_types_action_pb.Action;
+      reader.readMessage(value,proto_types_action_pb.Action.deserializeBinaryFromReader);
+      msg.setAction(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -4627,12 +4517,10 @@ proto.iotexapi.EstimateGasForActionRequest.deserializeBinaryFromReader = functio
  */
 proto.iotexapi.EstimateGasForActionRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.iotexapi.EstimateGasForActionRequest.serializeBinaryToWriter(
-    this,
-    writer
-  );
+  proto.iotexapi.EstimateGasForActionRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
+
 
 /**
  * Serializes the given message to binary data (in protobuf wire
@@ -4641,39 +4529,39 @@ proto.iotexapi.EstimateGasForActionRequest.prototype.serializeBinary = function(
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.EstimateGasForActionRequest.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.EstimateGasForActionRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getAction();
   if (f != null) {
-    writer.writeMessage(1, f, action_pb.Action.serializeBinaryToWriter);
+    writer.writeMessage(
+      1,
+      f,
+      proto_types_action_pb.Action.serializeBinaryToWriter
+    );
   }
 };
+
 
 /**
  * optional iotextypes.Action action = 1;
  * @return {?proto.iotextypes.Action}
  */
 proto.iotexapi.EstimateGasForActionRequest.prototype.getAction = function() {
-  return /** @type{?proto.iotextypes.Action} */ (jspb.Message.getWrapperField(
-    this,
-    action_pb.Action,
-    1
-  ));
+  return /** @type{?proto.iotextypes.Action} */ (
+    jspb.Message.getWrapperField(this, proto_types_action_pb.Action, 1));
 };
 
+
 /** @param {?proto.iotextypes.Action|undefined} value */
-proto.iotexapi.EstimateGasForActionRequest.prototype.setAction = function(
-  value
-) {
+proto.iotexapi.EstimateGasForActionRequest.prototype.setAction = function(value) {
   jspb.Message.setWrapperField(this, 1, value);
 };
+
 
 proto.iotexapi.EstimateGasForActionRequest.prototype.clearAction = function() {
   this.setAction(undefined);
 };
+
 
 /**
  * Returns whether this field is set.
@@ -4682,6 +4570,8 @@ proto.iotexapi.EstimateGasForActionRequest.prototype.clearAction = function() {
 proto.iotexapi.EstimateGasForActionRequest.prototype.hasAction = function() {
   return jspb.Message.getField(this, 1) != null;
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -4698,70 +4588,59 @@ proto.iotexapi.EstimateGasForActionResponse = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.EstimateGasForActionResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.EstimateGasForActionResponse.displayName =
-    "proto.iotexapi.EstimateGasForActionResponse";
+  proto.iotexapi.EstimateGasForActionResponse.displayName = 'proto.iotexapi.EstimateGasForActionResponse';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.EstimateGasForActionResponse.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.EstimateGasForActionResponse.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.EstimateGasForActionResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.EstimateGasForActionResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.EstimateGasForActionResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.EstimateGasForActionResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    gas: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.EstimateGasForActionResponse} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.EstimateGasForActionResponse.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {
-        gas: jspb.Message.getFieldWithDefault(msg, 1, 0)
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotexapi.EstimateGasForActionResponse}
  */
-proto.iotexapi.EstimateGasForActionResponse.deserializeBinary = function(
-  bytes
-) {
+proto.iotexapi.EstimateGasForActionResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.EstimateGasForActionResponse();
-  return proto.iotexapi.EstimateGasForActionResponse.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.EstimateGasForActionResponse;
+  return proto.iotexapi.EstimateGasForActionResponse.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -4770,27 +4649,25 @@ proto.iotexapi.EstimateGasForActionResponse.deserializeBinary = function(
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.EstimateGasForActionResponse}
  */
-proto.iotexapi.EstimateGasForActionResponse.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.EstimateGasForActionResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = /** @type {number} */ (reader.readUint64());
-        msg.setGas(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setGas(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -4798,12 +4675,10 @@ proto.iotexapi.EstimateGasForActionResponse.deserializeBinaryFromReader = functi
  */
 proto.iotexapi.EstimateGasForActionResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.iotexapi.EstimateGasForActionResponse.serializeBinaryToWriter(
-    this,
-    writer
-  );
+  proto.iotexapi.EstimateGasForActionResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
+
 
 /**
  * Serializes the given message to binary data (in protobuf wire
@@ -4812,16 +4687,17 @@ proto.iotexapi.EstimateGasForActionResponse.prototype.serializeBinary = function
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.EstimateGasForActionResponse.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.EstimateGasForActionResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getGas();
   if (f !== 0) {
-    writer.writeUint64(1, f);
+    writer.writeUint64(
+      1,
+      f
+    );
   }
 };
+
 
 /**
  * optional uint64 gas = 1;
@@ -4831,10 +4707,13 @@ proto.iotexapi.EstimateGasForActionResponse.prototype.getGas = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
+
 /** @param {number} value */
 proto.iotexapi.EstimateGasForActionResponse.prototype.setGas = function(value) {
   jspb.Message.setProto3IntField(this, 1, value);
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -4847,19 +4726,11 @@ proto.iotexapi.EstimateGasForActionResponse.prototype.setGas = function(value) {
  * @constructor
  */
 proto.iotexapi.ReadStateRequest = function(opt_data) {
-  jspb.Message.initialize(
-    this,
-    opt_data,
-    0,
-    -1,
-    proto.iotexapi.ReadStateRequest.repeatedFields_,
-    null
-  );
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.iotexapi.ReadStateRequest.repeatedFields_, null);
 };
 goog.inherits(proto.iotexapi.ReadStateRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.ReadStateRequest.displayName =
-    "proto.iotexapi.ReadStateRequest";
+  proto.iotexapi.ReadStateRequest.displayName = 'proto.iotexapi.ReadStateRequest';
 }
 /**
  * List of repeated fields within this message type.
@@ -4868,46 +4739,47 @@ if (goog.DEBUG && !COMPILED) {
  */
 proto.iotexapi.ReadStateRequest.repeatedFields_ = [3];
 
+
+
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.ReadStateRequest.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.ReadStateRequest.toObject(opt_includeInstance, this);
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.ReadStateRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.ReadStateRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.ReadStateRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.ReadStateRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    protocolid: msg.getProtocolid_asB64(),
+    methodname: msg.getMethodname_asB64(),
+    argumentsList: msg.getArgumentsList_asB64()
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.ReadStateRequest} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.ReadStateRequest.toObject = function(includeInstance, msg) {
-    var f,
-      obj = {
-        protocolid: msg.getProtocolid_asB64(),
-        methodname: msg.getMethodname_asB64(),
-        argumentsList: msg.getArgumentsList_asB64()
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -4916,12 +4788,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.ReadStateRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.ReadStateRequest();
-  return proto.iotexapi.ReadStateRequest.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.ReadStateRequest;
+  return proto.iotexapi.ReadStateRequest.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -4930,35 +4800,33 @@ proto.iotexapi.ReadStateRequest.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.ReadStateRequest}
  */
-proto.iotexapi.ReadStateRequest.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.ReadStateRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = /** @type {!Uint8Array} */ (reader.readBytes());
-        msg.setProtocolid(value);
-        break;
-      case 2:
-        var value = /** @type {!Uint8Array} */ (reader.readBytes());
-        msg.setMethodname(value);
-        break;
-      case 3:
-        var value = /** @type {!Uint8Array} */ (reader.readBytes());
-        msg.addArguments(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setProtocolid(value);
+      break;
+    case 2:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setMethodname(value);
+      break;
+    case 3:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.addArguments(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -4970,6 +4838,7 @@ proto.iotexapi.ReadStateRequest.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -4977,24 +4846,31 @@ proto.iotexapi.ReadStateRequest.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.ReadStateRequest.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.ReadStateRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getProtocolid_asU8();
   if (f.length > 0) {
-    writer.writeBytes(1, f);
+    writer.writeBytes(
+      1,
+      f
+    );
   }
   f = message.getMethodname_asU8();
   if (f.length > 0) {
-    writer.writeBytes(2, f);
+    writer.writeBytes(
+      2,
+      f
+    );
   }
   f = message.getArgumentsList_asU8();
   if (f.length > 0) {
-    writer.writeRepeatedBytes(3, f);
+    writer.writeRepeatedBytes(
+      3,
+      f
+    );
   }
 };
+
 
 /**
  * optional bytes protocolID = 1;
@@ -5004,14 +4880,17 @@ proto.iotexapi.ReadStateRequest.prototype.getProtocolid = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
+
 /**
  * optional bytes protocolID = 1;
  * This is a type-conversion wrapper around `getProtocolid()`
  * @return {string}
  */
 proto.iotexapi.ReadStateRequest.prototype.getProtocolid_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(this.getProtocolid()));
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getProtocolid()));
 };
+
 
 /**
  * optional bytes protocolID = 1;
@@ -5022,14 +4901,15 @@ proto.iotexapi.ReadStateRequest.prototype.getProtocolid_asB64 = function() {
  */
 proto.iotexapi.ReadStateRequest.prototype.getProtocolid_asU8 = function() {
   return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-    this.getProtocolid()
-  ));
+      this.getProtocolid()));
 };
+
 
 /** @param {!(string|Uint8Array)} value */
 proto.iotexapi.ReadStateRequest.prototype.setProtocolid = function(value) {
   jspb.Message.setProto3BytesField(this, 1, value);
 };
+
 
 /**
  * optional bytes methodName = 2;
@@ -5039,14 +4919,17 @@ proto.iotexapi.ReadStateRequest.prototype.getMethodname = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
+
 /**
  * optional bytes methodName = 2;
  * This is a type-conversion wrapper around `getMethodname()`
  * @return {string}
  */
 proto.iotexapi.ReadStateRequest.prototype.getMethodname_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(this.getMethodname()));
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getMethodname()));
 };
+
 
 /**
  * optional bytes methodName = 2;
@@ -5057,14 +4940,15 @@ proto.iotexapi.ReadStateRequest.prototype.getMethodname_asB64 = function() {
  */
 proto.iotexapi.ReadStateRequest.prototype.getMethodname_asU8 = function() {
   return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-    this.getMethodname()
-  ));
+      this.getMethodname()));
 };
+
 
 /** @param {!(string|Uint8Array)} value */
 proto.iotexapi.ReadStateRequest.prototype.setMethodname = function(value) {
   jspb.Message.setProto3BytesField(this, 2, value);
 };
+
 
 /**
  * repeated bytes arguments = 3;
@@ -5074,6 +4958,7 @@ proto.iotexapi.ReadStateRequest.prototype.getArgumentsList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 3));
 };
 
+
 /**
  * repeated bytes arguments = 3;
  * This is a type-conversion wrapper around `getArgumentsList()`
@@ -5081,9 +4966,9 @@ proto.iotexapi.ReadStateRequest.prototype.getArgumentsList = function() {
  */
 proto.iotexapi.ReadStateRequest.prototype.getArgumentsList_asB64 = function() {
   return /** @type {!Array<string>} */ (jspb.Message.bytesListAsB64(
-    this.getArgumentsList()
-  ));
+      this.getArgumentsList()));
 };
+
 
 /**
  * repeated bytes arguments = 3;
@@ -5094,29 +4979,30 @@ proto.iotexapi.ReadStateRequest.prototype.getArgumentsList_asB64 = function() {
  */
 proto.iotexapi.ReadStateRequest.prototype.getArgumentsList_asU8 = function() {
   return /** @type {!Array<!Uint8Array>} */ (jspb.Message.bytesListAsU8(
-    this.getArgumentsList()
-  ));
+      this.getArgumentsList()));
 };
+
 
 /** @param {!(Array<!Uint8Array>|Array<string>)} value */
 proto.iotexapi.ReadStateRequest.prototype.setArgumentsList = function(value) {
   jspb.Message.setField(this, 3, value || []);
 };
 
+
 /**
  * @param {!(string|Uint8Array)} value
  * @param {number=} opt_index
  */
-proto.iotexapi.ReadStateRequest.prototype.addArguments = function(
-  value,
-  opt_index
-) {
+proto.iotexapi.ReadStateRequest.prototype.addArguments = function(value, opt_index) {
   jspb.Message.addToRepeatedField(this, 3, value, opt_index);
 };
+
 
 proto.iotexapi.ReadStateRequest.prototype.clearArgumentsList = function() {
   this.setArgumentsList([]);
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -5133,48 +5019,47 @@ proto.iotexapi.ReadStateResponse = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.ReadStateResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.ReadStateResponse.displayName =
-    "proto.iotexapi.ReadStateResponse";
+  proto.iotexapi.ReadStateResponse.displayName = 'proto.iotexapi.ReadStateResponse';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.ReadStateResponse.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.ReadStateResponse.toObject(opt_includeInstance, this);
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.ReadStateResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.ReadStateResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.ReadStateResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.ReadStateResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    data: msg.getData_asB64()
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.ReadStateResponse} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.ReadStateResponse.toObject = function(includeInstance, msg) {
-    var f,
-      obj = {
-        data: msg.getData_asB64()
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -5183,12 +5068,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.ReadStateResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.ReadStateResponse();
-  return proto.iotexapi.ReadStateResponse.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.ReadStateResponse;
+  return proto.iotexapi.ReadStateResponse.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -5197,27 +5080,25 @@ proto.iotexapi.ReadStateResponse.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.ReadStateResponse}
  */
-proto.iotexapi.ReadStateResponse.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.ReadStateResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = /** @type {!Uint8Array} */ (reader.readBytes());
-        msg.setData(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setData(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -5229,6 +5110,7 @@ proto.iotexapi.ReadStateResponse.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -5236,16 +5118,17 @@ proto.iotexapi.ReadStateResponse.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.ReadStateResponse.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.ReadStateResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getData_asU8();
   if (f.length > 0) {
-    writer.writeBytes(1, f);
+    writer.writeBytes(
+      1,
+      f
+    );
   }
 };
+
 
 /**
  * optional bytes data = 1;
@@ -5255,14 +5138,17 @@ proto.iotexapi.ReadStateResponse.prototype.getData = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
+
 /**
  * optional bytes data = 1;
  * This is a type-conversion wrapper around `getData()`
  * @return {string}
  */
 proto.iotexapi.ReadStateResponse.prototype.getData_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(this.getData()));
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getData()));
 };
+
 
 /**
  * optional bytes data = 1;
@@ -5272,13 +5158,17 @@ proto.iotexapi.ReadStateResponse.prototype.getData_asB64 = function() {
  * @return {!Uint8Array}
  */
 proto.iotexapi.ReadStateResponse.prototype.getData_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(this.getData()));
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getData()));
 };
+
 
 /** @param {!(string|Uint8Array)} value */
 proto.iotexapi.ReadStateResponse.prototype.setData = function(value) {
   jspb.Message.setProto3BytesField(this, 1, value);
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -5295,54 +5185,47 @@ proto.iotexapi.GetProductivityRequest = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.GetProductivityRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetProductivityRequest.displayName =
-    "proto.iotexapi.GetProductivityRequest";
+  proto.iotexapi.GetProductivityRequest.displayName = 'proto.iotexapi.GetProductivityRequest';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetProductivityRequest.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetProductivityRequest.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetProductivityRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetProductivityRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetProductivityRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetProductivityRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    epochnumber: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetProductivityRequest} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetProductivityRequest.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {
-        epochnumber: jspb.Message.getFieldWithDefault(msg, 1, 0)
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -5351,12 +5234,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetProductivityRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetProductivityRequest();
-  return proto.iotexapi.GetProductivityRequest.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetProductivityRequest;
+  return proto.iotexapi.GetProductivityRequest.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -5365,27 +5246,25 @@ proto.iotexapi.GetProductivityRequest.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetProductivityRequest}
  */
-proto.iotexapi.GetProductivityRequest.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetProductivityRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = /** @type {number} */ (reader.readUint64());
-        msg.setEpochnumber(value);
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setEpochnumber(value);
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -5397,6 +5276,7 @@ proto.iotexapi.GetProductivityRequest.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -5404,16 +5284,17 @@ proto.iotexapi.GetProductivityRequest.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetProductivityRequest.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetProductivityRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getEpochnumber();
   if (f !== 0) {
-    writer.writeUint64(1, f);
+    writer.writeUint64(
+      1,
+      f
+    );
   }
 };
+
 
 /**
  * optional uint64 epochNumber = 1;
@@ -5423,12 +5304,13 @@ proto.iotexapi.GetProductivityRequest.prototype.getEpochnumber = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
+
 /** @param {number} value */
-proto.iotexapi.GetProductivityRequest.prototype.setEpochnumber = function(
-  value
-) {
+proto.iotexapi.GetProductivityRequest.prototype.setEpochnumber = function(value) {
   jspb.Message.setProto3IntField(this, 1, value);
 };
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -5445,57 +5327,48 @@ proto.iotexapi.GetProductivityResponse = function(opt_data) {
 };
 goog.inherits(proto.iotexapi.GetProductivityResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotexapi.GetProductivityResponse.displayName =
-    "proto.iotexapi.GetProductivityResponse";
+  proto.iotexapi.GetProductivityResponse.displayName = 'proto.iotexapi.GetProductivityResponse';
 }
+
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
-  /**
-   * Creates an object representation of this proto suitable for use in Soy templates.
-   * Field names that are reserved in JavaScript and will be renamed to pb_name.
-   * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
-   * For the list of reserved names please see:
-   *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
-   * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
-   *     for transitional soy proto support: http://goto/soy-param-migration
-   * @return {!Object}
-   */
-  proto.iotexapi.GetProductivityResponse.prototype.toObject = function(
-    opt_includeInstance
-  ) {
-    return proto.iotexapi.GetProductivityResponse.toObject(
-      opt_includeInstance,
-      this
-    );
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.GetProductivityResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.GetProductivityResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.GetProductivityResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.GetProductivityResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    totalblks: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    blksperdelegateMap: (f = msg.getBlksperdelegateMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
-  /**
-   * Static version of the {@see toObject} method.
-   * @param {boolean|undefined} includeInstance Whether to include the JSPB
-   *     instance for transitional soy proto support:
-   *     http://goto/soy-param-migration
-   * @param {!proto.iotexapi.GetProductivityResponse} msg The msg instance to transform.
-   * @return {!Object}
-   * @suppress {unusedLocalVariables} f is only used for nested messages
-   */
-  proto.iotexapi.GetProductivityResponse.toObject = function(
-    includeInstance,
-    msg
-  ) {
-    var f,
-      obj = {
-        totalblks: jspb.Message.getFieldWithDefault(msg, 1, 0),
-        blksperdelegateMap: (f = msg.getBlksperdelegateMap())
-          ? f.toObject(includeInstance, undefined)
-          : []
-      };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
-  };
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
+
 
 /**
  * Deserializes binary data (in protobuf wire format).
@@ -5504,12 +5377,10 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  */
 proto.iotexapi.GetProductivityResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.iotexapi.GetProductivityResponse();
-  return proto.iotexapi.GetProductivityResponse.deserializeBinaryFromReader(
-    msg,
-    reader
-  );
+  var msg = new proto.iotexapi.GetProductivityResponse;
+  return proto.iotexapi.GetProductivityResponse.deserializeBinaryFromReader(msg, reader);
 };
+
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
@@ -5518,40 +5389,31 @@ proto.iotexapi.GetProductivityResponse.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.iotexapi.GetProductivityResponse}
  */
-proto.iotexapi.GetProductivityResponse.deserializeBinaryFromReader = function(
-  msg,
-  reader
-) {
+proto.iotexapi.GetProductivityResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
     var field = reader.getFieldNumber();
     switch (field) {
-      case 1:
-        var value = /** @type {number} */ (reader.readUint64());
-        msg.setTotalblks(value);
-        break;
-      case 2:
-        var value = msg.getBlksperdelegateMap();
-        reader.readMessage(value, function(message, reader) {
-          jspb.Map.deserializeBinary(
-            message,
-            reader,
-            jspb.BinaryReader.prototype.readString,
-            jspb.BinaryReader.prototype.readUint64,
-            null,
-            ""
-          );
-        });
-        break;
-      default:
-        reader.skipField();
-        break;
+    case 1:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setTotalblks(value);
+      break;
+    case 2:
+      var value = msg.getBlksperdelegateMap();
+      reader.readMessage(value, function(message, reader) {
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readUint64, null, "");
+         });
+      break;
+    default:
+      reader.skipField();
+      break;
     }
   }
   return msg;
 };
+
 
 /**
  * Serializes the message to binary data (in protobuf wire format).
@@ -5563,6 +5425,7 @@ proto.iotexapi.GetProductivityResponse.prototype.serializeBinary = function() {
   return writer.getResultBuffer();
 };
 
+
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
@@ -5570,25 +5433,21 @@ proto.iotexapi.GetProductivityResponse.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.iotexapi.GetProductivityResponse.serializeBinaryToWriter = function(
-  message,
-  writer
-) {
+proto.iotexapi.GetProductivityResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getTotalblks();
   if (f !== 0) {
-    writer.writeUint64(1, f);
+    writer.writeUint64(
+      1,
+      f
+    );
   }
   f = message.getBlksperdelegateMap(true);
   if (f && f.getLength() > 0) {
-    f.serializeBinary(
-      2,
-      writer,
-      jspb.BinaryWriter.prototype.writeString,
-      jspb.BinaryWriter.prototype.writeUint64
-    );
+    f.serializeBinary(2, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeUint64);
   }
 };
+
 
 /**
  * optional uint64 totalBlks = 1;
@@ -5598,12 +5457,12 @@ proto.iotexapi.GetProductivityResponse.prototype.getTotalblks = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
+
 /** @param {number} value */
-proto.iotexapi.GetProductivityResponse.prototype.setTotalblks = function(
-  value
-) {
+proto.iotexapi.GetProductivityResponse.prototype.setTotalblks = function(value) {
   jspb.Message.setProto3IntField(this, 1, value);
 };
+
 
 /**
  * map<string, uint64> blksPerDelegate = 2;
@@ -5611,19 +5470,16 @@ proto.iotexapi.GetProductivityResponse.prototype.setTotalblks = function(
  * empty, instead returning `undefined`
  * @return {!jspb.Map<string,number>}
  */
-proto.iotexapi.GetProductivityResponse.prototype.getBlksperdelegateMap = function(
-  opt_noLazyCreate
-) {
-  return /** @type {!jspb.Map<string,number>} */ (jspb.Message.getMapField(
-    this,
-    2,
-    opt_noLazyCreate,
-    null
-  ));
+proto.iotexapi.GetProductivityResponse.prototype.getBlksperdelegateMap = function(opt_noLazyCreate) {
+  return /** @type {!jspb.Map<string,number>} */ (
+      jspb.Message.getMapField(this, 2, opt_noLazyCreate,
+      null));
 };
+
 
 proto.iotexapi.GetProductivityResponse.prototype.clearBlksperdelegateMap = function() {
   this.getBlksperdelegateMap().clear();
 };
+
 
 goog.object.extend(exports, proto.iotexapi);
