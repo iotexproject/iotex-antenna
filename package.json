@@ -4,7 +4,8 @@
   "description": "field_description",
   "main": "index.js",
   "files": [
-    "lib"
+    "lib",
+    "proto"
   ],
   "scripts": {
     "test": "npm run cover",
