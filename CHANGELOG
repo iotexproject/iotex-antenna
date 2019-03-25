@@ -1,3 +1,8 @@
+2019-03-25 - 0.5.1 (dbc35eb)
+dbc35eb (HEAD -> master) include proto in package.json
+226fdc5 (tag: v0.5.0, origin/master, origin/HEAD) 0.5.0
+
+
 2019-03-25 - 0.5.0 (55ebbf1)
 55ebbf1 (HEAD -> master, origin/master, origin/HEAD) bump proto
 6499fee Update circleci/node:10.15.3-browsers-legacy Docker digest to 470041b
