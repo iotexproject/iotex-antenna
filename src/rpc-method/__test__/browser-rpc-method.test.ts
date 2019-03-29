@@ -18,7 +18,8 @@ test("RpcMethod.getAccount", async t => {
       address: "io126xcrjhtp27end76ac9nmx6px2072c3vgz6suw",
       balance: "0",
       nonce: 0,
-      pendingNonce: 1
+      pendingNonce: 1,
+      numActions: 0
     }
   });
 });

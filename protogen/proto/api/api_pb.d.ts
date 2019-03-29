@@ -215,6 +215,33 @@ export namespace ActionInfo {
   }
 }
 
+export class BlockProducerInfo extends jspb.Message {
+  constructor ();
+  getAddress(): string;
+  setAddress(value: string): void;
+  getVotes(): string;
+  setVotes(value: string): void;
+  getActive(): boolean;
+  setActive(value: boolean): void;
+  getProduction(): number;
+  setProduction(value: number): void;
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): BlockProducerInfo.AsObject;
+  static toObject(includeInstance: boolean, msg: BlockProducerInfo): BlockProducerInfo.AsObject;
+  static serializeBinaryToWriter(message: BlockProducerInfo, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): BlockProducerInfo;
+  static deserializeBinaryFromReader(message: BlockProducerInfo, reader: jspb.BinaryReader): BlockProducerInfo;
+}
+
+export namespace BlockProducerInfo {
+  export type AsObject = {
+    address: string;
+    votes: string;
+    active: boolean;
+    production: number;
+  }
+}
+
 export class GetActionsResponse extends jspb.Message {
   constructor ();
   getActioninfoList(): ActionInfo[] | undefined;
@@ -604,64 +631,47 @@ export namespace ReadStateResponse {
   }
 }
 
-export class GetProductivityRequest extends jspb.Message {
+export class GetEpochMetaRequest extends jspb.Message {
   constructor ();
   getEpochnumber(): number;
   setEpochnumber(value: number): void;
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetProductivityRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: GetProductivityRequest): GetProductivityRequest.AsObject;
-  static serializeBinaryToWriter(message: GetProductivityRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetProductivityRequest;
-  static deserializeBinaryFromReader(message: GetProductivityRequest, reader: jspb.BinaryReader): GetProductivityRequest;
+  toObject(includeInstance?: boolean): GetEpochMetaRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetEpochMetaRequest): GetEpochMetaRequest.AsObject;
+  static serializeBinaryToWriter(message: GetEpochMetaRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetEpochMetaRequest;
+  static deserializeBinaryFromReader(message: GetEpochMetaRequest, reader: jspb.BinaryReader): GetEpochMetaRequest;
 }
 
-export namespace GetProductivityRequest {
+export namespace GetEpochMetaRequest {
   export type AsObject = {
     epochnumber: number;
   }
 }
 
-export class GetProductivityResponse extends jspb.Message {
+export class GetEpochMetaResponse extends jspb.Message {
   constructor ();
-  getTotalblks(): number;
-  setTotalblks(value: number): void;
-  getBlksperdelegateMap(): jspb.Map<string, number> | undefined;
-  clearBlksperdelegateMap(): void;
+  getEpochdata(): proto_types_blockchain_pb.EpochData | undefined;
+  setEpochdata(value?: proto_types_blockchain_pb.EpochData): void;
+  clearEpochdata(): void;
+  getTotalblocks(): number;
+  setTotalblocks(value: number): void;
+  getBlockproducersinfoList(): BlockProducerInfo[] | undefined;
+  setBlockproducersinfoList(value?: BlockProducerInfo[]): void;
+  clearBlockproducersinfoList(): void;
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetProductivityResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: GetProductivityResponse): GetProductivityResponse.AsObject;
-  static serializeBinaryToWriter(message: GetProductivityResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetProductivityResponse;
-  static deserializeBinaryFromReader(message: GetProductivityResponse, reader: jspb.BinaryReader): GetProductivityResponse;
+  toObject(includeInstance?: boolean): GetEpochMetaResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetEpochMetaResponse): GetEpochMetaResponse.AsObject;
+  static serializeBinaryToWriter(message: GetEpochMetaResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetEpochMetaResponse;
+  static deserializeBinaryFromReader(message: GetEpochMetaResponse, reader: jspb.BinaryReader): GetEpochMetaResponse;
 }
 
-export namespace GetProductivityResponse {
+export namespace GetEpochMetaResponse {
   export type AsObject = {
-    totalblks: number;
-    blksperdelegateMap?: GetProductivityResponse.BlksPerDelegateEntry.AsObject[];
+    epochdata?: proto_types_blockchain_pb.EpochData.AsObject;
+    totalblocks: number;
+    blockproducersinfoList?: BlockProducerInfo.AsObject[];
   }
-
-  export class BlksPerDelegateEntry extends jspb.Message {
-    constructor ();
-    getKey(): string;
-    setKey(value: string): void;
-    getValue(): number;
-    setValue(value: number): void;
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): BlksPerDelegateEntry.AsObject;
-    static toObject(includeInstance: boolean, msg: BlksPerDelegateEntry): BlksPerDelegateEntry.AsObject;
-    static serializeBinaryToWriter(message: BlksPerDelegateEntry, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): BlksPerDelegateEntry;
-    static deserializeBinaryFromReader(message: BlksPerDelegateEntry, reader: jspb.BinaryReader): BlksPerDelegateEntry;
-  }
-
-  export namespace BlksPerDelegateEntry {
-    export type AsObject = {
-      key: string;
-      value: number;
-    }
-  }
-
 }
 

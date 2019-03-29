@@ -10,8 +10,8 @@ export class ServerMeta extends jspb.Message {
   setGitstatus(value: string): void;
   getGoversion(): string;
   setGoversion(value: string): void;
-  getBuidtime(): string;
-  setBuidtime(value: string): void;
+  getBuildtime(): string;
+  setBuildtime(value: string): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ServerMeta.AsObject;
   static toObject(includeInstance: boolean, msg: ServerMeta): ServerMeta.AsObject;
@@ -26,7 +26,7 @@ export namespace ServerMeta {
     packagecommitid: string;
     gitstatus: string;
     goversion: string;
-    buidtime: string;
+    buildtime: string;
   }
 }
 

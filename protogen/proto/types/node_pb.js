@@ -63,7 +63,7 @@ proto.iotextypes.ServerMeta.toObject = function(includeInstance, msg) {
     packagecommitid: jspb.Message.getFieldWithDefault(msg, 2, ""),
     gitstatus: jspb.Message.getFieldWithDefault(msg, 3, ""),
     goversion: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    buidtime: jspb.Message.getFieldWithDefault(msg, 5, "")
+    buildtime: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {
@@ -118,7 +118,7 @@ proto.iotextypes.ServerMeta.deserializeBinaryFromReader = function(msg, reader) 
       break;
     case 5:
       var value = /** @type {string} */ (reader.readString());
-      msg.setBuidtime(value);
+      msg.setBuildtime(value);
       break;
     default:
       reader.skipField();
@@ -177,7 +177,7 @@ proto.iotextypes.ServerMeta.serializeBinaryToWriter = function(message, writer) 
       f
     );
   }
-  f = message.getBuidtime();
+  f = message.getBuildtime();
   if (f.length > 0) {
     writer.writeString(
       5,
@@ -248,16 +248,16 @@ proto.iotextypes.ServerMeta.prototype.setGoversion = function(value) {
 
 
 /**
- * optional string buidTime = 5;
+ * optional string buildTime = 5;
  * @return {string}
  */
-proto.iotextypes.ServerMeta.prototype.getBuidtime = function() {
+proto.iotextypes.ServerMeta.prototype.getBuildtime = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
 
 /** @param {string} value */
-proto.iotextypes.ServerMeta.prototype.setBuidtime = function(value) {
+proto.iotextypes.ServerMeta.prototype.setBuildtime = function(value) {
   jspb.Message.setProto3StringField(this, 5, value);
 };
 

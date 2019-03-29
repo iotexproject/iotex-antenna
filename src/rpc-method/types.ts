@@ -2,6 +2,7 @@
 
 import { Timestamp } from "google-protobuf/google/protobuf/timestamp_pb";
 import apiPb, {
+  GetAccountResponse,
   GetActionsResponse,
   GetReceiptByActionResponse
 } from "../../protogen/proto/api/api_pb";
@@ -36,12 +37,15 @@ export interface IAccountMeta {
 
   // AccountMeta pendingNonce. Type is string in node but number in browser.
   pendingNonce: string | number;
+
+  // AccountMeta numActions related to the account. Type is string in node but number in browser.
+  numActions: string | number;
 }
 
 // Properties of a GetAccountResponse.
 export interface IGetAccountResponse {
   // GetAccountResponse accountMeta
-  accountMeta: IAccountMeta;
+  accountMeta: IAccountMeta | undefined;
 }
 
 export const GetAccountRequest = {
@@ -51,20 +55,23 @@ export const GetAccountRequest = {
     return pbReq;
   },
 
-  from(pbRes: any): IGetAccountResponse {
+  from(pbRes: GetAccountResponse): IGetAccountResponse {
     const meta = pbRes.getAccountmeta();
-    const res = {
-      accountMeta: meta
-    };
-    if (meta) {
-      res.accountMeta = {
+    if (!meta) {
+      return {
+        accountMeta: undefined
+      };
+    }
+
+    return {
+      accountMeta: {
         address: meta.getAddress(),
         balance: meta.getBalance(),
         nonce: meta.getNonce(),
-        pendingNonce: meta.getPendingnonce()
-      };
-    }
-    return res;
+        pendingNonce: meta.getPendingnonce(),
+        numActions: meta.getNumactions()
+      }
+    };
   }
 };
 

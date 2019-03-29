@@ -708,53 +708,53 @@ proto.iotexapi.APIServicePromiseClient.prototype.readState =
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.iotexapi.GetProductivityRequest,
- *   !proto.iotexapi.GetProductivityResponse>}
+ *   !proto.iotexapi.GetEpochMetaRequest,
+ *   !proto.iotexapi.GetEpochMetaResponse>}
  */
-const methodInfo_APIService_GetProductivity = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.iotexapi.GetProductivityResponse,
-  /** @param {!proto.iotexapi.GetProductivityRequest} request */
+const methodInfo_APIService_GetEpochMeta = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.iotexapi.GetEpochMetaResponse,
+  /** @param {!proto.iotexapi.GetEpochMetaRequest} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.iotexapi.GetProductivityResponse.deserializeBinary
+  proto.iotexapi.GetEpochMetaResponse.deserializeBinary
 );
 
 
 /**
- * @param {!proto.iotexapi.GetProductivityRequest} request The
+ * @param {!proto.iotexapi.GetEpochMetaRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.iotexapi.GetProductivityResponse)}
+ * @param {function(?grpc.web.Error, ?proto.iotexapi.GetEpochMetaResponse)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetProductivityResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetEpochMetaResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServiceClient.prototype.getProductivity =
+proto.iotexapi.APIServiceClient.prototype.getEpochMeta =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/iotexapi.APIService/GetProductivity',
+      '/iotexapi.APIService/GetEpochMeta',
       request,
       metadata || {},
-      methodInfo_APIService_GetProductivity,
+      methodInfo_APIService_GetEpochMeta,
       callback);
 };
 
 
 /**
- * @param {!proto.iotexapi.GetProductivityRequest} request The
+ * @param {!proto.iotexapi.GetEpochMetaRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.iotexapi.GetProductivityResponse>}
+ * @return {!Promise<!proto.iotexapi.GetEpochMetaResponse>}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServicePromiseClient.prototype.getProductivity =
+proto.iotexapi.APIServicePromiseClient.prototype.getEpochMeta =
     function(request, metadata) {
   var _this = this;
   return new Promise(function (resolve, reject) {
-    _this.delegateClient_.getProductivity(
+    _this.delegateClient_.getEpochMeta(
       request, metadata, function (error, response) {
         error ? reject(error) : resolve(response);
       });

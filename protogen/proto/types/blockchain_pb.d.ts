@@ -239,6 +239,8 @@ export class AccountMeta extends jspb.Message {
   setNonce(value: number): void;
   getPendingnonce(): number;
   setPendingnonce(value: number): void;
+  getNumactions(): number;
+  setNumactions(value: number): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): AccountMeta.AsObject;
   static toObject(includeInstance: boolean, msg: AccountMeta): AccountMeta.AsObject;
@@ -253,6 +255,7 @@ export namespace AccountMeta {
     balance: string;
     nonce: number;
     pendingnonce: number;
+    numactions: number;
   }
 }
 

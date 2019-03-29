@@ -15,8 +15,8 @@ import {
   GetBlockMetasResponse,
   GetChainMetaRequest,
   GetChainMetaResponse,
-  GetProductivityRequest,
-  GetProductivityResponse,
+  GetEpochMetaRequest,
+  GetEpochMetaResponse,
   GetReceiptByActionRequest,
   GetReceiptByActionResponse,
   GetServerMetaRequest,
@@ -112,12 +112,12 @@ export class APIServiceClient {
                response: ReadStateResponse) => void
   ): grpcWeb.ClientReadableStream<ReadStateResponse>;
 
-  getProductivity(
-    request: GetProductivityRequest,
+  getEpochMeta(
+    request: GetEpochMetaRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: GetProductivityResponse) => void
-  ): grpcWeb.ClientReadableStream<GetProductivityResponse>;
+               response: GetEpochMetaResponse) => void
+  ): grpcWeb.ClientReadableStream<GetEpochMetaResponse>;
 
 }
 
@@ -181,10 +181,10 @@ export class APIServicePromiseClient {
     metadata?: grpcWeb.Metadata
   ): Promise<ReadStateResponse>;
 
-  getProductivity(
-    request: GetProductivityRequest,
+  getEpochMeta(
+    request: GetEpochMetaRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<GetProductivityResponse>;
+  ): Promise<GetEpochMetaResponse>;
 
 }
 

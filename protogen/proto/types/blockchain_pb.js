@@ -2181,7 +2181,8 @@ proto.iotextypes.AccountMeta.toObject = function(includeInstance, msg) {
     address: jspb.Message.getFieldWithDefault(msg, 1, ""),
     balance: jspb.Message.getFieldWithDefault(msg, 2, ""),
     nonce: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    pendingnonce: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    pendingnonce: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    numactions: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -2233,6 +2234,10 @@ proto.iotextypes.AccountMeta.deserializeBinaryFromReader = function(msg, reader)
     case 4:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setPendingnonce(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setNumactions(value);
       break;
     default:
       reader.skipField();
@@ -2288,6 +2293,13 @@ proto.iotextypes.AccountMeta.serializeBinaryToWriter = function(message, writer)
   if (f !== 0) {
     writer.writeUint64(
       4,
+      f
+    );
+  }
+  f = message.getNumactions();
+  if (f !== 0) {
+    writer.writeUint64(
+      5,
       f
     );
   }
@@ -2351,6 +2363,21 @@ proto.iotextypes.AccountMeta.prototype.getPendingnonce = function() {
 /** @param {number} value */
 proto.iotextypes.AccountMeta.prototype.setPendingnonce = function(value) {
   jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional uint64 numActions = 5;
+ * @return {number}
+ */
+proto.iotextypes.AccountMeta.prototype.getNumactions = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/** @param {number} value */
+proto.iotextypes.AccountMeta.prototype.setNumactions = function(value) {
+  jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
