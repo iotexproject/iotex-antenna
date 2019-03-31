@@ -23,21 +23,22 @@ import {
   ISuggestGasPriceResponse
 } from "./types";
 
+const packageDefinition = protoLoader.loadSync(
+  `${__dirname}/../../proto/api/api.proto`,
+  {
+    keepCase: true,
+    longs: String,
+    enums: String,
+    defaults: true,
+    oneofs: true,
+    includeDirs: [`${__dirname}/../../`]
+  }
+);
+
 export default class RpcMethod implements IRpcMethod {
   public client: IRpcMethod;
 
   constructor(hostname: string) {
-    const packageDefinition = protoLoader.loadSync(
-      `${__dirname}/../../proto/api/api.proto`,
-      {
-        keepCase: true,
-        longs: String,
-        enums: String,
-        defaults: true,
-        oneofs: true,
-        includeDirs: [`${__dirname}/../../`]
-      }
-    );
     const iotexapi = grpc.loadPackageDefinition(packageDefinition).iotexapi;
 
     // @ts-ignore
