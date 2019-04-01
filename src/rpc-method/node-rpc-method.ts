@@ -34,13 +34,12 @@ const packageDefinition = protoLoader.loadSync(
     includeDirs: [`${__dirname}/../../`]
   }
 );
+const iotexapi = grpc.loadPackageDefinition(packageDefinition).iotexapi;
 
 export default class RpcMethod implements IRpcMethod {
   public client: IRpcMethod;
 
   constructor(hostname: string) {
-    const iotexapi = grpc.loadPackageDefinition(packageDefinition).iotexapi;
-
     // @ts-ignore
     this.client = new iotexapi.APIService(
       hostname,
