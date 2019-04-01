@@ -1,3 +1,8 @@
+2019-04-01 - 0.5.6 (572cf31)
+572cf31 (HEAD -> master, origin/master, origin/HEAD) further put iotexapi into file scope
+9e404cc (tag: v0.5.5) 0.5.5
+
+
 2019-03-30 - 0.5.5 (1514040)
 1514040 (HEAD -> master) do not load file when creating RpcMethod instance
 3b28a96 (tag: v0.5.4, origin/master, origin/HEAD) 0.5.4
