@@ -119,6 +119,35 @@ export const GetChainMetaRequest = {
   }
 };
 
+// interface for get server metas
+export interface IServerMeta {
+  packageversion: string;
+  packagecommitid: string;
+  gitstatus: string;
+  goversion: string;
+  buildtime: string;
+}
+
+export interface IGetServerMetaRequest {}
+
+export interface IGetServerMetaResponse {
+  serverMeta: IServerMeta;
+}
+
+export const GetServerMetaRequest = {
+  // @ts-ignore
+  to(req: IGetServerMetaRequest): any {
+    return new apiPb.GetServerMetaRequest();
+  },
+
+  from(pbRes: any): IGetServerMetaResponse {
+    const meta = pbRes.getServerMeta();
+    return {
+      serverMeta: meta
+    };
+  }
+};
+
 // interface for get block metas
 // Properties of a GetBlockMetasByIndexRequest.
 export interface IGetBlockMetasByIndexRequest {
@@ -1730,6 +1759,8 @@ export interface IRpcMethod {
   getBlockMetas(req: IGetBlockMetasRequest): Promise<IGetBlockMetasResponse>;
 
   getChainMeta(req: IGetChainMetaRequest): Promise<IGetChainMetaResponse>;
+
+  getServerMeta(req: IGetServerMetaRequest): Promise<IGetServerMetaResponse>;
 
   getActions(req: IGetActionsRequest): Promise<IGetActionsResponse>;
 

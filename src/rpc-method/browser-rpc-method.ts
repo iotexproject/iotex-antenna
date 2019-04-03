@@ -1,5 +1,6 @@
 import grpcWeb from "../../protogen/proto/api/api_grpc_web_pb";
 import {
+  GetServerMetaRequest,
   IEstimateGasForActionRequest,
   IEstimateGasForActionResponse,
   IGetAccountRequest,
@@ -12,6 +13,8 @@ import {
   IGetChainMetaResponse,
   IGetReceiptByActionRequest,
   IGetReceiptByActionResponse,
+  IGetServerMetaRequest,
+  IGetServerMetaResponse,
   IReadContractRequest,
   IReadContractResponse,
   IRpcMethod,
@@ -62,6 +65,14 @@ export default class RpcMethod implements IRpcMethod {
     const pbReq = GetChainMetaRequest.to(req);
     const pbResp = await this.client.getChainMeta(pbReq);
     return GetChainMetaRequest.from(pbResp);
+  }
+
+  public async getServerMeta(
+    req: IGetServerMetaRequest
+  ): Promise<IGetServerMetaResponse> {
+    const pbReq = GetServerMetaRequest.to(req);
+    const pbResp = await this.client.getServerMeta(pbReq);
+    return GetServerMetaRequest.from(pbResp);
   }
 
   public async getActions(
