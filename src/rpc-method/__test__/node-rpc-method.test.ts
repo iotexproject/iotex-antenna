@@ -3,7 +3,8 @@ import { get } from "dottie";
 import RpcMethod from "../node-rpc-method";
 import { ITransfer } from "../types";
 
-const TEST_HOSTNAME = "35.239.122.109:80";
+// const TEST_HOSTNAME = "35.239.122.109:80";
+const TEST_HOSTNAME = "api.iotex.one:80";
 
 test("RpcMethod.getAccount", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
