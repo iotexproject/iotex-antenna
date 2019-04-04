@@ -14,6 +14,8 @@ import {
   IGetChainMetaResponse,
   IGetReceiptByActionRequest,
   IGetReceiptByActionResponse,
+  IGetServerMetaRequest,
+  IGetServerMetaResponse,
   IReadContractRequest,
   IReadContractResponse,
   IRpcMethod,
@@ -72,6 +74,16 @@ export default class RpcMethod implements IRpcMethod {
     const getChainMeta = promisify(this.client.getChainMeta.bind(this.client));
     // @ts-ignore
     return getChainMeta(req);
+  }
+
+  public async getServerMeta(
+    req: IGetServerMetaRequest
+  ): Promise<IGetServerMetaResponse> {
+    const getServerMeta = promisify(
+      this.client.getServerMeta.bind(this.client)
+    );
+    // @ts-ignore
+    return getServerMeta(req);
   }
 
   public async getActions(
