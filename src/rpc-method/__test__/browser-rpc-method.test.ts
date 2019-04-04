@@ -6,8 +6,7 @@ import RpcMethod from "../browser-rpc-method";
 import { ITransfer } from "../types";
 browserEnv();
 
-// const TEST_HOSTNAME = "http://35.239.122.109:80";
-const TEST_HOSTNAME = "api.iotex.one:80";
+const TEST_HOSTNAME = "http://35.239.122.109:80";
 
 test("RpcMethod.getAccount", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);

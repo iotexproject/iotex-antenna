@@ -4,7 +4,8 @@ import { Timestamp } from "google-protobuf/google/protobuf/timestamp_pb";
 import apiPb, {
   GetAccountResponse,
   GetActionsResponse,
-  GetReceiptByActionResponse
+  GetReceiptByActionResponse,
+  GetServerMetaResponse
 } from "../../protogen/proto/api/api_pb";
 import actionPb, { PutPollResult } from "../../protogen/proto/types/action_pb";
 
@@ -131,19 +132,31 @@ export interface IServerMeta {
 export interface IGetServerMetaRequest {}
 
 export interface IGetServerMetaResponse {
-  serverMeta: IServerMeta;
+  serverMeta: IServerMeta | undefined;
 }
-
+// @ts-ignore
 export const GetServerMetaRequest = {
   // @ts-ignore
-  to(req: IGetServerMetaRequest): any {
+  to(req: IGetServerMetaRequest): apiPb.GetServerMetaRequest {
     return new apiPb.GetServerMetaRequest();
   },
 
-  from(pbRes: any): IGetServerMetaResponse {
-    const meta = pbRes.getServerMeta();
+  from(pbRes: GetServerMetaResponse): IGetServerMetaResponse {
+    const meta = pbRes.getServermeta();
+    if (!meta) {
+      return {
+        serverMeta: undefined
+      };
+    }
+
     return {
-      serverMeta: meta
+      serverMeta: {
+        packageversion: meta.getPackageversion(),
+        packagecommitid: meta.getPackagecommitid(),
+        gitstatus: meta.getGitstatus(),
+        goversion: meta.getGoversion(),
+        buildtime: meta.getBuildtime()
+      }
     };
   }
 };
