@@ -122,11 +122,11 @@ export const GetChainMetaRequest = {
 
 // interface for get server metas
 export interface IServerMeta {
-  packageversion: string;
-  packagecommitid: string;
-  gitstatus: string;
-  goversion: string;
-  buildtime: string;
+  packageVersion: string;
+  packageCommitID: string;
+  gitStatus: string;
+  goVersion: string;
+  buildTime: string;
 }
 
 export interface IGetServerMetaRequest {}
@@ -151,11 +151,11 @@ export const GetServerMetaRequest = {
 
     return {
       serverMeta: {
-        packageversion: meta.getPackageversion(),
-        packagecommitid: meta.getPackagecommitid(),
-        gitstatus: meta.getGitstatus(),
-        goversion: meta.getGoversion(),
-        buildtime: meta.getBuildtime()
+        packageVersion: meta.getPackageversion(),
+        packageCommitID: meta.getPackagecommitid(),
+        gitStatus: meta.getGitstatus(),
+        goVersion: meta.getGoversion(),
+        buildTime: meta.getBuildtime()
       }
     };
   }
