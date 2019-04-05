@@ -1,3 +1,8 @@
+2019-04-04 - 0.6.0 (92726a1)
+92726a1 (HEAD -> master, origin/master, origin/HEAD) add getServerMeta (#117)
+5dad410 (tag: v0.5.7) 0.5.7
+
+
 2019-04-04 - 0.5.7 (9c41b95)
 9c41b95 (HEAD -> master) make rpc method isomorphic
 6c4edff (origin/master, origin/HEAD) Update dependency typescript to v3.4.1 (#97)
