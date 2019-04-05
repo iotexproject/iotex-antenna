@@ -22,7 +22,9 @@ import {
   ISendActionRequest,
   ISendActionResponse,
   ISuggestGasPriceRequest,
-  ISuggestGasPriceResponse
+  ISuggestGasPriceResponse,
+  IGetEpochMetaRequest,
+  IGetEpochMetaResponse
 } from "./types";
 
 const packageDefinition = protoLoader.loadSync(
@@ -137,5 +139,15 @@ export default class RpcMethod implements IRpcMethod {
     );
     // @ts-ignore
     return estimateGasForAction(req);
+  }
+
+  public async getEpochMeta(
+    req: IGetEpochMetaRequest
+  ): Promise<IGetEpochMetaResponse> {
+    const getEpochMeta = promisify(
+      this.client.getEpochMeta.bind(this.client)
+    );
+    // @ts-ignore
+    return getEpochMeta(req);
   }
 }

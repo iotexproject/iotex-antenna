@@ -1766,6 +1766,75 @@ export const EstimateGasForActionRequest = {
   }
 };
 
+// Properties of a BlockProducerInfo.
+export interface IBlockProducerInfo {
+  // BlockProducerInfo address
+  address: string;
+
+  // BlockProducerInfo votes
+  votes: string;
+
+  // BlockProducerInfo active
+  active: boolean;
+
+  // BlockProducerInfo production
+  production: number;
+}
+
+// Properties of a GetEpochMetaRequest.
+export interface IGetEpochMetaRequest {
+  epochNumber: number;
+}
+
+// Properties of a GetEpochMetaResponse.
+export interface IGetEpochMetaResponse {
+  // GetEpochMetaResponse epochData
+  epochData: IEpochData;
+
+  // GetEpochMetaResponse totalBlocks
+  totalBlocks: number;
+
+  // GetEpochMetaResponse blockProducersInfo
+  blockProducersInfo: Array<IBlockProducerInfo>;
+}
+
+export const GetEpochMetaRequest = {
+  to(req: IGetEpochMetaRequest): any {
+    const pbReq = new apiPb.GetEpochMetaRequest();
+    if (req.epochNumber) {
+      pbReq.setEpochnumber(req.epochNumber);
+    }
+    return pbReq;
+  },
+  from(pbRes: any): IGetEpochMetaResponse {
+    const epoch = pbRes.getEpochdata();
+    const bpInfo = pbRes.getBlockproducersinfoList();
+    const res = { 
+      epochData: {
+        num: epoch.getNum(),
+        height: epoch.getHeight(),
+        beaconChainHeight: epoch.getBeaconchainheight(),
+      },
+      totalBlocks: pbRes.getTotalblocks(),
+      blockProducersInfo: bpInfo,
+    };
+    if (bpInfo) {
+      const parsedBpinfo = [];
+      for (let i = 0; i < bpInfo.length; i++) {
+        parsedBpinfo[i] = {
+          address: bpInfo[i].getAddress(),
+          votes: bpInfo[i].getVotes(),
+          active: bpInfo[i].getActive(),
+          production: bpInfo[i].getProduction(),
+        };
+      }
+      res.blockProducersInfo = parsedBpinfo;
+    }
+
+    return res;
+  }
+};
+
 export interface IRpcMethod {
   getAccount(req: IGetAccountRequest): Promise<IGetAccountResponse>;
 
@@ -1792,4 +1861,8 @@ export interface IRpcMethod {
   estimateGasForAction(
     req: IEstimateGasForActionRequest
   ): Promise<IEstimateGasForActionResponse>;
+
+  getEpochMeta(
+    req: IGetEpochMetaRequest
+  ): Promise<IGetEpochMetaResponse>;
 }
