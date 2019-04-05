@@ -27,6 +27,12 @@ test("RpcMethod.getChainMeta", async t => {
   t.truthy(resp);
 });
 
+test("RpcMethod.getServerMeta", async t => {
+  const client = new RpcMethod(TEST_HOSTNAME);
+  const resp = await client.getServerMeta({});
+  t.truthy(resp);
+});
+
 test("RpcMethod.getBlockMetas", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   // test getMetasByIndex

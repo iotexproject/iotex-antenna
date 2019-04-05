@@ -1,8 +1,8 @@
 {
   "name": "iotex-antenna",
-  "version": "0.5.4",
+  "version": "0.6.0",
   "description": "field_description",
-  "main": "index.js",
+  "main": "lib/index.js",
   "files": [
     "lib",
     "proto",
@@ -67,15 +67,15 @@
   },
   "homepage": "https://github.com/puncsky/template_website#readme",
   "devDependencies": {
-    "@babel/cli": "7.2.3",
-    "@babel/core": "7.4.0",
-    "@babel/preset-env": "7.4.2",
+    "@babel/cli": "7.4.3",
+    "@babel/core": "7.4.3",
+    "@babel/preset-env": "7.4.3",
     "@babel/preset-react": "7.0.0",
     "@babel/preset-typescript": "7.3.3",
     "@babel/register": "7.4.0",
     "@types/bech32": "1.1.1",
-    "@types/dottie": "^2.0.3",
-    "@types/elliptic": "6.4.6",
+    "@types/dottie": "2.0.3",
+    "@types/elliptic": "6.4.5",
     "@types/node": "11.11.6",
     "ava": "1.4.0",
     "babel-loader": "8.0.5",
@@ -84,7 +84,7 @@
     "babel-plugin-transform-class-properties": "6.24.1",
     "browser-env": "3.2.6",
     "build-changelog": "2.1.2",
-    "dottie": "^2.0.1",
+    "dottie": "2.0.1",
     "global": "4.3.2",
     "husky": "1.3.1",
     "nyc": "13.3.0",
@@ -93,16 +93,16 @@
     "proto-build": "0.2.3",
     "ts-node": "8.0.3",
     "ts-protoc-gen": "0.9.0",
-    "tslint": "5.14.0",
+    "tslint": "5.15.0",
     "tslint-config-prettier": "1.18.0",
     "tslint-microsoft-contrib": "6.1.0",
     "tslint-require-connnect-typing": "1.0.1",
-    "typescript": "3.3.3333"
+    "typescript": "3.4.2"
   },
   "dependencies": {
-    "@types/google-protobuf": "^3.2.7",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@grpc/proto-loader": "0.4.0",
+    "@types/google-protobuf": "^3.2.7",
     "bech32": "1.1.3",
     "bignumber.js": "8.1.1",
     "blakejs": "1.1.0",
@@ -112,6 +112,6 @@
     "grpc": "1.19.0",
     "grpc-web": "1.0.3",
     "protobufjs": "^6.8.8",
-    "sha3": "2.0.0"
+    "sha3": "2.0.1"
   }
 }

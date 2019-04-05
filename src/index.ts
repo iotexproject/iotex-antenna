@@ -1,5 +1,3 @@
-import RpcMethod from "./rpc-method/node-rpc-method";
+import Antenna from "./antenna";
 
-export default {
-  RpcMethod
-};
+export default Antenna;

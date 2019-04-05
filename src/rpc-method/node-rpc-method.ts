@@ -14,6 +14,8 @@ import {
   IGetChainMetaResponse,
   IGetReceiptByActionRequest,
   IGetReceiptByActionResponse,
+  IGetServerMetaRequest,
+  IGetServerMetaResponse,
   IReadContractRequest,
   IReadContractResponse,
   IRpcMethod,
@@ -23,23 +25,23 @@ import {
   ISuggestGasPriceResponse
 } from "./types";
 
+const packageDefinition = protoLoader.loadSync(
+  `${__dirname}/../../proto/api/api.proto`,
+  {
+    keepCase: true,
+    longs: String,
+    enums: String,
+    defaults: true,
+    oneofs: true,
+    includeDirs: [`${__dirname}/../../`]
+  }
+);
+const iotexapi = grpc.loadPackageDefinition(packageDefinition).iotexapi;
+
 export default class RpcMethod implements IRpcMethod {
   public client: IRpcMethod;
 
   constructor(hostname: string) {
-    const packageDefinition = protoLoader.loadSync(
-      `${__dirname}/../../proto/api/api.proto`,
-      {
-        keepCase: true,
-        longs: String,
-        enums: String,
-        defaults: true,
-        oneofs: true,
-        includeDirs: [`${__dirname}/../../`]
-      }
-    );
-    const iotexapi = grpc.loadPackageDefinition(packageDefinition).iotexapi;
-
     // @ts-ignore
     this.client = new iotexapi.APIService(
       hostname,
@@ -72,6 +74,16 @@ export default class RpcMethod implements IRpcMethod {
     const getChainMeta = promisify(this.client.getChainMeta.bind(this.client));
     // @ts-ignore
     return getChainMeta(req);
+  }
+
+  public async getServerMeta(
+    req: IGetServerMetaRequest
+  ): Promise<IGetServerMetaResponse> {
+    const getServerMeta = promisify(
+      this.client.getServerMeta.bind(this.client)
+    );
+    // @ts-ignore
+    return getServerMeta(req);
   }
 
   public async getActions(

@@ -1,3 +1,24 @@
+2019-04-04 - 0.6.0 (92726a1)
+92726a1 (HEAD -> master, origin/master, origin/HEAD) add getServerMeta (#117)
+5dad410 (tag: v0.5.7) 0.5.7
+
+
+2019-04-04 - 0.5.7 (9c41b95)
+9c41b95 (HEAD -> master) make rpc method isomorphic
+6c4edff (origin/master, origin/HEAD) Update dependency typescript to v3.4.1 (#97)
+0a12b5b (tag: v0.5.6) 0.5.6
+
+
+2019-04-01 - 0.5.6 (572cf31)
+572cf31 (HEAD -> master, origin/master, origin/HEAD) further put iotexapi into file scope
+9e404cc (tag: v0.5.5) 0.5.5
+
+
+2019-03-30 - 0.5.5 (1514040)
+1514040 (HEAD -> master) do not load file when creating RpcMethod instance
+3b28a96 (tag: v0.5.4, origin/master, origin/HEAD) 0.5.4
+
+
 2019-03-28 - 0.5.4 (ca6c61e)
 ca6c61e (HEAD -> master) update proto
 1979346 (tag: v0.5.3, origin/master, origin/HEAD) 0.5.3
