@@ -21,7 +21,9 @@ import {
   ISendActionRequest,
   ISendActionResponse,
   ISuggestGasPriceRequest,
-  ISuggestGasPriceResponse
+  ISuggestGasPriceResponse,
+  IGetEpochMetaRequest,
+  IGetEpochMetaResponse,
 } from "./types";
 
 import {
@@ -33,7 +35,8 @@ import {
   GetReceiptByActionRequest,
   ReadContractRequest,
   SendActionRequest,
-  SuggestGasPriceRequest
+  SuggestGasPriceRequest,
+  GetEpochMetaRequest,
 } from "./types";
 
 export default class RpcMethod implements IRpcMethod {
@@ -121,5 +124,13 @@ export default class RpcMethod implements IRpcMethod {
     const pbReq = GetReceiptByActionRequest.to(req);
     const pbResp = await this.client.getReceiptByAction(pbReq);
     return GetReceiptByActionRequest.from(pbResp);
+  }
+
+  public async getEpochMeta(
+    req: IGetEpochMetaRequest
+  ): Promise<IGetEpochMetaResponse> {
+    const pbReq = GetEpochMetaRequest.to(req);
+    const pbResp = await this.client.getEpochMeta(pbReq);
+    return GetEpochMetaRequest.from(pbResp);
   }
 }

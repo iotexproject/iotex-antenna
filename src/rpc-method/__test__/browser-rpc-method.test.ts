@@ -170,3 +170,9 @@ test("RpcMethod.estimateGasForAction", async t => {
     }
   }
 });
+
+test("RpcMethod.getEpochMeta", async t => {
+  const client = new RpcMethod(TEST_HOSTNAME);
+  const epochData = await client.getEpochMeta({ epochNumber: 1 });
+  t.deepEqual(epochData.totalBlocks, 1);
+});
