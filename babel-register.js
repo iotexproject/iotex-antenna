@@ -1,2 +1,1 @@
-require('@babel/register')(require('./babel.config'));
-require('@babel/polyfill');
+require("@babel/register")(require("./babel.config"));

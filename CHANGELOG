@@ -1,0 +1,142 @@
+2019-04-04 - 0.6.0 (92726a1)
+92726a1 (HEAD -> master, origin/master, origin/HEAD) add getServerMeta (#117)
+5dad410 (tag: v0.5.7) 0.5.7
+
+
+2019-04-04 - 0.5.7 (9c41b95)
+9c41b95 (HEAD -> master) make rpc method isomorphic
+6c4edff (origin/master, origin/HEAD) Update dependency typescript to v3.4.1 (#97)
+0a12b5b (tag: v0.5.6) 0.5.6
+
+
+2019-04-01 - 0.5.6 (572cf31)
+572cf31 (HEAD -> master, origin/master, origin/HEAD) further put iotexapi into file scope
+9e404cc (tag: v0.5.5) 0.5.5
+
+
+2019-03-30 - 0.5.5 (1514040)
+1514040 (HEAD -> master) do not load file when creating RpcMethod instance
+3b28a96 (tag: v0.5.4, origin/master, origin/HEAD) 0.5.4
+
+
+2019-03-28 - 0.5.4 (ca6c61e)
+ca6c61e (HEAD -> master) update proto
+1979346 (tag: v0.5.3, origin/master, origin/HEAD) 0.5.3
+
+
+2019-03-25 - 0.5.3 (bdfe3e9)
+bdfe3e9 (HEAD -> master) adjust deps
+494edf2 (tag: v0.5.2, origin/master, origin/HEAD) 0.5.2
+
+
+2019-03-25 - 0.5.2 (7e7fab1)
+7e7fab1 (HEAD -> master) include protogen
+fb56eb1 (tag: v0.5.1, origin/master, origin/HEAD) 0.5.1
+
+
+2019-03-25 - 0.5.1 (dbc35eb)
+dbc35eb (HEAD -> master) include proto in package.json
+226fdc5 (tag: v0.5.0, origin/master, origin/HEAD) 0.5.0
+
+
+2019-03-25 - 0.5.0 (55ebbf1)
+55ebbf1 (HEAD -> master, origin/master, origin/HEAD) bump proto
+6499fee Update circleci/node:10.15.3-browsers-legacy Docker digest to 470041b
+f48fea6 Update dependency ava to v1.4.0
+95a55bc Update circleci/node:10.15.3-browsers-legacy Docker digest to cc7b0cf
+037cd7a Update dependency @types/node to v11.11.6
+70db792 Update babel monorepo
+095d7bd Pin dependencies
+ca5d627 fix browser-env import
+c818006 fix test
+61b04de bump circle ci
+8e820ed (tag: v0.4.0) 0.4.0
+
+
+2019-03-22 - 0.4.0 (c88f80a)
+c88f80a (HEAD -> master, origin/master, origin/HEAD) enforce protobuf types
+f5055a7 migrate to typescript
+cf9bae1 Update circleci/node:10.15.3-browsers-legacy Docker digest to 0c15d40
+9937d8e Update dependency eslint to v5.15.3
+a58507c Update circleci/node:10.15.3-browsers-legacy Docker digest to 511bd9b
+09dc9e6 Update circleci/node:10.15.3-browsers-legacy Docker digest to 31d0326
+c18e40b Update circleci/node:10.15.3-browsers-legacy Docker digest to 751069d
+caa1da5 Update dependency eslint to v5.15.2
+779a206 Update dependency flow-bin to v0.95.1
+a259030 Update circleci/node:10.15.3-browsers-legacy Docker digest to c686837
+cdcc367 bump version
+8c0c0f3 Update package (#84)
+38a529f update proto (#82)
+60e1523 prevent reinitializing arr (#78)
+2f8d3b9 add getReceiptByAction (#79)
+dd76d06 Update Node.js to v10.15.3 (#81)
+58cce78 update version
+ffc6b34 Update circleci/node:10.15.2-browsers-legacy Docker digest to 14dc92d
+2b5db12 Update npm to v6.9.0
+172db1b Pin dependency bignumber.js to 8.1.1
+7150698 add toRau utils (#75)
+b31c0a9 Update dependency ava to v1.3.1
+3f06052 Update Node.js
+5b07c9b Update dependency eslint to v5.15.1
+025ca54 Update dependency grpc to v1.19.0
+7f27776 Update dependency google-protobuf to v3.7.0
+236ebc9 add account sign (#70)
+19e991d add action core browser detail 2 (#68)
+93358b0 add account (#69)
+4b96c09 Merge pull request #67 from iotexproject/xiaxiangzhou17
+63d76c5 Pin dependencies
+76e1faf Merge pull request #65 from iotexproject/xiaxiangzhou16
+cf08551 Update dependency flow-bin to v0.94.0 (#63)
+0899d8b add-estimateGasForAction (#64)
+47d0783 update latest proto (#61)
+2e68749 Update README.md
+12576f2 Update README.md
+22bc801 Update README.md
+de81af0 Update Node.js to v10.15.2 (#52)
+93acc2e Browset RPC GetChainMetaRequest (first good issue) (#55)
+88aa7b3 add readContract browser method (#54)
+2b2cbe6 add node estimate gas for action (#60)
+ce3466e add sendAction browser (#56)
+3505c8a add get actions browser method (#53)
+9b4d915 Pin dependencies
+552daa3 add public key, private key, address encoding (#50)
+5aa7a18 Update circleci/node:10.15.1-browsers-legacy Docker digest to 6e51e53
+c32727c update grpc endpoint
+0a017d7 add getChainMeta (#47)
+fd7c748 implement readContract in node-rpc-method (#31)
+ab6e7b4 Update dependency eslint-plugin-flowtype to v3 (#38)
+2b8edf9 add send action (#32)
+fbc897b Update dependency eslint-plugin-react to v7.12.4 (#33)
+0f8d391 Update dependency flow-bin to v0.93.0 (#34)
+b7c4c41 Update dependency nyc to v13.3.0 (#35)
+3d300b4 Update dependency eslint-plugin-import to v2.16.0
+8db3433 Update npm to v6.8.0 (#36)
+97279a1 Update dependency babel-eslint to v10 (#37)
+f2f3376 getAction2 (#29)
+df5acdc Update dependency babel-plugin-react-require to v3.1.1
+4b1b506 Update dependency eslint to v5.14.1
+9779726 Update dependency babel-plugin-module-resolver to v3.2.0
+5987db6 Update dependency ava to v1.2.1
+07a0c95 Update babel monorepo to v7.3.4
+9239696 Update Node.js
+b9df008 Update circleci/node:10.15.0-browsers-legacy Docker digest to b6d9419
+b73613e Pin dependencies (#21)
+6f8b5d2 Merge pull request #16 from iotexproject/xiaxiangzhou5
+e6cfc26 add flow-install in config
+fa63a6a update README
+fdffd2a Update README.md
+9fd53bf add getActions1 (#12)
+4a596ea add suggestGasPrice (#13)
+ce157f7 add getReceiptByAction (#14)
+5af6ddb add getBlockMetas (#11)
+f41c9e5 update RpcMethod.getChainMeta
+d112b44 simplify getAccount
+d113e3c update getAccount
+43a7d99 update proto
+417832b update readme
+8e50ce5 first commit
+6204ff9 add rpc method from proto
+340217b add js boilerplate and proto defs
+e5ebb6b add initial commit
+
+

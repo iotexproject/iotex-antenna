@@ -3,20 +3,20 @@ version: 2
 jobs:
   build:
     docker:
-      - image: "circleci/node:10.15.1-browsers-legacy@sha256:6e51e5380d23a7cbce2ae3335d1f9377e0558b2f85b584d88b2c01203d60dc3c"
+      - image: "circleci/node:10.15.3-browsers-legacy@sha256:470041bf3f088485a6e276ac855e20980864540b1c9d19371e41885bbd142894"
     steps:
       - checkout
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-      - run: npm install && npm run flow-install
+            - v2-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v2-dependencies-
+      - run: npm install
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v2-dependencies-{{ checksum "package.json" }}
       - run: npm test
       - store_artifacts:
           path: coverage
