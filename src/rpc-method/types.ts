@@ -80,7 +80,7 @@ export const GetAccountRequest = {
 export interface IEpochData {
   num: number;
   height: number;
-  beaconChainHeight: number;
+  gravityChainStartHeight: number | string;
 }
 
 export interface IChainMeta {
@@ -1809,14 +1809,14 @@ export const GetEpochMetaRequest = {
   from(pbRes: any): IGetEpochMetaResponse {
     const epoch = pbRes.getEpochdata();
     const bpInfo = pbRes.getBlockproducersinfoList();
-    const res = { 
+    const res = {
       epochData: {
         num: epoch.getNum(),
         height: epoch.getHeight(),
-        beaconChainHeight: epoch.getBeaconchainheight(),
+        gravityChainStartHeight: epoch.getGravitychainstartheight()
       },
       totalBlocks: pbRes.getTotalblocks(),
-      blockProducersInfo: bpInfo,
+      blockProducersInfo: bpInfo
     };
     if (bpInfo) {
       const parsedBpinfo = [];
@@ -1825,7 +1825,7 @@ export const GetEpochMetaRequest = {
           address: bpInfo[i].getAddress(),
           votes: bpInfo[i].getVotes(),
           active: bpInfo[i].getActive(),
-          production: bpInfo[i].getProduction(),
+          production: bpInfo[i].getProduction()
         };
       }
       res.blockProducersInfo = parsedBpinfo;
@@ -1862,7 +1862,5 @@ export interface IRpcMethod {
     req: IEstimateGasForActionRequest
   ): Promise<IEstimateGasForActionResponse>;
 
-  getEpochMeta(
-    req: IGetEpochMetaRequest
-  ): Promise<IGetEpochMetaResponse>;
+  getEpochMeta(req: IGetEpochMetaRequest): Promise<IGetEpochMetaResponse>;
 }

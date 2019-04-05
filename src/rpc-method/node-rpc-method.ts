@@ -12,6 +12,8 @@ import {
   IGetBlockMetasResponse,
   IGetChainMetaRequest,
   IGetChainMetaResponse,
+  IGetEpochMetaRequest,
+  IGetEpochMetaResponse,
   IGetReceiptByActionRequest,
   IGetReceiptByActionResponse,
   IGetServerMetaRequest,
@@ -22,9 +24,7 @@ import {
   ISendActionRequest,
   ISendActionResponse,
   ISuggestGasPriceRequest,
-  ISuggestGasPriceResponse,
-  IGetEpochMetaRequest,
-  IGetEpochMetaResponse
+  ISuggestGasPriceResponse
 } from "./types";
 
 const packageDefinition = protoLoader.loadSync(
@@ -44,9 +44,13 @@ export default class RpcMethod implements IRpcMethod {
   public client: IRpcMethod;
 
   constructor(hostname: string) {
+    const normalizedHostname = String(hostname).replace(
+      /^(http:\/\/|https:\/\/)/,
+      ""
+    );
     // @ts-ignore
     this.client = new iotexapi.APIService(
-      hostname,
+      normalizedHostname,
       grpc.credentials.createInsecure(),
       null
     );
@@ -144,9 +148,7 @@ export default class RpcMethod implements IRpcMethod {
   public async getEpochMeta(
     req: IGetEpochMetaRequest
   ): Promise<IGetEpochMetaResponse> {
-    const getEpochMeta = promisify(
-      this.client.getEpochMeta.bind(this.client)
-    );
+    const getEpochMeta = promisify(this.client.getEpochMeta.bind(this.client));
     // @ts-ignore
     return getEpochMeta(req);
   }

@@ -11,6 +11,8 @@ import {
   IGetBlockMetasResponse,
   IGetChainMetaRequest,
   IGetChainMetaResponse,
+  IGetEpochMetaRequest,
+  IGetEpochMetaResponse,
   IGetReceiptByActionRequest,
   IGetReceiptByActionResponse,
   IGetServerMetaRequest,
@@ -21,9 +23,7 @@ import {
   ISendActionRequest,
   ISendActionResponse,
   ISuggestGasPriceRequest,
-  ISuggestGasPriceResponse,
-  IGetEpochMetaRequest,
-  IGetEpochMetaResponse,
+  ISuggestGasPriceResponse
 } from "./types";
 
 import {
@@ -32,11 +32,11 @@ import {
   GetActionsRequest,
   GetBlockMetasRequest,
   GetChainMetaRequest,
+  GetEpochMetaRequest,
   GetReceiptByActionRequest,
   ReadContractRequest,
   SendActionRequest,
-  SuggestGasPriceRequest,
-  GetEpochMetaRequest,
+  SuggestGasPriceRequest
 } from "./types";
 
 export default class RpcMethod implements IRpcMethod {
