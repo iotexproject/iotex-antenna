@@ -1,3 +1,24 @@
+2019-04-05 - 0.6.1 (5640b94)
+5640b94 (HEAD -> master, origin/master, origin/HEAD) Pin dependency dotenv to 7.0.0 (#124)
+3b5bf29 Update circleci/node:10.15.3-browsers-legacy Docker digest to f1cbbdc
+4d164ba fix tests
+02f96b8 add get epochmeta (#123)
+da4b31b Update circleci/node:10.15.3-browsers-legacy Docker digest to d201b80 (#105)
+eeff7ed Update dependency @types/node to v11.13.0 (#104)
+bcabfcc Update dependency grpc-web to v1.0.4 (#100)
+297b45c Update dependency google-protobuf to v3.7.1 (#99)
+20206c3 Update dependency ava to v1.4.1 (#106)
+66b0726 Update dependency @types/elliptic to v6.4.6 (#107)
+ab42556 Update dependency sha3 to v2.0.1 (#98)
+f9ab2e7 Update dependency tslint to v5.15.0 (#108)
+1bb96d8 Update dependency typescript to v3.4.2 (#122)
+6ebc817 Update babel monorepo to v7.4.3 (#112)
+f4e6fc2 Pin dependencies (#103)
+ba62758 add action core browser detail 2 (#120)
+5588209  fix field naming issuse (#121)
+356a295 (tag: v0.6.0) 0.6.0
+
+
 2019-04-04 - 0.6.0 (92726a1)
 92726a1 (HEAD -> master, origin/master, origin/HEAD) add getServerMeta (#117)
 5dad410 (tag: v0.5.7) 0.5.7
