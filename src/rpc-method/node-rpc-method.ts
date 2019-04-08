@@ -62,7 +62,7 @@ export default class RpcMethod implements IRpcMethod {
     this.timeout = options.timeout || 3000;
   }
 
-  public getDeadline() {
+  public getDeadline(): Date {
     return new Date(Date.now() + this.timeout);
   }
 
@@ -81,7 +81,7 @@ export default class RpcMethod implements IRpcMethod {
       this.client.getBlockMetas.bind(this.client)
     );
     // @ts-ignore
-    return getBlockMetas(req), { deadline: this.getDeadline() };
+    return getBlockMetas(req, { deadline: this.getDeadline() });
   }
 
   public async getChainMeta(
