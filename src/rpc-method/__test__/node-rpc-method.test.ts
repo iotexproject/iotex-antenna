@@ -212,3 +212,9 @@ test.only("RpcMethod.getEpochMeta", async t => {
   const epochData = await client.getEpochMeta({ epochNumber: 1 });
   t.truthy(epochData.totalBlocks);
 });
+
+test("RpcMethod.getDeadline", async t => {
+  const client = new RpcMethod(TEST_HOSTNAME);
+  const deadline = client.getDeadline();
+  t.truthy(deadline);
+});

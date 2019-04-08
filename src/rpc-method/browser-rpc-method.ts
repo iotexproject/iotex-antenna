@@ -39,18 +39,30 @@ import {
   SuggestGasPriceRequest
 } from "./types";
 
+type Opts = {
+  timeout?: number;
+};
+
 export default class RpcMethod implements IRpcMethod {
   public client: grpcWeb.APIServicePromiseClient;
+  public timeout: number;
 
-  constructor(hostname: string) {
+  constructor(hostname: string, options: Opts = {}) {
     this.client = new grpcWeb.APIServicePromiseClient(hostname, null, null);
+    this.timeout = options.timeout || 3000;
+  }
+
+  public getDeadline(): string {
+    return `${new Date(Date.now() + this.timeout).getTime()}`;
   }
 
   public async getAccount(
     req: IGetAccountRequest
   ): Promise<IGetAccountResponse> {
     const pbReq = GetAccountRequest.to(req);
-    const pbResp = await this.client.getAccount(pbReq);
+    const pbResp = await this.client.getAccount(pbReq, {
+      deadline: this.getDeadline()
+    });
     return GetAccountRequest.from(pbResp);
   }
 
@@ -58,7 +70,9 @@ export default class RpcMethod implements IRpcMethod {
     req: IGetBlockMetasRequest
   ): Promise<IGetBlockMetasResponse> {
     const pbReq = GetBlockMetasRequest.to(req);
-    const pbResp = await this.client.getBlockMetas(pbReq);
+    const pbResp = await this.client.getBlockMetas(pbReq, {
+      deadline: this.getDeadline()
+    });
     return GetBlockMetasRequest.from(pbResp);
   }
 
@@ -66,7 +80,9 @@ export default class RpcMethod implements IRpcMethod {
     req: IGetChainMetaRequest
   ): Promise<IGetChainMetaResponse> {
     const pbReq = GetChainMetaRequest.to(req);
-    const pbResp = await this.client.getChainMeta(pbReq);
+    const pbResp = await this.client.getChainMeta(pbReq, {
+      deadline: this.getDeadline()
+    });
     return GetChainMetaRequest.from(pbResp);
   }
 
@@ -74,7 +90,9 @@ export default class RpcMethod implements IRpcMethod {
     req: IGetServerMetaRequest
   ): Promise<IGetServerMetaResponse> {
     const pbReq = GetServerMetaRequest.to(req);
-    const pbResp = await this.client.getServerMeta(pbReq);
+    const pbResp = await this.client.getServerMeta(pbReq, {
+      deadline: this.getDeadline()
+    });
     return GetServerMetaRequest.from(pbResp);
   }
 
@@ -82,7 +100,9 @@ export default class RpcMethod implements IRpcMethod {
     req: IGetActionsRequest
   ): Promise<IGetActionsResponse> {
     const pbReq = GetActionsRequest.to(req);
-    const pbResp = await this.client.getActions(pbReq);
+    const pbResp = await this.client.getActions(pbReq, {
+      deadline: this.getDeadline()
+    });
     return GetActionsRequest.from(pbResp);
   }
 
@@ -90,7 +110,9 @@ export default class RpcMethod implements IRpcMethod {
     req: ISuggestGasPriceRequest
   ): Promise<ISuggestGasPriceResponse> {
     const pbReq = SuggestGasPriceRequest.to(req);
-    const pbResp = await this.client.suggestGasPrice(pbReq);
+    const pbResp = await this.client.suggestGasPrice(pbReq, {
+      deadline: this.getDeadline()
+    });
     return SuggestGasPriceRequest.from(pbResp);
   }
 
@@ -98,7 +120,9 @@ export default class RpcMethod implements IRpcMethod {
     req: IEstimateGasForActionRequest
   ): Promise<IEstimateGasForActionResponse> {
     const pbReq = EstimateGasForActionRequest.to(req);
-    const pbResp = await this.client.estimateGasForAction(pbReq);
+    const pbResp = await this.client.estimateGasForAction(pbReq, {
+      deadline: this.getDeadline()
+    });
     return EstimateGasForActionRequest.from(pbResp);
   }
 
@@ -106,7 +130,9 @@ export default class RpcMethod implements IRpcMethod {
     req: IReadContractRequest
   ): Promise<IReadContractResponse> {
     const pbReq = ReadContractRequest.to(req);
-    const pbResp = await this.client.readContract(pbReq);
+    const pbResp = await this.client.readContract(pbReq, {
+      deadline: this.getDeadline()
+    });
     return ReadContractRequest.from(pbResp);
   }
 
@@ -114,7 +140,9 @@ export default class RpcMethod implements IRpcMethod {
     req: ISendActionRequest
   ): Promise<ISendActionResponse> {
     const pbReq = SendActionRequest.to(req);
-    const pbResp = await this.client.sendAction(pbReq);
+    const pbResp = await this.client.sendAction(pbReq, {
+      deadline: this.getDeadline()
+    });
     return SendActionRequest.from(pbResp);
   }
 
@@ -122,7 +150,9 @@ export default class RpcMethod implements IRpcMethod {
     req: IGetReceiptByActionRequest
   ): Promise<IGetReceiptByActionResponse> {
     const pbReq = GetReceiptByActionRequest.to(req);
-    const pbResp = await this.client.getReceiptByAction(pbReq);
+    const pbResp = await this.client.getReceiptByAction(pbReq, {
+      deadline: this.getDeadline()
+    });
     return GetReceiptByActionRequest.from(pbResp);
   }
 
@@ -130,7 +160,9 @@ export default class RpcMethod implements IRpcMethod {
     req: IGetEpochMetaRequest
   ): Promise<IGetEpochMetaResponse> {
     const pbReq = GetEpochMetaRequest.to(req);
-    const pbResp = await this.client.getEpochMeta(pbReq);
+    const pbResp = await this.client.getEpochMeta(pbReq, {
+      deadline: this.getDeadline()
+    });
     return GetEpochMetaRequest.from(pbResp);
   }
 }
