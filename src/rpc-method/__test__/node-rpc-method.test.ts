@@ -148,7 +148,7 @@ test.skip("RpcMethod.getReceiptByAction", async t => {
     actionHash:
       "01d5c895f3b066e695d516884bec9977404875aeb15216bc087dbc0a1ef9aed1"
   });
-  t.deepEqual(resp.receipt, {});
+  t.deepEqual(resp.receiptInfo.receipt, {});
 });
 
 test("RpcMethod.readContract", async t => {

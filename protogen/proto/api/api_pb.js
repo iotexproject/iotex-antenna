@@ -43,6 +43,7 @@ goog.exportSymbol('proto.iotexapi.ReadContractRequest', null, global);
 goog.exportSymbol('proto.iotexapi.ReadContractResponse', null, global);
 goog.exportSymbol('proto.iotexapi.ReadStateRequest', null, global);
 goog.exportSymbol('proto.iotexapi.ReadStateResponse', null, global);
+goog.exportSymbol('proto.iotexapi.ReceiptInfo', null, global);
 goog.exportSymbol('proto.iotexapi.SendActionRequest', null, global);
 goog.exportSymbol('proto.iotexapi.SendActionResponse', null, global);
 goog.exportSymbol('proto.iotexapi.SuggestGasPriceRequest', null, global);
@@ -1852,6 +1853,173 @@ proto.iotexapi.ActionInfo.prototype.setBlkhash = function(value) {
   jspb.Message.setProto3StringField(this, 3, value);
 };
 
+
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotexapi.ReceiptInfo.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotexapi.ReceiptInfo.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotexapi.ReceiptInfo} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.ReceiptInfo.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    receipt: (f = msg.getReceipt()) && proto_types_action_pb.Receipt.toObject(includeInstance, f),
+    blkhash: jspb.Message.getFieldWithDefault(msg, 2, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.iotexapi.ReceiptInfo}
+ */
+proto.iotexapi.ReceiptInfo.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.iotexapi.ReceiptInfo;
+  return proto.iotexapi.ReceiptInfo.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.iotexapi.ReceiptInfo} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.iotexapi.ReceiptInfo}
+ */
+proto.iotexapi.ReceiptInfo.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+      case 1:
+        var value = new proto_types_action_pb.Receipt;
+        reader.readMessage(value,proto_types_action_pb.Receipt.deserializeBinaryFromReader);
+        msg.setReceipt(value);
+        break;
+      case 2:
+        var value = /** @type {string} */ (reader.readString());
+        msg.setBlkhash(value);
+        break;
+      default:
+        reader.skipField();
+        break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.iotexapi.ReceiptInfo.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.iotexapi.ReceiptInfo.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.iotexapi.ReceiptInfo} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotexapi.ReceiptInfo.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getReceipt();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto_types_action_pb.Receipt.serializeBinaryToWriter
+    );
+  }
+  f = message.getBlkhash();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional iotextypes.Receipt receipt = 1;
+ * @return {?proto.iotextypes.Receipt}
+ */
+proto.iotexapi.ReceiptInfo.prototype.getReceipt = function() {
+  return /** @type{?proto.iotextypes.Receipt} */ (
+    jspb.Message.getWrapperField(this, proto_types_action_pb.Receipt, 1));
+};
+
+
+/** @param {?proto.iotextypes.Receipt|undefined} value */
+proto.iotexapi.ReceiptInfo.prototype.setReceipt = function(value) {
+  jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ */
+proto.iotexapi.ReceiptInfo.prototype.clearReceipt = function() {
+  this.setReceipt(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.iotexapi.ReceiptInfo.prototype.hasReceipt = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional string blkHash = 2;
+ * @return {string}
+ */
+proto.iotexapi.ReceiptInfo.prototype.getBlkhash = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/** @param {string} value */
+proto.iotexapi.ReceiptInfo.prototype.setBlkhash = function(value) {
+  jspb.Message.setProto3StringField(this, 2, value);
+};
 
 
 /**
@@ -3956,7 +4124,6 @@ proto.iotexapi.GetReceiptByActionResponse.prototype.toObject = function(opt_incl
   return proto.iotexapi.GetReceiptByActionResponse.toObject(opt_includeInstance, this);
 };
 
-
 /**
  * Static version of the {@see toObject} method.
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
@@ -3968,7 +4135,7 @@ proto.iotexapi.GetReceiptByActionResponse.prototype.toObject = function(opt_incl
  */
 proto.iotexapi.GetReceiptByActionResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    receipt: (f = msg.getReceipt()) && proto_types_action_pb.Receipt.toObject(includeInstance, f)
+    receiptinfo: (f = msg.getReceiptinfo()) && proto.iotexapi.ReceiptInfo.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -3990,7 +4157,6 @@ proto.iotexapi.GetReceiptByActionResponse.deserializeBinary = function(bytes) {
   return proto.iotexapi.GetReceiptByActionResponse.deserializeBinaryFromReader(msg, reader);
 };
 
-
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
@@ -4005,14 +4171,14 @@ proto.iotexapi.GetReceiptByActionResponse.deserializeBinaryFromReader = function
     }
     var field = reader.getFieldNumber();
     switch (field) {
-    case 1:
-      var value = new proto_types_action_pb.Receipt;
-      reader.readMessage(value,proto_types_action_pb.Receipt.deserializeBinaryFromReader);
-      msg.setReceipt(value);
-      break;
-    default:
-      reader.skipField();
-      break;
+      case 1:
+        var value = new proto.iotexapi.ReceiptInfo;
+        reader.readMessage(value,proto.iotexapi.ReceiptInfo.deserializeBinaryFromReader);
+        msg.setReceiptinfo(value);
+        break;
+      default:
+        reader.skipField();
+        break;
     }
   }
   return msg;
@@ -4039,43 +4205,45 @@ proto.iotexapi.GetReceiptByActionResponse.prototype.serializeBinary = function()
  */
 proto.iotexapi.GetReceiptByActionResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getReceipt();
+  f = message.getReceiptinfo();
   if (f != null) {
     writer.writeMessage(
       1,
       f,
-      proto_types_action_pb.Receipt.serializeBinaryToWriter
+      proto.iotexapi.ReceiptInfo.serializeBinaryToWriter
     );
   }
 };
 
-
 /**
- * optional iotextypes.Receipt receipt = 1;
- * @return {?proto.iotextypes.Receipt}
+ * optional ReceiptInfo receiptInfo = 1;
+ * @return {?proto.iotexapi.ReceiptInfo}
  */
-proto.iotexapi.GetReceiptByActionResponse.prototype.getReceipt = function() {
-  return /** @type{?proto.iotextypes.Receipt} */ (
-    jspb.Message.getWrapperField(this, proto_types_action_pb.Receipt, 1));
+proto.iotexapi.GetReceiptByActionResponse.prototype.getReceiptinfo = function() {
+  return /** @type{?proto.iotexapi.ReceiptInfo} */ (
+    jspb.Message.getWrapperField(this, proto.iotexapi.ReceiptInfo, 1));
 };
 
 
-/** @param {?proto.iotextypes.Receipt|undefined} value */
-proto.iotexapi.GetReceiptByActionResponse.prototype.setReceipt = function(value) {
+/** @param {?proto.iotexapi.ReceiptInfo|undefined} value */
+proto.iotexapi.GetReceiptByActionResponse.prototype.setReceiptinfo = function(value) {
   jspb.Message.setWrapperField(this, 1, value);
 };
 
 
-proto.iotexapi.GetReceiptByActionResponse.prototype.clearReceipt = function() {
-  this.setReceipt(undefined);
+/**
+ * Clears the message field making it undefined.
+ */
+proto.iotexapi.GetReceiptByActionResponse.prototype.clearReceiptinfo = function() {
+  this.setReceiptinfo(undefined);
 };
 
 
 /**
  * Returns whether this field is set.
- * @return {!boolean}
+ * @return {boolean}
  */
-proto.iotexapi.GetReceiptByActionResponse.prototype.hasReceipt = function() {
+proto.iotexapi.GetReceiptByActionResponse.prototype.hasReceiptinfo = function() {
   return jspb.Message.getField(this, 1) != null;
 };
 
