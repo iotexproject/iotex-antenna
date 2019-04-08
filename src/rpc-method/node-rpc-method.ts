@@ -142,8 +142,8 @@ export default class RpcMethod implements IRpcMethod {
     req: ISendActionRequest
   ): Promise<ISendActionResponse> {
     const sendAction = promisify(this.client.sendAction.bind(this.client));
-    // TODO can not add timeout parameter
-    return sendAction(req);
+    // @ts-ignore
+    return sendAction(req, { deadline: this.getDeadline() });
   }
 
   public async estimateGasForAction(
