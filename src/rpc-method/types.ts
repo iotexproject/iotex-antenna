@@ -1660,17 +1660,11 @@ export const GetReceiptByActionRequest = {
     const receiptInfoData = pbRes.getReceiptinfo();
     const receipt = {
       returnValue: Buffer.from(""),
-      // Receipt statu,
       status: 0,
-      // block Height ,
       blkHeight: 0,
-      // Receipt actHas,
       actHash: Buffer.from(""),
-      // Receipt gasConsume,
       gasConsumed: 0,
-      // Receipt contractAddres,
       contractAddress: "",
-      // Receipt log,
       logs: []
     };
 
@@ -1678,7 +1672,7 @@ export const GetReceiptByActionRequest = {
       return {
         receiptInfo: {
           receipt,
-          blkHash: "" //update blkHask
+          blkHash: ""
         }
       };
     }
