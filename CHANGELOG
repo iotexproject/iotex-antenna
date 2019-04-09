@@ -1,3 +1,10 @@
+2019-04-08 - 0.8.0 (bdb1bf7)
+bdb1bf7 (HEAD -> master, origin/master, origin/HEAD) Update receipt (#134)
+40a9421 Update circleci/node:10.15.3-browsers-legacy Docker digest to 0196a72
+92ac767 Update dependency @types/node to v11.13.2 (#132)
+c0116fb (tag: v0.7.1) 0.7.1
+
+
 2019-04-08 - 0.7.1 (cdf98ae)
 cdf98ae (HEAD -> master, origin/master, origin/HEAD) Update dependency @types/node to v11.13.1 (#131)
 f3d22c7 Timeout to rpc (#130)
