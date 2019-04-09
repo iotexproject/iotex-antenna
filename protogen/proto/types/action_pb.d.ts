@@ -697,20 +697,33 @@ export namespace Action {
 }
 
 export class Receipt extends jspb.Message {
-  constructor ();
-  getReturnvalue(): {};
-  setReturnvalue(value: {}): void;
+  getReturnvalue(): Uint8Array | string;
+  getReturnvalue_asU8(): Uint8Array;
+  getReturnvalue_asB64(): string;
+  setReturnvalue(value: Uint8Array | string): void;
+
   getStatus(): number;
   setStatus(value: number): void;
-  getActhash(): {};
-  setActhash(value: {}): void;
+
+  getBlkheight(): number;
+  setBlkheight(value: number): void;
+
+  getActhash(): Uint8Array | string;
+  getActhash_asU8(): Uint8Array;
+  getActhash_asB64(): string;
+  setActhash(value: Uint8Array | string): void;
+
   getGasconsumed(): number;
   setGasconsumed(value: number): void;
+
   getContractaddress(): string;
   setContractaddress(value: string): void;
-  getLogsList(): Log[] | undefined;
-  setLogsList(value?: Log[]): void;
+
+  getLogsList(): Array<Log>;
+  setLogsList(value: Array<Log>): void;
   clearLogsList(): void;
+  addLogs(value?: Log, index?: number): Log;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Receipt.AsObject;
   static toObject(includeInstance: boolean, msg: Receipt): Receipt.AsObject;
@@ -721,30 +734,41 @@ export class Receipt extends jspb.Message {
 
 export namespace Receipt {
   export type AsObject = {
-    returnvalue: {};
-    status: number;
-    acthash: {};
-    gasconsumed: number;
-    contractaddress: string;
-    logsList?: Log.AsObject[];
+    returnvalue: Uint8Array | string,
+    status: number,
+    blkheight: number,
+    acthash: Uint8Array | string,
+    gasconsumed: number,
+    contractaddress: string,
+    logsList: Array<Log.AsObject>,
   }
 }
 
 export class Log extends jspb.Message {
-  constructor ();
-  getAddress(): string;
-  setAddress(value: string): void;
-  getTopicsList(): {}[];
-  setTopicsList(value: {}[]): void;
+  getContractaddress(): string;
+  setContractaddress(value: string): void;
+
+  getTopicsList(): Array<Uint8Array | string>;
+  setTopicsList(value: Array<Uint8Array | string>): void;
   clearTopicsList(): void;
-  getData(): {};
-  setData(value: {}): void;
-  getBlocknumber(): number;
-  setBlocknumber(value: number): void;
-  getTxnhash(): {};
-  setTxnhash(value: {}): void;
+  addTopics(value: Uint8Array | string, index?: number): void;
+
+  getData(): Uint8Array | string;
+  getData_asU8(): Uint8Array;
+  getData_asB64(): string;
+  setData(value: Uint8Array | string): void;
+
+  getBlkheight(): number;
+  setBlkheight(value: number): void;
+
+  getActhash(): Uint8Array | string;
+  getActhash_asU8(): Uint8Array;
+  getActhash_asB64(): string;
+  setActhash(value: Uint8Array | string): void;
+
   getIndex(): number;
   setIndex(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Log.AsObject;
   static toObject(includeInstance: boolean, msg: Log): Log.AsObject;
@@ -755,15 +779,14 @@ export class Log extends jspb.Message {
 
 export namespace Log {
   export type AsObject = {
-    address: string;
-    topicsList: {}[];
-    data: {};
-    blocknumber: number;
-    txnhash: {};
-    index: number;
+    contractaddress: string,
+    topicsList: Array<Uint8Array | string>,
+    data: Uint8Array | string,
+    blkheight: number,
+    acthash: Uint8Array | string,
+    index: number,
   }
 }
-
 export class DepositToRewardingFund extends jspb.Message {
   constructor ();
   getAmount(): string;
@@ -824,7 +847,7 @@ export namespace GrantReward {
   }
 }
 
-export enum RewardType { 
+export enum RewardType {
   BlockReward = 0,
   EpochReward = 1,
 }

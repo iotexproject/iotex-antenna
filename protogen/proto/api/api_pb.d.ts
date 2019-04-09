@@ -215,6 +215,32 @@ export namespace ActionInfo {
   }
 }
 
+
+export class ReceiptInfo extends jspb.Message {
+  getReceipt(): proto_types_action_pb.Receipt | undefined;
+  setReceipt(value?: proto_types_action_pb.Receipt): void;
+  hasReceipt(): boolean;
+  clearReceipt(): void;
+
+  getBlkhash(): string;
+  setBlkhash(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ReceiptInfo.AsObject;
+  static toObject(includeInstance: boolean, msg: ReceiptInfo): ReceiptInfo.AsObject;
+  static serializeBinaryToWriter(message: ReceiptInfo, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ReceiptInfo;
+  static deserializeBinaryFromReader(message: ReceiptInfo, reader: jspb.BinaryReader): ReceiptInfo;
+}
+
+export namespace ReceiptInfo {
+  export type AsObject = {
+    receipt?: proto_types_action_pb.Receipt.AsObject,
+    blkhash: string,
+  }
+}
+
+
 export class BlockProducerInfo extends jspb.Message {
   constructor ();
   getAddress(): string;
@@ -463,10 +489,11 @@ export namespace GetReceiptByActionRequest {
 }
 
 export class GetReceiptByActionResponse extends jspb.Message {
-  constructor ();
-  getReceipt(): proto_types_action_pb.Receipt | undefined;
-  setReceipt(value?: proto_types_action_pb.Receipt): void;
-  clearReceipt(): void;
+  getReceiptinfo(): ReceiptInfo | undefined;
+  setReceiptinfo(value?: ReceiptInfo): void;
+  hasReceiptinfo(): boolean;
+  clearReceiptinfo(): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetReceiptByActionResponse.AsObject;
   static toObject(includeInstance: boolean, msg: GetReceiptByActionResponse): GetReceiptByActionResponse.AsObject;
@@ -477,7 +504,7 @@ export class GetReceiptByActionResponse extends jspb.Message {
 
 export namespace GetReceiptByActionResponse {
   export type AsObject = {
-    receipt?: proto_types_action_pb.Receipt.AsObject;
+    receiptinfo?: ReceiptInfo.AsObject,
   }
 }
 

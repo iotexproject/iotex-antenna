@@ -1590,7 +1590,7 @@ export interface IGetReceiptByActionRequest {
 // Properties of an Log.
 export interface ILog {
   // Log address
-  address: string;
+  contractAddress: string;
 
   // Log topics
   topics: Array<Buffer | {}>;
@@ -1598,11 +1598,11 @@ export interface ILog {
   // Log data
   data: Buffer | {};
 
-  // Log blockNumber
-  blockNumber: number;
+  // Log blkHeight
+  blkHeight: number;
 
   // Log txnHash
-  txnHash: Buffer | {};
+  actHash: Buffer | {};
 
   // Log index
   index: number;
@@ -1615,6 +1615,9 @@ export interface IReceipt {
 
   // Receipt status
   status: number;
+
+  // blkHeight
+  blkHeight: number;
 
   // Receipt actHash
   actHash: Buffer | {};
@@ -1629,10 +1632,19 @@ export interface IReceipt {
   logs: Array<ILog>;
 }
 
+// Properties of an Receipt.
+export interface IReceiptInfo {
+  // Receipt
+  receipt: IReceipt;
+
+  // blkHash
+  blkHash: string;
+}
+
 // Properties of a GetReceiptByActionResponse.
 export interface IGetReceiptByActionResponse {
-  // GetReceiptByActionResponse receipt
-  receipt: IReceipt;
+  // GetReceiptByActionResponse receiptInfo
+  receiptInfo: IReceiptInfo;
 }
 
 export const GetReceiptByActionRequest = {
@@ -1645,43 +1657,60 @@ export const GetReceiptByActionRequest = {
   },
 
   from(pbRes: GetReceiptByActionResponse): IGetReceiptByActionResponse {
-    const receiptData = pbRes.getReceipt();
-    if (!receiptData) {
+    const receiptInfoData = pbRes.getReceiptinfo();
+    const receipt = {
+      returnValue: Buffer.from(""),
+      status: 0,
+      blkHeight: 0,
+      actHash: Buffer.from(""),
+      gasConsumed: 0,
+      contractAddress: "",
+      logs: []
+    };
+
+    if (!receiptInfoData) {
       return {
-        receipt: {
-          returnValue: Buffer.from(""),
-          // Receipt statu,
-          status: 0,
-          // Receipt actHas,
-          actHash: Buffer.from(""),
-          // Receipt gasConsume,
-          gasConsumed: 0,
-          // Receipt contractAddres,
-          contractAddress: "",
-          // Receipt log,
-          logs: []
+        receiptInfo: {
+          receipt,
+          blkHash: ""
         }
       };
     }
-    const res = {
-      receipt: {
-        returnValue: receiptData.getReturnvalue(),
-        status: receiptData.getStatus(),
-        actHash: receiptData.getActhash(),
-        gasConsumed: receiptData.getGasconsumed(),
-        contractAddress: receiptData.getContractaddress(),
-        logs: [] as Array<ILog>
-      }
-    };
+    const receiptData = receiptInfoData.getReceipt();
+    let res;
+    if (receiptData) {
+      res = {
+        receiptInfo: {
+          receipt: {
+            returnValue: receiptData.getReturnvalue(),
+            status: receiptData.getStatus(),
+            blkHeight: receiptData.getBlkheight(),
+            actHash: receiptData.getActhash(),
+            gasConsumed: receiptData.getGasconsumed(),
+            contractAddress: receiptData.getContractaddress(),
+            logs: [] as Array<ILog>
+          },
+          blkHash: receiptInfoData.getBlkhash()
+        }
+      };
+    } else {
+      return {
+        receiptInfo: {
+          receipt,
+          blkHash: receiptInfoData.getBlkhash()
+        }
+      };
+    }
+
     const logsData = receiptData.getLogsList();
     if (logsData) {
       for (const log of logsData) {
-        res.receipt.logs.push({
-          address: log.getAddress(),
+        res.receiptInfo.receipt.logs.push({
+          contractAddress: log.getContractaddress(),
           topics: log.getTopicsList(),
           data: log.getData(),
-          blockNumber: log.getBlocknumber(),
-          txnHash: log.getTxnhash(),
+          blkHeight: log.getBlkheight(),
+          actHash: log.getActhash(),
           index: log.getIndex()
         });
       }
