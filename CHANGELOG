@@ -1,3 +1,11 @@
+2019-04-08 - 0.7.1 (cdf98ae)
+cdf98ae (HEAD -> master, origin/master, origin/HEAD) Update dependency @types/node to v11.13.1 (#131)
+f3d22c7 Timeout to rpc (#130)
+6580656 Update circleci/node:10.15.3-browsers-legacy Docker digest to 38e4f46
+d8822fc Update circleci/node:10.15.3-browsers-legacy Docker digest to a0c5203
+ae873d7 (tag: v0.7.0) 0.7.0
+
+
 2019-04-06 - 0.7.0 (c535f2e)
 c535f2e (HEAD -> master) add accounts to iotx
 3bdaacb (origin/master, origin/HEAD) unskip action serialization deserialization
