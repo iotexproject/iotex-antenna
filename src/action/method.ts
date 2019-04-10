@@ -21,7 +21,6 @@ export class TransferMethod {
     });
 
     const iAction: IAction = {
-      // @ts-ignore
       core: {
         version: 1,
         // @ts-ignore
@@ -32,8 +31,31 @@ export class TransferMethod {
           amount: this.transfer.amount,
           recipient: this.transfer.recipient,
           payload: Buffer.from(this.transfer.payload)
-        }
-      }
+        },
+        vote: undefined,
+        execution: undefined,
+        startSubChain: undefined,
+        stopSubChain: undefined,
+        putBlock: undefined,
+        createDeposit: undefined,
+        settleDeposit: undefined,
+        createPlumChain: undefined,
+        terminatePlumChain: undefined,
+        plumPutBlock: undefined,
+        plumCreateDeposit: undefined,
+        plumStartExit: undefined,
+        plumChallengeExit: undefined,
+        plumResponseChallengeExit: undefined,
+        plumFinalizeExit: undefined,
+        plumSettleDeposit: undefined,
+        plumTransfer: undefined,
+        depositToRewardingFund: undefined,
+        claimFromRewardingFund: undefined,
+        grantReward: undefined,
+        putPollResult: undefined
+      },
+      senderPubKey: this.account.publicKey,
+      signature: {}
     };
 
     const action = toAction(iAction);
@@ -41,7 +63,6 @@ export class TransferMethod {
     const byte = sbytes.subarray(2, sbytes.length);
     const sign = this.account.sign(byte);
 
-    iAction.senderPubKey = this.account.publicKey;
     iAction.signature = sign;
 
     await this.client.sendAction({
