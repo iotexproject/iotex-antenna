@@ -1,14 +1,14 @@
 import { Account } from "../account/account";
-import RpcMethod from "../rpc-method";
+import { IRpcMethod } from "../rpc-method/types";
 import { toAction, toActionTransfer } from "../rpc-method/types";
 import { Transfer } from "./types";
 
 export class TransferMethod {
-  public client: RpcMethod;
+  public client: IRpcMethod;
   public account: Account;
   public transfer: Transfer;
 
-  constructor(client: RpcMethod, account: Account, transfer: Transfer) {
+  constructor(client: IRpcMethod, account: Account, transfer: Transfer) {
     this.client = client;
     this.account = account;
     this.transfer = transfer;

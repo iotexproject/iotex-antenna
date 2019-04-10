@@ -1,6 +1,6 @@
 import test from "ava";
 import { Account } from "../../account/account";
-import RpcMethod from "../../rpc-method/node-rpc-method";
+import RpcMethod from "../../rpc-method";
 import { TransferMethod } from "../method";
 
 export const TEST_ACCOUNT = {
@@ -13,8 +13,8 @@ export const TEST_ACCOUNT = {
 
 const TEST_HOSTNAME = process.env.IOTEX_CORE || "http://localhost:14014";
 
-test.skip("TransferMethod_execute", async t => {
-  const client = new RpcMethod(TEST_HOSTNAME);
+test("TransferMethod_execute", async t => {
+  const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
   const method = new TransferMethod(client, sender, {
     amount: "100",
