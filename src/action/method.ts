@@ -1,6 +1,7 @@
 import { Account } from "../account/account";
+import { hash256b } from "../crypto/hash";
 import { IRpcMethod } from "../rpc-method/types";
-import { toAction, toActionTransfer } from "../rpc-method/types";
+import { IAction, toAction } from "../rpc-method/types";
 import { Transfer } from "./types";
 
 export class TransferMethod {
@@ -15,47 +16,39 @@ export class TransferMethod {
   }
 
   public async execute(): Promise<string> {
-    const tf = toActionTransfer({
-      amount: this.transfer.amount,
-      recipient: this.transfer.recipient,
-      payload: this.transfer.payload
-    });
-
     const meta = await this.client.getAccount({
       address: this.account.address
     });
 
-    const action = toAction({
+    const iAction: IAction = {
       // @ts-ignore
       core: {
         version: 1,
         // @ts-ignore
-        nonce: meta.accountMeta.pendingNonce,
+        nonce: meta.accountMeta.pendingNonce.toString(),
         gasLimit: this.transfer.gasLimit,
         gasPrice: this.transfer.gasPrice,
-        transfer: tf
+        transfer: {
+          amount: this.transfer.amount,
+          recipient: this.transfer.recipient,
+          payload: Buffer.from(this.transfer.payload)
+        }
       }
-    });
-    const bytes = action.serializeBinary();
-    const sign = this.account.sign(bytes);
+    };
+
+    const action = toAction(iAction);
+    const sbytes = action.serializeBinary();
+    const byte = sbytes.subarray(2, sbytes.length);
+    const sign = this.account.sign(byte);
+
+    iAction.senderPubKey = this.account.publicKey;
+    iAction.signature = sign;
 
     await this.client.sendAction({
-      action: {
-        // @ts-ignore
-        core: {
-          version: 1,
-          // @ts-ignore
-          nonce: meta.accountMeta.pendingNonce,
-          gasLimit: this.transfer.gasLimit,
-          gasPrice: this.transfer.gasPrice,
-          transfer: tf
-        },
-        senderPubKey: this.account.publicKey,
-        signature: sign
-      }
+      action: iAction
     });
 
-    // TODO to set hash
-    return "hash";
+    // TODO mabey
+    return Buffer.from(hash256b(byte)).toString("hex");
   }
 }
