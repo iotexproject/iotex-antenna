@@ -1,7 +1,10 @@
 import test from "ava";
+import dotenv from "dotenv";
 import { Account } from "../../account/account";
 import RpcMethod from "../../rpc-method";
 import { TransferMethod } from "../method";
+
+dotenv.config();
 
 export const TEST_ACCOUNT = {
   address: "io187wzp08vnhjjpkydnr97qlh8kh0dpkkytfam8j",
