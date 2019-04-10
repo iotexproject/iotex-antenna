@@ -13,7 +13,7 @@ export const TEST_ACCOUNT = {
 
 const TEST_HOSTNAME = process.env.IOTEX_CORE || "http://localhost:14014";
 
-test("TransferMethod_execute", async t => {
+test.skip("TransferMethod_execute", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
   const method = new TransferMethod(client, sender, {
