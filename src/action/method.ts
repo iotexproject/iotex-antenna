@@ -39,9 +39,9 @@ export class TransferMethod extends AbstractMethod {
       address: this.account.address
     });
 
-    // @ts-ignore
     const envelop = new Envelop(
       1,
+      // @ts-ignore
       String(meta.accountMeta.pendingNonce),
       this.transfer.gasLimit,
       this.transfer.gasPrice
