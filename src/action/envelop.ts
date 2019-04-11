@@ -1,4 +1,5 @@
 import actionPb from "../../protogen/proto/types/action_pb";
+import { hash256b } from "../crypto/hash";
 import {
   ITransfer,
   IVote,
@@ -136,7 +137,32 @@ export class Envelop {
     return pbActionCore;
   }
 
-  public hash(): Uint8Array {
+  public bytestream(): Uint8Array {
     return this.core().serializeBinary();
+  }
+}
+
+export class SealedEnvelop {
+  public act: Envelop;
+  public senderPubKey: Buffer;
+  public signature: Buffer;
+
+  constructor(act: Envelop, senderPubKey: Buffer, signature: Buffer) {
+    this.act = act;
+    this.senderPubKey = senderPubKey;
+    this.signature = signature;
+  }
+
+  public bytestream(): Uint8Array {
+    const pbActionCore = this.act.core();
+    const pbAction = new actionPb.Action();
+    pbAction.setCore(pbActionCore);
+    pbAction.setSenderpubkey(this.senderPubKey);
+    pbAction.setSignature(this.signature);
+    return pbAction.serializeBinary();
+  }
+
+  public hash(): string {
+    return Buffer.from(hash256b(this.bytestream())).toString("hex");
   }
 }
