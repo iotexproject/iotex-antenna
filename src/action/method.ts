@@ -24,7 +24,7 @@ export class TransferMethod {
       core: {
         version: 1,
         // @ts-ignore
-        nonce: meta.accountMeta.pendingNonce.toString(),
+        nonce: String(meta.accountMeta.pendingNonce),
         gasLimit: this.transfer.gasLimit,
         gasPrice: this.transfer.gasPrice,
         transfer: {
@@ -32,9 +32,7 @@ export class TransferMethod {
           recipient: this.transfer.recipient,
           payload: Buffer.from(this.transfer.payload)
         }
-      },
-      senderPubKey: this.account.publicKey,
-      signature: {}
+      }
     };
 
     const action = toAction(iAction);
@@ -42,13 +40,15 @@ export class TransferMethod {
     const byte = sbytes.subarray(2, sbytes.length);
     const sign = this.account.sign(byte);
 
+    iAction.senderPubKey = Buffer.from(this.account.publicKey, "hex");
     iAction.signature = sign;
 
     await this.client.sendAction({
       action: iAction
     });
 
-    // TODO mabey
-    return Buffer.from(hash256b(byte)).toString("hex");
+    const actionSelp = toAction(iAction);
+    const byteSelp = actionSelp.serializeBinary();
+    return Buffer.from(hash256b(byteSelp)).toString("hex");
   }
 }
