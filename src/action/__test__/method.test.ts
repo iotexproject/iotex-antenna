@@ -20,11 +20,11 @@ test.skip("TransferMethod_execute", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
   const method = new TransferMethod(client, sender, {
-    amount: "100",
+    amount: "100000000000000",
     recipient: "io13zt8sznez2pf0q0hqdz2hyl938wak2fsjgdeml",
     payload: "hello transfer",
-    gasLimit: "10000",
-    gasPrice: "1"
+    gasLimit: "100000",
+    gasPrice: "10000000000000"
   });
   const reps = await method.execute();
   t.truthy(reps);

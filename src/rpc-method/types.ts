@@ -710,10 +710,10 @@ export interface IAction {
   core: IActionCore | undefined;
 
   // Action senderPubkey
-  senderPubKey: Buffer | {};
+  senderPubKey?: Buffer | {};
 
   // Action signature
-  signature: Buffer | {};
+  signature?: Buffer | {};
 }
 
 export function toActionTransfer(req: ITransfer | undefined): any {
@@ -1059,9 +1059,13 @@ export function toAction(req: IAction): any {
   const pbAction = new actionPb.Action();
   pbAction.setCore(pbActionCore);
 
-  pbAction.setSenderpubkey(req.senderPubKey);
+  if (req.senderPubKey) {
+    pbAction.setSenderpubkey(req.senderPubKey);
+  }
 
-  pbAction.setSignature(req.signature);
+  if (req.signature) {
+    pbAction.setSignature(req.signature);
+  }
 
   return pbAction;
 }
