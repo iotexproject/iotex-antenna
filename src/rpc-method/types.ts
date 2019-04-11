@@ -653,55 +653,55 @@ export interface IActionCore {
 
   // Action detail fields
   // ActionCore transfer
-  transfer: ITransfer;
+  transfer?: ITransfer | undefined;
   // ActionCore vote
-  vote: IVote;
+  vote?: IVote | undefined;
   // ActionCore execution
-  execution: IExecution | undefined;
+  execution?: IExecution | undefined;
 
   // FedChain
   // ActionCore startSubChain
-  startSubChain: IStartSubChain;
+  startSubChain?: IStartSubChain | undefined;
   // ActionCore stopSubChain
-  stopSubChain: IStopSubChain;
+  stopSubChain?: IStopSubChain | undefined;
   // ActionCore putBlock
-  putBlock: IPutBlock;
+  putBlock?: IPutBlock | undefined;
   // ActionCore createDeposit
-  createDeposit: ICreateDeposit;
+  createDeposit?: ICreateDeposit | undefined;
   // ActionCore settleDeposit
-  settleDeposit: ISettleDeposit;
+  settleDeposit?: ISettleDeposit | undefined;
 
   // PlumChain
   // ActionCore createPlumChain
-  createPlumChain: ICreatePlumChain;
+  createPlumChain?: ICreatePlumChain | undefined;
   // ActionCore terminatePlumChain
-  terminatePlumChain: ITerminatePlumChain;
+  terminatePlumChain?: ITerminatePlumChain | undefined;
   // ActionCore plumPutBlock
-  plumPutBlock: IPlumPutBlock;
+  plumPutBlock?: IPlumPutBlock | undefined;
   // ActionCore plumCreateDeposit
-  plumCreateDeposit: IPlumCreateDeposit;
+  plumCreateDeposit?: IPlumCreateDeposit | undefined;
   // ActionCore plumStartExit
-  plumStartExit: IPlumStartExit;
+  plumStartExit?: IPlumStartExit | undefined;
   // ActionCore plumChallengeExit
-  plumChallengeExit: IPlumChallengeExit;
+  plumChallengeExit?: IPlumChallengeExit | undefined;
   // ActionCore plumResponseChallengeExit
-  plumResponseChallengeExit: IPlumResponseChallengeExit;
+  plumResponseChallengeExit?: IPlumResponseChallengeExit | undefined;
   // ActionCore plumFinalizeExit
-  plumFinalizeExit: IPlumFinalizeExit;
+  plumFinalizeExit?: IPlumFinalizeExit | undefined;
   // ActionCore plumSettleDeposit
-  plumSettleDeposit: IPlumSettleDeposit;
+  plumSettleDeposit?: IPlumSettleDeposit | undefined;
   // ActionCore plumTransfer
-  plumTransfer: IPlumTransfer;
+  plumTransfer?: IPlumTransfer | undefined;
 
   // Rewarding protocol actions
   // ActionCore depositToRewardingFund
-  depositToRewardingFund: IDepositToRewardingFund;
+  depositToRewardingFund?: IDepositToRewardingFund | undefined;
   // ActionCore claimFromRewardingFund
-  claimFromRewardingFund: IClaimFromRewardingFund;
+  claimFromRewardingFund?: IClaimFromRewardingFund | undefined;
   // ActionCore grantReward
-  grantReward: IGrantReward;
+  grantReward?: IGrantReward | undefined;
 
-  putPollResult: IPutPollResult | undefined;
+  putPollResult?: IPutPollResult | undefined;
 }
 
 // Properties of an Action.
@@ -716,7 +716,7 @@ export interface IAction {
   signature: Buffer | {};
 }
 
-export function toActionTransfer(req: ITransfer): any {
+export function toActionTransfer(req: ITransfer | undefined): any {
   if (!req) {
     return undefined;
   }
@@ -736,7 +736,7 @@ function toTimestamp(timestamp: ITimestamp): Timestamp {
   return ts;
 }
 
-export function toActionVote(req: IVote): any {
+export function toActionVote(req: IVote | undefined): any {
   if (!req) {
     return undefined;
   }
@@ -761,7 +761,7 @@ export function toActionExecution(
   return pbExecution;
 }
 
-export function toActionStartSubChain(req: IStartSubChain): any {
+export function toActionStartSubChain(req: IStartSubChain | undefined): any {
   if (!req) {
     return undefined;
   }
@@ -775,7 +775,7 @@ export function toActionStartSubChain(req: IStartSubChain): any {
   return pbStartSubChain;
 }
 
-export function toActionStopSubChain(req: IStopSubChain): any {
+export function toActionStopSubChain(req: IStopSubChain | undefined): any {
   if (!req) {
     return undefined;
   }
@@ -789,7 +789,7 @@ export function toActionStopSubChain(req: IStopSubChain): any {
   return pbStopSubChain;
 }
 
-export function toActionPutBlock(req: IPutBlock): any {
+export function toActionPutBlock(req: IPutBlock | undefined): any {
   if (!req) {
     return undefined;
   }
@@ -811,7 +811,7 @@ export function toActionPutBlock(req: IPutBlock): any {
   return pbPutBlock;
 }
 
-export function toActionCreateDeposit(req: ICreateDeposit): any {
+export function toActionCreateDeposit(req: ICreateDeposit | undefined): any {
   if (!req) {
     return undefined;
   }
@@ -822,7 +822,7 @@ export function toActionCreateDeposit(req: ICreateDeposit): any {
   return pbCreateDeposit;
 }
 
-export function toActionSettleDeposit(req: ISettleDeposit): any {
+export function toActionSettleDeposit(req: ISettleDeposit | undefined): any {
   if (!req) {
     return undefined;
   }
@@ -833,14 +833,18 @@ export function toActionSettleDeposit(req: ISettleDeposit): any {
   return pbSettleDeposit;
 }
 
-export function toActionCreatePlumChain(req: ICreatePlumChain): any {
+export function toActionCreatePlumChain(
+  req: ICreatePlumChain | undefined
+): any {
   if (!req) {
     return undefined;
   }
   return new actionPb.CreatePlumChain();
 }
 
-export function toActionTerminatePlumChain(req: ITerminatePlumChain): any {
+export function toActionTerminatePlumChain(
+  req: ITerminatePlumChain | undefined
+): any {
   if (!req) {
     return undefined;
   }
@@ -849,7 +853,7 @@ export function toActionTerminatePlumChain(req: ITerminatePlumChain): any {
   return pbTerminatePlumChain;
 }
 
-export function toActionPlumPutBlock(req: IPlumPutBlock): any {
+export function toActionPlumPutBlock(req: IPlumPutBlock | undefined): any {
   if (!req) {
     return undefined;
   }
@@ -859,7 +863,9 @@ export function toActionPlumPutBlock(req: IPlumPutBlock): any {
   return pbPlumPutBlock;
 }
 
-export function toActionPlumCreateDeposit(req: IPlumCreateDeposit): any {
+export function toActionPlumCreateDeposit(
+  req: IPlumCreateDeposit | undefined
+): any {
   if (!req) {
     return undefined;
   }
@@ -874,7 +880,7 @@ export function toActionPlumCreateDeposit(req: IPlumCreateDeposit): any {
   return pbPlumCreateDeposit;
 }
 
-export function toActionPlumStartExit(req: IPlumStartExit): any {
+export function toActionPlumStartExit(req: IPlumStartExit | undefined): any {
   if (!req) {
     return undefined;
   }
@@ -892,7 +898,9 @@ export function toActionPlumStartExit(req: IPlumStartExit): any {
   return pbPlumStartExit;
 }
 
-export function toActionPlumChallengeExit(req: IPlumChallengeExit): any {
+export function toActionPlumChallengeExit(
+  req: IPlumChallengeExit | undefined
+): any {
   if (!req) {
     return undefined;
   }
@@ -911,7 +919,7 @@ export function toActionPlumChallengeExit(req: IPlumChallengeExit): any {
 }
 
 export function toActionPlumResponseChallengeExit(
-  req: IPlumResponseChallengeExit
+  req: IPlumResponseChallengeExit | undefined
 ): any {
   if (!req) {
     return undefined;
@@ -928,7 +936,9 @@ export function toActionPlumResponseChallengeExit(
   return pbPlumResponseChallengeExit;
 }
 
-export function toActionPlumFinalizeExit(req: IPlumFinalizeExit): any {
+export function toActionPlumFinalizeExit(
+  req: IPlumFinalizeExit | undefined
+): any {
   if (!req) {
     return undefined;
   }
@@ -938,7 +948,9 @@ export function toActionPlumFinalizeExit(req: IPlumFinalizeExit): any {
   return pbPlumFinalizeExit;
 }
 
-export function toActionPlumSettleDeposit(req: IPlumSettleDeposit): any {
+export function toActionPlumSettleDeposit(
+  req: IPlumSettleDeposit | undefined
+): any {
   if (!req) {
     return undefined;
   }
@@ -947,7 +959,7 @@ export function toActionPlumSettleDeposit(req: IPlumSettleDeposit): any {
   return pbPlumSettleDeposit;
 }
 
-export function toActionPlumTransfer(req: IPlumTransfer): any {
+export function toActionPlumTransfer(req: IPlumTransfer | undefined): any {
   if (!req) {
     return undefined;
   }
@@ -960,7 +972,7 @@ export function toActionPlumTransfer(req: IPlumTransfer): any {
 }
 
 export function toActionDepositToRewardingFund(
-  req: IDepositToRewardingFund
+  req: IDepositToRewardingFund | undefined
 ): any {
   if (!req) {
     return undefined;
@@ -972,7 +984,7 @@ export function toActionDepositToRewardingFund(
 }
 
 export function toActionClaimFromRewardingFund(
-  req: IClaimFromRewardingFund
+  req: IClaimFromRewardingFund | undefined
 ): any {
   if (!req) {
     return undefined;
@@ -985,7 +997,7 @@ export function toActionClaimFromRewardingFund(
   return pbClaimFromRewardingFund;
 }
 
-export function toActionGrantReward(req: IGrantReward): any {
+export function toActionGrantReward(req: IGrantReward | undefined): any {
   if (!req) {
     return undefined;
   }
