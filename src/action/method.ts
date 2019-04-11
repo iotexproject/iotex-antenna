@@ -1,17 +1,36 @@
 import { Account } from "../account/account";
-import { hash256b } from "../crypto/hash";
 import { IRpcMethod } from "../rpc-method/types";
-import { IAction, toAction } from "../rpc-method/types";
+import { Envelop, SealedEnvelop } from "./envelop";
 import { Transfer } from "./types";
 
-export class TransferMethod {
+export class AbstractMethod {
   public client: IRpcMethod;
   public account: Account;
+  constructor(client: IRpcMethod, account: Account) {
+    this.client = client;
+    this.account = account;
+  }
+
+  public async sendAction(envelop: Envelop): Promise<string> {
+    const selp = SealedEnvelop.sign(
+      this.account.privateKey,
+      this.account.publicKey,
+      envelop
+    );
+
+    await this.client.sendAction({
+      action: selp.action()
+    });
+
+    return selp.hash();
+  }
+}
+
+export class TransferMethod extends AbstractMethod {
   public transfer: Transfer;
 
   constructor(client: IRpcMethod, account: Account, transfer: Transfer) {
-    this.client = client;
-    this.account = account;
+    super(client, account);
     this.transfer = transfer;
   }
 
@@ -20,35 +39,19 @@ export class TransferMethod {
       address: this.account.address
     });
 
-    const iAction: IAction = {
-      core: {
-        version: 1,
-        // @ts-ignore
-        nonce: String(meta.accountMeta.pendingNonce),
-        gasLimit: this.transfer.gasLimit,
-        gasPrice: this.transfer.gasPrice,
-        transfer: {
-          amount: this.transfer.amount,
-          recipient: this.transfer.recipient,
-          payload: Buffer.from(this.transfer.payload)
-        }
-      }
+    // @ts-ignore
+    const envelop = new Envelop(
+      1,
+      String(meta.accountMeta.pendingNonce),
+      this.transfer.gasLimit,
+      this.transfer.gasPrice
+    );
+    envelop.transfer = {
+      amount: this.transfer.amount,
+      recipient: this.transfer.recipient,
+      payload: Buffer.from(this.transfer.payload)
     };
 
-    const action = toAction(iAction);
-    const sbytes = action.serializeBinary();
-    const byte = sbytes.subarray(2, sbytes.length);
-    const sign = this.account.sign(byte);
-
-    iAction.senderPubKey = Buffer.from(this.account.publicKey, "hex");
-    iAction.signature = sign;
-
-    await this.client.sendAction({
-      action: iAction
-    });
-
-    const actionSelp = toAction(iAction);
-    const byteSelp = actionSelp.serializeBinary();
-    return Buffer.from(hash256b(byteSelp)).toString("hex");
+    return this.sendAction(envelop);
   }
 }

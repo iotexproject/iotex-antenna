@@ -1,6 +1,8 @@
 import actionPb from "../../protogen/proto/types/action_pb";
+import { makeSigner } from "../crypto/crypto";
 import { hash256b } from "../crypto/hash";
 import {
+  IAction,
   ITransfer,
   IVote,
   IExecution,
@@ -164,5 +166,53 @@ export class SealedEnvelop {
 
   public hash(): string {
     return Buffer.from(hash256b(this.bytestream())).toString("hex");
+  }
+
+  public action(): IAction {
+    return {
+      core: {
+        version: this.act.version,
+        nonce: this.act.nonce,
+        gasLimit: this.act.gasLimit,
+        gasPrice: this.act.gasPrice,
+        transfer: this.act.transfer,
+        vote: this.act.vote,
+        execution: this.act.execution,
+        startSubChain: this.act.startSubChain,
+        stopSubChain: this.act.stopSubChain,
+        putBlock: this.act.putBlock,
+        createDeposit: this.act.createDeposit,
+        settleDeposit: this.act.settleDeposit,
+        createPlumChain: this.act.createPlumChain,
+        terminatePlumChain: this.act.terminatePlumChain,
+        plumPutBlock: this.act.plumPutBlock,
+        plumCreateDeposit: this.act.plumCreateDeposit,
+        plumStartExit: this.act.plumStartExit,
+        plumChallengeExit: this.act.plumChallengeExit,
+        plumResponseChallengeExit: this.act.plumResponseChallengeExit,
+        plumFinalizeExit: this.act.plumFinalizeExit,
+        plumSettleDeposit: this.act.plumSettleDeposit,
+        plumTransfer: this.act.plumTransfer,
+        depositToRewardingFund: this.act.depositToRewardingFund,
+        claimFromRewardingFund: this.act.claimFromRewardingFund,
+        grantReward: this.act.grantReward,
+        putPollResult: this.act.putPollResult
+      },
+      senderPubKey: this.senderPubKey,
+      signature: this.signature
+    };
+  }
+
+  public static sign(
+    privateKey: string,
+    publicKey: string,
+    act: Envelop
+  ): SealedEnvelop {
+    const h = hash256b(act.bytestream());
+    const sign = Buffer.from(
+      makeSigner(0)(h.toString("hex"), privateKey),
+      "hex"
+    );
+    return new SealedEnvelop(act, Buffer.from(publicKey, "hex"), sign);
   }
 }
