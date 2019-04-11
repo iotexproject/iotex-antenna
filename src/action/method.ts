@@ -47,7 +47,8 @@ export class TransferMethod {
       action: iAction
     });
 
-    // TODO verify
-    return Buffer.from(hash256b(sbytes)).toString("hex");
+    const actionSelp = toAction(iAction);
+    const byteSelp = actionSelp.serializeBinary();
+    return Buffer.from(hash256b(byteSelp)).toString("hex");
   }
 }
