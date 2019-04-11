@@ -653,55 +653,55 @@ export interface IActionCore {
 
   // Action detail fields
   // ActionCore transfer
-  transfer: ITransfer | undefined;
+  transfer?: ITransfer | undefined;
   // ActionCore vote
-  vote: IVote | undefined;
+  vote?: IVote | undefined;
   // ActionCore execution
-  execution: IExecution | undefined;
+  execution?: IExecution | undefined;
 
   // FedChain
   // ActionCore startSubChain
-  startSubChain: IStartSubChain | undefined;
+  startSubChain?: IStartSubChain | undefined;
   // ActionCore stopSubChain
-  stopSubChain: IStopSubChain | undefined;
+  stopSubChain?: IStopSubChain | undefined;
   // ActionCore putBlock
-  putBlock: IPutBlock | undefined;
+  putBlock?: IPutBlock | undefined;
   // ActionCore createDeposit
-  createDeposit: ICreateDeposit | undefined;
+  createDeposit?: ICreateDeposit | undefined;
   // ActionCore settleDeposit
-  settleDeposit: ISettleDeposit | undefined;
+  settleDeposit?: ISettleDeposit | undefined;
 
   // PlumChain
   // ActionCore createPlumChain
-  createPlumChain: ICreatePlumChain | undefined;
+  createPlumChain?: ICreatePlumChain | undefined;
   // ActionCore terminatePlumChain
-  terminatePlumChain: ITerminatePlumChain | undefined;
+  terminatePlumChain?: ITerminatePlumChain | undefined;
   // ActionCore plumPutBlock
-  plumPutBlock: IPlumPutBlock | undefined;
+  plumPutBlock?: IPlumPutBlock | undefined;
   // ActionCore plumCreateDeposit
-  plumCreateDeposit: IPlumCreateDeposit | undefined;
+  plumCreateDeposit?: IPlumCreateDeposit | undefined;
   // ActionCore plumStartExit
-  plumStartExit: IPlumStartExit | undefined;
+  plumStartExit?: IPlumStartExit | undefined;
   // ActionCore plumChallengeExit
-  plumChallengeExit: IPlumChallengeExit | undefined;
+  plumChallengeExit?: IPlumChallengeExit | undefined;
   // ActionCore plumResponseChallengeExit
-  plumResponseChallengeExit: IPlumResponseChallengeExit | undefined;
+  plumResponseChallengeExit?: IPlumResponseChallengeExit | undefined;
   // ActionCore plumFinalizeExit
-  plumFinalizeExit: IPlumFinalizeExit | undefined;
+  plumFinalizeExit?: IPlumFinalizeExit | undefined;
   // ActionCore plumSettleDeposit
-  plumSettleDeposit: IPlumSettleDeposit | undefined;
+  plumSettleDeposit?: IPlumSettleDeposit | undefined;
   // ActionCore plumTransfer
-  plumTransfer: IPlumTransfer | undefined;
+  plumTransfer?: IPlumTransfer | undefined;
 
   // Rewarding protocol actions
   // ActionCore depositToRewardingFund
-  depositToRewardingFund: IDepositToRewardingFund | undefined;
+  depositToRewardingFund?: IDepositToRewardingFund | undefined;
   // ActionCore claimFromRewardingFund
-  claimFromRewardingFund: IClaimFromRewardingFund | undefined;
+  claimFromRewardingFund?: IClaimFromRewardingFund | undefined;
   // ActionCore grantReward
-  grantReward: IGrantReward | undefined;
+  grantReward?: IGrantReward | undefined;
 
-  putPollResult: IPutPollResult | undefined;
+  putPollResult?: IPutPollResult | undefined;
 }
 
 // Properties of an Action.
