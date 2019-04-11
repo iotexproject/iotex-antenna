@@ -1,6 +1,6 @@
 import test from "ava";
-import actionPb from "../../protogen/proto/types/action_pb";
-import { TEST_ACCOUNT } from "../account/__test__/account.test";
+import actionPb from "../../../protogen/proto/types/action_pb";
+import { TEST_ACCOUNT } from "../../account/__test__/account.test";
 
 test("TestAction_SerializationDeserialization", async t => {
   const tf = new actionPb.Transfer();
