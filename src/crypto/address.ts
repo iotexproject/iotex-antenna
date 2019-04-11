@@ -2,6 +2,9 @@ import bech32 from "bech32";
 
 export interface IAddress {
   string(): string;
+
+  stringEth(): string;
+
   bytes(): Uint8Array;
 }
 
@@ -21,6 +24,10 @@ class AddressV1 implements IAddress {
     // @ts-ignore
     const grouped = bech32.toWords(this.payload);
     return bech32.encode(AddressV1.prefix(), grouped);
+  }
+
+  public stringEth(): string {
+    return `0x${Buffer.from(this.payload).toString("hex")}`;
   }
 
   public bytes(): Uint8Array {
