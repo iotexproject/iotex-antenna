@@ -11,6 +11,23 @@ export class AbstractMethod {
     this.account = account;
   }
 
+  public async baseEnvelop(
+    gasLimit: string,
+    gasPrice: string
+  ): Promise<Envelop> {
+    const meta = await this.client.getAccount({
+      address: this.account.address
+    });
+
+    return new Envelop(
+      1,
+      // @ts-ignore
+      String(meta.accountMeta.pendingNonce),
+      gasLimit,
+      gasPrice
+    );
+  }
+
   public async sendAction(envelop: Envelop): Promise<string> {
     const selp = SealedEnvelop.sign(
       this.account.privateKey,
@@ -35,14 +52,7 @@ export class TransferMethod extends AbstractMethod {
   }
 
   public async execute(): Promise<string> {
-    const meta = await this.client.getAccount({
-      address: this.account.address
-    });
-
-    const envelop = new Envelop(
-      1,
-      // @ts-ignore
-      String(meta.accountMeta.pendingNonce),
+    const envelop = await this.baseEnvelop(
       this.transfer.gasLimit,
       this.transfer.gasPrice
     );
