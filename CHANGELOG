@@ -1,3 +1,25 @@
+2019-04-12 - 0.9.0 (f8e5eef)
+f8e5eef (HEAD -> master, origin/master, origin/HEAD) Transfer api (#153)
+03d51b7 Update circleci/node:10.15.3-browsers-legacy Docker digest to 36b4b1f (#152)
+1e3179d Action envelop (#151)
+4f5ade7 Pin dependencies (#149)
+74d731e add account integration tests
+7ca031f Account transfer fix public key bug (#147)
+ef82b0d Pin dependency solc to 0.4.25 (#146)
+d6fbc41 add abi-to-byte
+0cd6881 Update circleci/node:10.15.3-browsers-legacy Docker digest to 169f652 (#145)
+9a5980c Account transfer (#140)
+5abab44 Update dependency @grpc/proto-loader to v0.5.0
+9763d54 Update dependency @types/node to v11.13.4
+d151584 Update circleci/node:10.15.3-browsers-legacy Docker digest to 0fdf141
+eb545d3 Update circleci/node:10.15.3-browsers-legacy Docker digest to f38ae25
+4dfcb87 Update circleci/node:10.15.3-browsers-legacy Docker digest to ed5ffb9 (#138)
+daab379 Update dependency typescript to v3.4.3 (#137)
+8f0e2a8 Update circleci/node:10.15.3-browsers-legacy Docker digest to d4066b4
+d06c302 Update circleci/node:10.15.3-browsers-legacy Docker digest to e963a38
+fca958d (tag: v0.8.0) 0.8.0
+
+
 2019-04-08 - 0.8.0 (bdb1bf7)
 bdb1bf7 (HEAD -> master, origin/master, origin/HEAD) Update receipt (#134)
 40a9421 Update circleci/node:10.15.3-browsers-legacy Docker digest to 0196a72
