@@ -8,3 +8,14 @@ export interface Transfer extends BaseActionRequest {
   recipient: string;
   payload: string;
 }
+
+export interface Execution extends BaseActionRequest {
+  // Execution contract
+  contract: string;
+
+  // Execution amount
+  amount: string;
+
+  // Execution data
+  data: Buffer;
+}

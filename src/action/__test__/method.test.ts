@@ -2,7 +2,7 @@ import test from "ava";
 import dotenv from "dotenv";
 import { Account } from "../../account/account";
 import RpcMethod from "../../rpc-method";
-import { TransferMethod } from "../method";
+import { ExecutionMethod, TransferMethod } from "../method";
 
 dotenv.config();
 
@@ -34,9 +34,22 @@ test.skip("TransferMethod_execute_nogas", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
   const method = new TransferMethod(client, sender, {
-    amount: "8000000000000000",
+    amount: "1000000000000000000",
     recipient: "io13zt8sznez2pf0q0hqdz2hyl938wak2fsjgdeml",
-    payload: "hello transfer"
+    payload: "transfer"
+  });
+  const reps = await method.execute();
+  t.truthy(reps);
+});
+
+test.skip("Execution_execute", async t => {
+  const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
+  const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
+  const method = new ExecutionMethod(client, sender, {
+    gasPrice: "1000000000000",
+    amount: "5",
+    contract: "io1pmjhyksxmz2xpxn2qmz4gx9qq2kn2gdr8un4xq",
+    data: Buffer.from("2885ad2c", "hex")
   });
   const reps = await method.execute();
   t.truthy(reps);
