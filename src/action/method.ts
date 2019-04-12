@@ -12,8 +12,8 @@ export class AbstractMethod {
   }
 
   public async baseEnvelop(
-    gasLimit: string,
-    gasPrice: string
+    gasLimit?: string,
+    gasPrice?: string
   ): Promise<Envelop> {
     const meta = await this.client.getAccount({
       address: this.account.address
@@ -29,6 +29,23 @@ export class AbstractMethod {
   }
 
   public async sendAction(envelop: Envelop): Promise<string> {
+    if (!envelop.gasPrice) {
+      const price = await this.client.suggestGasPrice({});
+      envelop.gasPrice = String(price.gasPrice);
+    }
+
+    if (!envelop.gasLimit) {
+      const selp = SealedEnvelop.sign(
+        this.account.privateKey,
+        this.account.publicKey,
+        envelop
+      );
+      const limit = await this.client.estimateGasForAction({
+        action: selp.action()
+      });
+      envelop.gasLimit = limit.gas;
+    }
+
     const selp = SealedEnvelop.sign(
       this.account.privateKey,
       this.account.publicKey,
