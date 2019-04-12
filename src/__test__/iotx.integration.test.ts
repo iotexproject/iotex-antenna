@@ -24,12 +24,16 @@ test("unlock account", async t => {
   t.deepEqual(acct, another);
 });
 
-test.skip("transfer throws if no account", async t => {
+test("transfer throws if no account", async t => {
   const antenna = new Antenna(IOTEX_CORE);
   await t.throwsAsync(
     async () => {
       // @ts-ignore
-      antenna.iotx.sendTransfer();
+      antenna.iotx.sendTransfer({
+        from: "empty from",
+        to: "empty to",
+        value: "1"
+      });
     },
     { instanceOf: Error },
     "cannot send without an wallet"
@@ -61,7 +65,7 @@ test.skip("transfer", async t => {
   });
   t.truthy(hash);
 
-  await sleepPromise(3000);
+  await sleepPromise(30000);
 
   const balAfter = await antenna.iotx.getAccount({
     address: acctHavingIotx.address
