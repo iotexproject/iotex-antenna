@@ -1,6 +1,6 @@
 export interface BaseActionRequest {
-  gasLimit?: string | "100000";
-  gasPrice?: string;
+  gasLimit?: string | undefined;
+  gasPrice?: string | undefined;
 }
 
 export interface Transfer extends BaseActionRequest {
