@@ -91,8 +91,8 @@ export class Envelop {
   }
 
   public core(): actionPb.ActionCore {
-    const gasLimit = this.gasLimit || "1";
-    const gasPrice = this.gasPrice || "1";
+    const gasLimit = this.gasLimit || "0";
+    const gasPrice = this.gasPrice || "0";
 
     const pbActionCore = new actionPb.ActionCore();
     pbActionCore.setVersion(this.version);
