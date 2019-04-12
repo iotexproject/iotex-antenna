@@ -51,8 +51,8 @@ import {
 export class Envelop {
   public version: number;
   public nonce: string;
-  public gasLimit: string;
-  public gasPrice: string;
+  public gasLimit?: string | undefined;
+  public gasPrice?: string | undefined;
 
   // optional fields
   public transfer?: ITransfer | undefined;
@@ -81,8 +81,8 @@ export class Envelop {
   constructor(
     version: number,
     nonce: string,
-    gasLimit: string,
-    gasPrice: string
+    gasLimit?: string,
+    gasPrice?: string
   ) {
     this.version = version;
     this.nonce = nonce;
@@ -91,11 +91,14 @@ export class Envelop {
   }
 
   public core(): actionPb.ActionCore {
+    const gasLimit = this.gasLimit || "0";
+    const gasPrice = this.gasPrice || "0";
+
     const pbActionCore = new actionPb.ActionCore();
     pbActionCore.setVersion(this.version);
     pbActionCore.setNonce(Number(this.nonce));
-    pbActionCore.setGaslimit(Number(this.gasLimit));
-    pbActionCore.setGasprice(this.gasPrice);
+    pbActionCore.setGaslimit(Number(gasLimit));
+    pbActionCore.setGasprice(gasPrice);
     pbActionCore.setTransfer(toActionTransfer(this.transfer));
     pbActionCore.setVote(toActionVote(this.vote));
     pbActionCore.setExecution(toActionExecution(this.execution));
@@ -169,12 +172,15 @@ export class SealedEnvelop {
   }
 
   public action(): IAction {
+    const gasLimit = this.act.gasLimit || "0";
+    const gasPrice = this.act.gasPrice || "0";
+
     return {
       core: {
         version: this.act.version,
         nonce: this.act.nonce,
-        gasLimit: this.act.gasLimit,
-        gasPrice: this.act.gasPrice,
+        gasLimit: gasLimit,
+        gasPrice: gasPrice,
         transfer: this.act.transfer,
         vote: this.act.vote,
         execution: this.act.execution,

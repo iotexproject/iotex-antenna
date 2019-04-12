@@ -38,3 +38,12 @@ export interface TransactionReceipt {
   };
   status: boolean;
 }
+
+export interface TransferRequest {
+  from: string;
+  to: string;
+  value: string;
+  payload?: string;
+  gasLimit?: string;
+  gasPrice?: string;
+}
