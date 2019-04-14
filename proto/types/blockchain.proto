@@ -37,11 +37,16 @@ message BlockFooter {
   google.protobuf.Timestamp timestamp = 2;
 }
 
+// body of a block
+message BlockBody {
+  repeated Action actions = 1;
+}
+
 // block consists of header followed by transactions
 // hash of current block can be computed from header hence not stored
 message Block {
   BlockHeader header = 1;
-  repeated Action actions = 2;
+  BlockBody body = 2;
   BlockFooter footer = 3;
 }
 
@@ -68,7 +73,7 @@ message ChainMeta {
 message BlockMeta {
   string hash = 1;
   uint64 height = 2;
-  int64 timestamp = 3;
+  google.protobuf.Timestamp timestamp = 3;
   int64 numActions = 4;
   string producerAddress = 5;
   string transferAmount = 6;

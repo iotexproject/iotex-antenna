@@ -3,12 +3,18 @@ import { get } from "dottie";
 import dotenv from "dotenv";
 import RpcMethod from "../node-rpc-method";
 import { ITransfer } from "../types";
+import sleep from "sleep-promise";
 
 dotenv.config();
 
 const TEST_HOSTNAME = process.env.IOTEX_CORE || "http://localhost:14014";
 
-test("RpcMethod.getAccount", async t => {
+// throttle requests for the ratelimit
+test.beforeEach(async _ => {
+  await sleep(500);
+});
+
+test.serial("RpcMethod.getAccount", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   const resp = await client.getAccount({
     address: "io126xcrjhtp27end76ac9nmx6px2072c3vgz6suw"
@@ -24,19 +30,19 @@ test("RpcMethod.getAccount", async t => {
   });
 });
 
-test("RpcMethod.getChainMeta", async t => {
+test.serial("RpcMethod.getChainMeta", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   const resp = await client.getChainMeta({});
   t.truthy(resp);
 });
 
-test("RpcMethod.getServerMeta", async t => {
+test.serial("RpcMethod.getServerMeta", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   const resp = await client.getServerMeta({});
   t.truthy(resp);
 });
 
-test("RpcMethod.getBlockMetas", async t => {
+test.serial("RpcMethod.getBlockMetas", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   // test getMetasByIndex
   const resp1 = await client.getBlockMetas({
@@ -59,7 +65,7 @@ test("RpcMethod.getBlockMetas", async t => {
   t.deepEqual(resp1.blkMetas[0], resp4.blkMetas[0]);
 });
 
-test("RpcMethod.getActionsByIndex", async t => {
+test.serial("RpcMethod.getActionsByIndex", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   // test getActionsByIndex
   const resp1 = await client.getActions({ byIndex: { start: 0, count: 10 } });
@@ -70,7 +76,7 @@ test("RpcMethod.getActionsByIndex", async t => {
   t.deepEqual(get(resp3, "actionInfo.length"), 0);
 });
 
-test("RpcMethod.getActionsByAddress", async t => {
+test.serial("RpcMethod.getActionsByAddress", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   const blks = await client.getBlockMetas({ byIndex: { start: 10, count: 1 } });
   t.deepEqual(blks.blkMetas.length, 1);
@@ -125,7 +131,7 @@ test.skip("RpcMethod.getActionsByHash", async t => {
   t.deepEqual(resp4.actionInfo.length, 0);
 });
 
-test("RpcMethod.getActionsByBlock", async t => {
+test.serial("RpcMethod.getActionsByBlock", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   // test getActionsByBlock
   const blks = await client.getBlockMetas({ byIndex: { start: 10, count: 1 } });
@@ -136,7 +142,7 @@ test("RpcMethod.getActionsByBlock", async t => {
   t.deepEqual(resp7.actionInfo.length, 1);
 });
 
-test("RpcMethod.suggestGasPrice", async t => {
+test.serial("RpcMethod.suggestGasPrice", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   const resp = await client.suggestGasPrice({});
   t.deepEqual(resp.gasPrice.toString(), "1");
@@ -148,10 +154,10 @@ test.skip("RpcMethod.getReceiptByAction", async t => {
     actionHash:
       "01d5c895f3b066e695d516884bec9977404875aeb15216bc087dbc0a1ef9aed1"
   });
-  t.deepEqual(resp.receiptInfo.receipt, {});
+  t.deepEqual(get(resp, "receiptInfo.receipt"), {});
 });
 
-test("RpcMethod.readContract", async t => {
+test.serial("RpcMethod.readContract", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   // test getActionsByBlock
   const blks = await client.getBlockMetas({ byIndex: { start: 10, count: 1 } });
@@ -169,7 +175,7 @@ test("RpcMethod.readContract", async t => {
   }
 });
 
-test("RpcMethod.sendAction", async t => {
+test.serial("RpcMethod.sendAction", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   const blks = await client.getBlockMetas({ byIndex: { start: 10, count: 1 } });
   t.deepEqual(blks.blkMetas.length, 1);
@@ -191,7 +197,7 @@ test("RpcMethod.sendAction", async t => {
   }
 });
 
-test("RpcMethod.estimateGasForAction", async t => {
+test.serial("RpcMethod.estimateGasForAction", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   const blks = await client.getBlockMetas({ byIndex: { start: 10, count: 1 } });
   t.deepEqual(blks.blkMetas.length, 1);
@@ -207,13 +213,13 @@ test("RpcMethod.estimateGasForAction", async t => {
   }
 });
 
-test.only("RpcMethod.getEpochMeta", async t => {
+test.serial("RpcMethod.getEpochMeta", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   const epochData = await client.getEpochMeta({ epochNumber: 1 });
   t.truthy(epochData.totalBlocks);
 });
 
-test("RpcMethod.getDeadline", async t => {
+test.serial("RpcMethod.getDeadline", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   const deadline = client.getDeadline();
   t.truthy(deadline);

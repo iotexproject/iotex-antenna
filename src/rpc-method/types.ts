@@ -195,7 +195,7 @@ export interface IBlockMeta {
   height: number;
 
   // BlockMeta timestamp
-  timestamp: number;
+  timestamp: ITimestamp;
 
   // BlockMeta numActions
   numActions: number;
@@ -619,6 +619,7 @@ export interface ISetReward {
 export interface IGrantReward {
   // GrantReward type
   type: number;
+  height: number | string;
 }
 
 export interface ICandidate {
@@ -1429,14 +1430,16 @@ export const GetActionsRequest = {
     return setRewardData;
   },
 
-  fromGrantReward(pbRes: any): any {
-    let grantRewardData = pbRes;
-    if (grantRewardData) {
-      grantRewardData = {
-        type: pbRes.type
-      };
+  fromGrantReward(
+    pbRes: actionPb.GrantReward | undefined
+  ): IGrantReward | undefined {
+    if (!pbRes) {
+      return undefined;
     }
-    return grantRewardData;
+    return {
+      type: pbRes.getType(),
+      height: pbRes.getHeight()
+    };
   },
 
   getPutPollResult(req: PutPollResult | undefined): IPutPollResult | undefined {
@@ -1626,9 +1629,6 @@ export interface ILog {
 
 // Properties of an Receipt.
 export interface IReceipt {
-  // Receipt returnValue
-  returnValue: Buffer | {};
-
   // Receipt status
   status: number;
 
@@ -1645,13 +1645,13 @@ export interface IReceipt {
   contractAddress: string;
 
   // Receipt logs
-  logs: Array<ILog>;
+  logs: Array<ILog> | undefined;
 }
 
 // Properties of an Receipt.
 export interface IReceiptInfo {
   // Receipt
-  receipt: IReceipt;
+  receipt: IReceipt | undefined;
 
   // blkHash
   blkHash: string;
@@ -1660,7 +1660,19 @@ export interface IReceiptInfo {
 // Properties of a GetReceiptByActionResponse.
 export interface IGetReceiptByActionResponse {
   // GetReceiptByActionResponse receiptInfo
-  receiptInfo: IReceiptInfo;
+  receiptInfo: IReceiptInfo | undefined;
+}
+
+function fromPbReceiptInfo(
+  pbReceiptInfo: apiPb.ReceiptInfo | undefined
+): IReceiptInfo | undefined {
+  if (!pbReceiptInfo) {
+    return undefined;
+  }
+  return {
+    receipt: fromPbReceipt(pbReceiptInfo.getReceipt()),
+    blkHash: pbReceiptInfo.getBlkhash()
+  };
 }
 
 export const GetReceiptByActionRequest = {
@@ -1673,67 +1685,47 @@ export const GetReceiptByActionRequest = {
   },
 
   from(pbRes: GetReceiptByActionResponse): IGetReceiptByActionResponse {
-    const receiptInfoData = pbRes.getReceiptinfo();
-    const receipt = {
-      returnValue: Buffer.from(""),
-      status: 0,
-      blkHeight: 0,
-      actHash: Buffer.from(""),
-      gasConsumed: 0,
-      contractAddress: "",
-      logs: []
+    return {
+      receiptInfo: fromPbReceiptInfo(pbRes.getReceiptinfo())
     };
-
-    if (!receiptInfoData) {
-      return {
-        receiptInfo: {
-          receipt,
-          blkHash: ""
-        }
-      };
-    }
-    const receiptData = receiptInfoData.getReceipt();
-    let res;
-    if (receiptData) {
-      res = {
-        receiptInfo: {
-          receipt: {
-            returnValue: receiptData.getReturnvalue(),
-            status: receiptData.getStatus(),
-            blkHeight: receiptData.getBlkheight(),
-            actHash: receiptData.getActhash(),
-            gasConsumed: receiptData.getGasconsumed(),
-            contractAddress: receiptData.getContractaddress(),
-            logs: [] as Array<ILog>
-          },
-          blkHash: receiptInfoData.getBlkhash()
-        }
-      };
-    } else {
-      return {
-        receiptInfo: {
-          receipt,
-          blkHash: receiptInfoData.getBlkhash()
-        }
-      };
-    }
-
-    const logsData = receiptData.getLogsList();
-    if (logsData) {
-      for (const log of logsData) {
-        res.receiptInfo.receipt.logs.push({
-          contractAddress: log.getContractaddress(),
-          topics: log.getTopicsList(),
-          data: log.getData(),
-          blkHeight: log.getBlkheight(),
-          actHash: log.getActhash(),
-          index: log.getIndex()
-        });
-      }
-    }
-    return res;
   }
 };
+
+function fromPbReceipt(
+  pbReceipt: actionPb.Receipt | undefined
+): IReceipt | undefined {
+  if (!pbReceipt) {
+    return undefined;
+  }
+  return {
+    status: pbReceipt.getStatus(),
+    blkHeight: pbReceipt.getBlkheight(),
+    actHash: pbReceipt.getActhash(),
+    gasConsumed: pbReceipt.getGasconsumed(),
+    contractAddress: pbReceipt.getContractaddress(),
+    logs: fromPbLogList(pbReceipt.getLogsList())
+  };
+}
+
+function fromPbLogList(
+  pbLogList: Array<actionPb.Log> | undefined
+): Array<ILog> | undefined {
+  if (!pbLogList) {
+    return undefined;
+  }
+  const res = [] as Array<ILog>;
+  for (const log of pbLogList) {
+    res.push({
+      contractAddress: log.getContractaddress(),
+      topics: log.getTopicsList(),
+      data: log.getData(),
+      blkHeight: log.getBlkheight(),
+      actHash: log.getActhash(),
+      index: log.getIndex()
+    });
+  }
+  return res;
+}
 
 // Properties of a ReadContractRequest.
 export interface IReadContractRequest {
@@ -1744,6 +1736,7 @@ export interface IReadContractRequest {
 // Properties of a ReadContractResponse.
 export interface IReadContractResponse {
   data: string;
+  receipt: IReceipt | undefined;
 }
 
 export const ReadContractRequest = {
@@ -1755,10 +1748,10 @@ export const ReadContractRequest = {
     return pbReq;
   },
 
-  from(pbRes: any): IReadContractResponse {
-    const data = pbRes.getData();
+  from(pbRes: apiPb.ReadContractResponse): IReadContractResponse {
     return {
-      data
+      data: pbRes.getData(),
+      receipt: fromPbReceipt(pbRes.getReceipt())
     };
   }
 };
@@ -1770,7 +1763,9 @@ export interface ISendActionRequest {
 }
 
 // Properties of a SendActionResponse.
-export interface ISendActionResponse {}
+export interface ISendActionResponse {
+  actionHash: string;
+}
 
 export const SendActionRequest = {
   to(req: ISendActionRequest): any {
@@ -1779,12 +1774,14 @@ export const SendActionRequest = {
       pbReq.setAction(toAction(req.action));
     }
     return pbReq;
-  },
+  }
+};
 
-  // TODO: to be implemented
-  // tslint:disable-next-line
-  from(_: any): ISendActionResponse {
-    return {};
+export const SendActionResponse = {
+  from(resp: apiPb.SendActionResponse): ISendActionResponse {
+    return {
+      actionHash: resp.getActionhash()
+    };
   }
 };
 

@@ -16,6 +16,7 @@ var proto_types_endorsement_pb = require('../../proto/types/endorsement_pb.js');
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 goog.exportSymbol('proto.iotextypes.AccountMeta', null, global);
 goog.exportSymbol('proto.iotextypes.Block', null, global);
+goog.exportSymbol('proto.iotextypes.BlockBody', null, global);
 goog.exportSymbol('proto.iotextypes.BlockFooter', null, global);
 goog.exportSymbol('proto.iotextypes.BlockHeader', null, global);
 goog.exportSymbol('proto.iotextypes.BlockHeaderCore', null, global);
@@ -924,20 +925,181 @@ proto.iotextypes.BlockFooter.prototype.hasTimestamp = function() {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.iotextypes.Block = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.iotextypes.Block.repeatedFields_, null);
+proto.iotextypes.BlockBody = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.iotextypes.BlockBody.repeatedFields_, null);
 };
-goog.inherits(proto.iotextypes.Block, jspb.Message);
+goog.inherits(proto.iotextypes.BlockBody, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.iotextypes.Block.displayName = 'proto.iotextypes.Block';
+  proto.iotextypes.BlockBody.displayName = 'proto.iotextypes.BlockBody';
 }
 /**
  * List of repeated fields within this message type.
  * @private {!Array<number>}
  * @const
  */
-proto.iotextypes.Block.repeatedFields_ = [2];
+proto.iotextypes.BlockBody.repeatedFields_ = [1];
 
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.iotextypes.BlockBody.prototype.toObject = function(opt_includeInstance) {
+  return proto.iotextypes.BlockBody.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.iotextypes.BlockBody} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotextypes.BlockBody.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    actionsList: jspb.Message.toObjectList(msg.getActionsList(),
+    proto_types_action_pb.Action.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.iotextypes.BlockBody}
+ */
+proto.iotextypes.BlockBody.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.iotextypes.BlockBody;
+  return proto.iotextypes.BlockBody.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.iotextypes.BlockBody} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.iotextypes.BlockBody}
+ */
+proto.iotextypes.BlockBody.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto_types_action_pb.Action;
+      reader.readMessage(value,proto_types_action_pb.Action.deserializeBinaryFromReader);
+      msg.addActions(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.iotextypes.BlockBody.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.iotextypes.BlockBody.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.iotextypes.BlockBody} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.iotextypes.BlockBody.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getActionsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      1,
+      f,
+      proto_types_action_pb.Action.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * repeated Action actions = 1;
+ * @return {!Array<!proto.iotextypes.Action>}
+ */
+proto.iotextypes.BlockBody.prototype.getActionsList = function() {
+  return /** @type{!Array<!proto.iotextypes.Action>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto_types_action_pb.Action, 1));
+};
+
+
+/** @param {!Array<!proto.iotextypes.Action>} value */
+proto.iotextypes.BlockBody.prototype.setActionsList = function(value) {
+  jspb.Message.setRepeatedWrapperField(this, 1, value);
+};
+
+
+/**
+ * @param {!proto.iotextypes.Action=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.iotextypes.Action}
+ */
+proto.iotextypes.BlockBody.prototype.addActions = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.iotextypes.Action, opt_index);
+};
+
+
+proto.iotextypes.BlockBody.prototype.clearActionsList = function() {
+  this.setActionsList([]);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.iotextypes.Block = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.iotextypes.Block, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.iotextypes.Block.displayName = 'proto.iotextypes.Block';
+}
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -968,8 +1130,7 @@ proto.iotextypes.Block.prototype.toObject = function(opt_includeInstance) {
 proto.iotextypes.Block.toObject = function(includeInstance, msg) {
   var f, obj = {
     header: (f = msg.getHeader()) && proto.iotextypes.BlockHeader.toObject(includeInstance, f),
-    actionsList: jspb.Message.toObjectList(msg.getActionsList(),
-    proto_types_action_pb.Action.toObject, includeInstance),
+    body: (f = msg.getBody()) && proto.iotextypes.BlockBody.toObject(includeInstance, f),
     footer: (f = msg.getFooter()) && proto.iotextypes.BlockFooter.toObject(includeInstance, f)
   };
 
@@ -1013,9 +1174,9 @@ proto.iotextypes.Block.deserializeBinaryFromReader = function(msg, reader) {
       msg.setHeader(value);
       break;
     case 2:
-      var value = new proto_types_action_pb.Action;
-      reader.readMessage(value,proto_types_action_pb.Action.deserializeBinaryFromReader);
-      msg.addActions(value);
+      var value = new proto.iotextypes.BlockBody;
+      reader.readMessage(value,proto.iotextypes.BlockBody.deserializeBinaryFromReader);
+      msg.setBody(value);
       break;
     case 3:
       var value = new proto.iotextypes.BlockFooter;
@@ -1059,12 +1220,12 @@ proto.iotextypes.Block.serializeBinaryToWriter = function(message, writer) {
       proto.iotextypes.BlockHeader.serializeBinaryToWriter
     );
   }
-  f = message.getActionsList();
-  if (f.length > 0) {
-    writer.writeRepeatedMessage(
+  f = message.getBody();
+  if (f != null) {
+    writer.writeMessage(
       2,
       f,
-      proto_types_action_pb.Action.serializeBinaryToWriter
+      proto.iotextypes.BlockBody.serializeBinaryToWriter
     );
   }
   f = message.getFooter();
@@ -1109,33 +1270,32 @@ proto.iotextypes.Block.prototype.hasHeader = function() {
 
 
 /**
- * repeated Action actions = 2;
- * @return {!Array<!proto.iotextypes.Action>}
+ * optional BlockBody body = 2;
+ * @return {?proto.iotextypes.BlockBody}
  */
-proto.iotextypes.Block.prototype.getActionsList = function() {
-  return /** @type{!Array<!proto.iotextypes.Action>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto_types_action_pb.Action, 2));
+proto.iotextypes.Block.prototype.getBody = function() {
+  return /** @type{?proto.iotextypes.BlockBody} */ (
+    jspb.Message.getWrapperField(this, proto.iotextypes.BlockBody, 2));
 };
 
 
-/** @param {!Array<!proto.iotextypes.Action>} value */
-proto.iotextypes.Block.prototype.setActionsList = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 2, value);
+/** @param {?proto.iotextypes.BlockBody|undefined} value */
+proto.iotextypes.Block.prototype.setBody = function(value) {
+  jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+proto.iotextypes.Block.prototype.clearBody = function() {
+  this.setBody(undefined);
 };
 
 
 /**
- * @param {!proto.iotextypes.Action=} opt_value
- * @param {number=} opt_index
- * @return {!proto.iotextypes.Action}
+ * Returns whether this field is set.
+ * @return {!boolean}
  */
-proto.iotextypes.Block.prototype.addActions = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.iotextypes.Action, opt_index);
-};
-
-
-proto.iotextypes.Block.prototype.clearActionsList = function() {
-  this.setActionsList([]);
+proto.iotextypes.Block.prototype.hasBody = function() {
+  return jspb.Message.getField(this, 2) != null;
 };
 
 
@@ -1822,7 +1982,7 @@ proto.iotextypes.BlockMeta.toObject = function(includeInstance, msg) {
   var f, obj = {
     hash: jspb.Message.getFieldWithDefault(msg, 1, ""),
     height: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    timestamp: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     numactions: jspb.Message.getFieldWithDefault(msg, 4, 0),
     produceraddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
     transferamount: jspb.Message.getFieldWithDefault(msg, 6, ""),
@@ -1874,7 +2034,8 @@ proto.iotextypes.BlockMeta.deserializeBinaryFromReader = function(msg, reader) {
       msg.setHeight(value);
       break;
     case 3:
-      var value = /** @type {number} */ (reader.readInt64());
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
       msg.setTimestamp(value);
       break;
     case 4:
@@ -1945,10 +2106,11 @@ proto.iotextypes.BlockMeta.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getTimestamp();
-  if (f !== 0) {
-    writer.writeInt64(
+  if (f != null) {
+    writer.writeMessage(
       3,
-      f
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
   f = message.getNumactions();
@@ -2027,17 +2189,32 @@ proto.iotextypes.BlockMeta.prototype.setHeight = function(value) {
 
 
 /**
- * optional int64 timestamp = 3;
- * @return {number}
+ * optional google.protobuf.Timestamp timestamp = 3;
+ * @return {?proto.google.protobuf.Timestamp}
  */
 proto.iotextypes.BlockMeta.prototype.getTimestamp = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 3));
 };
 
 
-/** @param {number} value */
+/** @param {?proto.google.protobuf.Timestamp|undefined} value */
 proto.iotextypes.BlockMeta.prototype.setTimestamp = function(value) {
-  jspb.Message.setProto3IntField(this, 3, value);
+  jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+proto.iotextypes.BlockMeta.prototype.clearTimestamp = function() {
+  this.setTimestamp(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.iotextypes.BlockMeta.prototype.hasTimestamp = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
