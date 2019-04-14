@@ -10,7 +10,7 @@ export type Options = {
 export class Contract {
   // The json interface for the contract to instantiate
   // tslint:disable-next-line: no-any
-  private readonly jsonInterface: Array<any>;
+  private readonly jsonInterface?: Array<any> | undefined;
 
   // This address is necessary for executions and call requests
   private readonly address?: string;
@@ -19,14 +19,14 @@ export class Contract {
   private readonly options?: Options;
 
   // tslint:disable-next-line: no-any
-  constructor(jsonInterface: Array<any>, address?: string, options?: Options) {
+  constructor(jsonInterface?: Array<any>, address?: string, options?: Options) {
     this.jsonInterface = jsonInterface;
     this.address = address;
     this.options = options;
   }
 
   // tslint:disable-next-line: no-any
-  public getABI(): Array<any> {
+  public getABI(): Array<any> | undefined {
     return this.jsonInterface;
   }
 
