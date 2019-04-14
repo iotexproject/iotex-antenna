@@ -18,9 +18,7 @@ export class Iotx extends RpcMethod {
       throw new Error(`can not found account: ${req.from}`);
     }
 
-    const price = req.gasPrice
-      ? toRau(String(req.gasPrice), "iotx")
-      : undefined;
+    const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
     const payload = req.payload || "";
     return new TransferMethod(this, sender, {
       gasLimit: req.gasLimit,
@@ -37,9 +35,7 @@ export class Iotx extends RpcMethod {
       throw new Error(`can not found account: ${req.from}`);
     }
 
-    const price = req.gasPrice
-      ? toRau(String(req.gasPrice), "iotx")
-      : undefined;
+    const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
 
     const contractEnvelop = new Contract(undefined, undefined, {
       data: req.data
