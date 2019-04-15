@@ -1,3 +1,4 @@
+/* tslint:disable:non-literal-fs-path */
 import test from "ava";
 import BigNumber from "bignumber.js";
 import dotenv from "dotenv";
@@ -13,7 +14,9 @@ import Antenna from "../antenna";
 dotenv.config();
 const { IOTEX_CORE = "", TEST_PRIVATE_KEY_HAVING_IOTX = "" } = process.env;
 
-test("create account", async t => {
+const accountTest = TEST_PRIVATE_KEY_HAVING_IOTX ? test.serial : test.skip;
+
+test.serial("create account", async t => {
   const antenna = new Antenna(IOTEX_CORE);
   const acct = antenna.iotx.accounts.create();
   t.truthy(acct.address);
@@ -21,14 +24,14 @@ test("create account", async t => {
   t.truthy(acct.privateKey);
 });
 
-test("unlock account", async t => {
+test.serial("unlock account", async t => {
   const antenna = new Antenna(IOTEX_CORE);
   const acct = antenna.iotx.accounts.create();
   const another = antenna.iotx.accounts.privateKeyToAccount(acct.privateKey);
   t.deepEqual(acct, another);
 });
 
-test("transfer throws if no account", async t => {
+test.serial("transfer throws if no account", async t => {
   const antenna = new Antenna(IOTEX_CORE);
   await t.throwsAsync(
     async () => {
@@ -44,7 +47,7 @@ test("transfer throws if no account", async t => {
   );
 });
 
-test.skip("transfer", async t => {
+accountTest("transfer", async t => {
   const antenna = new Antenna(IOTEX_CORE);
   const acctHavingIotx = antenna.iotx.accounts.privateKeyToAccount(
     TEST_PRIVATE_KEY_HAVING_IOTX
@@ -90,7 +93,7 @@ test.skip("transfer", async t => {
   );
 });
 
-test.skip("deployContract", async t => {
+accountTest("deployContract", async t => {
   const antenna = new Antenna(IOTEX_CORE);
   const creator = antenna.iotx.accounts.privateKeyToAccount(
     TEST_PRIVATE_KEY_HAVING_IOTX
