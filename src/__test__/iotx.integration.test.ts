@@ -28,7 +28,7 @@ test("unlock account", async t => {
   t.deepEqual(acct, another);
 });
 
-test.skip("transfer throws if no account", async t => {
+test("transfer throws if no account", async t => {
   const antenna = new Antenna(IOTEX_CORE);
   await t.throwsAsync(
     async () => {
@@ -60,11 +60,11 @@ test.skip("transfer", async t => {
     "account must have 1 IOTX"
   );
 
-  const acctNew = "io13zt8sznez2pf0q0hqdz2hyl938wak2fsjgdeml";
+  const acctNew = antenna.iotx.accounts.create("any entropy");
   // @ts-ignore
   const hash = await antenna.iotx.sendTransfer({
     from: acctHavingIotx.address,
-    to: acctNew,
+    to: acctNew.address,
     value: oneIotx
   });
   t.truthy(hash);
@@ -81,7 +81,7 @@ test.skip("transfer", async t => {
     "account balance <= original balance - 1 IOTX"
   );
 
-  const balNew = await antenna.iotx.getAccount({ address: acctNew });
+  const balNew = await antenna.iotx.getAccount({ address: acctNew.address });
   t.truthy(
     new BigNumber(get(balNew, "accountMeta.balance")).isGreaterThanOrEqualTo(
       oneIotx

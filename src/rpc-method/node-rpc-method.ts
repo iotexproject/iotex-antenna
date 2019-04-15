@@ -59,7 +59,7 @@ export default class RpcMethod implements IRpcMethod {
       grpc.credentials.createInsecure(),
       null
     );
-    this.timeout = options.timeout || 30000;
+    this.timeout = options.timeout || 300000;
   }
 
   public getDeadline(): Date {
