@@ -36,7 +36,6 @@ export class Iotx extends RpcMethod {
     }
 
     const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
-
     const contractEnvelop = new Contract(undefined, undefined, {
       data: req.data
     }).deploy();

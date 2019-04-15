@@ -49,7 +49,7 @@ export default class RpcMethod implements IRpcMethod {
 
   constructor(hostname: string, options: Opts = {}) {
     this.client = new grpcWeb.APIServicePromiseClient(hostname, null, null);
-    this.timeout = options.timeout || 3000;
+    this.timeout = options.timeout || 30000;
   }
 
   public getDeadline(): string {

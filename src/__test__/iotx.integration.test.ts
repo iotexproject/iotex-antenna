@@ -104,7 +104,9 @@ test.skip("deployContract", async t => {
 
   const hash = await antenna.iotx.deployContract({
     from: creator.address,
-    data: contract.bytecode
+    amount: "0",
+    data: contract.bytecode,
+    gasLimit: "1000000"
   });
 
   t.truthy(hash);
