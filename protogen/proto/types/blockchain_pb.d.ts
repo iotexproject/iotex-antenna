@@ -89,14 +89,33 @@ export namespace BlockFooter {
   }
 }
 
+export class BlockBody extends jspb.Message {
+  constructor ();
+  getActionsList(): proto_types_action_pb.Action[] | undefined;
+  setActionsList(value?: proto_types_action_pb.Action[]): void;
+  clearActionsList(): void;
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): BlockBody.AsObject;
+  static toObject(includeInstance: boolean, msg: BlockBody): BlockBody.AsObject;
+  static serializeBinaryToWriter(message: BlockBody, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): BlockBody;
+  static deserializeBinaryFromReader(message: BlockBody, reader: jspb.BinaryReader): BlockBody;
+}
+
+export namespace BlockBody {
+  export type AsObject = {
+    actionsList?: proto_types_action_pb.Action.AsObject[];
+  }
+}
+
 export class Block extends jspb.Message {
   constructor ();
   getHeader(): BlockHeader | undefined;
   setHeader(value?: BlockHeader): void;
   clearHeader(): void;
-  getActionsList(): proto_types_action_pb.Action[] | undefined;
-  setActionsList(value?: proto_types_action_pb.Action[]): void;
-  clearActionsList(): void;
+  getBody(): BlockBody | undefined;
+  setBody(value?: BlockBody): void;
+  clearBody(): void;
   getFooter(): BlockFooter | undefined;
   setFooter(value?: BlockFooter): void;
   clearFooter(): void;
@@ -111,7 +130,7 @@ export class Block extends jspb.Message {
 export namespace Block {
   export type AsObject = {
     header?: BlockHeader.AsObject;
-    actionsList?: proto_types_action_pb.Action.AsObject[];
+    body?: BlockBody.AsObject;
     footer?: BlockFooter.AsObject;
   }
 }
@@ -193,8 +212,9 @@ export class BlockMeta extends jspb.Message {
   setHash(value: string): void;
   getHeight(): number;
   setHeight(value: number): void;
-  getTimestamp(): number;
-  setTimestamp(value: number): void;
+  getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): void;
+  clearTimestamp(): void;
   getNumactions(): number;
   setNumactions(value: number): void;
   getProduceraddress(): string;
@@ -219,7 +239,7 @@ export namespace BlockMeta {
   export type AsObject = {
     hash: string;
     height: number;
-    timestamp: number;
+    timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject;
     numactions: number;
     produceraddress: string;
     transferamount: string;

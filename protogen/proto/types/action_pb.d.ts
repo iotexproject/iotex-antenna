@@ -697,33 +697,20 @@ export namespace Action {
 }
 
 export class Receipt extends jspb.Message {
-  getReturnvalue(): Uint8Array | string;
-  getReturnvalue_asU8(): Uint8Array;
-  getReturnvalue_asB64(): string;
-  setReturnvalue(value: Uint8Array | string): void;
-
+  constructor ();
   getStatus(): number;
   setStatus(value: number): void;
-
   getBlkheight(): number;
   setBlkheight(value: number): void;
-
-  getActhash(): Uint8Array | string;
-  getActhash_asU8(): Uint8Array;
-  getActhash_asB64(): string;
-  setActhash(value: Uint8Array | string): void;
-
+  getActhash(): {};
+  setActhash(value: {}): void;
   getGasconsumed(): number;
   setGasconsumed(value: number): void;
-
   getContractaddress(): string;
   setContractaddress(value: string): void;
-
-  getLogsList(): Array<Log>;
-  setLogsList(value: Array<Log>): void;
+  getLogsList(): Log[] | undefined;
+  setLogsList(value?: Log[]): void;
   clearLogsList(): void;
-  addLogs(value?: Log, index?: number): Log;
-
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Receipt.AsObject;
   static toObject(includeInstance: boolean, msg: Receipt): Receipt.AsObject;
@@ -734,41 +721,30 @@ export class Receipt extends jspb.Message {
 
 export namespace Receipt {
   export type AsObject = {
-    returnvalue: Uint8Array | string,
-    status: number,
-    blkheight: number,
-    acthash: Uint8Array | string,
-    gasconsumed: number,
-    contractaddress: string,
-    logsList: Array<Log.AsObject>,
+    status: number;
+    blkheight: number;
+    acthash: {};
+    gasconsumed: number;
+    contractaddress: string;
+    logsList?: Log.AsObject[];
   }
 }
 
 export class Log extends jspb.Message {
+  constructor ();
   getContractaddress(): string;
   setContractaddress(value: string): void;
-
-  getTopicsList(): Array<Uint8Array | string>;
-  setTopicsList(value: Array<Uint8Array | string>): void;
+  getTopicsList(): {}[];
+  setTopicsList(value: {}[]): void;
   clearTopicsList(): void;
-  addTopics(value: Uint8Array | string, index?: number): void;
-
-  getData(): Uint8Array | string;
-  getData_asU8(): Uint8Array;
-  getData_asB64(): string;
-  setData(value: Uint8Array | string): void;
-
+  getData(): {};
+  setData(value: {}): void;
   getBlkheight(): number;
   setBlkheight(value: number): void;
-
-  getActhash(): Uint8Array | string;
-  getActhash_asU8(): Uint8Array;
-  getActhash_asB64(): string;
-  setActhash(value: Uint8Array | string): void;
-
+  getActhash(): {};
+  setActhash(value: {}): void;
   getIndex(): number;
   setIndex(value: number): void;
-
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Log.AsObject;
   static toObject(includeInstance: boolean, msg: Log): Log.AsObject;
@@ -779,14 +755,15 @@ export class Log extends jspb.Message {
 
 export namespace Log {
   export type AsObject = {
-    contractaddress: string,
-    topicsList: Array<Uint8Array | string>,
-    data: Uint8Array | string,
-    blkheight: number,
-    acthash: Uint8Array | string,
-    index: number,
+    contractaddress: string;
+    topicsList: {}[];
+    data: {};
+    blkheight: number;
+    acthash: {};
+    index: number;
   }
 }
+
 export class DepositToRewardingFund extends jspb.Message {
   constructor ();
   getAmount(): string;
@@ -833,6 +810,8 @@ export class GrantReward extends jspb.Message {
   constructor ();
   getType(): RewardType;
   setType(value: RewardType): void;
+  getHeight(): number;
+  setHeight(value: number): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GrantReward.AsObject;
   static toObject(includeInstance: boolean, msg: GrantReward): GrantReward.AsObject;
@@ -844,10 +823,11 @@ export class GrantReward extends jspb.Message {
 export namespace GrantReward {
   export type AsObject = {
     type: RewardType;
+    height: number;
   }
 }
 
-export enum RewardType {
+export enum RewardType { 
   BlockReward = 0,
   EpochReward = 1,
 }

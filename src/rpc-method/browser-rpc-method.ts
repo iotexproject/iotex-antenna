@@ -23,7 +23,8 @@ import {
   ISendActionRequest,
   ISendActionResponse,
   ISuggestGasPriceRequest,
-  ISuggestGasPriceResponse
+  ISuggestGasPriceResponse,
+  SendActionResponse
 } from "./types";
 
 import {
@@ -143,7 +144,7 @@ export default class RpcMethod implements IRpcMethod {
     const pbResp = await this.client.sendAction(pbReq, {
       deadline: this.getDeadline()
     });
-    return SendActionRequest.from(pbResp);
+    return SendActionResponse.from(pbResp);
   }
 
   public async getReceiptByAction(

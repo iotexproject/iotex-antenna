@@ -17,6 +17,8 @@ var proto_types_action_pb = require('../../proto/types/action_pb.js')
 var proto_types_blockchain_pb = require('../../proto/types/blockchain_pb.js')
 
 var proto_types_node_pb = require('../../proto/types/node_pb.js')
+
+var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js')
 const proto = {};
 proto.iotexapi = require('./api_pb.js');
 

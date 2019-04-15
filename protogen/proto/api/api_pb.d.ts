@@ -3,6 +3,7 @@ import * as jspb from "google-protobuf"
 import * as proto_types_action_pb from '../../proto/types/action_pb';
 import * as proto_types_blockchain_pb from '../../proto/types/blockchain_pb';
 import * as proto_types_node_pb from '../../proto/types/node_pb';
+import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
 
 export class GetAccountRequest extends jspb.Message {
   constructor ();
@@ -199,6 +200,9 @@ export class ActionInfo extends jspb.Message {
   setActhash(value: string): void;
   getBlkhash(): string;
   setBlkhash(value: string): void;
+  getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): void;
+  clearTimestamp(): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ActionInfo.AsObject;
   static toObject(includeInstance: boolean, msg: ActionInfo): ActionInfo.AsObject;
@@ -212,19 +216,17 @@ export namespace ActionInfo {
     action?: proto_types_action_pb.Action.AsObject;
     acthash: string;
     blkhash: string;
+    timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject;
   }
 }
 
-
 export class ReceiptInfo extends jspb.Message {
+  constructor ();
   getReceipt(): proto_types_action_pb.Receipt | undefined;
   setReceipt(value?: proto_types_action_pb.Receipt): void;
-  hasReceipt(): boolean;
   clearReceipt(): void;
-
   getBlkhash(): string;
   setBlkhash(value: string): void;
-
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ReceiptInfo.AsObject;
   static toObject(includeInstance: boolean, msg: ReceiptInfo): ReceiptInfo.AsObject;
@@ -235,11 +237,10 @@ export class ReceiptInfo extends jspb.Message {
 
 export namespace ReceiptInfo {
   export type AsObject = {
-    receipt?: proto_types_action_pb.Receipt.AsObject,
-    blkhash: string,
+    receipt?: proto_types_action_pb.Receipt.AsObject;
+    blkhash: string;
   }
 }
-
 
 export class BlockProducerInfo extends jspb.Message {
   constructor ();
@@ -457,6 +458,8 @@ export namespace SendActionRequest {
 
 export class SendActionResponse extends jspb.Message {
   constructor ();
+  getActionhash(): string;
+  setActionhash(value: string): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): SendActionResponse.AsObject;
   static toObject(includeInstance: boolean, msg: SendActionResponse): SendActionResponse.AsObject;
@@ -467,6 +470,7 @@ export class SendActionResponse extends jspb.Message {
 
 export namespace SendActionResponse {
   export type AsObject = {
+    actionhash: string;
   }
 }
 
@@ -489,11 +493,10 @@ export namespace GetReceiptByActionRequest {
 }
 
 export class GetReceiptByActionResponse extends jspb.Message {
+  constructor ();
   getReceiptinfo(): ReceiptInfo | undefined;
   setReceiptinfo(value?: ReceiptInfo): void;
-  hasReceiptinfo(): boolean;
   clearReceiptinfo(): void;
-
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetReceiptByActionResponse.AsObject;
   static toObject(includeInstance: boolean, msg: GetReceiptByActionResponse): GetReceiptByActionResponse.AsObject;
@@ -504,7 +507,7 @@ export class GetReceiptByActionResponse extends jspb.Message {
 
 export namespace GetReceiptByActionResponse {
   export type AsObject = {
-    receiptinfo?: ReceiptInfo.AsObject,
+    receiptinfo?: ReceiptInfo.AsObject;
   }
 }
 
@@ -531,6 +534,9 @@ export class ReadContractResponse extends jspb.Message {
   constructor ();
   getData(): string;
   setData(value: string): void;
+  getReceipt(): proto_types_action_pb.Receipt | undefined;
+  setReceipt(value?: proto_types_action_pb.Receipt): void;
+  clearReceipt(): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ReadContractResponse.AsObject;
   static toObject(includeInstance: boolean, msg: ReadContractResponse): ReadContractResponse.AsObject;
@@ -542,6 +548,7 @@ export class ReadContractResponse extends jspb.Message {
 export namespace ReadContractResponse {
   export type AsObject = {
     data: string;
+    receipt?: proto_types_action_pb.Receipt.AsObject;
   }
 }
 
