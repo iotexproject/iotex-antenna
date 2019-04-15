@@ -1,7 +1,7 @@
 import { Account } from "../account/account";
 import { IRpcMethod } from "../rpc-method/types";
 import { Envelop, SealedEnvelop } from "./envelop";
-import { Transfer } from "./types";
+import { Execution, Transfer } from "./types";
 
 export class AbstractMethod {
   public client: IRpcMethod;
@@ -77,6 +77,29 @@ export class TransferMethod extends AbstractMethod {
       amount: this.transfer.amount,
       recipient: this.transfer.recipient,
       payload: Buffer.from(this.transfer.payload)
+    };
+
+    return this.sendAction(envelop);
+  }
+}
+
+export class ExecutionMethod extends AbstractMethod {
+  public execution: Execution;
+
+  constructor(client: IRpcMethod, account: Account, execution: Execution) {
+    super(client, account);
+    this.execution = execution;
+  }
+
+  public async execute(): Promise<string> {
+    const envelop = await this.baseEnvelop(
+      this.execution.gasLimit,
+      this.execution.gasPrice
+    );
+    envelop.execution = {
+      amount: this.execution.amount,
+      contract: this.execution.contract,
+      data: this.execution.data
     };
 
     return this.sendAction(envelop);

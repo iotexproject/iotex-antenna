@@ -47,3 +47,12 @@ export interface TransferRequest {
   gasLimit?: string;
   gasPrice?: string;
 }
+
+export interface ContractRequest {
+  from: string;
+  amount?: string;
+  // contract bytecode
+  data: Buffer;
+  gasLimit?: string;
+  gasPrice?: string;
+}

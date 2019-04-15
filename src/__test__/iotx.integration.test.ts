@@ -1,10 +1,14 @@
 import test from "ava";
+import BigNumber from "bignumber.js";
 import dotenv from "dotenv";
 import { get } from "dottie";
-import Antenna from "../antenna";
-import { toRau } from "../account/utils";
-import BigNumber from "bignumber.js";
+import fs from "fs";
+import path from "path";
 import sleepPromise from "sleep-promise";
+// @ts-ignore
+import solc from "solc";
+import { toRau } from "../account/utils";
+import Antenna from "../antenna";
 
 dotenv.config();
 const { IOTEX_CORE = "", TEST_PRIVATE_KEY_HAVING_IOTX = "" } = process.env;
@@ -84,4 +88,26 @@ test.skip("transfer", async t => {
     ),
     "new account balance >= 1 IOTX"
   );
+});
+
+test.skip("deployContract", async t => {
+  const antenna = new Antenna(IOTEX_CORE);
+  const creator = antenna.iotx.accounts.privateKeyToAccount(
+    TEST_PRIVATE_KEY_HAVING_IOTX
+  );
+
+  const solFile = "../contract/__test__/RollDice.sol";
+  const contractName = ":RollDice";
+  const input = fs.readFileSync(path.resolve(__dirname, solFile));
+  const output = solc.compile(input.toString(), 1);
+  const contract = output.contracts[contractName];
+
+  const hash = await antenna.iotx.deployContract({
+    from: creator.address,
+    amount: "0",
+    data: contract.bytecode,
+    gasLimit: "1000000"
+  });
+
+  t.truthy(hash);
 });
