@@ -1,3 +1,12 @@
+2019-04-15 - 0.11.0 (f238885)
+f238885 (HEAD -> master, origin/master, origin/HEAD) unskip test (#163)
+41b409f Update circleci/node:10.15.3-browsers-legacy Docker digest to c1f1c58 (#159)
+84c7977 Update dependency ts-node to v8.1.0 (#160)
+350f8a4 Contract deploy (#161)
+bdfe6c3 Update dependency tslint-microsoft-contrib to v6.1.1 (#162)
+3c4de78 (tag: v0.10.0) 0.10.0
+
+
 2019-04-14 - 0.10.0 (5d5ace1)
 5d5ace1 (HEAD -> master, origin/master, origin/HEAD) bump protos and adjust timeout
 7bb3713 Update dependency prettier to v1.17.0 (#157)
