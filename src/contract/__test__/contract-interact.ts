@@ -8,11 +8,7 @@ import solc from "solc";
 import { Account } from "../../account/account";
 import { ExecutionMethod } from "../../action/method";
 import RpcMethod from "../../rpc-method";
-/*
-import RpcMethod from "../../rpc-method/browser-rpc-method";
-// @ts-ignore
-import browserEnv from "browser-env";
-browserEnv();*/
+import { encodeInputData, getAbiFunctions } from "../abi-to-byte";
 
 dotenv.config();
 
@@ -41,6 +37,28 @@ test.skip("Contract_deploy_SimpleStorage", async t => {
     contract: "",
     amount: "0",
     data: Buffer.from(contract.bytecode, "hex")
+  });
+  const reps = await method.execute();
+  t.truthy(reps);
+});
+
+test("Contract_set_SimpleStorage", async t => {
+  const solFile = "./SimpleStorage.sol";
+  const contractName = ":SimpleStorage";
+  const input = fs.readFileSync(path.resolve(__dirname, solFile));
+  const output = solc.compile(input.toString(), 1);
+  const contract = output.contracts[contractName];
+  const abi = JSON.parse(contract.interface);
+  const abiFunctions = getAbiFunctions(abi);
+
+  const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
+  const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
+  const method = new ExecutionMethod(client, sender, {
+    gasPrice: "1",
+    gasLimit: "1000000",
+    contract: "io1kreuaw606dggnneftvdytfkx6phzqlll8vkhxs",
+    amount: "0",
+    data: Buffer.from(encodeInputData(abiFunctions, "set", { x: 2 }), "hex")
   });
   const reps = await method.execute();
   t.truthy(reps);
