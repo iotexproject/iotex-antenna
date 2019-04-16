@@ -42,7 +42,7 @@ test.skip("Contract_deploy_SimpleStorage", async t => {
   t.truthy(reps);
 });
 
-test("Contract_set_SimpleStorage", async t => {
+test.skip("Contract_set_SimpleStorage", async t => {
   const solFile = "./SimpleStorage.sol";
   const contractName = ":SimpleStorage";
   const input = fs.readFileSync(path.resolve(__dirname, solFile));
@@ -59,6 +59,28 @@ test("Contract_set_SimpleStorage", async t => {
     contract: "io1kreuaw606dggnneftvdytfkx6phzqlll8vkhxs",
     amount: "0",
     data: Buffer.from(encodeInputData(abiFunctions, "set", { x: 2 }), "hex")
+  });
+  const reps = await method.execute();
+  t.truthy(reps);
+});
+
+test.skip("Contract_get_SimpleStorage", async t => {
+  const solFile = "./SimpleStorage.sol";
+  const contractName = ":SimpleStorage";
+  const input = fs.readFileSync(path.resolve(__dirname, solFile));
+  const output = solc.compile(input.toString(), 1);
+  const contract = output.contracts[contractName];
+  const abi = JSON.parse(contract.interface);
+  const abiFunctions = getAbiFunctions(abi);
+
+  const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
+  const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
+  const method = new ExecutionMethod(client, sender, {
+    gasPrice: "1",
+    gasLimit: "1000000",
+    contract: "io1kreuaw606dggnneftvdytfkx6phzqlll8vkhxs",
+    amount: "0",
+    data: Buffer.from(encodeInputData(abiFunctions, "get", {}), "hex")
   });
   const reps = await method.execute();
   t.truthy(reps);
