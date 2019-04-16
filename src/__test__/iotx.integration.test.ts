@@ -108,7 +108,7 @@ accountTest("deployContract", async t => {
   const hash = await antenna.iotx.deployContract({
     from: creator.address,
     amount: "0",
-    data: contract.bytecode,
+    data: Buffer.from(contract.bytecode, "hex"),
     gasLimit: "1000000"
   });
 

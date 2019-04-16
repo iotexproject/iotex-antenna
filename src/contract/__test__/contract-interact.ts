@@ -8,6 +8,11 @@ import solc from "solc";
 import { Account } from "../../account/account";
 import { ExecutionMethod } from "../../action/method";
 import RpcMethod from "../../rpc-method";
+/*
+import RpcMethod from "../../rpc-method/browser-rpc-method";
+// @ts-ignore
+import browserEnv from "browser-env";
+browserEnv();*/
 
 dotenv.config();
 
@@ -35,7 +40,7 @@ test.skip("Contract_deploy_SimpleStorage", async t => {
     gasLimit: "1000000",
     contract: "",
     amount: "0",
-    data: contract.bytecode
+    data: Buffer.from(contract.bytecode, "hex")
   });
   const reps = await method.execute();
   t.truthy(reps);
