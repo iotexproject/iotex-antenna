@@ -1,5 +1,4 @@
 // @ts-ignore
-import solc from "solc";
 import { Execution } from "../action/types";
 import { AbiByFunc, encodeInputData, getAbiFunctions } from "./abi-to-byte";
 
@@ -45,11 +44,6 @@ export class Contract {
       amount: "0",
       data: this.options.data
     };
-  }
-
-  // tslint:disable-next-line: no-any
-  public static compile(name: string, contract: string): any {
-    return solc.compile(contract, 1)[name];
   }
 
   public encodeMethod(
