@@ -1483,7 +1483,8 @@ export const GetActionsRequest = {
     for (const rawActionInfo of rawActionInfoList) {
       const actionInfo = ({
         actHash: rawActionInfo.getActhash(),
-        blkHash: rawActionInfo.getBlkhash()
+        blkHash: rawActionInfo.getBlkhash(),
+        timestamp: rawActionInfo.getTimestamp(),
       } as any) as IActionInfo;
 
       const rawAction = rawActionInfo.getAction();
