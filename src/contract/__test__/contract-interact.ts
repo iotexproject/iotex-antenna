@@ -3,6 +3,7 @@ import test from "ava";
 import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
+import sleepPromise from "sleep-promise";
 // @ts-ignore
 import solc from "solc";
 import { Account } from "../../account/account";
@@ -32,7 +33,7 @@ test.skip("Contract_deploy_SimpleStorage", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
   const method = new ExecutionMethod(client, sender, {
-    gasPrice: "1",
+    gasPrice: "1000000000000",
     gasLimit: "1000000",
     contract: "",
     amount: "0",
@@ -54,14 +55,26 @@ test.skip("Contract_set_SimpleStorage", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
   const method = new ExecutionMethod(client, sender, {
-    gasPrice: "1",
+    gasPrice: "1000000000000",
     gasLimit: "1000000",
-    contract: "io1kreuaw606dggnneftvdytfkx6phzqlll8vkhxs",
+    contract: "io186s45j3rgvhxh25ec6xk9wap0drtthk3jq4du7",
     amount: "0",
     data: Buffer.from(encodeInputData(abiFunctions, "set", { x: 2 }), "hex")
   });
   const reps = await method.execute();
   t.truthy(reps);
+
+  await sleepPromise(30000);
+
+  const actions = await client.getActions({
+    byHash: { actionHash: reps, checkingPending: true }
+  });
+  t.deepEqual(actions.actionInfo.length, 1, "contract action is empty");
+  const result = await client.readContract({
+    action: actions.actionInfo[0].action
+  });
+  t.truthy(result);
+  t.deepEqual(result.data, "");
 });
 
 test.skip("Contract_get_SimpleStorage", async t => {
@@ -76,12 +89,22 @@ test.skip("Contract_get_SimpleStorage", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
   const method = new ExecutionMethod(client, sender, {
-    gasPrice: "1",
+    gasPrice: "1000000000000",
     gasLimit: "1000000",
-    contract: "io1kreuaw606dggnneftvdytfkx6phzqlll8vkhxs",
+    contract: "io186s45j3rgvhxh25ec6xk9wap0drtthk3jq4du7",
     amount: "0",
     data: Buffer.from(encodeInputData(abiFunctions, "get", {}), "hex")
   });
-  const reps = await method.execute();
-  t.truthy(reps);
+  const hash = await method.execute();
+
+  await sleepPromise(30000);
+
+  const actions = await client.getActions({
+    byHash: { actionHash: hash, checkingPending: true }
+  });
+  t.deepEqual(actions.actionInfo.length, 1, "contract action is empty");
+  const result = await client.readContract({
+    action: actions.actionInfo[0].action
+  });
+  t.truthy(result);
 });
