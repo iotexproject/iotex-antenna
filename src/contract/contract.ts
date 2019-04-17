@@ -1,6 +1,7 @@
 // @ts-ignore
 import solc from "solc";
 import { Execution } from "../action/types";
+import { AbiByFunc, encodeInputData, getAbiFunctions } from "./abi-to-byte";
 
 export type Options = {
   // The byte code of the contract. Used when the contract gets deployed
@@ -9,8 +10,7 @@ export type Options = {
 
 export class Contract {
   // The json interface for the contract to instantiate
-  // tslint:disable-next-line: no-any
-  private readonly jsonInterface?: Array<any> | undefined;
+  private readonly abi?: AbiByFunc;
 
   // This address is necessary for executions and call requests
   private readonly address?: string;
@@ -20,14 +20,16 @@ export class Contract {
 
   // tslint:disable-next-line: no-any
   constructor(jsonInterface?: Array<any>, address?: string, options?: Options) {
-    this.jsonInterface = jsonInterface;
+    if (jsonInterface) {
+      this.abi = getAbiFunctions(jsonInterface);
+    }
     this.address = address;
     this.options = options;
   }
 
   // tslint:disable-next-line: no-any
-  public getABI(): Array<any> | undefined {
-    return this.jsonInterface;
+  public getABI(): AbiByFunc | undefined {
+    return this.abi;
   }
 
   public getAddress(): string | undefined {
@@ -48,5 +50,24 @@ export class Contract {
   // tslint:disable-next-line: no-any
   public static compile(name: string, contract: string): any {
     return solc.compile(contract, 1)[name];
+  }
+
+  public encodeMethod(
+    amount: string,
+    method: string,
+    input: { [key: string]: any }
+  ): Execution {
+    if (!this.address || !this.abi) {
+      throw new Error("must set contract address and abi");
+    }
+    if (!this.abi[method]) {
+      throw new Error(`method ${method} dose not in abi`);
+    }
+
+    return {
+      contract: this.address,
+      amount: amount,
+      data: Buffer.from(encodeInputData(this.abi, method, input), "hex")
+    };
   }
 }
