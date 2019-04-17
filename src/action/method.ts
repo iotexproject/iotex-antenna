@@ -1,11 +1,12 @@
 import { Account } from "../account/account";
-import { IRpcMethod } from "../rpc-method/types";
+import { IAction, IRpcMethod } from "../rpc-method/types";
 import { Envelop, SealedEnvelop } from "./envelop";
 import { Execution, Transfer } from "./types";
 
 export class AbstractMethod {
   public client: IRpcMethod;
   public account: Account;
+
   constructor(client: IRpcMethod, account: Account) {
     this.client = client;
     this.account = account;
@@ -28,7 +29,7 @@ export class AbstractMethod {
     );
   }
 
-  public async sendAction(envelop: Envelop): Promise<string> {
+  public async signAction(envelop: Envelop): Promise<SealedEnvelop> {
     if (!envelop.gasPrice) {
       const price = await this.client.suggestGasPrice({});
       envelop.gasPrice = String(price.gasPrice);
@@ -46,11 +47,15 @@ export class AbstractMethod {
       envelop.gasLimit = limit.gas;
     }
 
-    const selp = SealedEnvelop.sign(
+    return SealedEnvelop.sign(
       this.account.privateKey,
       this.account.publicKey,
       envelop
     );
+  }
+
+  public async sendAction(envelop: Envelop): Promise<string> {
+    const selp = await this.signAction(envelop);
 
     await this.client.sendAction({
       action: selp.action()
@@ -103,5 +108,20 @@ export class ExecutionMethod extends AbstractMethod {
     };
 
     return this.sendAction(envelop);
+  }
+
+  public async sign(): Promise<IAction> {
+    const envelop = await this.baseEnvelop(
+      this.execution.gasLimit,
+      this.execution.gasPrice
+    );
+    envelop.execution = {
+      amount: this.execution.amount,
+      contract: this.execution.contract,
+      data: this.execution.data
+    };
+
+    const selp = await this.signAction(envelop);
+    return selp.action();
   }
 }

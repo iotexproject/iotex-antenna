@@ -59,7 +59,7 @@ test.skip("Contract_set_SimpleStorage", async t => {
     gasLimit: "1000000",
     contract: "io186s45j3rgvhxh25ec6xk9wap0drtthk3jq4du7",
     amount: "0",
-    data: Buffer.from(encodeInputData(abiFunctions, "set", { x: 2 }), "hex")
+    data: Buffer.from(encodeInputData(abiFunctions, "set", { x: 10 }), "hex")
   });
   const reps = await method.execute();
   t.truthy(reps);
@@ -95,16 +95,8 @@ test.skip("Contract_get_SimpleStorage", async t => {
     amount: "0",
     data: Buffer.from(encodeInputData(abiFunctions, "get", {}), "hex")
   });
-  const hash = await method.execute();
+  const action = await method.sign();
 
-  await sleepPromise(30000);
-
-  const actions = await client.getActions({
-    byHash: { actionHash: hash, checkingPending: true }
-  });
-  t.deepEqual(actions.actionInfo.length, 1, "contract action is empty");
-  const result = await client.readContract({
-    action: actions.actionInfo[0].action
-  });
+  const result = await client.readContract({ action: action });
   t.truthy(result);
 });
