@@ -69,16 +69,14 @@ export interface ExecuteContractRequest {
   gasPrice?: string;
 }
 
-export interface ReadContractRequest {
-  from?: string;
-  abi?: string;
-  contractAddress?: string;
+export interface ReadContractByMethodRequest {
+  from: string;
+  abi: string;
+  contractAddress: string;
   // read view contract method
-  method?: string;
-  // read excuted method result by hash
-  hash?: string;
+  method: string;
   // tslint:disable-next-line:no-any
-  input?: { [key: string]: any };
+  input: { [key: string]: any };
   gasLimit?: string;
   gasPrice?: string;
 }
