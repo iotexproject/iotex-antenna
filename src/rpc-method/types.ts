@@ -1075,6 +1075,7 @@ export interface IActionInfo {
   action: IAction;
   actHash: string;
   blkHash: string;
+  timestamp: ITimestamp;
 }
 
 export interface IGetActionsResponse {
