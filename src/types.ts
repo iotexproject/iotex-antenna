@@ -67,3 +67,16 @@ export interface ExecuteContractRequest {
   gasLimit?: string;
   gasPrice?: string;
 }
+
+export interface ReadContractRequest {
+  from?: string;
+  abi?: string;
+  contractAddress?: string;
+  // read view contract method
+  method?: string;
+  // read excuted method result by hash
+  hash?: string;
+  input?: { [key: string]: any };
+  gasLimit?: string;
+  gasPrice?: string;
+}

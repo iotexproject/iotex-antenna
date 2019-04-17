@@ -140,3 +140,38 @@ accountTest("executeContract", async t => {
 
   t.truthy(hash);
 });
+
+accountTest("hashReadResultContract", async t => {
+  const antenna = new Antenna(IOTEX_CORE);
+
+  const result = await antenna.iotx.readResultContract({
+    hash: "4415ec3a0bac761e68237ca4fc3668f0e77babc29c9a25dc3d000ccc934f8ace"
+  });
+
+  t.deepEqual(result, "");
+});
+
+accountTest("methodReadResultContract", async t => {
+  const antenna = new Antenna(IOTEX_CORE);
+  const creator = antenna.iotx.accounts.privateKeyToAccount(
+    TEST_PRIVATE_KEY_HAVING_IOTX
+  );
+
+  const solFile = "../contract/__test__/SimpleStorage.sol";
+  const contractName = ":SimpleStorage";
+  const input = fs.readFileSync(path.resolve(__dirname, solFile));
+  const output = solc.compile(input.toString(), 1);
+  const contract = output.contracts[contractName];
+
+  const result = await antenna.iotx.readResultContract({
+    from: creator.address,
+    contractAddress: "io186s45j3rgvhxh25ec6xk9wap0drtthk3jq4du7",
+    abi: contract.interface,
+    method: "get",
+    input: {},
+    gasPrice: "1",
+    gasLimit: "1000000"
+  });
+
+  t.truthy(result);
+});

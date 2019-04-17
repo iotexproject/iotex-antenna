@@ -5,8 +5,9 @@ import { Contract } from "./contract/contract";
 import RpcMethod from "./rpc-method";
 import {
   ContractRequest,
-  TransferRequest,
-  ExecuteContractRequest
+  ExecuteContractRequest,
+  ReadContractRequest,
+  TransferRequest
 } from "./types";
 
 export class Iotx extends RpcMethod {
@@ -66,5 +67,47 @@ export class Iotx extends RpcMethod {
     methodEnvelop.gasLimit = req.gasLimit;
     methodEnvelop.gasPrice = price;
     return new ExecutionMethod(this, sender, methodEnvelop).execute();
+  }
+
+  public async readResultContract(req: ReadContractRequest): Promise<string> {
+    if (req.hash) {
+      const actions = await this.getActions({
+        byHash: { actionHash: req.hash, checkingPending: true }
+      });
+      const result = await this.readContract({
+        action: actions.actionInfo[0].action
+      });
+      return result.data;
+    }
+
+    if (req.method) {
+      const sender = this.accounts.getAccount(req.from || "");
+      if (!sender) {
+        throw new Error(`can not found account: ${req.from}`);
+      }
+      const price = req.gasPrice
+        ? toRau(String(req.gasPrice), "Qev")
+        : undefined;
+      const contract = new Contract(
+        JSON.parse(req.abi || "[]"),
+        req.contractAddress
+      );
+      const methodEnvelop = contract.encodeMethod(
+        "0",
+        req.method,
+        req.input || {}
+      );
+      methodEnvelop.gasLimit = req.gasLimit;
+      methodEnvelop.gasPrice = price;
+      const action = await new ExecutionMethod(
+        this,
+        sender,
+        methodEnvelop
+      ).sign();
+      const result = await this.readContract({ action: action });
+      return result.data;
+    }
+
+    throw new Error(`must set method or hash parameter`);
   }
 }
