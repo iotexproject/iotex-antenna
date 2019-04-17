@@ -63,6 +63,7 @@ export interface ExecuteContractRequest {
   abi: string;
   contractAddress: string;
   method: string;
+  // tslint:disable-next-line:no-any
   input: { [key: string]: any };
   gasLimit?: string;
   gasPrice?: string;
@@ -76,6 +77,7 @@ export interface ReadContractRequest {
   method?: string;
   // read excuted method result by hash
   hash?: string;
+  // tslint:disable-next-line:no-any
   input?: { [key: string]: any };
   gasLimit?: string;
   gasPrice?: string;

@@ -55,6 +55,7 @@ export class Contract {
   public encodeMethod(
     amount: string,
     method: string,
+    // tslint:disable-next-line:no-any
     input: { [key: string]: any }
   ): Execution {
     if (!this.address || !this.abi) {
