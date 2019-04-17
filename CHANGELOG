@@ -1,3 +1,10 @@
+2019-04-17 - 0.11.1 (fe7c126)
+fe7c126 (HEAD -> master, origin/master, origin/HEAD) Implement #169, add timestamp to action info. (#170)
+814532d Update circleci/node:10.15.3-browsers-legacy Docker digest to 8de76df (#164)
+f7eb36a Update dependency nyc to v14 (#165)
+e4ed8bd (tag: v0.11.0) 0.11.0
+
+
 2019-04-15 - 0.11.0 (f238885)
 f238885 (HEAD -> master, origin/master, origin/HEAD) unskip test (#163)
 41b409f Update circleci/node:10.15.3-browsers-legacy Docker digest to c1f1c58 (#159)
