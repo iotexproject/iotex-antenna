@@ -1075,6 +1075,7 @@ export interface IActionInfo {
   action: IAction;
   actHash: string;
   blkHash: string;
+  timestamp: ITimestamp;
 }
 
 export interface IGetActionsResponse {
@@ -1483,7 +1484,8 @@ export const GetActionsRequest = {
     for (const rawActionInfo of rawActionInfoList) {
       const actionInfo = ({
         actHash: rawActionInfo.getActhash(),
-        blkHash: rawActionInfo.getBlkhash()
+        blkHash: rawActionInfo.getBlkhash(),
+        timestamp: rawActionInfo.getTimestamp(),
       } as any) as IActionInfo;
 
       const rawAction = rawActionInfo.getAction();
