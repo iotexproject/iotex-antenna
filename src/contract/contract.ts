@@ -38,9 +38,9 @@ export class Contract {
         continue;
       }
 
-      // @ts-ignore
       this.methods[func] = async (
         executeParameter: MethodExecuteParameter,
+        // @ts-ignore
         ...args
       ) => {
         if (!this.address || !this.abi) {
@@ -51,6 +51,7 @@ export class Contract {
         if (!abiFunc.inputs || !Array.isArray(abiFunc.inputs)) {
           return userInput;
         }
+        // tslint:disable-next-line: no-any
         abiFunc.inputs.map((val: any, i: number) => {
           // @ts-ignore
           userInput[val.name] = args[i];

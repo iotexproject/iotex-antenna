@@ -127,16 +127,18 @@ accountTest("executeContract", async t => {
   const output = solc.compile(input.toString(), 1);
   const contract = output.contracts[contractName];
 
-  const hash = await antenna.iotx.executeContract({
-    from: creator.address,
-    contractAddress: "io186s45j3rgvhxh25ec6xk9wap0drtthk3jq4du7",
-    abi: contract.interface,
-    amount: "0",
-    method: "set",
-    input: { x: 100 },
-    gasPrice: "1",
-    gasLimit: "1000000"
-  });
+  const hash = await antenna.iotx.executeContract(
+    {
+      from: creator.address,
+      contractAddress: "io186s45j3rgvhxh25ec6xk9wap0drtthk3jq4du7",
+      abi: contract.interface,
+      amount: "0",
+      method: "set",
+      gasPrice: "1",
+      gasLimit: "1000000"
+    },
+    102
+  );
 
   t.truthy(hash);
 });
@@ -168,7 +170,6 @@ accountTest("readContractByMethod", async t => {
     contractAddress: "io186s45j3rgvhxh25ec6xk9wap0drtthk3jq4du7",
     abi: contract.interface,
     method: "get",
-    input: {},
     gasPrice: "1",
     gasLimit: "1000000"
   });

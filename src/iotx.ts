@@ -6,7 +6,6 @@ import RpcMethod from "./rpc-method";
 import {
   ContractRequest,
   ExecuteContractRequest,
-  ReadContractByMethodRequest,
   TransferRequest
 } from "./types";
 
@@ -49,7 +48,12 @@ export class Iotx extends RpcMethod {
   }
 
   // return action hash
-  public executeContract(req: ExecuteContractRequest): Promise<string> {
+  // @ts-ignore
+  // tslint:disable-next-line: typedef
+  public executeContract(
+    req: ExecuteContractRequest,
+    ...args
+  ): Promise<string> {
     const sender = this.accounts.getAccount(req.from);
     if (!sender) {
       throw new Error(`can not found account: ${req.from}`);
@@ -57,14 +61,16 @@ export class Iotx extends RpcMethod {
 
     const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
     const contract = new Contract(JSON.parse(req.abi), req.contractAddress);
-    const methodEnvelop = contract.encodeMethod(
-      req.amount || "0",
-      req.method,
-      req.input,
-      req.gasLimit,
-      price
+    return contract.methods[req.method](
+      {
+        client: this,
+        account: sender,
+        amount: req.amount,
+        gasLimit: req.gasLimit,
+        gasPrice: price
+      },
+      ...args
     );
-    return new ExecutionMethod(this, sender, methodEnvelop).execute();
   }
 
   public async readContractByHash(hash: string): Promise<string> {
@@ -77,8 +83,11 @@ export class Iotx extends RpcMethod {
     return result.data;
   }
 
+  // @ts-ignore
+  // tslint:disable-next-line: typedef
   public async readContractByMethod(
-    req: ReadContractByMethodRequest
+    req: ExecuteContractRequest,
+    ...args
   ): Promise<string> {
     const sender = this.accounts.getAccount(req.from);
     if (!sender) {
@@ -87,19 +96,14 @@ export class Iotx extends RpcMethod {
 
     const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
     const contract = new Contract(JSON.parse(req.abi), req.contractAddress);
-    const methodEnvelop = contract.encodeMethod(
-      "0",
-      req.method,
-      req.input,
-      req.gasLimit,
-      price
+    return contract.methods[req.method](
+      {
+        client: this,
+        account: sender,
+        gasLimit: req.gasLimit,
+        gasPrice: price
+      },
+      ...args
     );
-    const action = await new ExecutionMethod(
-      this,
-      sender,
-      methodEnvelop
-    ).sign();
-    const result = await this.readContract({ action: action });
-    return result.data;
   }
 }

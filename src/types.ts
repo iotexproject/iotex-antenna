@@ -63,20 +63,6 @@ export interface ExecuteContractRequest {
   abi: string;
   contractAddress: string;
   method: string;
-  // tslint:disable-next-line:no-any
-  input: { [key: string]: any };
-  gasLimit?: string;
-  gasPrice?: string;
-}
-
-export interface ReadContractByMethodRequest {
-  from: string;
-  abi: string;
-  contractAddress: string;
-  // read view contract method
-  method: string;
-  // tslint:disable-next-line:no-any
-  input: { [key: string]: any };
   gasLimit?: string;
   gasPrice?: string;
 }
