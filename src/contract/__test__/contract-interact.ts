@@ -10,6 +10,7 @@ import { Account } from "../../account/account";
 import { ExecutionMethod } from "../../action/method";
 import RpcMethod from "../../rpc-method";
 import { encodeInputData, getAbiFunctions } from "../abi-to-byte";
+import { Contract } from "../contract";
 
 dotenv.config();
 
@@ -98,5 +99,54 @@ test.skip("Contract_get_SimpleStorage", async t => {
   const action = await method.sign();
 
   const result = await client.readContract({ action: action });
+  t.truthy(result);
+});
+
+test.skip("Contract_method_get_SimpleStorage", async t => {
+  const solFile = "./SimpleStorage.sol";
+  const contractName = ":SimpleStorage";
+  const input = fs.readFileSync(path.resolve(__dirname, solFile));
+  const output = solc.compile(input.toString(), 1);
+  const contractDef = output.contracts[contractName];
+
+  const contract = new Contract(
+    JSON.parse(contractDef.interface),
+    "io186s45j3rgvhxh25ec6xk9wap0drtthk3jq4du7"
+  );
+
+  const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
+  const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
+  const result = await contract.methods.get({
+    client: client,
+    account: sender,
+    gasLimit: "1000000",
+    gasPrice: "1000000000000"
+  });
+  t.truthy(result);
+});
+
+test.skip("Contract_method_set_SimpleStorage", async t => {
+  const solFile = "./SimpleStorage.sol";
+  const contractName = ":SimpleStorage";
+  const input = fs.readFileSync(path.resolve(__dirname, solFile));
+  const output = solc.compile(input.toString(), 1);
+  const contractDef = output.contracts[contractName];
+
+  const contract = new Contract(
+    JSON.parse(contractDef.interface),
+    "io186s45j3rgvhxh25ec6xk9wap0drtthk3jq4du7"
+  );
+
+  const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
+  const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
+  const result = await contract.methods.set(
+    {
+      client: client,
+      account: sender,
+      gasLimit: "1000000",
+      gasPrice: "1000000000000"
+    },
+    101
+  );
   t.truthy(result);
 });

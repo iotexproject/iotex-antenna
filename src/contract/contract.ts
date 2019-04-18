@@ -1,5 +1,7 @@
-// @ts-ignore
+import { IAccount } from "../account/account";
+import { ExecutionMethod } from "../action/method";
 import { Execution } from "../action/types";
+import { IRpcMethod } from "../rpc-method/types";
 import { AbiByFunc, encodeInputData, getAbiFunctions } from "./abi-to-byte";
 
 export type Options = {
@@ -17,6 +19,8 @@ export class Contract {
   // The options of the contract.
   private readonly options?: Options;
 
+  public readonly methods: { [funcName: string]: Function };
+
   // tslint:disable-next-line: no-any
   constructor(jsonInterface?: Array<any>, address?: string, options?: Options) {
     if (jsonInterface) {
@@ -24,6 +28,57 @@ export class Contract {
     }
     this.address = address;
     this.options = options;
+
+    // mount methods
+    this.methods = {};
+    // tslint:disable-next-line: no-for-in
+    for (const func in this.abi) {
+      if (!this.abi.hasOwnProperty(func)) {
+        // eslint-disable-next-line no-continue
+        continue;
+      }
+
+      // @ts-ignore
+      this.methods[func] = async (
+        executeParameter: MethodExecuteParameter,
+        ...args
+      ) => {
+        if (!this.address || !this.abi) {
+          throw new Error("must set contract address and abi");
+        }
+        const abiFunc = this.abi[func];
+        const userInput = {};
+        if (!abiFunc.inputs || !Array.isArray(abiFunc.inputs)) {
+          return userInput;
+        }
+        abiFunc.inputs.map((val: any, i: number) => {
+          // @ts-ignore
+          userInput[val.name] = args[i];
+        });
+
+        const methodEnvelop = this.encodeMethod(
+          executeParameter.amount || "0",
+          func,
+          userInput,
+          executeParameter.gasLimit,
+          executeParameter.gasPrice
+        );
+        const method = new ExecutionMethod(
+          executeParameter.client,
+          executeParameter.account,
+          methodEnvelop
+        );
+
+        if (abiFunc.stateMutability.toLowerCase() === "view") {
+          const action = await method.sign();
+          const result = await executeParameter.client.readContract({
+            action: action
+          });
+          return result.data;
+        }
+        return method.execute();
+      };
+    }
   }
 
   // tslint:disable-next-line: no-any
@@ -71,4 +126,12 @@ export class Contract {
       data: Buffer.from(encodeInputData(this.abi, method, input), "hex")
     };
   }
+}
+
+export interface MethodExecuteParameter {
+  client: IRpcMethod;
+  account: IAccount;
+  amount?: string;
+  gasLimit?: string;
+  gasPrice?: string;
 }
