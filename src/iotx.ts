@@ -48,10 +48,10 @@ export class Iotx extends RpcMethod {
   }
 
   // return action hash
-  // @ts-ignore
-  // tslint:disable-next-line: typedef
   public executeContract(
     req: ExecuteContractRequest,
+    // @ts-ignore
+    // tslint:disable-next-line: typedef
     ...args
   ): Promise<string> {
     const sender = this.accounts.getAccount(req.from);
@@ -83,10 +83,10 @@ export class Iotx extends RpcMethod {
     return result.data;
   }
 
-  // @ts-ignore
-  // tslint:disable-next-line: typedef
   public async readContractByMethod(
     req: ExecuteContractRequest,
+    // @ts-ignore
+    // tslint:disable-next-line: typedef
     ...args
   ): Promise<string> {
     const sender = this.accounts.getAccount(req.from);
