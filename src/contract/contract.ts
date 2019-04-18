@@ -47,13 +47,16 @@ export class Contract {
       }
 
       this.methods[func] = async (
-        executeParameter: MethodExecuteParameter,
         // @ts-ignore
         ...args
       ) => {
         if (!this.address || !this.abi) {
           throw new Error("must set contract address and abi");
         }
+        if (args.length < 1) {
+          throw new Error("must set method execute parameter");
+        }
+        const executeParameter = args[args.length - 1];
         const abiFunc = this.abi[func];
         const userInput = {};
         if (!abiFunc.inputs || !Array.isArray(abiFunc.inputs)) {

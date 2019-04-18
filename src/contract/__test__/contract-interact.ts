@@ -141,13 +141,10 @@ test.skip("Contract_method_set_SimpleStorage", async t => {
   );
 
   const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
-  const result = await contract.methods.set(
-    {
-      account: sender,
-      gasLimit: "1000000",
-      gasPrice: "1000000000000"
-    },
-    101
-  );
+  const result = await contract.methods.set(101, {
+    account: sender,
+    gasLimit: "1000000",
+    gasPrice: "1000000000000"
+  });
   t.truthy(result);
 });

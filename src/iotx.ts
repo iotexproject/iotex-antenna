@@ -64,15 +64,12 @@ export class Iotx extends RpcMethod {
       JSON.parse(req.abi),
       req.contractAddress
     );
-    return contract.methods[req.method](
-      {
-        account: sender,
-        amount: req.amount,
-        gasLimit: req.gasLimit,
-        gasPrice: price
-      },
-      ...args
-    );
+    return contract.methods[req.method](...args, {
+      account: sender,
+      amount: req.amount,
+      gasLimit: req.gasLimit,
+      gasPrice: price
+    });
   }
 
   public async readContractByHash(hash: string): Promise<string> {
@@ -102,13 +99,10 @@ export class Iotx extends RpcMethod {
       JSON.parse(req.abi),
       req.contractAddress
     );
-    return contract.methods[req.method](
-      {
-        account: sender,
-        gasLimit: req.gasLimit,
-        gasPrice: price
-      },
-      ...args
-    );
+    return contract.methods[req.method](...args, {
+      account: sender,
+      gasLimit: req.gasLimit,
+      gasPrice: price
+    });
   }
 }
