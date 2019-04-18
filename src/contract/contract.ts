@@ -23,9 +23,9 @@ export class Contract {
 
   public readonly methods: { [funcName: string]: Function };
 
-  // tslint:disable-next-line: no-any
   constructor(
     provider: IRpcMethod,
+    // tslint:disable-next-line: no-any
     jsonInterface?: Array<any>,
     address?: string,
     options?: Options
