@@ -109,15 +109,15 @@ test.skip("Contract_method_get_SimpleStorage", async t => {
   const output = solc.compile(input.toString(), 1);
   const contractDef = output.contracts[contractName];
 
+  const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const contract = new Contract(
+    client,
     JSON.parse(contractDef.interface),
     "io186s45j3rgvhxh25ec6xk9wap0drtthk3jq4du7"
   );
 
-  const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
   const result = await contract.methods.get({
-    client: client,
     account: sender,
     gasLimit: "1000000",
     gasPrice: "1000000000000"
@@ -132,16 +132,17 @@ test.skip("Contract_method_set_SimpleStorage", async t => {
   const output = solc.compile(input.toString(), 1);
   const contractDef = output.contracts[contractName];
 
+  const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
+
   const contract = new Contract(
+    client,
     JSON.parse(contractDef.interface),
     "io186s45j3rgvhxh25ec6xk9wap0drtthk3jq4du7"
   );
 
-  const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
   const result = await contract.methods.set(
     {
-      client: client,
       account: sender,
       gasLimit: "1000000",
       gasPrice: "1000000000000"

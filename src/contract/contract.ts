@@ -19,10 +19,18 @@ export class Contract {
   // The options of the contract.
   private readonly options?: Options;
 
+  private readonly provider: IRpcMethod;
+
   public readonly methods: { [funcName: string]: Function };
 
   // tslint:disable-next-line: no-any
-  constructor(jsonInterface?: Array<any>, address?: string, options?: Options) {
+  constructor(
+    provider: IRpcMethod,
+    jsonInterface?: Array<any>,
+    address?: string,
+    options?: Options
+  ) {
+    this.provider = provider;
     if (jsonInterface) {
       this.abi = getAbiFunctions(jsonInterface);
     }
@@ -65,14 +73,14 @@ export class Contract {
           executeParameter.gasPrice
         );
         const method = new ExecutionMethod(
-          executeParameter.client,
+          this.provider,
           executeParameter.account,
           methodEnvelop
         );
 
         if (abiFunc.stateMutability.toLowerCase() === "view") {
           const action = await method.sign();
-          const result = await executeParameter.client.readContract({
+          const result = await this.provider.readContract({
             action: action
           });
           return result.data;
@@ -91,17 +99,27 @@ export class Contract {
     return this.address;
   }
 
-  public deploy(gasLimit?: string | undefined, gasPrice?: string): Execution {
+  public async deploy(
+    account: IAccount,
+    gasLimit?: string | undefined,
+    gasPrice?: string
+  ): Promise<string> {
     if (!this.options) {
       throw new Error("must set contract byte code");
     }
-    return {
+
+    const contractEnvelop = {
       gasLimit: gasLimit,
       gasPrice: gasPrice,
       contract: "",
       amount: "0",
       data: this.options.data
     };
+    return new ExecutionMethod(
+      this.provider,
+      account,
+      contractEnvelop
+    ).execute();
   }
 
   public encodeMethod(
@@ -130,7 +148,6 @@ export class Contract {
 }
 
 export interface MethodExecuteParameter {
-  client: IRpcMethod;
   account: IAccount;
   amount?: string;
   gasLimit?: string;

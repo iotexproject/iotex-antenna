@@ -109,6 +109,7 @@ accountTest("deployContract", async t => {
     from: creator.address,
     amount: "0",
     data: Buffer.from(contract.bytecode, "hex"),
+    gasPrice: "1",
     gasLimit: "1000000"
   });
 

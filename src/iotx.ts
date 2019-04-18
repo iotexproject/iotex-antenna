@@ -1,6 +1,6 @@
 import { Accounts } from "./account/accounts";
 import { toRau } from "./account/utils";
-import { ExecutionMethod, TransferMethod } from "./action/method";
+import { TransferMethod } from "./action/method";
 import { Contract } from "./contract/contract";
 import RpcMethod from "./rpc-method";
 import {
@@ -41,10 +41,9 @@ export class Iotx extends RpcMethod {
     }
 
     const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
-    const contractEnvelop = new Contract(undefined, undefined, {
+    return new Contract(this, undefined, undefined, {
       data: req.data
-    }).deploy(req.gasLimit, price);
-    return new ExecutionMethod(this, sender, contractEnvelop).execute();
+    }).deploy(sender, req.gasLimit, price);
   }
 
   // return action hash
@@ -60,10 +59,13 @@ export class Iotx extends RpcMethod {
     }
 
     const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
-    const contract = new Contract(JSON.parse(req.abi), req.contractAddress);
+    const contract = new Contract(
+      this,
+      JSON.parse(req.abi),
+      req.contractAddress
+    );
     return contract.methods[req.method](
       {
-        client: this,
         account: sender,
         amount: req.amount,
         gasLimit: req.gasLimit,
@@ -95,10 +97,13 @@ export class Iotx extends RpcMethod {
     }
 
     const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
-    const contract = new Contract(JSON.parse(req.abi), req.contractAddress);
+    const contract = new Contract(
+      this,
+      JSON.parse(req.abi),
+      req.contractAddress
+    );
     return contract.methods[req.method](
       {
-        client: this,
         account: sender,
         gasLimit: req.gasLimit,
         gasPrice: price
