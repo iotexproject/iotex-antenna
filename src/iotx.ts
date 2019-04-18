@@ -1,9 +1,13 @@
 import { Accounts } from "./account/accounts";
 import { toRau } from "./account/utils";
-import { ExecutionMethod, TransferMethod } from "./action/method";
+import { TransferMethod } from "./action/method";
 import { Contract } from "./contract/contract";
 import RpcMethod from "./rpc-method";
-import { ContractRequest, TransferRequest } from "./types";
+import {
+  ContractRequest,
+  ExecuteContractRequest,
+  TransferRequest
+} from "./types";
 
 export class Iotx extends RpcMethod {
   public accounts: Accounts;
@@ -29,6 +33,7 @@ export class Iotx extends RpcMethod {
     }).execute();
   }
 
+  // return action hash
   public deployContract(req: ContractRequest): Promise<string> {
     const sender = this.accounts.getAccount(req.from);
     if (!sender) {
@@ -36,11 +41,68 @@ export class Iotx extends RpcMethod {
     }
 
     const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
-    const contractEnvelop = new Contract(undefined, undefined, {
+    return new Contract(this, undefined, undefined, {
       data: req.data
-    }).deploy();
-    contractEnvelop.gasLimit = req.gasLimit;
-    contractEnvelop.gasPrice = price;
-    return new ExecutionMethod(this, sender, contractEnvelop).execute();
+    }).deploy(sender, req.gasLimit, price);
+  }
+
+  // return action hash
+  public executeContract(
+    req: ExecuteContractRequest,
+    // @ts-ignore
+    // tslint:disable-next-line: typedef
+    ...args
+  ): Promise<string> {
+    const sender = this.accounts.getAccount(req.from);
+    if (!sender) {
+      throw new Error(`can not found account: ${req.from}`);
+    }
+
+    const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
+    const contract = new Contract(
+      this,
+      JSON.parse(req.abi),
+      req.contractAddress
+    );
+    return contract.methods[req.method](...args, {
+      account: sender,
+      amount: req.amount,
+      gasLimit: req.gasLimit,
+      gasPrice: price
+    });
+  }
+
+  public async readContractByHash(hash: string): Promise<string> {
+    const actions = await this.getActions({
+      byHash: { actionHash: hash, checkingPending: true }
+    });
+    const result = await this.readContract({
+      action: actions.actionInfo[0].action
+    });
+    return result.data;
+  }
+
+  public async readContractByMethod(
+    req: ExecuteContractRequest,
+    // @ts-ignore
+    // tslint:disable-next-line: typedef
+    ...args
+  ): Promise<string> {
+    const sender = this.accounts.getAccount(req.from);
+    if (!sender) {
+      throw new Error(`can not found account: ${req.from}`);
+    }
+
+    const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
+    const contract = new Contract(
+      this,
+      JSON.parse(req.abi),
+      req.contractAddress
+    );
+    return contract.methods[req.method](...args, {
+      account: sender,
+      gasLimit: req.gasLimit,
+      gasPrice: price
+    });
   }
 }

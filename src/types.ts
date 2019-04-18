@@ -56,3 +56,13 @@ export interface ContractRequest {
   gasLimit?: string;
   gasPrice?: string;
 }
+
+export interface ExecuteContractRequest {
+  from: string;
+  amount?: string;
+  abi: string;
+  contractAddress: string;
+  method: string;
+  gasLimit?: string;
+  gasPrice?: string;
+}
