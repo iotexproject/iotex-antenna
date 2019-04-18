@@ -35,11 +35,13 @@ export class Contract {
     return this.address;
   }
 
-  public deploy(): Execution {
+  public deploy(gasLimit?: string | undefined, gasPrice?: string): Execution {
     if (!this.options) {
       throw new Error("must set contract byte code");
     }
     return {
+      gasLimit: gasLimit,
+      gasPrice: gasPrice,
       contract: "",
       amount: "0",
       data: this.options.data
@@ -50,7 +52,9 @@ export class Contract {
     amount: string,
     method: string,
     // tslint:disable-next-line:no-any
-    input: { [key: string]: any }
+    input: { [key: string]: any },
+    gasLimit?: string | undefined,
+    gasPrice?: string
   ): Execution {
     if (!this.address || !this.abi) {
       throw new Error("must set contract address and abi");
@@ -60,6 +64,8 @@ export class Contract {
     }
 
     return {
+      gasLimit: gasLimit,
+      gasPrice: gasPrice,
       contract: this.address,
       amount: amount,
       data: Buffer.from(encodeInputData(this.abi, method, input), "hex")
