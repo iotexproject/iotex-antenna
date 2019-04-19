@@ -1,3 +1,14 @@
+2019-04-19 - 0.12.0 (4aa677e)
+4aa677e (HEAD -> master, origin/master, origin/HEAD) minor adjust
+ab8df73 Update circleci/node:10.15.3-browsers-legacy Docker digest to a0b4551 (#175)
+822963a Contract interact (#171)
+7072434 Update dependency @types/node to v11.13.5 (#173)
+36cfd96 Update dependency tslint to v5.16.0 (#167)
+e0c2b4e Update circleci/node:10.15.3-browsers-legacy Docker digest to cfde13b (#168)
+29b674f Update dependency grpc to v1.20.0 (#172)
+03d4348 (tag: v0.11.2) 0.11.2
+
+
 2019-04-17 - 0.11.2 (5dc339d)
 5dc339d (HEAD -> master) remove solc from contract.ts
 c4dd219 (tag: v0.11.1, origin/master, origin/HEAD) 0.11.1
