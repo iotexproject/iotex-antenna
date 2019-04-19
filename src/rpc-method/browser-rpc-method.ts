@@ -19,11 +19,14 @@ import {
   IGetServerMetaResponse,
   IReadContractRequest,
   IReadContractResponse,
+  IReadStateRequest,
+  IReadStateResponse,
   IRpcMethod,
   ISendActionRequest,
   ISendActionResponse,
   ISuggestGasPriceRequest,
   ISuggestGasPriceResponse,
+  ReadStateRequest,
   SendActionResponse
 } from "./types";
 
@@ -125,6 +128,14 @@ export default class RpcMethod implements IRpcMethod {
       deadline: this.getDeadline()
     });
     return EstimateGasForActionRequest.from(pbResp);
+  }
+
+  public async readState(req: IReadStateRequest): Promise<IReadStateResponse> {
+    const pbReq = ReadStateRequest.to(req);
+    const pbResp = await this.client.readState(pbReq, {
+      deadline: this.getDeadline()
+    });
+    return ReadStateRequest.from(pbResp);
   }
 
   public async readContract(

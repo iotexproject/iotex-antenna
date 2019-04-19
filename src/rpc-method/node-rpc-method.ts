@@ -20,6 +20,8 @@ import {
   IGetServerMetaResponse,
   IReadContractRequest,
   IReadContractResponse,
+  IReadStateRequest,
+  IReadStateResponse,
   IRpcMethod,
   ISendActionRequest,
   ISendActionResponse,
@@ -154,6 +156,12 @@ export default class RpcMethod implements IRpcMethod {
     );
     // @ts-ignore
     return estimateGasForAction(req, { deadline: this.getDeadline() });
+  }
+
+  public async readState(req: IReadStateRequest): Promise<IReadStateResponse> {
+    const readState = promisify(this.client.readState.bind(this.client));
+    // @ts-ignore
+    return readState(req, { deadline: this.getDeadline() });
   }
 
   public async getEpochMeta(
