@@ -216,9 +216,9 @@ test.serial("RpcMethod.estimateGasForAction", async t => {
 test.serial("RpcMethod.readState", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   const state = await client.readState({
-    protocolID: Buffer.from("rewarding", "hex"),
-    methodName: Buffer.from("UnclaimedBalance", "hex"),
-    arguments: [Buffer.from("io1ph0u2psnd7muq5xv9623rmxdsxc4uapxhzpg02", "hex")]
+    protocolID: Buffer.from("rewarding"),
+    methodName: Buffer.from("UnclaimedBalance"),
+    arguments: [Buffer.from("io1ph0u2psnd7muq5xv9623rmxdsxc4uapxhzpg02")]
   });
   t.truthy(state.data);
 });
