@@ -101,7 +101,7 @@
     "tslint-config-prettier": "1.18.0",
     "tslint-microsoft-contrib": "6.1.1",
     "tslint-require-connnect-typing": "1.0.1",
-    "typescript": "3.4.3"
+    "typescript": "3.4.4"
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.4.0",
