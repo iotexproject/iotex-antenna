@@ -17,6 +17,7 @@
     "promise-function-async": false,
     "no-unnecessary-qualifier": false,
     "no-void-expression": false,
+    "no-banned-terms": false,
     "await-promise": false,
     "no-require-imports": false,
     "no-duplicate-imports": false,

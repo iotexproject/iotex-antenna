@@ -213,6 +213,16 @@ test.serial("RpcMethod.estimateGasForAction", async t => {
   }
 });
 
+test.serial("RpcMethod.readState", async t => {
+  const client = new RpcMethod(TEST_HOSTNAME);
+  const state = await client.readState({
+    protocolID: Buffer.from("rewarding"),
+    methodName: Buffer.from("UnclaimedBalance"),
+    arguments: [Buffer.from("io1ph0u2psnd7muq5xv9623rmxdsxc4uapxhzpg02")]
+  });
+  t.truthy(state.data);
+});
+
 test.serial("RpcMethod.getEpochMeta", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   const epochData = await client.getEpochMeta({ epochNumber: 1 });
