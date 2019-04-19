@@ -6,7 +6,8 @@ import { AbiByFunc, encodeInputData, getAbiFunctions } from "./abi-to-byte";
 
 export type Options = {
   // The byte code of the contract. Used when the contract gets deployed
-  data: Buffer;
+  data?: Buffer;
+  provider?: IRpcMethod;
 };
 
 export class Contract {
@@ -19,18 +20,21 @@ export class Contract {
   // The options of the contract.
   private readonly options?: Options;
 
-  private readonly provider: IRpcMethod;
+  public provider?: IRpcMethod;
 
   public readonly methods: { [funcName: string]: Function };
 
+  public setProvider(provider: IRpcMethod): void {
+    this.provider = provider;
+  }
+
   constructor(
-    provider: IRpcMethod,
     // tslint:disable-next-line: no-any
     jsonInterface?: Array<any>,
     address?: string,
     options?: Options
   ) {
-    this.provider = provider;
+    this.provider = options && options.provider;
     if (jsonInterface) {
       this.abi = getAbiFunctions(jsonInterface);
     }
@@ -55,6 +59,9 @@ export class Contract {
         }
         if (args.length < 1) {
           throw new Error("must set method execute parameter");
+        }
+        if (!this.provider) {
+          throw new Error("no rpc method provider specified");
         }
         const executeParameter = args[args.length - 1];
         const abiFunc = this.abi[func];
@@ -110,13 +117,16 @@ export class Contract {
     if (!this.options) {
       throw new Error("must set contract byte code");
     }
+    if (!this.provider) {
+      throw new Error("no rpc method provider specified");
+    }
 
     const contractEnvelop = {
       gasLimit: gasLimit,
       gasPrice: gasPrice,
       contract: "",
       amount: "0",
-      data: this.options.data
+      data: this.options.data || Buffer.from([])
     };
     return new ExecutionMethod(
       this.provider,

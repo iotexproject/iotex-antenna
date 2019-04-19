@@ -41,8 +41,9 @@ export class Iotx extends RpcMethod {
     }
 
     const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
-    return new Contract(this, undefined, undefined, {
-      data: req.data
+    return new Contract(undefined, undefined, {
+      data: req.data,
+      provider: this
     }).deploy(sender, req.gasLimit, price);
   }
 
@@ -59,11 +60,9 @@ export class Iotx extends RpcMethod {
     }
 
     const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
-    const contract = new Contract(
-      this,
-      JSON.parse(req.abi),
-      req.contractAddress
-    );
+    const contract = new Contract(JSON.parse(req.abi), req.contractAddress, {
+      provider: this
+    });
     return contract.methods[req.method](...args, {
       account: sender,
       amount: req.amount,
@@ -94,11 +93,9 @@ export class Iotx extends RpcMethod {
     }
 
     const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
-    const contract = new Contract(
-      this,
-      JSON.parse(req.abi),
-      req.contractAddress
-    );
+    const contract = new Contract(JSON.parse(req.abi), req.contractAddress, {
+      provider: this
+    });
     return contract.methods[req.method](...args, {
       account: sender,
       gasLimit: req.gasLimit,

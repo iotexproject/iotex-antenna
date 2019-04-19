@@ -68,7 +68,9 @@ accountTest("transfer", async t => {
   const hash = await antenna.iotx.sendTransfer({
     from: acctHavingIotx.address,
     to: acctNew.address,
-    value: oneIotx
+    value: oneIotx,
+    gasLimit: "100000",
+    gasPrice: "1"
   });
   t.truthy(hash);
 
