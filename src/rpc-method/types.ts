@@ -5,7 +5,8 @@ import apiPb, {
   GetAccountResponse,
   GetActionsResponse,
   GetReceiptByActionResponse,
-  GetServerMetaResponse
+  GetServerMetaResponse,
+  ReadStateResponse
 } from "../../protogen/proto/api/api_pb";
 import actionPb, { PutPollResult } from "../../protogen/proto/types/action_pb";
 
@@ -1485,7 +1486,7 @@ export const GetActionsRequest = {
       const actionInfo = ({
         actHash: rawActionInfo.getActhash(),
         blkHash: rawActionInfo.getBlkhash(),
-        timestamp: rawActionInfo.getTimestamp(),
+        timestamp: rawActionInfo.getTimestamp()
       } as any) as IActionInfo;
 
       const rawAction = rawActionInfo.getAction();
@@ -1810,6 +1811,31 @@ export const EstimateGasForActionRequest = {
   }
 };
 
+export interface IReadStateRequest {
+  protocolID: Buffer;
+  methodName: Buffer;
+  arguments: Array<Buffer>;
+}
+
+export interface IReadStateResponse {
+  data: Buffer | {};
+}
+
+export const ReadStateRequest = {
+  to(req: IReadStateRequest): apiPb.ReadStateRequest {
+    const pbReq = new apiPb.ReadStateRequest();
+    pbReq.setProtocolid(req.protocolID);
+    pbReq.setMethodname(req.methodName);
+    pbReq.setArgumentsList(req.arguments);
+    return pbReq;
+  },
+  from(pbRes: ReadStateResponse): IReadStateResponse {
+    return {
+      data: pbRes.getData()
+    };
+  }
+};
+
 // Properties of a BlockProducerInfo.
 export interface IBlockProducerInfo {
   // BlockProducerInfo address
@@ -1901,7 +1927,7 @@ export interface IRpcMethod {
   readContract(req: IReadContractRequest): Promise<IReadContractResponse>;
 
   sendAction(req: ISendActionRequest): Promise<ISendActionResponse>;
-
+  readState(req: IReadStateRequest): Promise<IReadStateResponse>;
   estimateGasForAction(
     req: IEstimateGasForActionRequest
   ): Promise<IEstimateGasForActionResponse>;
