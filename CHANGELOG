@@ -1,3 +1,11 @@
+2019-04-20 - 0.13.0 (beb3a6a)
+beb3a6a (HEAD -> master, origin/master, origin/HEAD) #183 add node-rpc-method ClaimFromRewardingFund (#184)
+3e60f32 Update circleci/node:10.15.3-browsers-legacy Docker digest to 5b58c03 (#177)
+347c05f Update dependency typescript to v3.4.4 (#176)
+96b5f4a #178 add readState to RpcMethod  (#179)
+eb1b8c6 (tag: v0.12.0) 0.12.0
+
+
 2019-04-19 - 0.12.0 (4aa677e)
 4aa677e (HEAD -> master, origin/master, origin/HEAD) minor adjust
 ab8df73 Update circleci/node:10.15.3-browsers-legacy Docker digest to a0b4551 (#175)
