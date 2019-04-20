@@ -190,7 +190,7 @@ accountTest("claim from rewarding fund", async t => {
     amount: "0",
     gasPrice: "1",
     gasLimit: "1000000",
-    data: Buffer.from("test", "hex")
+    data: Buffer.from("test")
   });
   t.truthy(hash);
 });
