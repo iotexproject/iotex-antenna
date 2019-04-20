@@ -179,3 +179,18 @@ accountTest("readContractByMethod", async t => {
 
   t.truthy(result);
 });
+
+accountTest("claim from rewarding fund", async t => {
+  const antenna = new Antenna(IOTEX_CORE);
+  const sender = antenna.iotx.accounts.privateKeyToAccount(
+    TEST_PRIVATE_KEY_HAVING_IOTX
+  );
+  const hash = await antenna.iotx.claimFromRewardingFund({
+    from: sender.address,
+    amount: "0",
+    gasPrice: "1",
+    gasLimit: "1000000",
+    data: Buffer.from("test")
+  });
+  t.truthy(hash);
+});

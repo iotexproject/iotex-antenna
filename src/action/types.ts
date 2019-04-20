@@ -19,3 +19,8 @@ export interface Execution extends BaseActionRequest {
   // Execution data
   data: Buffer;
 }
+
+export interface ClaimFromRewardingFund extends BaseActionRequest {
+  amount: string;
+  data: Buffer | {};
+}

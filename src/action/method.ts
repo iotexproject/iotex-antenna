@@ -1,7 +1,7 @@
 import { Account } from "../account/account";
 import { IAction, IRpcMethod } from "../rpc-method/types";
 import { Envelop, SealedEnvelop } from "./envelop";
-import { Execution, Transfer } from "./types";
+import { ClaimFromRewardingFund, Execution, Transfer } from "./types";
 
 export class AbstractMethod {
   public client: IRpcMethod;
@@ -119,6 +119,46 @@ export class ExecutionMethod extends AbstractMethod {
       amount: this.execution.amount,
       contract: this.execution.contract,
       data: this.execution.data
+    };
+
+    const selp = await this.signAction(envelop);
+    return selp.action();
+  }
+}
+
+export class ClaimFromRewardingFundMethod extends AbstractMethod {
+  public claimFronRewardFund: ClaimFromRewardingFund;
+
+  constructor(
+    client: IRpcMethod,
+    account: Account,
+    claim: ClaimFromRewardingFund
+  ) {
+    super(client, account);
+    this.claimFronRewardFund = claim;
+  }
+
+  public async execute(): Promise<string> {
+    const envelop = await this.baseEnvelop(
+      this.claimFronRewardFund.gasLimit,
+      this.claimFronRewardFund.gasPrice
+    );
+    envelop.claimFromRewardingFund = {
+      amount: this.claimFronRewardFund.amount,
+      data: this.claimFronRewardFund.data
+    };
+
+    return this.sendAction(envelop);
+  }
+
+  public async sign(): Promise<IAction> {
+    const envelop = await this.baseEnvelop(
+      this.claimFronRewardFund.gasLimit,
+      this.claimFronRewardFund.gasPrice
+    );
+    envelop.claimFromRewardingFund = {
+      amount: this.claimFronRewardFund.amount,
+      data: this.claimFronRewardFund.data
     };
 
     const selp = await this.signAction(envelop);
