@@ -1,8 +1,9 @@
 import { Accounts } from "./account/accounts";
 import { toRau } from "./account/utils";
-import { TransferMethod } from "./action/method";
+import { TransferMethod, ClaimFronRewardingFundMethod } from "./action/method";
 import { Contract } from "./contract/contract";
 import RpcMethod from "./rpc-method";
+import { ClaimFromRewardingFundRequset } from "./types";
 import {
   ContractRequest,
   ExecuteContractRequest,
@@ -101,5 +102,22 @@ export class Iotx extends RpcMethod {
       gasLimit: req.gasLimit,
       gasPrice: price
     });
+  }
+
+  public async ClaimFromRewardingFund(
+    req: ClaimFromRewardingFundRequset
+  ): Promise<string> {
+    const sender = this.accounts.getAccount(req.from);
+    if (!sender) {
+      throw new Error(`can not found account: ${req.from}`);
+    }
+
+    const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
+    return new ClaimFronRewardingFundMethod(this, sender, {
+      gasLimit: req.gasLimit,
+      gasPrice: price,
+      amount: req.amount,
+      data: req.data
+    }).execute();
   }
 }

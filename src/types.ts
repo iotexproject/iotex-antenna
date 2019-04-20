@@ -66,3 +66,11 @@ export interface ExecuteContractRequest {
   gasLimit?: string;
   gasPrice?: string;
 }
+
+export interface ClaimFromRewardingFundRequset {
+  from: string;
+  amount: string;
+  data: Buffer;
+  gasLimit?: string;
+  gasPrice?: string;
+}
