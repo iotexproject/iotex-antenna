@@ -185,7 +185,7 @@ accountTest("claim from rewarding fund", async t => {
   const sender = antenna.iotx.accounts.privateKeyToAccount(
     TEST_PRIVATE_KEY_HAVING_IOTX
   );
-  const hash = await antenna.iotx.ClaimFromRewardingFund({
+  const hash = await antenna.iotx.claimFromRewardingFund({
     from: sender.address,
     amount: "0",
     gasPrice: "1",

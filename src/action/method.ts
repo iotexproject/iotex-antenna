@@ -1,7 +1,7 @@
 import { Account } from "../account/account";
 import { IAction, IRpcMethod } from "../rpc-method/types";
 import { Envelop, SealedEnvelop } from "./envelop";
-import { Execution, Transfer, ClaimFromRewardingFund } from "./types";
+import { ClaimFromRewardingFund, Execution, Transfer } from "./types";
 
 export class AbstractMethod {
   public client: IRpcMethod;
@@ -126,7 +126,7 @@ export class ExecutionMethod extends AbstractMethod {
   }
 }
 
-export class ClaimFronRewardingFundMethod extends AbstractMethod {
+export class ClaimFromRewardingFundMethod extends AbstractMethod {
   public claimFronRewardFund: ClaimFromRewardingFund;
 
   constructor(

@@ -5,7 +5,7 @@ import RpcMethod from "../../rpc-method";
 import {
   ExecutionMethod,
   TransferMethod,
-  ClaimFronRewardingFundMethod
+  ClaimFromRewardingFundMethod
 } from "../method";
 
 dotenv.config();
@@ -66,7 +66,7 @@ test.skip("Execution_execute", async t => {
 test.skip("ClaimFronRewardingFundMethod_execute", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
-  const method = new ClaimFronRewardingFundMethod(client, sender, {
+  const method = new ClaimFromRewardingFundMethod(client, sender, {
     amount: "0",
     gasLimit: "100000",
     gasPrice: "10000000000000",
