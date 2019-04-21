@@ -8,6 +8,7 @@ import sleep from "sleep-promise";
 dotenv.config();
 
 const TEST_HOSTNAME = process.env.IOTEX_CORE || "http://localhost:14014";
+const TEST_HOSTNAME_SSL = "api.testnet.iotex.one:443";
 
 // throttle requests for the ratelimit
 test.beforeEach(async _ => {
@@ -28,6 +29,12 @@ test.serial("RpcMethod.getAccount", async t => {
       numActions: "0"
     }
   });
+});
+
+test.serial("RpcMethod enableSsl", async t => {
+  const client = new RpcMethod(TEST_HOSTNAME_SSL, { enableSsl: true });
+  const resp = await client.getChainMeta({});
+  t.truthy(resp);
 });
 
 test.serial("RpcMethod.getChainMeta", async t => {
