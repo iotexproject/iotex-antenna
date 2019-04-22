@@ -12,7 +12,7 @@
   "scripts": {
     "test": "npm run cover",
     "check-coverage": "nyc check-coverage --lines 65 --functions 60 --Statements 65",
-    "ava": "NODE_ENV=test ava --concurrency 1",
+    "ava": "TS_NODE_TRANSPILE_ONLY=true NODE_ENV=test ava --concurrency 1",
     "server": "node server",
     "lint": "tslint --fix --project tsconfig.json -t stylish",
     "qualitycheck": "npm-run-all typecheck tslint",

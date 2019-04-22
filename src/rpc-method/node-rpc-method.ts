@@ -1,6 +1,7 @@
 import * as protoLoader from "@grpc/proto-loader";
 import grpc from "grpc";
 import { promisify } from "util";
+import { ROOT_CERTS } from "./root-certs";
 import {
   IEstimateGasForActionRequest,
   IEstimateGasForActionResponse,
@@ -44,6 +45,7 @@ const iotexapi = grpc.loadPackageDefinition(packageDefinition).iotexapi;
 
 type Opts = {
   timeout?: number;
+  enableSsl?: boolean;
 };
 
 export default class RpcMethod implements IRpcMethod {
@@ -55,10 +57,14 @@ export default class RpcMethod implements IRpcMethod {
       /^(http:\/\/|https:\/\/)/,
       ""
     );
+    const credentials =
+      options && options.enableSsl
+        ? grpc.credentials.createSsl(Buffer.from(ROOT_CERTS))
+        : grpc.credentials.createInsecure();
     // @ts-ignore
     this.client = new iotexapi.APIService(
       normalizedHostname,
-      grpc.credentials.createInsecure(),
+      credentials,
       null
     );
     this.timeout = options.timeout || 300000;
