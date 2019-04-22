@@ -77,7 +77,7 @@
     "@types/bech32": "1.1.1",
     "@types/dottie": "2.0.3",
     "@types/elliptic": "6.4.5",
-    "@types/node": "11.13.5",
+    "@types/node": "11.13.6",
     "ava": "1.4.1",
     "babel-loader": "8.0.5",
     "babel-plugin-module-resolver": "3.2.0",
