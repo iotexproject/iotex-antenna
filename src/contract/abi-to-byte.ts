@@ -14,12 +14,16 @@ export function getAbiFunctions(abi: Array<any>): AbiByFunc {
     if (f.type === "function") {
       abiFunctions[f.name] = f;
     }
+    if (f.type === "constructor") {
+      /* tslint:disable:no-string-literal */
+      abiFunctions["constructor"] = f;
+    }
   });
 
   return abiFunctions;
 }
 
-function getArgTypes(fnAbi: {
+export function getArgTypes(fnAbi: {
   inputs: Array<{ name: string; type: string }>;
 }): Array<EthAbiDecodeParametersType> {
   const args = [] as Array<EthAbiDecodeParametersType>;

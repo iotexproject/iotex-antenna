@@ -51,6 +51,7 @@ export interface TransferRequest {
 export interface ContractRequest {
   from: string;
   amount?: string;
+  abi: string;
   // contract bytecode
   data: Buffer;
   gasLimit?: string;
