@@ -145,9 +145,9 @@ export class Contract {
         // @ts-ignore
         userInput[val.name] = inputs[i];
       });
-      // @ts-ignore
       data = Buffer.concat([
         data,
+        // @ts-ignore
         Buffer.from(encodeArguments(getArgTypes(abiFunc), userInput), "hex")
       ]);
     }
