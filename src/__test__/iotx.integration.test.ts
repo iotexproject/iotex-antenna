@@ -101,19 +101,23 @@ accountTest("deployContract", async t => {
     TEST_PRIVATE_KEY_HAVING_IOTX
   );
 
-  const solFile = "../contract/__test__/RollDice.sol";
-  const contractName = ":RollDice";
+  const solFile = "../contract/__test__/SimpleStorage.sol";
+  const contractName = ":SimpleStorage";
   const input = fs.readFileSync(path.resolve(__dirname, solFile));
   const output = solc.compile(input.toString(), 1);
   const contract = output.contracts[contractName];
 
-  const hash = await antenna.iotx.deployContract({
-    from: creator.address,
-    amount: "0",
-    data: Buffer.from(contract.bytecode, "hex"),
-    gasPrice: "1",
-    gasLimit: "1000000"
-  });
+  const hash = await antenna.iotx.deployContract(
+    {
+      from: creator.address,
+      amount: "0",
+      abi: contract.interface,
+      data: Buffer.from(contract.bytecode, "hex"),
+      gasPrice: "1",
+      gasLimit: "1000000"
+    },
+    8
+  );
 
   t.truthy(hash);
 });

@@ -14,12 +14,15 @@ export function getAbiFunctions(abi: Array<any>): AbiByFunc {
     if (f.type === "function") {
       abiFunctions[f.name] = f;
     }
+    if (f.type === "constructor") {
+      abiFunctions[Constructor] = f;
+    }
   });
 
   return abiFunctions;
 }
 
-function getArgTypes(fnAbi: {
+export function getArgTypes(fnAbi: {
   inputs: Array<{ name: string; type: string }>;
 }): Array<EthAbiDecodeParametersType> {
   const args = [] as Array<EthAbiDecodeParametersType>;
@@ -71,6 +74,8 @@ export function encodeArguments(
     throw new Error(`failed to rawEncode: ${e.stack}`);
   }
 }
+
+export const Constructor = "constructor";
 
 type UserInput = {
   [key: string]: any;

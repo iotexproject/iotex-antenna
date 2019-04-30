@@ -2,7 +2,14 @@ import { IAccount } from "../account/account";
 import { ExecutionMethod } from "../action/method";
 import { Execution } from "../action/types";
 import { IRpcMethod } from "../rpc-method/types";
-import { AbiByFunc, encodeInputData, getAbiFunctions } from "./abi-to-byte";
+import {
+  AbiByFunc,
+  Constructor,
+  encodeArguments,
+  encodeInputData,
+  getAbiFunctions,
+  getArgTypes
+} from "./abi-to-byte";
 
 export type Options = {
   // The byte code of the contract. Used when the contract gets deployed
@@ -111,6 +118,9 @@ export class Contract {
 
   public async deploy(
     account: IAccount,
+    // @ts-ignore
+    // tslint:disable-next-line: no-any
+    inputs: Array[any],
     gasLimit?: string | undefined,
     gasPrice?: string
   ): Promise<string> {
@@ -121,12 +131,33 @@ export class Contract {
       throw new Error("no rpc method provider specified");
     }
 
+    let data = this.options.data || Buffer.from([]);
+    if (this.abi && this.abi.hasOwnProperty(Constructor)) {
+      const abiFunc = this.abi[Constructor];
+      const userInput = {};
+      // @ts-ignore
+      if (!abiFunc.inputs || !Array.isArray(abiFunc.inputs)) {
+        throw new Error("construtor input error");
+      }
+      // @ts-ignore
+      // tslint:disable-next-line: no-any
+      abiFunc.inputs.map((val: any, i: number) => {
+        // @ts-ignore
+        userInput[val.name] = inputs[i];
+      });
+      data = Buffer.concat([
+        data,
+        // @ts-ignore
+        Buffer.from(encodeArguments(getArgTypes(abiFunc), userInput), "hex")
+      ]);
+    }
+
     const contractEnvelop = {
       gasLimit: gasLimit,
       gasPrice: gasPrice,
       contract: "",
       amount: "0",
-      data: this.options.data || Buffer.from([])
+      data: data
     };
     return new ExecutionMethod(
       this.provider,

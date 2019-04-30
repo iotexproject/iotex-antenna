@@ -35,17 +35,22 @@ export class Iotx extends RpcMethod {
   }
 
   // return action hash
-  public deployContract(req: ContractRequest): Promise<string> {
+  public deployContract(
+    req: ContractRequest,
+    // @ts-ignore
+    // tslint:disable-next-line: typedef
+    ...args
+  ): Promise<string> {
     const sender = this.accounts.getAccount(req.from);
     if (!sender) {
       throw new Error(`can not found account: ${req.from}`);
     }
 
     const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
-    return new Contract(undefined, undefined, {
+    return new Contract(JSON.parse(req.abi), undefined, {
       data: req.data,
       provider: this
-    }).deploy(sender, req.gasLimit, price);
+    }).deploy(sender, args, req.gasLimit, price);
   }
 
   // return action hash
