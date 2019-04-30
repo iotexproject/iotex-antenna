@@ -1,3 +1,18 @@
+2019-04-30 - 0.14.0 (d4c060b)
+d4c060b (HEAD -> master, origin/master, origin/HEAD) add encrypt & decrypt to wallet
+f90d800 Update dependency husky to v2.1.0 (#198)
+d4af13b Enhance contract deploy constructor (#196)
+f8d68f2 Update dependency husky to v2 (#197)
+c57774b Update circleci/node:10.15.3-browsers-legacy Docker digest to aaa2bce
+2ee680d Update dependency @types/node to v11.13.7 (#191)
+0d0788e Update dependency typescript to v3.4.5 (#193)
+1c617d9 Update circleci/node:10.15.3-browsers-legacy Docker digest to 150da9d (#185)
+87b8f99 Update dependency @types/node to v11.13.6 (#180)
+f13e48f add ssl to RpcMethod (#188)
+98f7951 Update circleci/node:10.15.3-browsers-legacy Docker digest to 52ed5af (#182)
+d9e72b0 (tag: v0.13.0) 0.13.0
+
+
 2019-04-20 - 0.13.0 (beb3a6a)
 beb3a6a (HEAD -> master, origin/master, origin/HEAD) #183 add node-rpc-method ClaimFromRewardingFund (#184)
 3e60f32 Update circleci/node:10.15.3-browsers-legacy Docker digest to 5b58c03 (#177)
