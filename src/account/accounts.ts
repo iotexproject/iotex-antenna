@@ -1,5 +1,7 @@
+/* tslint:disable:no-any */
 // @ts-ignore
 import account from "eth-lib/lib/account";
+
 import { IRpcMethod } from "../rpc-method/types";
 import { Account } from "./account";
 import { IAccount } from "./account";
