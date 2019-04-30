@@ -9,7 +9,13 @@ import solc from "solc";
 import { Account } from "../../account/account";
 import { ExecutionMethod } from "../../action/method";
 import RpcMethod from "../../rpc-method";
-import { encodeInputData, getAbiFunctions } from "../abi-to-byte";
+import {
+  Constructor,
+  encodeArguments,
+  encodeInputData,
+  getAbiFunctions,
+  getArgTypes
+} from "../abi-to-byte";
 import { Contract } from "../contract";
 
 dotenv.config();
@@ -30,6 +36,9 @@ test.skip("Contract_deploy_SimpleStorage", async t => {
   const input = fs.readFileSync(path.resolve(__dirname, solFile));
   const output = solc.compile(input.toString(), 1);
   const contract = output.contracts[contractName];
+  const abi = JSON.parse(contract.interface);
+  const abiFunctions = getAbiFunctions(abi);
+  const abiFunc = abiFunctions[Constructor];
 
   const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
@@ -38,7 +47,11 @@ test.skip("Contract_deploy_SimpleStorage", async t => {
     gasLimit: "1000000",
     contract: "",
     amount: "0",
-    data: Buffer.from(contract.bytecode, "hex")
+    data: Buffer.concat([
+      Buffer.from(contract.bytecode, "hex"),
+      // @ts-ignore
+      Buffer.from(encodeArguments(getArgTypes(abiFunc), { _x: 5 }), "hex")
+    ])
   });
   const reps = await method.execute();
   t.truthy(reps);

@@ -4,6 +4,7 @@ import { Execution } from "../action/types";
 import { IRpcMethod } from "../rpc-method/types";
 import {
   AbiByFunc,
+  Constructor,
   encodeArguments,
   encodeInputData,
   getAbiFunctions,
@@ -131,9 +132,8 @@ export class Contract {
     }
 
     let data = this.options.data || Buffer.from([]);
-    if (this.abi && this.abi.hasOwnProperty("constructor")) {
-      /* tslint:disable:no-string-literal */
-      const abiFunc = this.abi["constructor"];
+    if (this.abi && this.abi.hasOwnProperty(Constructor)) {
+      const abiFunc = this.abi[Constructor];
       const userInput = {};
       // @ts-ignore
       if (!abiFunc.inputs || !Array.isArray(abiFunc.inputs)) {

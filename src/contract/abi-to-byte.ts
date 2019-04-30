@@ -15,8 +15,7 @@ export function getAbiFunctions(abi: Array<any>): AbiByFunc {
       abiFunctions[f.name] = f;
     }
     if (f.type === "constructor") {
-      /* tslint:disable:no-string-literal */
-      abiFunctions["constructor"] = f;
+      abiFunctions[Constructor] = f;
     }
   });
 
@@ -75,6 +74,8 @@ export function encodeArguments(
     throw new Error(`failed to rawEncode: ${e.stack}`);
   }
 }
+
+export const Constructor = "constructor";
 
 type UserInput = {
   [key: string]: any;
