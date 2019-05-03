@@ -59,9 +59,7 @@ test.serial("RpcMethod.getBlockMetas", async t => {
 test.serial("RpcMethod.suggestGasPrice", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   const resp = await client.suggestGasPrice({});
-  t.deepEqual(resp, {
-    gasPrice: 1
-  });
+  t.truthy(resp.gasPrice > 0);
 });
 
 test.serial("RpcMethod.readContract", async t => {

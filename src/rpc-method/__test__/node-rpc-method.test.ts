@@ -152,7 +152,7 @@ test.serial("RpcMethod.getActionsByBlock", async t => {
 test.serial("RpcMethod.suggestGasPrice", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   const resp = await client.suggestGasPrice({});
-  t.deepEqual(resp.gasPrice.toString(), "1");
+  t.truthy(resp.gasPrice > 0);
 });
 
 test.skip("RpcMethod.getReceiptByAction", async t => {
