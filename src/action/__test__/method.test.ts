@@ -26,7 +26,7 @@ test.skip("TransferMethod_execute", async t => {
   const method = new TransferMethod(client, sender, {
     amount: "8500000000000000",
     recipient: "io13zt8sznez2pf0q0hqdz2hyl938wak2fsjgdeml",
-    payload: "hello transfer",
+    payload: "68656c6c6f20776f726c6421",
     gasLimit: "100000",
     gasPrice: "10000000000000"
   });
@@ -40,7 +40,7 @@ test.skip("TransferMethod_execute_nogas", async t => {
   const method = new TransferMethod(client, sender, {
     amount: "1000000000000000000",
     recipient: "io13zt8sznez2pf0q0hqdz2hyl938wak2fsjgdeml",
-    payload: "transfer"
+    payload: "68656c6c6f20776f726c6421"
   });
   const reps = await method.execute();
   t.truthy(reps);

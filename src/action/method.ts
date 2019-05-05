@@ -81,7 +81,7 @@ export class TransferMethod extends AbstractMethod {
     envelop.transfer = {
       amount: this.transfer.amount,
       recipient: this.transfer.recipient,
-      payload: Buffer.from(this.transfer.payload)
+      payload: Buffer.from(this.transfer.payload, "hex")
     };
 
     return this.sendAction(envelop);
