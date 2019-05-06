@@ -6,7 +6,7 @@ test("TestAction_SerializationDeserialization", async t => {
   const tf = new actionPb.Transfer();
   tf.setAmount("456");
   tf.setRecipient(TEST_ACCOUNT.address);
-  tf.setPayload(Buffer.from("hello world!"));
+  tf.setPayload(Buffer.from("68656c6c6f20776f726c6421", "hex"));
   const bytes = tf.serializeBinary();
   t.deepEqual(
     Buffer.from(bytes).toString("hex"),
