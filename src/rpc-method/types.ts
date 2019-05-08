@@ -1906,7 +1906,7 @@ export const GetEpochMetaRequest = {
 };
 
 export interface IRpcMethod {
-  changeClient(hostname: string): void;
+  setProvider(provider: string | IRpcMethod): void;
 
   getAccount(req: IGetAccountRequest): Promise<IGetAccountResponse>;
 

@@ -71,17 +71,22 @@ export default class RpcMethod implements IRpcMethod {
     this.timeout = options.timeout || 300000;
   }
 
-  public changeClient(hostname: string): void {
-    const normalizedHostname = String(hostname).replace(
-      /^(http:\/\/|https:\/\/)/,
-      ""
-    );
-    // @ts-ignore
-    this.client = new iotexapi.APIService(
-      normalizedHostname,
-      this.credentials,
-      null
-    );
+  public setProvider(provider: string | IRpcMethod): void {
+    if (typeof provider === "string") {
+      const normalizedHostname = String(provider).replace(
+        /^(http:\/\/|https:\/\/)/,
+        ""
+      );
+      // @ts-ignore
+      this.client = new iotexapi.APIService(
+        normalizedHostname,
+        this.credentials,
+        null
+      );
+    } else {
+      const origin = provider as RpcMethod;
+      this.client = origin.client;
+    }
   }
 
   public getDeadline(): Date {
