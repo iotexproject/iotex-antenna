@@ -56,6 +56,10 @@ export default class RpcMethod implements IRpcMethod {
     this.timeout = options.timeout || 300000;
   }
 
+  public changeClient(hostname: string): void {
+    this.client = new grpcWeb.APIServicePromiseClient(hostname, null, null);
+  }
+
   public getDeadline(): string {
     return `${new Date(Date.now() + this.timeout).getTime()}`;
   }

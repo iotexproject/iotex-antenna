@@ -10,4 +10,8 @@ export default class Antenna {
   public static modules: {
     Iotx: new (hostname: string) => Iotx;
   };
+
+  public setProvider(provider: string): void {
+    this.iotx.setProvider(provider);
+  }
 }

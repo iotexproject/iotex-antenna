@@ -17,6 +17,10 @@ export class Iotx extends RpcMethod {
     this.accounts = new Accounts(this);
   }
 
+  public setProvider(provider: string): void {
+    this.changeClient(provider);
+  }
+
   public sendTransfer(req: TransferRequest): Promise<string> {
     const sender = this.accounts.getAccount(req.from);
     if (!sender) {
