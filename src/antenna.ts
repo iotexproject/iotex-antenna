@@ -14,14 +14,14 @@ export default class Antenna {
 
   public setProvider(provider: string | IRpcMethod): void {
     if (typeof provider === "object") {
-      if (provider === this.iotx.getProvider()) {
+      if (provider === this.iotx.currentProvider()) {
         return;
       }
     }
     this.iotx.setProvider(provider);
   }
 
-  public getProvider(): IRpcMethod {
-    return this.iotx.getProvider();
+  public currentProvider(): IRpcMethod {
+    return this.iotx.currentProvider();
   }
 }

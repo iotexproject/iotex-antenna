@@ -18,7 +18,7 @@ export class Iotx extends RpcMethod {
     this.accounts = new Accounts(this);
   }
 
-  public getProvider(): IRpcMethod {
+  public currentProvider(): IRpcMethod {
     return this.client;
   }
 
