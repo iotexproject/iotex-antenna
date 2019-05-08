@@ -65,11 +65,6 @@ export default class RpcMethod implements IRpcMethod {
     }
   }
 
-  public getProvider(): IRpcMethod {
-    // @ts-ignore
-    return this.client;
-  }
-
   public getDeadline(): string {
     return `${new Date(Date.now() + this.timeout).getTime()}`;
   }
