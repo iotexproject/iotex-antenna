@@ -51,23 +51,42 @@ type Opts = {
 export default class RpcMethod implements IRpcMethod {
   public client: IRpcMethod;
   public timeout: number;
+  private readonly credentials: grpc.ChannelCredentials;
 
   constructor(hostname: string, options: Opts = {}) {
     const normalizedHostname = String(hostname).replace(
       /^(http:\/\/|https:\/\/)/,
       ""
     );
-    const credentials =
+    this.credentials =
       options && options.enableSsl
         ? grpc.credentials.createSsl(Buffer.from(ROOT_CERTS))
         : grpc.credentials.createInsecure();
     // @ts-ignore
     this.client = new iotexapi.APIService(
       normalizedHostname,
-      credentials,
+      this.credentials,
       null
     );
     this.timeout = options.timeout || 300000;
+  }
+
+  public setProvider(provider: string | IRpcMethod): void {
+    if (typeof provider === "string") {
+      const normalizedHostname = String(provider).replace(
+        /^(http:\/\/|https:\/\/)/,
+        ""
+      );
+      // @ts-ignore
+      this.client = new iotexapi.APIService(
+        normalizedHostname,
+        this.credentials,
+        null
+      );
+    } else {
+      const origin = provider as RpcMethod;
+      this.client = origin.client;
+    }
   }
 
   public getDeadline(): Date {

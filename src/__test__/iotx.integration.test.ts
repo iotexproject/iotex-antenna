@@ -47,6 +47,17 @@ test.serial("transfer throws if no account", async t => {
   );
 });
 
+test.serial("change provider", async t => {
+  // tslint:disable-next-line:no-http-string
+  const antenna = new Antenna("http://api.testnet.iotex.one:80");
+  let chainMeta = await antenna.iotx.getChainMeta({});
+  t.truthy(chainMeta);
+  // tslint:disable-next-line:no-http-string
+  antenna.setProvider("http://api.iotex.one:80");
+  chainMeta = await antenna.iotx.getChainMeta({});
+  t.truthy(chainMeta);
+});
+
 accountTest("transfer", async t => {
   const antenna = new Antenna(IOTEX_CORE);
   const acctHavingIotx = antenna.iotx.accounts.privateKeyToAccount(

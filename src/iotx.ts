@@ -3,8 +3,9 @@ import { toRau } from "./account/utils";
 import { ClaimFromRewardingFundMethod, TransferMethod } from "./action/method";
 import { Contract } from "./contract/contract";
 import RpcMethod from "./rpc-method";
-import { ClaimFromRewardingFundRequset } from "./types";
+import { IRpcMethod } from "./rpc-method/types";
 import {
+  ClaimFromRewardingFundRequset,
   ContractRequest,
   ExecuteContractRequest,
   TransferRequest
@@ -15,6 +16,10 @@ export class Iotx extends RpcMethod {
   constructor(hostname: string) {
     super(hostname);
     this.accounts = new Accounts(this);
+  }
+
+  public currentProvider(): IRpcMethod {
+    return this.client;
   }
 
   public sendTransfer(req: TransferRequest): Promise<string> {
