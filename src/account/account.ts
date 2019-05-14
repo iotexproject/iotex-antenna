@@ -9,6 +9,7 @@ export interface IAccount {
 
   sign(data: string | Buffer | Uint8Array): Buffer;
   recover(message: string, signature: Buffer, preFixed: boolean): String;
+  hashMessage(data: string | Buffer | Uint8Array): Buffer;
 }
 
 export class Account implements IAccount {
@@ -46,7 +47,7 @@ export class Account implements IAccount {
     return recover(bytes, signature);
   }
 
-  private hashMessage(data: string | Buffer | Uint8Array): Buffer {
+  public hashMessage(data: string | Buffer | Uint8Array): Buffer {
     let bytes = data;
     if (typeof data === "string" && isHexStrict(data)) {
       bytes = hexToBytes(data);
