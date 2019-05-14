@@ -1,4 +1,5 @@
 import { BigNumber } from "bignumber.js";
+import { decode, encode } from "utf8";
 
 /**
  * fromRau is a function to convert Rau to Iotx.
@@ -44,4 +45,82 @@ function convert(num: string, unit: string, operator: string): string {
       // @ts-ignore
       return rauBN[operator](new BigNumber("1000000000000000000")).toString(10);
   }
+}
+
+/**
+ * Should be called to get hex representation of utf8 string
+ *
+ * @param value input string
+ * @returns hex representation of input string
+ */
+export function fromUtf8(value: string): string {
+  let eValue = encode(value);
+  let hex = "";
+
+  // remove \u0000 padding from either side
+  eValue = eValue.replace(/^(?:\u0000)*/, "");
+  eValue = eValue
+    .split("")
+    .reverse()
+    .join("");
+  eValue = eValue.replace(/^(?:\u0000)*/, "");
+  eValue = eValue
+    .split("")
+    .reverse()
+    .join("");
+
+  for (let i = 0; i < eValue.length; i++) {
+    const code = eValue.charCodeAt(i);
+    const n = code.toString(16);
+    hex += n.length < 2 ? `0${n}` : n;
+  }
+
+  return `${hex}`;
+}
+
+/**
+ * Should be called to get utf8 from it's hex representation
+ *
+ * @param hex hex string
+ *
+ * @returns ascii string representation of hex value
+ */
+export function toUtf8(hex: string): string {
+  if (!isHexStrict(hex)) {
+    throw new Error(`The parameter "${hex}" must be a valid HEX string.`);
+  }
+
+  let result = "";
+  let code = 0;
+  let eHex = hex;
+
+  // remove 00 padding from either side
+  eHex = eHex.replace(/^(?:00)*/, "");
+  eHex = eHex
+    .split("")
+    .reverse()
+    .join("");
+  eHex = eHex.replace(/^(?:00)*/, "");
+  eHex = eHex
+    .split("")
+    .reverse()
+    .join("");
+
+  const l = eHex.length;
+  for (let i = 0; i < l; i += 2) {
+    code = parseInt(eHex.substr(i, 2), 16);
+    result += String.fromCharCode(code);
+  }
+
+  return decode(result);
+}
+
+/**
+ * Check if string is HEX, requires a 0x in front
+ *
+ * @param hex to be checked
+ * @returns is hex
+ */
+export function isHexStrict(hex: string): boolean {
+  return /^(-)?[0-9a-f]*$/i.test(hex);
 }
