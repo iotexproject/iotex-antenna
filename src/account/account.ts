@@ -1,4 +1,4 @@
-import { makeSigner, privateKeyToAccount } from "../crypto/crypto";
+import { makeSigner, privateKeyToAccount, recover } from "../crypto/crypto";
 import { hash256b } from "../crypto/hash";
 import { hexToBytes, isHexStrict } from "./utils";
 
@@ -8,6 +8,7 @@ export interface IAccount {
   publicKey: string;
 
   sign(data: string | Buffer | Uint8Array): Buffer;
+  recover(message: string, signature: Buffer, preFixed: boolean): String;
 }
 
 export class Account implements IAccount {
@@ -25,6 +26,27 @@ export class Account implements IAccount {
   }
 
   public sign(data: string | Buffer | Uint8Array): Buffer {
+    const h = this.hashMessage(data);
+    return Buffer.from(
+      makeSigner(0)(h.toString("hex"), this.privateKey),
+      "hex"
+    );
+  }
+
+  public recover(
+    message: string | Buffer | Uint8Array,
+    signature: Buffer,
+    preFixed: boolean
+  ): String {
+    let bytes = message;
+    if (!preFixed) {
+      bytes = this.hashMessage(message);
+    }
+    // @ts-ignore
+    return recover(bytes, signature);
+  }
+
+  private hashMessage(data: string | Buffer | Uint8Array): Buffer {
     let bytes = data;
     if (typeof data === "string" && isHexStrict(data)) {
       bytes = hexToBytes(data);
@@ -35,10 +57,6 @@ export class Account implements IAccount {
     const preamble = `\u0019IoTeX Signed Message:\n${bytes.length}`;
     const preambleBuffer = Buffer.from(preamble);
     const iotexMessage = Buffer.concat([preambleBuffer, messageBuffer]);
-    const h = hash256b(iotexMessage);
-    return Buffer.from(
-      makeSigner(0)(h.toString("hex"), this.privateKey),
-      "hex"
-    );
+    return hash256b(iotexMessage);
   }
 }

@@ -20,3 +20,16 @@ test("Account Sign", async t => {
     signed.toString("hex")
   );
 });
+
+test("Account recover", async t => {
+  const act = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
+  const address = act.recover(
+    fromUtf8(TEXT),
+    Buffer.from(
+      "1d1cc36447db94675c2a26466932a17311b2100a7a3df2d93ebf81e3b801ca6b65e96825330a91d108c8682dd20df7aeece805b21d31f4cf2d95ff8ddfbe06da00",
+      "hex"
+    ),
+    false
+  );
+  t.deepEqual(TEST_ACCOUNT.address, address);
+});
