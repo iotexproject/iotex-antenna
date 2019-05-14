@@ -1,5 +1,6 @@
 import test from "ava";
 import { fromRau, toRau } from "../utils";
+import { fromUtf8, toUtf8 } from "../utils";
 
 test("fromRau", async t => {
   const rau = "2002000000000000000";
@@ -23,4 +24,12 @@ test("toRau", async t => {
   t.is(toRau("2.002", "Iotx"), rau);
 
   t.is(toRau("10000.002", "Iotx"), "10000002000000000000000");
+});
+
+test("fromUtf8", async t => {
+  t.is(fromUtf8("hello"), "68656c6c6f");
+});
+
+test("toUtf8", async t => {
+  t.is(toUtf8("68656c6c6f"), "hello");
 });
