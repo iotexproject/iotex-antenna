@@ -124,3 +124,25 @@ export function toUtf8(hex: string): string {
 export function isHexStrict(hex: string): boolean {
   return /^(-)?[0-9a-f]*$/i.test(hex);
 }
+
+/**
+ * Convert a hex string to a byte array
+ *
+ * @param hex string
+ *
+ * @returns  the byte array
+ */
+export function hexToBytes(hex: string): Uint8Array {
+  if (!isHexStrict(hex)) {
+    throw new Error(`Given value "${hex}" is not a valid hex string.`);
+  }
+
+  const shex = hex.length % 2 ? `0${hex}` : hex;
+
+  const bytes = [];
+  for (let c = 0; c < shex.length; c += 2) {
+    bytes.push(parseInt(shex.substr(c, 2), 16));
+  }
+
+  return new Uint8Array(bytes);
+}
