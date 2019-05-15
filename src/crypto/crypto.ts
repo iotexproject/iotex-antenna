@@ -1,6 +1,6 @@
 import elliptic from "elliptic";
 // @ts-ignore
-import { encodeSignature } from "eth-lib/lib/account";
+import { decodeSignature, encodeSignature } from "eth-lib/lib/account";
 // @ts-ignore
 import Bytes from "eth-lib/lib/bytes";
 
@@ -46,4 +46,20 @@ export const makeSigner = (addToV: number) => (
     Bytes.pad(32, Bytes.fromNat(`0x${signature.s.toString(16)}`))
   ]);
   return signed.slice(2);
+};
+
+export const recover = (hash: Buffer, signature: Buffer) => {
+  const vals = decodeSignature(`0x${signature.toString("hex")}`);
+  const vrs = {
+    v: Bytes.toNumber(vals[0]),
+    r: vals[1].slice(2),
+    s: vals[2].slice(2)
+  };
+  const ecPublicKey = secp256k1.recoverPubKey(
+    hash,
+    vrs,
+    vrs.v < 2 ? vrs.v : 1 - (vrs.v % 2)
+  );
+  const publicKey = ecPublicKey.encode("hex", false);
+  return publicKeyToAddress(publicKey);
 };
