@@ -1707,8 +1707,8 @@ function fromPbLogList(
 
 // Properties of a ReadContractRequest.
 export interface IReadContractRequest {
-  calleraddress: string;
-  execution?: IExecution | undefined;
+  execution: IExecution;
+  callerAddress: string;
 }
 
 // Properties of a ReadContractResponse.
@@ -1720,7 +1720,7 @@ export interface IReadContractResponse {
 export const ReadContractRequest = {
   to(req: IReadContractRequest): any {
     const pbReq = new apiPb.ReadContractRequest();
-    pbReq.setCalleraddress(req.calleraddress);
+    pbReq.setCalleraddress(req.callerAddress);
     if (req.execution) {
       pbReq.setExecution(toActionExecution(req.execution));
     }

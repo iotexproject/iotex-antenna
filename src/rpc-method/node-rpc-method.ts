@@ -162,6 +162,7 @@ export default class RpcMethod implements IRpcMethod {
     req: IReadContractRequest
   ): Promise<IReadContractResponse> {
     const readContract = promisify(this.client.readContract.bind(this.client));
+    console.log(req);
     // @ts-ignore
     return readContract(req, { deadline: this.getDeadline() });
   }
