@@ -2,9 +2,8 @@ import { Accounts } from "./account/accounts";
 import { toRau } from "./account/utils";
 import { ClaimFromRewardingFundMethod, TransferMethod } from "./action/method";
 import { Contract } from "./contract/contract";
-import { publicKeyToAddress } from "./crypto/crypto";
 import RpcMethod from "./rpc-method";
-import { GetActionsRequest, IRpcMethod } from "./rpc-method/types";
+import { IRpcMethod } from "./rpc-method/types";
 import {
   ClaimFromRewardingFundRequset,
   ContractRequest,

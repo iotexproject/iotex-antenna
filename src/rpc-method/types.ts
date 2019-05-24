@@ -363,7 +363,7 @@ export interface IExecution {
   contract: string;
 
   // Execution data
-  data: Buffer | {};
+  data: Buffer | string;
 }
 
 // Properties of a StartSubChain.
