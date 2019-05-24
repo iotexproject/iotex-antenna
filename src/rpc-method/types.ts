@@ -351,16 +351,7 @@ export interface ITransfer {
   recipient: string;
 
   // Transfer payload
-  payload: Buffer | {};
-}
-
-// Properties of a Vote.
-export interface IVote {
-  // Vote timestamp
-  timestamp: ITimestamp;
-
-  // Vote voteeAddress
-  voteeAddress: string;
+  payload: Buffer | string;
 }
 
 // Properties of a Execution.
@@ -411,7 +402,7 @@ export interface IMerkleRoot {
   name: string;
 
   // MerkleRoot value
-  value: Buffer | {};
+  value: Buffer;
 }
 
 // Properties of a PutBlock.
@@ -489,19 +480,19 @@ export interface IPlumStartExit {
   subChainAddress: string;
 
   // PlumStartExit previousTransfer
-  previousTransfer: Buffer | {};
+  previousTransfer: Buffer;
 
   // PlumStartExit previousTransferBlockProof
-  previousTransferBlockProof: Buffer | {};
+  previousTransferBlockProof: Buffer;
 
   // PlumStartExit previousTransferBlockHeight
   previousTransferBlockHeight: number;
 
   // PlumStartExit exitTransfer
-  exitTransfer: Buffer | {};
+  exitTransfer: Buffer | string;
 
   // PlumStartExit exitTransferBlockProof
-  exitTransferBlockProof: Buffer | {};
+  exitTransferBlockProof: Buffer | string;
 
   // PlumStartExit exitTransferBlockHeight
   exitTransferBlockHeight: number;
@@ -516,10 +507,10 @@ export interface IPlumChallengeExit {
   coinID: number;
 
   // PlumChallengeExit challengeTransfer
-  challengeTransfer: Buffer | {};
+  challengeTransfer: Buffer | string;
 
   // PlumChallengeExit challengeTransferBlockProof
-  challengeTransferBlockProof: Buffer | {};
+  challengeTransferBlockProof: Buffer | string;
 
   // PlumChallengeExit challengeTransferBlockHeight
   challengeTransferBlockHeight: number;
@@ -534,13 +525,13 @@ export interface IPlumResponseChallengeExit {
   coinID: number;
 
   // PlumResponseChallengeExit challengeTransfer
-  challengeTransfer: Buffer | {};
+  challengeTransfer: Buffer;
 
   // PlumResponseChallengeExit responseTransfer
-  responseTransfer: Buffer | {};
+  responseTransfer: Buffer;
 
   // PlumResponseChallengeExit responseTransferBlockProof
-  responseTransferBlockProof: Buffer | {};
+  responseTransferBlockProof: Buffer;
 
   // PlumResponseChallengeExit previousTransferBlockHeight
   previousTransferBlockHeight: number;
@@ -568,7 +559,7 @@ export interface IPlumTransfer {
   coinID: number;
 
   // PlumTransfer denomination
-  denomination: Buffer | {};
+  denomination: Buffer;
 
   // PlumTransfer owner
   owner: string;
@@ -587,7 +578,7 @@ export interface IDepositToRewardingFund {
   amount: string;
 
   // DepositToRewardingFund data
-  data: Buffer | {};
+  data: Buffer;
 }
 
 // Properties of a ClaimFromRewardingFund.
@@ -656,8 +647,6 @@ export interface IActionCore {
   // Action detail fields
   // ActionCore transfer
   transfer?: ITransfer | undefined;
-  // ActionCore vote
-  vote?: IVote | undefined;
   // ActionCore execution
   execution?: IExecution | undefined;
 
@@ -712,10 +701,10 @@ export interface IAction {
   core: IActionCore | undefined;
 
   // Action senderPubkey
-  senderPubKey?: Buffer | {};
+  senderPubKey: Uint8Array | string;
 
   // Action signature
-  signature?: Buffer | {};
+  signature: Uint8Array | string;
 }
 
 export function toActionTransfer(req: ITransfer | undefined): any {
@@ -729,25 +718,13 @@ export function toActionTransfer(req: ITransfer | undefined): any {
   return pbTransfer;
 }
 
-function toTimestamp(timestamp: ITimestamp): Timestamp {
+export function toTimestamp(timestamp: ITimestamp): Timestamp {
   const ts = new Timestamp();
   if (timestamp) {
     ts.setSeconds(timestamp.seconds);
     ts.setNanos(timestamp.nanos);
   }
   return ts;
-}
-
-export function toActionVote(req: IVote | undefined): any {
-  if (!req) {
-    return undefined;
-  }
-  const pbVote = new actionPb.Vote();
-  const ts = new Timestamp();
-  ts.setSeconds(req.timestamp.seconds);
-  pbVote.setTimestamp(toTimestamp(req.timestamp));
-  pbVote.setVoteeaddress(req.voteeAddress);
-  return pbVote;
 }
 
 export function toActionExecution(
@@ -1018,7 +995,6 @@ export function toAction(req: IAction): any {
     pbActionCore.setGaslimit(Number(core.gasLimit));
     pbActionCore.setGasprice(core.gasPrice);
     pbActionCore.setTransfer(toActionTransfer(core.transfer));
-    pbActionCore.setVote(toActionVote(core.vote));
     pbActionCore.setExecution(toActionExecution(core.execution));
     pbActionCore.setStartsubchain(toActionStartSubChain(core.startSubChain));
     pbActionCore.setStopsubchain(toActionStopSubChain(core.stopSubChain));
@@ -1502,7 +1478,6 @@ export const GetActionsRequest = {
             transfer: GetActionsRequest.fromTransfer(
               rawActionCore.getTransfer()
             ),
-            vote: GetActionsRequest.fromVote(rawActionCore.getVote()),
             execution: GetActionsRequest.fromExecution(
               rawActionCore.getExecution()
             ),
@@ -1732,8 +1707,8 @@ function fromPbLogList(
 
 // Properties of a ReadContractRequest.
 export interface IReadContractRequest {
-  // ReadContractRequest action
-  action: IAction;
+  calleraddress: string;
+  execution?: IExecution | undefined;
 }
 
 // Properties of a ReadContractResponse.
@@ -1745,8 +1720,9 @@ export interface IReadContractResponse {
 export const ReadContractRequest = {
   to(req: IReadContractRequest): any {
     const pbReq = new apiPb.ReadContractRequest();
-    if (req.action) {
-      pbReq.setAction(toAction(req.action));
+    pbReq.setCalleraddress(req.calleraddress);
+    if (req.execution) {
+      pbReq.setExecution(toActionExecution(req.execution));
     }
     return pbReq;
   },

@@ -27,7 +27,8 @@ import {
   ISendActionRequest,
   ISendActionResponse,
   ISuggestGasPriceRequest,
-  ISuggestGasPriceResponse
+  ISuggestGasPriceResponse,
+  ReadContractRequest
 } from "./types";
 
 const packageDefinition = protoLoader.loadSync(

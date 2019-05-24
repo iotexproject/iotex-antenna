@@ -27,8 +27,8 @@
     "changelog-minor": "build-changelog --minor",
     "changelog-patch": "build-changelog --patch",
     "build-proto": "npm run build-proto:js && npm run build-proto:grpc",
-    "build-proto:js": "protoc -I=./ proto/api/api.proto proto/rpc/rpc.proto proto/types/action.proto proto/types/blockchain.proto proto/types/consensus.proto proto/types/endorsement.proto proto/types/genesis.proto proto/types/node.proto --js_out=import_style=commonjs:./protogen/",
-    "build-proto:grpc": "protoc -I=./  proto/api/api.proto proto/rpc/rpc.proto proto/types/action.proto proto/types/blockchain.proto proto/types/consensus.proto proto/types/endorsement.proto proto/types/genesis.proto proto/types/node.proto --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:./protogen/"
+    "build-proto:js": "protoc -I=./ google/api/http.proto google/api/annotations.proto proto/api/api.proto proto/rpc/rpc.proto proto/types/action.proto proto/types/blockchain.proto proto/types/consensus.proto proto/types/endorsement.proto proto/types/genesis.proto proto/types/node.proto --js_out=import_style=commonjs:./protogen/",
+    "build-proto:grpc": "protoc -I=./ google/api/http.proto google/api/annotations.proto proto/api/api.proto proto/rpc/rpc.proto proto/types/action.proto proto/types/blockchain.proto proto/types/consensus.proto proto/types/endorsement.proto proto/types/genesis.proto proto/types/node.proto --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:./protogen/"
   },
   "nyc": {
     "include": [
@@ -119,9 +119,10 @@
     "eth-lib": "0.2.8",
     "ethereumjs-abi": "^0.6.7",
     "google-protobuf": "3.7.1",
-    "grpc": "1.20.3",
-    "grpc-web": "1.0.4",
+    "grpc": "^1.21.0",
+    "grpc-web": "^1.0.4",
     "protobufjs": "^6.8.8",
+    "protoc": "^1.0.3",
     "randombytes": "^2.1.0",
     "scrypt.js": "0.3.0",
     "sha3": "2.0.1",

@@ -8,7 +8,7 @@
 //      protoc --go_out=plugins=grpc:$GOPATH/src *.proto
 syntax = "proto3";
 package testingpb;
-option go_package = "github.com/iotexproject/iotex-core/protogen/testingpb";
+option go_package = "github.com/iotexproject/iotex-proto/golang/testingpb";
 
 message TestPayload {
   bytes msg_body = 1;

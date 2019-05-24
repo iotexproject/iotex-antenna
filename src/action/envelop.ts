@@ -24,7 +24,6 @@ import {
   IStopSubChain,
   ITerminatePlumChain,
   ITransfer,
-  IVote,
   toActionClaimFromRewardingFund,
   toActionCreateDeposit,
   toActionCreatePlumChain,
@@ -44,8 +43,7 @@ import {
   toActionStartSubChain,
   toActionStopSubChain,
   toActionTerminatePlumChain,
-  toActionTransfer,
-  toActionVote
+  toActionTransfer
 } from "../rpc-method/types";
 
 export class Envelop {
@@ -56,7 +54,6 @@ export class Envelop {
 
   // optional fields
   public transfer?: ITransfer | undefined;
-  public vote?: IVote | undefined;
   public execution?: IExecution | undefined;
   public startSubChain?: IStartSubChain | undefined;
   public stopSubChain?: IStopSubChain | undefined;
@@ -100,7 +97,6 @@ export class Envelop {
     pbActionCore.setGaslimit(Number(gasLimit));
     pbActionCore.setGasprice(gasPrice);
     pbActionCore.setTransfer(toActionTransfer(this.transfer));
-    pbActionCore.setVote(toActionVote(this.vote));
     pbActionCore.setExecution(toActionExecution(this.execution));
     pbActionCore.setStartsubchain(toActionStartSubChain(this.startSubChain));
     pbActionCore.setStopsubchain(toActionStopSubChain(this.stopSubChain));
@@ -182,7 +178,6 @@ export class SealedEnvelop {
         gasLimit: gasLimit,
         gasPrice: gasPrice,
         transfer: this.act.transfer,
-        vote: this.act.vote,
         execution: this.act.execution,
         startSubChain: this.act.startSubChain,
         stopSubChain: this.act.stopSubChain,

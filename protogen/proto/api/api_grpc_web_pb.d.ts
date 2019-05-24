@@ -4,12 +4,14 @@ import * as proto_types_action_pb from '../../proto/types/action_pb';
 import * as proto_types_blockchain_pb from '../../proto/types/blockchain_pb';
 import * as proto_types_node_pb from '../../proto/types/node_pb';
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
+import * as google_api_annotations_pb from '../../google/api/annotations_pb';
 
 import {
   EstimateGasForActionRequest,
   EstimateGasForActionResponse,
   GetAccountRequest,
   GetAccountResponse,
+  GetActionsByAddressRequest,
   GetActionsRequest,
   GetActionsResponse,
   GetBlockMetasRequest,
@@ -18,6 +20,8 @@ import {
   GetChainMetaResponse,
   GetEpochMetaRequest,
   GetEpochMetaResponse,
+  GetRawBlocksRequest,
+  GetRawBlocksResponse,
   GetReceiptByActionRequest,
   GetReceiptByActionResponse,
   GetServerMetaRequest,
@@ -28,6 +32,9 @@ import {
   ReadStateResponse,
   SendActionRequest,
   SendActionResponse,
+  SendSignedActionBytesRequest,
+  StreamBlocksRequest,
+  StreamBlocksResponse,
   SuggestGasPriceRequest,
   SuggestGasPriceResponse} from './api_pb';
 
@@ -120,6 +127,32 @@ export class APIServiceClient {
                response: GetEpochMetaResponse) => void
   ): grpcWeb.ClientReadableStream<GetEpochMetaResponse>;
 
+  getRawBlocks(
+    request: GetRawBlocksRequest,
+    metadata: grpcWeb.Metadata | undefined,
+    callback: (err: grpcWeb.Error,
+               response: GetRawBlocksResponse) => void
+  ): grpcWeb.ClientReadableStream<GetRawBlocksResponse>;
+
+  streamBlocks(
+    request: StreamBlocksRequest,
+    metadata?: grpcWeb.Metadata
+  ): grpcWeb.ClientReadableStream<StreamBlocksResponse>;
+
+  getActionsByAddress(
+    request: GetActionsByAddressRequest,
+    metadata: grpcWeb.Metadata | undefined,
+    callback: (err: grpcWeb.Error,
+               response: GetActionsResponse) => void
+  ): grpcWeb.ClientReadableStream<GetActionsResponse>;
+
+  sendSignedActionBytes(
+    request: SendSignedActionBytesRequest,
+    metadata: grpcWeb.Metadata | undefined,
+    callback: (err: grpcWeb.Error,
+               response: SendActionResponse) => void
+  ): grpcWeb.ClientReadableStream<SendActionResponse>;
+
 }
 
 export class APIServicePromiseClient {
@@ -186,6 +219,26 @@ export class APIServicePromiseClient {
     request: GetEpochMetaRequest,
     metadata?: grpcWeb.Metadata
   ): Promise<GetEpochMetaResponse>;
+
+  getRawBlocks(
+    request: GetRawBlocksRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<GetRawBlocksResponse>;
+
+  streamBlocks(
+    request: StreamBlocksRequest,
+    metadata?: grpcWeb.Metadata
+  ): grpcWeb.ClientReadableStream<StreamBlocksResponse>;
+
+  getActionsByAddress(
+    request: GetActionsByAddressRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<GetActionsResponse>;
+
+  sendSignedActionBytes(
+    request: SendSignedActionBytesRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<SendActionResponse>;
 
 }
 

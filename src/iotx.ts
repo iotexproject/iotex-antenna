@@ -2,8 +2,9 @@ import { Accounts } from "./account/accounts";
 import { toRau } from "./account/utils";
 import { ClaimFromRewardingFundMethod, TransferMethod } from "./action/method";
 import { Contract } from "./contract/contract";
+import { publicKeyToAddress } from "./crypto/crypto";
 import RpcMethod from "./rpc-method";
-import { IRpcMethod } from "./rpc-method/types";
+import { GetActionsRequest, IRpcMethod } from "./rpc-method/types";
 import {
   ClaimFromRewardingFundRequset,
   ContractRequest,
@@ -82,36 +83,26 @@ export class Iotx extends RpcMethod {
     });
   }
 
-  public async readContractByHash(hash: string): Promise<string> {
-    const actions = await this.getActions({
-      byHash: { actionHash: hash, checkingPending: true }
-    });
-    const result = await this.readContract({
-      action: actions.actionInfo[0].action
-    });
-    return result.data;
-  }
-
   public async readContractByMethod(
     req: ExecuteContractRequest,
     // @ts-ignore
     // tslint:disable-next-line: typedef
     ...args
   ): Promise<string> {
-    const sender = this.accounts.getAccount(req.from);
-    if (!sender) {
-      throw new Error(`can not found account: ${req.from}`);
-    }
-
-    const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
     const contract = new Contract(JSON.parse(req.abi), req.contractAddress, {
       provider: this
     });
-    return contract.methods[req.method](...args, {
-      account: sender,
-      gasLimit: req.gasLimit,
-      gasPrice: price
+
+    const result = await this.readContract({
+      execution: {
+        amount: "0",
+        contract: req.contractAddress,
+        data: contract.pureEncodeMethod("0", req.method, args).data
+      },
+      calleraddress: req.from
     });
+
+    return result.data;
   }
 
   public async claimFromRewardingFund(
