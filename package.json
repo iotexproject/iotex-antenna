@@ -95,7 +95,7 @@
     "proto-build": "0.2.3",
     "sleep-promise": "8.0.1",
     "solc": "0.4.25",
-    "ts-node": "8.1.0",
+    "ts-node": "8.2.0",
     "ts-protoc-gen": "0.10.0",
     "tslint": "5.16.0",
     "tslint-config-prettier": "1.18.0",
