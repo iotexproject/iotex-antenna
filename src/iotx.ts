@@ -93,7 +93,7 @@ export class Iotx extends RpcMethod {
     });
 
     const result = await this.readContract({
-      execution: contract.pureEncodeMethod("0", req.method, args),
+      execution: contract.pureEncodeMethod("0", req.method, ...args),
       callerAddress: req.from
     });
 
