@@ -95,13 +95,6 @@ export class Contract {
           methodEnvelop
         );
 
-        if (abiFunc.stateMutability.toLowerCase() === "view") {
-          const action = await method.sign();
-          const result = await this.provider.readContract({
-            action: action
-          });
-          return result.data;
-        }
         return method.execute();
       };
     }
@@ -164,6 +157,31 @@ export class Contract {
       account,
       contractEnvelop
     ).execute();
+  }
+
+  public pureEncodeMethod(
+    amount: string,
+    method: string,
+    // @ts-ignore
+    // tslint:disable-next-line: typedef
+    ...args
+  ): Execution {
+    if (!this.address || !this.abi) {
+      throw new Error("must set contract address and abi");
+    }
+    if (!this.abi[method]) {
+      throw new Error(`method ${method} dose not in abi`);
+    }
+    const abiFunc = this.abi[method];
+
+    const userInput = {};
+    // tslint:disable-next-line: no-any
+    abiFunc.inputs.map((val: any, i: number) => {
+      // @ts-ignore
+      userInput[val.name] = args[i];
+    });
+
+    return this.encodeMethod(amount, method, userInput);
   }
 
   public encodeMethod(

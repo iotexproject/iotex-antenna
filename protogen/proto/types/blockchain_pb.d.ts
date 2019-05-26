@@ -5,14 +5,21 @@ import * as proto_types_endorsement_pb from '../../proto/types/endorsement_pb';
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
 
 export class BlockHeader extends jspb.Message {
-  constructor ();
   getCore(): BlockHeaderCore | undefined;
   setCore(value?: BlockHeaderCore): void;
+  hasCore(): boolean;
   clearCore(): void;
-  getProducerpubkey(): {};
-  setProducerpubkey(value: {}): void;
-  getSignature(): {};
-  setSignature(value: {}): void;
+
+  getProducerpubkey(): Uint8Array | string;
+  getProducerpubkey_asU8(): Uint8Array;
+  getProducerpubkey_asB64(): string;
+  setProducerpubkey(value: Uint8Array | string): void;
+
+  getSignature(): Uint8Array | string;
+  getSignature_asU8(): Uint8Array;
+  getSignature_asB64(): string;
+  setSignature(value: Uint8Array | string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockHeader.AsObject;
   static toObject(includeInstance: boolean, msg: BlockHeader): BlockHeader.AsObject;
@@ -23,29 +30,44 @@ export class BlockHeader extends jspb.Message {
 
 export namespace BlockHeader {
   export type AsObject = {
-    core?: BlockHeaderCore.AsObject;
-    producerpubkey: {};
-    signature: {};
+    core?: BlockHeaderCore.AsObject,
+    producerpubkey: Uint8Array | string,
+    signature: Uint8Array | string,
   }
 }
 
 export class BlockHeaderCore extends jspb.Message {
-  constructor ();
   getVersion(): number;
   setVersion(value: number): void;
+
   getHeight(): number;
   setHeight(value: number): void;
+
   getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
   setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): void;
+  hasTimestamp(): boolean;
   clearTimestamp(): void;
-  getPrevblockhash(): {};
-  setPrevblockhash(value: {}): void;
-  getTxroot(): {};
-  setTxroot(value: {}): void;
-  getDeltastatedigest(): {};
-  setDeltastatedigest(value: {}): void;
-  getReceiptroot(): {};
-  setReceiptroot(value: {}): void;
+
+  getPrevblockhash(): Uint8Array | string;
+  getPrevblockhash_asU8(): Uint8Array;
+  getPrevblockhash_asB64(): string;
+  setPrevblockhash(value: Uint8Array | string): void;
+
+  getTxroot(): Uint8Array | string;
+  getTxroot_asU8(): Uint8Array;
+  getTxroot_asB64(): string;
+  setTxroot(value: Uint8Array | string): void;
+
+  getDeltastatedigest(): Uint8Array | string;
+  getDeltastatedigest_asU8(): Uint8Array;
+  getDeltastatedigest_asB64(): string;
+  setDeltastatedigest(value: Uint8Array | string): void;
+
+  getReceiptroot(): Uint8Array | string;
+  getReceiptroot_asU8(): Uint8Array;
+  getReceiptroot_asB64(): string;
+  setReceiptroot(value: Uint8Array | string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockHeaderCore.AsObject;
   static toObject(includeInstance: boolean, msg: BlockHeaderCore): BlockHeaderCore.AsObject;
@@ -56,24 +78,27 @@ export class BlockHeaderCore extends jspb.Message {
 
 export namespace BlockHeaderCore {
   export type AsObject = {
-    version: number;
-    height: number;
-    timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject;
-    prevblockhash: {};
-    txroot: {};
-    deltastatedigest: {};
-    receiptroot: {};
+    version: number,
+    height: number,
+    timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+    prevblockhash: Uint8Array | string,
+    txroot: Uint8Array | string,
+    deltastatedigest: Uint8Array | string,
+    receiptroot: Uint8Array | string,
   }
 }
 
 export class BlockFooter extends jspb.Message {
-  constructor ();
-  getEndorsementsList(): proto_types_endorsement_pb.Endorsement[] | undefined;
-  setEndorsementsList(value?: proto_types_endorsement_pb.Endorsement[]): void;
+  getEndorsementsList(): Array<proto_types_endorsement_pb.Endorsement>;
+  setEndorsementsList(value: Array<proto_types_endorsement_pb.Endorsement>): void;
   clearEndorsementsList(): void;
+  addEndorsements(value?: proto_types_endorsement_pb.Endorsement, index?: number): proto_types_endorsement_pb.Endorsement;
+
   getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
   setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): void;
+  hasTimestamp(): boolean;
   clearTimestamp(): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockFooter.AsObject;
   static toObject(includeInstance: boolean, msg: BlockFooter): BlockFooter.AsObject;
@@ -84,16 +109,17 @@ export class BlockFooter extends jspb.Message {
 
 export namespace BlockFooter {
   export type AsObject = {
-    endorsementsList?: proto_types_endorsement_pb.Endorsement.AsObject[];
-    timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject;
+    endorsementsList: Array<proto_types_endorsement_pb.Endorsement.AsObject>,
+    timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
   }
 }
 
 export class BlockBody extends jspb.Message {
-  constructor ();
-  getActionsList(): proto_types_action_pb.Action[] | undefined;
-  setActionsList(value?: proto_types_action_pb.Action[]): void;
+  getActionsList(): Array<proto_types_action_pb.Action>;
+  setActionsList(value: Array<proto_types_action_pb.Action>): void;
   clearActionsList(): void;
+  addActions(value?: proto_types_action_pb.Action, index?: number): proto_types_action_pb.Action;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockBody.AsObject;
   static toObject(includeInstance: boolean, msg: BlockBody): BlockBody.AsObject;
@@ -104,21 +130,26 @@ export class BlockBody extends jspb.Message {
 
 export namespace BlockBody {
   export type AsObject = {
-    actionsList?: proto_types_action_pb.Action.AsObject[];
+    actionsList: Array<proto_types_action_pb.Action.AsObject>,
   }
 }
 
 export class Block extends jspb.Message {
-  constructor ();
   getHeader(): BlockHeader | undefined;
   setHeader(value?: BlockHeader): void;
+  hasHeader(): boolean;
   clearHeader(): void;
+
   getBody(): BlockBody | undefined;
   setBody(value?: BlockBody): void;
+  hasBody(): boolean;
   clearBody(): void;
+
   getFooter(): BlockFooter | undefined;
   setFooter(value?: BlockFooter): void;
+  hasFooter(): boolean;
   clearFooter(): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Block.AsObject;
   static toObject(includeInstance: boolean, msg: Block): Block.AsObject;
@@ -129,17 +160,18 @@ export class Block extends jspb.Message {
 
 export namespace Block {
   export type AsObject = {
-    header?: BlockHeader.AsObject;
-    body?: BlockBody.AsObject;
-    footer?: BlockFooter.AsObject;
+    header?: BlockHeader.AsObject,
+    body?: BlockBody.AsObject,
+    footer?: BlockFooter.AsObject,
   }
 }
 
 export class Receipts extends jspb.Message {
-  constructor ();
-  getReceiptsList(): proto_types_action_pb.Receipt[] | undefined;
-  setReceiptsList(value?: proto_types_action_pb.Receipt[]): void;
+  getReceiptsList(): Array<proto_types_action_pb.Receipt>;
+  setReceiptsList(value: Array<proto_types_action_pb.Receipt>): void;
   clearReceiptsList(): void;
+  addReceipts(value?: proto_types_action_pb.Receipt, index?: number): proto_types_action_pb.Receipt;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Receipts.AsObject;
   static toObject(includeInstance: boolean, msg: Receipts): Receipts.AsObject;
@@ -150,18 +182,20 @@ export class Receipts extends jspb.Message {
 
 export namespace Receipts {
   export type AsObject = {
-    receiptsList?: proto_types_action_pb.Receipt.AsObject[];
+    receiptsList: Array<proto_types_action_pb.Receipt.AsObject>,
   }
 }
 
 export class EpochData extends jspb.Message {
-  constructor ();
   getNum(): number;
   setNum(value: number): void;
+
   getHeight(): number;
   setHeight(value: number): void;
+
   getGravitychainstartheight(): number;
   setGravitychainstartheight(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): EpochData.AsObject;
   static toObject(includeInstance: boolean, msg: EpochData): EpochData.AsObject;
@@ -172,23 +206,27 @@ export class EpochData extends jspb.Message {
 
 export namespace EpochData {
   export type AsObject = {
-    num: number;
-    height: number;
-    gravitychainstartheight: number;
+    num: number,
+    height: number,
+    gravitychainstartheight: number,
   }
 }
 
 export class ChainMeta extends jspb.Message {
-  constructor ();
   getHeight(): number;
   setHeight(value: number): void;
+
   getNumactions(): number;
   setNumactions(value: number): void;
+
   getTps(): number;
   setTps(value: number): void;
+
   getEpoch(): EpochData | undefined;
   setEpoch(value?: EpochData): void;
+  hasEpoch(): boolean;
   clearEpoch(): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ChainMeta.AsObject;
   static toObject(includeInstance: boolean, msg: ChainMeta): ChainMeta.AsObject;
@@ -199,34 +237,43 @@ export class ChainMeta extends jspb.Message {
 
 export namespace ChainMeta {
   export type AsObject = {
-    height: number;
-    numactions: number;
-    tps: number;
-    epoch?: EpochData.AsObject;
+    height: number,
+    numactions: number,
+    tps: number,
+    epoch?: EpochData.AsObject,
   }
 }
 
 export class BlockMeta extends jspb.Message {
-  constructor ();
   getHash(): string;
   setHash(value: string): void;
+
   getHeight(): number;
   setHeight(value: number): void;
+
   getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
   setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): void;
+  hasTimestamp(): boolean;
   clearTimestamp(): void;
+
   getNumactions(): number;
   setNumactions(value: number): void;
+
   getProduceraddress(): string;
   setProduceraddress(value: string): void;
+
   getTransferamount(): string;
   setTransferamount(value: string): void;
+
   getTxroot(): string;
   setTxroot(value: string): void;
+
   getReceiptroot(): string;
   setReceiptroot(value: string): void;
+
   getDeltastatedigest(): string;
   setDeltastatedigest(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockMeta.AsObject;
   static toObject(includeInstance: boolean, msg: BlockMeta): BlockMeta.AsObject;
@@ -237,30 +284,34 @@ export class BlockMeta extends jspb.Message {
 
 export namespace BlockMeta {
   export type AsObject = {
-    hash: string;
-    height: number;
-    timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject;
-    numactions: number;
-    produceraddress: string;
-    transferamount: string;
-    txroot: string;
-    receiptroot: string;
-    deltastatedigest: string;
+    hash: string,
+    height: number,
+    timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+    numactions: number,
+    produceraddress: string,
+    transferamount: string,
+    txroot: string,
+    receiptroot: string,
+    deltastatedigest: string,
   }
 }
 
 export class AccountMeta extends jspb.Message {
-  constructor ();
   getAddress(): string;
   setAddress(value: string): void;
+
   getBalance(): string;
   setBalance(value: string): void;
+
   getNonce(): number;
   setNonce(value: number): void;
+
   getPendingnonce(): number;
   setPendingnonce(value: number): void;
+
   getNumactions(): number;
   setNumactions(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): AccountMeta.AsObject;
   static toObject(includeInstance: boolean, msg: AccountMeta): AccountMeta.AsObject;
@@ -271,11 +322,11 @@ export class AccountMeta extends jspb.Message {
 
 export namespace AccountMeta {
   export type AsObject = {
-    address: string;
-    balance: string;
-    nonce: number;
-    pendingnonce: number;
-    numactions: number;
+    address: string,
+    balance: string,
+    nonce: number,
+    pendingnonce: number,
+    numactions: number,
   }
 }
 

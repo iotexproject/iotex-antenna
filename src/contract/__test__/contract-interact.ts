@@ -85,7 +85,8 @@ test.skip("Contract_set_SimpleStorage", async t => {
   });
   t.deepEqual(actions.actionInfo.length, 1, "contract action is empty");
   const result = await client.readContract({
-    action: actions.actionInfo[0].action
+    execution: actions.actionInfo[0].action.core.execution,
+    callerAddress: TEST_ACCOUNT.address
   });
   t.truthy(result);
   t.deepEqual(result.data, "");
@@ -111,7 +112,10 @@ test.skip("Contract_get_SimpleStorage", async t => {
   });
   const action = await method.sign();
 
-  const result = await client.readContract({ action: action });
+  const result = await client.readContract({
+    execution: action.core.execution,
+    callerAddress: TEST_ACCOUNT.address
+  });
   t.truthy(result);
 });
 

@@ -4,13 +4,16 @@ import * as proto_types_blockchain_pb from '../../proto/types/blockchain_pb';
 import * as proto_types_endorsement_pb from '../../proto/types/endorsement_pb';
 
 export class BlockProposal extends jspb.Message {
-  constructor ();
   getBlock(): proto_types_blockchain_pb.Block | undefined;
   setBlock(value?: proto_types_blockchain_pb.Block): void;
+  hasBlock(): boolean;
   clearBlock(): void;
-  getEndorsementsList(): proto_types_endorsement_pb.Endorsement[] | undefined;
-  setEndorsementsList(value?: proto_types_endorsement_pb.Endorsement[]): void;
+
+  getEndorsementsList(): Array<proto_types_endorsement_pb.Endorsement>;
+  setEndorsementsList(value: Array<proto_types_endorsement_pb.Endorsement>): void;
   clearEndorsementsList(): void;
+  addEndorsements(value?: proto_types_endorsement_pb.Endorsement, index?: number): proto_types_endorsement_pb.Endorsement;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockProposal.AsObject;
   static toObject(includeInstance: boolean, msg: BlockProposal): BlockProposal.AsObject;
@@ -21,17 +24,20 @@ export class BlockProposal extends jspb.Message {
 
 export namespace BlockProposal {
   export type AsObject = {
-    block?: proto_types_blockchain_pb.Block.AsObject;
-    endorsementsList?: proto_types_endorsement_pb.Endorsement.AsObject[];
+    block?: proto_types_blockchain_pb.Block.AsObject,
+    endorsementsList: Array<proto_types_endorsement_pb.Endorsement.AsObject>,
   }
 }
 
 export class ConsensusVote extends jspb.Message {
-  constructor ();
-  getBlockhash(): {};
-  setBlockhash(value: {}): void;
+  getBlockhash(): Uint8Array | string;
+  getBlockhash_asU8(): Uint8Array;
+  getBlockhash_asB64(): string;
+  setBlockhash(value: Uint8Array | string): void;
+
   getTopic(): ConsensusVote.Topic;
   setTopic(value: ConsensusVote.Topic): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ConsensusVote.AsObject;
   static toObject(includeInstance: boolean, msg: ConsensusVote): ConsensusVote.AsObject;
@@ -42,8 +48,8 @@ export class ConsensusVote extends jspb.Message {
 
 export namespace ConsensusVote {
   export type AsObject = {
-    blockhash: {};
-    topic: ConsensusVote.Topic;
+    blockhash: Uint8Array | string,
+    topic: ConsensusVote.Topic,
   }
 
   export enum Topic { 
@@ -54,18 +60,28 @@ export namespace ConsensusVote {
 }
 
 export class ConsensusMessage extends jspb.Message {
-  constructor ();
   getHeight(): number;
   setHeight(value: number): void;
+
   getEndorsement(): proto_types_endorsement_pb.Endorsement | undefined;
   setEndorsement(value?: proto_types_endorsement_pb.Endorsement): void;
+  hasEndorsement(): boolean;
   clearEndorsement(): void;
+
   getBlockproposal(): BlockProposal | undefined;
   setBlockproposal(value?: BlockProposal): void;
+  hasBlockproposal(): boolean;
   clearBlockproposal(): void;
+  hasBlockproposal(): boolean;
+
   getVote(): ConsensusVote | undefined;
   setVote(value?: ConsensusVote): void;
+  hasVote(): boolean;
   clearVote(): void;
+  hasVote(): boolean;
+
+  getMsgCase(): ConsensusMessage.MsgCase;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ConsensusMessage.AsObject;
   static toObject(includeInstance: boolean, msg: ConsensusMessage): ConsensusMessage.AsObject;
@@ -76,10 +92,16 @@ export class ConsensusMessage extends jspb.Message {
 
 export namespace ConsensusMessage {
   export type AsObject = {
-    height: number;
-    endorsement?: proto_types_endorsement_pb.Endorsement.AsObject;
-    blockproposal?: BlockProposal.AsObject;
-    vote?: ConsensusVote.AsObject;
+    height: number,
+    endorsement?: proto_types_endorsement_pb.Endorsement.AsObject,
+    blockproposal?: BlockProposal.AsObject,
+    vote?: ConsensusVote.AsObject,
+  }
+
+  export enum MsgCase { 
+    MSG_NOT_SET = 0,
+    BLOCKPROPOSAL = 100,
+    VOTE = 101,
   }
 }
 

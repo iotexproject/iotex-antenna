@@ -82,36 +82,22 @@ export class Iotx extends RpcMethod {
     });
   }
 
-  public async readContractByHash(hash: string): Promise<string> {
-    const actions = await this.getActions({
-      byHash: { actionHash: hash, checkingPending: true }
-    });
-    const result = await this.readContract({
-      action: actions.actionInfo[0].action
-    });
-    return result.data;
-  }
-
   public async readContractByMethod(
     req: ExecuteContractRequest,
     // @ts-ignore
     // tslint:disable-next-line: typedef
     ...args
   ): Promise<string> {
-    const sender = this.accounts.getAccount(req.from);
-    if (!sender) {
-      throw new Error(`can not found account: ${req.from}`);
-    }
-
-    const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
     const contract = new Contract(JSON.parse(req.abi), req.contractAddress, {
       provider: this
     });
-    return contract.methods[req.method](...args, {
-      account: sender,
-      gasLimit: req.gasLimit,
-      gasPrice: price
+
+    const result = await this.readContract({
+      execution: contract.pureEncodeMethod("0", req.method, args),
+      callerAddress: req.from
     });
+
+    return result.data;
   }
 
   public async claimFromRewardingFund(

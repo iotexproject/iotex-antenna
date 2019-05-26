@@ -2,8 +2,9 @@ import test from "ava";
 import { get } from "dottie";
 import dotenv from "dotenv";
 import RpcMethod from "../node-rpc-method";
-import { ITransfer } from "../types";
+import { GetActionsRequest, ITransfer } from "../types";
 import sleep from "sleep-promise";
+import { publicKeyToAddress } from "../../crypto/crypto";
 
 dotenv.config();
 
@@ -175,7 +176,14 @@ test.serial("RpcMethod.readContract", async t => {
   for (let index = 0; index < resp1.actionInfo.length; index++) {
     if (get(resp1, `actionInfo.${index}.action.core.execution`)) {
       const resp2 = await client.readContract({
-        action: get(resp1, `actionInfo.${index}.action`)
+        execution: GetActionsRequest.fromExecution(
+          get(resp1, `actionInfo.${index}.action.core.execution`)
+        ),
+        calleraddress: publicKeyToAddress(
+          Buffer.from(
+            get(resp1, `actionInfo.${index}.action.senderPubKey`)
+          ).toString("hex")
+        )
       });
       t.deepEqual(resp2.data, "");
     }
