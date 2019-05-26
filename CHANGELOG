@@ -1,3 +1,11 @@
+2019-05-26 - 0.15.1 (06f9500)
+06f9500 (HEAD -> master, origin/master, origin/HEAD) Update dependency @types/node to v11.13.11 (#199)
+3a64ba8 Update dependency nyc to v14.1.1 (#205)
+64172e8 Update babel monorepo (#201)
+da472b5 fix read contract parameter bug (#229)
+d6bee04 0.15.0
+
+
 2019-05-25 - 0.15.0 (7140de1)
 7140de1 (HEAD -> master, origin/master, origin/HEAD) complete validate address (#224)
 787edbb Update proto to iotex-proto v0.2.0 (#225)

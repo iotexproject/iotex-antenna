@@ -1,6 +1,6 @@
 {
   "name": "iotex-antenna",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "description": "field_description",
   "iotexCoreVersion": "iotex-core v0.7.0-3-g51069f16",
   "main": "lib/index.js",
