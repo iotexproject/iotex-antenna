@@ -91,7 +91,7 @@
     "husky": "2.3.0",
     "nyc": "14.0.0",
     "prettier": "1.17.1",
-    "pretty-quick": "1.10.0",
+    "pretty-quick": "1.11.0",
     "proto-build": "0.2.3",
     "sleep-promise": "8.0.1",
     "solc": "0.4.25",
