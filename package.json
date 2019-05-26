@@ -79,7 +79,7 @@
     "@types/elliptic": "6.4.5",
     "@types/node": "11.13.11",
     "ava": "1.4.1",
-    "babel-loader": "8.0.5",
+    "babel-loader": "8.0.6",
     "babel-plugin-module-resolver": "3.2.0",
     "babel-plugin-react-require": "3.1.1",
     "babel-plugin-transform-class-properties": "6.24.1",
