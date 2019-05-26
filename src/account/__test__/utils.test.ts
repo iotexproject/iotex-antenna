@@ -1,5 +1,5 @@
 import test from "ava";
-import { fromRau, toRau } from "../utils";
+import { fromRau, toRau, validateAddress } from "../utils";
 import { fromUtf8, toUtf8 } from "../utils";
 
 test("fromRau", async t => {
@@ -32,4 +32,12 @@ test("fromUtf8", async t => {
 
 test("toUtf8", async t => {
   t.is(toUtf8("68656c6c6f"), "hello");
+});
+
+test("validateAddress", async t => {
+  t.true(validateAddress("io187wzp08vnhjjpkydnr97qlh8kh0dpkkytfam8j"));
+  t.true(validateAddress("io14y2zg5anuuqs597fz6qlkfs2d4h4vyszajaud0"));
+  t.false(validateAddress("io14y2zg5anuuqs597fz6qlkfs2d4h4vyszajaud"));
+  t.true(validateAddress("io1usnjqjhtjuk3up8244ay82yylugg5rs37ure00"));
+  t.false(validateAddress("io1usnjqjhtjuk3up8244ay82yylugg5rs37ure"));
 });

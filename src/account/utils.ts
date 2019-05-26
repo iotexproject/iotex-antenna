@@ -1,3 +1,4 @@
+import bech32 from "bech32";
 import { BigNumber } from "bignumber.js";
 import { decode, encode } from "utf8";
 
@@ -145,4 +146,20 @@ export function hexToBytes(hex: string): Uint8Array {
   }
 
   return new Uint8Array(bytes);
+}
+
+/**
+ * validate address for iotex.
+ *
+ * @param address address
+ *
+ * @returns validate result
+ */
+export function validateAddress(address: string): boolean {
+  try {
+    const payload = bech32.decode(address);
+    return payload.prefix === "io";
+  } catch (e) {
+    return false;
+  }
 }
