@@ -1,3 +1,21 @@
+2019-05-25 - 0.15.0 (7140de1)
+7140de1 (HEAD -> master, origin/master, origin/HEAD) complete validate address (#224)
+787edbb Update proto to iotex-proto v0.2.0 (#225)
+d045ec3 Update dependency tslint-microsoft-contrib to v6.2.0 (#227)
+3401776 Update dependency ts-node to v8.2.0 (#228)
+86a3b48 Update dependency pretty-quick to v1.11.0 (#221)
+7306bec Update dependency grpc to v1.20.3 (#203)
+a8f1b10 Update dependency ts-protoc-gen to v0.10.0 (#219)
+56b1613 Update dependency husky to v2.3.0 (#204)
+ba07b9c Update sign (#218)
+03f5efb Update dependency prettier to v1.17.1 (#216)
+38028bb add provider for change network (#213)
+26e6049 Update dependency dotenv to v8 (#207)
+eb6ca4f change trasfer payload to hex string (#209)
+3c72ee9 fix tests
+ad0ecfd (tag: v0.14.0) 0.14.0
+
+
 2019-04-30 - 0.14.0 (d4c060b)
 d4c060b (HEAD -> master, origin/master, origin/HEAD) add encrypt & decrypt to wallet
 f90d800 Update dependency husky to v2.1.0 (#198)
