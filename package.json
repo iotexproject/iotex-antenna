@@ -84,7 +84,7 @@
     "babel-plugin-react-require": "3.1.1",
     "babel-plugin-transform-class-properties": "6.24.1",
     "browser-env": "3.2.6",
-    "standard-version": "5.0.2",
+    "standard-version": "6.0.1",
     "dotenv": "8.0.0",
     "dottie": "2.0.1",
     "global": "4.3.2",
