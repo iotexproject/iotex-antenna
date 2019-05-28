@@ -111,9 +111,8 @@ export class Contract {
 
   public async deploy(
     account: IAccount,
-    // @ts-ignore
     // tslint:disable-next-line: no-any
-    inputs: Array[any],
+    inputs: Array<any>,
     gasLimit?: string | undefined,
     gasPrice?: string
   ): Promise<string> {
