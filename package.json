@@ -1,7 +1,7 @@
 {
   "name": "iotex-antenna",
   "version": "0.15.2",
-  "description": "field_description",
+  "description": "IoTeX blockchain SDK",
   "iotexCoreVersion": "iotex-core v0.7.0-3-g51069f16",
   "main": "lib/index.js",
   "files": [
@@ -58,15 +58,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/puncsky/template_website.git"
+    "url": "git+ssh://git@github.com/iotexproject/iotex-antenna.git"
   },
   "keywords": [],
   "author": "Tian Pan (tian@iotex.io)",
   "license": "APACHE",
   "bugs": {
-    "url": "https://github.com/puncsky/template_website/issues"
+    "url": "https://github.com/iotexproject/iotex-antenna/issues"
   },
-  "homepage": "https://github.com/puncsky/template_website#readme",
+  "homepage": "https://github.com/iotexproject/iotex-antenna#readme",
   "devDependencies": {
     "@babel/cli": "7.4.4",
     "@babel/core": "7.4.5",
