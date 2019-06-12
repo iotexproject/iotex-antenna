@@ -5,6 +5,7 @@ import account from "eth-lib/lib/account";
 import { IRpcMethod } from "../rpc-method/types";
 import { Account } from "./account";
 import { IAccount } from "./account";
+import { ISigner } from "./signer";
 import Wallet from "./wallet";
 
 export class Accounts {
@@ -41,5 +42,11 @@ export class Accounts {
 
   public sign(data: string | Buffer | Uint8Array, privateKey: string): Buffer {
     return Account.fromPrivateKey(privateKey).sign(data);
+  }
+
+  public addressToAccount(address: string, signer: ISigner): IAccount {
+    const account = Account.fromAddressAndSigner(address, signer);
+    this.wallet.add(account);
+    return account;
   }
 }
