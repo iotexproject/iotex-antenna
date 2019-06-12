@@ -36,22 +36,14 @@ export class AbstractMethod {
     }
 
     if (!envelop.gasLimit) {
-      const selp = SealedEnvelop.sign(
-        this.account.privateKey,
-        this.account.publicKey,
-        envelop
-      );
+      const selp = await SealedEnvelop.sign(this.account, envelop);
       const limit = await this.client.estimateGasForAction({
         action: selp.action()
       });
       envelop.gasLimit = limit.gas;
     }
 
-    return SealedEnvelop.sign(
-      this.account.privateKey,
-      this.account.publicKey,
-      envelop
-    );
+    return SealedEnvelop.sign(this.account, envelop);
   }
 
   public async sendAction(envelop: Envelop): Promise<string> {

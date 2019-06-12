@@ -1,11 +1,13 @@
 import { makeSigner, privateKeyToAccount, recover } from "../crypto/crypto";
 import { hash256b } from "../crypto/hash";
+import { ISigner } from "./signer";
 import { hexToBytes, isHexStrict } from "./utils";
 
 export interface IAccount {
   address: string;
   privateKey: string;
   publicKey: string;
+  signer?: ISigner;
 
   sign(data: string | Buffer | Uint8Array): Buffer;
   recover(message: string, signature: Buffer, preFixed: boolean): String;
@@ -16,6 +18,7 @@ export class Account implements IAccount {
   public address: string;
   public privateKey: string;
   public publicKey: string;
+  public signer?: ISigner;
 
   public static fromPrivateKey(privateKey: string): IAccount {
     const obj = privateKeyToAccount(privateKey);
@@ -26,7 +29,20 @@ export class Account implements IAccount {
     return act;
   }
 
+  public static fromAddressAndSigner(
+    address: string,
+    signer: ISigner
+  ): IAccount {
+    const act = new Account();
+    act.address = address;
+    act.signer = signer;
+    return act;
+  }
+
   public sign(data: string | Buffer | Uint8Array): Buffer {
+    if (!this.privateKey) {
+      throw new Error("account sign only support local model.");
+    }
     const h = this.hashMessage(data);
     return Buffer.from(
       makeSigner(0)(h.toString("hex"), this.privateKey),

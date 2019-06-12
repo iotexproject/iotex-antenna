@@ -1,4 +1,5 @@
 import actionPb from "../../protogen/proto/types/action_pb";
+import { IAccount } from "../account/account";
 import { makeSigner } from "../crypto/crypto";
 import { hash256b } from "../crypto/hash";
 import {
@@ -204,16 +205,28 @@ export class SealedEnvelop {
     };
   }
 
-  public static sign(
-    privateKey: string,
-    publicKey: string,
+  public static async sign(
+    account: IAccount,
     act: Envelop
-  ): SealedEnvelop {
+  ): Promise<SealedEnvelop> {
     const h = hash256b(act.bytestream());
-    const sign = Buffer.from(
-      makeSigner(0)(h.toString("hex"), privateKey),
-      "hex"
-    );
-    return new SealedEnvelop(act, Buffer.from(publicKey, "hex"), sign);
+    if (account.signer) {
+      const signdData = await account.signer.sign(account.address, h);
+      return new SealedEnvelop(
+        act,
+        Buffer.from(signdData.publicKey, "hex"),
+        signdData.data
+      );
+    } else {
+      const sign = Buffer.from(
+        makeSigner(0)(h.toString("hex"), account.privateKey),
+        "hex"
+      );
+      return new SealedEnvelop(
+        act,
+        Buffer.from(account.publicKey, "hex"),
+        sign
+      );
+    }
   }
 }
