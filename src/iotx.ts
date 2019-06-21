@@ -1,7 +1,10 @@
+/* tslint:disable:no-any */
+import ethereumjs from "ethereumjs-abi";
 import { Accounts } from "./account/accounts";
 import { toRau } from "./account/utils";
 import { ClaimFromRewardingFundMethod, TransferMethod } from "./action/method";
 import { Contract } from "./contract/contract";
+import { fromBytes } from "./crypto/address";
 import RpcMethod from "./rpc-method";
 import { IRpcMethod } from "./rpc-method/types";
 import {
@@ -87,7 +90,7 @@ export class Iotx extends RpcMethod {
     // @ts-ignore
     // tslint:disable-next-line: typedef
     ...args
-  ): Promise<string> {
+  ): Promise<any> {
     const contract = new Contract(JSON.parse(req.abi), req.contractAddress, {
       provider: this
     });
@@ -97,7 +100,34 @@ export class Iotx extends RpcMethod {
       callerAddress: req.from
     });
 
-    return result.data;
+    const outTypes = [] as Array<string>;
+
+    // @ts-ignore
+    contract.getABI()[req.method].outputs.forEach(field => {
+      outTypes.push(field.type);
+    });
+
+    if (outTypes.length === 0) {
+      return null;
+    }
+
+    const results = ethereumjs.rawDecode(
+      outTypes,
+      Buffer.from(result.data, "hex")
+    );
+
+    for (let i = 0; i < outTypes.length; i++) {
+      if (outTypes[i] === "address") {
+        results[i] = fromBytes(
+          Buffer.from(results[i].toString(), "hex")
+        ).string();
+      }
+    }
+
+    if (outTypes.length === 1) {
+      return results[0];
+    }
+    return results;
   }
 
   public async claimFromRewardingFund(
