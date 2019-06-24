@@ -201,31 +201,24 @@ test("decode method one result", async t => {
   const antenna = new Antenna(IOTEX_CORE);
   const contract = new Contract(
     ABI,
-    "io15rxn7xdmtxgpe76lcka49za00kuutwxyqvwupx",
-    {
-      provider: antenna.iotx
-    }
+    "io15rxn7xdmtxgpe76lcka49za00kuutwxyqvwupx"
   );
 
   const hex =
     "000000000000000000000000dd638623da9eccc67a07df098b2446cfb3b6f4c1";
-  const result = antenna.iotx.decodeMethodResult(contract, "owner", hex);
+  const result = contract.decodeMethodResult("owner", hex);
   t.deepEqual("io1m43cvg76nmxvv7s8muyckfzxe7emdaxp3xu84j", result);
 });
 
 test("decode method multiple result", async t => {
-  const antenna = new Antenna(IOTEX_CORE);
   const contract = new Contract(
     ABI,
-    "io15rxn7xdmtxgpe76lcka49za00kuutwxyqvwupx",
-    {
-      provider: antenna.iotx
-    }
+    "io15rxn7xdmtxgpe76lcka49za00kuutwxyqvwupx"
   );
 
   const hex =
     "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001054686973497341757468537472696e6700000000000000000000000000000000";
-  const result = antenna.iotx.decodeMethodResult(contract, "userpools", hex);
+  const result = contract.decodeMethodResult("userpools", hex);
   t.deepEqual("0", result[0].toString());
   t.deepEqual("ThisIsAuthString", result[1]);
   t.deepEqual("0", result[2].toString());

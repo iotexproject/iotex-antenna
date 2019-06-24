@@ -1,10 +1,8 @@
 /* tslint:disable:no-any */
-import ethereumjs from "ethereumjs-abi";
 import { Accounts } from "./account/accounts";
 import { toRau } from "./account/utils";
 import { ClaimFromRewardingFundMethod, TransferMethod } from "./action/method";
 import { Contract } from "./contract/contract";
-import { fromBytes } from "./crypto/address";
 import RpcMethod from "./rpc-method";
 import { IRpcMethod } from "./rpc-method/types";
 import {
@@ -98,7 +96,7 @@ export class Iotx extends RpcMethod {
       callerAddress: req.from
     });
 
-    return this.decodeMethodResult(contract, req.method, result.data);
+    return contract.decodeMethodResult(req.method, result.data);
   }
 
   public async claimFromRewardingFund(
@@ -116,37 +114,5 @@ export class Iotx extends RpcMethod {
       amount: req.amount,
       data: req.data
     }).execute();
-  }
-
-  public decodeMethodResult(
-    contract: Contract,
-    method: string,
-    result: string
-  ): any | Array<any> {
-    const outTypes = [] as Array<string>;
-
-    // @ts-ignore
-    contract.getABI()[method].outputs.forEach(field => {
-      outTypes.push(field.type);
-    });
-
-    if (outTypes.length === 0) {
-      return null;
-    }
-
-    const results = ethereumjs.rawDecode(outTypes, Buffer.from(result, "hex"));
-
-    for (let i = 0; i < outTypes.length; i++) {
-      if (outTypes[i] === "address") {
-        results[i] = fromBytes(
-          Buffer.from(results[i].toString(), "hex")
-        ).string();
-      }
-    }
-
-    if (outTypes.length === 1) {
-      return results[0];
-    }
-    return results;
   }
 }
