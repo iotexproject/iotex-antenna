@@ -1,3 +1,4 @@
+/* tslint:disable:no-any */
 import { Accounts } from "./account/accounts";
 import { toRau } from "./account/utils";
 import { ClaimFromRewardingFundMethod, TransferMethod } from "./action/method";
@@ -84,10 +85,8 @@ export class Iotx extends RpcMethod {
 
   public async readContractByMethod(
     req: ExecuteContractRequest,
-    // @ts-ignore
-    // tslint:disable-next-line: typedef
-    ...args
-  ): Promise<string> {
+    ...args: Array<any>
+  ): Promise<any | Array<any>> {
     const contract = new Contract(JSON.parse(req.abi), req.contractAddress, {
       provider: this
     });
@@ -97,7 +96,7 @@ export class Iotx extends RpcMethod {
       callerAddress: req.from
     });
 
-    return result.data;
+    return contract.decodeMethodResult(req.method, result.data);
   }
 
   public async claimFromRewardingFund(

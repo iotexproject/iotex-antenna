@@ -1,6 +1,9 @@
+/* tslint:disable:no-any */
+import ethereumjs from "ethereumjs-abi";
 import { IAccount } from "../account/account";
 import { ExecutionMethod } from "../action/method";
 import { Execution } from "../action/types";
+import { fromBytes } from "../crypto/address";
 import { IRpcMethod } from "../rpc-method/types";
 import {
   AbiByFunc,
@@ -205,6 +208,34 @@ export class Contract {
       amount: amount,
       data: Buffer.from(encodeInputData(this.abi, method, input), "hex")
     };
+  }
+
+  public decodeMethodResult(method: string, result: string): any | Array<any> {
+    const outTypes = [] as Array<string>;
+
+    // @ts-ignore
+    this.getABI()[method].outputs.forEach(field => {
+      outTypes.push(field.type);
+    });
+
+    if (outTypes.length === 0) {
+      return null;
+    }
+
+    const results = ethereumjs.rawDecode(outTypes, Buffer.from(result, "hex"));
+
+    for (let i = 0; i < outTypes.length; i++) {
+      if (outTypes[i] === "address") {
+        results[i] = fromBytes(
+          Buffer.from(results[i].toString(), "hex")
+        ).string();
+      }
+    }
+
+    if (outTypes.length === 1) {
+      return results[0];
+    }
+    return results;
   }
 }
 
