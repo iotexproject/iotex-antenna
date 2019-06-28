@@ -68,6 +68,11 @@ export class BlockHeaderCore extends jspb.Message {
   getReceiptroot_asB64(): string;
   setReceiptroot(value: Uint8Array | string): void;
 
+  getLogsbloom(): Uint8Array | string;
+  getLogsbloom_asU8(): Uint8Array;
+  getLogsbloom_asB64(): string;
+  setLogsbloom(value: Uint8Array | string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockHeaderCore.AsObject;
   static toObject(includeInstance: boolean, msg: BlockHeaderCore): BlockHeaderCore.AsObject;
@@ -85,6 +90,7 @@ export namespace BlockHeaderCore {
     txroot: Uint8Array | string,
     deltastatedigest: Uint8Array | string,
     receiptroot: Uint8Array | string,
+    logsbloom: Uint8Array | string,
   }
 }
 

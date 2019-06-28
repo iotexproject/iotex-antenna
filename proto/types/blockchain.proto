@@ -29,6 +29,7 @@ message BlockHeaderCore {
   bytes txRoot = 5;
   bytes deltaStateDigest = 6;
   bytes receiptRoot = 7;
+  bytes logsBloom = 8;
 }
 
 // footer of a block
@@ -65,7 +66,7 @@ message EpochData {
 message ChainMeta {
   uint64 height = 1;
   int64 numActions = 2;
-  int64 tps = 3;
+  float tps = 3;
   EpochData epoch = 4;
 }
 
