@@ -1,6 +1,5 @@
 /* tslint:disable:no-any */
 import { Accounts } from "./account/accounts";
-import { toRau } from "./account/utils";
 import { ClaimFromRewardingFundMethod, TransferMethod } from "./action/method";
 import { Contract } from "./contract/contract";
 import RpcMethod from "./rpc-method";
@@ -29,11 +28,10 @@ export class Iotx extends RpcMethod {
       throw new Error(`can not found account: ${req.from}`);
     }
 
-    const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
     const payload = req.payload || "";
     return new TransferMethod(this, sender, {
       gasLimit: req.gasLimit,
-      gasPrice: price,
+      gasPrice: req.gasPrice,
       amount: req.value,
       recipient: req.to,
       payload: payload
@@ -52,11 +50,10 @@ export class Iotx extends RpcMethod {
       throw new Error(`can not found account: ${req.from}`);
     }
 
-    const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
     return new Contract(JSON.parse(req.abi), undefined, {
       data: req.data,
       provider: this
-    }).deploy(sender, args, req.gasLimit, price);
+    }).deploy(sender, args, req.gasLimit, req.gasPrice);
   }
 
   // return action hash
@@ -71,7 +68,6 @@ export class Iotx extends RpcMethod {
       throw new Error(`can not found account: ${req.from}`);
     }
 
-    const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
     const contract = new Contract(JSON.parse(req.abi), req.contractAddress, {
       provider: this
     });
@@ -79,7 +75,7 @@ export class Iotx extends RpcMethod {
       account: sender,
       amount: req.amount,
       gasLimit: req.gasLimit,
-      gasPrice: price
+      gasPrice: req.gasPrice
     });
   }
 
@@ -107,10 +103,9 @@ export class Iotx extends RpcMethod {
       throw new Error(`can not found account: ${req.from}`);
     }
 
-    const price = req.gasPrice ? toRau(String(req.gasPrice), "Qev") : undefined;
     return new ClaimFromRewardingFundMethod(this, sender, {
       gasLimit: req.gasLimit,
-      gasPrice: price,
+      gasPrice: req.gasPrice,
       amount: req.amount,
       data: req.data
     }).execute();
