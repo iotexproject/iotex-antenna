@@ -55,7 +55,7 @@ export class Account implements IAccount {
 
     // @ts-ignore
     const messageBuffer = Buffer.from(bytes);
-    const preamble = `\u0019IoTeX Signed Message:\n${bytes.length}`;
+    const preamble = `\x16IoTeX Signed Message:\n${bytes.length}`;
     const preambleBuffer = Buffer.from(preamble);
     const iotexMessage = Buffer.concat([preambleBuffer, messageBuffer]);
     return hash256b(iotexMessage);
