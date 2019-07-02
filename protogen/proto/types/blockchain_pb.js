@@ -520,7 +520,8 @@ proto.iotextypes.BlockHeaderCore.toObject = function(includeInstance, msg) {
     prevblockhash: msg.getPrevblockhash_asB64(),
     txroot: msg.getTxroot_asB64(),
     deltastatedigest: msg.getDeltastatedigest_asB64(),
-    receiptroot: msg.getReceiptroot_asB64()
+    receiptroot: msg.getReceiptroot_asB64(),
+    logsbloom: msg.getLogsbloom_asB64()
   };
 
   if (includeInstance) {
@@ -585,6 +586,10 @@ proto.iotextypes.BlockHeaderCore.deserializeBinaryFromReader = function(msg, rea
     case 7:
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setReceiptroot(value);
+      break;
+    case 8:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setLogsbloom(value);
       break;
     default:
       reader.skipField();
@@ -662,6 +667,13 @@ proto.iotextypes.BlockHeaderCore.serializeBinaryToWriter = function(message, wri
   if (f.length > 0) {
     writer.writeBytes(
       7,
+      f
+    );
+  }
+  f = message.getLogsbloom_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      8,
       f
     );
   }
@@ -884,6 +896,45 @@ proto.iotextypes.BlockHeaderCore.prototype.getReceiptroot_asU8 = function() {
 /** @param {!(string|Uint8Array)} value */
 proto.iotextypes.BlockHeaderCore.prototype.setReceiptroot = function(value) {
   jspb.Message.setProto3BytesField(this, 7, value);
+};
+
+
+/**
+ * optional bytes logsBloom = 8;
+ * @return {string}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getLogsbloom = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * optional bytes logsBloom = 8;
+ * This is a type-conversion wrapper around `getLogsbloom()`
+ * @return {string}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getLogsbloom_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getLogsbloom()));
+};
+
+
+/**
+ * optional bytes logsBloom = 8;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getLogsbloom()`
+ * @return {!Uint8Array}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getLogsbloom_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getLogsbloom()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.iotextypes.BlockHeaderCore.prototype.setLogsbloom = function(value) {
+  jspb.Message.setProto3BytesField(this, 8, value);
 };
 
 
@@ -1846,7 +1897,7 @@ proto.iotextypes.ChainMeta.toObject = function(includeInstance, msg) {
   var f, obj = {
     height: jspb.Message.getFieldWithDefault(msg, 1, 0),
     numactions: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    tps: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    tps: +jspb.Message.getFieldWithDefault(msg, 3, 0.0),
     epoch: (f = msg.getEpoch()) && proto.iotextypes.EpochData.toObject(includeInstance, f)
   };
 
@@ -1893,7 +1944,7 @@ proto.iotextypes.ChainMeta.deserializeBinaryFromReader = function(msg, reader) {
       msg.setNumactions(value);
       break;
     case 3:
-      var value = /** @type {number} */ (reader.readInt64());
+      var value = /** @type {number} */ (reader.readFloat());
       msg.setTps(value);
       break;
     case 4:
@@ -1945,8 +1996,8 @@ proto.iotextypes.ChainMeta.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getTps();
-  if (f !== 0) {
-    writer.writeInt64(
+  if (f !== 0.0) {
+    writer.writeFloat(
       3,
       f
     );
@@ -1993,17 +2044,17 @@ proto.iotextypes.ChainMeta.prototype.setNumactions = function(value) {
 
 
 /**
- * optional int64 tps = 3;
+ * optional float tps = 3;
  * @return {number}
  */
 proto.iotextypes.ChainMeta.prototype.getTps = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 3, 0.0));
 };
 
 
 /** @param {number} value */
 proto.iotextypes.ChainMeta.prototype.setTps = function(value) {
-  jspb.Message.setProto3IntField(this, 3, value);
+  jspb.Message.setProto3FloatField(this, 3, value);
 };
 
 

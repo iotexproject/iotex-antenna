@@ -27,8 +27,8 @@
     "changelog-minor": "standard-version --release-as minor",
     "changelog-patch": "standard-version --release-as patch",
     "build-proto": "npm run build-proto:js && npm run build-proto:grpc",
-    "build-proto:js": "protoc -I=./ google/api/http.proto google/api/annotations.proto proto/api/api.proto proto/rpc/rpc.proto proto/types/action.proto proto/types/blockchain.proto proto/types/consensus.proto proto/types/endorsement.proto proto/types/genesis.proto proto/types/node.proto --js_out=import_style=commonjs:./protogen/",
-    "build-proto:grpc": "protoc -I=./ google/api/http.proto google/api/annotations.proto proto/api/api.proto proto/rpc/rpc.proto proto/types/action.proto proto/types/blockchain.proto proto/types/consensus.proto proto/types/endorsement.proto proto/types/genesis.proto proto/types/node.proto --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:./protogen/"
+    "build-proto:js": "protoc -I=./ proto/api/api.proto proto/rpc/rpc.proto proto/types/action.proto proto/types/blockchain.proto proto/types/consensus.proto proto/types/endorsement.proto proto/types/genesis.proto proto/types/node.proto --js_out=import_style=commonjs:./protogen/",
+    "build-proto:grpc": "protoc -I=./ proto/api/api.proto proto/rpc/rpc.proto proto/types/action.proto proto/types/blockchain.proto proto/types/consensus.proto proto/types/endorsement.proto proto/types/genesis.proto proto/types/node.proto --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:./protogen/"
   },
   "nyc": {
     "include": [
