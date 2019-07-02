@@ -1,8 +1,8 @@
 {
   "name": "iotex-antenna",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "description": "IoTeX blockchain SDK",
-  "iotexCoreVersion": "iotex-core v0.7.0-3-g51069f16",
+  "iotexCoreVersion": "iotex-core v0.7.1",
   "main": "lib/index.js",
   "files": [
     "lib",

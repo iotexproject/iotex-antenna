@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.17.0](https://github.com/iotexproject/iotex-antenna/compare/v0.16.0...v0.17.0) (2019-07-02)
+
+This version has breaking changes.
+
+- bump grpc API defs for iotex-core v0.7.1
+- fix message signing prefix
+
 # [0.16.0](https://github.com/iotexproject/iotex-antenna/compare/v0.15.3...v0.16.0) (2019-06-26)
 
 ### Bug Fixes
