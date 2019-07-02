@@ -4,7 +4,6 @@ import * as proto_types_action_pb from '../../proto/types/action_pb';
 import * as proto_types_blockchain_pb from '../../proto/types/blockchain_pb';
 import * as proto_types_node_pb from '../../proto/types/node_pb';
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
-import * as google_api_annotations_pb from '../../google/api/annotations_pb';
 
 export class GetAccountRequest extends jspb.Message {
   getAddress(): string;
@@ -902,6 +901,156 @@ export namespace GetRawBlocksResponse {
   }
 }
 
+export class GetLogsByBlock extends jspb.Message {
+  getBlockhash(): Uint8Array | string;
+  getBlockhash_asU8(): Uint8Array;
+  getBlockhash_asB64(): string;
+  setBlockhash(value: Uint8Array | string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetLogsByBlock.AsObject;
+  static toObject(includeInstance: boolean, msg: GetLogsByBlock): GetLogsByBlock.AsObject;
+  static serializeBinaryToWriter(message: GetLogsByBlock, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetLogsByBlock;
+  static deserializeBinaryFromReader(message: GetLogsByBlock, reader: jspb.BinaryReader): GetLogsByBlock;
+}
+
+export namespace GetLogsByBlock {
+  export type AsObject = {
+    blockhash: Uint8Array | string,
+  }
+}
+
+export class GetLogsByRange extends jspb.Message {
+  getFromblock(): number;
+  setFromblock(value: number): void;
+
+  getCount(): number;
+  setCount(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetLogsByRange.AsObject;
+  static toObject(includeInstance: boolean, msg: GetLogsByRange): GetLogsByRange.AsObject;
+  static serializeBinaryToWriter(message: GetLogsByRange, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetLogsByRange;
+  static deserializeBinaryFromReader(message: GetLogsByRange, reader: jspb.BinaryReader): GetLogsByRange;
+}
+
+export namespace GetLogsByRange {
+  export type AsObject = {
+    fromblock: number,
+    count: number,
+  }
+}
+
+export class Topics extends jspb.Message {
+  getTopicList(): Array<Uint8Array | string>;
+  setTopicList(value: Array<Uint8Array | string>): void;
+  clearTopicList(): void;
+  addTopic(value: Uint8Array | string, index?: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): Topics.AsObject;
+  static toObject(includeInstance: boolean, msg: Topics): Topics.AsObject;
+  static serializeBinaryToWriter(message: Topics, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Topics;
+  static deserializeBinaryFromReader(message: Topics, reader: jspb.BinaryReader): Topics;
+}
+
+export namespace Topics {
+  export type AsObject = {
+    topicList: Array<Uint8Array | string>,
+  }
+}
+
+export class LogsFilter extends jspb.Message {
+  getAddressList(): Array<string>;
+  setAddressList(value: Array<string>): void;
+  clearAddressList(): void;
+  addAddress(value: string, index?: number): void;
+
+  getTopicsList(): Array<Topics>;
+  setTopicsList(value: Array<Topics>): void;
+  clearTopicsList(): void;
+  addTopics(value?: Topics, index?: number): Topics;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): LogsFilter.AsObject;
+  static toObject(includeInstance: boolean, msg: LogsFilter): LogsFilter.AsObject;
+  static serializeBinaryToWriter(message: LogsFilter, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): LogsFilter;
+  static deserializeBinaryFromReader(message: LogsFilter, reader: jspb.BinaryReader): LogsFilter;
+}
+
+export namespace LogsFilter {
+  export type AsObject = {
+    addressList: Array<string>,
+    topicsList: Array<Topics.AsObject>,
+  }
+}
+
+export class GetLogsRequest extends jspb.Message {
+  getFilter(): LogsFilter | undefined;
+  setFilter(value?: LogsFilter): void;
+  hasFilter(): boolean;
+  clearFilter(): void;
+
+  getByblock(): GetLogsByBlock | undefined;
+  setByblock(value?: GetLogsByBlock): void;
+  hasByblock(): boolean;
+  clearByblock(): void;
+  hasByblock(): boolean;
+
+  getByrange(): GetLogsByRange | undefined;
+  setByrange(value?: GetLogsByRange): void;
+  hasByrange(): boolean;
+  clearByrange(): void;
+  hasByrange(): boolean;
+
+  getLookupCase(): GetLogsRequest.LookupCase;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetLogsRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetLogsRequest): GetLogsRequest.AsObject;
+  static serializeBinaryToWriter(message: GetLogsRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetLogsRequest;
+  static deserializeBinaryFromReader(message: GetLogsRequest, reader: jspb.BinaryReader): GetLogsRequest;
+}
+
+export namespace GetLogsRequest {
+  export type AsObject = {
+    filter?: LogsFilter.AsObject,
+    byblock?: GetLogsByBlock.AsObject,
+    byrange?: GetLogsByRange.AsObject,
+  }
+
+  export enum LookupCase { 
+    LOOKUP_NOT_SET = 0,
+    BYBLOCK = 2,
+    BYRANGE = 3,
+  }
+}
+
+export class GetLogsResponse extends jspb.Message {
+  getLogsList(): Array<proto_types_action_pb.Log>;
+  setLogsList(value: Array<proto_types_action_pb.Log>): void;
+  clearLogsList(): void;
+  addLogs(value?: proto_types_action_pb.Log, index?: number): proto_types_action_pb.Log;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetLogsResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetLogsResponse): GetLogsResponse.AsObject;
+  static serializeBinaryToWriter(message: GetLogsResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetLogsResponse;
+  static deserializeBinaryFromReader(message: GetLogsResponse, reader: jspb.BinaryReader): GetLogsResponse;
+}
+
+export namespace GetLogsResponse {
+  export type AsObject = {
+    logsList: Array<proto_types_action_pb.Log.AsObject>,
+  }
+}
+
 export class StreamBlocksRequest extends jspb.Message {
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): StreamBlocksRequest.AsObject;
@@ -933,6 +1082,46 @@ export class StreamBlocksResponse extends jspb.Message {
 export namespace StreamBlocksResponse {
   export type AsObject = {
     block?: BlockInfo.AsObject,
+  }
+}
+
+export class StreamLogsRequest extends jspb.Message {
+  getFilter(): LogsFilter | undefined;
+  setFilter(value?: LogsFilter): void;
+  hasFilter(): boolean;
+  clearFilter(): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StreamLogsRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: StreamLogsRequest): StreamLogsRequest.AsObject;
+  static serializeBinaryToWriter(message: StreamLogsRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StreamLogsRequest;
+  static deserializeBinaryFromReader(message: StreamLogsRequest, reader: jspb.BinaryReader): StreamLogsRequest;
+}
+
+export namespace StreamLogsRequest {
+  export type AsObject = {
+    filter?: LogsFilter.AsObject,
+  }
+}
+
+export class StreamLogsResponse extends jspb.Message {
+  getLog(): proto_types_action_pb.Log | undefined;
+  setLog(value?: proto_types_action_pb.Log): void;
+  hasLog(): boolean;
+  clearLog(): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StreamLogsResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: StreamLogsResponse): StreamLogsResponse.AsObject;
+  static serializeBinaryToWriter(message: StreamLogsResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StreamLogsResponse;
+  static deserializeBinaryFromReader(message: StreamLogsResponse, reader: jspb.BinaryReader): StreamLogsResponse;
+}
+
+export namespace StreamLogsResponse {
+  export type AsObject = {
+    log?: proto_types_action_pb.Log.AsObject,
   }
 }
 

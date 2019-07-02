@@ -14,15 +14,10 @@ import "proto/types/action.proto";
 import "proto/types/blockchain.proto";
 import "proto/types/node.proto";
 import "google/protobuf/timestamp.proto";
-import "google/api/annotations.proto";
 
 service APIService {
   // get the address detail of an address
-  rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {
-    option (google.api.http) = {
-      get: "/v1/accounts/{address}"
-    };
-  }
+  rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {}
 
   // get action(s) by:
   // 1. start index and action count
@@ -30,11 +25,7 @@ service APIService {
   // 3. address with start index and action count
   // 4. get unconfirmed actions by address with start index and action count
   // 5. block hash with start index and action count
-  rpc GetActions(GetActionsRequest) returns (GetActionsResponse) {
-    option (google.api.http) = {
-      get: "/v1/actions/hash/{byHash.actionHash}"
-    };
-  }
+  rpc GetActions(GetActionsRequest) returns (GetActionsResponse) {}
 
   // get block metadata(s) by:
   // 1. start index and block count
@@ -48,12 +39,7 @@ service APIService {
   rpc GetServerMeta(GetServerMetaRequest) returns (GetServerMetaResponse) {}
 
   // sendAction
-  rpc SendAction(SendActionRequest) returns (SendActionResponse) {
-    option (google.api.http) = {
-      post: "/v1/actions"
-      body: "action"
-    };
-  }
+  rpc SendAction(SendActionRequest) returns (SendActionResponse) {}
 
   // get receipt by action Hash
   rpc GetReceiptByAction(GetReceiptByActionRequest) returns (GetReceiptByActionResponse) {}
@@ -76,26 +62,18 @@ service APIService {
   // get raw blocks data
   rpc GetRawBlocks(GetRawBlocksRequest) returns (GetRawBlocksResponse) {}
 
+  // get logs filtered by contract address and topics
+  rpc GetLogs(GetLogsRequest) returns (GetLogsResponse) {}
+
+  /*
+   * below are streaming APIs
+   */
+
   // get block info in stream
   rpc StreamBlocks(StreamBlocksRequest) returns (stream StreamBlocksResponse) {}
 
-  // below API are for trustwallet use only
-  // this is to WA grpc-gateway cannot handle oneof message
-  // refer to https://github.com/grpc-ecosystem/grpc-gateway/issues/753
-
-  // get actions by addr
-  rpc GetActionsByAddress(GetActionsByAddressRequest) returns (GetActionsResponse) {
-    option (google.api.http) = {
-      get: "/v1/actions/addr/{address}"
-    };
-  }
-
-  // send signed transaction bytes
-  rpc SendSignedActionBytes(SendSignedActionBytesRequest) returns (SendActionResponse) {
-    option (google.api.http) = {
-      post: "/v1/actionbytes/{signedActionBytes}"
-    };
-  }
+  // get logs filtered by contract address and topics in stream
+  rpc StreamLogs(StreamLogsRequest) returns (stream StreamLogsResponse) {}
 }
 
 message GetAccountRequest {
@@ -160,15 +138,15 @@ message ReceiptInfo {
 }
 
 message BlockProducerInfo {
-    string address = 1;
-    string votes = 2;
-    bool active = 3;
-    uint64 production = 4;
+  string address = 1;
+  string votes = 2;
+  bool active = 3;
+  uint64 production = 4;
 }
 
 message BlockInfo {
-    iotextypes.Block block = 1;
-    repeated iotextypes.Receipt receipts = 2;
+  iotextypes.Block block = 1;
+  repeated iotextypes.Receipt receipts = 2;
 }
 
 message GetActionsResponse {
@@ -214,11 +192,11 @@ message SendActionRequest {
 }
 
 message SendSignedActionBytesRequest {
-    string signedActionBytes = 1;
+  string signedActionBytes = 1;
 }
 
 message SendActionResponse {
-    string actionHash = 1;
+  string actionHash = 1;
 }
 
 message GetReceiptByActionRequest {
@@ -264,27 +242,68 @@ message ReadStateResponse {
 }
 
 message GetEpochMetaRequest {
-    uint64 epochNumber = 1;
+  uint64 epochNumber = 1;
 }
 
 message GetEpochMetaResponse {
-    iotextypes.EpochData epochData = 1;
-    uint64 totalBlocks = 2;
-    repeated BlockProducerInfo blockProducersInfo = 3;
+  iotextypes.EpochData epochData = 1;
+  uint64 totalBlocks = 2;
+  repeated BlockProducerInfo blockProducersInfo = 3;
 }
 
 message GetRawBlocksRequest {
-    uint64 startHeight = 1;
-    uint64 count = 2;
-    bool withReceipts = 3;
+  uint64 startHeight = 1;
+  uint64 count = 2;
+  bool withReceipts = 3;
 }
 
 message GetRawBlocksResponse {
-    repeated BlockInfo blocks = 1;
+  repeated BlockInfo blocks = 1;
 }
 
+message GetLogsByBlock {
+  bytes blockHash = 1;
+}
+
+message GetLogsByRange {
+  uint64 fromBlock = 1;
+  uint64 count = 2;
+}
+
+message Topics {
+    repeated bytes topic = 1;
+}
+
+message LogsFilter {
+  repeated string address = 1;
+  repeated Topics topics = 2;
+}
+
+message GetLogsRequest {
+  LogsFilter filter = 1;
+  oneof lookup {
+    GetLogsByBlock byBlock = 2;
+    GetLogsByRange byRange = 3;
+  }
+}
+
+message GetLogsResponse {
+  repeated iotextypes.Log logs = 1;
+}
+
+/*
+ * below are streaming APIs
+ */
 message StreamBlocksRequest {}
 
 message StreamBlocksResponse {
     BlockInfo block = 1;
+}
+
+message StreamLogsRequest {
+    LogsFilter filter = 1;
+}
+
+message StreamLogsResponse {
+    iotextypes.Log log = 1;
 }

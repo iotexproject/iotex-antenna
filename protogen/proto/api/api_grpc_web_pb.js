@@ -19,8 +19,6 @@ var proto_types_blockchain_pb = require('../../proto/types/blockchain_pb.js')
 var proto_types_node_pb = require('../../proto/types/node_pb.js')
 
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js')
-
-var google_api_annotations_pb = require('../../google/api/annotations_pb.js')
 const proto = {};
 proto.iotexapi = require('./api_pb.js');
 
@@ -814,6 +812,61 @@ proto.iotexapi.APIServicePromiseClient.prototype.getRawBlocks =
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.iotexapi.GetLogsRequest,
+ *   !proto.iotexapi.GetLogsResponse>}
+ */
+const methodInfo_APIService_GetLogs = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.iotexapi.GetLogsResponse,
+  /** @param {!proto.iotexapi.GetLogsRequest} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.GetLogsResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.iotexapi.GetLogsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.iotexapi.GetLogsResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetLogsResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.iotexapi.APIServiceClient.prototype.getLogs =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/GetLogs',
+      request,
+      metadata || {},
+      methodInfo_APIService_GetLogs,
+      callback);
+};
+
+
+/**
+ * @param {!proto.iotexapi.GetLogsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.iotexapi.GetLogsResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.iotexapi.APIServicePromiseClient.prototype.getLogs =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/iotexapi.APIService/GetLogs',
+      request,
+      metadata || {},
+      methodInfo_APIService_GetLogs);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.iotexapi.StreamBlocksRequest,
  *   !proto.iotexapi.StreamBlocksResponse>}
  */
@@ -864,110 +917,50 @@ proto.iotexapi.APIServicePromiseClient.prototype.streamBlocks =
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.iotexapi.GetActionsByAddressRequest,
- *   !proto.iotexapi.GetActionsResponse>}
+ *   !proto.iotexapi.StreamLogsRequest,
+ *   !proto.iotexapi.StreamLogsResponse>}
  */
-const methodInfo_APIService_GetActionsByAddress = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.iotexapi.GetActionsResponse,
-  /** @param {!proto.iotexapi.GetActionsByAddressRequest} request */
+const methodInfo_APIService_StreamLogs = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.iotexapi.StreamLogsResponse,
+  /** @param {!proto.iotexapi.StreamLogsRequest} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.iotexapi.GetActionsResponse.deserializeBinary
+  proto.iotexapi.StreamLogsResponse.deserializeBinary
 );
 
 
 /**
- * @param {!proto.iotexapi.GetActionsByAddressRequest} request The
- *     request proto
+ * @param {!proto.iotexapi.StreamLogsRequest} request The request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.iotexapi.GetActionsResponse)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetActionsResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.StreamLogsResponse>}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServiceClient.prototype.getActionsByAddress =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/iotexapi.APIService/GetActionsByAddress',
-      request,
-      metadata || {},
-      methodInfo_APIService_GetActionsByAddress,
-      callback);
-};
-
-
-/**
- * @param {!proto.iotexapi.GetActionsByAddressRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @return {!Promise<!proto.iotexapi.GetActionsResponse>}
- *     A native promise that resolves to the response
- */
-proto.iotexapi.APIServicePromiseClient.prototype.getActionsByAddress =
+proto.iotexapi.APIServiceClient.prototype.streamLogs =
     function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
-      '/iotexapi.APIService/GetActionsByAddress',
+  return this.client_.serverStreaming(this.hostname_ +
+      '/iotexapi.APIService/StreamLogs',
       request,
       metadata || {},
-      methodInfo_APIService_GetActionsByAddress);
+      methodInfo_APIService_StreamLogs);
 };
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.iotexapi.SendSignedActionBytesRequest,
- *   !proto.iotexapi.SendActionResponse>}
- */
-const methodInfo_APIService_SendSignedActionBytes = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.iotexapi.SendActionResponse,
-  /** @param {!proto.iotexapi.SendSignedActionBytesRequest} request */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.SendActionResponse.deserializeBinary
-);
-
-
-/**
- * @param {!proto.iotexapi.SendSignedActionBytesRequest} request The
- *     request proto
+ * @param {!proto.iotexapi.StreamLogsRequest} request The request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.iotexapi.SendActionResponse)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.SendActionResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.StreamLogsResponse>}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServiceClient.prototype.sendSignedActionBytes =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/iotexapi.APIService/SendSignedActionBytes',
-      request,
-      metadata || {},
-      methodInfo_APIService_SendSignedActionBytes,
-      callback);
-};
-
-
-/**
- * @param {!proto.iotexapi.SendSignedActionBytesRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @return {!Promise<!proto.iotexapi.SendActionResponse>}
- *     A native promise that resolves to the response
- */
-proto.iotexapi.APIServicePromiseClient.prototype.sendSignedActionBytes =
+proto.iotexapi.APIServicePromiseClient.prototype.streamLogs =
     function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
-      '/iotexapi.APIService/SendSignedActionBytes',
+  return this.client_.serverStreaming(this.hostname_ +
+      '/iotexapi.APIService/StreamLogs',
       request,
       metadata || {},
-      methodInfo_APIService_SendSignedActionBytes);
+      methodInfo_APIService_StreamLogs);
 };
 
 
