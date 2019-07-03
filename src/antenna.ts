@@ -1,11 +1,16 @@
+import { SignerPlugin } from "./action/method";
 import { Iotx } from "./iotx";
 import { IRpcMethod } from "./rpc-method/types";
+
+export type Opts = {
+  signer?: SignerPlugin;
+};
 
 export default class Antenna {
   public iotx: Iotx;
 
-  constructor(provider: string) {
-    this.iotx = new Iotx(provider);
+  constructor(provider: string, opts?: Opts) {
+    this.iotx = new Iotx(provider, { signer: opts && opts.signer });
   }
 
   public static modules: {

@@ -1,7 +1,7 @@
 /* tslint:disable:no-any */
 import ethereumjs from "ethereumjs-abi";
 import { IAccount } from "../account/account";
-import { ExecutionMethod } from "../action/method";
+import { ExecutionMethod, SignerPlugin } from "../action/method";
 import { Execution } from "../action/types";
 import { fromBytes } from "../crypto/address";
 import { IRpcMethod } from "../rpc-method/types";
@@ -18,6 +18,7 @@ export type Options = {
   // The byte code of the contract. Used when the contract gets deployed
   data?: Buffer;
   provider?: IRpcMethod;
+  signer?: SignerPlugin;
 };
 
 export class Contract {
@@ -95,7 +96,8 @@ export class Contract {
         const method = new ExecutionMethod(
           this.provider,
           executeParameter.account,
-          methodEnvelop
+          methodEnvelop,
+          { signer: this.options && this.options.signer }
         );
 
         return method.execute();
@@ -154,11 +156,9 @@ export class Contract {
       amount: "0",
       data: data
     };
-    return new ExecutionMethod(
-      this.provider,
-      account,
-      contractEnvelop
-    ).execute();
+    return new ExecutionMethod(this.provider, account, contractEnvelop, {
+      signer: this.options && this.options.signer
+    }).execute();
   }
 
   public pureEncodeMethod(

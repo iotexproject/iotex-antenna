@@ -3,30 +3,40 @@ import { IAction, IRpcMethod } from "../rpc-method/types";
 import { Envelop, SealedEnvelop } from "./envelop";
 import { ClaimFromRewardingFund, Execution, Transfer } from "./types";
 
+export interface SignerPlugin {
+  signAndSend?(envelop: Envelop): Promise<string>;
+
+  signOnly?(envelop: Envelop): Promise<SealedEnvelop>;
+
+  getAccount?(address: string): Promise<Account>;
+}
+
+export type AbstractMethodOpts = { signer?: SignerPlugin | undefined };
+
 export class AbstractMethod {
   public client: IRpcMethod;
   public account: Account;
+  public signer?: SignerPlugin;
 
-  constructor(client: IRpcMethod, account: Account) {
+  constructor(client: IRpcMethod, account: Account, opts?: AbstractMethodOpts) {
     this.client = client;
     this.account = account;
+    this.signer = opts && opts.signer;
   }
 
   public async baseEnvelop(
     gasLimit?: string,
     gasPrice?: string
   ): Promise<Envelop> {
-    const meta = await this.client.getAccount({
-      address: this.account.address
-    });
+    let nonce = "";
+    if (this.account && this.account.address) {
+      const meta = await this.client.getAccount({
+        address: this.account.address
+      });
+      nonce = String((meta.accountMeta && meta.accountMeta.pendingNonce) || "");
+    }
 
-    return new Envelop(
-      1,
-      // @ts-ignore
-      String(meta.accountMeta.pendingNonce),
-      gasLimit,
-      gasPrice
-    );
+    return new Envelop(1, nonce, gasLimit, gasPrice);
   }
 
   public async signAction(envelop: Envelop): Promise<SealedEnvelop> {
@@ -55,7 +65,16 @@ export class AbstractMethod {
   }
 
   public async sendAction(envelop: Envelop): Promise<string> {
-    const selp = await this.signAction(envelop);
+    if (this.signer && this.signer.signAndSend) {
+      return this.signer.signAndSend(envelop);
+    }
+
+    let selp: SealedEnvelop;
+    if (this.signer && this.signer.signOnly) {
+      selp = await this.signer.signOnly(envelop);
+    } else {
+      selp = await this.signAction(envelop);
+    }
 
     await this.client.sendAction({
       action: selp.action()
@@ -68,8 +87,13 @@ export class AbstractMethod {
 export class TransferMethod extends AbstractMethod {
   public transfer: Transfer;
 
-  constructor(client: IRpcMethod, account: Account, transfer: Transfer) {
-    super(client, account);
+  constructor(
+    client: IRpcMethod,
+    account: Account,
+    transfer: Transfer,
+    opts?: AbstractMethodOpts
+  ) {
+    super(client, account, opts);
     this.transfer = transfer;
   }
 
@@ -91,8 +115,13 @@ export class TransferMethod extends AbstractMethod {
 export class ExecutionMethod extends AbstractMethod {
   public execution: Execution;
 
-  constructor(client: IRpcMethod, account: Account, execution: Execution) {
-    super(client, account);
+  constructor(
+    client: IRpcMethod,
+    account: Account,
+    execution: Execution,
+    opts?: AbstractMethodOpts
+  ) {
+    super(client, account, opts);
     this.execution = execution;
   }
 
@@ -132,9 +161,10 @@ export class ClaimFromRewardingFundMethod extends AbstractMethod {
   constructor(
     client: IRpcMethod,
     account: Account,
-    claim: ClaimFromRewardingFund
+    claim: ClaimFromRewardingFund,
+    opts?: AbstractMethodOpts
   ) {
-    super(client, account);
+    super(client, account, opts);
     this.claimFronRewardFund = claim;
   }
 

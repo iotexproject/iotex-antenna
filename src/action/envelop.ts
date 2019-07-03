@@ -2,6 +2,7 @@ import actionPb from "../../protogen/proto/types/action_pb";
 import { makeSigner } from "../crypto/crypto";
 import { hash256b } from "../crypto/hash";
 import {
+  GetActionsRequest,
   IAction,
   IClaimFromRewardingFund,
   ICreateDeposit,
@@ -87,6 +88,7 @@ export class Envelop {
     this.gasPrice = gasPrice;
   }
 
+  // tslint:disable-next-line:cyclomatic-complexity
   public core(): actionPb.ActionCore {
     const gasLimit = this.gasLimit || "0";
     const gasPrice = this.gasPrice || "0";
@@ -96,50 +98,93 @@ export class Envelop {
     pbActionCore.setNonce(Number(this.nonce));
     pbActionCore.setGaslimit(Number(gasLimit));
     pbActionCore.setGasprice(gasPrice);
-    pbActionCore.setTransfer(toActionTransfer(this.transfer));
-    pbActionCore.setExecution(toActionExecution(this.execution));
-    pbActionCore.setStartsubchain(toActionStartSubChain(this.startSubChain));
-    pbActionCore.setStopsubchain(toActionStopSubChain(this.stopSubChain));
-    pbActionCore.setPutblock(toActionPutBlock(this.putBlock));
-    pbActionCore.setCreatedeposit(toActionCreateDeposit(this.createDeposit));
-    pbActionCore.setSettledeposit(toActionSettleDeposit(this.settleDeposit));
-    pbActionCore.setCreateplumchain(
-      toActionCreatePlumChain(this.createPlumChain)
-    );
-    pbActionCore.setTerminateplumchain(
-      toActionTerminatePlumChain(this.terminatePlumChain)
-    );
-    pbActionCore.setPlumputblock(toActionPlumPutBlock(this.plumPutBlock));
-    pbActionCore.setPlumcreatedeposit(
-      toActionPlumCreateDeposit(this.plumCreateDeposit)
-    );
-    pbActionCore.setPlumstartexit(toActionPlumStartExit(this.plumStartExit));
-    pbActionCore.setPlumchallengeexit(
-      toActionPlumChallengeExit(this.plumChallengeExit)
-    );
-    pbActionCore.setPlumresponsechallengeexit(
-      toActionPlumResponseChallengeExit(this.plumResponseChallengeExit)
-    );
-    pbActionCore.setPlumfinalizeexit(
-      toActionPlumFinalizeExit(this.plumFinalizeExit)
-    );
-    pbActionCore.setPlumsettledeposit(
-      toActionPlumSettleDeposit(this.plumSettleDeposit)
-    );
-    pbActionCore.setPlumtransfer(toActionPlumTransfer(this.plumTransfer));
-    pbActionCore.setDeposittorewardingfund(
-      toActionDepositToRewardingFund(this.depositToRewardingFund)
-    );
-    pbActionCore.setClaimfromrewardingfund(
-      toActionClaimFromRewardingFund(this.claimFromRewardingFund)
-    );
-    pbActionCore.setGrantreward(toActionGrantReward(this.grantReward));
 
+    // oneof action
+    if (this.transfer) {
+      pbActionCore.setTransfer(toActionTransfer(this.transfer));
+    } else if (this.execution) {
+      pbActionCore.setExecution(toActionExecution(this.execution));
+    } else if (this.startSubChain) {
+      pbActionCore.setStartsubchain(toActionStartSubChain(this.startSubChain));
+    } else if (this.stopSubChain) {
+      pbActionCore.setStopsubchain(toActionStopSubChain(this.stopSubChain));
+    } else if (this.putBlock) {
+      pbActionCore.setPutblock(toActionPutBlock(this.putBlock));
+    } else if (this.createDeposit) {
+      pbActionCore.setCreatedeposit(toActionCreateDeposit(this.createDeposit));
+    } else if (this.settleDeposit) {
+      pbActionCore.setSettledeposit(toActionSettleDeposit(this.settleDeposit));
+    } else if (this.createPlumChain) {
+      pbActionCore.setCreateplumchain(
+        toActionCreatePlumChain(this.createPlumChain)
+      );
+    } else if (this.terminatePlumChain) {
+      pbActionCore.setTerminateplumchain(
+        toActionTerminatePlumChain(this.terminatePlumChain)
+      );
+    } else if (this.plumPutBlock) {
+      pbActionCore.setPlumputblock(toActionPlumPutBlock(this.plumPutBlock));
+    } else if (this.plumCreateDeposit) {
+      pbActionCore.setPlumcreatedeposit(
+        toActionPlumCreateDeposit(this.plumCreateDeposit)
+      );
+    } else if (this.plumStartExit) {
+      pbActionCore.setPlumstartexit(toActionPlumStartExit(this.plumStartExit));
+    } else if (this.plumChallengeExit) {
+      pbActionCore.setPlumchallengeexit(
+        toActionPlumChallengeExit(this.plumChallengeExit)
+      );
+    } else if (this.plumResponseChallengeExit) {
+      pbActionCore.setPlumresponsechallengeexit(
+        toActionPlumResponseChallengeExit(this.plumResponseChallengeExit)
+      );
+    } else if (this.plumFinalizeExit) {
+      pbActionCore.setPlumfinalizeexit(
+        toActionPlumFinalizeExit(this.plumFinalizeExit)
+      );
+    } else if (this.plumSettleDeposit) {
+      pbActionCore.setPlumsettledeposit(
+        toActionPlumSettleDeposit(this.plumSettleDeposit)
+      );
+    } else if (this.plumTransfer) {
+      pbActionCore.setPlumtransfer(toActionPlumTransfer(this.plumTransfer));
+    } else if (this.depositToRewardingFund) {
+      pbActionCore.setDeposittorewardingfund(
+        toActionDepositToRewardingFund(this.depositToRewardingFund)
+      );
+    } else if (this.claimFromRewardingFund) {
+      pbActionCore.setClaimfromrewardingfund(
+        toActionClaimFromRewardingFund(this.claimFromRewardingFund)
+      );
+    } else if (this.grantReward) {
+      pbActionCore.setGrantreward(toActionGrantReward(this.grantReward));
+    }
     return pbActionCore;
   }
 
   public bytestream(): Uint8Array {
     return this.core().serializeBinary();
+  }
+
+  public static deserialize(bytes: Uint8Array): Envelop {
+    const pbActionCore = actionPb.ActionCore.deserializeBinary(bytes);
+    const envelop = new Envelop(
+      pbActionCore.getVersion(),
+      String(pbActionCore.getNonce()),
+      String(pbActionCore.getGaslimit()),
+      pbActionCore.getGasprice()
+    );
+    envelop.transfer = GetActionsRequest.fromTransfer(
+      pbActionCore.getTransfer()
+    );
+    envelop.execution = GetActionsRequest.fromExecution(
+      pbActionCore.getExecution()
+    );
+    envelop.claimFromRewardingFund = GetActionsRequest.fromClaimFromRewardingFund(
+      pbActionCore.getClaimfromrewardingfund()
+    );
+    // TODO(tian): add more fields
+    return envelop;
   }
 }
 

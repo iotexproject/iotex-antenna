@@ -1,6 +1,11 @@
 /* tslint:disable:no-any */
+import { Account } from "./account/account";
 import { Accounts } from "./account/accounts";
-import { ClaimFromRewardingFundMethod, TransferMethod } from "./action/method";
+import {
+  ClaimFromRewardingFundMethod,
+  SignerPlugin,
+  TransferMethod
+} from "./action/method";
 import { Contract } from "./contract/contract";
 import RpcMethod from "./rpc-method";
 import { IRpcMethod } from "./rpc-method/types";
@@ -11,65 +16,78 @@ import {
   TransferRequest
 } from "./types";
 
+type IotxOpts = { signer?: SignerPlugin };
+
 export class Iotx extends RpcMethod {
   public accounts: Accounts;
-  constructor(hostname: string) {
+  public signer?: SignerPlugin;
+
+  constructor(hostname: string, opts?: IotxOpts) {
     super(hostname);
-    this.accounts = new Accounts(this);
+    this.accounts = new Accounts((this as any) as IRpcMethod);
+    this.signer = opts && opts.signer;
+  }
+
+  public async tryGetAccount(address: string): Promise<Account> {
+    const sender =
+      this.signer && this.signer.getAccount
+        ? await this.signer.getAccount(address)
+        : this.accounts.getAccount(address);
+    if (!sender) {
+      throw new Error(`cannot find account: ${address}`);
+    }
+    return sender;
   }
 
   public currentProvider(): IRpcMethod {
     return this.client;
   }
 
-  public sendTransfer(req: TransferRequest): Promise<string> {
-    const sender = this.accounts.getAccount(req.from);
-    if (!sender) {
-      throw new Error(`can not found account: ${req.from}`);
-    }
-
+  public async sendTransfer(req: TransferRequest): Promise<string> {
+    const sender = await this.tryGetAccount(req.from);
     const payload = req.payload || "";
-    return new TransferMethod(this, sender, {
-      gasLimit: req.gasLimit,
-      gasPrice: req.gasPrice,
-      amount: req.value,
-      recipient: req.to,
-      payload: payload
-    }).execute();
+    return new TransferMethod(
+      this,
+      sender,
+      {
+        gasLimit: req.gasLimit,
+        gasPrice: req.gasPrice,
+        amount: req.value,
+        recipient: req.to,
+        payload: payload
+      },
+      { signer: this.signer }
+    ).execute();
   }
 
   // return action hash
-  public deployContract(
+  public async deployContract(
     req: ContractRequest,
     // @ts-ignore
     // tslint:disable-next-line: typedef
     ...args
   ): Promise<string> {
-    const sender = this.accounts.getAccount(req.from);
-    if (!sender) {
-      throw new Error(`can not found account: ${req.from}`);
-    }
+    const sender = await this.tryGetAccount(req.from);
 
     return new Contract(JSON.parse(req.abi), undefined, {
       data: req.data,
-      provider: this
+      provider: this,
+      signer: this.signer
     }).deploy(sender, args, req.gasLimit, req.gasPrice);
   }
 
   // return action hash
-  public executeContract(
+  public async executeContract(
     req: ExecuteContractRequest,
     // @ts-ignore
     // tslint:disable-next-line: typedef
     ...args
   ): Promise<string> {
-    const sender = this.accounts.getAccount(req.from);
-    if (!sender) {
-      throw new Error(`can not found account: ${req.from}`);
-    }
+    const sender = await this.tryGetAccount(req.from);
 
     const contract = new Contract(JSON.parse(req.abi), req.contractAddress, {
-      provider: this
+      provider: this,
+      signer: this.signer
     });
     return contract.methods[req.method](...args, {
       account: sender,
@@ -84,7 +102,8 @@ export class Iotx extends RpcMethod {
     ...args: Array<any>
   ): Promise<any | Array<any>> {
     const contract = new Contract(JSON.parse(req.abi), req.contractAddress, {
-      provider: this
+      provider: this,
+      signer: this.signer
     });
 
     const result = await this.readContract({
@@ -98,16 +117,18 @@ export class Iotx extends RpcMethod {
   public async claimFromRewardingFund(
     req: ClaimFromRewardingFundRequset
   ): Promise<string> {
-    const sender = this.accounts.getAccount(req.from);
-    if (!sender) {
-      throw new Error(`can not found account: ${req.from}`);
-    }
+    const sender = await this.tryGetAccount(req.from);
 
-    return new ClaimFromRewardingFundMethod(this, sender, {
-      gasLimit: req.gasLimit,
-      gasPrice: req.gasPrice,
-      amount: req.amount,
-      data: req.data
-    }).execute();
+    return new ClaimFromRewardingFundMethod(
+      this,
+      sender,
+      {
+        gasLimit: req.gasLimit,
+        gasPrice: req.gasPrice,
+        amount: req.amount,
+        data: req.data
+      },
+      { signer: this.signer }
+    ).execute();
   }
 }

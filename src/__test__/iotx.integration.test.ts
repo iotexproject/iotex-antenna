@@ -37,8 +37,7 @@ test.serial("transfer throws if no account", async t => {
   const antenna = new Antenna(IOTEX_CORE);
   await t.throwsAsync(
     async () => {
-      // @ts-ignore
-      antenna.iotx.sendTransfer({
+      await antenna.iotx.sendTransfer({
         from: "empty from",
         to: "empty to",
         value: "1"

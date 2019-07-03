@@ -8,7 +8,10 @@ import apiPb, {
   GetServerMetaResponse,
   ReadStateResponse
 } from "../../protogen/proto/api/api_pb";
-import actionPb, { PutPollResult } from "../../protogen/proto/types/action_pb";
+import actionPb, {
+  Execution,
+  PutPollResult
+} from "../../protogen/proto/types/action_pb";
 
 // Properties of a Timestamp.
 export interface ITimestamp {
@@ -1170,16 +1173,16 @@ export const GetActionsRequest = {
     return voteData;
   },
 
-  fromExecution(pbRes: any): any {
-    let executionData = pbRes;
-    if (executionData) {
-      executionData = {
-        amount: pbRes.getAmount(),
-        contract: pbRes.getContract(),
-        data: pbRes.getData()
-      };
+  fromExecution(pbRes: Execution | undefined): IExecution | undefined {
+    if (!pbRes) {
+      return;
     }
-    return executionData;
+    // @ts-ignore
+    return {
+      amount: pbRes.getAmount(),
+      contract: pbRes.getContract(),
+      data: pbRes.getData()
+    };
   },
 
   fromStartSubChain(pbRes: any): any {
