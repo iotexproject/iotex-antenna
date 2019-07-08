@@ -1177,11 +1177,11 @@ export const GetActionsRequest = {
     if (!pbRes) {
       return;
     }
-    // @ts-ignore
     return {
       amount: pbRes.getAmount(),
       contract: pbRes.getContract(),
-      data: pbRes.getData()
+      // @ts-ignore
+      data: Buffer.from(pbRes.getData())
     };
   },
 

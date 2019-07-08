@@ -63,9 +63,7 @@ export class Iotx extends RpcMethod {
   // return action hash
   public async deployContract(
     req: ContractRequest,
-    // @ts-ignore
-    // tslint:disable-next-line: typedef
-    ...args
+    ...args: Array<any>
   ): Promise<string> {
     const sender = await this.tryGetAccount(req.from);
 
@@ -79,9 +77,7 @@ export class Iotx extends RpcMethod {
   // return action hash
   public async executeContract(
     req: ExecuteContractRequest,
-    // @ts-ignore
-    // tslint:disable-next-line: typedef
-    ...args
+    ...args: Array<any>
   ): Promise<string> {
     const sender = await this.tryGetAccount(req.from);
 

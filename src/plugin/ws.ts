@@ -12,9 +12,7 @@ export class WsSignerPlugin implements SignerPlugin {
   private readonly ws: WebSocket;
 
   constructor(provider: string) {
-    this.ws = new WebSocket(provider, {
-      rejectUnauthorized: false
-    });
+    this.ws = new WebSocket(provider);
     this.ws.onopen = (): void => {
       window.console.log("[antenna-ws] connected");
     };
