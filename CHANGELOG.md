@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.18.3](https://github.com/iotexproject/iotex-antenna/compare/v0.16.0...v0.18.3) (2019-07-09)
+
 ### [0.18.2](https://github.com/iotexproject/iotex-antenna/compare/v0.16.0...v0.18.2) (2019-07-09)
 
 - fix ws integration in browser
