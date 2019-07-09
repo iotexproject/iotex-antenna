@@ -28,13 +28,21 @@ export class WsSignerPlugin implements SignerPlugin {
       envelop: Buffer.from(envelop.bytestream()).toString("hex")
     };
     this.ws.send(JSON.stringify(req));
+    // tslint:disable-next-line:promise-must-complete
     return new Promise<string>(resolve => {
-      this.ws.on("message", (event: string) => {
-        const resp = JSON.parse(event);
+      this.ws.onmessage = event => {
+        let resp = { reqId: -1, actionHash: "" };
+        try {
+          if (typeof event.data === "string") {
+            resp = JSON.parse(event.data);
+          }
+        } catch (_) {
+          return;
+        }
         if (resp.reqId === id) {
           resolve(resp.actionHash);
         }
-      });
+      };
     });
   }
 

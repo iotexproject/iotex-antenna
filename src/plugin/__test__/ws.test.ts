@@ -45,9 +45,9 @@ test.skip("WsSignerPlugin", async t => {
           amount: "0",
           abi:
             '[{"constant":false,"inputs":[{"name":"x","type":"uint256"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}]',
-          method: "get",
+          method: "set",
           gasLimit: "100000",
-          gasPrice: "1000000000000000000",
+          gasPrice: toRau("1", "Qev"),
           from: tt.address
         },
         666
