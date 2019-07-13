@@ -91,7 +91,7 @@ export class Contract {
             execution: this.pureEncodeMethod(
               "0",
               func,
-              ...args.slice(0, args.length - 1)
+              ...args.slice(1, args.length)
             ),
             callerAddress: this.address
           });
