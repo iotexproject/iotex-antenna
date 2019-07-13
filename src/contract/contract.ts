@@ -86,6 +86,18 @@ export class Contract {
           userInput[val.name] = args[i];
         });
 
+        if (abiFunc.stateMutability === "view") {
+          const result = await this.provider.readContract({
+            execution: this.pureEncodeMethod(
+              "0",
+              func,
+              ...args.slice(0, args.length - 1)
+            ),
+            callerAddress: this.address
+          });
+          return this.decodeMethodResult(func, result.data);
+        }
+
         const methodEnvelop = this.encodeMethod(
           executeParameter.amount || "0",
           func,
