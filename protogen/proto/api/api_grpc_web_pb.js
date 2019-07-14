@@ -647,6 +647,61 @@ proto.iotexapi.APIServicePromiseClient.prototype.estimateGasForAction =
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.iotexapi.EstimateActionGasConsumptionRequest,
+ *   !proto.iotexapi.EstimateActionGasConsumptionResponse>}
+ */
+const methodInfo_APIService_EstimateActionGasConsumption = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.iotexapi.EstimateActionGasConsumptionResponse,
+  /** @param {!proto.iotexapi.EstimateActionGasConsumptionRequest} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.EstimateActionGasConsumptionResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.iotexapi.EstimateActionGasConsumptionRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.iotexapi.EstimateActionGasConsumptionResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.EstimateActionGasConsumptionResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.iotexapi.APIServiceClient.prototype.estimateActionGasConsumption =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/EstimateActionGasConsumption',
+      request,
+      metadata || {},
+      methodInfo_APIService_EstimateActionGasConsumption,
+      callback);
+};
+
+
+/**
+ * @param {!proto.iotexapi.EstimateActionGasConsumptionRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.iotexapi.EstimateActionGasConsumptionResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.iotexapi.APIServicePromiseClient.prototype.estimateActionGasConsumption =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/iotexapi.APIService/EstimateActionGasConsumption',
+      request,
+      metadata || {},
+      methodInfo_APIService_EstimateActionGasConsumption);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.iotexapi.ReadStateRequest,
  *   !proto.iotexapi.ReadStateResponse>}
  */

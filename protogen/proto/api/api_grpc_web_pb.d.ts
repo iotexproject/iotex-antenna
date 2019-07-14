@@ -6,6 +6,8 @@ import * as proto_types_node_pb from '../../proto/types/node_pb';
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
 
 import {
+  EstimateActionGasConsumptionRequest,
+  EstimateActionGasConsumptionResponse,
   EstimateGasForActionRequest,
   EstimateGasForActionResponse,
   GetAccountRequest,
@@ -114,6 +116,13 @@ export class APIServiceClient {
                response: EstimateGasForActionResponse) => void
   ): grpcWeb.ClientReadableStream<EstimateGasForActionResponse>;
 
+  estimateActionGasConsumption(
+    request: EstimateActionGasConsumptionRequest,
+    metadata: grpcWeb.Metadata | undefined,
+    callback: (err: grpcWeb.Error,
+               response: EstimateActionGasConsumptionResponse) => void
+  ): grpcWeb.ClientReadableStream<EstimateActionGasConsumptionResponse>;
+
   readState(
     request: ReadStateRequest,
     metadata: grpcWeb.Metadata | undefined,
@@ -208,6 +217,11 @@ export class APIServicePromiseClient {
     request: EstimateGasForActionRequest,
     metadata?: grpcWeb.Metadata
   ): Promise<EstimateGasForActionResponse>;
+
+  estimateActionGasConsumption(
+    request: EstimateActionGasConsumptionRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<EstimateActionGasConsumptionResponse>;
 
   readState(
     request: ReadStateRequest,
