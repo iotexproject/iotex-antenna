@@ -737,6 +737,64 @@ export namespace EstimateGasForActionRequest {
   }
 }
 
+export class EstimateActionGasConsumptionRequest extends jspb.Message {
+  getTransfer(): proto_types_action_pb.Transfer | undefined;
+  setTransfer(value?: proto_types_action_pb.Transfer): void;
+  hasTransfer(): boolean;
+  clearTransfer(): void;
+  hasTransfer(): boolean;
+
+  getExecution(): proto_types_action_pb.Execution | undefined;
+  setExecution(value?: proto_types_action_pb.Execution): void;
+  hasExecution(): boolean;
+  clearExecution(): void;
+  hasExecution(): boolean;
+
+  getCalleraddress(): string;
+  setCalleraddress(value: string): void;
+
+  getActionCase(): EstimateActionGasConsumptionRequest.ActionCase;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): EstimateActionGasConsumptionRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: EstimateActionGasConsumptionRequest): EstimateActionGasConsumptionRequest.AsObject;
+  static serializeBinaryToWriter(message: EstimateActionGasConsumptionRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): EstimateActionGasConsumptionRequest;
+  static deserializeBinaryFromReader(message: EstimateActionGasConsumptionRequest, reader: jspb.BinaryReader): EstimateActionGasConsumptionRequest;
+}
+
+export namespace EstimateActionGasConsumptionRequest {
+  export type AsObject = {
+    transfer?: proto_types_action_pb.Transfer.AsObject,
+    execution?: proto_types_action_pb.Execution.AsObject,
+    calleraddress: string,
+  }
+
+  export enum ActionCase { 
+    ACTION_NOT_SET = 0,
+    TRANSFER = 1,
+    EXECUTION = 2,
+  }
+}
+
+export class EstimateActionGasConsumptionResponse extends jspb.Message {
+  getGas(): number;
+  setGas(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): EstimateActionGasConsumptionResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: EstimateActionGasConsumptionResponse): EstimateActionGasConsumptionResponse.AsObject;
+  static serializeBinaryToWriter(message: EstimateActionGasConsumptionResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): EstimateActionGasConsumptionResponse;
+  static deserializeBinaryFromReader(message: EstimateActionGasConsumptionResponse, reader: jspb.BinaryReader): EstimateActionGasConsumptionResponse;
+}
+
+export namespace EstimateActionGasConsumptionResponse {
+  export type AsObject = {
+    gas: number,
+  }
+}
+
 export class EstimateGasForActionResponse extends jspb.Message {
   getGas(): number;
   setGas(value: number): void;

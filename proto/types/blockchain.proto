@@ -66,8 +66,9 @@ message EpochData {
 message ChainMeta {
   uint64 height = 1;
   int64 numActions = 2;
-  float tps = 3;
+  int64 tps = 3;
   EpochData epoch = 4;
+  float tpsFloat = 5;
 }
 
 // Block Metadata
