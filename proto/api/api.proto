@@ -50,8 +50,11 @@ service APIService {
   // suggest gas price
   rpc SuggestGasPrice(SuggestGasPriceRequest) returns (SuggestGasPriceResponse) {}
 
-  // estimate gas for action
+  // estimate gas for action, to be deprecated
   rpc EstimateGasForAction(EstimateGasForActionRequest) returns (EstimateGasForActionResponse) {}
+
+  // estimate gas for action and transfer not sealed
+  rpc EstimateActionGasConsumption(EstimateActionGasConsumptionRequest) returns (EstimateActionGasConsumptionResponse) {}
 
   // read state from blockchain
   rpc ReadState(ReadStateRequest) returns (ReadStateResponse) {}
@@ -223,8 +226,21 @@ message SuggestGasPriceResponse {
   uint64 gasPrice = 1;
 }
 
+// To be deprecated
 message EstimateGasForActionRequest {
   iotextypes.Action action = 1;
+}
+
+message EstimateActionGasConsumptionRequest {
+  oneof action {
+    iotextypes.Transfer transfer = 1;
+    iotextypes.Execution execution = 2;
+  }
+  string callerAddress = 100;
+}
+
+message EstimateActionGasConsumptionResponse {
+  uint64 gas = 1;
 }
 
 message EstimateGasForActionResponse {

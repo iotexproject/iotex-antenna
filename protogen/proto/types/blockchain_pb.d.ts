@@ -233,6 +233,9 @@ export class ChainMeta extends jspb.Message {
   hasEpoch(): boolean;
   clearEpoch(): void;
 
+  getTpsfloat(): number;
+  setTpsfloat(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ChainMeta.AsObject;
   static toObject(includeInstance: boolean, msg: ChainMeta): ChainMeta.AsObject;
@@ -247,6 +250,7 @@ export namespace ChainMeta {
     numactions: number,
     tps: number,
     epoch?: EpochData.AsObject,
+    tpsfloat: number,
   }
 }
 

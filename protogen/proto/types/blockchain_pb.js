@@ -1897,8 +1897,9 @@ proto.iotextypes.ChainMeta.toObject = function(includeInstance, msg) {
   var f, obj = {
     height: jspb.Message.getFieldWithDefault(msg, 1, 0),
     numactions: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    tps: +jspb.Message.getFieldWithDefault(msg, 3, 0.0),
-    epoch: (f = msg.getEpoch()) && proto.iotextypes.EpochData.toObject(includeInstance, f)
+    tps: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    epoch: (f = msg.getEpoch()) && proto.iotextypes.EpochData.toObject(includeInstance, f),
+    tpsfloat: +jspb.Message.getFieldWithDefault(msg, 5, 0.0)
   };
 
   if (includeInstance) {
@@ -1944,13 +1945,17 @@ proto.iotextypes.ChainMeta.deserializeBinaryFromReader = function(msg, reader) {
       msg.setNumactions(value);
       break;
     case 3:
-      var value = /** @type {number} */ (reader.readFloat());
+      var value = /** @type {number} */ (reader.readInt64());
       msg.setTps(value);
       break;
     case 4:
       var value = new proto.iotextypes.EpochData;
       reader.readMessage(value,proto.iotextypes.EpochData.deserializeBinaryFromReader);
       msg.setEpoch(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setTpsfloat(value);
       break;
     default:
       reader.skipField();
@@ -1996,8 +2001,8 @@ proto.iotextypes.ChainMeta.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getTps();
-  if (f !== 0.0) {
-    writer.writeFloat(
+  if (f !== 0) {
+    writer.writeInt64(
       3,
       f
     );
@@ -2008,6 +2013,13 @@ proto.iotextypes.ChainMeta.serializeBinaryToWriter = function(message, writer) {
       4,
       f,
       proto.iotextypes.EpochData.serializeBinaryToWriter
+    );
+  }
+  f = message.getTpsfloat();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      5,
+      f
     );
   }
 };
@@ -2044,17 +2056,17 @@ proto.iotextypes.ChainMeta.prototype.setNumactions = function(value) {
 
 
 /**
- * optional float tps = 3;
+ * optional int64 tps = 3;
  * @return {number}
  */
 proto.iotextypes.ChainMeta.prototype.getTps = function() {
-  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 3, 0.0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
 /** @param {number} value */
 proto.iotextypes.ChainMeta.prototype.setTps = function(value) {
-  jspb.Message.setProto3FloatField(this, 3, value);
+  jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
@@ -2088,6 +2100,21 @@ proto.iotextypes.ChainMeta.prototype.clearEpoch = function() {
  */
 proto.iotextypes.ChainMeta.prototype.hasEpoch = function() {
   return jspb.Message.getField(this, 4) != null;
+};
+
+
+/**
+ * optional float tpsFloat = 5;
+ * @return {number}
+ */
+proto.iotextypes.ChainMeta.prototype.getTpsfloat = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 5, 0.0));
+};
+
+
+/** @param {number} value */
+proto.iotextypes.ChainMeta.prototype.setTpsfloat = function(value) {
+  jspb.Message.setProto3FloatField(this, 5, value);
 };
 
 
