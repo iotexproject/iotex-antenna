@@ -224,6 +224,7 @@ export interface IBlockMeta {
 export interface IGetBlockMetasResponse {
   // GetBlockMetasResponse blockMetas
   blkMetas: Array<IBlockMeta>;
+  total: number;
 }
 
 export const GetBlockMetasRequest = {
@@ -249,7 +250,8 @@ export const GetBlockMetasRequest = {
   from(pbRes: any): IGetBlockMetasResponse {
     const metas = pbRes.getBlkmetasList();
     const res = {
-      blkMetas: metas
+      blkMetas: metas,
+      total: pbRes.getTotal()
     };
     if (metas) {
       const parsedMetas = [];
