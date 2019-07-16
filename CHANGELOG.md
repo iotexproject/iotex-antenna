@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.19.0](https://github.com/iotexproject/iotex-antenna/compare/v0.18.3...v0.19.0) (2019-07-16)
+
+We introduced breaking changes in this release.
+
+1. API changes: updated proto of iotex-core to 0.7.2
+2. Contract: contract.methods's contract call will use read contract automatically if it is a view method of solidity.
+
 ### [0.18.3](https://github.com/iotexproject/iotex-antenna/compare/v0.16.0...v0.18.3) (2019-07-09)
 
 ### [0.18.2](https://github.com/iotexproject/iotex-antenna/compare/v0.16.0...v0.18.2) (2019-07-09)
