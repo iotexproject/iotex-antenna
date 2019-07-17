@@ -242,6 +242,13 @@ export class Contract {
           Buffer.from(results[i].toString(), "hex")
         ).string();
       }
+      if (outTypes[i] === "address[]") {
+        for (let j = 0; j < results[i].length; j++) {
+          results[i][j] = fromBytes(
+            Buffer.from(results[i][j].toString(), "hex")
+          ).string();
+        }
+      }
     }
 
     if (outTypes.length === 1) {

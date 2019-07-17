@@ -62,6 +62,11 @@ export function encodeArguments(
       if (arg.type === "address") {
         value = address.fromString(value).stringEth();
       }
+      if (arg.type === "address[]") {
+        for (let i = 0; i < value.length; i++) {
+          value[i] = address.fromString(value[i]).stringEth();
+        }
+      }
       values.push(value);
     } else {
       values.push("");
