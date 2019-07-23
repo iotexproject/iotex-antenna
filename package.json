@@ -123,7 +123,6 @@
     "grpc": "^1.21.0",
     "grpc-web": "^1.0.4",
     "isomorphic-ws": "^4.0.1",
-    "protobufjs": "^6.8.8",
     "protoc": "^1.0.3",
     "randombytes": "^2.1.0",
     "scrypt.js": "0.3.0",
