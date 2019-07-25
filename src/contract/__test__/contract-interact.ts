@@ -133,9 +133,7 @@ test.skip("Contract_method_get_SimpleStorage", async t => {
     { provider: client }
   );
 
-  const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
   const result = await contract.methods.get({
-    account: sender,
     gasLimit: "1000000",
     gasPrice: "1000000000000"
   });

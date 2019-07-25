@@ -82,7 +82,7 @@ accountTest("transfer", async t => {
     to: acctNew.address,
     value: oneIotx,
     gasLimit: "100000",
-    gasPrice: "1000000000000000000"
+    gasPrice: "1000000000000"
   });
   t.truthy(hash);
 
@@ -123,9 +123,9 @@ accountTest("deployContract", async t => {
     {
       from: creator.address,
       amount: "0",
-      abi: contract.interface,
+      abi: JSON.parse(contract.interface),
       data: Buffer.from(contract.bytecode, "hex"),
-      gasPrice: "1000000000000000000",
+      gasPrice: "1000000000000",
       gasLimit: "1000000"
     },
     8
@@ -153,7 +153,7 @@ accountTest("executeContract", async t => {
       abi: contract.interface,
       amount: "0",
       method: "set",
-      gasPrice: "1000000000000000000",
+      gasPrice: "1000000000000",
       gasLimit: "1000000"
     },
     102
@@ -189,7 +189,7 @@ accountTest("claim from rewarding fund", async t => {
   const hash = await antenna.iotx.claimFromRewardingFund({
     from: sender.address,
     amount: "0",
-    gasPrice: "1000000000000000000",
+    gasPrice: "1000000000000",
     gasLimit: "1000000",
     data: Buffer.from("test")
   });
