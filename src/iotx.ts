@@ -65,9 +65,18 @@ export class Iotx extends RpcMethod {
     req: ContractRequest,
     ...args: Array<any>
   ): Promise<string> {
+    if (typeof req.abi === "string") {
+      try {
+        req.abi = JSON.parse(req.abi);
+      } catch (e) {
+        throw new Error("parse abi to ABIDefinition error");
+      }
+    }
+
     const sender = await this.tryGetAccount(req.from);
 
-    return new Contract(JSON.parse(req.abi), undefined, {
+    // @ts-ignore
+    return new Contract(req.abi, undefined, {
       data: req.data,
       provider: this,
       signer: this.signer
@@ -79,9 +88,18 @@ export class Iotx extends RpcMethod {
     req: ExecuteContractRequest,
     ...args: Array<any>
   ): Promise<string> {
+    if (typeof req.abi === "string") {
+      try {
+        req.abi = JSON.parse(req.abi);
+      } catch (e) {
+        throw new Error("parse abi to ABIDefinition error");
+      }
+    }
+
     const sender = await this.tryGetAccount(req.from);
 
-    const contract = new Contract(JSON.parse(req.abi), req.contractAddress, {
+    // @ts-ignore
+    const contract = new Contract(req.abi, req.contractAddress, {
       provider: this,
       signer: this.signer
     });
@@ -97,7 +115,16 @@ export class Iotx extends RpcMethod {
     req: ExecuteContractRequest,
     ...args: Array<any>
   ): Promise<any | Array<any>> {
-    const contract = new Contract(JSON.parse(req.abi), req.contractAddress, {
+    if (typeof req.abi === "string") {
+      try {
+        req.abi = JSON.parse(req.abi);
+      } catch (e) {
+        throw new Error("parse abi to ABIDefinition error");
+      }
+    }
+
+    // @ts-ignore
+    const contract = new Contract(req.abi, req.contractAddress, {
       provider: this,
       signer: this.signer
     });

@@ -1,3 +1,5 @@
+import { ABIDefinition } from "./contract/abi";
+
 export interface Log {
   address: string;
   data: string;
@@ -51,7 +53,7 @@ export interface TransferRequest {
 export interface ContractRequest {
   from: string;
   amount?: string;
-  abi: string;
+  abi: Array<ABIDefinition> | string;
   // contract bytecode
   data: Buffer;
   gasLimit?: string;
@@ -61,7 +63,7 @@ export interface ContractRequest {
 export interface ExecuteContractRequest {
   from: string;
   amount?: string;
-  abi: string;
+  abi: Array<ABIDefinition> | string;
   contractAddress: string;
   method: string;
   gasLimit?: string;

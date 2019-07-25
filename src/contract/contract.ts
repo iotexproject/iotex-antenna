@@ -5,6 +5,7 @@ import { ExecutionMethod, SignerPlugin } from "../action/method";
 import { Execution } from "../action/types";
 import { fromBytes } from "../crypto/address";
 import { IRpcMethod } from "../rpc-method/types";
+import { ABIDefinition } from "./abi";
 import {
   AbiByFunc,
   Constructor,
@@ -41,7 +42,7 @@ export class Contract {
 
   constructor(
     // tslint:disable-next-line: no-any
-    jsonInterface?: Array<any>,
+    jsonInterface?: Array<ABIDefinition>,
     address?: string,
     options?: Options
   ) {
@@ -184,7 +185,7 @@ export class Contract {
       throw new Error("must set contract address and abi");
     }
     if (!this.abi[method]) {
-      throw new Error(`method ${method} dose not in abi`);
+      throw new Error(`method ${method} does not in abi`);
     }
     const abiFunc = this.abi[method];
 
@@ -210,7 +211,7 @@ export class Contract {
       throw new Error("must set contract address and abi");
     }
     if (!this.abi[method]) {
-      throw new Error(`method ${method} dose not in abi`);
+      throw new Error(`method ${method} does not in abi`);
     }
 
     return {
