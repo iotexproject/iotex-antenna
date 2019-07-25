@@ -1,3 +1,4 @@
+/* tslint:disable:no-any */
 import crypto, { Cipher, Decipher } from "crypto";
 import randomBytes from "randombytes";
 // @ts-ignore
@@ -59,24 +60,50 @@ type EncryptOptions = {
 };
 
 export default class Wallet {
-  private readonly accounts: Map<string, IAccount>;
+  private readonly accounts: {
+    [key: string]: IAccount;
+    [index: number]: IAccount;
+  };
+  private accountsIndex: number;
 
   constructor() {
-    this.accounts = new Map();
+    this.accounts = {};
+    this.accountsIndex = 0;
+
+    return new Proxy(this, {
+      get: (target, name: string | number) => {
+        if (target.accounts[name]) {
+          return target.accounts[name];
+        }
+
+        if (name === "length") {
+          return target.accountsIndex;
+        }
+
+        // @ts-ignore
+        return target[name];
+      }
+    });
   }
 
   public add(account: IAccount): void {
-    if (account) {
-      this.accounts.set(account.address, account);
+    if (!this.accounts[account.address]) {
+      this.accounts[this.accountsIndex] = account;
+      this.accounts[account.address] = account;
+      this.accountsIndex++;
     }
   }
 
-  public get(address: string): IAccount | undefined {
-    return this.accounts.get(address);
-  }
-
-  public remove(address: string): void {
-    this.accounts.delete(address);
+  public remove(addressOrIndex: string | number): void {
+    const account = this.accounts[addressOrIndex];
+    if (account) {
+      // @ts-ignore
+      delete this.accounts.delete(account.address);
+      if (account.address !== addressOrIndex) {
+        // @ts-ignore
+        delete this.accounts.delete(addressOrIndex);
+      }
+    }
   }
 }
 

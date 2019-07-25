@@ -15,6 +15,19 @@ export class Accounts {
   constructor(rpcMethod: IRpcMethod) {
     this.rpcMethod = rpcMethod;
     this.wallet = new Wallet();
+
+    return new Proxy(this, {
+      get: (target, name: string | number) => {
+        // @ts-ignore
+        if (target.wallet[name]) {
+          // @ts-ignore
+          return target.wallet[name];
+        }
+
+        // @ts-ignore
+        return target[name];
+      }
+    });
   }
 
   public create(entropy?: string): IAccount {
@@ -32,7 +45,8 @@ export class Accounts {
   }
 
   public getAccount(address: string): IAccount | undefined {
-    return this.wallet.get(address);
+    // @ts-ignore
+    return this.wallet[address];
   }
 
   public removeAccount(address: string): void {
