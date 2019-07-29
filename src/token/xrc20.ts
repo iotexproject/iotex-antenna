@@ -63,11 +63,11 @@ export class XRC20 {
     this.methods = methods;
   }
 
-  public async name(callerAddress: string): Promise<string> {
+  public async name(): Promise<string> {
     if (this.tokenName) {
       return this.tokenName;
     }
-    const result = await this.readMethod("name", callerAddress);
+    const result = await this.readMethod("name", this.address);
     const data = ethereumjs.rawDecode(["string"], Buffer.from(result, "hex"));
     if (data.length > 0) {
       this.tokenName = data[0];
@@ -76,11 +76,11 @@ export class XRC20 {
     return "";
   }
 
-  public async symbol(callerAddress: string): Promise<string> {
+  public async symbol(): Promise<string> {
     if (this.tokenSymbol) {
       return this.tokenSymbol;
     }
-    const result = await this.readMethod("symbol", callerAddress);
+    const result = await this.readMethod("symbol", this.address);
     const data = ethereumjs.rawDecode(["string"], Buffer.from(result, "hex"));
     if (data.length > 0) {
       this.tokenSymbol = data[0];
@@ -89,29 +89,26 @@ export class XRC20 {
     return "";
   }
 
-  public async decimals(callerAddress: string): Promise<BigNumber> {
+  public async decimals(): Promise<BigNumber> {
     if (this.tokenDecimals) {
       return this.tokenDecimals;
     }
-    const result = await this.readMethod("decimals", callerAddress);
+    const result = await this.readMethod("decimals", this.address);
     this.tokenDecimals = new BigNumber(result, 16);
     return this.tokenDecimals;
   }
 
-  public async totalSupply(callerAddress: string): Promise<BigNumber> {
+  public async totalSupply(): Promise<BigNumber> {
     if (this.tokenTotalSupply) {
       return this.tokenTotalSupply;
     }
-    const result = await this.readMethod("totalSupply", callerAddress);
+    const result = await this.readMethod("totalSupply", this.address);
     this.tokenTotalSupply = new BigNumber(result, 16);
     return this.tokenTotalSupply;
   }
 
-  public async balanceOf(
-    owner: string,
-    callerAddress: string
-  ): Promise<BigNumber> {
-    const result = await this.readMethod("balanceOf", callerAddress, owner);
+  public async balanceOf(owner: string): Promise<BigNumber> {
+    const result = await this.readMethod("balanceOf", this.address, owner);
     return new BigNumber(result, 16);
   }
 

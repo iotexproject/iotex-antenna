@@ -14,20 +14,15 @@ test.skip("test_xrc20_contant_method", async t => {
     provider: new RpcMethod(IOTEX_CORE, { timeout: 10000 })
   });
   t.truthy(vita);
-  const name = await vita.name("io13zt8sznez2pf0q0hqdz2hyl938wak2fsjgdeml");
+  const name = await vita.name();
   t.deepEqual(name, "Vitality");
-  const symbol = await vita.symbol("io13zt8sznez2pf0q0hqdz2hyl938wak2fsjgdeml");
+  const symbol = await vita.symbol();
   t.deepEqual(symbol, "VITA");
-  const decimals = await vita.decimals(
-    "io13zt8sznez2pf0q0hqdz2hyl938wak2fsjgdeml"
-  );
+  const decimals = await vita.decimals();
   t.deepEqual(decimals, new BigNumber(18));
-  const total = await vita.totalSupply(
-    "io13zt8sznez2pf0q0hqdz2hyl938wak2fsjgdeml"
-  );
+  const total = await vita.totalSupply();
   t.truthy(total);
   const balanceOf = await vita.balanceOf(
-    "io13zt8sznez2pf0q0hqdz2hyl938wak2fsjgdeml",
     "io13zt8sznez2pf0q0hqdz2hyl938wak2fsjgdeml"
   );
   t.deepEqual(balanceOf, new BigNumber("0"));
