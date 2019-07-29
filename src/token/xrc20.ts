@@ -18,6 +18,12 @@ export interface DecodeData {
   data: { [key: string]: any };
 }
 
+export interface ExecuteOption {
+  account: Account;
+  gasPrice: string;
+  gasLimit: string;
+}
+
 export class XRC20 {
   public address: string;
   private contract: Contract;
@@ -33,9 +39,9 @@ export class XRC20 {
 
     const methods = {};
     // @ts-ignore
-    for (const fnName of Object.keys(erc20.contract.getABI())) {
+    for (const fnName of Object.keys(this.contract.getABI())) {
       // @ts-ignore
-      const fnAbi = erc20.contract.getABI()[fnName];
+      const fnAbi = this.contract.getABI()[fnName];
       if (fnAbi.type === "constructor") {
         continue;
       }
@@ -112,15 +118,13 @@ export class XRC20 {
   public async transfer(
     to: string,
     value: BigNumber,
-    account: Account,
-    gasPrice: string,
-    gasLimit: string
+    options: ExecuteOption
   ): Promise<string> {
     return this.executeMethod(
       "transfer",
-      account,
-      gasPrice,
-      gasLimit,
+      options.account,
+      options.gasPrice,
+      options.gasLimit,
       "0",
       to,
       value.toFixed(0)
@@ -130,15 +134,13 @@ export class XRC20 {
   public async allowance(
     owner: string,
     spender: string,
-    account: Account,
-    gasPrice: string,
-    gasLimit: string
+    options: ExecuteOption
   ): Promise<string> {
     return this.executeMethod(
       "allowance",
-      account,
-      gasPrice,
-      gasLimit,
+      options.account,
+      options.gasPrice,
+      options.gasLimit,
       "0",
       owner,
       spender
@@ -148,15 +150,13 @@ export class XRC20 {
   public async approve(
     spender: string,
     value: BigNumber,
-    account: Account,
-    gasPrice: string,
-    gasLimit: string
+    options: ExecuteOption
   ): Promise<string> {
     return this.executeMethod(
       "approve",
-      account,
-      gasPrice,
-      gasLimit,
+      options.account,
+      options.gasPrice,
+      options.gasLimit,
       "0",
       spender,
       value.toFixed(0)
@@ -167,15 +167,13 @@ export class XRC20 {
     from: string,
     to: string,
     value: BigNumber,
-    account: Account,
-    gasPrice: string,
-    gasLimit: string
+    options: ExecuteOption
   ): Promise<string> {
     return this.executeMethod(
       "transferFrom",
-      account,
-      gasPrice,
-      gasLimit,
+      options.account,
+      options.gasPrice,
+      options.gasLimit,
       "0",
       from,
       to,
