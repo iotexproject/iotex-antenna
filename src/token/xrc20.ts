@@ -26,8 +26,8 @@ export interface ExecuteOption {
 
 export class XRC20 {
   public address: string;
-  private contract: Contract;
-  private methods: { [key: string]: Method };
+  private readonly contract: Contract;
+  private readonly methods: { [key: string]: Method };
   private tokenName: string;
   private tokenSymbol: string;
   private tokenDecimals: BigNumber;

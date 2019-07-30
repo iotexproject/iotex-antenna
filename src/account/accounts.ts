@@ -44,6 +44,12 @@ export class Accounts {
     return account;
   }
 
+  public addressToAccount(address: string): IAccount {
+    const account = Account.fromAddress(address);
+    this.wallet.add(account);
+    return account;
+  }
+
   public getAccount(address: string): IAccount | undefined {
     // @ts-ignore
     return this.wallet[address];

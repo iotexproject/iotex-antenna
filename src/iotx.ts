@@ -26,6 +26,12 @@ export class Iotx extends RpcMethod {
     super(hostname);
     this.accounts = new Accounts((this as any) as IRpcMethod);
     this.signer = opts && opts.signer;
+    if (this.signer && this.signer.getAccounts) {
+      const accounts = this.signer.getAccounts();
+      accounts.forEach(address => {
+        this.accounts.addressToAccount(address);
+      });
+    }
   }
 
   public async tryGetAccount(address: string): Promise<Account> {

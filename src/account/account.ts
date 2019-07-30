@@ -26,7 +26,16 @@ export class Account implements IAccount {
     return act;
   }
 
+  public static fromAddress(address: string): IAccount {
+    const act = new Account();
+    act.address = address;
+    return act;
+  }
+
   public sign(data: string | Buffer | Uint8Array): Buffer {
+    if (!this.privateKey) {
+      throw new Error("account sign only support local model.");
+    }
     const h = this.hashMessage(data);
     return Buffer.from(
       makeSigner(0)(h.toString("hex"), this.privateKey),
