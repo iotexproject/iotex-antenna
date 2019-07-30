@@ -3,7 +3,7 @@ pragma solidity ^0.4.23;
 contract SimpleStorage {
     uint storedData;
 
-    constructor(uint32 _x) public {
+    constructor(uint32 _x) public payable {
         storedData = _x;
     }
 

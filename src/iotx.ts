@@ -80,7 +80,7 @@ export class Iotx extends RpcMethod {
       data: req.data,
       provider: this,
       signer: this.signer
-    }).deploy(sender, args, req.gasLimit, req.gasPrice);
+    }).deploy(sender, args, req.amount, req.gasLimit, req.gasPrice);
   }
 
   // return action hash
