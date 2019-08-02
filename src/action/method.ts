@@ -14,7 +14,7 @@ export interface SignerPlugin {
 
   getAccount?(address: string): Promise<Account>;
 
-  getAccounts?(): Array<string>;
+  getAccounts?(): Promise<Array<string>>;
 }
 
 export type AbstractMethodOpts = { signer?: SignerPlugin | undefined };

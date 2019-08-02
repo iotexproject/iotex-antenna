@@ -1,5 +1,6 @@
 import test from "ava";
 import dotenv from "dotenv";
+import sleepPromise from "sleep-promise";
 import { Envelop, SealedEnvelop } from "../action/envelop";
 import { PluginOpts } from "../action/method";
 import Antenna from "../antenna";
@@ -18,7 +19,7 @@ export const TEST_ACCOUNT = {
 test("signer-plugin-test", async t => {
   const antenna = new Antenna(IOTEX_CORE, {
     signer: {
-      getAccounts: () => {
+      getAccounts: async () => {
         return [TEST_ACCOUNT.address];
       },
       signOnly: async (envelop: Envelop, opts: PluginOpts) => {
@@ -30,6 +31,8 @@ test("signer-plugin-test", async t => {
       }
     }
   });
+
+  await sleepPromise(3000);
 
   const hash = await antenna.iotx.sendTransfer({
     from: TEST_ACCOUNT.address,

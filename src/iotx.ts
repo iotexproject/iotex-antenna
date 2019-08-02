@@ -27,10 +27,16 @@ export class Iotx extends RpcMethod {
     this.accounts = new Accounts((this as any) as IRpcMethod);
     this.signer = opts && opts.signer;
     if (this.signer && this.signer.getAccounts) {
-      const accounts = this.signer.getAccounts();
-      accounts.forEach(address => {
-        this.accounts.addressToAccount(address);
-      });
+      this.signer
+        .getAccounts()
+        .then(accounts => {
+          accounts.forEach(address => {
+            this.accounts.addressToAccount(address);
+          });
+        })
+        .catch(err => {
+          throw new Error(`fetch remote accounts address error: ${err}`);
+        });
     }
   }
 
