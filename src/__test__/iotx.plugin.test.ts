@@ -38,7 +38,7 @@ test("signer-plugin-test", async t => {
   await sleepPromise(3000);
 
   const hash = await antenna.iotx.sendTransfer({
-    from: TEST_ACCOUNT.address,
+    from: antenna.iotx.accounts[0].address,
     to: "io16acqxqlmaep6z96khs3ey2607sygnx3surn3ga",
     value: "1000000000000000000",
     gasLimit: "100000",
