@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.20.0](https://github.com/iotexproject/iotex-antenna/compare/v0.18.3...v0.20.0) (2019-08-05)
+
+- support payable deployment of contracts
+- add XRC20 utils
+- fixes the encoding of contract call's address array
+
 ## [0.19.0](https://github.com/iotexproject/iotex-antenna/compare/v0.18.3...v0.19.0) (2019-07-16)
 
 We introduced breaking changes in this release.

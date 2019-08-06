@@ -131,6 +131,7 @@ export class Contract {
     account: IAccount,
     // tslint:disable-next-line: no-any
     inputs: Array<any>,
+    amount?: string,
     gasLimit?: string | undefined,
     gasPrice?: string
   ): Promise<string> {
@@ -166,7 +167,7 @@ export class Contract {
       gasLimit: gasLimit,
       gasPrice: gasPrice,
       contract: "",
-      amount: "0",
+      amount: amount || "0",
       data: data
     };
     return new ExecutionMethod(this.provider, account, contractEnvelop, {
