@@ -30,8 +30,8 @@ export class Iotx extends RpcMethod {
       this.signer
         .getAccounts()
         .then(accounts => {
-          accounts.forEach(address => {
-            this.accounts.addressToAccount(address);
+          accounts.forEach(account => {
+            this.accounts.addAccount(account);
           });
         })
         .catch(err => {

@@ -3,8 +3,8 @@ import { IAction, IRpcMethod } from "../rpc-method/types";
 import { Envelop, SealedEnvelop } from "./envelop";
 import { ClaimFromRewardingFund, Execution, Transfer } from "./types";
 
-export class PluginOpts {
-  public address: string;
+export interface PluginOpts {
+  address: string;
 }
 
 export interface SignerPlugin {
@@ -14,7 +14,7 @@ export interface SignerPlugin {
 
   getAccount?(address: string): Promise<Account>;
 
-  getAccounts?(): Promise<Array<string>>;
+  getAccounts?(): Promise<Array<Account>>;
 }
 
 export type AbstractMethodOpts = { signer?: SignerPlugin | undefined };
@@ -71,7 +71,7 @@ export class AbstractMethod {
   }
 
   public async sendAction(envelop: Envelop): Promise<string> {
-    const opts = new PluginOpts();
+    const opts = { address: "" };
     if (this.account && this.account.address) {
       opts.address = this.account.address;
     }
