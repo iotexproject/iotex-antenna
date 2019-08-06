@@ -3,12 +3,18 @@ import { IAction, IRpcMethod } from "../rpc-method/types";
 import { Envelop, SealedEnvelop } from "./envelop";
 import { ClaimFromRewardingFund, Execution, Transfer } from "./types";
 
-export interface SignerPlugin {
-  signAndSend?(envelop: Envelop): Promise<string>;
+export interface PluginOpts {
+  address: string;
+}
 
-  signOnly?(envelop: Envelop): Promise<SealedEnvelop>;
+export interface SignerPlugin {
+  signAndSend?(envelop: Envelop, options?: PluginOpts): Promise<string>;
+
+  signOnly?(envelop: Envelop, options?: PluginOpts): Promise<SealedEnvelop>;
 
   getAccount?(address: string): Promise<Account>;
+
+  getAccounts?(): Promise<Array<Account>>;
 }
 
 export type AbstractMethodOpts = { signer?: SignerPlugin | undefined };
@@ -65,13 +71,18 @@ export class AbstractMethod {
   }
 
   public async sendAction(envelop: Envelop): Promise<string> {
+    const opts = { address: "" };
+    if (this.account && this.account.address) {
+      opts.address = this.account.address;
+    }
+
     if (this.signer && this.signer.signAndSend) {
-      return this.signer.signAndSend(envelop);
+      return this.signer.signAndSend(envelop, opts);
     }
 
     let selp: SealedEnvelop;
     if (this.signer && this.signer.signOnly) {
-      selp = await this.signer.signOnly(envelop);
+      selp = await this.signer.signOnly(envelop, opts);
     } else {
       selp = await this.signAction(envelop);
     }
