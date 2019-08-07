@@ -2,18 +2,16 @@
 // @ts-ignore
 import account from "eth-lib/lib/account";
 
-import { IRpcMethod } from "../rpc-method/types";
 import { Account } from "./account";
 import { IAccount } from "./account";
 import Wallet from "./wallet";
 
-export class Accounts {
-  // @ts-ignore
-  private readonly rpcMethod: IRpcMethod;
+export class Accounts extends Array<IAccount> {
   private readonly wallet: Wallet;
 
-  constructor(rpcMethod: IRpcMethod) {
-    this.rpcMethod = rpcMethod;
+  constructor() {
+    super();
+
     this.wallet = new Wallet();
 
     return new Proxy(this, {

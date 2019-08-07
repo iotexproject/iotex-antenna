@@ -24,20 +24,22 @@ export class Iotx extends RpcMethod {
 
   constructor(hostname: string, opts?: IotxOpts) {
     super(hostname);
-    this.accounts = new Accounts((this as any) as IRpcMethod);
+    this.accounts = new Accounts();
     this.signer = opts && opts.signer;
-    if (this.signer && this.signer.getAccounts) {
-      this.signer
-        .getAccounts()
-        .then(accounts => {
-          accounts.forEach(account => {
-            this.accounts.addAccount(account);
+    setTimeout(() => {
+      if (this.signer && this.signer.getAccounts) {
+        this.signer
+          .getAccounts()
+          .then(accounts => {
+            accounts.forEach(account => {
+              this.accounts.addAccount(account);
+            });
+          })
+          .catch(err => {
+            throw new Error(`fetch remote accounts address error: ${err}`);
           });
-        })
-        .catch(err => {
-          throw new Error(`fetch remote accounts address error: ${err}`);
-        });
-    }
+      }
+    }, 2000);
   }
 
   public async tryGetAccount(address: string): Promise<Account> {

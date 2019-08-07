@@ -1,4 +1,4 @@
-import { Account } from "../account/account";
+import { Account, IAccount } from "../account/account";
 import { IAction, IRpcMethod } from "../rpc-method/types";
 import { Envelop, SealedEnvelop } from "./envelop";
 import { ClaimFromRewardingFund, Execution, Transfer } from "./types";
@@ -12,9 +12,9 @@ export interface SignerPlugin {
 
   signOnly?(envelop: Envelop, options?: PluginOpts): Promise<SealedEnvelop>;
 
-  getAccount?(address: string): Promise<Account>;
+  getAccount?(address: string): Promise<IAccount>;
 
-  getAccounts?(): Promise<Array<Account>>;
+  getAccounts?(): Promise<Array<IAccount>>;
 }
 
 export type AbstractMethodOpts = { signer?: SignerPlugin | undefined };

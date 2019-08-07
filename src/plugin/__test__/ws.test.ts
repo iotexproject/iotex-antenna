@@ -56,3 +56,11 @@ test.skip("WsSignerPlugin", async t => {
     })
   );
 });
+
+test.skip("getAccounts", async t => {
+  const antenna = new Antenna(String(process.env.IOTEX_CORE), {
+    signer: new WsSignerPlugin()
+  });
+  await sleepPromise(5000);
+  t.deepEqual(antenna.iotx.accounts[0].address.length, 41);
+});
