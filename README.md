@@ -9,7 +9,7 @@ iotex-antenna is our SDK allowing you to interact with a local or remote iotex b
 ## Developing
 
 ```bash
-# not compatible with later versions 
+# incompatible with later npm versions 
 nvm use 10.15.1
 npm install
 
