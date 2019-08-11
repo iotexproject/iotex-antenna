@@ -1,6 +1,6 @@
 {
   "name": "iotex-antenna",
-  "version": "0.22.0",
+  "version": "0.22.1",
   "description": "IoTeX blockchain SDK",
   "iotexCoreVersion": "iotex-core v0.7.1",
   "main": "lib/index.js",
@@ -19,7 +19,7 @@
     "build:js": "rm -rf ./lib && babel src/ --source-maps inline --extensions \".ts,.tsx,.js,.jsx\" --ignore **/__test__/**,src/**/**.test.ts -d lib --copy-files",
     "build:types": "tsc --emitDeclarationOnly",
     "build:watch": "babel --watch src/**/*.ts -d lib",
-    "build:webpack": "NODE_ENV=production webpack --config webpack.js",
+    "build:webpack": "webpack --config webpack.js && NODE_ENV=production webpack --config webpack.js",
     "changelog-major": "standard-version --release-as major",
     "changelog-minor": "standard-version --release-as minor",
     "changelog-patch": "standard-version --release-as patch",
