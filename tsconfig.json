@@ -34,6 +34,11 @@
     "typeRoots": ["node_modules/@types", "src/types"]
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules/**", "**/__test__/**", "**/*.test.**"],
+  "exclude": [
+    "node_modules/**",
+    "**/__test__/**",
+    "**/*.test.**",
+    "src/iotex-antenna.browser.ts"
+  ],
   "compileOnSave": false
 }
