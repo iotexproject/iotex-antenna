@@ -1,11 +1,11 @@
 import test from "ava";
 // @ts-ignore
 import browserEnv from "browser-env";
-import { get } from "dottie";
 import dotenv from "dotenv";
+import { get } from "dottie";
+import sleep from "sleep-promise";
 import RpcMethod from "../browser-rpc-method";
 import { ITransfer } from "../types";
-import sleep from "sleep-promise";
 browserEnv();
 
 dotenv.config();
@@ -194,4 +194,19 @@ test.serial("RpcMethod.getEpochMeta", async t => {
   t.truthy(epochData.totalBlocks);
   t.truthy(epochData.blockProducersInfo);
   t.truthy(epochData.epochData);
+});
+
+test.serial("RpcMethod.getLogs", async t => {
+  const client = new RpcMethod(TEST_HOSTNAME);
+  const getLogs = await client.getLogs({
+    filter: {
+      address: [],
+      topics: []
+    },
+    byRange: {
+      fromBlock: 1,
+      count: 100
+    }
+  });
+  t.truthy(getLogs);
 });

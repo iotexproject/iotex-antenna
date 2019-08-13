@@ -1,5 +1,6 @@
 import grpcWeb from "../../protogen/proto/api/api_grpc_web_pb";
 import {
+  GetLogsRequest,
   GetServerMetaRequest,
   IEstimateGasForActionRequest,
   IEstimateGasForActionResponse,
@@ -13,6 +14,8 @@ import {
   IGetChainMetaResponse,
   IGetEpochMetaRequest,
   IGetEpochMetaResponse,
+  IGetLogsRequest,
+  IGetLogsResponse,
   IGetReceiptByActionRequest,
   IGetReceiptByActionResponse,
   IGetServerMetaRequest,
@@ -185,5 +188,13 @@ export default class RpcMethod implements IRpcMethod {
       deadline: this.getDeadline()
     });
     return GetEpochMetaRequest.from(pbResp);
+  }
+
+  public async getLogs(req: IGetLogsRequest): Promise<IGetLogsResponse> {
+    const pbReq = GetLogsRequest.to(req);
+    const pbResp = await this.client.getLogs(pbReq, {
+      deadline: this.getDeadline()
+    });
+    return GetLogsRequest.from(pbResp);
   }
 }
