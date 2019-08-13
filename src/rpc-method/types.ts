@@ -4,9 +4,11 @@ import { Timestamp } from "google-protobuf/google/protobuf/timestamp_pb";
 import apiPb, {
   GetAccountResponse,
   GetActionsResponse,
+  GetLogsResponse,
   GetReceiptByActionResponse,
   GetServerMetaResponse,
-  ReadStateResponse
+  ReadStateResponse,
+  Topics
 } from "../../protogen/proto/api/api_pb";
 import actionPb, {
   Execution,
@@ -1886,6 +1888,70 @@ export const GetEpochMetaRequest = {
   }
 };
 
+export interface ITopics {
+  topic: Array<Buffer>;
+}
+
+export interface ILogsFilter {
+  address: Array<string>;
+  topics: Array<ITopics>;
+}
+
+export interface IGetLogsByBlock {
+  blockHash: Buffer;
+}
+
+export interface IGetLogsByRange {
+  fromBlock: number;
+  count: number;
+}
+
+export interface IGetLogsRequest {
+  filter: ILogsFilter;
+  byBlock?: IGetLogsByBlock | undefined;
+  byRange?: IGetLogsByRange | undefined;
+}
+
+export interface IGetLogsResponse {
+  logs: Array<ILog> | undefined;
+}
+
+export const GetLogsRequest = {
+  to(req: IGetLogsRequest): any {
+    const pbReq = new apiPb.GetLogsRequest();
+    if (req.filter) {
+      const filter = new apiPb.LogsFilter();
+      filter.setAddressList(req.filter.address);
+      const topics = [] as Array<Topics>;
+      for (let i = 0; i < req.filter.topics.length; i++) {
+        const topic = new apiPb.Topics();
+        topic.setTopicList(req.filter.topics[i].topic);
+        topics.push(topic);
+      }
+      filter.setTopicsList(topics);
+      pbReq.setFilter(filter);
+    }
+    if (req.byBlock) {
+      const byBlock = new apiPb.GetLogsByBlock();
+      byBlock.setBlockhash(req.byBlock.blockHash);
+      pbReq.setByblock(byBlock);
+    }
+    if (req.byRange) {
+      const byRange = new apiPb.GetLogsByRange();
+      byRange.setFromblock(req.byRange.fromBlock);
+      byRange.setCount(req.byRange.count);
+      pbReq.setByrange(byRange);
+    }
+    return pbReq;
+  },
+
+  from(pbRes: GetLogsResponse): IGetLogsResponse {
+    return {
+      logs: fromPbLogList(pbRes.getLogsList())
+    };
+  }
+};
+
 export interface IRpcMethod {
   setProvider(provider: string | IRpcMethod): void;
 
@@ -1916,4 +1982,6 @@ export interface IRpcMethod {
   ): Promise<IEstimateGasForActionResponse>;
 
   getEpochMeta(req: IGetEpochMetaRequest): Promise<IGetEpochMetaResponse>;
+
+  getLogs(req: IGetLogsRequest): Promise<IGetLogsResponse>;
 }

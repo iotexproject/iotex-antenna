@@ -1,10 +1,10 @@
 import test from "ava";
-import { get } from "dottie";
 import dotenv from "dotenv";
-import RpcMethod from "../node-rpc-method";
-import { GetActionsRequest, ITransfer } from "../types";
+import { get } from "dottie";
 import sleep from "sleep-promise";
 import { publicKeyToAddress } from "../../crypto/crypto";
+import RpcMethod from "../node-rpc-method";
+import { GetActionsRequest, ITransfer } from "../types";
 
 dotenv.config();
 
@@ -179,7 +179,7 @@ test.serial("RpcMethod.readContract", async t => {
         execution: GetActionsRequest.fromExecution(
           get(resp1, `actionInfo.${index}.action.core.execution`)
         ),
-        calleraddress: publicKeyToAddress(
+        callerAddress: publicKeyToAddress(
           Buffer.from(
             get(resp1, `actionInfo.${index}.action.senderPubKey`)
           ).toString("hex")
@@ -248,4 +248,19 @@ test.serial("RpcMethod.getDeadline", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
   const deadline = client.getDeadline();
   t.truthy(deadline);
+});
+
+test.serial("RpcMethod.getLogs", async t => {
+  const client = new RpcMethod(TEST_HOSTNAME);
+  const getLogs = await client.getLogs({
+    filter: {
+      address: [],
+      topics: []
+    },
+    byRange: {
+      fromBlock: 1,
+      count: 100
+    }
+  });
+  t.truthy(getLogs);
 });

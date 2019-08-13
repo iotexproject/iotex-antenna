@@ -15,6 +15,8 @@ import {
   IGetChainMetaResponse,
   IGetEpochMetaRequest,
   IGetEpochMetaResponse,
+  IGetLogsRequest,
+  IGetLogsResponse,
   IGetReceiptByActionRequest,
   IGetReceiptByActionResponse,
   IGetServerMetaRequest,
@@ -195,5 +197,11 @@ export default class RpcMethod implements IRpcMethod {
     const getEpochMeta = promisify(this.client.getEpochMeta.bind(this.client));
     // @ts-ignore
     return getEpochMeta(req, { deadline: this.getDeadline() });
+  }
+
+  public async getLogs(req: IGetLogsRequest): Promise<IGetLogsResponse> {
+    const getLogs = promisify(this.client.getLogs.bind(this.client));
+    // @ts-ignore
+    return getLogs(req, { deadline: this.getDeadline() });
   }
 }
