@@ -18,6 +18,9 @@ export class Account implements IAccount {
   public publicKey: string;
 
   public static fromPrivateKey(privateKey: string): IAccount {
+    if (privateKey === "") {
+      throw new Error("private key can not empty.");
+    }
     const obj = privateKeyToAccount(privateKey);
     const act = new Account();
     act.address = obj.address;
@@ -27,6 +30,9 @@ export class Account implements IAccount {
   }
 
   public static fromAddress(address: string): IAccount {
+    if (address === "" || address.length !== 41) {
+      throw new Error("address illegal.");
+    }
     const act = new Account();
     act.address = address;
     return act;
