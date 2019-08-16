@@ -603,127 +603,106 @@ export class ActionCore extends jspb.Message {
   setTransfer(value?: Transfer): void;
   hasTransfer(): boolean;
   clearTransfer(): void;
-  hasTransfer(): boolean;
 
   getExecution(): Execution | undefined;
   setExecution(value?: Execution): void;
   hasExecution(): boolean;
   clearExecution(): void;
-  hasExecution(): boolean;
 
   getStartsubchain(): StartSubChain | undefined;
   setStartsubchain(value?: StartSubChain): void;
   hasStartsubchain(): boolean;
   clearStartsubchain(): void;
-  hasStartsubchain(): boolean;
 
   getStopsubchain(): StopSubChain | undefined;
   setStopsubchain(value?: StopSubChain): void;
   hasStopsubchain(): boolean;
   clearStopsubchain(): void;
-  hasStopsubchain(): boolean;
 
   getPutblock(): PutBlock | undefined;
   setPutblock(value?: PutBlock): void;
   hasPutblock(): boolean;
   clearPutblock(): void;
-  hasPutblock(): boolean;
 
   getCreatedeposit(): CreateDeposit | undefined;
   setCreatedeposit(value?: CreateDeposit): void;
   hasCreatedeposit(): boolean;
   clearCreatedeposit(): void;
-  hasCreatedeposit(): boolean;
 
   getSettledeposit(): SettleDeposit | undefined;
   setSettledeposit(value?: SettleDeposit): void;
   hasSettledeposit(): boolean;
   clearSettledeposit(): void;
-  hasSettledeposit(): boolean;
 
   getCreateplumchain(): CreatePlumChain | undefined;
   setCreateplumchain(value?: CreatePlumChain): void;
   hasCreateplumchain(): boolean;
   clearCreateplumchain(): void;
-  hasCreateplumchain(): boolean;
 
   getTerminateplumchain(): TerminatePlumChain | undefined;
   setTerminateplumchain(value?: TerminatePlumChain): void;
   hasTerminateplumchain(): boolean;
   clearTerminateplumchain(): void;
-  hasTerminateplumchain(): boolean;
 
   getPlumputblock(): PlumPutBlock | undefined;
   setPlumputblock(value?: PlumPutBlock): void;
   hasPlumputblock(): boolean;
   clearPlumputblock(): void;
-  hasPlumputblock(): boolean;
 
   getPlumcreatedeposit(): PlumCreateDeposit | undefined;
   setPlumcreatedeposit(value?: PlumCreateDeposit): void;
   hasPlumcreatedeposit(): boolean;
   clearPlumcreatedeposit(): void;
-  hasPlumcreatedeposit(): boolean;
 
   getPlumstartexit(): PlumStartExit | undefined;
   setPlumstartexit(value?: PlumStartExit): void;
   hasPlumstartexit(): boolean;
   clearPlumstartexit(): void;
-  hasPlumstartexit(): boolean;
 
   getPlumchallengeexit(): PlumChallengeExit | undefined;
   setPlumchallengeexit(value?: PlumChallengeExit): void;
   hasPlumchallengeexit(): boolean;
   clearPlumchallengeexit(): void;
-  hasPlumchallengeexit(): boolean;
 
   getPlumresponsechallengeexit(): PlumResponseChallengeExit | undefined;
   setPlumresponsechallengeexit(value?: PlumResponseChallengeExit): void;
   hasPlumresponsechallengeexit(): boolean;
   clearPlumresponsechallengeexit(): void;
-  hasPlumresponsechallengeexit(): boolean;
 
   getPlumfinalizeexit(): PlumFinalizeExit | undefined;
   setPlumfinalizeexit(value?: PlumFinalizeExit): void;
   hasPlumfinalizeexit(): boolean;
   clearPlumfinalizeexit(): void;
-  hasPlumfinalizeexit(): boolean;
 
   getPlumsettledeposit(): PlumSettleDeposit | undefined;
   setPlumsettledeposit(value?: PlumSettleDeposit): void;
   hasPlumsettledeposit(): boolean;
   clearPlumsettledeposit(): void;
-  hasPlumsettledeposit(): boolean;
 
   getPlumtransfer(): PlumTransfer | undefined;
   setPlumtransfer(value?: PlumTransfer): void;
   hasPlumtransfer(): boolean;
   clearPlumtransfer(): void;
-  hasPlumtransfer(): boolean;
 
   getDeposittorewardingfund(): DepositToRewardingFund | undefined;
   setDeposittorewardingfund(value?: DepositToRewardingFund): void;
   hasDeposittorewardingfund(): boolean;
   clearDeposittorewardingfund(): void;
-  hasDeposittorewardingfund(): boolean;
 
   getClaimfromrewardingfund(): ClaimFromRewardingFund | undefined;
   setClaimfromrewardingfund(value?: ClaimFromRewardingFund): void;
   hasClaimfromrewardingfund(): boolean;
   clearClaimfromrewardingfund(): void;
-  hasClaimfromrewardingfund(): boolean;
 
   getGrantreward(): GrantReward | undefined;
   setGrantreward(value?: GrantReward): void;
   hasGrantreward(): boolean;
   clearGrantreward(): void;
-  hasGrantreward(): boolean;
 
   getPutpollresult(): PutPollResult | undefined;
   setPutpollresult(value?: PutPollResult): void;
   hasPutpollresult(): boolean;
   clearPutpollresult(): void;
-  hasPutpollresult(): boolean;
 
   getActionCase(): ActionCore.ActionCase;
 
@@ -979,6 +958,6 @@ export namespace GrantReward {
 }
 
 export enum RewardType { 
-  BlockReward = 0,
-  EpochReward = 1,
+  BLOCKREWARD = 0,
+  EPOCHREWARD = 1,
 }
