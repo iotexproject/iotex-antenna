@@ -62,10 +62,7 @@ export class Contract {
         continue;
       }
 
-      this.methods[func] = async (
-        // @ts-ignore
-        ...args
-      ) => {
+      this.methods[func] = async (...args: Array<any>) => {
         if (!this.address || !this.abi) {
           throw new Error("must set contract address and abi");
         }
@@ -75,7 +72,7 @@ export class Contract {
         if (!this.provider) {
           throw new Error("no rpc method provider specified");
         }
-        const executeParameter = args[args.length - 1];
+        const executeParameter: MethodExecuteParameter = args[args.length - 1];
         const abiFunc = this.abi[func];
         const userInput = {};
         if (!abiFunc.inputs || !Array.isArray(abiFunc.inputs)) {
@@ -92,7 +89,7 @@ export class Contract {
             execution: this.pureEncodeMethod(
               "0",
               func,
-              ...args.slice(1, args.length)
+              ...args.slice(0, args.length - 1)
             ),
             callerAddress: this.address
           });
@@ -178,9 +175,7 @@ export class Contract {
   public pureEncodeMethod(
     amount: string,
     method: string,
-    // @ts-ignore
-    // tslint:disable-next-line: typedef
-    ...args
+    ...args: Array<any>
   ): Execution {
     if (!this.address || !this.abi) {
       throw new Error("must set contract address and abi");
