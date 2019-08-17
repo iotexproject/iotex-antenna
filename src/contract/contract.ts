@@ -188,8 +188,12 @@ export class Contract {
     const userInput = {};
     // tslint:disable-next-line: no-any
     abiFunc.inputs.map((val: any, i: number) => {
+      let name = val.name;
+      if (name === "") {
+        name = `arg${i}`;
+      }
       // @ts-ignore
-      userInput[val.name] = args[i];
+      userInput[name] = args[i];
     });
 
     return this.encodeMethod(amount, method, userInput);
