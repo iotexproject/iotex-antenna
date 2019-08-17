@@ -1612,10 +1612,25 @@ export interface ILog {
   index: number;
 }
 
+export enum ReceiptStatus {
+  Failure = 0,
+  Success = 1,
+  //1xx for EVM ErrorCode
+  ErrUnknown = 100,
+  ErrOutOfGas = 101,
+  ErrCodeStoreOutOfGas = 102,
+  ErrDepth = 103,
+  ErrContractAddressCollision = 104,
+  ErrNoCompatibleInterpreter = 105,
+  ErrExecutionReverted = 106,
+  ErrMaxCodeSizeExceeded = 107,
+  ErrWriteProtection = 108
+}
+
 // Properties of an Receipt.
 export interface IReceipt {
   // Receipt status
-  status: number;
+  status: ReceiptStatus;
 
   // blkHeight
   blkHeight: number;
@@ -1676,7 +1691,7 @@ export const GetReceiptByActionRequest = {
   }
 };
 
-function fromPbReceipt(
+export function fromPbReceipt(
   pbReceipt: actionPb.Receipt | undefined
 ): IReceipt | undefined {
   if (!pbReceipt) {
