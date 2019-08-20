@@ -51,14 +51,18 @@ export function encodeArguments(
   const types = [] as Array<any>;
   const values = [] as Array<any>;
 
-  (args || []).forEach(arg => {
+  (args || []).forEach((arg, index) => {
+    let name = arg.name;
+    if (name === "") {
+      name = `arg${index}`;
+    }
     if (arg.type === "bool") {
       types.push("uint256");
     } else {
       types.push(arg.type);
     }
-    if (userInput.hasOwnProperty(arg.name)) {
-      let value = userInput[arg.name];
+    if (userInput.hasOwnProperty(name)) {
+      let value = userInput[name];
       if (arg.type === "address") {
         value = address.fromString(value).stringEth();
       }
