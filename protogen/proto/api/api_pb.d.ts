@@ -48,31 +48,26 @@ export class GetActionsRequest extends jspb.Message {
   setByindex(value?: GetActionsByIndexRequest): void;
   hasByindex(): boolean;
   clearByindex(): void;
-  hasByindex(): boolean;
 
   getByhash(): GetActionByHashRequest | undefined;
   setByhash(value?: GetActionByHashRequest): void;
   hasByhash(): boolean;
   clearByhash(): void;
-  hasByhash(): boolean;
 
   getByaddr(): GetActionsByAddressRequest | undefined;
   setByaddr(value?: GetActionsByAddressRequest): void;
   hasByaddr(): boolean;
   clearByaddr(): void;
-  hasByaddr(): boolean;
 
   getUnconfirmedbyaddr(): GetUnconfirmedActionsByAddressRequest | undefined;
   setUnconfirmedbyaddr(value?: GetUnconfirmedActionsByAddressRequest): void;
   hasUnconfirmedbyaddr(): boolean;
   clearUnconfirmedbyaddr(): void;
-  hasUnconfirmedbyaddr(): boolean;
 
   getByblk(): GetActionsByBlockRequest | undefined;
   setByblk(value?: GetActionsByBlockRequest): void;
   hasByblk(): boolean;
   clearByblk(): void;
-  hasByblk(): boolean;
 
   getLookupCase(): GetActionsRequest.LookupCase;
 
@@ -380,13 +375,11 @@ export class GetBlockMetasRequest extends jspb.Message {
   setByindex(value?: GetBlockMetasByIndexRequest): void;
   hasByindex(): boolean;
   clearByindex(): void;
-  hasByindex(): boolean;
 
   getByhash(): GetBlockMetaByHashRequest | undefined;
   setByhash(value?: GetBlockMetaByHashRequest): void;
   hasByhash(): boolean;
   clearByhash(): void;
-  hasByhash(): boolean;
 
   getLookupCase(): GetBlockMetasRequest.LookupCase;
 
@@ -742,13 +735,11 @@ export class EstimateActionGasConsumptionRequest extends jspb.Message {
   setTransfer(value?: proto_types_action_pb.Transfer): void;
   hasTransfer(): boolean;
   clearTransfer(): void;
-  hasTransfer(): boolean;
 
   getExecution(): proto_types_action_pb.Execution | undefined;
   setExecution(value?: proto_types_action_pb.Execution): void;
   hasExecution(): boolean;
   clearExecution(): void;
-  hasExecution(): boolean;
 
   getCalleraddress(): string;
   setCalleraddress(value: string): void;
@@ -1057,13 +1048,11 @@ export class GetLogsRequest extends jspb.Message {
   setByblock(value?: GetLogsByBlock): void;
   hasByblock(): boolean;
   clearByblock(): void;
-  hasByblock(): boolean;
 
   getByrange(): GetLogsByRange | undefined;
   setByrange(value?: GetLogsByRange): void;
   hasByrange(): boolean;
   clearByrange(): void;
-  hasByrange(): boolean;
 
   getLookupCase(): GetLogsRequest.LookupCase;
 

@@ -43,8 +43,8 @@ import {
 
 export class APIServiceClient {
   constructor (hostname: string,
-               credentials: null | { [index: string]: string; },
-               options: null | { [index: string]: string; });
+               credentials?: null | { [index: string]: string; },
+               options?: null | { [index: string]: string; });
 
   getAccount(
     request: GetAccountRequest,
@@ -165,8 +165,8 @@ export class APIServiceClient {
 
 export class APIServicePromiseClient {
   constructor (hostname: string,
-               credentials: null | { [index: string]: string; },
-               options: null | { [index: string]: string; });
+               credentials?: null | { [index: string]: string; },
+               options?: null | { [index: string]: string; });
 
   getAccount(
     request: GetAccountRequest,
