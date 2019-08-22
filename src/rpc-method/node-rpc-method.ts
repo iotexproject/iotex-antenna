@@ -53,13 +53,16 @@ type Opts = {
 export default class RpcMethod implements IRpcMethod {
   public client: IRpcMethod;
   public timeout: number;
-  private readonly credentials: grpc.ChannelCredentials;
+  private credentials: grpc.ChannelCredentials;
 
   constructor(hostname: string, options: Opts = {}) {
     const normalizedHostname = String(hostname).replace(
       /^(http:\/\/|https:\/\/)/,
       ""
     );
+    if (hostname.startsWith("https://")) {
+      options.enableSsl = true;
+    }
     this.credentials =
       options && options.enableSsl
         ? grpc.credentials.createSsl(Buffer.from(ROOT_CERTS))
@@ -79,6 +82,9 @@ export default class RpcMethod implements IRpcMethod {
         /^(http:\/\/|https:\/\/)/,
         ""
       );
+      this.credentials = provider.startsWith("https://")
+        ? grpc.credentials.createSsl(Buffer.from(ROOT_CERTS))
+        : grpc.credentials.createInsecure();
       // @ts-ignore
       this.client = new iotexapi.APIService(
         normalizedHostname,
