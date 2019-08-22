@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.24.0](https://github.com/iotexproject/iotex-antenna/compare/v0.22.3...v0.24.0) (2019-08-22)
+
+- add status code for receipt
+- enable SSL for https:// automatically in node
+
 ## [0.23.0](https://github.com/iotexproject/iotex-antenna/compare/v0.22.3...v0.23.0) (2019-08-22)
 
 ### [0.22.3](https://github.com/iotexproject/iotex-antenna/compare/v0.18.3...v0.22.3) (2019-08-18)
