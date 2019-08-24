@@ -85,7 +85,7 @@ export class WsSignerPlugin implements SignerPlugin {
     });
   }
 
-  public sendOriginInfo(method: string, plugin = ""): Promise<string> {
+  public sendOriginInfo(method: string, plugin: string = ""): Promise<string> {
     const id = reqId++;
     const req = {
       reqId: id,
@@ -102,10 +102,10 @@ export class WsSignerPlugin implements SignerPlugin {
     });
   }
 
-  public getOrigin(plugin = ""): string {
+  public getOrigin(plugin: string = ""): string {
     let origin: string = "";
     if (
-      typeof location !== "undefined" &&
+      location !== undefined &&
       location.hasOwnProperty("hostname") &&
       location.hostname.length
     ) {
