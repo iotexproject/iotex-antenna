@@ -37,7 +37,8 @@
     "node_modules/**",
     "**/__test__/**",
     "**/*.test.**",
-    "src/iotex-antenna.browser.ts"
+    "src/iotex-antenna.browser.ts",
+    "lib/**"
   ],
   "compileOnSave": false
 }
