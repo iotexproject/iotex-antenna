@@ -84,4 +84,39 @@ export class WsSignerPlugin implements SignerPlugin {
       };
     });
   }
+
+  public sendOriginInfo(method: string, plugin = ""): Promise<string> {
+    const id = reqId++;
+    const req = {
+      reqId: id,
+      origin: {
+        method,
+        origin: this.getOrigin(plugin)
+      },
+      type: "SEND_ORIGIN"
+    };
+    this.ws.send(JSON.stringify(req));
+
+    return new Promise(resolve => {
+      resolve(`action ${req.type} send`);
+    });
+  }
+
+  public getOrigin(plugin = ""): string {
+    let origin: string = "";
+    if (
+      typeof location !== "undefined" &&
+      location.hasOwnProperty("hostname") &&
+      location.hostname.length
+    ) {
+      origin = location.hostname;
+    } else {
+      origin = plugin;
+    }
+
+    if (origin.substr(0, 4) === "www.") {
+      origin = origin.replace("www.", "");
+    }
+    return origin;
+  }
 }
