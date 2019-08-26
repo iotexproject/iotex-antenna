@@ -11,12 +11,15 @@ let reqId = Math.round(Math.random() * 10000);
 interface IRequest {
   reqId: number;
   type: "SIGN_AND_SEND" | "GET_ACCOUNTS";
-
   envelop?: string; // serialized proto string
+  origin?: string;
+  method?: string;
 }
 
 export class WsSignerPlugin implements SignerPlugin {
   private readonly ws: WebSocket;
+
+  private currentMethod: string;
 
   constructor(provider: string = "wss://local.get-scatter.com:64102") {
     this.ws = new WebSocket(provider);
@@ -33,7 +36,9 @@ export class WsSignerPlugin implements SignerPlugin {
     const req: IRequest = {
       reqId: id,
       envelop: Buffer.from(envelop.bytestream()).toString("hex"),
-      type: "SIGN_AND_SEND"
+      type: "SIGN_AND_SEND",
+      origin: this.getOrigin(),
+      method: this.method
     };
     this.ws.send(JSON.stringify(req));
     // tslint:disable-next-line:promise-must-complete
@@ -85,23 +90,6 @@ export class WsSignerPlugin implements SignerPlugin {
     });
   }
 
-  public sendOriginInfo(method: string, plugin: string = ""): Promise<string> {
-    const id = reqId++;
-    const req = {
-      reqId: id,
-      origin: {
-        method,
-        origin: this.getOrigin(plugin)
-      },
-      type: "SEND_ORIGIN"
-    };
-    this.ws.send(JSON.stringify(req));
-
-    return new Promise(resolve => {
-      resolve(`action ${req.type} send`);
-    });
-  }
-
   public getOrigin(plugin: string = ""): string {
     let origin: string = "";
     if (
@@ -118,5 +106,13 @@ export class WsSignerPlugin implements SignerPlugin {
       origin = origin.replace("www.", "");
     }
     return origin;
+  }
+
+  public get method(): string {
+    return this.currentMethod;
+  }
+
+  public set method(method: string) {
+    this.currentMethod = method;
   }
 }
