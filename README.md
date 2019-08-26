@@ -7,6 +7,17 @@ iotex-antenna is our SDK allowing you to interact with a local or remote iotex b
 - [Documentation](https://docs.iotex.io/docs/libraries-and-tools.html)
 - [Reference](https://iotexproject.github.io/iotex-antenna/)
 
+## Antenna features
+
+| Features      | antenna | antenna-java | antenna-go | antenna-swift |
+| ------------- | ------- | ------------ | ---------- | ------------- |
+| crypto        | Yes     | Yes          | Yes        | Yes           |
+| rpc-method    | Yes     | Yes          | Yes        | Yes           |
+| account       | Yes     | Yes          | Yes        | Yes           |
+| action        | Yes     | No           | Yes        | Yes           |
+| contract      | Yes     | No           | Yes        | Yes           |
+| token support | Yes     | No           | No         | Yes           |
+
 ## Developing
 
 ```bash
