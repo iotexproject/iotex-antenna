@@ -4,6 +4,8 @@ import sleepPromise from "sleep-promise";
 import Antenna from "../../antenna";
 import { WsSignerPlugin } from "../ws";
 import { toRau } from "../../account/utils";
+// @ts-ignore
+import browserEnv from "browser-env";
 
 dotenv.config();
 
@@ -63,4 +65,16 @@ test.skip("getAccounts", async t => {
   });
   await sleepPromise(5000);
   t.deepEqual(antenna.iotx.accounts[0].address.length, 41);
+});
+
+browserEnv();
+
+test("test origins", t => {
+  const plugin = new WsSignerPlugin();
+  const origin = plugin.getOrigin("www.iotex.io");
+
+  t.deepEqual(origin, "iotex.io");
+
+  const empty = plugin.getOrigin();
+  t.deepEqual(empty, "");
 });
