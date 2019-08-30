@@ -14,9 +14,9 @@ iotex-antenna is our SDK allowing you to interact with a local or remote iotex b
 | crypto        | Yes     | Yes                                                                | Yes                                                            | Yes                                                                  |
 | rpc-method    | Yes     | Yes                                                                | Yes                                                            | Yes                                                                  |
 | account       | Yes     | Yes                                                                | Yes                                                            | Yes                                                                  |
-| action        | Yes     | No                                                                 | Yes                                                            | Yes                                                                  |
-| contract      | Yes     | No                                                                 | Yes                                                            | Yes                                                                  |
-| token support | Yes     | No                                                                 | No                                                             | Yes                                                                  |
+| action        | Yes     | Yes                                                                | Yes                                                            | Yes                                                                  |
+| contract      | Yes     | Yes                                                                | Yes                                                            | Yes                                                                  |
+| token support | Yes     | Yes                                                                | No                                                             | Yes                                                                  |
 
 ## Developing
 
