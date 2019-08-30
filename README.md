@@ -9,14 +9,14 @@ iotex-antenna is our SDK allowing you to interact with a local or remote iotex b
 
 ## Antenna features
 
-| Features      | antenna | antenna-java | antenna-go | antenna-swift |
-| ------------- | ------- | ------------ | ---------- | ------------- |
-| crypto        | Yes     | Yes          | Yes        | Yes           |
-| rpc-method    | Yes     | Yes          | Yes        | Yes           |
-| account       | Yes     | Yes          | Yes        | Yes           |
-| action        | Yes     | No           | Yes        | Yes           |
-| contract      | Yes     | No           | Yes        | Yes           |
-| token support | Yes     | No           | No         | Yes           |
+| Features      | antenna | [antenna-java](https://github.com/iotexproject/iotex-antenna-java) | [antenna-go](https://github.com/iotexproject/iotex-antenna-go) | [antenna-swift](https://github.com/iotexproject/iotex-antenna-swift) |
+| ------------- | ------- | ------------------------------------------------------------------ | -------------------------------------------------------------- | -------------------------------------------------------------------- |
+| crypto        | Yes     | Yes                                                                | Yes                                                            | Yes                                                                  |
+| rpc-method    | Yes     | Yes                                                                | Yes                                                            | Yes                                                                  |
+| account       | Yes     | Yes                                                                | Yes                                                            | Yes                                                                  |
+| action        | Yes     | Yes                                                                | Yes                                                            | Yes                                                                  |
+| contract      | Yes     | Yes                                                                | Yes                                                            | Yes                                                                  |
+| token support | Yes     | Yes                                                                | No                                                             | Yes                                                                  |
 
 ## Developing
 
