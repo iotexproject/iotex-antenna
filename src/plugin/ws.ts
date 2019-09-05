@@ -11,8 +11,8 @@ let reqId = Math.round(Math.random() * 10000);
 interface IRequest {
   reqId: number;
   type: "SIGN_AND_SEND" | "GET_ACCOUNTS";
-
   envelop?: string; // serialized proto string
+  origin?: string;
 }
 
 export class WsSignerPlugin implements SignerPlugin {
@@ -33,7 +33,8 @@ export class WsSignerPlugin implements SignerPlugin {
     const req: IRequest = {
       reqId: id,
       envelop: Buffer.from(envelop.bytestream()).toString("hex"),
-      type: "SIGN_AND_SEND"
+      type: "SIGN_AND_SEND",
+      origin: this.getOrigin()
     };
     this.ws.send(JSON.stringify(req));
     // tslint:disable-next-line:promise-must-complete
@@ -83,5 +84,23 @@ export class WsSignerPlugin implements SignerPlugin {
         }
       };
     });
+  }
+
+  public getOrigin(plugin: string = ""): string {
+    let origin: string = "";
+    if (
+      location !== undefined &&
+      location.hasOwnProperty("hostname") &&
+      location.hostname.length
+    ) {
+      origin = location.hostname;
+    } else {
+      origin = plugin;
+    }
+
+    if (origin.substr(0, 4) === "www.") {
+      origin = origin.replace("www.", "");
+    }
+    return origin;
   }
 }
