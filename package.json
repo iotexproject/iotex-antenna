@@ -108,7 +108,7 @@
     "tslint-microsoft-contrib": "6.2.0",
     "tslint-require-connnect-typing": "1.0.1",
     "typedoc": "^0.15.0",
-    "typescript": "3.5.3",
+    "typescript": "3.6.2",
     "webpack": "4.39.1",
     "webpack-bundle-analyzer": "3.4.1",
     "webpack-cli": "3.3.6"
