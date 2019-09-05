@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.1](https://github.com/iotexproject/iotex-antenna/compare/v0.22.3...v0.24.1) (2019-09-05)
+
+- add origin to ws request payload
+- fix protoc vulnerability
+- adding feature comparisons among antenna in different languages
+
 ## [0.24.0](https://github.com/iotexproject/iotex-antenna/compare/v0.22.3...v0.24.0) (2019-08-22)
 
 - add status code for receipt
