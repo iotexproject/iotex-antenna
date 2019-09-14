@@ -15,17 +15,83 @@ interface IRequest {
   origin?: string;
 }
 
-export class WsSignerPlugin implements SignerPlugin {
-  private readonly ws: WebSocket;
+export interface WsSignerPluginOptions {
+  retryCount: number;
+  retryDuration: number;
+}
 
-  constructor(provider: string = "wss://local.get-scatter.com:64102") {
-    this.ws = new WebSocket(provider);
+export interface WsRequest {
+  // tslint:disable-next-line: no-any
+  [key: string]: any;
+}
+
+export class WsSignerPlugin implements SignerPlugin {
+  private ws: WebSocket;
+
+  private readonly provider: string;
+
+  private readonly options: WsSignerPluginOptions;
+
+  constructor(
+    provider: string = "wss://local.get-scatter.com:64102",
+    options: WsSignerPluginOptions = { retryCount: 3, retryDuration: 50 }
+  ) {
+    this.provider = provider;
+
+    this.options = options;
+
+    this.init();
+  }
+
+  private init(): void {
+    this.ws = new WebSocket(this.provider);
     this.ws.onopen = (): void => {
       window.console.log("[antenna-ws] connected");
     };
     this.ws.onclose = (): void => {
       window.console.log("[antenna-ws] disconnected");
     };
+  }
+
+  private send(req: WsRequest): void {
+    const readyState = this.ws.readyState;
+
+    if (readyState === 1) {
+      this.ws.send(JSON.stringify(req));
+    } else {
+      if (readyState === 2 || readyState === 3) {
+        this.init();
+      }
+      this.reconnectAndSend(this.options.retryCount, req);
+    }
+  }
+
+  private reconnectAndSend(
+    retryCount: number,
+    req: WsRequest,
+    timeoutId?: number
+  ): void {
+    const readyState = this.ws.readyState;
+
+    if (timeoutId) {
+      window.clearTimeout(timeoutId);
+    }
+
+    if (retryCount > 0) {
+      const id = window.setTimeout(() => {
+        if (readyState === 1) {
+          this.ws.send(JSON.stringify(req));
+          window.clearTimeout(id);
+        } else {
+          const count = retryCount - 1;
+          this.reconnectAndSend(count, req, id);
+        }
+      }, this.options.retryDuration);
+    } else {
+      window.console.error(
+        "ws plugin connect error, please retry again later."
+      );
+    }
   }
 
   public async signAndSend(envelop: Envelop): Promise<string> {
@@ -36,7 +102,7 @@ export class WsSignerPlugin implements SignerPlugin {
       type: "SIGN_AND_SEND",
       origin: this.getOrigin()
     };
-    this.ws.send(JSON.stringify(req));
+    this.send(req);
     // tslint:disable-next-line:promise-must-complete
     return new Promise<string>(resolve => {
       this.ws.onmessage = event => {
@@ -67,7 +133,7 @@ export class WsSignerPlugin implements SignerPlugin {
       reqId: id,
       type: "GET_ACCOUNTS"
     };
-    this.ws.send(JSON.stringify(req));
+    this.send(req);
     // tslint:disable-next-line:promise-must-complete
     return new Promise<Array<Account>>(resolve => {
       this.ws.onmessage = event => {
