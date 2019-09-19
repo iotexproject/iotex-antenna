@@ -3,9 +3,9 @@ import dotenv from "dotenv";
 import { Account } from "../../account/account";
 import RpcMethod from "../../rpc-method";
 import {
+  ClaimFromRewardingFundMethod,
   ExecutionMethod,
-  TransferMethod,
-  ClaimFromRewardingFundMethod
+  TransferMethod
 } from "../method";
 
 dotenv.config();
