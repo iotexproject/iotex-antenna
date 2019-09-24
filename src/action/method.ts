@@ -1,3 +1,4 @@
+import BigNumber from "bignumber.js";
 import { Account, IAccount } from "../account/account";
 import { IAction, IRpcMethod } from "../rpc-method/types";
 import { Envelop, SealedEnvelop } from "./envelop";
@@ -61,6 +62,33 @@ export class AbstractMethod {
         action: selp.action()
       });
       envelop.gasLimit = limit.gas;
+    }
+
+    if (this.account && this.account.address) {
+      const meta = await this.client.getAccount({
+        address: this.account.address
+      });
+      if (meta.accountMeta && meta.accountMeta.balance) {
+        const gasPrice = new BigNumber(envelop.gasPrice);
+        const gasLimit = new BigNumber(envelop.gasLimit);
+        const balance = new BigNumber(meta.accountMeta.balance);
+        if (envelop.transfer) {
+          const amount = new BigNumber(envelop.transfer.amount);
+          if (
+            balance.comparedTo(amount.plus(gasPrice.multipliedBy(gasLimit))) < 0
+          ) {
+            throw new Error("Insufficient funds for gas * price + amount");
+          }
+        }
+        if (envelop.execution) {
+          const amount = new BigNumber(envelop.execution.amount);
+          if (
+            balance.comparedTo(amount.plus(gasPrice.multipliedBy(gasLimit))) < 0
+          ) {
+            throw new Error("Insufficient funds for gas * price + amount");
+          }
+        }
+      }
     }
 
     return SealedEnvelop.sign(
