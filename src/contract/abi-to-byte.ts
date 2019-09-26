@@ -80,7 +80,9 @@ export function encodeArguments(
     const encoded = ethereumjs.rawEncode(types, values);
     return encoded.toString("hex");
   } catch (e) {
-    throw new Error(`failed to rawEncode: ${e.stack}`);
+    throw new Error(
+      `failed to rawEncode: ${e.stack}, types: ${types}, values: ${values}`
+    );
   }
 }
 
