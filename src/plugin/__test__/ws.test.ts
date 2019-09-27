@@ -1,11 +1,11 @@
 import test from "ava";
-import dotenv from "dotenv";
-import sleepPromise from "sleep-promise";
-import Antenna from "../../antenna";
-import { WsSignerPlugin } from "../ws";
-import { toRau } from "../../account/utils";
 // @ts-ignore
 import browserEnv from "browser-env";
+import dotenv from "dotenv";
+import sleepPromise from "sleep-promise";
+import { toRau } from "../../account/utils";
+import Antenna from "../../antenna";
+import { WsSignerPlugin } from "../ws";
 
 dotenv.config();
 
