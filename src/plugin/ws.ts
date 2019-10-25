@@ -18,12 +18,19 @@ interface IRequest {
 export interface WsSignerPluginOptions {
   retryCount: number;
   retryDuration: number;
+  keepConnections: boolean;
 }
 
 export interface WsRequest {
   // tslint:disable-next-line: no-any
   [key: string]: any;
 }
+
+export const DEFAULT_OPTIONS = {
+  retryCount: 3,
+  retryDuration: 50,
+  keepConnections: false
+};
 
 export class WsSignerPlugin implements SignerPlugin {
   private ws: WebSocket;
@@ -34,23 +41,42 @@ export class WsSignerPlugin implements SignerPlugin {
 
   constructor(
     provider: string = "wss://local.get-scatter.com:64102",
-    options: WsSignerPluginOptions = { retryCount: 3, retryDuration: 50 }
+    options: WsSignerPluginOptions = DEFAULT_OPTIONS
   ) {
     this.provider = provider;
 
-    this.options = options;
+    this.options = { ...DEFAULT_OPTIONS, ...options };
 
-    this.init();
+    this.init(this.options.retryCount);
   }
 
-  private init(): void {
+  private init(retryCount?: number, timeoutId?: number): void {
     this.ws = new WebSocket(this.provider);
     this.ws.onopen = (): void => {
       window.console.log("[antenna-ws] connected");
     };
     this.ws.onclose = (): void => {
       window.console.log("[antenna-ws] disconnected");
+      if (this.options.keepConnections && retryCount && retryCount > 0) {
+        this.reconnect(retryCount);
+      }
     };
+    if (timeoutId) {
+      window.clearTimeout(timeoutId);
+    }
+  }
+
+  private reconnect(retryCount: number): void {
+    if (retryCount >= 0) {
+      const id = window.setTimeout(() => {
+        const count = retryCount - 1;
+        this.init(count, id);
+      }, this.options.retryDuration);
+    } else {
+      window.console.error(
+        "ws plugin connect error, please retry again later."
+      );
+    }
   }
 
   private send(req: WsRequest): void {
