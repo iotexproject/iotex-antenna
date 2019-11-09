@@ -69,7 +69,7 @@ test.skip("getAccounts", async t => {
 
 browserEnv();
 
-test("test origins", t => {
+test.skip("test origins", t => {
   const plugin = new WsSignerPlugin();
   const origin = plugin.getOrigin("www.iotex.io");
 

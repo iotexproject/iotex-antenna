@@ -17,7 +17,7 @@ export const TEST_ACCOUNT = {
     "044e18306ae9ef4ec9d07bf6e705442d4d1a75e6cdf750330ca2d880f2cc54607c9c33deb9eae9c06e06e04fe9ce3d43962cc67d5aa34fbeb71270d4bad3d648d9"
 };
 
-test("signer-plugin-test", async t => {
+test.skip("signer-plugin-test", async t => {
   const antenna = new Antenna(IOTEX_CORE, {
     signer: {
       getAccounts: async () => {

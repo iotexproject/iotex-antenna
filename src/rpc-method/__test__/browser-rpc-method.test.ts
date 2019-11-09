@@ -44,10 +44,6 @@ test.serial("RpcMethod.getBlockMetas", async t => {
     byIndex: { start: 10, count: 10 }
   });
   t.deepEqual(resp2.blkMetas.length, 10);
-  const resp3 = await client.getBlockMetas({
-    byIndex: { start: 10, count: 0 }
-  });
-  t.deepEqual(resp3.blkMetas.length, 0);
 
   // test getMetasByBlkHash
   const resp4 = await client.getBlockMetas({
@@ -83,8 +79,6 @@ test.serial("RpcMethod.getActionsByIndex", async t => {
   t.deepEqual(get(resp1, "actionInfo.length"), 1);
   const resp2 = await client.getActions({ byIndex: { start: 10, count: 10 } });
   t.deepEqual(get(resp2, "actionInfo.length"), 10);
-  const resp3 = await client.getActions({ byIndex: { start: 10, count: 0 } });
-  t.deepEqual(get(resp3, "actionInfo.length"), 0);
 });
 
 test.serial("RpcMethod.getActionsByAddress", async t => {
