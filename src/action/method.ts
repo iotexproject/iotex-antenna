@@ -115,9 +115,13 @@ export class AbstractMethod {
       selp = await this.signAction(envelop);
     }
 
-    await this.client.sendAction({
-      action: selp.action()
-    });
+    try {
+      await this.client.sendAction({
+        action: selp.action()
+      });
+    } catch (e) {
+      throw new Error(e.details);
+    }
 
     return selp.hash();
   }
