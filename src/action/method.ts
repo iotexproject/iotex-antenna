@@ -120,7 +120,7 @@ export class AbstractMethod {
         action: selp.action()
       });
     } catch (e) {
-      throw new Error(e.details);
+      throw new Error(e.details || `send action error: ${JSON.stringify(e)}`);
     }
 
     return selp.hash();
