@@ -148,7 +148,7 @@ export class AbstractMethod {
         if (e.details === "action source address is blacklisted") {
           code = ActionErrorCode.ErrAddress;
         }
-        if (e.details.indexOf("nonce") < 0) {
+        if (e.details.indexOf("nonce") >= 0) {
           code = ActionErrorCode.ErrNonce;
         }
       }
