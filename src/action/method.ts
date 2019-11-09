@@ -2,7 +2,13 @@ import BigNumber from "bignumber.js";
 import { Account, IAccount } from "../account/account";
 import { IAction, IRpcMethod } from "../rpc-method/types";
 import { Envelop, SealedEnvelop } from "./envelop";
-import { ClaimFromRewardingFund, Execution, Transfer } from "./types";
+import {
+  ActionError,
+  ActionErrorCode,
+  ClaimFromRewardingFund,
+  Execution,
+  Transfer
+} from "./types";
 
 export interface PluginOpts {
   address: string;
@@ -77,7 +83,10 @@ export class AbstractMethod {
           if (
             balance.comparedTo(amount.plus(gasPrice.multipliedBy(gasLimit))) < 0
           ) {
-            throw new Error("Insufficient funds for gas * price + amount");
+            throw new ActionError(
+              ActionErrorCode.ErrBalance,
+              "Insufficient funds for gas * price + amount"
+            );
           }
         }
         if (envelop.execution) {
@@ -85,7 +94,10 @@ export class AbstractMethod {
           if (
             balance.comparedTo(amount.plus(gasPrice.multipliedBy(gasLimit))) < 0
           ) {
-            throw new Error("Insufficient funds for gas * price + amount");
+            throw new ActionError(
+              ActionErrorCode.ErrBalance,
+              "Insufficient funds for gas * price + amount"
+            );
           }
         }
       }
@@ -120,7 +132,27 @@ export class AbstractMethod {
         action: selp.action()
       });
     } catch (e) {
-      throw new Error(e.details || `send action error: ${JSON.stringify(e)}`);
+      let code = ActionErrorCode.ErrUnknown;
+      let message = `send action error: ${JSON.stringify(e)}`;
+      if (e.details) {
+        message = e.details;
+        if (e.details.startsWith("reject existed action")) {
+          code = ActionErrorCode.ErrExistedAction;
+        }
+        if (e.details.startsWith("insufficient balance")) {
+          code = ActionErrorCode.ErrBalance;
+        }
+        if (e.details.endsWith("lower than minimal gas price threshold")) {
+          code = ActionErrorCode.ErrGasPrice;
+        }
+        if (e.details === "action source address is blacklisted") {
+          code = ActionErrorCode.ErrAddress;
+        }
+        if (e.details.indexOf("nonce") < 0) {
+          code = ActionErrorCode.ErrNonce;
+        }
+      }
+      throw new ActionError(code, message);
     }
 
     return selp.hash();
