@@ -138,17 +138,15 @@ export class AbstractMethod {
         message = e.details;
         if (e.details.startsWith("reject existed action")) {
           code = ActionErrorCode.ErrExistedAction;
-        }
-        if (e.details.startsWith("insufficient balance")) {
+        } else if (e.details.startsWith("insufficient balance")) {
           code = ActionErrorCode.ErrBalance;
-        }
-        if (e.details.endsWith("lower than minimal gas price threshold")) {
+        } else if (
+          e.details.endsWith("lower than minimal gas price threshold")
+        ) {
           code = ActionErrorCode.ErrGasPrice;
-        }
-        if (e.details === "action source address is blacklisted") {
+        } else if (e.details === "action source address is blacklisted") {
           code = ActionErrorCode.ErrAddress;
-        }
-        if (e.details.indexOf("nonce") >= 0) {
+        } else if (e.details.indexOf("nonce") >= 0) {
           code = ActionErrorCode.ErrNonce;
         }
       }
