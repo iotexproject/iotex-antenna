@@ -136,12 +136,12 @@ export class AbstractMethod {
       let message = `send action error: ${JSON.stringify(e)}`;
       if (e.details) {
         message = e.details;
-        if (e.details.startsWith("reject existed action")) {
+        if (e.details.match(/^reject existed action .*/)) {
           code = ActionErrorCode.ErrExistedAction;
-        } else if (e.details.startsWith("insufficient balance")) {
+        } else if (e.details.match(/^insufficient balance .*/)) {
           code = ActionErrorCode.ErrBalance;
         } else if (
-          e.details.endsWith("lower than minimal gas price threshold")
+          e.details.match(/.* lower than minimal gas price threshold$/)
         ) {
           code = ActionErrorCode.ErrGasPrice;
         } else if (e.details === "action source address is blacklisted") {
