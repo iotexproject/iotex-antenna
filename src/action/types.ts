@@ -24,3 +24,22 @@ export interface ClaimFromRewardingFund extends BaseActionRequest {
   amount: string;
   data: Buffer | {};
 }
+
+export enum ActionErrorCode {
+  ErrExistedAction,
+  ErrBalance,
+  ErrNonce,
+  ErrAddress,
+  ErrGasPrice,
+  ErrUnknown
+}
+
+export class ActionError extends Error {
+  public code: ActionErrorCode;
+
+  constructor(code: ActionErrorCode, message: string) {
+    super(message);
+    this.code = code;
+    Object.setPrototypeOf(this, ActionError.prototype);
+  }
+}
