@@ -3,7 +3,88 @@ import * as jspb from "google-protobuf"
 import * as proto_types_action_pb from '../../proto/types/action_pb';
 import * as proto_types_blockchain_pb from '../../proto/types/blockchain_pb';
 import * as proto_types_node_pb from '../../proto/types/node_pb';
+import * as proto_types_election_pb from '../../proto/types/election_pb';
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
+
+export class GetVotesRequest extends jspb.Message {
+  getVotee(): string;
+  setVotee(value: string): void;
+
+  getHeight(): string;
+  setHeight(value: string): void;
+
+  getOffset(): number;
+  setOffset(value: number): void;
+
+  getLimit(): number;
+  setLimit(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetVotesRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetVotesRequest): GetVotesRequest.AsObject;
+  static serializeBinaryToWriter(message: GetVotesRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetVotesRequest;
+  static deserializeBinaryFromReader(message: GetVotesRequest, reader: jspb.BinaryReader): GetVotesRequest;
+}
+
+export namespace GetVotesRequest {
+  export type AsObject = {
+    votee: string,
+    height: string,
+    offset: number,
+    limit: number,
+  }
+}
+
+export class GetVotesResponse extends jspb.Message {
+  getBucketsList(): Array<Bucket>;
+  setBucketsList(value: Array<Bucket>): void;
+  clearBucketsList(): void;
+  addBuckets(value?: Bucket, index?: number): Bucket;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetVotesResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetVotesResponse): GetVotesResponse.AsObject;
+  static serializeBinaryToWriter(message: GetVotesResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetVotesResponse;
+  static deserializeBinaryFromReader(message: GetVotesResponse, reader: jspb.BinaryReader): GetVotesResponse;
+}
+
+export namespace GetVotesResponse {
+  export type AsObject = {
+    bucketsList: Array<Bucket.AsObject>,
+  }
+}
+
+export class Bucket extends jspb.Message {
+  getVoter(): string;
+  setVoter(value: string): void;
+
+  getVotes(): string;
+  setVotes(value: string): void;
+
+  getWeightedvotes(): string;
+  setWeightedvotes(value: string): void;
+
+  getRemainingduration(): string;
+  setRemainingduration(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): Bucket.AsObject;
+  static toObject(includeInstance: boolean, msg: Bucket): Bucket.AsObject;
+  static serializeBinaryToWriter(message: Bucket, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Bucket;
+  static deserializeBinaryFromReader(message: Bucket, reader: jspb.BinaryReader): Bucket;
+}
+
+export namespace Bucket {
+  export type AsObject = {
+    voter: string,
+    votes: string,
+    weightedvotes: string,
+    remainingduration: string,
+  }
+}
 
 export class GetAccountRequest extends jspb.Message {
   getAddress(): string;
@@ -48,26 +129,31 @@ export class GetActionsRequest extends jspb.Message {
   setByindex(value?: GetActionsByIndexRequest): void;
   hasByindex(): boolean;
   clearByindex(): void;
+  hasByindex(): boolean;
 
   getByhash(): GetActionByHashRequest | undefined;
   setByhash(value?: GetActionByHashRequest): void;
   hasByhash(): boolean;
   clearByhash(): void;
+  hasByhash(): boolean;
 
   getByaddr(): GetActionsByAddressRequest | undefined;
   setByaddr(value?: GetActionsByAddressRequest): void;
   hasByaddr(): boolean;
   clearByaddr(): void;
+  hasByaddr(): boolean;
 
   getUnconfirmedbyaddr(): GetUnconfirmedActionsByAddressRequest | undefined;
   setUnconfirmedbyaddr(value?: GetUnconfirmedActionsByAddressRequest): void;
   hasUnconfirmedbyaddr(): boolean;
   clearUnconfirmedbyaddr(): void;
+  hasUnconfirmedbyaddr(): boolean;
 
   getByblk(): GetActionsByBlockRequest | undefined;
   setByblk(value?: GetActionsByBlockRequest): void;
   hasByblk(): boolean;
   clearByblk(): void;
+  hasByblk(): boolean;
 
   getLookupCase(): GetActionsRequest.LookupCase;
 
@@ -375,11 +461,13 @@ export class GetBlockMetasRequest extends jspb.Message {
   setByindex(value?: GetBlockMetasByIndexRequest): void;
   hasByindex(): boolean;
   clearByindex(): void;
+  hasByindex(): boolean;
 
   getByhash(): GetBlockMetaByHashRequest | undefined;
   setByhash(value?: GetBlockMetaByHashRequest): void;
   hasByhash(): boolean;
   clearByhash(): void;
+  hasByhash(): boolean;
 
   getLookupCase(): GetBlockMetasRequest.LookupCase;
 
@@ -735,11 +823,13 @@ export class EstimateActionGasConsumptionRequest extends jspb.Message {
   setTransfer(value?: proto_types_action_pb.Transfer): void;
   hasTransfer(): boolean;
   clearTransfer(): void;
+  hasTransfer(): boolean;
 
   getExecution(): proto_types_action_pb.Execution | undefined;
   setExecution(value?: proto_types_action_pb.Execution): void;
   hasExecution(): boolean;
   clearExecution(): void;
+  hasExecution(): boolean;
 
   getCalleraddress(): string;
   setCalleraddress(value: string): void;
@@ -1048,11 +1138,13 @@ export class GetLogsRequest extends jspb.Message {
   setByblock(value?: GetLogsByBlock): void;
   hasByblock(): boolean;
   clearByblock(): void;
+  hasByblock(): boolean;
 
   getByrange(): GetLogsByRange | undefined;
   setByrange(value?: GetLogsByRange): void;
   hasByrange(): boolean;
   clearByrange(): void;
+  hasByrange(): boolean;
 
   getLookupCase(): GetLogsRequest.LookupCase;
 
@@ -1169,6 +1261,44 @@ export class StreamLogsResponse extends jspb.Message {
 export namespace StreamLogsResponse {
   export type AsObject = {
     log?: proto_types_action_pb.Log.AsObject,
+  }
+}
+
+export class GetElectionBucketsRequest extends jspb.Message {
+  getEpochnum(): number;
+  setEpochnum(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetElectionBucketsRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetElectionBucketsRequest): GetElectionBucketsRequest.AsObject;
+  static serializeBinaryToWriter(message: GetElectionBucketsRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetElectionBucketsRequest;
+  static deserializeBinaryFromReader(message: GetElectionBucketsRequest, reader: jspb.BinaryReader): GetElectionBucketsRequest;
+}
+
+export namespace GetElectionBucketsRequest {
+  export type AsObject = {
+    epochnum: number,
+  }
+}
+
+export class GetElectionBucketsResponse extends jspb.Message {
+  getBucketsList(): Array<proto_types_election_pb.ElectionBucket>;
+  setBucketsList(value: Array<proto_types_election_pb.ElectionBucket>): void;
+  clearBucketsList(): void;
+  addBuckets(value?: proto_types_election_pb.ElectionBucket, index?: number): proto_types_election_pb.ElectionBucket;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetElectionBucketsResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetElectionBucketsResponse): GetElectionBucketsResponse.AsObject;
+  static serializeBinaryToWriter(message: GetElectionBucketsResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetElectionBucketsResponse;
+  static deserializeBinaryFromReader(message: GetElectionBucketsResponse, reader: jspb.BinaryReader): GetElectionBucketsResponse;
+}
+
+export namespace GetElectionBucketsResponse {
+  export type AsObject = {
+    bucketsList: Array<proto_types_election_pb.ElectionBucket.AsObject>,
   }
 }
 

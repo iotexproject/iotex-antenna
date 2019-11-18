@@ -284,6 +284,9 @@ export class BlockMeta extends jspb.Message {
   getDeltastatedigest(): string;
   setDeltastatedigest(value: string): void;
 
+  getLogsbloom(): string;
+  setLogsbloom(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockMeta.AsObject;
   static toObject(includeInstance: boolean, msg: BlockMeta): BlockMeta.AsObject;
@@ -303,6 +306,7 @@ export namespace BlockMeta {
     txroot: string,
     receiptroot: string,
     deltastatedigest: string,
+    logsbloom: string,
   }
 }
 

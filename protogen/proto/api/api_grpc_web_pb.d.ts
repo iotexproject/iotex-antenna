@@ -3,6 +3,7 @@ import * as grpcWeb from 'grpc-web';
 import * as proto_types_action_pb from '../../proto/types/action_pb';
 import * as proto_types_blockchain_pb from '../../proto/types/blockchain_pb';
 import * as proto_types_node_pb from '../../proto/types/node_pb';
+import * as proto_types_election_pb from '../../proto/types/election_pb';
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
 
 import {
@@ -18,6 +19,8 @@ import {
   GetBlockMetasResponse,
   GetChainMetaRequest,
   GetChainMetaResponse,
+  GetElectionBucketsRequest,
+  GetElectionBucketsResponse,
   GetEpochMetaRequest,
   GetEpochMetaResponse,
   GetLogsRequest,
@@ -28,6 +31,8 @@ import {
   GetReceiptByActionResponse,
   GetServerMetaRequest,
   GetServerMetaResponse,
+  GetVotesRequest,
+  GetVotesResponse,
   ReadContractRequest,
   ReadContractResponse,
   ReadStateRequest,
@@ -43,8 +48,8 @@ import {
 
 export class APIServiceClient {
   constructor (hostname: string,
-               credentials?: null | { [index: string]: string; },
-               options?: null | { [index: string]: string; });
+               credentials: null | { [index: string]: string; },
+               options: null | { [index: string]: string; });
 
   getAccount(
     request: GetAccountRequest,
@@ -151,6 +156,13 @@ export class APIServiceClient {
                response: GetLogsResponse) => void
   ): grpcWeb.ClientReadableStream<GetLogsResponse>;
 
+  getVotes(
+    request: GetVotesRequest,
+    metadata: grpcWeb.Metadata | undefined,
+    callback: (err: grpcWeb.Error,
+               response: GetVotesResponse) => void
+  ): grpcWeb.ClientReadableStream<GetVotesResponse>;
+
   streamBlocks(
     request: StreamBlocksRequest,
     metadata?: grpcWeb.Metadata
@@ -161,12 +173,19 @@ export class APIServiceClient {
     metadata?: grpcWeb.Metadata
   ): grpcWeb.ClientReadableStream<StreamLogsResponse>;
 
+  getElectionBuckets(
+    request: GetElectionBucketsRequest,
+    metadata: grpcWeb.Metadata | undefined,
+    callback: (err: grpcWeb.Error,
+               response: GetElectionBucketsResponse) => void
+  ): grpcWeb.ClientReadableStream<GetElectionBucketsResponse>;
+
 }
 
 export class APIServicePromiseClient {
   constructor (hostname: string,
-               credentials?: null | { [index: string]: string; },
-               options?: null | { [index: string]: string; });
+               credentials: null | { [index: string]: string; },
+               options: null | { [index: string]: string; });
 
   getAccount(
     request: GetAccountRequest,
@@ -243,6 +262,11 @@ export class APIServicePromiseClient {
     metadata?: grpcWeb.Metadata
   ): Promise<GetLogsResponse>;
 
+  getVotes(
+    request: GetVotesRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<GetVotesResponse>;
+
   streamBlocks(
     request: StreamBlocksRequest,
     metadata?: grpcWeb.Metadata
@@ -252,6 +276,11 @@ export class APIServicePromiseClient {
     request: StreamLogsRequest,
     metadata?: grpcWeb.Metadata
   ): grpcWeb.ClientReadableStream<StreamLogsResponse>;
+
+  getElectionBuckets(
+    request: GetElectionBucketsRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<GetElectionBucketsResponse>;
 
 }
 

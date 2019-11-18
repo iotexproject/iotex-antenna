@@ -18,6 +18,8 @@ var proto_types_blockchain_pb = require('../../proto/types/blockchain_pb.js')
 
 var proto_types_node_pb = require('../../proto/types/node_pb.js')
 
+var proto_types_election_pb = require('../../proto/types/election_pb.js')
+
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js')
 const proto = {};
 proto.iotexapi = require('./api_pb.js');
@@ -96,25 +98,6 @@ proto.iotexapi.APIServicePromiseClient =
 
 /**
  * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.GetAccountRequest,
- *   !proto.iotexapi.GetAccountResponse>}
- */
-const methodDescriptor_APIService_GetAccount = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/GetAccount',
-  grpc.web.MethodType.UNARY,
-  proto.iotexapi.GetAccountRequest,
-  proto.iotexapi.GetAccountResponse,
-  /** @param {!proto.iotexapi.GetAccountRequest} request */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.GetAccountResponse.deserializeBinary
-);
-
-
-/**
- * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.iotexapi.GetAccountRequest,
  *   !proto.iotexapi.GetAccountResponse>}
@@ -145,7 +128,7 @@ proto.iotexapi.APIServiceClient.prototype.getAccount =
       '/iotexapi.APIService/GetAccount',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetAccount,
+      methodInfo_APIService_GetAccount,
       callback);
 };
 
@@ -164,27 +147,8 @@ proto.iotexapi.APIServicePromiseClient.prototype.getAccount =
       '/iotexapi.APIService/GetAccount',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetAccount);
+      methodInfo_APIService_GetAccount);
 };
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.GetActionsRequest,
- *   !proto.iotexapi.GetActionsResponse>}
- */
-const methodDescriptor_APIService_GetActions = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/GetActions',
-  grpc.web.MethodType.UNARY,
-  proto.iotexapi.GetActionsRequest,
-  proto.iotexapi.GetActionsResponse,
-  /** @param {!proto.iotexapi.GetActionsRequest} request */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.GetActionsResponse.deserializeBinary
-);
 
 
 /**
@@ -219,7 +183,7 @@ proto.iotexapi.APIServiceClient.prototype.getActions =
       '/iotexapi.APIService/GetActions',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetActions,
+      methodInfo_APIService_GetActions,
       callback);
 };
 
@@ -238,27 +202,8 @@ proto.iotexapi.APIServicePromiseClient.prototype.getActions =
       '/iotexapi.APIService/GetActions',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetActions);
+      methodInfo_APIService_GetActions);
 };
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.GetBlockMetasRequest,
- *   !proto.iotexapi.GetBlockMetasResponse>}
- */
-const methodDescriptor_APIService_GetBlockMetas = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/GetBlockMetas',
-  grpc.web.MethodType.UNARY,
-  proto.iotexapi.GetBlockMetasRequest,
-  proto.iotexapi.GetBlockMetasResponse,
-  /** @param {!proto.iotexapi.GetBlockMetasRequest} request */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.GetBlockMetasResponse.deserializeBinary
-);
 
 
 /**
@@ -293,7 +238,7 @@ proto.iotexapi.APIServiceClient.prototype.getBlockMetas =
       '/iotexapi.APIService/GetBlockMetas',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetBlockMetas,
+      methodInfo_APIService_GetBlockMetas,
       callback);
 };
 
@@ -312,27 +257,8 @@ proto.iotexapi.APIServicePromiseClient.prototype.getBlockMetas =
       '/iotexapi.APIService/GetBlockMetas',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetBlockMetas);
+      methodInfo_APIService_GetBlockMetas);
 };
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.GetChainMetaRequest,
- *   !proto.iotexapi.GetChainMetaResponse>}
- */
-const methodDescriptor_APIService_GetChainMeta = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/GetChainMeta',
-  grpc.web.MethodType.UNARY,
-  proto.iotexapi.GetChainMetaRequest,
-  proto.iotexapi.GetChainMetaResponse,
-  /** @param {!proto.iotexapi.GetChainMetaRequest} request */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.GetChainMetaResponse.deserializeBinary
-);
 
 
 /**
@@ -367,7 +293,7 @@ proto.iotexapi.APIServiceClient.prototype.getChainMeta =
       '/iotexapi.APIService/GetChainMeta',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetChainMeta,
+      methodInfo_APIService_GetChainMeta,
       callback);
 };
 
@@ -386,27 +312,8 @@ proto.iotexapi.APIServicePromiseClient.prototype.getChainMeta =
       '/iotexapi.APIService/GetChainMeta',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetChainMeta);
+      methodInfo_APIService_GetChainMeta);
 };
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.GetServerMetaRequest,
- *   !proto.iotexapi.GetServerMetaResponse>}
- */
-const methodDescriptor_APIService_GetServerMeta = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/GetServerMeta',
-  grpc.web.MethodType.UNARY,
-  proto.iotexapi.GetServerMetaRequest,
-  proto.iotexapi.GetServerMetaResponse,
-  /** @param {!proto.iotexapi.GetServerMetaRequest} request */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.GetServerMetaResponse.deserializeBinary
-);
 
 
 /**
@@ -441,7 +348,7 @@ proto.iotexapi.APIServiceClient.prototype.getServerMeta =
       '/iotexapi.APIService/GetServerMeta',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetServerMeta,
+      methodInfo_APIService_GetServerMeta,
       callback);
 };
 
@@ -460,27 +367,8 @@ proto.iotexapi.APIServicePromiseClient.prototype.getServerMeta =
       '/iotexapi.APIService/GetServerMeta',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetServerMeta);
+      methodInfo_APIService_GetServerMeta);
 };
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.SendActionRequest,
- *   !proto.iotexapi.SendActionResponse>}
- */
-const methodDescriptor_APIService_SendAction = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/SendAction',
-  grpc.web.MethodType.UNARY,
-  proto.iotexapi.SendActionRequest,
-  proto.iotexapi.SendActionResponse,
-  /** @param {!proto.iotexapi.SendActionRequest} request */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.SendActionResponse.deserializeBinary
-);
 
 
 /**
@@ -515,7 +403,7 @@ proto.iotexapi.APIServiceClient.prototype.sendAction =
       '/iotexapi.APIService/SendAction',
       request,
       metadata || {},
-      methodDescriptor_APIService_SendAction,
+      methodInfo_APIService_SendAction,
       callback);
 };
 
@@ -534,27 +422,8 @@ proto.iotexapi.APIServicePromiseClient.prototype.sendAction =
       '/iotexapi.APIService/SendAction',
       request,
       metadata || {},
-      methodDescriptor_APIService_SendAction);
+      methodInfo_APIService_SendAction);
 };
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.GetReceiptByActionRequest,
- *   !proto.iotexapi.GetReceiptByActionResponse>}
- */
-const methodDescriptor_APIService_GetReceiptByAction = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/GetReceiptByAction',
-  grpc.web.MethodType.UNARY,
-  proto.iotexapi.GetReceiptByActionRequest,
-  proto.iotexapi.GetReceiptByActionResponse,
-  /** @param {!proto.iotexapi.GetReceiptByActionRequest} request */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.GetReceiptByActionResponse.deserializeBinary
-);
 
 
 /**
@@ -589,7 +458,7 @@ proto.iotexapi.APIServiceClient.prototype.getReceiptByAction =
       '/iotexapi.APIService/GetReceiptByAction',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetReceiptByAction,
+      methodInfo_APIService_GetReceiptByAction,
       callback);
 };
 
@@ -608,27 +477,8 @@ proto.iotexapi.APIServicePromiseClient.prototype.getReceiptByAction =
       '/iotexapi.APIService/GetReceiptByAction',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetReceiptByAction);
+      methodInfo_APIService_GetReceiptByAction);
 };
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.ReadContractRequest,
- *   !proto.iotexapi.ReadContractResponse>}
- */
-const methodDescriptor_APIService_ReadContract = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/ReadContract',
-  grpc.web.MethodType.UNARY,
-  proto.iotexapi.ReadContractRequest,
-  proto.iotexapi.ReadContractResponse,
-  /** @param {!proto.iotexapi.ReadContractRequest} request */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.ReadContractResponse.deserializeBinary
-);
 
 
 /**
@@ -663,7 +513,7 @@ proto.iotexapi.APIServiceClient.prototype.readContract =
       '/iotexapi.APIService/ReadContract',
       request,
       metadata || {},
-      methodDescriptor_APIService_ReadContract,
+      methodInfo_APIService_ReadContract,
       callback);
 };
 
@@ -682,27 +532,8 @@ proto.iotexapi.APIServicePromiseClient.prototype.readContract =
       '/iotexapi.APIService/ReadContract',
       request,
       metadata || {},
-      methodDescriptor_APIService_ReadContract);
+      methodInfo_APIService_ReadContract);
 };
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.SuggestGasPriceRequest,
- *   !proto.iotexapi.SuggestGasPriceResponse>}
- */
-const methodDescriptor_APIService_SuggestGasPrice = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/SuggestGasPrice',
-  grpc.web.MethodType.UNARY,
-  proto.iotexapi.SuggestGasPriceRequest,
-  proto.iotexapi.SuggestGasPriceResponse,
-  /** @param {!proto.iotexapi.SuggestGasPriceRequest} request */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.SuggestGasPriceResponse.deserializeBinary
-);
 
 
 /**
@@ -737,7 +568,7 @@ proto.iotexapi.APIServiceClient.prototype.suggestGasPrice =
       '/iotexapi.APIService/SuggestGasPrice',
       request,
       metadata || {},
-      methodDescriptor_APIService_SuggestGasPrice,
+      methodInfo_APIService_SuggestGasPrice,
       callback);
 };
 
@@ -756,27 +587,8 @@ proto.iotexapi.APIServicePromiseClient.prototype.suggestGasPrice =
       '/iotexapi.APIService/SuggestGasPrice',
       request,
       metadata || {},
-      methodDescriptor_APIService_SuggestGasPrice);
+      methodInfo_APIService_SuggestGasPrice);
 };
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.EstimateGasForActionRequest,
- *   !proto.iotexapi.EstimateGasForActionResponse>}
- */
-const methodDescriptor_APIService_EstimateGasForAction = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/EstimateGasForAction',
-  grpc.web.MethodType.UNARY,
-  proto.iotexapi.EstimateGasForActionRequest,
-  proto.iotexapi.EstimateGasForActionResponse,
-  /** @param {!proto.iotexapi.EstimateGasForActionRequest} request */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.EstimateGasForActionResponse.deserializeBinary
-);
 
 
 /**
@@ -811,7 +623,7 @@ proto.iotexapi.APIServiceClient.prototype.estimateGasForAction =
       '/iotexapi.APIService/EstimateGasForAction',
       request,
       metadata || {},
-      methodDescriptor_APIService_EstimateGasForAction,
+      methodInfo_APIService_EstimateGasForAction,
       callback);
 };
 
@@ -830,27 +642,8 @@ proto.iotexapi.APIServicePromiseClient.prototype.estimateGasForAction =
       '/iotexapi.APIService/EstimateGasForAction',
       request,
       metadata || {},
-      methodDescriptor_APIService_EstimateGasForAction);
+      methodInfo_APIService_EstimateGasForAction);
 };
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.EstimateActionGasConsumptionRequest,
- *   !proto.iotexapi.EstimateActionGasConsumptionResponse>}
- */
-const methodDescriptor_APIService_EstimateActionGasConsumption = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/EstimateActionGasConsumption',
-  grpc.web.MethodType.UNARY,
-  proto.iotexapi.EstimateActionGasConsumptionRequest,
-  proto.iotexapi.EstimateActionGasConsumptionResponse,
-  /** @param {!proto.iotexapi.EstimateActionGasConsumptionRequest} request */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.EstimateActionGasConsumptionResponse.deserializeBinary
-);
 
 
 /**
@@ -885,7 +678,7 @@ proto.iotexapi.APIServiceClient.prototype.estimateActionGasConsumption =
       '/iotexapi.APIService/EstimateActionGasConsumption',
       request,
       metadata || {},
-      methodDescriptor_APIService_EstimateActionGasConsumption,
+      methodInfo_APIService_EstimateActionGasConsumption,
       callback);
 };
 
@@ -904,27 +697,8 @@ proto.iotexapi.APIServicePromiseClient.prototype.estimateActionGasConsumption =
       '/iotexapi.APIService/EstimateActionGasConsumption',
       request,
       metadata || {},
-      methodDescriptor_APIService_EstimateActionGasConsumption);
+      methodInfo_APIService_EstimateActionGasConsumption);
 };
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.ReadStateRequest,
- *   !proto.iotexapi.ReadStateResponse>}
- */
-const methodDescriptor_APIService_ReadState = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/ReadState',
-  grpc.web.MethodType.UNARY,
-  proto.iotexapi.ReadStateRequest,
-  proto.iotexapi.ReadStateResponse,
-  /** @param {!proto.iotexapi.ReadStateRequest} request */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.ReadStateResponse.deserializeBinary
-);
 
 
 /**
@@ -959,7 +733,7 @@ proto.iotexapi.APIServiceClient.prototype.readState =
       '/iotexapi.APIService/ReadState',
       request,
       metadata || {},
-      methodDescriptor_APIService_ReadState,
+      methodInfo_APIService_ReadState,
       callback);
 };
 
@@ -978,27 +752,8 @@ proto.iotexapi.APIServicePromiseClient.prototype.readState =
       '/iotexapi.APIService/ReadState',
       request,
       metadata || {},
-      methodDescriptor_APIService_ReadState);
+      methodInfo_APIService_ReadState);
 };
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.GetEpochMetaRequest,
- *   !proto.iotexapi.GetEpochMetaResponse>}
- */
-const methodDescriptor_APIService_GetEpochMeta = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/GetEpochMeta',
-  grpc.web.MethodType.UNARY,
-  proto.iotexapi.GetEpochMetaRequest,
-  proto.iotexapi.GetEpochMetaResponse,
-  /** @param {!proto.iotexapi.GetEpochMetaRequest} request */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.GetEpochMetaResponse.deserializeBinary
-);
 
 
 /**
@@ -1033,7 +788,7 @@ proto.iotexapi.APIServiceClient.prototype.getEpochMeta =
       '/iotexapi.APIService/GetEpochMeta',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetEpochMeta,
+      methodInfo_APIService_GetEpochMeta,
       callback);
 };
 
@@ -1052,27 +807,8 @@ proto.iotexapi.APIServicePromiseClient.prototype.getEpochMeta =
       '/iotexapi.APIService/GetEpochMeta',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetEpochMeta);
+      methodInfo_APIService_GetEpochMeta);
 };
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.GetRawBlocksRequest,
- *   !proto.iotexapi.GetRawBlocksResponse>}
- */
-const methodDescriptor_APIService_GetRawBlocks = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/GetRawBlocks',
-  grpc.web.MethodType.UNARY,
-  proto.iotexapi.GetRawBlocksRequest,
-  proto.iotexapi.GetRawBlocksResponse,
-  /** @param {!proto.iotexapi.GetRawBlocksRequest} request */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.GetRawBlocksResponse.deserializeBinary
-);
 
 
 /**
@@ -1107,7 +843,7 @@ proto.iotexapi.APIServiceClient.prototype.getRawBlocks =
       '/iotexapi.APIService/GetRawBlocks',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetRawBlocks,
+      methodInfo_APIService_GetRawBlocks,
       callback);
 };
 
@@ -1126,27 +862,8 @@ proto.iotexapi.APIServicePromiseClient.prototype.getRawBlocks =
       '/iotexapi.APIService/GetRawBlocks',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetRawBlocks);
+      methodInfo_APIService_GetRawBlocks);
 };
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.GetLogsRequest,
- *   !proto.iotexapi.GetLogsResponse>}
- */
-const methodDescriptor_APIService_GetLogs = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/GetLogs',
-  grpc.web.MethodType.UNARY,
-  proto.iotexapi.GetLogsRequest,
-  proto.iotexapi.GetLogsResponse,
-  /** @param {!proto.iotexapi.GetLogsRequest} request */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.GetLogsResponse.deserializeBinary
-);
 
 
 /**
@@ -1181,7 +898,7 @@ proto.iotexapi.APIServiceClient.prototype.getLogs =
       '/iotexapi.APIService/GetLogs',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetLogs,
+      methodInfo_APIService_GetLogs,
       callback);
 };
 
@@ -1200,27 +917,63 @@ proto.iotexapi.APIServicePromiseClient.prototype.getLogs =
       '/iotexapi.APIService/GetLogs',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetLogs);
+      methodInfo_APIService_GetLogs);
 };
 
 
 /**
  * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.StreamBlocksRequest,
- *   !proto.iotexapi.StreamBlocksResponse>}
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.iotexapi.GetVotesRequest,
+ *   !proto.iotexapi.GetVotesResponse>}
  */
-const methodDescriptor_APIService_StreamBlocks = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/StreamBlocks',
-  grpc.web.MethodType.SERVER_STREAMING,
-  proto.iotexapi.StreamBlocksRequest,
-  proto.iotexapi.StreamBlocksResponse,
-  /** @param {!proto.iotexapi.StreamBlocksRequest} request */
+const methodInfo_APIService_GetVotes = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.iotexapi.GetVotesResponse,
+  /** @param {!proto.iotexapi.GetVotesRequest} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.iotexapi.StreamBlocksResponse.deserializeBinary
+  proto.iotexapi.GetVotesResponse.deserializeBinary
 );
+
+
+/**
+ * @param {!proto.iotexapi.GetVotesRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.iotexapi.GetVotesResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetVotesResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.iotexapi.APIServiceClient.prototype.getVotes =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/GetVotes',
+      request,
+      metadata || {},
+      methodInfo_APIService_GetVotes,
+      callback);
+};
+
+
+/**
+ * @param {!proto.iotexapi.GetVotesRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.iotexapi.GetVotesResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.iotexapi.APIServicePromiseClient.prototype.getVotes =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/iotexapi.APIService/GetVotes',
+      request,
+      metadata || {},
+      methodInfo_APIService_GetVotes);
+};
 
 
 /**
@@ -1252,7 +1005,7 @@ proto.iotexapi.APIServiceClient.prototype.streamBlocks =
       '/iotexapi.APIService/StreamBlocks',
       request,
       metadata || {},
-      methodDescriptor_APIService_StreamBlocks);
+      methodInfo_APIService_StreamBlocks);
 };
 
 
@@ -1269,27 +1022,8 @@ proto.iotexapi.APIServicePromiseClient.prototype.streamBlocks =
       '/iotexapi.APIService/StreamBlocks',
       request,
       metadata || {},
-      methodDescriptor_APIService_StreamBlocks);
+      methodInfo_APIService_StreamBlocks);
 };
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.StreamLogsRequest,
- *   !proto.iotexapi.StreamLogsResponse>}
- */
-const methodDescriptor_APIService_StreamLogs = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/StreamLogs',
-  grpc.web.MethodType.SERVER_STREAMING,
-  proto.iotexapi.StreamLogsRequest,
-  proto.iotexapi.StreamLogsResponse,
-  /** @param {!proto.iotexapi.StreamLogsRequest} request */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.StreamLogsResponse.deserializeBinary
-);
 
 
 /**
@@ -1321,7 +1055,7 @@ proto.iotexapi.APIServiceClient.prototype.streamLogs =
       '/iotexapi.APIService/StreamLogs',
       request,
       metadata || {},
-      methodDescriptor_APIService_StreamLogs);
+      methodInfo_APIService_StreamLogs);
 };
 
 
@@ -1338,7 +1072,62 @@ proto.iotexapi.APIServicePromiseClient.prototype.streamLogs =
       '/iotexapi.APIService/StreamLogs',
       request,
       metadata || {},
-      methodDescriptor_APIService_StreamLogs);
+      methodInfo_APIService_StreamLogs);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.iotexapi.GetElectionBucketsRequest,
+ *   !proto.iotexapi.GetElectionBucketsResponse>}
+ */
+const methodInfo_APIService_GetElectionBuckets = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.iotexapi.GetElectionBucketsResponse,
+  /** @param {!proto.iotexapi.GetElectionBucketsRequest} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.GetElectionBucketsResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.iotexapi.GetElectionBucketsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.iotexapi.GetElectionBucketsResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetElectionBucketsResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.iotexapi.APIServiceClient.prototype.getElectionBuckets =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/GetElectionBuckets',
+      request,
+      metadata || {},
+      methodInfo_APIService_GetElectionBuckets,
+      callback);
+};
+
+
+/**
+ * @param {!proto.iotexapi.GetElectionBucketsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.iotexapi.GetElectionBucketsResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.iotexapi.APIServicePromiseClient.prototype.getElectionBuckets =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/iotexapi.APIService/GetElectionBuckets',
+      request,
+      metadata || {},
+      methodInfo_APIService_GetElectionBuckets);
 };
 
 

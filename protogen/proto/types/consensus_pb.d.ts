@@ -72,11 +72,13 @@ export class ConsensusMessage extends jspb.Message {
   setBlockproposal(value?: BlockProposal): void;
   hasBlockproposal(): boolean;
   clearBlockproposal(): void;
+  hasBlockproposal(): boolean;
 
   getVote(): ConsensusVote | undefined;
   setVote(value?: ConsensusVote): void;
   hasVote(): boolean;
   clearVote(): void;
+  hasVote(): boolean;
 
   getMsgCase(): ConsensusMessage.MsgCase;
 
