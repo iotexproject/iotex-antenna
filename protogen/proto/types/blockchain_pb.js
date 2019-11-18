@@ -2156,7 +2156,8 @@ proto.iotextypes.BlockMeta.toObject = function(includeInstance, msg) {
     transferamount: jspb.Message.getFieldWithDefault(msg, 6, ""),
     txroot: jspb.Message.getFieldWithDefault(msg, 7, ""),
     receiptroot: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    deltastatedigest: jspb.Message.getFieldWithDefault(msg, 9, "")
+    deltastatedigest: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    logsbloom: jspb.Message.getFieldWithDefault(msg, 10, "")
   };
 
   if (includeInstance) {
@@ -2229,6 +2230,10 @@ proto.iotextypes.BlockMeta.deserializeBinaryFromReader = function(msg, reader) {
     case 9:
       var value = /** @type {string} */ (reader.readString());
       msg.setDeltastatedigest(value);
+      break;
+    case 10:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setLogsbloom(value);
       break;
     default:
       reader.skipField();
@@ -2320,6 +2325,13 @@ proto.iotextypes.BlockMeta.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       9,
+      f
+    );
+  }
+  f = message.getLogsbloom();
+  if (f.length > 0) {
+    writer.writeString(
+      10,
       f
     );
   }
@@ -2476,6 +2488,21 @@ proto.iotextypes.BlockMeta.prototype.getDeltastatedigest = function() {
 /** @param {string} value */
 proto.iotextypes.BlockMeta.prototype.setDeltastatedigest = function(value) {
   jspb.Message.setProto3StringField(this, 9, value);
+};
+
+
+/**
+ * optional string logsBloom = 10;
+ * @return {string}
+ */
+proto.iotextypes.BlockMeta.prototype.getLogsbloom = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
+};
+
+
+/** @param {string} value */
+proto.iotextypes.BlockMeta.prototype.setLogsbloom = function(value) {
+  jspb.Message.setProto3StringField(this, 10, value);
 };
 
 

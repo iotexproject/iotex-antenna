@@ -1,4 +1,4 @@
-// Copyright (c) 2018 IoTeX
+// Copyright (c) 2019 IoTeX
 // This is an alpha (internal) release and is not suitable for production. This source code is provided 'as is' and no
 // warranties are given as to title or non-infringement, merchantability or fitness for purpose and, to the extent
 // permitted by law, all liability for your use of the code is disclaimed. This source code is governed by Apache
@@ -6,24 +6,19 @@
 
 // To compile the proto, run:
 //      protoc --go_out=plugins=grpc:$GOPATH/src *.proto
+
 syntax = "proto3";
 package iotextypes;
 option go_package = "github.com/iotexproject/iotex-proto/golang/iotextypes";
 
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
 
-// BELOW ARE DEFINITIONS FOR EVM ERROR CLASSIFICATION IN RECEIPT STATUS 
-enum ReceiptStatus {
-  Failure              = 0;
-  Success              = 1;
-
-  //1xx for EVM ErrorCode
-  ErrUnknown                  		= 100;
-  ErrOutOfGas                 		= 101;
-  ErrCodeStoreOutOfGas        		= 102;
-  ErrDepth                    		= 103;
-  ErrContractAddressCollision 		= 104;
-  ErrNoCompatibleInterpreter  		= 105;
-  ErrExecutionReverted        		= 106;
-  ErrMaxCodeSizeExceeded      		= 107;
-  ErrWriteProtection          		= 108;
+message ElectionBucket {
+  bytes voter = 1;
+  bytes candidate = 2;
+  bytes amount = 3;
+  google.protobuf.Timestamp startTime = 4;
+  google.protobuf.Duration duration = 5;
+  bool decay = 6;
 }
