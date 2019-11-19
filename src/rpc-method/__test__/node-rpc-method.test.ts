@@ -258,3 +258,16 @@ test.serial("RpcMethod.getLogs", async t => {
   });
   t.truthy(getLogs);
 });
+
+test.serial("RpcMethod.estimateActionGasConsumption", async t => {
+  const client = new RpcMethod(TEST_HOSTNAME);
+  const response = await client.estimateActionGasConsumption({
+    transfer: {
+      amount: "1000000000000000000",
+      recipient: "io1hc6ndjzm3frn5e7a83qhm7m3a9gxsyg9teg9j8",
+      payload: Buffer.from("hello").toString("hex")
+    },
+    callerAddress: "io1hc6ndjzm3frn5e7a83qhm7m3a9gxsyg9teg9j8"
+  });
+  t.truthy(response);
+});

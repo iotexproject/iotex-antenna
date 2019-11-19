@@ -3,6 +3,8 @@ import grpc from "grpc";
 import { promisify } from "util";
 import { ROOT_CERTS } from "./root-certs";
 import {
+  IEstimateActionGasConsumptionRequest,
+  IEstimateActionGasConsumptionResponse,
   IEstimateGasForActionRequest,
   IEstimateGasForActionResponse,
   IGetAccountRequest,
@@ -209,5 +211,15 @@ export default class RpcMethod implements IRpcMethod {
     const getLogs = promisify(this.client.getLogs.bind(this.client));
     // @ts-ignore
     return getLogs(req, { deadline: this.getDeadline() });
+  }
+
+  public async estimateActionGasConsumption(
+    req: IEstimateActionGasConsumptionRequest
+  ): Promise<IEstimateActionGasConsumptionResponse> {
+    const estimateActionGasConsumption = promisify(
+      this.client.estimateActionGasConsumption.bind(this.client)
+    );
+    // @ts-ignore
+    return estimateActionGasConsumption(req, { deadline: this.getDeadline() });
   }
 }

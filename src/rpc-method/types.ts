@@ -1967,6 +1967,36 @@ export const GetLogsRequest = {
   }
 };
 
+export interface IEstimateActionGasConsumptionRequest {
+  transfer?: ITransfer | undefined;
+  execution?: IExecution | undefined;
+  callerAddress: string;
+}
+
+export interface IEstimateActionGasConsumptionResponse {
+  gas: number;
+}
+
+export const EstimateActionGasConsumptionRequest = {
+  to(req: IEstimateActionGasConsumptionRequest): any {
+    const pbReq = new apiPb.EstimateActionGasConsumptionRequest();
+    if (req.transfer) {
+      pbReq.setTransfer(toActionTransfer(req.transfer));
+    }
+    if (req.execution) {
+      pbReq.setExecution(toActionExecution(req.execution));
+    }
+    pbReq.setCalleraddress(req.callerAddress);
+    return pbReq;
+  },
+
+  from(
+    pbRes: apiPb.EstimateActionGasConsumptionResponse
+  ): IEstimateActionGasConsumptionResponse {
+    return { gas: pbRes.getGas() };
+  }
+};
+
 export interface IRpcMethod {
   setProvider(provider: string | IRpcMethod): void;
 
@@ -1999,4 +2029,8 @@ export interface IRpcMethod {
   getEpochMeta(req: IGetEpochMetaRequest): Promise<IGetEpochMetaResponse>;
 
   getLogs(req: IGetLogsRequest): Promise<IGetLogsResponse>;
+
+  estimateActionGasConsumption(
+    req: IEstimateActionGasConsumptionRequest
+  ): Promise<IEstimateActionGasConsumptionResponse>;
 }
