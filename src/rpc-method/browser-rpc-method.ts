@@ -1,7 +1,10 @@
 import grpcWeb from "../../protogen/proto/api/api_grpc_web_pb";
 import {
+  EstimateActionGasConsumptionRequest,
   GetLogsRequest,
   GetServerMetaRequest,
+  IEstimateActionGasConsumptionRequest,
+  IEstimateActionGasConsumptionResponse,
   IEstimateGasForActionRequest,
   IEstimateGasForActionResponse,
   IGetAccountRequest,
@@ -196,5 +199,15 @@ export default class RpcMethod implements IRpcMethod {
       deadline: this.getDeadline()
     });
     return GetLogsRequest.from(pbResp);
+  }
+
+  public async estimateActionGasConsumption(
+    req: IEstimateActionGasConsumptionRequest
+  ): Promise<IEstimateActionGasConsumptionResponse> {
+    const pbReq = EstimateActionGasConsumptionRequest.to(req);
+    const pbResp = await this.client.estimateActionGasConsumption(pbReq, {
+      deadline: this.getDeadline()
+    });
+    return EstimateActionGasConsumptionRequest.from(pbResp);
   }
 }
