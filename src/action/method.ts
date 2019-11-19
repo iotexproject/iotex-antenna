@@ -59,15 +59,12 @@ export class AbstractMethod {
     }
 
     if (!envelop.gasLimit) {
-      const selp = SealedEnvelop.sign(
-        this.account.privateKey,
-        this.account.publicKey,
-        envelop
-      );
-      const limit = await this.client.estimateGasForAction({
-        action: selp.action()
+      const limit = await this.client.estimateActionGasConsumption({
+        transfer: envelop.transfer,
+        execution: envelop.execution,
+        callerAddress: this.account.address
       });
-      envelop.gasLimit = limit.gas;
+      envelop.gasLimit = limit.gas.toString();
     }
 
     if (this.account && this.account.address) {

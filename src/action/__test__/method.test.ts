@@ -50,8 +50,6 @@ test.skip("Execution_execute", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
   const method = new ExecutionMethod(client, sender, {
-    gasPrice: "1",
-    gasLimit: "1000000",
     contract: "",
     amount: "0",
     data: Buffer.from(
