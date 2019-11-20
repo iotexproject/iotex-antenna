@@ -33,6 +33,8 @@ import {
   ISendActionResponse,
   IStreamBlocksRequest,
   IStreamBlocksResponse,
+  IStreamLogsRequest,
+  IStreamLogsResponse,
   ISuggestGasPriceRequest,
   ISuggestGasPriceResponse,
   ReadStateRequest,
@@ -50,10 +52,9 @@ import {
   ReadContractRequest,
   SendActionRequest,
   StreamBlocksRequest,
+  StreamLogsRequest,
   SuggestGasPriceRequest
 } from "./types";
-
-import apiPb from "../../protogen/proto/api/api_pb";
 
 type Opts = {
   timeout?: number;
@@ -227,5 +228,17 @@ export default class RpcMethod implements IRpcMethod {
     });
 
     return new ClientReadableStream(origin, "StreamBlocks");
+  }
+
+  public streamLogs(
+    req: IStreamLogsRequest
+  ): ClientReadableStream<IStreamLogsResponse> {
+    const pbReq = StreamLogsRequest.to(req);
+    // @ts-ignore
+    const origin = this.client.streamLogs(pbReq, {
+      deadline: this.getDeadline()
+    });
+
+    return new ClientReadableStream(origin, "StreamLogs");
   }
 }

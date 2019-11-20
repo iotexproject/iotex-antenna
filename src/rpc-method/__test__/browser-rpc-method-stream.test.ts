@@ -4,7 +4,7 @@ import browserEnv from "browser-env";
 import dotenv from "dotenv";
 import sleep from "sleep-promise";
 import RpcMethod from "../browser-rpc-method";
-import { IStreamBlocksResponse } from "../types";
+import { IStreamBlocksResponse, IStreamLogsResponse } from "../types";
 
 browserEnv();
 dotenv.config();
@@ -26,6 +26,30 @@ test.skip("RpcMethod.StreamBlocks", async t => {
   });
 
   await sleep(100000);
+  resp.cancel();
+  t.truthy(resp);
+});
+
+test.skip("RpcMethod.StreamLogs", async t => {
+  const client = new RpcMethod(TEST_HOSTNAME);
+  const resp = client.streamLogs({
+    filter: {
+      address: [],
+      topics: []
+    }
+  });
+
+  resp.on("data", (res: IStreamLogsResponse) => {
+    t.truthy(res);
+  });
+  resp.on("error", err => {
+    t.truthy(err);
+  });
+  resp.on("end", () => {
+    t.truthy("server end");
+  });
+
+  await sleep(30000);
   resp.cancel();
   t.truthy(resp);
 });

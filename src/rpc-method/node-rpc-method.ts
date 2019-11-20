@@ -33,6 +33,8 @@ import {
   ISendActionResponse,
   IStreamBlocksRequest,
   IStreamBlocksResponse,
+  IStreamLogsRequest,
+  IStreamLogsResponse,
   ISuggestGasPriceRequest,
   ISuggestGasPriceResponse
 } from "./types";
@@ -231,5 +233,12 @@ export default class RpcMethod implements IRpcMethod {
   ): ClientReadableStream<IStreamBlocksResponse> {
     // @ts-ignore
     return this.client.streamBlocks(req, { deadline: this.getDeadline() });
+  }
+
+  public streamLogs(
+    req: IStreamLogsRequest
+  ): ClientReadableStream<IStreamLogsResponse> {
+    // @ts-ignore
+    return this.client.streamLogs(req, { deadline: this.getDeadline() });
   }
 }

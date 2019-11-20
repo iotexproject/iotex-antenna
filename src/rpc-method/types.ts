@@ -14,6 +14,7 @@ import apiPb, {
 } from "../../protogen/proto/api/api_pb";
 import actionPb, {
   Execution,
+  Log,
   PutPollResult,
   Receipt
 } from "../../protogen/proto/types/action_pb";
@@ -2267,6 +2268,53 @@ export const StreamBlocksRequest = {
   }
 };
 
+export interface IStreamLogsRequest {
+  filter: ILogsFilter;
+}
+export interface IStreamLogsResponse {
+  log: ILog | undefined;
+}
+
+export const StreamLogsRequest = {
+  // @ts-ignore
+  to(req: IStreamLogsRequest): any {
+    const pbReq = new apiPb.StreamLogsRequest();
+    if (req.filter) {
+      const filter = new apiPb.LogsFilter();
+      filter.setAddressList(req.filter.address);
+      const topics = [] as Array<Topics>;
+      for (let i = 0; i < req.filter.topics.length; i++) {
+        const topic = new apiPb.Topics();
+        topic.setTopicList(req.filter.topics[i].topic);
+        topics.push(topic);
+      }
+      filter.setTopicsList(topics);
+      pbReq.setFilter(filter);
+    }
+    return pbReq;
+  },
+
+  fromPbLog(log: Log | undefined): ILog | undefined {
+    if (log) {
+      return {
+        contractAddress: log.getContractaddress(),
+        topics: log.getTopicsList(),
+        data: log.getData(),
+        blkHeight: log.getBlkheight(),
+        actHash: log.getActhash(),
+        index: log.getIndex()
+      };
+    }
+    return undefined;
+  },
+
+  from(pbRes: apiPb.StreamLogsResponse): IStreamLogsResponse {
+    return {
+      log: StreamLogsRequest.fromPbLog(pbRes.getLog())
+    };
+  }
+};
+
 // @ts-ignore
 export interface ClientReadableStream<Response> {
   on(
@@ -2287,7 +2335,7 @@ export interface ClientReadableStream<Response> {
 
 // @ts-ignore
 export class ClientReadableStream<Response> extends EventEmitter {
-  private origin: grpcWeb.ClientReadableStream<any>;
+  private readonly origin: grpcWeb.ClientReadableStream<any>;
 
   constructor(origin: grpcWeb.ClientReadableStream<any>, type: string) {
     super();
@@ -2303,6 +2351,10 @@ export class ClientReadableStream<Response> extends EventEmitter {
       if (type === "StreamBlocks") {
         // @ts-ignore
         this.emit("data", StreamBlocksRequest.from(response));
+      }
+      if (type === "StreamLogs") {
+        // @ts-ignore
+        this.emit("data", StreamLogsRequest.from(response));
       }
     });
     origin.on("end", () => {
@@ -2355,4 +2407,8 @@ export interface IRpcMethod {
   streamBlocks(
     req: IStreamBlocksRequest
   ): ClientReadableStream<IStreamBlocksResponse>;
+
+  streamLogs(
+    req: IStreamLogsRequest
+  ): ClientReadableStream<IStreamLogsResponse>;
 }
