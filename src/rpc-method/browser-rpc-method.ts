@@ -1,5 +1,6 @@
 import grpcWeb from "../../protogen/proto/api/api_grpc_web_pb";
 import {
+  ClientReadableStream,
   EstimateActionGasConsumptionRequest,
   GetLogsRequest,
   GetServerMetaRequest,
@@ -30,6 +31,8 @@ import {
   IRpcMethod,
   ISendActionRequest,
   ISendActionResponse,
+  IStreamBlocksRequest,
+  IStreamBlocksResponse,
   ISuggestGasPriceRequest,
   ISuggestGasPriceResponse,
   ReadStateRequest,
@@ -46,8 +49,11 @@ import {
   GetReceiptByActionRequest,
   ReadContractRequest,
   SendActionRequest,
+  StreamBlocksRequest,
   SuggestGasPriceRequest
 } from "./types";
+
+import apiPb from "../../protogen/proto/api/api_pb";
 
 type Opts = {
   timeout?: number;
@@ -209,5 +215,17 @@ export default class RpcMethod implements IRpcMethod {
       deadline: this.getDeadline()
     });
     return EstimateActionGasConsumptionRequest.from(pbResp);
+  }
+
+  public streamBlocks(
+    req: IStreamBlocksRequest
+  ): ClientReadableStream<IStreamBlocksResponse> {
+    const pbReq = StreamBlocksRequest.to(req);
+    // @ts-ignore
+    const origin = this.client.streamBlocks(pbReq, {
+      deadline: this.getDeadline()
+    });
+
+    return new ClientReadableStream(origin, "StreamBlocks");
   }
 }

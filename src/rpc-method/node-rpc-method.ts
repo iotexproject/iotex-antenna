@@ -3,6 +3,7 @@ import grpc from "grpc";
 import { promisify } from "util";
 import { ROOT_CERTS } from "./root-certs";
 import {
+  ClientReadableStream,
   IEstimateActionGasConsumptionRequest,
   IEstimateActionGasConsumptionResponse,
   IEstimateGasForActionRequest,
@@ -30,6 +31,8 @@ import {
   IRpcMethod,
   ISendActionRequest,
   ISendActionResponse,
+  IStreamBlocksRequest,
+  IStreamBlocksResponse,
   ISuggestGasPriceRequest,
   ISuggestGasPriceResponse
 } from "./types";
@@ -221,5 +224,12 @@ export default class RpcMethod implements IRpcMethod {
     );
     // @ts-ignore
     return estimateActionGasConsumption(req, { deadline: this.getDeadline() });
+  }
+
+  public streamBlocks(
+    req: IStreamBlocksRequest
+  ): ClientReadableStream<IStreamBlocksResponse> {
+    // @ts-ignore
+    return this.client.streamBlocks(req, { deadline: this.getDeadline() });
   }
 }
