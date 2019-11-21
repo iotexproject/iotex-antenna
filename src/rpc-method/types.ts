@@ -1,7 +1,9 @@
 /* tslint:disable:no-any */
-
+import { EventEmitter } from "events";
 import { Timestamp } from "google-protobuf/google/protobuf/timestamp_pb";
+import * as grpcWeb from "grpc-web";
 import apiPb, {
+  BlockInfo,
   GetAccountResponse,
   GetActionsResponse,
   GetLogsResponse,
@@ -12,8 +14,18 @@ import apiPb, {
 } from "../../protogen/proto/api/api_pb";
 import actionPb, {
   Execution,
-  PutPollResult
+  Log,
+  PutPollResult,
+  Receipt
 } from "../../protogen/proto/types/action_pb";
+import {
+  Block,
+  BlockBody,
+  BlockFooter,
+  BlockHeader,
+  BlockHeaderCore
+} from "../../protogen/proto/types/blockchain_pb";
+import { Endorsement } from "../../protogen/proto/types/endorsement_pb";
 
 // Properties of a Timestamp.
 export interface ITimestamp {
@@ -1997,6 +2009,364 @@ export const EstimateActionGasConsumptionRequest = {
   }
 };
 
+export interface IBlockHeaderCore {
+  version: number;
+  height: number;
+  timestamp: ITimestamp | undefined;
+  prevBlockHash: Buffer;
+  txRoot: Buffer;
+  deltaStateDigest: Buffer;
+  receiptRoot: Buffer;
+  logsBloom: Buffer;
+}
+
+export interface IBlockHeader {
+  core: IBlockHeaderCore | undefined;
+  producerPubkey: Buffer;
+  signature: Buffer;
+}
+
+export interface IBlockBody {
+  actions: Array<IAction>;
+}
+
+export interface IEndorsement {
+  timestamp: ITimestamp | undefined;
+  endorser: Buffer;
+  signature: Buffer;
+}
+
+export interface IBlockFooter {
+  endorsements: Array<IEndorsement>;
+  timestamp: ITimestamp | undefined;
+}
+
+export interface IBlock {
+  header: IBlockHeader | undefined;
+  body: IBlockBody | undefined;
+  footer: IBlockFooter | undefined;
+}
+
+export interface IBlockInfo {
+  block: IBlock | undefined;
+  receipts: Array<IReceipt>;
+}
+
+export interface IStreamBlocksRequest {}
+export interface IStreamBlocksResponse {
+  block: IBlockInfo | undefined;
+}
+
+function fromPbTimestamp(
+  timestamp: Timestamp | undefined
+): ITimestamp | undefined {
+  if (timestamp) {
+    return {
+      seconds: timestamp.getSeconds(),
+      nanos: timestamp.getNanos()
+    };
+  }
+  return undefined;
+}
+
+function fromPbBlockHeaderCore(
+  blockHeaderCore: BlockHeaderCore | undefined
+): IBlockHeaderCore | undefined {
+  if (blockHeaderCore) {
+    return {
+      version: blockHeaderCore.getVersion(),
+      height: blockHeaderCore.getHeight(),
+      timestamp: fromPbTimestamp(blockHeaderCore.getTimestamp()),
+      prevBlockHash: Buffer.from(blockHeaderCore.getPrevblockhash_asU8()),
+      txRoot: Buffer.from(blockHeaderCore.getTxroot_asU8()),
+      deltaStateDigest: Buffer.from(blockHeaderCore.getDeltastatedigest_asU8()),
+      receiptRoot: Buffer.from(blockHeaderCore.getReceiptroot_asU8()),
+      logsBloom: Buffer.from(blockHeaderCore.getLogsbloom_asU8())
+    };
+  }
+  return undefined;
+}
+
+function fromPbBlockHeader(
+  blockHeader: BlockHeader | undefined
+): IBlockHeader | undefined {
+  if (blockHeader) {
+    return {
+      core: fromPbBlockHeaderCore(blockHeader.getCore()),
+      producerPubkey: Buffer.from(blockHeader.getProducerpubkey_asU8()),
+      signature: Buffer.from(blockHeader.getSignature_asU8())
+    };
+  }
+  return undefined;
+}
+
+function fromPbBlockBody(
+  blockBody: BlockBody | undefined
+): IBlockBody | undefined {
+  if (blockBody) {
+    const res = [] as Array<IAction>;
+    for (const rawAction of blockBody.getActionsList()) {
+      const rawActionCore = rawAction.getCore();
+      let actionCore: IActionCore | undefined;
+      if (rawActionCore) {
+        actionCore = {
+          version: rawActionCore.getVersion(),
+          nonce: String(rawActionCore.getNonce()),
+          gasLimit: String(rawActionCore.getGaslimit()),
+          gasPrice: rawActionCore.getGasprice(),
+          transfer: GetActionsRequest.fromTransfer(rawActionCore.getTransfer()),
+          execution: GetActionsRequest.fromExecution(
+            rawActionCore.getExecution()
+          ),
+          startSubChain: GetActionsRequest.fromStartSubChain(
+            rawActionCore.getStartsubchain()
+          ),
+          stopSubChain: GetActionsRequest.fromStopSubChain(
+            rawActionCore.getStopsubchain()
+          ),
+          putBlock: GetActionsRequest.fromPutBlock(rawActionCore.getPutblock()),
+          createDeposit: GetActionsRequest.fromCreateDeposit(
+            rawActionCore.getCreatedeposit()
+          ),
+          settleDeposit: GetActionsRequest.fromSettleDeposit(
+            rawActionCore.getSettledeposit()
+          ),
+          createPlumChain: GetActionsRequest.fromCreatePlumChain(
+            rawActionCore.getCreateplumchain()
+          ),
+          terminatePlumChain: GetActionsRequest.fromTerminatePlumChain(
+            rawActionCore.getTerminateplumchain()
+          ),
+          plumPutBlock: GetActionsRequest.fromPlumPutBlock(
+            rawActionCore.getPlumputblock()
+          ),
+          plumCreateDeposit: GetActionsRequest.fromPlumCreateDeposit(
+            rawActionCore.getPlumcreatedeposit()
+          ),
+          plumStartExit: GetActionsRequest.fromPlumStartExit(
+            rawActionCore.getPlumstartexit()
+          ),
+          plumChallengeExit: GetActionsRequest.fromPlumChallengeExit(
+            rawActionCore.getPlumchallengeexit()
+          ),
+          plumResponseChallengeExit: GetActionsRequest.fromPlumResponseChallengeExit(
+            rawActionCore.getPlumresponsechallengeexit()
+          ),
+          plumFinalizeExit: GetActionsRequest.fromPlumFinalizeExit(
+            rawActionCore.getPlumfinalizeexit()
+          ),
+          plumSettleDeposit: GetActionsRequest.fromPlumSettleDeposit(
+            rawActionCore.getPlumsettledeposit()
+          ),
+          plumTransfer: GetActionsRequest.fromPlumTransfer(
+            rawActionCore.getPlumtransfer()
+          ),
+          depositToRewardingFund: GetActionsRequest.fromDepositToRewardingFund(
+            rawActionCore.getDeposittorewardingfund()
+          ),
+          claimFromRewardingFund: GetActionsRequest.fromClaimFromRewardingFund(
+            rawActionCore.getClaimfromrewardingfund()
+          ),
+          grantReward: GetActionsRequest.fromGrantReward(
+            rawActionCore.getGrantreward()
+          ),
+          putPollResult: GetActionsRequest.getPutPollResult(
+            rawActionCore.getPutpollresult()
+          )
+        };
+      }
+
+      const action = {
+        core: actionCore,
+        senderPubKey: rawAction.getSenderpubkey(),
+        signature: rawAction.getSignature()
+      };
+      res.push(action);
+    }
+
+    return {
+      actions: res
+    };
+  }
+  return undefined;
+}
+
+function fromPbEndorsements(
+  endorsements: Array<Endorsement>
+): Array<IEndorsement> {
+  const res = [] as Array<IEndorsement>;
+  for (const endorsement of endorsements) {
+    res.push({
+      timestamp: fromPbTimestamp(endorsement.getTimestamp()),
+      endorser: Buffer.from(endorsement.getEndorser_asU8()),
+      signature: Buffer.from(endorsement.getSignature_asU8())
+    });
+  }
+  return res;
+}
+
+function fromPbBlockFooter(
+  blockFooter: BlockFooter | undefined
+): IBlockFooter | undefined {
+  if (blockFooter) {
+    return {
+      endorsements: fromPbEndorsements(blockFooter.getEndorsementsList()),
+      timestamp: fromPbTimestamp(blockFooter.getTimestamp())
+    };
+  }
+  return undefined;
+}
+
+function fromPbBlock(block: Block | undefined): IBlock | undefined {
+  if (block) {
+    return {
+      header: fromPbBlockHeader(block.getHeader()),
+      body: fromPbBlockBody(block.getBody()),
+      footer: fromPbBlockFooter(block.getFooter())
+    };
+  }
+  return undefined;
+}
+
+function fromPbReceipts(receipts: Array<Receipt>): Array<IReceipt> {
+  const res = [] as Array<IReceipt>;
+  for (const receipt of receipts) {
+    res.push({
+      status: receipt.getStatus(),
+      blkHeight: receipt.getBlkheight(),
+      actHash: receipt.getActhash(),
+      gasConsumed: receipt.getGasconsumed(),
+      contractAddress: receipt.getContractaddress(),
+      logs: fromPbLogList(receipt.getLogsList())
+    });
+  }
+  return res;
+}
+
+function fromPbBlockInfo(
+  blockInfo: BlockInfo | undefined
+): IBlockInfo | undefined {
+  if (blockInfo) {
+    return {
+      block: fromPbBlock(blockInfo.getBlock()),
+      receipts: fromPbReceipts(blockInfo.getReceiptsList())
+    };
+  }
+  return undefined;
+}
+
+export const StreamBlocksRequest = {
+  // @ts-ignore
+  to(req: IStreamBlocksRequest): any {
+    return new apiPb.StreamBlocksRequest();
+  },
+
+  from(pbRes: apiPb.StreamBlocksResponse): IStreamBlocksResponse {
+    return {
+      block: fromPbBlockInfo(pbRes.getBlock())
+    };
+  }
+};
+
+export interface IStreamLogsRequest {
+  filter: ILogsFilter;
+}
+export interface IStreamLogsResponse {
+  log: ILog | undefined;
+}
+
+export const StreamLogsRequest = {
+  // @ts-ignore
+  to(req: IStreamLogsRequest): any {
+    const pbReq = new apiPb.StreamLogsRequest();
+    if (req.filter) {
+      const filter = new apiPb.LogsFilter();
+      filter.setAddressList(req.filter.address);
+      const topics = [] as Array<Topics>;
+      for (let i = 0; i < req.filter.topics.length; i++) {
+        const topic = new apiPb.Topics();
+        topic.setTopicList(req.filter.topics[i].topic);
+        topics.push(topic);
+      }
+      filter.setTopicsList(topics);
+      pbReq.setFilter(filter);
+    }
+    return pbReq;
+  },
+
+  fromPbLog(log: Log | undefined): ILog | undefined {
+    if (log) {
+      return {
+        contractAddress: log.getContractaddress(),
+        topics: log.getTopicsList(),
+        data: log.getData(),
+        blkHeight: log.getBlkheight(),
+        actHash: log.getActhash(),
+        index: log.getIndex()
+      };
+    }
+    return undefined;
+  },
+
+  from(pbRes: apiPb.StreamLogsResponse): IStreamLogsResponse {
+    return {
+      log: StreamLogsRequest.fromPbLog(pbRes.getLog())
+    };
+  }
+};
+
+// @ts-ignore
+export interface ClientReadableStream<Response> {
+  on(
+    type: "error",
+    callback: (err: Error) => void
+  ): ClientReadableStream<Response>;
+  on(
+    type: "status",
+    callback: (status: any) => void
+  ): ClientReadableStream<Response>;
+  on(
+    type: "data",
+    callback: (response: Response) => void
+  ): ClientReadableStream<Response>;
+  on(type: "end", callback: () => void): ClientReadableStream<Response>;
+  cancel(): void;
+}
+
+// @ts-ignore
+export class ClientReadableStream<Response> extends EventEmitter {
+  private readonly origin: grpcWeb.ClientReadableStream<any>;
+
+  constructor(origin: grpcWeb.ClientReadableStream<any>, type: string) {
+    super();
+
+    this.origin = origin;
+    origin.on("error", (err: any) => {
+      this.emit("error", err);
+    });
+    origin.on("status", (status: any) => {
+      this.emit("status", status);
+    });
+    origin.on("data", (response: Response) => {
+      if (type === "StreamBlocks") {
+        // @ts-ignore
+        this.emit("data", StreamBlocksRequest.from(response));
+      }
+      if (type === "StreamLogs") {
+        // @ts-ignore
+        this.emit("data", StreamLogsRequest.from(response));
+      }
+    });
+    origin.on("end", () => {
+      this.emit("end");
+    });
+  }
+
+  public cancel(): void {
+    this.origin.cancel();
+  }
+}
+
 export interface IRpcMethod {
   setProvider(provider: string | IRpcMethod): void;
 
@@ -2033,4 +2403,12 @@ export interface IRpcMethod {
   estimateActionGasConsumption(
     req: IEstimateActionGasConsumptionRequest
   ): Promise<IEstimateActionGasConsumptionResponse>;
+
+  streamBlocks(
+    req: IStreamBlocksRequest
+  ): ClientReadableStream<IStreamBlocksResponse>;
+
+  streamLogs(
+    req: IStreamLogsRequest
+  ): ClientReadableStream<IStreamLogsResponse>;
 }
