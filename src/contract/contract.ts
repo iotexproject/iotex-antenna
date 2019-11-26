@@ -12,7 +12,8 @@ import {
   encodeArguments,
   encodeInputData,
   getAbiFunctions,
-  getArgTypes
+  getArgTypes,
+  getHeaderHash
 } from "./abi-to-byte";
 
 export type Options = {
@@ -36,6 +37,8 @@ export class Contract {
 
   public readonly methods: { [funcName: string]: Function };
 
+  public readonly decodeMethods: { [key: string]: DecodeMethod };
+
   public setProvider(provider: IRpcMethod): void {
     this.provider = provider;
   }
@@ -49,6 +52,30 @@ export class Contract {
     this.provider = options && options.provider;
     if (jsonInterface) {
       this.abi = getAbiFunctions(jsonInterface);
+      const methods = {};
+      // @ts-ignore
+      for (const fnName of Object.keys(this.abi)) {
+        // @ts-ignore
+        const fnAbi = this.abi[fnName];
+        if (fnAbi.type === "constructor") {
+          continue;
+        }
+
+        const args = getArgTypes(fnAbi);
+        const header = getHeaderHash(fnAbi, args);
+
+        // @ts-ignore
+        methods[header] = {
+          name: fnName,
+          inputsNames: args.map(i => {
+            return `${i.name}`;
+          }),
+          inputsTypes: args.map(i => {
+            return `${i.type}`;
+          })
+        };
+      }
+      this.decodeMethods = methods;
     }
     this.address = address;
     this.options = options;
@@ -257,6 +284,37 @@ export class Contract {
     }
     return results;
   }
+
+  public decodeInput(data: string): DecodeData {
+    if (data.length < 8) {
+      throw new Error("input data error");
+    }
+    const methodKey = data.substr(0, 8);
+    const method = this.decodeMethods[methodKey];
+    if (!method) {
+      throw new Error(`method ${methodKey} is not contract method`);
+    }
+    const params = ethereumjs.rawDecode(
+      method.inputsTypes,
+      Buffer.from(data.substring(8), "hex")
+    );
+    const values = {};
+
+    for (let i = 0; i < method.inputsTypes.length; i++) {
+      if (method.inputsTypes[i] === "address") {
+        params[i] = fromBytes(
+          Buffer.from(params[i].toString(), "hex")
+        ).string();
+      }
+      // @ts-ignore
+      values[method.inputsNames[i]] = params[i];
+    }
+
+    return {
+      method: method.name,
+      data: values
+    };
+  }
 }
 
 export interface MethodExecuteParameter {
@@ -264,4 +322,16 @@ export interface MethodExecuteParameter {
   amount?: string;
   gasLimit?: string;
   gasPrice?: string;
+}
+
+export interface DecodeData {
+  method: string;
+  // tslint:disable-next-line: no-any
+  data: { [key: string]: any };
+}
+
+export interface DecodeMethod {
+  name: string;
+  inputsNames: [string];
+  inputsTypes: [string];
 }
