@@ -234,6 +234,12 @@ export class Contract {
     gasLimit?: string | undefined,
     gasPrice?: string
   ): Execution {
+    if (amount === "") {
+      throw new Error("amount can not empty.");
+    }
+    if (method === "") {
+      throw new Error("method can not empty.");
+    }
     if (!this.address || !this.abi) {
       throw new Error("must set contract address and abi");
     }

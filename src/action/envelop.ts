@@ -254,6 +254,12 @@ export class SealedEnvelop {
     publicKey: string,
     act: Envelop
   ): SealedEnvelop {
+    if (privateKey === "") {
+      throw new Error("private key can not empty.");
+    }
+    if (publicKey === "") {
+      throw new Error("public key can not empty.");
+    }
     const h = hash256b(act.bytestream());
     const sign = Buffer.from(
       makeSigner(0)(h.toString("hex"), privateKey),
