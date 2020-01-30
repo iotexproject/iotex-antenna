@@ -39,7 +39,7 @@ export const makeSigner = (addToV: number) => (
   hash: string,
   privateKey: string
 ) => {
-  if (hash === "") {
+  if (hash.length === 0) {
     throw new Error("hash can not empty.");
   }
   if (privateKey === "") {

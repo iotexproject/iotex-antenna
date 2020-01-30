@@ -116,7 +116,7 @@ export function encrypt(
   if (privateKey === "") {
     throw new Error("private key can not empty.");
   }
-  if (password === "") {
+  if (password.length === 0) {
     throw new Error("password can not empty.");
   }
 
