@@ -19,7 +19,7 @@ import {
 type IotxOpts = {
   signer?: SignerPlugin;
   timeout?: number;
-  token?: string;
+  apiToken?: string;
 };
 
 export class Iotx extends RpcMethod {
@@ -29,7 +29,7 @@ export class Iotx extends RpcMethod {
   constructor(hostname: string, opts?: IotxOpts) {
     super(hostname, {
       timeout: opts && opts.timeout,
-      token: opts && opts.token
+      apiToken: opts && opts.apiToken
     });
     this.accounts = new Accounts();
     this.signer = opts && opts.signer;

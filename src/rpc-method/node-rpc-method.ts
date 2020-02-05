@@ -55,13 +55,13 @@ const iotexapi = grpc.loadPackageDefinition(packageDefinition).iotexapi;
 type Opts = {
   timeout?: number;
   enableSsl?: boolean;
-  token?: string;
+  apiToken?: string;
 };
 
 export default class RpcMethod implements IRpcMethod {
   public client: IRpcMethod;
   public timeout: number;
-  public token?: string;
+  public apiToken?: string;
   private credentials: grpc.ChannelCredentials;
 
   constructor(hostname: string, options: Opts = {}) {
@@ -83,7 +83,7 @@ export default class RpcMethod implements IRpcMethod {
       null
     );
     this.timeout = options.timeout || 300000;
-    this.token = options.token;
+    this.apiToken = options.apiToken;
   }
 
   public setProvider(provider: string | IRpcMethod): void {
@@ -107,15 +107,15 @@ export default class RpcMethod implements IRpcMethod {
     }
   }
 
-  public getDeadline(): string {
-    return `${new Date(Date.now() + this.timeout).getTime()}`;
+  public getDeadline(): number {
+    return new Date(Date.now() + this.timeout).getTime();
   }
 
-  private getMetadata(): { [s: string]: string } {
-    if (this.token) {
+  private getMetadata(): { [s: string]: string | number } {
+    if (this.apiToken) {
       return {
         deadline: this.getDeadline(),
-        Authorization: `Bearer ${this.token}`
+        Authorization: `Bearer ${this.apiToken}`
       };
     }
     return {

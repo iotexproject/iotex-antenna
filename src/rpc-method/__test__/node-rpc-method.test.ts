@@ -17,7 +17,10 @@ test.beforeEach(async _ => {
 });
 
 test.serial("RpcMethod.getAccount", async t => {
-  const client = new RpcMethod(TEST_HOSTNAME);
+  const client = new RpcMethod(TEST_HOSTNAME, {
+    apiToken:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+  });
   const resp = await client.getAccount({
     address: "io126xcrjhtp27end76ac9nmx6px2072c3vgz6suw"
   });

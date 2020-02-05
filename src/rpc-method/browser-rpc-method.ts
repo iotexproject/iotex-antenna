@@ -58,18 +58,18 @@ import {
 
 type Opts = {
   timeout?: number;
-  token?: string;
+  apiToken?: string;
 };
 
 export default class RpcMethod implements IRpcMethod {
   public client: grpcWeb.APIServicePromiseClient;
   public timeout: number;
-  public token?: string;
+  public apiToken?: string;
 
   constructor(hostname: string, options: Opts = {}) {
     this.client = new grpcWeb.APIServicePromiseClient(hostname, null, null);
     this.timeout = options.timeout || 300000;
-    this.token = options.token;
+    this.apiToken = options.apiToken;
   }
 
   public setProvider(provider: string | IRpcMethod): void {
@@ -86,10 +86,10 @@ export default class RpcMethod implements IRpcMethod {
   }
 
   private getMetadata(): { [s: string]: string } {
-    if (this.token) {
+    if (this.apiToken) {
       return {
         deadline: this.getDeadline(),
-        Authorization: `Bearer ${this.token}`
+        Authorization: `Bearer ${this.apiToken}`
       };
     }
     return {
