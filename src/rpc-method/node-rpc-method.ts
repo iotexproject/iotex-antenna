@@ -83,9 +83,7 @@ export default class RpcMethod implements IRpcMethod {
       null
     );
     this.timeout = options.timeout || 300000;
-    if (options.token) {
-      this.token = options.token;
-    }
+    this.token = options.token;
   }
 
   public setProvider(provider: string | IRpcMethod): void {

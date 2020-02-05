@@ -69,9 +69,7 @@ export default class RpcMethod implements IRpcMethod {
   constructor(hostname: string, options: Opts = {}) {
     this.client = new grpcWeb.APIServicePromiseClient(hostname, null, null);
     this.timeout = options.timeout || 300000;
-    if (options.token) {
-      this.token = options.token;
-    }
+    this.token = options.token;
   }
 
   public setProvider(provider: string | IRpcMethod): void {
