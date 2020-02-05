@@ -55,11 +55,13 @@ const iotexapi = grpc.loadPackageDefinition(packageDefinition).iotexapi;
 type Opts = {
   timeout?: number;
   enableSsl?: boolean;
+  apiToken?: string;
 };
 
 export default class RpcMethod implements IRpcMethod {
   public client: IRpcMethod;
   public timeout: number;
+  public apiToken?: string;
   private credentials: grpc.ChannelCredentials;
 
   constructor(hostname: string, options: Opts = {}) {
@@ -81,6 +83,7 @@ export default class RpcMethod implements IRpcMethod {
       null
     );
     this.timeout = options.timeout || 300000;
+    this.apiToken = options.apiToken;
   }
 
   public setProvider(provider: string | IRpcMethod): void {
@@ -104,8 +107,20 @@ export default class RpcMethod implements IRpcMethod {
     }
   }
 
-  public getDeadline(): Date {
-    return new Date(Date.now() + this.timeout);
+  public getDeadline(): number {
+    return new Date(Date.now() + this.timeout).getTime();
+  }
+
+  private getMetadata(): { [s: string]: string | number } {
+    if (this.apiToken) {
+      return {
+        deadline: this.getDeadline(),
+        Authorization: `Bearer ${this.apiToken}`
+      };
+    }
+    return {
+      deadline: this.getDeadline()
+    };
   }
 
   public async getAccount(
@@ -113,7 +128,7 @@ export default class RpcMethod implements IRpcMethod {
   ): Promise<IGetAccountResponse> {
     const getAccount = promisify(this.client.getAccount.bind(this.client));
     // @ts-ignore
-    return getAccount(req, { deadline: this.getDeadline() });
+    return getAccount(req, this.getMetadata());
   }
 
   public async getBlockMetas(
@@ -123,7 +138,7 @@ export default class RpcMethod implements IRpcMethod {
       this.client.getBlockMetas.bind(this.client)
     );
     // @ts-ignore
-    return getBlockMetas(req, { deadline: this.getDeadline() });
+    return getBlockMetas(req, this.getMetadata());
   }
 
   public async getChainMeta(
@@ -131,7 +146,7 @@ export default class RpcMethod implements IRpcMethod {
   ): Promise<IGetChainMetaResponse> {
     const getChainMeta = promisify(this.client.getChainMeta.bind(this.client));
     // @ts-ignore
-    return getChainMeta(req, { deadline: this.getDeadline() });
+    return getChainMeta(req, this.getMetadata());
   }
 
   public async getServerMeta(
@@ -141,7 +156,7 @@ export default class RpcMethod implements IRpcMethod {
       this.client.getServerMeta.bind(this.client)
     );
     // @ts-ignore
-    return getServerMeta(req, { deadline: this.getDeadline() });
+    return getServerMeta(req, this.getMetadata());
   }
 
   public async getActions(
@@ -149,7 +164,7 @@ export default class RpcMethod implements IRpcMethod {
   ): Promise<IGetActionsResponse> {
     const getActions = promisify(this.client.getActions.bind(this.client));
     // @ts-ignore
-    return getActions(req, { deadline: this.getDeadline() });
+    return getActions(req, this.getMetadata());
   }
 
   public async suggestGasPrice(
@@ -159,7 +174,7 @@ export default class RpcMethod implements IRpcMethod {
       this.client.suggestGasPrice.bind(this.client)
     );
     // @ts-ignore
-    return suggestGasPrice(req, { deadline: this.getDeadline() });
+    return suggestGasPrice(req, this.getMetadata());
   }
 
   public async getReceiptByAction(
@@ -169,7 +184,7 @@ export default class RpcMethod implements IRpcMethod {
       this.client.getReceiptByAction.bind(this.client)
     );
     // @ts-ignore
-    return getReceiptByAction(req, { deadline: this.getDeadline() });
+    return getReceiptByAction(req, this.getMetadata());
   }
 
   public async readContract(
@@ -177,7 +192,7 @@ export default class RpcMethod implements IRpcMethod {
   ): Promise<IReadContractResponse> {
     const readContract = promisify(this.client.readContract.bind(this.client));
     // @ts-ignore
-    return readContract(req, { deadline: this.getDeadline() });
+    return readContract(req, this.getMetadata());
   }
 
   public async sendAction(
@@ -185,7 +200,7 @@ export default class RpcMethod implements IRpcMethod {
   ): Promise<ISendActionResponse> {
     const sendAction = promisify(this.client.sendAction.bind(this.client));
     // @ts-ignore
-    return sendAction(req, { deadline: this.getDeadline() });
+    return sendAction(req, this.getMetadata());
   }
 
   public async estimateGasForAction(
@@ -195,13 +210,13 @@ export default class RpcMethod implements IRpcMethod {
       this.client.estimateGasForAction.bind(this.client)
     );
     // @ts-ignore
-    return estimateGasForAction(req, { deadline: this.getDeadline() });
+    return estimateGasForAction(req, this.getMetadata());
   }
 
   public async readState(req: IReadStateRequest): Promise<IReadStateResponse> {
     const readState = promisify(this.client.readState.bind(this.client));
     // @ts-ignore
-    return readState(req, { deadline: this.getDeadline() });
+    return readState(req, this.getMetadata());
   }
 
   public async getEpochMeta(
@@ -209,13 +224,13 @@ export default class RpcMethod implements IRpcMethod {
   ): Promise<IGetEpochMetaResponse> {
     const getEpochMeta = promisify(this.client.getEpochMeta.bind(this.client));
     // @ts-ignore
-    return getEpochMeta(req, { deadline: this.getDeadline() });
+    return getEpochMeta(req, this.getMetadata());
   }
 
   public async getLogs(req: IGetLogsRequest): Promise<IGetLogsResponse> {
     const getLogs = promisify(this.client.getLogs.bind(this.client));
     // @ts-ignore
-    return getLogs(req, { deadline: this.getDeadline() });
+    return getLogs(req, this.getMetadata());
   }
 
   public async estimateActionGasConsumption(
@@ -225,20 +240,20 @@ export default class RpcMethod implements IRpcMethod {
       this.client.estimateActionGasConsumption.bind(this.client)
     );
     // @ts-ignore
-    return estimateActionGasConsumption(req, { deadline: this.getDeadline() });
+    return estimateActionGasConsumption(req, this.getMetadata());
   }
 
   public streamBlocks(
     req: IStreamBlocksRequest
   ): ClientReadableStream<IStreamBlocksResponse> {
     // @ts-ignore
-    return this.client.streamBlocks(req, { deadline: this.getDeadline() });
+    return this.client.streamBlocks(req, this.getMetadata());
   }
 
   public streamLogs(
     req: IStreamLogsRequest
   ): ClientReadableStream<IStreamLogsResponse> {
     // @ts-ignore
-    return this.client.streamLogs(req, { deadline: this.getDeadline() });
+    return this.client.streamLogs(req, this.getMetadata());
   }
 }

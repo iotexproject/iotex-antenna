@@ -4,13 +4,19 @@ import { IRpcMethod } from "./rpc-method/types";
 
 export type Opts = {
   signer?: SignerPlugin;
+  timeout?: number;
+  apiToken?: string;
 };
 
 export default class Antenna {
   public iotx: Iotx;
 
   constructor(provider: string, opts?: Opts) {
-    this.iotx = new Iotx(provider, { signer: opts && opts.signer });
+    this.iotx = new Iotx(provider, {
+      signer: opts && opts.signer,
+      timeout: opts && opts.timeout,
+      apiToken: opts && opts.apiToken
+    });
   }
 
   public static modules: {
