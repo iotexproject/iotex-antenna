@@ -16,14 +16,21 @@ import {
   TransferRequest
 } from "./types";
 
-type IotxOpts = { signer?: SignerPlugin };
+type IotxOpts = {
+  signer?: SignerPlugin;
+  timeout?: number;
+  token?: string;
+};
 
 export class Iotx extends RpcMethod {
   public accounts: Accounts;
   public signer?: SignerPlugin;
 
   constructor(hostname: string, opts?: IotxOpts) {
-    super(hostname);
+    super(hostname, {
+      timeout: opts && opts.timeout,
+      token: opts && opts.token
+    });
     this.accounts = new Accounts();
     this.signer = opts && opts.signer;
     setTimeout(() => {
