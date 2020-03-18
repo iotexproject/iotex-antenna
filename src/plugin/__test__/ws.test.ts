@@ -20,7 +20,7 @@ test.skip("WsSignerPlugin", async t => {
       {
         privateKey: "",
         address: "",
-        plugin: new WsSignerPlugin("wss://local.get-scatter.com:64102")
+        plugin: new WsSignerPlugin("wss://local.iotex.io:64102")
       }
     ].map(async tt => {
       const antenna = new Antenna(String(process.env.IOTEX_CORE), {
