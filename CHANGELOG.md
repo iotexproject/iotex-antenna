@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.28.2](https://github.com/iotexproject/iotex-antenna/compare/v0.28.1...v0.28.2) (2020-04-03)
+
 ### [0.28.1](https://github.com/iotexproject/iotex-antenna/compare/v0.28.0...v0.28.1) (2020-03-31)
 
 ## [0.28.0](https://github.com/iotexproject/iotex-antenna/compare/v0.27.0...v0.28.0) (2020-02-05)
