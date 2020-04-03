@@ -1,4 +1,5 @@
 import { SignerPlugin } from "./action/method";
+import { Contract } from "./contract/contract";
 import { Iotx } from "./iotx";
 import { WsSignerPlugin } from "./plugin/ws";
 import { IRpcMethod } from "./rpc-method/types";
@@ -23,9 +24,11 @@ export default class Antenna {
   public static modules: {
     Iotx: typeof Iotx;
     WsSignerPlugin: typeof WsSignerPlugin;
+    Contract: typeof Contract;
   } = {
     Iotx,
-    WsSignerPlugin
+    WsSignerPlugin,
+    Contract
   };
 
   public setProvider(provider: string | IRpcMethod): void {
