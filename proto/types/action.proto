@@ -12,9 +12,9 @@ option go_package = "github.com/iotexproject/iotex-proto/golang/iotextypes";
 
 message Transfer {
   // used by state-based model
-  string amount  = 1;
+  string amount = 1;
   string recipient = 2;
-  bytes payload  = 3;
+  bytes payload = 3;
 }
 
 // Candidates and list of candidates
@@ -31,13 +31,71 @@ message CandidateList {
 
 message PutPollResult {
   uint64 height = 1;
-  CandidateList	candidates = 2;
+  CandidateList candidates = 2;
 }
 
 message Execution {
-  string amount  = 1;
+  string amount = 1;
   string contract = 2;
   bytes data = 3;
+}
+
+// create stake
+message StakeCreate {
+  string candidateName = 1;
+  string stakedAmount = 2;
+  uint32 stakedDuration = 3;
+  bool autoStake = 4;
+  bytes payload = 5;
+}
+
+// unstake or withdraw
+message StakeReclaim {
+  uint64 bucketIndex = 1;
+  bytes payload = 2;
+}
+
+// add the amount of bucket 
+message StakeAddDeposit {
+  uint64 bucketIndex = 1;
+  string amount = 2;
+  bytes payload = 3;
+}
+
+// restake the duration and autoStake flag of bucket 
+message StakeRestake {
+  uint64 bucketIndex = 1;
+  uint32 stakedDuration = 2;
+  bool autoStake = 3;
+  bytes payload = 4;
+}
+
+// move the bucket to vote for another candidate or transfer the ownership of bucket to another voters
+message StakeChangeCandidate {
+  uint64 bucketIndex = 1;
+  string candidateName = 2;
+  bytes payload = 3;
+}
+
+message StakeTransferOwnership {
+  uint64 bucketIndex = 1;
+  string voterAddress = 2;
+  bytes payload = 3;
+}
+
+message CandidateBasicInfo {
+  string name = 1;
+  string operatorAddress = 2;
+  string rewardAddress = 3;
+}
+
+message CandidateRegister {
+  CandidateBasicInfo candidate = 1;
+  string stakedAmount = 2;
+  uint32 stakedDuration = 3;
+  bool autoStake = 4;
+  string ownerAddress = 5; // if ownerAddress is absent, owner of candidate is the sender
+  bytes payload = 6;
 }
 
 message StartSubChain {
@@ -174,6 +232,17 @@ message ActionCore {
     ClaimFromRewardingFund claimFromRewardingFund = 31;
     GrantReward grantReward = 32;
 
+    // Native staking
+    StakeCreate stakeCreate = 40;
+    StakeReclaim stakeUnstake = 41;
+    StakeReclaim stakeWithdraw = 42;
+    StakeAddDeposit stakeAddDeposit = 43;
+    StakeRestake stakeRestake = 44;
+    StakeChangeCandidate stakeChangeCandidate = 45;
+    StakeTransferOwnership stakeTransferOwnership = 46;
+    CandidateRegister candidateRegister = 47;
+    CandidateBasicInfo candidateUpdate = 48;
+
     PutPollResult putPollResult = 50;
   }
 }
@@ -202,6 +271,27 @@ message Log{
   uint32 index = 6;
 }
 
+message EvmTransfer {
+  bytes amount = 1;
+  string from = 2;
+  string to = 3;
+}
+
+message EvmTransferList {
+  repeated EvmTransfer evmTransfers = 1;
+}
+
+message ActionEvmTransfer {
+  bytes actionHash = 1;
+  uint64 numEvmTransfers = 2;
+  repeated EvmTransfer evmTransfers = 3;
+}
+
+message BlockEvmTransfer {
+  uint64 blockHeight = 1;
+  uint64 numEvmTransfers = 2;
+  repeated ActionEvmTransfer actionEvmTransfers = 3;
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // BELOW ARE DEFINITIONS FOR BLOCK PRODUCER PROTOCOL

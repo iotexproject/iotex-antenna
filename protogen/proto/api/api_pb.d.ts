@@ -910,6 +910,9 @@ export class ReadStateRequest extends jspb.Message {
   clearArgumentsList(): void;
   addArguments(value: Uint8Array | string, index?: number): void;
 
+  getHeight(): string;
+  setHeight(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ReadStateRequest.AsObject;
   static toObject(includeInstance: boolean, msg: ReadStateRequest): ReadStateRequest.AsObject;
@@ -923,6 +926,7 @@ export namespace ReadStateRequest {
     protocolid: Uint8Array | string,
     methodname: Uint8Array | string,
     argumentsList: Array<Uint8Array | string>,
+    height: string,
   }
 }
 
@@ -1187,6 +1191,82 @@ export class GetLogsResponse extends jspb.Message {
 export namespace GetLogsResponse {
   export type AsObject = {
     logsList: Array<proto_types_action_pb.Log.AsObject>,
+  }
+}
+
+export class GetEvmTransfersByActionHashRequest extends jspb.Message {
+  getActionhash(): string;
+  setActionhash(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetEvmTransfersByActionHashRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetEvmTransfersByActionHashRequest): GetEvmTransfersByActionHashRequest.AsObject;
+  static serializeBinaryToWriter(message: GetEvmTransfersByActionHashRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetEvmTransfersByActionHashRequest;
+  static deserializeBinaryFromReader(message: GetEvmTransfersByActionHashRequest, reader: jspb.BinaryReader): GetEvmTransfersByActionHashRequest;
+}
+
+export namespace GetEvmTransfersByActionHashRequest {
+  export type AsObject = {
+    actionhash: string,
+  }
+}
+
+export class GetEvmTransfersByActionHashResponse extends jspb.Message {
+  getActionevmtransfers(): proto_types_action_pb.ActionEvmTransfer | undefined;
+  setActionevmtransfers(value?: proto_types_action_pb.ActionEvmTransfer): void;
+  hasActionevmtransfers(): boolean;
+  clearActionevmtransfers(): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetEvmTransfersByActionHashResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetEvmTransfersByActionHashResponse): GetEvmTransfersByActionHashResponse.AsObject;
+  static serializeBinaryToWriter(message: GetEvmTransfersByActionHashResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetEvmTransfersByActionHashResponse;
+  static deserializeBinaryFromReader(message: GetEvmTransfersByActionHashResponse, reader: jspb.BinaryReader): GetEvmTransfersByActionHashResponse;
+}
+
+export namespace GetEvmTransfersByActionHashResponse {
+  export type AsObject = {
+    actionevmtransfers?: proto_types_action_pb.ActionEvmTransfer.AsObject,
+  }
+}
+
+export class GetEvmTransfersByBlockHeightRequest extends jspb.Message {
+  getBlockheight(): number;
+  setBlockheight(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetEvmTransfersByBlockHeightRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetEvmTransfersByBlockHeightRequest): GetEvmTransfersByBlockHeightRequest.AsObject;
+  static serializeBinaryToWriter(message: GetEvmTransfersByBlockHeightRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetEvmTransfersByBlockHeightRequest;
+  static deserializeBinaryFromReader(message: GetEvmTransfersByBlockHeightRequest, reader: jspb.BinaryReader): GetEvmTransfersByBlockHeightRequest;
+}
+
+export namespace GetEvmTransfersByBlockHeightRequest {
+  export type AsObject = {
+    blockheight: number,
+  }
+}
+
+export class GetEvmTransfersByBlockHeightResponse extends jspb.Message {
+  getBlockevmtransfers(): proto_types_action_pb.BlockEvmTransfer | undefined;
+  setBlockevmtransfers(value?: proto_types_action_pb.BlockEvmTransfer): void;
+  hasBlockevmtransfers(): boolean;
+  clearBlockevmtransfers(): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetEvmTransfersByBlockHeightResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetEvmTransfersByBlockHeightResponse): GetEvmTransfersByBlockHeightResponse.AsObject;
+  static serializeBinaryToWriter(message: GetEvmTransfersByBlockHeightResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetEvmTransfersByBlockHeightResponse;
+  static deserializeBinaryFromReader(message: GetEvmTransfersByBlockHeightResponse, reader: jspb.BinaryReader): GetEvmTransfersByBlockHeightResponse;
+}
+
+export namespace GetEvmTransfersByBlockHeightResponse {
+  export type AsObject = {
+    blockevmtransfers?: proto_types_action_pb.BlockEvmTransfer.AsObject,
   }
 }
 

@@ -73,6 +73,16 @@ service APIService {
   rpc GetVotes(GetVotesRequest) returns (GetVotesResponse) {}
 
   /*
+   * evm transfers APIs
+   */
+
+  // get evm transfers by action hash
+  rpc GetEvmTransfersByActionHash(GetEvmTransfersByActionHashRequest) returns (GetEvmTransfersByActionHashResponse) {}
+
+  // get evm transfers by block height
+  rpc GetEvmTransfersByBlockHeight(GetEvmTransfersByBlockHeightRequest) returns (GetEvmTransfersByBlockHeightResponse) {}
+
+  /*
    * below are streaming APIs
    */
 
@@ -280,6 +290,7 @@ message ReadStateRequest {
   bytes protocolID = 1;
   bytes methodName = 2;
   repeated bytes arguments = 3;
+  string height = 4; // optional, if not present, read from tip height
 }
 
 message ReadStateResponse {
@@ -334,6 +345,22 @@ message GetLogsRequest {
 
 message GetLogsResponse {
   repeated iotextypes.Log logs = 1;
+}
+
+message GetEvmTransfersByActionHashRequest {
+  string actionHash = 1;
+}
+
+message GetEvmTransfersByActionHashResponse {
+  iotextypes.ActionEvmTransfer actionEvmTransfers = 1;
+}
+
+message GetEvmTransfersByBlockHeightRequest {
+  uint64 blockHeight = 1;
+}
+
+message GetEvmTransfersByBlockHeightResponse {
+  iotextypes.BlockEvmTransfer blockEvmTransfers = 1;
 }
 
 /*

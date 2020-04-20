@@ -26,4 +26,18 @@ enum ReceiptStatus {
   ErrExecutionReverted        		= 106;
   ErrMaxCodeSizeExceeded      		= 107;
   ErrWriteProtection          		= 108;
+
+  //2xx for Staking ErrorCode
+  ErrLoadAccount                    = 200;
+  ErrNotEnoughBalance               = 201;
+  ErrInvalidBucketIndex             = 202;
+  ErrUnauthorizedOperator           = 203;
+  ErrInvalidBucketType              = 204;
+  ErrCandidateNotExist              = 205;
+  ErrReduceDurationBeforeMaturity   = 206;
+  ErrUnstakeBeforeMaturity          = 207;
+  ErrWithdrawBeforeUnstake          = 208;
+  ErrWithdrawBeforeMaturity         = 209;
+  ErrCandidateAlreadyExist          = 210;
+  ErrCandidateConflict              = 211;
 }

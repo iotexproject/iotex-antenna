@@ -1,0 +1,61 @@
+// Copyright (c) 2020 IoTeX
+// This is an alpha (internal) release and is not suitable for production. This source code is provided 'as is' and no
+// warranties are given as to title or non-infringement, merchantability or fitness for purpose and, to the extent
+// permitted by law, all liability for your use of the code is disclaimed. This source code is governed by Apache
+// License 2.0 that can be found in the LICENSE file.
+
+// To compile the proto, run:
+//      protoc -I. -I ./../types --go_out=plugins=grpc:$GOPATH/src *.proto
+syntax = "proto3";
+package iotexapi;
+option go_package = "github.com/iotexproject/iotex-proto/golang/iotexapi";
+
+
+message PaginationParam {
+	uint32 offset = 1;
+	uint32 limit = 2;
+}
+
+message ReadStakingDataMethod {
+	enum Name {
+		INVALID = 0;
+		BUCKETS = 1;
+		BUCKETS_BY_VOTER = 2;
+		BUCKETS_BY_CANDIDATE = 3;
+		CANDIDATES = 4;
+		CANDIDATE_BY_NAME = 5;
+	}
+	Name method = 1;
+}
+
+message ReadStakingDataRequest {
+	message VoteBuckets {
+		PaginationParam pagination = 1;
+	}
+
+	message VoteBucketsByVoter {
+		string voterAddress = 1;
+		PaginationParam pagination = 2;
+	}
+
+	message VoteBucketsByCandidate {
+		string candName = 1;
+		PaginationParam pagination = 2;
+	}
+
+	message Candidates {
+		PaginationParam pagination = 1;
+	}
+
+	message CandidateByName {
+		string candName = 1;
+	}
+
+	oneof request {
+		VoteBuckets buckets = 1;
+		VoteBucketsByVoter bucketsByVoter = 2;
+		VoteBucketsByCandidate bucketsByCandidate = 3;
+		Candidates candidates = 4;
+		CandidateByName candidateByName = 5;
+	}
+}
