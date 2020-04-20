@@ -979,6 +979,116 @@ proto.iotexapi.APIServicePromiseClient.prototype.getVotes =
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.iotexapi.GetEvmTransfersByActionHashRequest,
+ *   !proto.iotexapi.GetEvmTransfersByActionHashResponse>}
+ */
+const methodInfo_APIService_GetEvmTransfersByActionHash = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.iotexapi.GetEvmTransfersByActionHashResponse,
+  /** @param {!proto.iotexapi.GetEvmTransfersByActionHashRequest} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.GetEvmTransfersByActionHashResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.iotexapi.GetEvmTransfersByActionHashRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.iotexapi.GetEvmTransfersByActionHashResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetEvmTransfersByActionHashResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.iotexapi.APIServiceClient.prototype.getEvmTransfersByActionHash =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/GetEvmTransfersByActionHash',
+      request,
+      metadata || {},
+      methodInfo_APIService_GetEvmTransfersByActionHash,
+      callback);
+};
+
+
+/**
+ * @param {!proto.iotexapi.GetEvmTransfersByActionHashRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.iotexapi.GetEvmTransfersByActionHashResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.iotexapi.APIServicePromiseClient.prototype.getEvmTransfersByActionHash =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/iotexapi.APIService/GetEvmTransfersByActionHash',
+      request,
+      metadata || {},
+      methodInfo_APIService_GetEvmTransfersByActionHash);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.iotexapi.GetEvmTransfersByBlockHeightRequest,
+ *   !proto.iotexapi.GetEvmTransfersByBlockHeightResponse>}
+ */
+const methodInfo_APIService_GetEvmTransfersByBlockHeight = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.iotexapi.GetEvmTransfersByBlockHeightResponse,
+  /** @param {!proto.iotexapi.GetEvmTransfersByBlockHeightRequest} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.GetEvmTransfersByBlockHeightResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.iotexapi.GetEvmTransfersByBlockHeightRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.iotexapi.GetEvmTransfersByBlockHeightResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetEvmTransfersByBlockHeightResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.iotexapi.APIServiceClient.prototype.getEvmTransfersByBlockHeight =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/GetEvmTransfersByBlockHeight',
+      request,
+      metadata || {},
+      methodInfo_APIService_GetEvmTransfersByBlockHeight,
+      callback);
+};
+
+
+/**
+ * @param {!proto.iotexapi.GetEvmTransfersByBlockHeightRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.iotexapi.GetEvmTransfersByBlockHeightResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.iotexapi.APIServicePromiseClient.prototype.getEvmTransfersByBlockHeight =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/iotexapi.APIService/GetEvmTransfersByBlockHeight',
+      request,
+      metadata || {},
+      methodInfo_APIService_GetEvmTransfersByBlockHeight);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.iotexapi.StreamBlocksRequest,
  *   !proto.iotexapi.StreamBlocksResponse>}
  */

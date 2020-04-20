@@ -5,7 +5,12 @@ import dotenv from "dotenv";
 import { get } from "dottie";
 import sleep from "sleep-promise";
 import RpcMethod from "../browser-rpc-method";
-import { ITransfer } from "../types";
+import {
+  IReadStakingDataMethodName,
+  IReadStakingDataMethodToBuffer,
+  IReadStakingDataRequestToBuffer,
+  ITransfer
+} from "../types";
 browserEnv();
 
 dotenv.config();
@@ -177,7 +182,30 @@ test.serial("RpcMethod.readState", async t => {
   const state = await client.readState({
     protocolID: Buffer.from("rewarding"),
     methodName: Buffer.from("UnclaimedBalance"),
-    arguments: [Buffer.from("io1ph0u2psnd7muq5xv9623rmxdsxc4uapxhzpg02")]
+    arguments: [Buffer.from("io1ph0u2psnd7muq5xv9623rmxdsxc4uapxhzpg02")],
+    height: undefined
+  });
+  t.truthy(state.data);
+});
+
+test.skip("RpcMethod.readStateStaking", async t => {
+  const client = new RpcMethod(TEST_HOSTNAME);
+  const state = await client.readState({
+    protocolID: Buffer.from("staking"),
+    methodName: IReadStakingDataMethodToBuffer({
+      method: IReadStakingDataMethodName.BUCKETS
+    }),
+    arguments: [
+      IReadStakingDataRequestToBuffer({
+        buckets: {
+          pagination: {
+            offset: 10,
+            limit: 1
+          }
+        }
+      })
+    ],
+    height: undefined
   });
   t.truthy(state.data);
 });

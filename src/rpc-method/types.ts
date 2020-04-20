@@ -12,6 +12,11 @@ import apiPb, {
   ReadStateResponse,
   Topics
 } from "../../protogen/proto/api/api_pb";
+import {
+  PaginationParam,
+  ReadStakingDataMethod,
+  ReadStakingDataRequest
+} from "../../protogen/proto/api/read_state_pb";
 import actionPb, {
   Execution,
   Log,
@@ -385,6 +390,64 @@ export interface IExecution {
   data: Buffer | string;
 }
 
+// create stake
+export interface IStakeCreate {
+  candidateName: string;
+  stakedAmount: string;
+  stakedDuration: number;
+  autoStake: boolean;
+  payload: Buffer | string;
+}
+
+// unstake or withdraw
+export interface IStakeReclaim {
+  bucketIndex: number;
+  payload: Buffer | string;
+}
+
+// add the amount of bucket
+export interface IStakeAddDeposit {
+  bucketIndex: number;
+  amount: string;
+  payload: Buffer | string;
+}
+
+// restake the duration and autoStake flag of bucket
+export interface IStakeRestake {
+  bucketIndex: number;
+  stakedDuration: number;
+  autoStake: boolean;
+  payload: Buffer | string;
+}
+
+// move the bucket to vote for another candidate or transfer the ownership of bucket to another voters
+export interface IStakeChangeCandidate {
+  bucketIndex: number;
+  candidateName: string;
+  payload: Buffer | string;
+}
+
+export interface IStakeTransferOwnership {
+  bucketIndex: number;
+  voterAddress: string;
+  payload: Buffer | string;
+}
+
+export interface ICandidateBasicInfo {
+  name: string;
+  operatorAddress: string;
+  rewardAddress: string;
+}
+
+export interface ICandidateRegister {
+  candidate: ICandidateBasicInfo;
+  stakedAmount: string;
+  stakedDuration: number;
+  autoStake: boolean;
+  ownerAddress: string;
+  payload: Buffer | string;
+}
+
 // Properties of a StartSubChain.
 export interface IStartSubChain {
   // StartSubChain chainID
@@ -724,6 +787,56 @@ export interface IAction {
 
   // Action signature
   signature: Uint8Array | string;
+}
+
+// read state
+export interface IPaginationParam {
+  offset: number;
+  limit: number;
+}
+
+export enum IReadStakingDataMethodName {
+  INVALID = 0,
+  BUCKETS = 1,
+  BUCKETS_BY_VOTER = 2,
+  BUCKETS_BY_CANDIDATE = 3,
+  CANDIDATES = 4,
+  CANDIDATE_BY_NAME = 5
+}
+
+export interface IReadStakingDataMethod {
+  method: IReadStakingDataMethodName;
+}
+
+export interface IReadStakingDataRequestVoteBuckets {
+  pagination: IPaginationParam;
+}
+
+export interface IReadStakingDataRequestVoteBucketsByVoter {
+  voterAddress: string;
+  pagination: IPaginationParam;
+}
+
+export interface IReadStakingDataRequestVoteBucketsByCandidate {
+  candName: string;
+  pagination: IPaginationParam;
+}
+
+export interface IReadStakingDataRequestCandidates {
+  candName: string;
+  pagination: IPaginationParam;
+}
+
+export interface IReadStakingDataRequestCandidateByName {
+  candName: string;
+}
+
+export interface IReadStakingDataRequest {
+  buckets?: IReadStakingDataRequestVoteBuckets;
+  bucketsByVoter?: IReadStakingDataRequestVoteBucketsByVoter;
+  bucketsByCandidate?: IReadStakingDataRequestVoteBucketsByCandidate;
+  candidates?: IReadStakingDataRequestCandidates;
+  candidateByName?: IReadStakingDataRequestCandidateByName;
 }
 
 export function toActionTransfer(req: ITransfer | undefined): any {
@@ -1636,7 +1749,21 @@ export enum ReceiptStatus {
   ErrNoCompatibleInterpreter = 105,
   ErrExecutionReverted = 106,
   ErrMaxCodeSizeExceeded = 107,
-  ErrWriteProtection = 108
+  ErrWriteProtection = 108,
+
+  //2xx for Staking ErrorCode
+  ErrLoadAccount = 200,
+  ErrNotEnoughBalance = 201,
+  ErrInvalidBucketIndex = 202,
+  ErrUnauthorizedOperator = 203,
+  ErrInvalidBucketType = 204,
+  ErrCandidateNotExist = 205,
+  ErrReduceDurationBeforeMaturity = 206,
+  ErrUnstakeBeforeMaturity = 207,
+  ErrWithdrawBeforeUnstake = 208,
+  ErrWithdrawBeforeMaturity = 209,
+  ErrCandidateAlreadyExist = 210,
+  ErrCandidateConflict = 211
 }
 
 // Properties of an Receipt.
@@ -1825,6 +1952,7 @@ export interface IReadStateRequest {
   protocolID: Buffer;
   methodName: Buffer;
   arguments: Array<Buffer>;
+  height: string | undefined;
 }
 
 export interface IReadStateResponse {
@@ -2366,6 +2494,82 @@ export class ClientReadableStream<Response> extends EventEmitter {
     this.origin.cancel();
   }
 }
+
+export const IReadStakingDataMethodToBuffer = (
+  req: IReadStakingDataMethod
+): Buffer => {
+  const pbObj = new ReadStakingDataMethod();
+  switch (req.method.valueOf()) {
+    case ReadStakingDataMethod.Name.INVALID.valueOf():
+      pbObj.setMethod(ReadStakingDataMethod.Name.INVALID);
+      break;
+    case ReadStakingDataMethod.Name.BUCKETS.valueOf():
+      pbObj.setMethod(ReadStakingDataMethod.Name.BUCKETS);
+      break;
+    case ReadStakingDataMethod.Name.BUCKETS_BY_VOTER.valueOf():
+      pbObj.setMethod(ReadStakingDataMethod.Name.BUCKETS_BY_VOTER);
+      break;
+    case ReadStakingDataMethod.Name.BUCKETS_BY_CANDIDATE.valueOf():
+      pbObj.setMethod(ReadStakingDataMethod.Name.BUCKETS_BY_CANDIDATE);
+      break;
+    case ReadStakingDataMethod.Name.CANDIDATES.valueOf():
+      pbObj.setMethod(ReadStakingDataMethod.Name.CANDIDATES);
+      break;
+    case ReadStakingDataMethod.Name.CANDIDATE_BY_NAME.valueOf():
+      pbObj.setMethod(ReadStakingDataMethod.Name.CANDIDATE_BY_NAME);
+      break;
+    default:
+      throw new Error(`unknow method ${req.method}`);
+  }
+  return Buffer.from(pbObj.serializeBinary());
+};
+
+export const IReadStakingDataRequestToBuffer = (
+  req: IReadStakingDataRequest
+): Buffer => {
+  const pbObj = new ReadStakingDataRequest();
+  if (req.buckets) {
+    const buckets = new ReadStakingDataRequest.VoteBuckets();
+    const pagination = new PaginationParam();
+    pagination.setOffset(req.buckets.pagination.offset);
+    pagination.setLimit(req.buckets.pagination.limit);
+    buckets.setPagination(pagination);
+    pbObj.setBuckets(buckets);
+  }
+  if (req.bucketsByVoter) {
+    const bucketsByVoter = new ReadStakingDataRequest.VoteBucketsByVoter();
+    const pagination = new PaginationParam();
+    pagination.setOffset(req.bucketsByVoter.pagination.offset);
+    pagination.setLimit(req.bucketsByVoter.pagination.limit);
+    bucketsByVoter.setPagination(pagination);
+    bucketsByVoter.setVoteraddress(req.bucketsByVoter.voterAddress);
+    pbObj.setBucketsbyvoter(bucketsByVoter);
+  }
+  if (req.bucketsByCandidate) {
+    const bucketsByCandidate = new ReadStakingDataRequest.VoteBucketsByCandidate();
+    const pagination = new PaginationParam();
+    pagination.setOffset(req.bucketsByCandidate.pagination.offset);
+    pagination.setLimit(req.bucketsByCandidate.pagination.limit);
+    bucketsByCandidate.setPagination(pagination);
+    bucketsByCandidate.setCandname(req.bucketsByCandidate.candName);
+    pbObj.setBucketsbycandidate(bucketsByCandidate);
+  }
+  if (req.candidates) {
+    const candidates = new ReadStakingDataRequest.Candidates();
+    const pagination = new PaginationParam();
+    pagination.setOffset(req.candidates.pagination.offset);
+    pagination.setLimit(req.candidates.pagination.limit);
+    candidates.setPagination(pagination);
+    pbObj.setCandidates(candidates);
+  }
+  if (req.candidateByName) {
+    const candidateByName = new ReadStakingDataRequest.CandidateByName();
+    candidateByName.setCandname(req.candidateByName.candName);
+    pbObj.setCandidatebyname(candidateByName);
+  }
+
+  return Buffer.from(pbObj.serializeBinary());
+};
 
 export interface IRpcMethod {
   setProvider(provider: string | IRpcMethod): void;

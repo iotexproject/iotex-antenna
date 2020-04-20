@@ -134,6 +134,250 @@ export namespace Execution {
   }
 }
 
+export class StakeCreate extends jspb.Message {
+  getCandidatename(): string;
+  setCandidatename(value: string): void;
+
+  getStakedamount(): string;
+  setStakedamount(value: string): void;
+
+  getStakedduration(): number;
+  setStakedduration(value: number): void;
+
+  getAutostake(): boolean;
+  setAutostake(value: boolean): void;
+
+  getPayload(): Uint8Array | string;
+  getPayload_asU8(): Uint8Array;
+  getPayload_asB64(): string;
+  setPayload(value: Uint8Array | string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StakeCreate.AsObject;
+  static toObject(includeInstance: boolean, msg: StakeCreate): StakeCreate.AsObject;
+  static serializeBinaryToWriter(message: StakeCreate, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StakeCreate;
+  static deserializeBinaryFromReader(message: StakeCreate, reader: jspb.BinaryReader): StakeCreate;
+}
+
+export namespace StakeCreate {
+  export type AsObject = {
+    candidatename: string,
+    stakedamount: string,
+    stakedduration: number,
+    autostake: boolean,
+    payload: Uint8Array | string,
+  }
+}
+
+export class StakeReclaim extends jspb.Message {
+  getBucketindex(): number;
+  setBucketindex(value: number): void;
+
+  getPayload(): Uint8Array | string;
+  getPayload_asU8(): Uint8Array;
+  getPayload_asB64(): string;
+  setPayload(value: Uint8Array | string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StakeReclaim.AsObject;
+  static toObject(includeInstance: boolean, msg: StakeReclaim): StakeReclaim.AsObject;
+  static serializeBinaryToWriter(message: StakeReclaim, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StakeReclaim;
+  static deserializeBinaryFromReader(message: StakeReclaim, reader: jspb.BinaryReader): StakeReclaim;
+}
+
+export namespace StakeReclaim {
+  export type AsObject = {
+    bucketindex: number,
+    payload: Uint8Array | string,
+  }
+}
+
+export class StakeAddDeposit extends jspb.Message {
+  getBucketindex(): number;
+  setBucketindex(value: number): void;
+
+  getAmount(): string;
+  setAmount(value: string): void;
+
+  getPayload(): Uint8Array | string;
+  getPayload_asU8(): Uint8Array;
+  getPayload_asB64(): string;
+  setPayload(value: Uint8Array | string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StakeAddDeposit.AsObject;
+  static toObject(includeInstance: boolean, msg: StakeAddDeposit): StakeAddDeposit.AsObject;
+  static serializeBinaryToWriter(message: StakeAddDeposit, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StakeAddDeposit;
+  static deserializeBinaryFromReader(message: StakeAddDeposit, reader: jspb.BinaryReader): StakeAddDeposit;
+}
+
+export namespace StakeAddDeposit {
+  export type AsObject = {
+    bucketindex: number,
+    amount: string,
+    payload: Uint8Array | string,
+  }
+}
+
+export class StakeRestake extends jspb.Message {
+  getBucketindex(): number;
+  setBucketindex(value: number): void;
+
+  getStakedduration(): number;
+  setStakedduration(value: number): void;
+
+  getAutostake(): boolean;
+  setAutostake(value: boolean): void;
+
+  getPayload(): Uint8Array | string;
+  getPayload_asU8(): Uint8Array;
+  getPayload_asB64(): string;
+  setPayload(value: Uint8Array | string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StakeRestake.AsObject;
+  static toObject(includeInstance: boolean, msg: StakeRestake): StakeRestake.AsObject;
+  static serializeBinaryToWriter(message: StakeRestake, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StakeRestake;
+  static deserializeBinaryFromReader(message: StakeRestake, reader: jspb.BinaryReader): StakeRestake;
+}
+
+export namespace StakeRestake {
+  export type AsObject = {
+    bucketindex: number,
+    stakedduration: number,
+    autostake: boolean,
+    payload: Uint8Array | string,
+  }
+}
+
+export class StakeChangeCandidate extends jspb.Message {
+  getBucketindex(): number;
+  setBucketindex(value: number): void;
+
+  getCandidatename(): string;
+  setCandidatename(value: string): void;
+
+  getPayload(): Uint8Array | string;
+  getPayload_asU8(): Uint8Array;
+  getPayload_asB64(): string;
+  setPayload(value: Uint8Array | string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StakeChangeCandidate.AsObject;
+  static toObject(includeInstance: boolean, msg: StakeChangeCandidate): StakeChangeCandidate.AsObject;
+  static serializeBinaryToWriter(message: StakeChangeCandidate, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StakeChangeCandidate;
+  static deserializeBinaryFromReader(message: StakeChangeCandidate, reader: jspb.BinaryReader): StakeChangeCandidate;
+}
+
+export namespace StakeChangeCandidate {
+  export type AsObject = {
+    bucketindex: number,
+    candidatename: string,
+    payload: Uint8Array | string,
+  }
+}
+
+export class StakeTransferOwnership extends jspb.Message {
+  getBucketindex(): number;
+  setBucketindex(value: number): void;
+
+  getVoteraddress(): string;
+  setVoteraddress(value: string): void;
+
+  getPayload(): Uint8Array | string;
+  getPayload_asU8(): Uint8Array;
+  getPayload_asB64(): string;
+  setPayload(value: Uint8Array | string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StakeTransferOwnership.AsObject;
+  static toObject(includeInstance: boolean, msg: StakeTransferOwnership): StakeTransferOwnership.AsObject;
+  static serializeBinaryToWriter(message: StakeTransferOwnership, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StakeTransferOwnership;
+  static deserializeBinaryFromReader(message: StakeTransferOwnership, reader: jspb.BinaryReader): StakeTransferOwnership;
+}
+
+export namespace StakeTransferOwnership {
+  export type AsObject = {
+    bucketindex: number,
+    voteraddress: string,
+    payload: Uint8Array | string,
+  }
+}
+
+export class CandidateBasicInfo extends jspb.Message {
+  getName(): string;
+  setName(value: string): void;
+
+  getOperatoraddress(): string;
+  setOperatoraddress(value: string): void;
+
+  getRewardaddress(): string;
+  setRewardaddress(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): CandidateBasicInfo.AsObject;
+  static toObject(includeInstance: boolean, msg: CandidateBasicInfo): CandidateBasicInfo.AsObject;
+  static serializeBinaryToWriter(message: CandidateBasicInfo, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CandidateBasicInfo;
+  static deserializeBinaryFromReader(message: CandidateBasicInfo, reader: jspb.BinaryReader): CandidateBasicInfo;
+}
+
+export namespace CandidateBasicInfo {
+  export type AsObject = {
+    name: string,
+    operatoraddress: string,
+    rewardaddress: string,
+  }
+}
+
+export class CandidateRegister extends jspb.Message {
+  getCandidate(): CandidateBasicInfo | undefined;
+  setCandidate(value?: CandidateBasicInfo): void;
+  hasCandidate(): boolean;
+  clearCandidate(): void;
+
+  getStakedamount(): string;
+  setStakedamount(value: string): void;
+
+  getStakedduration(): number;
+  setStakedduration(value: number): void;
+
+  getAutostake(): boolean;
+  setAutostake(value: boolean): void;
+
+  getOwneraddress(): string;
+  setOwneraddress(value: string): void;
+
+  getPayload(): Uint8Array | string;
+  getPayload_asU8(): Uint8Array;
+  getPayload_asB64(): string;
+  setPayload(value: Uint8Array | string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): CandidateRegister.AsObject;
+  static toObject(includeInstance: boolean, msg: CandidateRegister): CandidateRegister.AsObject;
+  static serializeBinaryToWriter(message: CandidateRegister, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CandidateRegister;
+  static deserializeBinaryFromReader(message: CandidateRegister, reader: jspb.BinaryReader): CandidateRegister;
+}
+
+export namespace CandidateRegister {
+  export type AsObject = {
+    candidate?: CandidateBasicInfo.AsObject,
+    stakedamount: string,
+    stakedduration: number,
+    autostake: boolean,
+    owneraddress: string,
+    payload: Uint8Array | string,
+  }
+}
+
 export class StartSubChain extends jspb.Message {
   getChainid(): number;
   setChainid(value: number): void;
@@ -719,6 +963,60 @@ export class ActionCore extends jspb.Message {
   clearGrantreward(): void;
   hasGrantreward(): boolean;
 
+  getStakecreate(): StakeCreate | undefined;
+  setStakecreate(value?: StakeCreate): void;
+  hasStakecreate(): boolean;
+  clearStakecreate(): void;
+  hasStakecreate(): boolean;
+
+  getStakeunstake(): StakeReclaim | undefined;
+  setStakeunstake(value?: StakeReclaim): void;
+  hasStakeunstake(): boolean;
+  clearStakeunstake(): void;
+  hasStakeunstake(): boolean;
+
+  getStakewithdraw(): StakeReclaim | undefined;
+  setStakewithdraw(value?: StakeReclaim): void;
+  hasStakewithdraw(): boolean;
+  clearStakewithdraw(): void;
+  hasStakewithdraw(): boolean;
+
+  getStakeadddeposit(): StakeAddDeposit | undefined;
+  setStakeadddeposit(value?: StakeAddDeposit): void;
+  hasStakeadddeposit(): boolean;
+  clearStakeadddeposit(): void;
+  hasStakeadddeposit(): boolean;
+
+  getStakerestake(): StakeRestake | undefined;
+  setStakerestake(value?: StakeRestake): void;
+  hasStakerestake(): boolean;
+  clearStakerestake(): void;
+  hasStakerestake(): boolean;
+
+  getStakechangecandidate(): StakeChangeCandidate | undefined;
+  setStakechangecandidate(value?: StakeChangeCandidate): void;
+  hasStakechangecandidate(): boolean;
+  clearStakechangecandidate(): void;
+  hasStakechangecandidate(): boolean;
+
+  getStaketransferownership(): StakeTransferOwnership | undefined;
+  setStaketransferownership(value?: StakeTransferOwnership): void;
+  hasStaketransferownership(): boolean;
+  clearStaketransferownership(): void;
+  hasStaketransferownership(): boolean;
+
+  getCandidateregister(): CandidateRegister | undefined;
+  setCandidateregister(value?: CandidateRegister): void;
+  hasCandidateregister(): boolean;
+  clearCandidateregister(): void;
+  hasCandidateregister(): boolean;
+
+  getCandidateupdate(): CandidateBasicInfo | undefined;
+  setCandidateupdate(value?: CandidateBasicInfo): void;
+  hasCandidateupdate(): boolean;
+  clearCandidateupdate(): void;
+  hasCandidateupdate(): boolean;
+
   getPutpollresult(): PutPollResult | undefined;
   setPutpollresult(value?: PutPollResult): void;
   hasPutpollresult(): boolean;
@@ -761,6 +1059,15 @@ export namespace ActionCore {
     deposittorewardingfund?: DepositToRewardingFund.AsObject,
     claimfromrewardingfund?: ClaimFromRewardingFund.AsObject,
     grantreward?: GrantReward.AsObject,
+    stakecreate?: StakeCreate.AsObject,
+    stakeunstake?: StakeReclaim.AsObject,
+    stakewithdraw?: StakeReclaim.AsObject,
+    stakeadddeposit?: StakeAddDeposit.AsObject,
+    stakerestake?: StakeRestake.AsObject,
+    stakechangecandidate?: StakeChangeCandidate.AsObject,
+    staketransferownership?: StakeTransferOwnership.AsObject,
+    candidateregister?: CandidateRegister.AsObject,
+    candidateupdate?: CandidateBasicInfo.AsObject,
     putpollresult?: PutPollResult.AsObject,
   }
 
@@ -786,6 +1093,15 @@ export namespace ActionCore {
     DEPOSITTOREWARDINGFUND = 30,
     CLAIMFROMREWARDINGFUND = 31,
     GRANTREWARD = 32,
+    STAKECREATE = 40,
+    STAKEUNSTAKE = 41,
+    STAKEWITHDRAW = 42,
+    STAKEADDDEPOSIT = 43,
+    STAKERESTAKE = 44,
+    STAKECHANGECANDIDATE = 45,
+    STAKETRANSFEROWNERSHIP = 46,
+    CANDIDATEREGISTER = 47,
+    CANDIDATEUPDATE = 48,
     PUTPOLLRESULT = 50,
   }
 }
@@ -905,6 +1221,112 @@ export namespace Log {
     blkheight: number,
     acthash: Uint8Array | string,
     index: number,
+  }
+}
+
+export class EvmTransfer extends jspb.Message {
+  getAmount(): Uint8Array | string;
+  getAmount_asU8(): Uint8Array;
+  getAmount_asB64(): string;
+  setAmount(value: Uint8Array | string): void;
+
+  getFrom(): string;
+  setFrom(value: string): void;
+
+  getTo(): string;
+  setTo(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): EvmTransfer.AsObject;
+  static toObject(includeInstance: boolean, msg: EvmTransfer): EvmTransfer.AsObject;
+  static serializeBinaryToWriter(message: EvmTransfer, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): EvmTransfer;
+  static deserializeBinaryFromReader(message: EvmTransfer, reader: jspb.BinaryReader): EvmTransfer;
+}
+
+export namespace EvmTransfer {
+  export type AsObject = {
+    amount: Uint8Array | string,
+    from: string,
+    to: string,
+  }
+}
+
+export class EvmTransferList extends jspb.Message {
+  getEvmtransfersList(): Array<EvmTransfer>;
+  setEvmtransfersList(value: Array<EvmTransfer>): void;
+  clearEvmtransfersList(): void;
+  addEvmtransfers(value?: EvmTransfer, index?: number): EvmTransfer;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): EvmTransferList.AsObject;
+  static toObject(includeInstance: boolean, msg: EvmTransferList): EvmTransferList.AsObject;
+  static serializeBinaryToWriter(message: EvmTransferList, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): EvmTransferList;
+  static deserializeBinaryFromReader(message: EvmTransferList, reader: jspb.BinaryReader): EvmTransferList;
+}
+
+export namespace EvmTransferList {
+  export type AsObject = {
+    evmtransfersList: Array<EvmTransfer.AsObject>,
+  }
+}
+
+export class ActionEvmTransfer extends jspb.Message {
+  getActionhash(): Uint8Array | string;
+  getActionhash_asU8(): Uint8Array;
+  getActionhash_asB64(): string;
+  setActionhash(value: Uint8Array | string): void;
+
+  getNumevmtransfers(): number;
+  setNumevmtransfers(value: number): void;
+
+  getEvmtransfersList(): Array<EvmTransfer>;
+  setEvmtransfersList(value: Array<EvmTransfer>): void;
+  clearEvmtransfersList(): void;
+  addEvmtransfers(value?: EvmTransfer, index?: number): EvmTransfer;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ActionEvmTransfer.AsObject;
+  static toObject(includeInstance: boolean, msg: ActionEvmTransfer): ActionEvmTransfer.AsObject;
+  static serializeBinaryToWriter(message: ActionEvmTransfer, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ActionEvmTransfer;
+  static deserializeBinaryFromReader(message: ActionEvmTransfer, reader: jspb.BinaryReader): ActionEvmTransfer;
+}
+
+export namespace ActionEvmTransfer {
+  export type AsObject = {
+    actionhash: Uint8Array | string,
+    numevmtransfers: number,
+    evmtransfersList: Array<EvmTransfer.AsObject>,
+  }
+}
+
+export class BlockEvmTransfer extends jspb.Message {
+  getBlockheight(): number;
+  setBlockheight(value: number): void;
+
+  getNumevmtransfers(): number;
+  setNumevmtransfers(value: number): void;
+
+  getActionevmtransfersList(): Array<ActionEvmTransfer>;
+  setActionevmtransfersList(value: Array<ActionEvmTransfer>): void;
+  clearActionevmtransfersList(): void;
+  addActionevmtransfers(value?: ActionEvmTransfer, index?: number): ActionEvmTransfer;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): BlockEvmTransfer.AsObject;
+  static toObject(includeInstance: boolean, msg: BlockEvmTransfer): BlockEvmTransfer.AsObject;
+  static serializeBinaryToWriter(message: BlockEvmTransfer, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): BlockEvmTransfer;
+  static deserializeBinaryFromReader(message: BlockEvmTransfer, reader: jspb.BinaryReader): BlockEvmTransfer;
+}
+
+export namespace BlockEvmTransfer {
+  export type AsObject = {
+    blockheight: number,
+    numevmtransfers: number,
+    actionevmtransfersList: Array<ActionEvmTransfer.AsObject>,
   }
 }
 

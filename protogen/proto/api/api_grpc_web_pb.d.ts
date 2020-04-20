@@ -23,6 +23,10 @@ import {
   GetElectionBucketsResponse,
   GetEpochMetaRequest,
   GetEpochMetaResponse,
+  GetEvmTransfersByActionHashRequest,
+  GetEvmTransfersByActionHashResponse,
+  GetEvmTransfersByBlockHeightRequest,
+  GetEvmTransfersByBlockHeightResponse,
   GetLogsRequest,
   GetLogsResponse,
   GetRawBlocksRequest,
@@ -163,6 +167,20 @@ export class APIServiceClient {
                response: GetVotesResponse) => void
   ): grpcWeb.ClientReadableStream<GetVotesResponse>;
 
+  getEvmTransfersByActionHash(
+    request: GetEvmTransfersByActionHashRequest,
+    metadata: grpcWeb.Metadata | undefined,
+    callback: (err: grpcWeb.Error,
+               response: GetEvmTransfersByActionHashResponse) => void
+  ): grpcWeb.ClientReadableStream<GetEvmTransfersByActionHashResponse>;
+
+  getEvmTransfersByBlockHeight(
+    request: GetEvmTransfersByBlockHeightRequest,
+    metadata: grpcWeb.Metadata | undefined,
+    callback: (err: grpcWeb.Error,
+               response: GetEvmTransfersByBlockHeightResponse) => void
+  ): grpcWeb.ClientReadableStream<GetEvmTransfersByBlockHeightResponse>;
+
   streamBlocks(
     request: StreamBlocksRequest,
     metadata?: grpcWeb.Metadata
@@ -266,6 +284,16 @@ export class APIServicePromiseClient {
     request: GetVotesRequest,
     metadata?: grpcWeb.Metadata
   ): Promise<GetVotesResponse>;
+
+  getEvmTransfersByActionHash(
+    request: GetEvmTransfersByActionHashRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<GetEvmTransfersByActionHashResponse>;
+
+  getEvmTransfersByBlockHeight(
+    request: GetEvmTransfersByBlockHeightRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<GetEvmTransfersByBlockHeightResponse>;
 
   streamBlocks(
     request: StreamBlocksRequest,
