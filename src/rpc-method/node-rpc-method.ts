@@ -115,7 +115,7 @@ export default class RpcMethod implements IRpcMethod {
     if (this.apiToken) {
       return {
         deadline: this.getDeadline(),
-        Authorization: `Bearer ${this.apiToken}`
+        authorization: `bearer ${this.apiToken}`
       };
     }
     return {

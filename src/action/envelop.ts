@@ -4,6 +4,8 @@ import { hash256b } from "../crypto/hash";
 import {
   GetActionsRequest,
   IAction,
+  ICandidateBasicInfo,
+  ICandidateRegister,
   IClaimFromRewardingFund,
   ICreateDeposit,
   ICreatePlumChain,
@@ -21,10 +23,18 @@ import {
   IPutBlock,
   IPutPollResult,
   ISettleDeposit,
+  IStakeAddDeposit,
+  IStakeChangeCandidate,
+  IStakeCreate,
+  IStakeReclaim,
+  IStakeRestake,
+  IStakeTransferOwnership,
   IStartSubChain,
   IStopSubChain,
   ITerminatePlumChain,
   ITransfer,
+  toActionCandidateBasicInfo,
+  toActionCandidateRegister,
   toActionClaimFromRewardingFund,
   toActionCreateDeposit,
   toActionCreatePlumChain,
@@ -41,6 +51,12 @@ import {
   toActionPlumTransfer,
   toActionPutBlock,
   toActionSettleDeposit,
+  toActionStakeAddDeposit,
+  toActionStakeChangeCandidate,
+  toActionStakeCreate,
+  toActionStakeReclaim,
+  toActionStakeRestake,
+  toActionStakeTransferOwnership,
   toActionStartSubChain,
   toActionStopSubChain,
   toActionTerminatePlumChain,
@@ -74,6 +90,15 @@ export class Envelop {
   public depositToRewardingFund?: IDepositToRewardingFund | undefined;
   public claimFromRewardingFund?: IClaimFromRewardingFund | undefined;
   public grantReward?: IGrantReward | undefined;
+  public stakeCreate?: IStakeCreate | undefined;
+  public stakeUnstake?: IStakeReclaim | undefined;
+  public stakeWithdraw?: IStakeReclaim | undefined;
+  public stakeAddDeposit?: IStakeAddDeposit | undefined;
+  public stakeRestake?: IStakeRestake | undefined;
+  public stakeChangeCandidate?: IStakeChangeCandidate | undefined;
+  public stakeTransferOwnership?: IStakeTransferOwnership | undefined;
+  public candidateRegister?: ICandidateRegister | undefined;
+  public candidateUpdate?: ICandidateBasicInfo | undefined;
   public putPollResult?: IPutPollResult | undefined;
 
   constructor(
@@ -158,6 +183,34 @@ export class Envelop {
       );
     } else if (this.grantReward) {
       pbActionCore.setGrantreward(toActionGrantReward(this.grantReward));
+    } else if (this.stakeCreate) {
+      pbActionCore.setStakecreate(toActionStakeCreate(this.stakeCreate));
+    } else if (this.stakeUnstake) {
+      pbActionCore.setStakeunstake(toActionStakeReclaim(this.stakeUnstake));
+    } else if (this.stakeWithdraw) {
+      pbActionCore.setStakewithdraw(toActionStakeReclaim(this.stakeWithdraw));
+    } else if (this.stakeAddDeposit) {
+      pbActionCore.setStakeadddeposit(
+        toActionStakeAddDeposit(this.stakeAddDeposit)
+      );
+    } else if (this.stakeRestake) {
+      pbActionCore.setStakerestake(toActionStakeRestake(this.stakeRestake));
+    } else if (this.stakeChangeCandidate) {
+      pbActionCore.setStakechangecandidate(
+        toActionStakeChangeCandidate(this.stakeChangeCandidate)
+      );
+    } else if (this.stakeTransferOwnership) {
+      pbActionCore.setStaketransferownership(
+        toActionStakeTransferOwnership(this.stakeTransferOwnership)
+      );
+    } else if (this.candidateRegister) {
+      pbActionCore.setCandidateregister(
+        toActionCandidateRegister(this.candidateRegister)
+      );
+    } else if (this.candidateUpdate) {
+      pbActionCore.setCandidateupdate(
+        toActionCandidateBasicInfo(this.candidateUpdate)
+      );
     }
     return pbActionCore;
   }
@@ -182,6 +235,33 @@ export class Envelop {
     );
     envelop.claimFromRewardingFund = GetActionsRequest.fromClaimFromRewardingFund(
       pbActionCore.getClaimfromrewardingfund()
+    );
+    envelop.stakeCreate = GetActionsRequest.fromStakeCreate(
+      pbActionCore.getStakecreate()
+    );
+    envelop.stakeUnstake = GetActionsRequest.fromStakeReclaim(
+      pbActionCore.getStakeunstake()
+    );
+    envelop.stakeWithdraw = GetActionsRequest.fromStakeReclaim(
+      pbActionCore.getStakewithdraw()
+    );
+    envelop.stakeAddDeposit = GetActionsRequest.fromStakeAddDeposit(
+      pbActionCore.getStakeadddeposit()
+    );
+    envelop.stakeRestake = GetActionsRequest.fromStakeRestake(
+      pbActionCore.getStakerestake()
+    );
+    envelop.stakeChangeCandidate = GetActionsRequest.fromStakeChangeCandidate(
+      pbActionCore.getStakechangecandidate()
+    );
+    envelop.stakeTransferOwnership = GetActionsRequest.fromStakeTransferOwnership(
+      pbActionCore.getStaketransferownership()
+    );
+    envelop.candidateRegister = GetActionsRequest.fromCandidateRegister(
+      pbActionCore.getCandidateregister()
+    );
+    envelop.candidateUpdate = GetActionsRequest.fromCandidateUpdate(
+      pbActionCore.getCandidateupdate()
     );
     // TODO(tian): add more fields
     return envelop;
@@ -242,6 +322,15 @@ export class SealedEnvelop {
         depositToRewardingFund: this.act.depositToRewardingFund,
         claimFromRewardingFund: this.act.claimFromRewardingFund,
         grantReward: this.act.grantReward,
+        stakeCreate: this.act.stakeCreate,
+        stakeUnstake: this.act.stakeUnstake,
+        stakeWithdraw: this.act.stakeWithdraw,
+        stakeAddDeposit: this.act.stakeAddDeposit,
+        stakeRestake: this.act.stakeRestake,
+        stakeChangeCandidate: this.act.stakeChangeCandidate,
+        stakeTransferOwnership: this.act.stakeTransferOwnership,
+        candidateRegister: this.act.candidateRegister,
+        candidateUpdate: this.act.candidateUpdate,
         putPollResult: this.act.putPollResult
       },
       senderPubKey: this.senderPubKey,

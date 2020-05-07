@@ -7,7 +7,16 @@ import {
   ActionErrorCode,
   ClaimFromRewardingFund,
   Execution,
-  Transfer
+  Transfer,
+  StakeCreate,
+  StakeUnstake,
+  StakeWithdraw,
+  StakeAddDeposit,
+  StakeRestake,
+  StakeChangeCandidate,
+  StakeTransferOwnership,
+  CandidateRegister,
+  CandidateUpdate
 } from "./types";
 
 export interface PluginOpts {
@@ -259,6 +268,409 @@ export class ClaimFromRewardingFundMethod extends AbstractMethod {
     envelop.claimFromRewardingFund = {
       amount: this.claimFronRewardFund.amount,
       data: this.claimFronRewardFund.data
+    };
+
+    const selp = await this.signAction(envelop);
+    return selp.action();
+  }
+}
+
+export class StakeCreateMethod extends AbstractMethod {
+  public target: StakeCreate;
+
+  constructor(
+    client: IRpcMethod,
+    account: Account,
+    target: StakeCreate,
+    opts?: AbstractMethodOpts
+  ) {
+    super(client, account, opts);
+    this.target = target;
+  }
+
+  public async execute(): Promise<string> {
+    const envelop = await this.baseEnvelop(
+      this.target.gasLimit,
+      this.target.gasPrice
+    );
+    envelop.stakeCreate = {
+      candidateName: this.target.candidateName,
+      stakedAmount: this.target.stakedAmount,
+      stakedDuration: this.target.stakedDuration,
+      autoStake: this.target.autoStake,
+      payload: this.target.payload
+    };
+
+    return this.sendAction(envelop);
+  }
+
+  public async sign(): Promise<IAction> {
+    const envelop = await this.baseEnvelop(
+      this.target.gasLimit,
+      this.target.gasPrice
+    );
+    envelop.stakeCreate = {
+      candidateName: this.target.candidateName,
+      stakedAmount: this.target.stakedAmount,
+      stakedDuration: this.target.stakedDuration,
+      autoStake: this.target.autoStake,
+      payload: this.target.payload
+    };
+
+    const selp = await this.signAction(envelop);
+    return selp.action();
+  }
+}
+
+export class StakeUnstakeMethod extends AbstractMethod {
+  public target: StakeUnstake;
+
+  constructor(
+    client: IRpcMethod,
+    account: Account,
+    target: StakeUnstake,
+    opts?: AbstractMethodOpts
+  ) {
+    super(client, account, opts);
+    this.target = target;
+  }
+
+  public async execute(): Promise<string> {
+    const envelop = await this.baseEnvelop(
+      this.target.gasLimit,
+      this.target.gasPrice
+    );
+    envelop.stakeUnstake = {
+      bucketIndex: this.target.bucketIndex,
+      payload: this.target.payload
+    };
+
+    return this.sendAction(envelop);
+  }
+
+  public async sign(): Promise<IAction> {
+    const envelop = await this.baseEnvelop(
+      this.target.gasLimit,
+      this.target.gasPrice
+    );
+    envelop.stakeUnstake = {
+      bucketIndex: this.target.bucketIndex,
+      payload: this.target.payload
+    };
+
+    const selp = await this.signAction(envelop);
+    return selp.action();
+  }
+}
+
+export class StakeWithdrawMethod extends AbstractMethod {
+  public target: StakeWithdraw;
+
+  constructor(
+    client: IRpcMethod,
+    account: Account,
+    target: StakeWithdraw,
+    opts?: AbstractMethodOpts
+  ) {
+    super(client, account, opts);
+    this.target = target;
+  }
+
+  public async execute(): Promise<string> {
+    const envelop = await this.baseEnvelop(
+      this.target.gasLimit,
+      this.target.gasPrice
+    );
+    envelop.stakeWithdraw = {
+      bucketIndex: this.target.bucketIndex,
+      payload: this.target.payload
+    };
+
+    return this.sendAction(envelop);
+  }
+
+  public async sign(): Promise<IAction> {
+    const envelop = await this.baseEnvelop(
+      this.target.gasLimit,
+      this.target.gasPrice
+    );
+    envelop.stakeWithdraw = {
+      bucketIndex: this.target.bucketIndex,
+      payload: this.target.payload
+    };
+
+    const selp = await this.signAction(envelop);
+    return selp.action();
+  }
+}
+
+export class StakeAddDepositMethod extends AbstractMethod {
+  public target: StakeAddDeposit;
+
+  constructor(
+    client: IRpcMethod,
+    account: Account,
+    target: StakeAddDeposit,
+    opts?: AbstractMethodOpts
+  ) {
+    super(client, account, opts);
+    this.target = target;
+  }
+
+  public async execute(): Promise<string> {
+    const envelop = await this.baseEnvelop(
+      this.target.gasLimit,
+      this.target.gasPrice
+    );
+    envelop.stakeAddDeposit = {
+      bucketIndex: this.target.bucketIndex,
+      amount: this.target.amount,
+      payload: this.target.payload
+    };
+
+    return this.sendAction(envelop);
+  }
+
+  public async sign(): Promise<IAction> {
+    const envelop = await this.baseEnvelop(
+      this.target.gasLimit,
+      this.target.gasPrice
+    );
+    envelop.stakeAddDeposit = {
+      bucketIndex: this.target.bucketIndex,
+      amount: this.target.amount,
+      payload: this.target.payload
+    };
+
+    const selp = await this.signAction(envelop);
+    return selp.action();
+  }
+}
+
+export class StakeRestakeMethod extends AbstractMethod {
+  public target: StakeRestake;
+
+  constructor(
+    client: IRpcMethod,
+    account: Account,
+    target: StakeRestake,
+    opts?: AbstractMethodOpts
+  ) {
+    super(client, account, opts);
+    this.target = target;
+  }
+
+  public async execute(): Promise<string> {
+    const envelop = await this.baseEnvelop(
+      this.target.gasLimit,
+      this.target.gasPrice
+    );
+    envelop.stakeRestake = {
+      bucketIndex: this.target.bucketIndex,
+      stakedDuration: this.target.stakedDuration,
+      autoStake: this.target.autoStake,
+      payload: this.target.payload
+    };
+
+    return this.sendAction(envelop);
+  }
+
+  public async sign(): Promise<IAction> {
+    const envelop = await this.baseEnvelop(
+      this.target.gasLimit,
+      this.target.gasPrice
+    );
+    envelop.stakeRestake = {
+      bucketIndex: this.target.bucketIndex,
+      stakedDuration: this.target.stakedDuration,
+      autoStake: this.target.autoStake,
+      payload: this.target.payload
+    };
+
+    const selp = await this.signAction(envelop);
+    return selp.action();
+  }
+}
+
+export class StakeChangeCandidateMethod extends AbstractMethod {
+  public target: StakeChangeCandidate;
+
+  constructor(
+    client: IRpcMethod,
+    account: Account,
+    target: StakeChangeCandidate,
+    opts?: AbstractMethodOpts
+  ) {
+    super(client, account, opts);
+    this.target = target;
+  }
+
+  public async execute(): Promise<string> {
+    const envelop = await this.baseEnvelop(
+      this.target.gasLimit,
+      this.target.gasPrice
+    );
+    envelop.stakeChangeCandidate = {
+      bucketIndex: this.target.bucketIndex,
+      candidateName: this.target.candidateName,
+      payload: this.target.payload
+    };
+
+    return this.sendAction(envelop);
+  }
+
+  public async sign(): Promise<IAction> {
+    const envelop = await this.baseEnvelop(
+      this.target.gasLimit,
+      this.target.gasPrice
+    );
+    envelop.stakeChangeCandidate = {
+      bucketIndex: this.target.bucketIndex,
+      candidateName: this.target.candidateName,
+      payload: this.target.payload
+    };
+
+    const selp = await this.signAction(envelop);
+    return selp.action();
+  }
+}
+
+export class StakeTransferOwnershipMethod extends AbstractMethod {
+  public target: StakeTransferOwnership;
+
+  constructor(
+    client: IRpcMethod,
+    account: Account,
+    target: StakeTransferOwnership,
+    opts?: AbstractMethodOpts
+  ) {
+    super(client, account, opts);
+    this.target = target;
+  }
+
+  public async execute(): Promise<string> {
+    const envelop = await this.baseEnvelop(
+      this.target.gasLimit,
+      this.target.gasPrice
+    );
+    envelop.stakeTransferOwnership = {
+      bucketIndex: this.target.bucketIndex,
+      voterAddress: this.target.voterAddress,
+      payload: this.target.payload
+    };
+
+    return this.sendAction(envelop);
+  }
+
+  public async sign(): Promise<IAction> {
+    const envelop = await this.baseEnvelop(
+      this.target.gasLimit,
+      this.target.gasPrice
+    );
+    envelop.stakeTransferOwnership = {
+      bucketIndex: this.target.bucketIndex,
+      voterAddress: this.target.voterAddress,
+      payload: this.target.payload
+    };
+
+    const selp = await this.signAction(envelop);
+    return selp.action();
+  }
+}
+
+export class CandidateRegisterMethod extends AbstractMethod {
+  public target: CandidateRegister;
+
+  constructor(
+    client: IRpcMethod,
+    account: Account,
+    target: CandidateRegister,
+    opts?: AbstractMethodOpts
+  ) {
+    super(client, account, opts);
+    this.target = target;
+  }
+
+  public async execute(): Promise<string> {
+    const envelop = await this.baseEnvelop(
+      this.target.gasLimit,
+      this.target.gasPrice
+    );
+    envelop.candidateRegister = {
+      candidate: {
+        name: this.target.name,
+        operatorAddress: this.target.operatorAddress,
+        rewardAddress: this.target.rewardAddress
+      },
+      stakedAmount: this.target.stakedAmount,
+      stakedDuration: this.target.stakedDuration,
+      autoStake: this.target.autoStake,
+      ownerAddress: this.target.ownerAddress,
+      payload: this.target.payload
+    };
+
+    return this.sendAction(envelop);
+  }
+
+  public async sign(): Promise<IAction> {
+    const envelop = await this.baseEnvelop(
+      this.target.gasLimit,
+      this.target.gasPrice
+    );
+    envelop.candidateRegister = {
+      candidate: {
+        name: this.target.name,
+        operatorAddress: this.target.operatorAddress,
+        rewardAddress: this.target.rewardAddress
+      },
+      stakedAmount: this.target.stakedAmount,
+      stakedDuration: this.target.stakedDuration,
+      autoStake: this.target.autoStake,
+      ownerAddress: this.target.ownerAddress,
+      payload: this.target.payload
+    };
+
+    const selp = await this.signAction(envelop);
+    return selp.action();
+  }
+}
+
+export class CandidateUpdateMethod extends AbstractMethod {
+  public target: CandidateUpdate;
+
+  constructor(
+    client: IRpcMethod,
+    account: Account,
+    target: CandidateUpdate,
+    opts?: AbstractMethodOpts
+  ) {
+    super(client, account, opts);
+    this.target = target;
+  }
+
+  public async execute(): Promise<string> {
+    const envelop = await this.baseEnvelop(
+      this.target.gasLimit,
+      this.target.gasPrice
+    );
+    envelop.candidateUpdate = {
+      name: this.target.name,
+      operatorAddress: this.target.operatorAddress,
+      rewardAddress: this.target.rewardAddress
+    };
+
+    return this.sendAction(envelop);
+  }
+
+  public async sign(): Promise<IAction> {
+    const envelop = await this.baseEnvelop(
+      this.target.gasLimit,
+      this.target.gasPrice
+    );
+    envelop.candidateUpdate = {
+      name: this.target.name,
+      operatorAddress: this.target.operatorAddress,
+      rewardAddress: this.target.rewardAddress
     };
 
     const selp = await this.signAction(envelop);
