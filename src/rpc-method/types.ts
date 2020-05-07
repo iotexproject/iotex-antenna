@@ -774,6 +774,17 @@ export interface IActionCore {
   // ActionCore grantReward
   grantReward?: IGrantReward | undefined;
 
+  // Native staking
+  stakeCreate?: IStakeCreate | undefined;
+  stakeUnstake?: IStakeReclaim | undefined;
+  stakeWithdraw?: IStakeReclaim | undefined;
+  stakeAddDeposit?: IStakeAddDeposit | undefined;
+  stakeRestake?: IStakeRestake | undefined;
+  stakeChangeCandidate?: IStakeChangeCandidate | undefined;
+  stakeTransferOwnership?: IStakeTransferOwnership | undefined;
+  candidateRegister?: ICandidateRegister | undefined;
+  candidateUpdate?: ICandidateBasicInfo | undefined;
+
   putPollResult?: IPutPollResult | undefined;
 }
 
@@ -1117,6 +1128,113 @@ export function toActionGrantReward(req: IGrantReward | undefined): any {
   return pbGrantReward;
 }
 
+export function toActionStakeCreate(req: IStakeCreate | undefined): any {
+  if (!req) {
+    return undefined;
+  }
+  const pbStakeCreate = new actionPb.StakeCreate();
+  pbStakeCreate.setCandidatename(req.candidateName);
+  pbStakeCreate.setStakedamount(req.stakedAmount);
+  pbStakeCreate.setStakedduration(req.stakedDuration);
+  pbStakeCreate.setAutostake(req.autoStake);
+  pbStakeCreate.setPayload(req.payload);
+  return pbStakeCreate;
+}
+
+export function toActionStakeReclaim(req: IStakeReclaim | undefined): any {
+  if (!req) {
+    return undefined;
+  }
+  const pbStakeReclaim = new actionPb.StakeReclaim();
+  pbStakeReclaim.setBucketindex(req.bucketIndex);
+  pbStakeReclaim.setPayload(req.payload);
+  return pbStakeReclaim;
+}
+
+export function toActionStakeAddDeposit(
+  req: IStakeAddDeposit | undefined
+): any {
+  if (!req) {
+    return undefined;
+  }
+  const pbStakeAddDeposit = new actionPb.StakeAddDeposit();
+  pbStakeAddDeposit.setBucketindex(req.bucketIndex);
+  pbStakeAddDeposit.setAmount(req.amount);
+  pbStakeAddDeposit.setPayload(req.payload);
+  return pbStakeAddDeposit;
+}
+
+export function toActionStakeRestake(req: IStakeRestake | undefined): any {
+  if (!req) {
+    return undefined;
+  }
+  const pbStakeRestake = new actionPb.StakeRestake();
+  pbStakeRestake.setBucketindex(req.bucketIndex);
+  pbStakeRestake.setStakedduration(req.stakedDuration);
+  pbStakeRestake.setAutostake(req.autoStake);
+  pbStakeRestake.setPayload(req.payload);
+  return pbStakeRestake;
+}
+
+export function toActionStakeChangeCandidate(
+  req: IStakeChangeCandidate | undefined
+): any {
+  if (!req) {
+    return undefined;
+  }
+  const pbStakeChangeCandidate = new actionPb.StakeChangeCandidate();
+  pbStakeChangeCandidate.setBucketindex(req.bucketIndex);
+  pbStakeChangeCandidate.setCandidatename(req.candidateName);
+  pbStakeChangeCandidate.setPayload(req.payload);
+  return pbStakeChangeCandidate;
+}
+
+export function toActionStakeTransferOwnership(
+  req: IStakeTransferOwnership | undefined
+): any {
+  if (!req) {
+    return undefined;
+  }
+  const pbStakeTransferOwnership = new actionPb.StakeTransferOwnership();
+  pbStakeTransferOwnership.setBucketindex(req.bucketIndex);
+  pbStakeTransferOwnership.setVoteraddress(req.voterAddress);
+  pbStakeTransferOwnership.setPayload(req.payload);
+  return pbStakeTransferOwnership;
+}
+
+export function toActionCandidateRegister(
+  req: ICandidateRegister | undefined
+): any {
+  if (!req) {
+    return undefined;
+  }
+  const pbCandidateRegister = new actionPb.CandidateRegister();
+  const pbCandidateBasicInfo = new actionPb.CandidateBasicInfo();
+  pbCandidateBasicInfo.setName(req.candidate.name);
+  pbCandidateBasicInfo.setOperatoraddress(req.candidate.operatorAddress);
+  pbCandidateBasicInfo.setRewardaddress(req.candidate.rewardAddress);
+  pbCandidateRegister.setCandidate(pbCandidateBasicInfo);
+  pbCandidateRegister.setStakedamount(req.stakedAmount);
+  pbCandidateRegister.setStakedduration(req.stakedDuration);
+  pbCandidateRegister.setAutostake(req.autoStake);
+  pbCandidateRegister.setOwneraddress(req.ownerAddress);
+  pbCandidateRegister.setPayload(req.payload);
+  return pbCandidateRegister;
+}
+
+export function toActionCandidateBasicInfo(
+  req: ICandidateBasicInfo | undefined
+): any {
+  if (!req) {
+    return undefined;
+  }
+  const pbCandidateBasicInfo = new actionPb.CandidateBasicInfo();
+  pbCandidateBasicInfo.setName(req.name);
+  pbCandidateBasicInfo.setOperatoraddress(req.operatorAddress);
+  pbCandidateBasicInfo.setRewardaddress(req.rewardAddress);
+  return pbCandidateBasicInfo;
+}
+
 export function toAction(req: IAction): any {
   const pbActionCore = new actionPb.ActionCore();
 
@@ -1164,6 +1282,26 @@ export function toAction(req: IAction): any {
       toActionClaimFromRewardingFund(core.claimFromRewardingFund)
     );
     pbActionCore.setGrantreward(toActionGrantReward(core.grantReward));
+
+    pbActionCore.setStakecreate(toActionStakeCreate(core.stakeCreate));
+    pbActionCore.setStakeunstake(toActionStakeReclaim(core.stakeUnstake));
+    pbActionCore.setStakewithdraw(toActionStakeReclaim(core.stakeWithdraw));
+    pbActionCore.setStakeadddeposit(
+      toActionStakeAddDeposit(core.stakeAddDeposit)
+    );
+    pbActionCore.setStakerestake(toActionStakeRestake(core.stakeRestake));
+    pbActionCore.setStakechangecandidate(
+      toActionStakeChangeCandidate(core.stakeChangeCandidate)
+    );
+    pbActionCore.setStaketransferownership(
+      toActionStakeTransferOwnership(core.stakeTransferOwnership)
+    );
+    pbActionCore.setCandidateregister(
+      toActionCandidateRegister(core.candidateRegister)
+    );
+    pbActionCore.setCandidateupdate(
+      toActionCandidateBasicInfo(core.candidateUpdate)
+    );
   }
 
   const pbAction = new actionPb.Action();
@@ -1552,6 +1690,129 @@ export const GetActionsRequest = {
     };
   },
 
+  fromStakeCreate(
+    pbRes: actionPb.StakeCreate | undefined
+  ): IStakeCreate | undefined {
+    if (!pbRes) {
+      return undefined;
+    }
+    return {
+      candidateName: pbRes.getCandidatename(),
+      stakedAmount: pbRes.getStakedamount(),
+      stakedDuration: pbRes.getStakedduration(),
+      autoStake: pbRes.getAutostake(),
+      // @ts-ignore
+      payload: Buffer.from(pbRes.getPayload())
+    };
+  },
+
+  fromStakeReclaim(
+    pbRes: actionPb.StakeReclaim | undefined
+  ): IStakeReclaim | undefined {
+    if (!pbRes) {
+      return undefined;
+    }
+    return {
+      bucketIndex: pbRes.getBucketindex(),
+      // @ts-ignore
+      payload: Buffer.from(pbRes.getPayload())
+    };
+  },
+
+  fromStakeAddDeposit(
+    pbRes: actionPb.StakeAddDeposit | undefined
+  ): IStakeAddDeposit | undefined {
+    if (!pbRes) {
+      return undefined;
+    }
+    return {
+      bucketIndex: pbRes.getBucketindex(),
+      amount: pbRes.getAmount(),
+      // @ts-ignore
+      payload: Buffer.from(pbRes.getPayload())
+    };
+  },
+
+  fromStakeRestake(
+    pbRes: actionPb.StakeRestake | undefined
+  ): IStakeRestake | undefined {
+    if (!pbRes) {
+      return undefined;
+    }
+    return {
+      bucketIndex: pbRes.getBucketindex(),
+      stakedDuration: pbRes.getStakedduration(),
+      autoStake: pbRes.getAutostake(),
+      // @ts-ignore
+      payload: Buffer.from(pbRes.getPayload())
+    };
+  },
+
+  fromStakeChangeCandidate(
+    pbRes: actionPb.StakeChangeCandidate | undefined
+  ): IStakeChangeCandidate | undefined {
+    if (!pbRes) {
+      return undefined;
+    }
+    return {
+      bucketIndex: pbRes.getBucketindex(),
+      candidateName: pbRes.getCandidatename(),
+      // @ts-ignore
+      payload: Buffer.from(pbRes.getPayload())
+    };
+  },
+
+  fromStakeTransferOwnership(
+    pbRes: actionPb.StakeTransferOwnership | undefined
+  ): IStakeTransferOwnership | undefined {
+    if (!pbRes) {
+      return undefined;
+    }
+    return {
+      bucketIndex: pbRes.getBucketindex(),
+      voterAddress: pbRes.getVoteraddress(),
+      // @ts-ignore
+      payload: Buffer.from(pbRes.getPayload())
+    };
+  },
+
+  fromCandidateRegister(
+    pbRes: actionPb.CandidateRegister | undefined
+  ): ICandidateRegister | undefined {
+    if (!pbRes) {
+      return undefined;
+    }
+    return {
+      candidate: {
+        // @ts-ignore
+        name: pbRes.getCandidate().getName(),
+        // @ts-ignore
+        operatorAddress: pbRes.getCandidate().getOperatoraddress(),
+        // @ts-ignore
+        rewardAddress: pbRes.getCandidate().getRewardaddress()
+      },
+      stakedAmount: pbRes.getStakedamount(),
+      stakedDuration: pbRes.getStakedduration(),
+      autoStake: pbRes.getAutostake(),
+      ownerAddress: pbRes.getOwneraddress(),
+      // @ts-ignore
+      payload: Buffer.from(pbRes.getPayload())
+    };
+  },
+
+  fromCandidateUpdate(
+    pbRes: actionPb.CandidateBasicInfo | undefined
+  ): ICandidateBasicInfo | undefined {
+    if (!pbRes) {
+      return undefined;
+    }
+    return {
+      name: pbRes.getName(),
+      operatorAddress: pbRes.getOperatoraddress(),
+      rewardAddress: pbRes.getRewardaddress()
+    };
+  },
+
   getPutPollResult(req: PutPollResult | undefined): IPutPollResult | undefined {
     if (!req) {
       return undefined;
@@ -1666,6 +1927,33 @@ export const GetActionsRequest = {
             ),
             grantReward: GetActionsRequest.fromGrantReward(
               rawActionCore.getGrantreward()
+            ),
+            stakeCreate: GetActionsRequest.fromStakeCreate(
+              rawActionCore.getStakecreate()
+            ),
+            stakeUnstake: GetActionsRequest.fromStakeReclaim(
+              rawActionCore.getStakeunstake()
+            ),
+            stakeWithdraw: GetActionsRequest.fromStakeReclaim(
+              rawActionCore.getStakewithdraw()
+            ),
+            stakeAddDeposit: GetActionsRequest.fromStakeAddDeposit(
+              rawActionCore.getStakeadddeposit()
+            ),
+            stakeRestake: GetActionsRequest.fromStakeRestake(
+              rawActionCore.getStakerestake()
+            ),
+            stakeChangeCandidate: GetActionsRequest.fromStakeChangeCandidate(
+              rawActionCore.getStakechangecandidate()
+            ),
+            stakeTransferOwnership: GetActionsRequest.fromStakeTransferOwnership(
+              rawActionCore.getStaketransferownership()
+            ),
+            candidateRegister: GetActionsRequest.fromCandidateRegister(
+              rawActionCore.getCandidateregister()
+            ),
+            candidateUpdate: GetActionsRequest.fromCandidateUpdate(
+              rawActionCore.getCandidateupdate()
             ),
             putPollResult: GetActionsRequest.getPutPollResult(
               rawActionCore.getPutpollresult()
