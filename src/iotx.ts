@@ -33,18 +33,16 @@ export class Iotx extends RpcMethod {
     });
     this.accounts = new Accounts();
     this.signer = opts && opts.signer;
-    setTimeout(() => {
+    setTimeout(async () => {
       if (this.signer && this.signer.getAccounts) {
-        this.signer
-          .getAccounts()
-          .then(accounts => {
-            accounts.forEach(account => {
-              this.accounts.addAccount(account);
-            });
-          })
-          .catch(err => {
-            throw new Error(`fetch remote accounts address error: ${err}`);
+        try {
+          const accounts = await this.signer.getAccounts();
+          accounts.forEach(account => {
+            this.accounts.addAccount(account);
           });
+        } catch (err) {
+          throw new Error(`fetch remote accounts address error: ${err}`);
+        }
       }
     }, 2000);
   }

@@ -266,7 +266,10 @@ test.skip("RpcMethod.readStateStaking", async t => {
 
 test.serial("RpcMethod.getEpochMeta", async t => {
   const client = new RpcMethod(TEST_HOSTNAME);
-  const epochData = await client.getEpochMeta({ epochNumber: 1 });
+  const latest = await client.getChainMeta({});
+  const epochData = await client.getEpochMeta({
+    epochNumber: latest.chainMeta.epoch.num
+  });
   t.truthy(epochData.totalBlocks);
 });
 

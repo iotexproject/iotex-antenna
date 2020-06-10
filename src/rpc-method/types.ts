@@ -131,12 +131,17 @@ export const GetChainMetaRequest = {
       chainMeta: meta
     };
     if (meta) {
-      const epochData = meta.Epoch;
+      const epochData = meta.getEpoch();
       res.chainMeta = {
         height: meta.getHeight(),
         numActions: meta.getNumactions(),
         tps: meta.getTps(),
-        epoch: epochData
+        epoch: {
+          num: epochData && epochData.getNum(),
+          height: epochData && epochData.getHeight(),
+          gravityChainStartHeight:
+            epochData && epochData.getGravitychainstartheight()
+        }
       };
     }
     return res;

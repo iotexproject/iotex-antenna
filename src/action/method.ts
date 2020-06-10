@@ -5,18 +5,18 @@ import { Envelop, SealedEnvelop } from "./envelop";
 import {
   ActionError,
   ActionErrorCode,
+  CandidateRegister,
+  CandidateUpdate,
   ClaimFromRewardingFund,
   Execution,
-  Transfer,
+  StakeAddDeposit,
+  StakeChangeCandidate,
   StakeCreate,
+  StakeRestake,
+  StakeTransferOwnership,
   StakeUnstake,
   StakeWithdraw,
-  StakeAddDeposit,
-  StakeRestake,
-  StakeChangeCandidate,
-  StakeTransferOwnership,
-  CandidateRegister,
-  CandidateUpdate
+  Transfer
 } from "./types";
 
 export interface PluginOpts {
