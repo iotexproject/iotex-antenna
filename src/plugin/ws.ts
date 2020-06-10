@@ -32,6 +32,8 @@ export class WsSignerPlugin implements SignerPlugin {
 
   private readonly options: WsSignerPluginOptions;
 
+  public readyState: Promise<number>;
+
   constructor(
     provider: string = "wss://local.iotex.io:64102",
     options: WsSignerPluginOptions = { retryCount: 3, retryDuration: 50 }
@@ -45,12 +47,21 @@ export class WsSignerPlugin implements SignerPlugin {
 
   private init(): void {
     this.ws = new WebSocket(this.provider);
-    this.ws.onopen = (): void => {
-      window.console.log("[antenna-ws] connected");
-    };
-    this.ws.onclose = (): void => {
-      window.console.log("[antenna-ws] disconnected");
-    };
+
+    this.readyState = new Promise(resolve => {
+      this.ws.onopen = (): void => {
+        window.console.log(
+          `[antenna-ws] connected state: ${this.ws.readyState}`
+        );
+        resolve(this.ws.readyState);
+      };
+      this.ws.onclose = (): void => {
+        window.console.log(
+          `[antenna-ws] disconnected state: ${this.ws.readyState}`
+        );
+        resolve(this.ws.readyState);
+      };
+    });
   }
 
   private send(req: WsRequest): void {
