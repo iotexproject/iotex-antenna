@@ -31,6 +31,8 @@ export interface SignerPlugin {
   getAccount?(address: string): Promise<IAccount>;
 
   getAccounts?(): Promise<Array<IAccount>>;
+
+  signMessage(data: string | Buffer | Uint8Array): Promise<Buffer>;
 }
 
 export type AbstractMethodOpts = { signer?: SignerPlugin | undefined };

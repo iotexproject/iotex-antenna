@@ -1,5 +1,5 @@
 /* tslint:disable:no-any */
-import { Account } from "./account/account";
+import { Account, RemoteAccount } from "./account/account";
 import { Accounts } from "./account/accounts";
 import {
   ClaimFromRewardingFundMethod,
@@ -34,11 +34,14 @@ export class Iotx extends RpcMethod {
     this.accounts = new Accounts();
     this.signer = opts && opts.signer;
     setTimeout(async () => {
-      if (this.signer && this.signer.getAccounts) {
+      const signer = this.signer;
+      if (signer && signer.getAccounts) {
         try {
-          const accounts = await this.signer.getAccounts();
+          const accounts = await signer.getAccounts();
           accounts.forEach(account => {
-            this.accounts.addAccount(account);
+            this.accounts.addAccount(
+              new RemoteAccount(account.address, signer)
+            );
           });
         } catch (err) {
           throw new Error(`fetch remote accounts address error: ${err}`);

@@ -14,7 +14,7 @@ const TEXT = "IoTeX is the auto-scalable and privacy-centric blockchain.";
 
 test("Account Sign", async t => {
   const act = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
-  const signed = act.sign(fromUtf8(TEXT));
+  const signed = await act.sign(fromUtf8(TEXT));
   t.deepEqual(
     signed.toString("hex"),
     "99f4ef1005ae6c43548520e08dd11477e9ea59317087f9c6f33bc79eb701b14b043ff0d177bc419e585c0ecae42420fabb837e602c8a3578ea17dd1a8ed862e301"

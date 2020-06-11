@@ -1,19 +1,13 @@
 // @ts-ignore
 import window from "global/window";
 import WebSocket from "isomorphic-ws";
-import { Account } from "../account/account";
-import { Envelop } from "../action/envelop";
-import { SignerPlugin } from "../action/method";
+import { Account } from "../../account/account";
+import { Envelop } from "../../action/envelop";
+import { SignerPlugin } from "../../action/method";
+import { IRequest } from "./request";
 
 // tslint:disable-next-line:insecure-random
 let reqId = Math.round(Math.random() * 10000);
-
-interface IRequest {
-  reqId: number;
-  type: "SIGN_AND_SEND" | "GET_ACCOUNTS";
-  envelop?: string; // serialized proto string
-  origin?: string;
-}
 
 export interface WsSignerPluginOptions {
   retryCount: number;
@@ -26,7 +20,7 @@ export interface WsRequest {
 }
 
 export class WsSignerPlugin implements SignerPlugin {
-  private ws: WebSocket;
+  public ws: WebSocket;
 
   private readonly provider: string;
 
@@ -53,7 +47,7 @@ export class WsSignerPlugin implements SignerPlugin {
     };
   }
 
-  private send(req: WsRequest): void {
+  public send(req: WsRequest): void {
     const readyState = this.ws.readyState;
 
     if (readyState === 1) {
@@ -168,5 +162,33 @@ export class WsSignerPlugin implements SignerPlugin {
       origin = origin.replace("www.", "");
     }
     return origin;
+  }
+
+  public async signMessage(
+    data: string | Buffer | Uint8Array
+  ): Promise<Buffer> {
+    const id = reqId++;
+    const req: IRequest = {
+      reqId: id,
+      msg: data,
+      type: "SIGN_MSG"
+    };
+    this.send(req);
+    return new Promise<Buffer>(resolve => {
+      this.ws.onmessage = event => {
+        let resp = { reqId: -1, sig: new Buffer("") };
+        try {
+          if (typeof event.data === "string") {
+            resp = JSON.parse(event.data);
+          }
+        } catch (_) {
+          resolve(new Buffer(""));
+          return;
+        }
+        if (resp.reqId === id) {
+          resolve(resp.sig);
+        }
+      };
+    });
   }
 }

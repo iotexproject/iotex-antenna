@@ -62,7 +62,10 @@ export class Accounts extends Array<IAccount> {
     return this.wallet.remove(address);
   }
 
-  public sign(data: string | Buffer | Uint8Array, privateKey: string): Buffer {
+  public async sign(
+    data: string | Buffer | Uint8Array,
+    privateKey: string
+  ): Promise<Buffer> {
     return Account.fromPrivateKey(privateKey).sign(data);
   }
 }

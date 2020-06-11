@@ -82,7 +82,7 @@ export async function sign(
     payload
   );
   const acct = Account.fromPrivateKey(secretOrPrivateKey);
-  const sigHex = acct.sign(fromUtf8(securedInput));
+  const sigHex = await acct.sign(fromUtf8(securedInput));
   const signature = base64url(sigHex.toString("hex"), "hex");
   return `${securedInput}.${signature}`;
 }
