@@ -115,7 +115,7 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "@grpc/proto-loader": "0.5.1",
+    "@grpc/proto-loader": "0.5.4",
     "@types/dotenv": "^6.1.1",
     "@types/ethereumjs-abi": "^0.6.3",
     "@types/google-protobuf": "^3.2.7",
