@@ -32,7 +32,7 @@ export interface SignerPlugin {
 
   getAccounts?(): Promise<Array<IAccount>>;
 
-  signMessage(data: string | Buffer | Uint8Array): Promise<Buffer>;
+  signMessage?(data: string | Buffer | Uint8Array): Promise<Buffer>;
 }
 
 export type AbstractMethodOpts = { signer?: SignerPlugin | undefined };

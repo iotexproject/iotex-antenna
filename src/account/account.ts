@@ -9,7 +9,7 @@ export interface IAccount {
   publicKey: string;
 
   sign(data: string | Buffer | Uint8Array): Promise<Buffer>;
-  recover(message: string, signature: Buffer, preFixed: boolean): String;
+  recover(message: string, signature: Buffer, preFixed: boolean): string;
   hashMessage(data: string | Buffer | Uint8Array): Buffer;
 }
 
@@ -53,8 +53,8 @@ export class Account implements IAccount {
   public recover(
     message: string | Buffer | Uint8Array,
     signature: Buffer,
-    preFixed: boolean
-  ): String {
+    preFixed: boolean = false
+  ): string {
     let bytes = message;
     if (!preFixed) {
       bytes = this.hashMessage(message);

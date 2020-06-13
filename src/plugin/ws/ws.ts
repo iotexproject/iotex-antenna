@@ -176,7 +176,7 @@ export class WsSignerPlugin implements SignerPlugin {
     this.send(req);
     return new Promise<Buffer>(resolve => {
       this.ws.onmessage = event => {
-        let resp = { reqId: -1, sig: new Buffer("") };
+        let resp = { reqId: -1, sig: "" };
         try {
           if (typeof event.data === "string") {
             resp = JSON.parse(event.data);
@@ -186,7 +186,7 @@ export class WsSignerPlugin implements SignerPlugin {
           return;
         }
         if (resp.reqId === id) {
-          resolve(resp.sig);
+          resolve(Buffer.from(resp.sig, "hex"));
         }
       };
     });
