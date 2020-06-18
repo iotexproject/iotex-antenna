@@ -111,16 +111,13 @@ export default class RpcMethod implements IRpcMethod {
     return new Date(Date.now() + this.timeout).getTime();
   }
 
-  private getMetadata(): { [s: string]: string | number } {
+  private getMetadata(): grpc.Metadata {
+    const metadata = new grpc.Metadata();
+    metadata.add("deadline", this.getDeadline().toString());
     if (this.apiToken) {
-      return {
-        deadline: this.getDeadline(),
-        authorization: `bearer ${this.apiToken}`
-      };
+      metadata.add("authorization", `bearer ${this.apiToken}`);
     }
-    return {
-      deadline: this.getDeadline()
-    };
+    return metadata;
   }
 
   public async getAccount(
