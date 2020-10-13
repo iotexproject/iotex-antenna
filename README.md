@@ -4,7 +4,7 @@
 
 iotex-antenna is our SDK allowing you to interact with a local or remote iotex blockchain node, using a gRPC or gRPC-web connection.
 
-- [Documentation](https://docs.iotex.io/docs/libraries-and-tools.html)
+- [Documentation](https://docs.iotex.io/developer/sdk/install-antenna-js.html)
 - [Reference](https://iotexproject.github.io/iotex-antenna/)
 
 ## Antenna features
