@@ -817,7 +817,11 @@ export enum IReadStakingDataMethodName {
   BUCKETS_BY_VOTER = 2,
   BUCKETS_BY_CANDIDATE = 3,
   CANDIDATES = 4,
-  CANDIDATE_BY_NAME = 5
+  CANDIDATE_BY_NAME = 5,
+  BUCKETS_BY_INDEXES = 6,
+  CANDIDATE_BY_ADDRESS = 7,
+  TOTAL_STAKING_AMOUNT = 8,
+  BUCKETS_COUNT = 9
 }
 
 export interface IReadStakingDataMethod {
@@ -847,12 +851,28 @@ export interface IReadStakingDataRequestCandidateByName {
   candName: string;
 }
 
+export interface IReadStakingDataRequestCandidateByAddress {
+  ownerAddr: string;
+}
+
+export interface IReadStakingDataRequestVoteBucketsByIndexes {
+  index: Array<number>;
+}
+
+export interface IReadStakingDataRequestTotalStakingAmount {}
+
+export interface IReadStakingDataRequestBucketsCount {}
+
 export interface IReadStakingDataRequest {
   buckets?: IReadStakingDataRequestVoteBuckets;
   bucketsByVoter?: IReadStakingDataRequestVoteBucketsByVoter;
   bucketsByCandidate?: IReadStakingDataRequestVoteBucketsByCandidate;
+  bucketsByIndexes?: IReadStakingDataRequestVoteBucketsByIndexes;
   candidates?: IReadStakingDataRequestCandidates;
   candidateByName?: IReadStakingDataRequestCandidateByName;
+  candidateByAddress?: IReadStakingDataRequestCandidateByAddress;
+  totalStakingAmount?: IReadStakingDataRequestTotalStakingAmount;
+  bucketsCount?: IReadStakingDataRequestBucketsCount;
 }
 
 export function toActionTransfer(req: ITransfer | undefined): any {
@@ -2811,6 +2831,18 @@ export const IReadStakingDataMethodToBuffer = (
     case ReadStakingDataMethod.Name.CANDIDATE_BY_NAME.valueOf():
       pbObj.setMethod(ReadStakingDataMethod.Name.CANDIDATE_BY_NAME);
       break;
+    case ReadStakingDataMethod.Name.BUCKETS_BY_INDEXES.valueOf():
+      pbObj.setMethod(ReadStakingDataMethod.Name.BUCKETS_BY_INDEXES);
+      break;
+    case ReadStakingDataMethod.Name.CANDIDATE_BY_ADDRESS.valueOf():
+      pbObj.setMethod(ReadStakingDataMethod.Name.CANDIDATE_BY_ADDRESS);
+      break;
+    case ReadStakingDataMethod.Name.TOTAL_STAKING_AMOUNT.valueOf():
+      pbObj.setMethod(ReadStakingDataMethod.Name.TOTAL_STAKING_AMOUNT);
+      break;
+    case ReadStakingDataMethod.Name.BUCKETS_COUNT.valueOf():
+      pbObj.setMethod(ReadStakingDataMethod.Name.BUCKETS_COUNT);
+      break;
     default:
       throw new Error(`unknow method ${req.method}`);
   }
@@ -2860,7 +2892,24 @@ export const IReadStakingDataRequestToBuffer = (
     candidateByName.setCandname(req.candidateByName.candName);
     pbObj.setCandidatebyname(candidateByName);
   }
-
+  if (req.bucketsByIndexes) {
+    const bucketsByIndexes = new ReadStakingDataRequest.VoteBucketsByIndexes();
+    bucketsByIndexes.setIndexList(req.bucketsByIndexes.index);
+    pbObj.setBucketsbyindexes(bucketsByIndexes);
+  }
+  if (req.candidateByAddress) {
+    const candidateByAddress = new ReadStakingDataRequest.CandidateByAddress();
+    candidateByAddress.setOwneraddr(req.candidateByAddress.ownerAddr);
+    pbObj.setCandidatebyaddress(candidateByAddress);
+  }
+  if (req.totalStakingAmount) {
+    const totalStakingAmount = new ReadStakingDataRequest.TotalStakingAmount();
+    pbObj.setTotalstakingamount(totalStakingAmount);
+  }
+  if (req.bucketsCount) {
+    const bucketsCount = new ReadStakingDataRequest.BucketsCount();
+    pbObj.setBucketscount(bucketsCount);
+  }
   return Buffer.from(pbObj.serializeBinary());
 };
 
