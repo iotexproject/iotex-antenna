@@ -1,11 +1,13 @@
-import * as jspb from "google-protobuf"
+import * as jspb from 'google-protobuf'
+
+
 
 export class PaginationParam extends jspb.Message {
   getOffset(): number;
-  setOffset(value: number): void;
+  setOffset(value: number): PaginationParam;
 
   getLimit(): number;
-  setLimit(value: number): void;
+  setLimit(value: number): PaginationParam;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PaginationParam.AsObject;
@@ -24,7 +26,7 @@ export namespace PaginationParam {
 
 export class ReadStakingDataMethod extends jspb.Message {
   getMethod(): ReadStakingDataMethod.Name;
-  setMethod(value: ReadStakingDataMethod.Name): void;
+  setMethod(value: ReadStakingDataMethod.Name): ReadStakingDataMethod;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ReadStakingDataMethod.AsObject;
@@ -46,39 +48,58 @@ export namespace ReadStakingDataMethod {
     BUCKETS_BY_CANDIDATE = 3,
     CANDIDATES = 4,
     CANDIDATE_BY_NAME = 5,
+    BUCKETS_BY_INDEXES = 6,
+    CANDIDATE_BY_ADDRESS = 7,
+    TOTAL_STAKING_AMOUNT = 8,
+    BUCKETS_COUNT = 9,
   }
 }
 
 export class ReadStakingDataRequest extends jspb.Message {
   getBuckets(): ReadStakingDataRequest.VoteBuckets | undefined;
-  setBuckets(value?: ReadStakingDataRequest.VoteBuckets): void;
+  setBuckets(value?: ReadStakingDataRequest.VoteBuckets): ReadStakingDataRequest;
   hasBuckets(): boolean;
-  clearBuckets(): void;
-  hasBuckets(): boolean;
+  clearBuckets(): ReadStakingDataRequest;
 
   getBucketsbyvoter(): ReadStakingDataRequest.VoteBucketsByVoter | undefined;
-  setBucketsbyvoter(value?: ReadStakingDataRequest.VoteBucketsByVoter): void;
+  setBucketsbyvoter(value?: ReadStakingDataRequest.VoteBucketsByVoter): ReadStakingDataRequest;
   hasBucketsbyvoter(): boolean;
-  clearBucketsbyvoter(): void;
-  hasBucketsbyvoter(): boolean;
+  clearBucketsbyvoter(): ReadStakingDataRequest;
 
   getBucketsbycandidate(): ReadStakingDataRequest.VoteBucketsByCandidate | undefined;
-  setBucketsbycandidate(value?: ReadStakingDataRequest.VoteBucketsByCandidate): void;
+  setBucketsbycandidate(value?: ReadStakingDataRequest.VoteBucketsByCandidate): ReadStakingDataRequest;
   hasBucketsbycandidate(): boolean;
-  clearBucketsbycandidate(): void;
-  hasBucketsbycandidate(): boolean;
+  clearBucketsbycandidate(): ReadStakingDataRequest;
 
   getCandidates(): ReadStakingDataRequest.Candidates | undefined;
-  setCandidates(value?: ReadStakingDataRequest.Candidates): void;
+  setCandidates(value?: ReadStakingDataRequest.Candidates): ReadStakingDataRequest;
   hasCandidates(): boolean;
-  clearCandidates(): void;
-  hasCandidates(): boolean;
+  clearCandidates(): ReadStakingDataRequest;
 
   getCandidatebyname(): ReadStakingDataRequest.CandidateByName | undefined;
-  setCandidatebyname(value?: ReadStakingDataRequest.CandidateByName): void;
+  setCandidatebyname(value?: ReadStakingDataRequest.CandidateByName): ReadStakingDataRequest;
   hasCandidatebyname(): boolean;
-  clearCandidatebyname(): void;
-  hasCandidatebyname(): boolean;
+  clearCandidatebyname(): ReadStakingDataRequest;
+
+  getBucketsbyindexes(): ReadStakingDataRequest.VoteBucketsByIndexes | undefined;
+  setBucketsbyindexes(value?: ReadStakingDataRequest.VoteBucketsByIndexes): ReadStakingDataRequest;
+  hasBucketsbyindexes(): boolean;
+  clearBucketsbyindexes(): ReadStakingDataRequest;
+
+  getCandidatebyaddress(): ReadStakingDataRequest.CandidateByAddress | undefined;
+  setCandidatebyaddress(value?: ReadStakingDataRequest.CandidateByAddress): ReadStakingDataRequest;
+  hasCandidatebyaddress(): boolean;
+  clearCandidatebyaddress(): ReadStakingDataRequest;
+
+  getTotalstakingamount(): ReadStakingDataRequest.TotalStakingAmount | undefined;
+  setTotalstakingamount(value?: ReadStakingDataRequest.TotalStakingAmount): ReadStakingDataRequest;
+  hasTotalstakingamount(): boolean;
+  clearTotalstakingamount(): ReadStakingDataRequest;
+
+  getBucketscount(): ReadStakingDataRequest.BucketsCount | undefined;
+  setBucketscount(value?: ReadStakingDataRequest.BucketsCount): ReadStakingDataRequest;
+  hasBucketscount(): boolean;
+  clearBucketscount(): ReadStakingDataRequest;
 
   getRequestCase(): ReadStakingDataRequest.RequestCase;
 
@@ -97,13 +118,17 @@ export namespace ReadStakingDataRequest {
     bucketsbycandidate?: ReadStakingDataRequest.VoteBucketsByCandidate.AsObject,
     candidates?: ReadStakingDataRequest.Candidates.AsObject,
     candidatebyname?: ReadStakingDataRequest.CandidateByName.AsObject,
+    bucketsbyindexes?: ReadStakingDataRequest.VoteBucketsByIndexes.AsObject,
+    candidatebyaddress?: ReadStakingDataRequest.CandidateByAddress.AsObject,
+    totalstakingamount?: ReadStakingDataRequest.TotalStakingAmount.AsObject,
+    bucketscount?: ReadStakingDataRequest.BucketsCount.AsObject,
   }
 
   export class VoteBuckets extends jspb.Message {
     getPagination(): PaginationParam | undefined;
-    setPagination(value?: PaginationParam): void;
+    setPagination(value?: PaginationParam): VoteBuckets;
     hasPagination(): boolean;
-    clearPagination(): void;
+    clearPagination(): VoteBuckets;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): VoteBuckets.AsObject;
@@ -122,12 +147,12 @@ export namespace ReadStakingDataRequest {
 
   export class VoteBucketsByVoter extends jspb.Message {
     getVoteraddress(): string;
-    setVoteraddress(value: string): void;
+    setVoteraddress(value: string): VoteBucketsByVoter;
 
     getPagination(): PaginationParam | undefined;
-    setPagination(value?: PaginationParam): void;
+    setPagination(value?: PaginationParam): VoteBucketsByVoter;
     hasPagination(): boolean;
-    clearPagination(): void;
+    clearPagination(): VoteBucketsByVoter;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): VoteBucketsByVoter.AsObject;
@@ -147,12 +172,12 @@ export namespace ReadStakingDataRequest {
 
   export class VoteBucketsByCandidate extends jspb.Message {
     getCandname(): string;
-    setCandname(value: string): void;
+    setCandname(value: string): VoteBucketsByCandidate;
 
     getPagination(): PaginationParam | undefined;
-    setPagination(value?: PaginationParam): void;
+    setPagination(value?: PaginationParam): VoteBucketsByCandidate;
     hasPagination(): boolean;
-    clearPagination(): void;
+    clearPagination(): VoteBucketsByCandidate;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): VoteBucketsByCandidate.AsObject;
@@ -172,9 +197,9 @@ export namespace ReadStakingDataRequest {
 
   export class Candidates extends jspb.Message {
     getPagination(): PaginationParam | undefined;
-    setPagination(value?: PaginationParam): void;
+    setPagination(value?: PaginationParam): Candidates;
     hasPagination(): boolean;
-    clearPagination(): void;
+    clearPagination(): Candidates;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Candidates.AsObject;
@@ -193,7 +218,7 @@ export namespace ReadStakingDataRequest {
 
   export class CandidateByName extends jspb.Message {
     getCandname(): string;
-    setCandname(value: string): void;
+    setCandname(value: string): CandidateByName;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): CandidateByName.AsObject;
@@ -210,6 +235,76 @@ export namespace ReadStakingDataRequest {
   }
 
 
+  export class VoteBucketsByIndexes extends jspb.Message {
+    getIndexList(): Array<number>;
+    setIndexList(value: Array<number>): VoteBucketsByIndexes;
+    clearIndexList(): VoteBucketsByIndexes;
+    addIndex(value: number, index?: number): VoteBucketsByIndexes;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): VoteBucketsByIndexes.AsObject;
+    static toObject(includeInstance: boolean, msg: VoteBucketsByIndexes): VoteBucketsByIndexes.AsObject;
+    static serializeBinaryToWriter(message: VoteBucketsByIndexes, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): VoteBucketsByIndexes;
+    static deserializeBinaryFromReader(message: VoteBucketsByIndexes, reader: jspb.BinaryReader): VoteBucketsByIndexes;
+  }
+
+  export namespace VoteBucketsByIndexes {
+    export type AsObject = {
+      indexList: Array<number>,
+    }
+  }
+
+
+  export class CandidateByAddress extends jspb.Message {
+    getOwneraddr(): string;
+    setOwneraddr(value: string): CandidateByAddress;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): CandidateByAddress.AsObject;
+    static toObject(includeInstance: boolean, msg: CandidateByAddress): CandidateByAddress.AsObject;
+    static serializeBinaryToWriter(message: CandidateByAddress, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): CandidateByAddress;
+    static deserializeBinaryFromReader(message: CandidateByAddress, reader: jspb.BinaryReader): CandidateByAddress;
+  }
+
+  export namespace CandidateByAddress {
+    export type AsObject = {
+      owneraddr: string,
+    }
+  }
+
+
+  export class TotalStakingAmount extends jspb.Message {
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): TotalStakingAmount.AsObject;
+    static toObject(includeInstance: boolean, msg: TotalStakingAmount): TotalStakingAmount.AsObject;
+    static serializeBinaryToWriter(message: TotalStakingAmount, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): TotalStakingAmount;
+    static deserializeBinaryFromReader(message: TotalStakingAmount, reader: jspb.BinaryReader): TotalStakingAmount;
+  }
+
+  export namespace TotalStakingAmount {
+    export type AsObject = {
+    }
+  }
+
+
+  export class BucketsCount extends jspb.Message {
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): BucketsCount.AsObject;
+    static toObject(includeInstance: boolean, msg: BucketsCount): BucketsCount.AsObject;
+    static serializeBinaryToWriter(message: BucketsCount, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): BucketsCount;
+    static deserializeBinaryFromReader(message: BucketsCount, reader: jspb.BinaryReader): BucketsCount;
+  }
+
+  export namespace BucketsCount {
+    export type AsObject = {
+    }
+  }
+
+
   export enum RequestCase { 
     REQUEST_NOT_SET = 0,
     BUCKETS = 1,
@@ -217,6 +312,10 @@ export namespace ReadStakingDataRequest {
     BUCKETSBYCANDIDATE = 3,
     CANDIDATES = 4,
     CANDIDATEBYNAME = 5,
+    BUCKETSBYINDEXES = 6,
+    CANDIDATEBYADDRESS = 7,
+    TOTALSTAKINGAMOUNT = 8,
+    BUCKETSCOUNT = 9,
   }
 }
 
