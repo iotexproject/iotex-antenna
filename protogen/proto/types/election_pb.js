@@ -1,3 +1,4 @@
+// source: proto/types/election.proto
 /**
  * @fileoverview
  * @enhanceable
@@ -42,13 +43,15 @@ if (goog.DEBUG && !COMPILED) {
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.ElectionBucket.prototype.toObject = function(opt_includeInstance) {
@@ -58,8 +61,8 @@ proto.iotextypes.ElectionBucket.prototype.toObject = function(opt_includeInstanc
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.ElectionBucket} msg The msg instance to transform.
  * @return {!Object}
@@ -72,7 +75,7 @@ proto.iotextypes.ElectionBucket.toObject = function(includeInstance, msg) {
     amount: msg.getAmount_asB64(),
     starttime: (f = msg.getStarttime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     duration: (f = msg.getDuration()) && google_protobuf_duration_pb.Duration.toObject(includeInstance, f),
-    decay: jspb.Message.getFieldWithDefault(msg, 6, false)
+    decay: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
   };
 
   if (includeInstance) {
@@ -244,9 +247,12 @@ proto.iotextypes.ElectionBucket.prototype.getVoter_asU8 = function() {
 };
 
 
-/** @param {!(string|Uint8Array)} value */
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.iotextypes.ElectionBucket} returns this
+ */
 proto.iotextypes.ElectionBucket.prototype.setVoter = function(value) {
-  jspb.Message.setProto3BytesField(this, 1, value);
+  return jspb.Message.setProto3BytesField(this, 1, value);
 };
 
 
@@ -283,9 +289,12 @@ proto.iotextypes.ElectionBucket.prototype.getCandidate_asU8 = function() {
 };
 
 
-/** @param {!(string|Uint8Array)} value */
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.iotextypes.ElectionBucket} returns this
+ */
 proto.iotextypes.ElectionBucket.prototype.setCandidate = function(value) {
-  jspb.Message.setProto3BytesField(this, 2, value);
+  return jspb.Message.setProto3BytesField(this, 2, value);
 };
 
 
@@ -322,9 +331,12 @@ proto.iotextypes.ElectionBucket.prototype.getAmount_asU8 = function() {
 };
 
 
-/** @param {!(string|Uint8Array)} value */
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.iotextypes.ElectionBucket} returns this
+ */
 proto.iotextypes.ElectionBucket.prototype.setAmount = function(value) {
-  jspb.Message.setProto3BytesField(this, 3, value);
+  return jspb.Message.setProto3BytesField(this, 3, value);
 };
 
 
@@ -338,17 +350,21 @@ proto.iotextypes.ElectionBucket.prototype.getStarttime = function() {
 };
 
 
-/** @param {?proto.google.protobuf.Timestamp|undefined} value */
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.iotextypes.ElectionBucket} returns this
+*/
 proto.iotextypes.ElectionBucket.prototype.setStarttime = function(value) {
-  jspb.Message.setWrapperField(this, 4, value);
+  return jspb.Message.setWrapperField(this, 4, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotextypes.ElectionBucket} returns this
  */
 proto.iotextypes.ElectionBucket.prototype.clearStarttime = function() {
-  this.setStarttime(undefined);
+  return this.setStarttime(undefined);
 };
 
 
@@ -371,17 +387,21 @@ proto.iotextypes.ElectionBucket.prototype.getDuration = function() {
 };
 
 
-/** @param {?proto.google.protobuf.Duration|undefined} value */
+/**
+ * @param {?proto.google.protobuf.Duration|undefined} value
+ * @return {!proto.iotextypes.ElectionBucket} returns this
+*/
 proto.iotextypes.ElectionBucket.prototype.setDuration = function(value) {
-  jspb.Message.setWrapperField(this, 5, value);
+  return jspb.Message.setWrapperField(this, 5, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotextypes.ElectionBucket} returns this
  */
 proto.iotextypes.ElectionBucket.prototype.clearDuration = function() {
-  this.setDuration(undefined);
+  return this.setDuration(undefined);
 };
 
 
@@ -396,18 +416,19 @@ proto.iotextypes.ElectionBucket.prototype.hasDuration = function() {
 
 /**
  * optional bool decay = 6;
- * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
- * You should avoid comparisons like {@code val === true/false} in those cases.
  * @return {boolean}
  */
 proto.iotextypes.ElectionBucket.prototype.getDecay = function() {
-  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 6, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 6, false));
 };
 
 
-/** @param {boolean} value */
+/**
+ * @param {boolean} value
+ * @return {!proto.iotextypes.ElectionBucket} returns this
+ */
 proto.iotextypes.ElectionBucket.prototype.setDecay = function(value) {
-  jspb.Message.setProto3BooleanField(this, 6, value);
+  return jspb.Message.setProto3BooleanField(this, 6, value);
 };
 
 

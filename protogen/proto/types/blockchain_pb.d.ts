@@ -1,24 +1,25 @@
-import * as jspb from "google-protobuf"
+import * as jspb from 'google-protobuf'
 
 import * as proto_types_action_pb from '../../proto/types/action_pb';
 import * as proto_types_endorsement_pb from '../../proto/types/endorsement_pb';
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
 
+
 export class BlockHeader extends jspb.Message {
   getCore(): BlockHeaderCore | undefined;
-  setCore(value?: BlockHeaderCore): void;
+  setCore(value?: BlockHeaderCore): BlockHeader;
   hasCore(): boolean;
-  clearCore(): void;
+  clearCore(): BlockHeader;
 
   getProducerpubkey(): Uint8Array | string;
   getProducerpubkey_asU8(): Uint8Array;
   getProducerpubkey_asB64(): string;
-  setProducerpubkey(value: Uint8Array | string): void;
+  setProducerpubkey(value: Uint8Array | string): BlockHeader;
 
   getSignature(): Uint8Array | string;
   getSignature_asU8(): Uint8Array;
   getSignature_asB64(): string;
-  setSignature(value: Uint8Array | string): void;
+  setSignature(value: Uint8Array | string): BlockHeader;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockHeader.AsObject;
@@ -38,40 +39,40 @@ export namespace BlockHeader {
 
 export class BlockHeaderCore extends jspb.Message {
   getVersion(): number;
-  setVersion(value: number): void;
+  setVersion(value: number): BlockHeaderCore;
 
   getHeight(): number;
-  setHeight(value: number): void;
+  setHeight(value: number): BlockHeaderCore;
 
   getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): void;
+  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): BlockHeaderCore;
   hasTimestamp(): boolean;
-  clearTimestamp(): void;
+  clearTimestamp(): BlockHeaderCore;
 
   getPrevblockhash(): Uint8Array | string;
   getPrevblockhash_asU8(): Uint8Array;
   getPrevblockhash_asB64(): string;
-  setPrevblockhash(value: Uint8Array | string): void;
+  setPrevblockhash(value: Uint8Array | string): BlockHeaderCore;
 
   getTxroot(): Uint8Array | string;
   getTxroot_asU8(): Uint8Array;
   getTxroot_asB64(): string;
-  setTxroot(value: Uint8Array | string): void;
+  setTxroot(value: Uint8Array | string): BlockHeaderCore;
 
   getDeltastatedigest(): Uint8Array | string;
   getDeltastatedigest_asU8(): Uint8Array;
   getDeltastatedigest_asB64(): string;
-  setDeltastatedigest(value: Uint8Array | string): void;
+  setDeltastatedigest(value: Uint8Array | string): BlockHeaderCore;
 
   getReceiptroot(): Uint8Array | string;
   getReceiptroot_asU8(): Uint8Array;
   getReceiptroot_asB64(): string;
-  setReceiptroot(value: Uint8Array | string): void;
+  setReceiptroot(value: Uint8Array | string): BlockHeaderCore;
 
   getLogsbloom(): Uint8Array | string;
   getLogsbloom_asU8(): Uint8Array;
   getLogsbloom_asB64(): string;
-  setLogsbloom(value: Uint8Array | string): void;
+  setLogsbloom(value: Uint8Array | string): BlockHeaderCore;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockHeaderCore.AsObject;
@@ -96,14 +97,14 @@ export namespace BlockHeaderCore {
 
 export class BlockFooter extends jspb.Message {
   getEndorsementsList(): Array<proto_types_endorsement_pb.Endorsement>;
-  setEndorsementsList(value: Array<proto_types_endorsement_pb.Endorsement>): void;
-  clearEndorsementsList(): void;
+  setEndorsementsList(value: Array<proto_types_endorsement_pb.Endorsement>): BlockFooter;
+  clearEndorsementsList(): BlockFooter;
   addEndorsements(value?: proto_types_endorsement_pb.Endorsement, index?: number): proto_types_endorsement_pb.Endorsement;
 
   getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): void;
+  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): BlockFooter;
   hasTimestamp(): boolean;
-  clearTimestamp(): void;
+  clearTimestamp(): BlockFooter;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockFooter.AsObject;
@@ -122,8 +123,8 @@ export namespace BlockFooter {
 
 export class BlockBody extends jspb.Message {
   getActionsList(): Array<proto_types_action_pb.Action>;
-  setActionsList(value: Array<proto_types_action_pb.Action>): void;
-  clearActionsList(): void;
+  setActionsList(value: Array<proto_types_action_pb.Action>): BlockBody;
+  clearActionsList(): BlockBody;
   addActions(value?: proto_types_action_pb.Action, index?: number): proto_types_action_pb.Action;
 
   serializeBinary(): Uint8Array;
@@ -142,19 +143,19 @@ export namespace BlockBody {
 
 export class Block extends jspb.Message {
   getHeader(): BlockHeader | undefined;
-  setHeader(value?: BlockHeader): void;
+  setHeader(value?: BlockHeader): Block;
   hasHeader(): boolean;
-  clearHeader(): void;
+  clearHeader(): Block;
 
   getBody(): BlockBody | undefined;
-  setBody(value?: BlockBody): void;
+  setBody(value?: BlockBody): Block;
   hasBody(): boolean;
-  clearBody(): void;
+  clearBody(): Block;
 
   getFooter(): BlockFooter | undefined;
-  setFooter(value?: BlockFooter): void;
+  setFooter(value?: BlockFooter): Block;
   hasFooter(): boolean;
-  clearFooter(): void;
+  clearFooter(): Block;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Block.AsObject;
@@ -174,8 +175,8 @@ export namespace Block {
 
 export class Receipts extends jspb.Message {
   getReceiptsList(): Array<proto_types_action_pb.Receipt>;
-  setReceiptsList(value: Array<proto_types_action_pb.Receipt>): void;
-  clearReceiptsList(): void;
+  setReceiptsList(value: Array<proto_types_action_pb.Receipt>): Receipts;
+  clearReceiptsList(): Receipts;
   addReceipts(value?: proto_types_action_pb.Receipt, index?: number): proto_types_action_pb.Receipt;
 
   serializeBinary(): Uint8Array;
@@ -194,13 +195,13 @@ export namespace Receipts {
 
 export class EpochData extends jspb.Message {
   getNum(): number;
-  setNum(value: number): void;
+  setNum(value: number): EpochData;
 
   getHeight(): number;
-  setHeight(value: number): void;
+  setHeight(value: number): EpochData;
 
   getGravitychainstartheight(): number;
-  setGravitychainstartheight(value: number): void;
+  setGravitychainstartheight(value: number): EpochData;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): EpochData.AsObject;
@@ -220,21 +221,21 @@ export namespace EpochData {
 
 export class ChainMeta extends jspb.Message {
   getHeight(): number;
-  setHeight(value: number): void;
+  setHeight(value: number): ChainMeta;
 
   getNumactions(): number;
-  setNumactions(value: number): void;
+  setNumactions(value: number): ChainMeta;
 
   getTps(): number;
-  setTps(value: number): void;
+  setTps(value: number): ChainMeta;
 
   getEpoch(): EpochData | undefined;
-  setEpoch(value?: EpochData): void;
+  setEpoch(value?: EpochData): ChainMeta;
   hasEpoch(): boolean;
-  clearEpoch(): void;
+  clearEpoch(): ChainMeta;
 
   getTpsfloat(): number;
-  setTpsfloat(value: number): void;
+  setTpsfloat(value: number): ChainMeta;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ChainMeta.AsObject;
@@ -256,36 +257,36 @@ export namespace ChainMeta {
 
 export class BlockMeta extends jspb.Message {
   getHash(): string;
-  setHash(value: string): void;
+  setHash(value: string): BlockMeta;
 
   getHeight(): number;
-  setHeight(value: number): void;
+  setHeight(value: number): BlockMeta;
 
   getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): void;
+  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): BlockMeta;
   hasTimestamp(): boolean;
-  clearTimestamp(): void;
+  clearTimestamp(): BlockMeta;
 
   getNumactions(): number;
-  setNumactions(value: number): void;
+  setNumactions(value: number): BlockMeta;
 
   getProduceraddress(): string;
-  setProduceraddress(value: string): void;
+  setProduceraddress(value: string): BlockMeta;
 
   getTransferamount(): string;
-  setTransferamount(value: string): void;
+  setTransferamount(value: string): BlockMeta;
 
   getTxroot(): string;
-  setTxroot(value: string): void;
+  setTxroot(value: string): BlockMeta;
 
   getReceiptroot(): string;
-  setReceiptroot(value: string): void;
+  setReceiptroot(value: string): BlockMeta;
 
   getDeltastatedigest(): string;
-  setDeltastatedigest(value: string): void;
+  setDeltastatedigest(value: string): BlockMeta;
 
   getLogsbloom(): string;
-  setLogsbloom(value: string): void;
+  setLogsbloom(value: string): BlockMeta;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockMeta.AsObject;
@@ -312,19 +313,19 @@ export namespace BlockMeta {
 
 export class AccountMeta extends jspb.Message {
   getAddress(): string;
-  setAddress(value: string): void;
+  setAddress(value: string): AccountMeta;
 
   getBalance(): string;
-  setBalance(value: string): void;
+  setBalance(value: string): AccountMeta;
 
   getNonce(): number;
-  setNonce(value: number): void;
+  setNonce(value: number): AccountMeta;
 
   getPendingnonce(): number;
-  setPendingnonce(value: number): void;
+  setPendingnonce(value: number): AccountMeta;
 
   getNumactions(): number;
-  setNumactions(value: number): void;
+  setNumactions(value: number): AccountMeta;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): AccountMeta.AsObject;

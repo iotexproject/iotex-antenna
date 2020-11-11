@@ -1,3 +1,4 @@
+// source: proto/types/blockchain.proto
 /**
  * @fileoverview
  * @enhanceable
@@ -242,13 +243,15 @@ if (goog.DEBUG && !COMPILED) {
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.BlockHeader.prototype.toObject = function(opt_includeInstance) {
@@ -258,8 +261,8 @@ proto.iotextypes.BlockHeader.prototype.toObject = function(opt_includeInstance) 
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.BlockHeader} msg The msg instance to transform.
  * @return {!Object}
@@ -383,17 +386,21 @@ proto.iotextypes.BlockHeader.prototype.getCore = function() {
 };
 
 
-/** @param {?proto.iotextypes.BlockHeaderCore|undefined} value */
+/**
+ * @param {?proto.iotextypes.BlockHeaderCore|undefined} value
+ * @return {!proto.iotextypes.BlockHeader} returns this
+*/
 proto.iotextypes.BlockHeader.prototype.setCore = function(value) {
-  jspb.Message.setWrapperField(this, 1, value);
+  return jspb.Message.setWrapperField(this, 1, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotextypes.BlockHeader} returns this
  */
 proto.iotextypes.BlockHeader.prototype.clearCore = function() {
-  this.setCore(undefined);
+  return this.setCore(undefined);
 };
 
 
@@ -439,9 +446,12 @@ proto.iotextypes.BlockHeader.prototype.getProducerpubkey_asU8 = function() {
 };
 
 
-/** @param {!(string|Uint8Array)} value */
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.iotextypes.BlockHeader} returns this
+ */
 proto.iotextypes.BlockHeader.prototype.setProducerpubkey = function(value) {
-  jspb.Message.setProto3BytesField(this, 2, value);
+  return jspb.Message.setProto3BytesField(this, 2, value);
 };
 
 
@@ -478,9 +488,12 @@ proto.iotextypes.BlockHeader.prototype.getSignature_asU8 = function() {
 };
 
 
-/** @param {!(string|Uint8Array)} value */
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.iotextypes.BlockHeader} returns this
+ */
 proto.iotextypes.BlockHeader.prototype.setSignature = function(value) {
-  jspb.Message.setProto3BytesField(this, 3, value);
+  return jspb.Message.setProto3BytesField(this, 3, value);
 };
 
 
@@ -489,13 +502,15 @@ proto.iotextypes.BlockHeader.prototype.setSignature = function(value) {
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.BlockHeaderCore.prototype.toObject = function(opt_includeInstance) {
@@ -505,8 +520,8 @@ proto.iotextypes.BlockHeaderCore.prototype.toObject = function(opt_includeInstan
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.BlockHeaderCore} msg The msg instance to transform.
  * @return {!Object}
@@ -689,9 +704,12 @@ proto.iotextypes.BlockHeaderCore.prototype.getVersion = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.BlockHeaderCore} returns this
+ */
 proto.iotextypes.BlockHeaderCore.prototype.setVersion = function(value) {
-  jspb.Message.setProto3IntField(this, 1, value);
+  return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
@@ -704,9 +722,12 @@ proto.iotextypes.BlockHeaderCore.prototype.getHeight = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.BlockHeaderCore} returns this
+ */
 proto.iotextypes.BlockHeaderCore.prototype.setHeight = function(value) {
-  jspb.Message.setProto3IntField(this, 2, value);
+  return jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -720,17 +741,21 @@ proto.iotextypes.BlockHeaderCore.prototype.getTimestamp = function() {
 };
 
 
-/** @param {?proto.google.protobuf.Timestamp|undefined} value */
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.iotextypes.BlockHeaderCore} returns this
+*/
 proto.iotextypes.BlockHeaderCore.prototype.setTimestamp = function(value) {
-  jspb.Message.setWrapperField(this, 3, value);
+  return jspb.Message.setWrapperField(this, 3, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotextypes.BlockHeaderCore} returns this
  */
 proto.iotextypes.BlockHeaderCore.prototype.clearTimestamp = function() {
-  this.setTimestamp(undefined);
+  return this.setTimestamp(undefined);
 };
 
 
@@ -776,9 +801,12 @@ proto.iotextypes.BlockHeaderCore.prototype.getPrevblockhash_asU8 = function() {
 };
 
 
-/** @param {!(string|Uint8Array)} value */
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.iotextypes.BlockHeaderCore} returns this
+ */
 proto.iotextypes.BlockHeaderCore.prototype.setPrevblockhash = function(value) {
-  jspb.Message.setProto3BytesField(this, 4, value);
+  return jspb.Message.setProto3BytesField(this, 4, value);
 };
 
 
@@ -815,9 +843,12 @@ proto.iotextypes.BlockHeaderCore.prototype.getTxroot_asU8 = function() {
 };
 
 
-/** @param {!(string|Uint8Array)} value */
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.iotextypes.BlockHeaderCore} returns this
+ */
 proto.iotextypes.BlockHeaderCore.prototype.setTxroot = function(value) {
-  jspb.Message.setProto3BytesField(this, 5, value);
+  return jspb.Message.setProto3BytesField(this, 5, value);
 };
 
 
@@ -854,9 +885,12 @@ proto.iotextypes.BlockHeaderCore.prototype.getDeltastatedigest_asU8 = function()
 };
 
 
-/** @param {!(string|Uint8Array)} value */
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.iotextypes.BlockHeaderCore} returns this
+ */
 proto.iotextypes.BlockHeaderCore.prototype.setDeltastatedigest = function(value) {
-  jspb.Message.setProto3BytesField(this, 6, value);
+  return jspb.Message.setProto3BytesField(this, 6, value);
 };
 
 
@@ -893,9 +927,12 @@ proto.iotextypes.BlockHeaderCore.prototype.getReceiptroot_asU8 = function() {
 };
 
 
-/** @param {!(string|Uint8Array)} value */
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.iotextypes.BlockHeaderCore} returns this
+ */
 proto.iotextypes.BlockHeaderCore.prototype.setReceiptroot = function(value) {
-  jspb.Message.setProto3BytesField(this, 7, value);
+  return jspb.Message.setProto3BytesField(this, 7, value);
 };
 
 
@@ -932,9 +969,12 @@ proto.iotextypes.BlockHeaderCore.prototype.getLogsbloom_asU8 = function() {
 };
 
 
-/** @param {!(string|Uint8Array)} value */
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.iotextypes.BlockHeaderCore} returns this
+ */
 proto.iotextypes.BlockHeaderCore.prototype.setLogsbloom = function(value) {
-  jspb.Message.setProto3BytesField(this, 8, value);
+  return jspb.Message.setProto3BytesField(this, 8, value);
 };
 
 
@@ -950,13 +990,15 @@ proto.iotextypes.BlockFooter.repeatedFields_ = [1];
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.BlockFooter.prototype.toObject = function(opt_includeInstance) {
@@ -966,8 +1008,8 @@ proto.iotextypes.BlockFooter.prototype.toObject = function(opt_includeInstance) 
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.BlockFooter} msg The msg instance to transform.
  * @return {!Object}
@@ -1082,9 +1124,12 @@ proto.iotextypes.BlockFooter.prototype.getEndorsementsList = function() {
 };
 
 
-/** @param {!Array<!proto.iotextypes.Endorsement>} value */
+/**
+ * @param {!Array<!proto.iotextypes.Endorsement>} value
+ * @return {!proto.iotextypes.BlockFooter} returns this
+*/
 proto.iotextypes.BlockFooter.prototype.setEndorsementsList = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 1, value);
+  return jspb.Message.setRepeatedWrapperField(this, 1, value);
 };
 
 
@@ -1100,9 +1145,10 @@ proto.iotextypes.BlockFooter.prototype.addEndorsements = function(opt_value, opt
 
 /**
  * Clears the list making it empty but non-null.
+ * @return {!proto.iotextypes.BlockFooter} returns this
  */
 proto.iotextypes.BlockFooter.prototype.clearEndorsementsList = function() {
-  this.setEndorsementsList([]);
+  return this.setEndorsementsList([]);
 };
 
 
@@ -1116,17 +1162,21 @@ proto.iotextypes.BlockFooter.prototype.getTimestamp = function() {
 };
 
 
-/** @param {?proto.google.protobuf.Timestamp|undefined} value */
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.iotextypes.BlockFooter} returns this
+*/
 proto.iotextypes.BlockFooter.prototype.setTimestamp = function(value) {
-  jspb.Message.setWrapperField(this, 2, value);
+  return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotextypes.BlockFooter} returns this
  */
 proto.iotextypes.BlockFooter.prototype.clearTimestamp = function() {
-  this.setTimestamp(undefined);
+  return this.setTimestamp(undefined);
 };
 
 
@@ -1151,13 +1201,15 @@ proto.iotextypes.BlockBody.repeatedFields_ = [1];
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.BlockBody.prototype.toObject = function(opt_includeInstance) {
@@ -1167,8 +1219,8 @@ proto.iotextypes.BlockBody.prototype.toObject = function(opt_includeInstance) {
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.BlockBody} msg The msg instance to transform.
  * @return {!Object}
@@ -1269,9 +1321,12 @@ proto.iotextypes.BlockBody.prototype.getActionsList = function() {
 };
 
 
-/** @param {!Array<!proto.iotextypes.Action>} value */
+/**
+ * @param {!Array<!proto.iotextypes.Action>} value
+ * @return {!proto.iotextypes.BlockBody} returns this
+*/
 proto.iotextypes.BlockBody.prototype.setActionsList = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 1, value);
+  return jspb.Message.setRepeatedWrapperField(this, 1, value);
 };
 
 
@@ -1287,9 +1342,10 @@ proto.iotextypes.BlockBody.prototype.addActions = function(opt_value, opt_index)
 
 /**
  * Clears the list making it empty but non-null.
+ * @return {!proto.iotextypes.BlockBody} returns this
  */
 proto.iotextypes.BlockBody.prototype.clearActionsList = function() {
-  this.setActionsList([]);
+  return this.setActionsList([]);
 };
 
 
@@ -1298,13 +1354,15 @@ proto.iotextypes.BlockBody.prototype.clearActionsList = function() {
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.Block.prototype.toObject = function(opt_includeInstance) {
@@ -1314,8 +1372,8 @@ proto.iotextypes.Block.prototype.toObject = function(opt_includeInstance) {
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.Block} msg The msg instance to transform.
  * @return {!Object}
@@ -1443,17 +1501,21 @@ proto.iotextypes.Block.prototype.getHeader = function() {
 };
 
 
-/** @param {?proto.iotextypes.BlockHeader|undefined} value */
+/**
+ * @param {?proto.iotextypes.BlockHeader|undefined} value
+ * @return {!proto.iotextypes.Block} returns this
+*/
 proto.iotextypes.Block.prototype.setHeader = function(value) {
-  jspb.Message.setWrapperField(this, 1, value);
+  return jspb.Message.setWrapperField(this, 1, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotextypes.Block} returns this
  */
 proto.iotextypes.Block.prototype.clearHeader = function() {
-  this.setHeader(undefined);
+  return this.setHeader(undefined);
 };
 
 
@@ -1476,17 +1538,21 @@ proto.iotextypes.Block.prototype.getBody = function() {
 };
 
 
-/** @param {?proto.iotextypes.BlockBody|undefined} value */
+/**
+ * @param {?proto.iotextypes.BlockBody|undefined} value
+ * @return {!proto.iotextypes.Block} returns this
+*/
 proto.iotextypes.Block.prototype.setBody = function(value) {
-  jspb.Message.setWrapperField(this, 2, value);
+  return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotextypes.Block} returns this
  */
 proto.iotextypes.Block.prototype.clearBody = function() {
-  this.setBody(undefined);
+  return this.setBody(undefined);
 };
 
 
@@ -1509,17 +1575,21 @@ proto.iotextypes.Block.prototype.getFooter = function() {
 };
 
 
-/** @param {?proto.iotextypes.BlockFooter|undefined} value */
+/**
+ * @param {?proto.iotextypes.BlockFooter|undefined} value
+ * @return {!proto.iotextypes.Block} returns this
+*/
 proto.iotextypes.Block.prototype.setFooter = function(value) {
-  jspb.Message.setWrapperField(this, 3, value);
+  return jspb.Message.setWrapperField(this, 3, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotextypes.Block} returns this
  */
 proto.iotextypes.Block.prototype.clearFooter = function() {
-  this.setFooter(undefined);
+  return this.setFooter(undefined);
 };
 
 
@@ -1544,13 +1614,15 @@ proto.iotextypes.Receipts.repeatedFields_ = [1];
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.Receipts.prototype.toObject = function(opt_includeInstance) {
@@ -1560,8 +1632,8 @@ proto.iotextypes.Receipts.prototype.toObject = function(opt_includeInstance) {
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.Receipts} msg The msg instance to transform.
  * @return {!Object}
@@ -1662,9 +1734,12 @@ proto.iotextypes.Receipts.prototype.getReceiptsList = function() {
 };
 
 
-/** @param {!Array<!proto.iotextypes.Receipt>} value */
+/**
+ * @param {!Array<!proto.iotextypes.Receipt>} value
+ * @return {!proto.iotextypes.Receipts} returns this
+*/
 proto.iotextypes.Receipts.prototype.setReceiptsList = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 1, value);
+  return jspb.Message.setRepeatedWrapperField(this, 1, value);
 };
 
 
@@ -1680,9 +1755,10 @@ proto.iotextypes.Receipts.prototype.addReceipts = function(opt_value, opt_index)
 
 /**
  * Clears the list making it empty but non-null.
+ * @return {!proto.iotextypes.Receipts} returns this
  */
 proto.iotextypes.Receipts.prototype.clearReceiptsList = function() {
-  this.setReceiptsList([]);
+  return this.setReceiptsList([]);
 };
 
 
@@ -1691,13 +1767,15 @@ proto.iotextypes.Receipts.prototype.clearReceiptsList = function() {
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.EpochData.prototype.toObject = function(opt_includeInstance) {
@@ -1707,8 +1785,8 @@ proto.iotextypes.EpochData.prototype.toObject = function(opt_includeInstance) {
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.EpochData} msg The msg instance to transform.
  * @return {!Object}
@@ -1829,9 +1907,12 @@ proto.iotextypes.EpochData.prototype.getNum = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.EpochData} returns this
+ */
 proto.iotextypes.EpochData.prototype.setNum = function(value) {
-  jspb.Message.setProto3IntField(this, 1, value);
+  return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
@@ -1844,9 +1925,12 @@ proto.iotextypes.EpochData.prototype.getHeight = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.EpochData} returns this
+ */
 proto.iotextypes.EpochData.prototype.setHeight = function(value) {
-  jspb.Message.setProto3IntField(this, 2, value);
+  return jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -1859,9 +1943,12 @@ proto.iotextypes.EpochData.prototype.getGravitychainstartheight = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.EpochData} returns this
+ */
 proto.iotextypes.EpochData.prototype.setGravitychainstartheight = function(value) {
-  jspb.Message.setProto3IntField(this, 3, value);
+  return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
@@ -1870,13 +1957,15 @@ proto.iotextypes.EpochData.prototype.setGravitychainstartheight = function(value
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.ChainMeta.prototype.toObject = function(opt_includeInstance) {
@@ -1886,8 +1975,8 @@ proto.iotextypes.ChainMeta.prototype.toObject = function(opt_includeInstance) {
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.ChainMeta} msg The msg instance to transform.
  * @return {!Object}
@@ -1899,7 +1988,7 @@ proto.iotextypes.ChainMeta.toObject = function(includeInstance, msg) {
     numactions: jspb.Message.getFieldWithDefault(msg, 2, 0),
     tps: jspb.Message.getFieldWithDefault(msg, 3, 0),
     epoch: (f = msg.getEpoch()) && proto.iotextypes.EpochData.toObject(includeInstance, f),
-    tpsfloat: +jspb.Message.getFieldWithDefault(msg, 5, 0.0)
+    tpsfloat: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0)
   };
 
   if (includeInstance) {
@@ -2034,9 +2123,12 @@ proto.iotextypes.ChainMeta.prototype.getHeight = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.ChainMeta} returns this
+ */
 proto.iotextypes.ChainMeta.prototype.setHeight = function(value) {
-  jspb.Message.setProto3IntField(this, 1, value);
+  return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
@@ -2049,9 +2141,12 @@ proto.iotextypes.ChainMeta.prototype.getNumactions = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.ChainMeta} returns this
+ */
 proto.iotextypes.ChainMeta.prototype.setNumactions = function(value) {
-  jspb.Message.setProto3IntField(this, 2, value);
+  return jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -2064,9 +2159,12 @@ proto.iotextypes.ChainMeta.prototype.getTps = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.ChainMeta} returns this
+ */
 proto.iotextypes.ChainMeta.prototype.setTps = function(value) {
-  jspb.Message.setProto3IntField(this, 3, value);
+  return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
@@ -2080,17 +2178,21 @@ proto.iotextypes.ChainMeta.prototype.getEpoch = function() {
 };
 
 
-/** @param {?proto.iotextypes.EpochData|undefined} value */
+/**
+ * @param {?proto.iotextypes.EpochData|undefined} value
+ * @return {!proto.iotextypes.ChainMeta} returns this
+*/
 proto.iotextypes.ChainMeta.prototype.setEpoch = function(value) {
-  jspb.Message.setWrapperField(this, 4, value);
+  return jspb.Message.setWrapperField(this, 4, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotextypes.ChainMeta} returns this
  */
 proto.iotextypes.ChainMeta.prototype.clearEpoch = function() {
-  this.setEpoch(undefined);
+  return this.setEpoch(undefined);
 };
 
 
@@ -2108,13 +2210,16 @@ proto.iotextypes.ChainMeta.prototype.hasEpoch = function() {
  * @return {number}
  */
 proto.iotextypes.ChainMeta.prototype.getTpsfloat = function() {
-  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 5, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.ChainMeta} returns this
+ */
 proto.iotextypes.ChainMeta.prototype.setTpsfloat = function(value) {
-  jspb.Message.setProto3FloatField(this, 5, value);
+  return jspb.Message.setProto3FloatField(this, 5, value);
 };
 
 
@@ -2123,13 +2228,15 @@ proto.iotextypes.ChainMeta.prototype.setTpsfloat = function(value) {
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.BlockMeta.prototype.toObject = function(opt_includeInstance) {
@@ -2139,8 +2246,8 @@ proto.iotextypes.BlockMeta.prototype.toObject = function(opt_includeInstance) {
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.BlockMeta} msg The msg instance to transform.
  * @return {!Object}
@@ -2347,9 +2454,12 @@ proto.iotextypes.BlockMeta.prototype.getHash = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.BlockMeta} returns this
+ */
 proto.iotextypes.BlockMeta.prototype.setHash = function(value) {
-  jspb.Message.setProto3StringField(this, 1, value);
+  return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
@@ -2362,9 +2472,12 @@ proto.iotextypes.BlockMeta.prototype.getHeight = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.BlockMeta} returns this
+ */
 proto.iotextypes.BlockMeta.prototype.setHeight = function(value) {
-  jspb.Message.setProto3IntField(this, 2, value);
+  return jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -2378,17 +2491,21 @@ proto.iotextypes.BlockMeta.prototype.getTimestamp = function() {
 };
 
 
-/** @param {?proto.google.protobuf.Timestamp|undefined} value */
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.iotextypes.BlockMeta} returns this
+*/
 proto.iotextypes.BlockMeta.prototype.setTimestamp = function(value) {
-  jspb.Message.setWrapperField(this, 3, value);
+  return jspb.Message.setWrapperField(this, 3, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotextypes.BlockMeta} returns this
  */
 proto.iotextypes.BlockMeta.prototype.clearTimestamp = function() {
-  this.setTimestamp(undefined);
+  return this.setTimestamp(undefined);
 };
 
 
@@ -2410,9 +2527,12 @@ proto.iotextypes.BlockMeta.prototype.getNumactions = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.BlockMeta} returns this
+ */
 proto.iotextypes.BlockMeta.prototype.setNumactions = function(value) {
-  jspb.Message.setProto3IntField(this, 4, value);
+  return jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
@@ -2425,9 +2545,12 @@ proto.iotextypes.BlockMeta.prototype.getProduceraddress = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.BlockMeta} returns this
+ */
 proto.iotextypes.BlockMeta.prototype.setProduceraddress = function(value) {
-  jspb.Message.setProto3StringField(this, 5, value);
+  return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
@@ -2440,9 +2563,12 @@ proto.iotextypes.BlockMeta.prototype.getTransferamount = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.BlockMeta} returns this
+ */
 proto.iotextypes.BlockMeta.prototype.setTransferamount = function(value) {
-  jspb.Message.setProto3StringField(this, 6, value);
+  return jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
@@ -2455,9 +2581,12 @@ proto.iotextypes.BlockMeta.prototype.getTxroot = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.BlockMeta} returns this
+ */
 proto.iotextypes.BlockMeta.prototype.setTxroot = function(value) {
-  jspb.Message.setProto3StringField(this, 7, value);
+  return jspb.Message.setProto3StringField(this, 7, value);
 };
 
 
@@ -2470,9 +2599,12 @@ proto.iotextypes.BlockMeta.prototype.getReceiptroot = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.BlockMeta} returns this
+ */
 proto.iotextypes.BlockMeta.prototype.setReceiptroot = function(value) {
-  jspb.Message.setProto3StringField(this, 8, value);
+  return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 
@@ -2485,9 +2617,12 @@ proto.iotextypes.BlockMeta.prototype.getDeltastatedigest = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.BlockMeta} returns this
+ */
 proto.iotextypes.BlockMeta.prototype.setDeltastatedigest = function(value) {
-  jspb.Message.setProto3StringField(this, 9, value);
+  return jspb.Message.setProto3StringField(this, 9, value);
 };
 
 
@@ -2500,9 +2635,12 @@ proto.iotextypes.BlockMeta.prototype.getLogsbloom = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.BlockMeta} returns this
+ */
 proto.iotextypes.BlockMeta.prototype.setLogsbloom = function(value) {
-  jspb.Message.setProto3StringField(this, 10, value);
+  return jspb.Message.setProto3StringField(this, 10, value);
 };
 
 
@@ -2511,13 +2649,15 @@ proto.iotextypes.BlockMeta.prototype.setLogsbloom = function(value) {
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.AccountMeta.prototype.toObject = function(opt_includeInstance) {
@@ -2527,8 +2667,8 @@ proto.iotextypes.AccountMeta.prototype.toObject = function(opt_includeInstance) 
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.AccountMeta} msg The msg instance to transform.
  * @return {!Object}
@@ -2673,9 +2813,12 @@ proto.iotextypes.AccountMeta.prototype.getAddress = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.AccountMeta} returns this
+ */
 proto.iotextypes.AccountMeta.prototype.setAddress = function(value) {
-  jspb.Message.setProto3StringField(this, 1, value);
+  return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
@@ -2688,9 +2831,12 @@ proto.iotextypes.AccountMeta.prototype.getBalance = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.AccountMeta} returns this
+ */
 proto.iotextypes.AccountMeta.prototype.setBalance = function(value) {
-  jspb.Message.setProto3StringField(this, 2, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
@@ -2703,9 +2849,12 @@ proto.iotextypes.AccountMeta.prototype.getNonce = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.AccountMeta} returns this
+ */
 proto.iotextypes.AccountMeta.prototype.setNonce = function(value) {
-  jspb.Message.setProto3IntField(this, 3, value);
+  return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
@@ -2718,9 +2867,12 @@ proto.iotextypes.AccountMeta.prototype.getPendingnonce = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.AccountMeta} returns this
+ */
 proto.iotextypes.AccountMeta.prototype.setPendingnonce = function(value) {
-  jspb.Message.setProto3IntField(this, 4, value);
+  return jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
@@ -2733,9 +2885,12 @@ proto.iotextypes.AccountMeta.prototype.getNumactions = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.AccountMeta} returns this
+ */
 proto.iotextypes.AccountMeta.prototype.setNumactions = function(value) {
-  jspb.Message.setProto3IntField(this, 5, value);
+  return jspb.Message.setProto3IntField(this, 5, value);
 };
 
 

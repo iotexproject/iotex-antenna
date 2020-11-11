@@ -1,3 +1,4 @@
+// source: proto/rpc/rpc.proto
 /**
  * @fileoverview
  * @enhanceable
@@ -85,13 +86,15 @@ if (goog.DEBUG && !COMPILED) {
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotexrpc.BlockSync.prototype.toObject = function(opt_includeInstance) {
@@ -101,8 +104,8 @@ proto.iotexrpc.BlockSync.prototype.toObject = function(opt_includeInstance) {
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotexrpc.BlockSync} msg The msg instance to transform.
  * @return {!Object}
@@ -211,9 +214,12 @@ proto.iotexrpc.BlockSync.prototype.getStart = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotexrpc.BlockSync} returns this
+ */
 proto.iotexrpc.BlockSync.prototype.setStart = function(value) {
-  jspb.Message.setProto3IntField(this, 2, value);
+  return jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -226,9 +232,12 @@ proto.iotexrpc.BlockSync.prototype.getEnd = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotexrpc.BlockSync} returns this
+ */
 proto.iotexrpc.BlockSync.prototype.setEnd = function(value) {
-  jspb.Message.setProto3IntField(this, 3, value);
+  return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
@@ -237,13 +246,15 @@ proto.iotexrpc.BlockSync.prototype.setEnd = function(value) {
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotexrpc.BroadcastMsg.prototype.toObject = function(opt_includeInstance) {
@@ -253,8 +264,8 @@ proto.iotexrpc.BroadcastMsg.prototype.toObject = function(opt_includeInstance) {
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotexrpc.BroadcastMsg} msg The msg instance to transform.
  * @return {!Object}
@@ -401,9 +412,12 @@ proto.iotexrpc.BroadcastMsg.prototype.getChainId = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotexrpc.BroadcastMsg} returns this
+ */
 proto.iotexrpc.BroadcastMsg.prototype.setChainId = function(value) {
-  jspb.Message.setProto3IntField(this, 1, value);
+  return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
@@ -416,9 +430,12 @@ proto.iotexrpc.BroadcastMsg.prototype.getMsgType = function() {
 };
 
 
-/** @param {!proto.iotexrpc.MessageType} value */
+/**
+ * @param {!proto.iotexrpc.MessageType} value
+ * @return {!proto.iotexrpc.BroadcastMsg} returns this
+ */
 proto.iotexrpc.BroadcastMsg.prototype.setMsgType = function(value) {
-  jspb.Message.setProto3EnumField(this, 2, value);
+  return jspb.Message.setProto3EnumField(this, 2, value);
 };
 
 
@@ -455,9 +472,12 @@ proto.iotexrpc.BroadcastMsg.prototype.getMsgBody_asU8 = function() {
 };
 
 
-/** @param {!(string|Uint8Array)} value */
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.iotexrpc.BroadcastMsg} returns this
+ */
 proto.iotexrpc.BroadcastMsg.prototype.setMsgBody = function(value) {
-  jspb.Message.setProto3BytesField(this, 3, value);
+  return jspb.Message.setProto3BytesField(this, 3, value);
 };
 
 
@@ -470,9 +490,12 @@ proto.iotexrpc.BroadcastMsg.prototype.getPeerId = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotexrpc.BroadcastMsg} returns this
+ */
 proto.iotexrpc.BroadcastMsg.prototype.setPeerId = function(value) {
-  jspb.Message.setProto3StringField(this, 4, value);
+  return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
@@ -486,17 +509,21 @@ proto.iotexrpc.BroadcastMsg.prototype.getTimestamp = function() {
 };
 
 
-/** @param {?proto.google.protobuf.Timestamp|undefined} value */
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.iotexrpc.BroadcastMsg} returns this
+*/
 proto.iotexrpc.BroadcastMsg.prototype.setTimestamp = function(value) {
-  jspb.Message.setWrapperField(this, 5, value);
+  return jspb.Message.setWrapperField(this, 5, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotexrpc.BroadcastMsg} returns this
  */
 proto.iotexrpc.BroadcastMsg.prototype.clearTimestamp = function() {
-  this.setTimestamp(undefined);
+  return this.setTimestamp(undefined);
 };
 
 
@@ -514,13 +541,15 @@ proto.iotexrpc.BroadcastMsg.prototype.hasTimestamp = function() {
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotexrpc.UnicastMsg.prototype.toObject = function(opt_includeInstance) {
@@ -530,8 +559,8 @@ proto.iotexrpc.UnicastMsg.prototype.toObject = function(opt_includeInstance) {
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotexrpc.UnicastMsg} msg The msg instance to transform.
  * @return {!Object}
@@ -690,9 +719,12 @@ proto.iotexrpc.UnicastMsg.prototype.getChainId = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotexrpc.UnicastMsg} returns this
+ */
 proto.iotexrpc.UnicastMsg.prototype.setChainId = function(value) {
-  jspb.Message.setProto3IntField(this, 1, value);
+  return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
@@ -705,9 +737,12 @@ proto.iotexrpc.UnicastMsg.prototype.getAddr = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotexrpc.UnicastMsg} returns this
+ */
 proto.iotexrpc.UnicastMsg.prototype.setAddr = function(value) {
-  jspb.Message.setProto3StringField(this, 2, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
@@ -720,9 +755,12 @@ proto.iotexrpc.UnicastMsg.prototype.getMsgType = function() {
 };
 
 
-/** @param {!proto.iotexrpc.MessageType} value */
+/**
+ * @param {!proto.iotexrpc.MessageType} value
+ * @return {!proto.iotexrpc.UnicastMsg} returns this
+ */
 proto.iotexrpc.UnicastMsg.prototype.setMsgType = function(value) {
-  jspb.Message.setProto3EnumField(this, 3, value);
+  return jspb.Message.setProto3EnumField(this, 3, value);
 };
 
 
@@ -759,9 +797,12 @@ proto.iotexrpc.UnicastMsg.prototype.getMsgBody_asU8 = function() {
 };
 
 
-/** @param {!(string|Uint8Array)} value */
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.iotexrpc.UnicastMsg} returns this
+ */
 proto.iotexrpc.UnicastMsg.prototype.setMsgBody = function(value) {
-  jspb.Message.setProto3BytesField(this, 4, value);
+  return jspb.Message.setProto3BytesField(this, 4, value);
 };
 
 
@@ -774,9 +815,12 @@ proto.iotexrpc.UnicastMsg.prototype.getPeerId = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotexrpc.UnicastMsg} returns this
+ */
 proto.iotexrpc.UnicastMsg.prototype.setPeerId = function(value) {
-  jspb.Message.setProto3StringField(this, 5, value);
+  return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
@@ -790,17 +834,21 @@ proto.iotexrpc.UnicastMsg.prototype.getTimestamp = function() {
 };
 
 
-/** @param {?proto.google.protobuf.Timestamp|undefined} value */
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.iotexrpc.UnicastMsg} returns this
+*/
 proto.iotexrpc.UnicastMsg.prototype.setTimestamp = function(value) {
-  jspb.Message.setWrapperField(this, 6, value);
+  return jspb.Message.setWrapperField(this, 6, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotexrpc.UnicastMsg} returns this
  */
 proto.iotexrpc.UnicastMsg.prototype.clearTimestamp = function() {
-  this.setTimestamp(undefined);
+  return this.setTimestamp(undefined);
 };
 
 

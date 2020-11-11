@@ -2371,6 +2371,8 @@ export interface IGetLogsByBlock {
 
 export interface IGetLogsByRange {
   fromBlock: number;
+  toBlock: number;
+  paginationSize: number;
   count: number;
 }
 
@@ -2407,7 +2409,8 @@ export const GetLogsRequest = {
     if (req.byRange) {
       const byRange = new apiPb.GetLogsByRange();
       byRange.setFromblock(req.byRange.fromBlock);
-      byRange.setCount(req.byRange.count);
+      byRange.setToblock(req.byRange.toBlock);
+      byRange.setPaginationsize(req.byRange.paginationSize);
       pbReq.setByrange(byRange);
     }
     return pbReq;

@@ -1,4 +1,4 @@
-import * as jspb from "google-protobuf"
+import * as jspb from 'google-protobuf'
 
 import * as proto_types_action_pb from '../../proto/types/action_pb';
 import * as proto_types_blockchain_pb from '../../proto/types/blockchain_pb';
@@ -6,18 +6,19 @@ import * as proto_types_node_pb from '../../proto/types/node_pb';
 import * as proto_types_election_pb from '../../proto/types/election_pb';
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
 
+
 export class GetVotesRequest extends jspb.Message {
   getVotee(): string;
-  setVotee(value: string): void;
+  setVotee(value: string): GetVotesRequest;
 
   getHeight(): string;
-  setHeight(value: string): void;
+  setHeight(value: string): GetVotesRequest;
 
   getOffset(): number;
-  setOffset(value: number): void;
+  setOffset(value: number): GetVotesRequest;
 
   getLimit(): number;
-  setLimit(value: number): void;
+  setLimit(value: number): GetVotesRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetVotesRequest.AsObject;
@@ -38,8 +39,8 @@ export namespace GetVotesRequest {
 
 export class GetVotesResponse extends jspb.Message {
   getBucketsList(): Array<Bucket>;
-  setBucketsList(value: Array<Bucket>): void;
-  clearBucketsList(): void;
+  setBucketsList(value: Array<Bucket>): GetVotesResponse;
+  clearBucketsList(): GetVotesResponse;
   addBuckets(value?: Bucket, index?: number): Bucket;
 
   serializeBinary(): Uint8Array;
@@ -58,16 +59,16 @@ export namespace GetVotesResponse {
 
 export class Bucket extends jspb.Message {
   getVoter(): string;
-  setVoter(value: string): void;
+  setVoter(value: string): Bucket;
 
   getVotes(): string;
-  setVotes(value: string): void;
+  setVotes(value: string): Bucket;
 
   getWeightedvotes(): string;
-  setWeightedvotes(value: string): void;
+  setWeightedvotes(value: string): Bucket;
 
   getRemainingduration(): string;
-  setRemainingduration(value: string): void;
+  setRemainingduration(value: string): Bucket;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Bucket.AsObject;
@@ -88,7 +89,7 @@ export namespace Bucket {
 
 export class GetAccountRequest extends jspb.Message {
   getAddress(): string;
-  setAddress(value: string): void;
+  setAddress(value: string): GetAccountRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetAccountRequest.AsObject;
@@ -106,9 +107,9 @@ export namespace GetAccountRequest {
 
 export class GetAccountResponse extends jspb.Message {
   getAccountmeta(): proto_types_blockchain_pb.AccountMeta | undefined;
-  setAccountmeta(value?: proto_types_blockchain_pb.AccountMeta): void;
+  setAccountmeta(value?: proto_types_blockchain_pb.AccountMeta): GetAccountResponse;
   hasAccountmeta(): boolean;
-  clearAccountmeta(): void;
+  clearAccountmeta(): GetAccountResponse;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetAccountResponse.AsObject;
@@ -126,34 +127,29 @@ export namespace GetAccountResponse {
 
 export class GetActionsRequest extends jspb.Message {
   getByindex(): GetActionsByIndexRequest | undefined;
-  setByindex(value?: GetActionsByIndexRequest): void;
+  setByindex(value?: GetActionsByIndexRequest): GetActionsRequest;
   hasByindex(): boolean;
-  clearByindex(): void;
-  hasByindex(): boolean;
+  clearByindex(): GetActionsRequest;
 
   getByhash(): GetActionByHashRequest | undefined;
-  setByhash(value?: GetActionByHashRequest): void;
+  setByhash(value?: GetActionByHashRequest): GetActionsRequest;
   hasByhash(): boolean;
-  clearByhash(): void;
-  hasByhash(): boolean;
+  clearByhash(): GetActionsRequest;
 
   getByaddr(): GetActionsByAddressRequest | undefined;
-  setByaddr(value?: GetActionsByAddressRequest): void;
+  setByaddr(value?: GetActionsByAddressRequest): GetActionsRequest;
   hasByaddr(): boolean;
-  clearByaddr(): void;
-  hasByaddr(): boolean;
+  clearByaddr(): GetActionsRequest;
 
   getUnconfirmedbyaddr(): GetUnconfirmedActionsByAddressRequest | undefined;
-  setUnconfirmedbyaddr(value?: GetUnconfirmedActionsByAddressRequest): void;
+  setUnconfirmedbyaddr(value?: GetUnconfirmedActionsByAddressRequest): GetActionsRequest;
   hasUnconfirmedbyaddr(): boolean;
-  clearUnconfirmedbyaddr(): void;
-  hasUnconfirmedbyaddr(): boolean;
+  clearUnconfirmedbyaddr(): GetActionsRequest;
 
   getByblk(): GetActionsByBlockRequest | undefined;
-  setByblk(value?: GetActionsByBlockRequest): void;
+  setByblk(value?: GetActionsByBlockRequest): GetActionsRequest;
   hasByblk(): boolean;
-  clearByblk(): void;
-  hasByblk(): boolean;
+  clearByblk(): GetActionsRequest;
 
   getLookupCase(): GetActionsRequest.LookupCase;
 
@@ -186,10 +182,10 @@ export namespace GetActionsRequest {
 
 export class GetActionsByIndexRequest extends jspb.Message {
   getStart(): number;
-  setStart(value: number): void;
+  setStart(value: number): GetActionsByIndexRequest;
 
   getCount(): number;
-  setCount(value: number): void;
+  setCount(value: number): GetActionsByIndexRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetActionsByIndexRequest.AsObject;
@@ -208,10 +204,10 @@ export namespace GetActionsByIndexRequest {
 
 export class GetActionByHashRequest extends jspb.Message {
   getActionhash(): string;
-  setActionhash(value: string): void;
+  setActionhash(value: string): GetActionByHashRequest;
 
   getCheckpending(): boolean;
-  setCheckpending(value: boolean): void;
+  setCheckpending(value: boolean): GetActionByHashRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetActionByHashRequest.AsObject;
@@ -230,13 +226,13 @@ export namespace GetActionByHashRequest {
 
 export class GetActionsByAddressRequest extends jspb.Message {
   getAddress(): string;
-  setAddress(value: string): void;
+  setAddress(value: string): GetActionsByAddressRequest;
 
   getStart(): number;
-  setStart(value: number): void;
+  setStart(value: number): GetActionsByAddressRequest;
 
   getCount(): number;
-  setCount(value: number): void;
+  setCount(value: number): GetActionsByAddressRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetActionsByAddressRequest.AsObject;
@@ -256,13 +252,13 @@ export namespace GetActionsByAddressRequest {
 
 export class GetUnconfirmedActionsByAddressRequest extends jspb.Message {
   getAddress(): string;
-  setAddress(value: string): void;
+  setAddress(value: string): GetUnconfirmedActionsByAddressRequest;
 
   getStart(): number;
-  setStart(value: number): void;
+  setStart(value: number): GetUnconfirmedActionsByAddressRequest;
 
   getCount(): number;
-  setCount(value: number): void;
+  setCount(value: number): GetUnconfirmedActionsByAddressRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetUnconfirmedActionsByAddressRequest.AsObject;
@@ -282,13 +278,13 @@ export namespace GetUnconfirmedActionsByAddressRequest {
 
 export class GetActionsByBlockRequest extends jspb.Message {
   getBlkhash(): string;
-  setBlkhash(value: string): void;
+  setBlkhash(value: string): GetActionsByBlockRequest;
 
   getStart(): number;
-  setStart(value: number): void;
+  setStart(value: number): GetActionsByBlockRequest;
 
   getCount(): number;
-  setCount(value: number): void;
+  setCount(value: number): GetActionsByBlockRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetActionsByBlockRequest.AsObject;
@@ -308,29 +304,29 @@ export namespace GetActionsByBlockRequest {
 
 export class ActionInfo extends jspb.Message {
   getAction(): proto_types_action_pb.Action | undefined;
-  setAction(value?: proto_types_action_pb.Action): void;
+  setAction(value?: proto_types_action_pb.Action): ActionInfo;
   hasAction(): boolean;
-  clearAction(): void;
+  clearAction(): ActionInfo;
 
   getActhash(): string;
-  setActhash(value: string): void;
+  setActhash(value: string): ActionInfo;
 
   getBlkhash(): string;
-  setBlkhash(value: string): void;
+  setBlkhash(value: string): ActionInfo;
 
   getBlkheight(): number;
-  setBlkheight(value: number): void;
+  setBlkheight(value: number): ActionInfo;
 
   getSender(): string;
-  setSender(value: string): void;
+  setSender(value: string): ActionInfo;
 
   getGasfee(): string;
-  setGasfee(value: string): void;
+  setGasfee(value: string): ActionInfo;
 
   getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): void;
+  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): ActionInfo;
   hasTimestamp(): boolean;
-  clearTimestamp(): void;
+  clearTimestamp(): ActionInfo;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ActionInfo.AsObject;
@@ -354,12 +350,12 @@ export namespace ActionInfo {
 
 export class ReceiptInfo extends jspb.Message {
   getReceipt(): proto_types_action_pb.Receipt | undefined;
-  setReceipt(value?: proto_types_action_pb.Receipt): void;
+  setReceipt(value?: proto_types_action_pb.Receipt): ReceiptInfo;
   hasReceipt(): boolean;
-  clearReceipt(): void;
+  clearReceipt(): ReceiptInfo;
 
   getBlkhash(): string;
-  setBlkhash(value: string): void;
+  setBlkhash(value: string): ReceiptInfo;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ReceiptInfo.AsObject;
@@ -378,16 +374,16 @@ export namespace ReceiptInfo {
 
 export class BlockProducerInfo extends jspb.Message {
   getAddress(): string;
-  setAddress(value: string): void;
+  setAddress(value: string): BlockProducerInfo;
 
   getVotes(): string;
-  setVotes(value: string): void;
+  setVotes(value: string): BlockProducerInfo;
 
   getActive(): boolean;
-  setActive(value: boolean): void;
+  setActive(value: boolean): BlockProducerInfo;
 
   getProduction(): number;
-  setProduction(value: number): void;
+  setProduction(value: number): BlockProducerInfo;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockProducerInfo.AsObject;
@@ -408,13 +404,13 @@ export namespace BlockProducerInfo {
 
 export class BlockInfo extends jspb.Message {
   getBlock(): proto_types_blockchain_pb.Block | undefined;
-  setBlock(value?: proto_types_blockchain_pb.Block): void;
+  setBlock(value?: proto_types_blockchain_pb.Block): BlockInfo;
   hasBlock(): boolean;
-  clearBlock(): void;
+  clearBlock(): BlockInfo;
 
   getReceiptsList(): Array<proto_types_action_pb.Receipt>;
-  setReceiptsList(value: Array<proto_types_action_pb.Receipt>): void;
-  clearReceiptsList(): void;
+  setReceiptsList(value: Array<proto_types_action_pb.Receipt>): BlockInfo;
+  clearReceiptsList(): BlockInfo;
   addReceipts(value?: proto_types_action_pb.Receipt, index?: number): proto_types_action_pb.Receipt;
 
   serializeBinary(): Uint8Array;
@@ -434,11 +430,11 @@ export namespace BlockInfo {
 
 export class GetActionsResponse extends jspb.Message {
   getTotal(): number;
-  setTotal(value: number): void;
+  setTotal(value: number): GetActionsResponse;
 
   getActioninfoList(): Array<ActionInfo>;
-  setActioninfoList(value: Array<ActionInfo>): void;
-  clearActioninfoList(): void;
+  setActioninfoList(value: Array<ActionInfo>): GetActionsResponse;
+  clearActioninfoList(): GetActionsResponse;
   addActioninfo(value?: ActionInfo, index?: number): ActionInfo;
 
   serializeBinary(): Uint8Array;
@@ -458,16 +454,14 @@ export namespace GetActionsResponse {
 
 export class GetBlockMetasRequest extends jspb.Message {
   getByindex(): GetBlockMetasByIndexRequest | undefined;
-  setByindex(value?: GetBlockMetasByIndexRequest): void;
+  setByindex(value?: GetBlockMetasByIndexRequest): GetBlockMetasRequest;
   hasByindex(): boolean;
-  clearByindex(): void;
-  hasByindex(): boolean;
+  clearByindex(): GetBlockMetasRequest;
 
   getByhash(): GetBlockMetaByHashRequest | undefined;
-  setByhash(value?: GetBlockMetaByHashRequest): void;
+  setByhash(value?: GetBlockMetaByHashRequest): GetBlockMetasRequest;
   hasByhash(): boolean;
-  clearByhash(): void;
-  hasByhash(): boolean;
+  clearByhash(): GetBlockMetasRequest;
 
   getLookupCase(): GetBlockMetasRequest.LookupCase;
 
@@ -494,10 +488,10 @@ export namespace GetBlockMetasRequest {
 
 export class GetBlockMetasByIndexRequest extends jspb.Message {
   getStart(): number;
-  setStart(value: number): void;
+  setStart(value: number): GetBlockMetasByIndexRequest;
 
   getCount(): number;
-  setCount(value: number): void;
+  setCount(value: number): GetBlockMetasByIndexRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetBlockMetasByIndexRequest.AsObject;
@@ -516,7 +510,7 @@ export namespace GetBlockMetasByIndexRequest {
 
 export class GetBlockMetaByHashRequest extends jspb.Message {
   getBlkhash(): string;
-  setBlkhash(value: string): void;
+  setBlkhash(value: string): GetBlockMetaByHashRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetBlockMetaByHashRequest.AsObject;
@@ -534,11 +528,11 @@ export namespace GetBlockMetaByHashRequest {
 
 export class GetBlockMetasResponse extends jspb.Message {
   getTotal(): number;
-  setTotal(value: number): void;
+  setTotal(value: number): GetBlockMetasResponse;
 
   getBlkmetasList(): Array<proto_types_blockchain_pb.BlockMeta>;
-  setBlkmetasList(value: Array<proto_types_blockchain_pb.BlockMeta>): void;
-  clearBlkmetasList(): void;
+  setBlkmetasList(value: Array<proto_types_blockchain_pb.BlockMeta>): GetBlockMetasResponse;
+  clearBlkmetasList(): GetBlockMetasResponse;
   addBlkmetas(value?: proto_types_blockchain_pb.BlockMeta, index?: number): proto_types_blockchain_pb.BlockMeta;
 
   serializeBinary(): Uint8Array;
@@ -572,9 +566,9 @@ export namespace GetChainMetaRequest {
 
 export class GetChainMetaResponse extends jspb.Message {
   getChainmeta(): proto_types_blockchain_pb.ChainMeta | undefined;
-  setChainmeta(value?: proto_types_blockchain_pb.ChainMeta): void;
+  setChainmeta(value?: proto_types_blockchain_pb.ChainMeta): GetChainMetaResponse;
   hasChainmeta(): boolean;
-  clearChainmeta(): void;
+  clearChainmeta(): GetChainMetaResponse;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetChainMetaResponse.AsObject;
@@ -606,9 +600,9 @@ export namespace GetServerMetaRequest {
 
 export class GetServerMetaResponse extends jspb.Message {
   getServermeta(): proto_types_node_pb.ServerMeta | undefined;
-  setServermeta(value?: proto_types_node_pb.ServerMeta): void;
+  setServermeta(value?: proto_types_node_pb.ServerMeta): GetServerMetaResponse;
   hasServermeta(): boolean;
-  clearServermeta(): void;
+  clearServermeta(): GetServerMetaResponse;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetServerMetaResponse.AsObject;
@@ -626,9 +620,9 @@ export namespace GetServerMetaResponse {
 
 export class SendActionRequest extends jspb.Message {
   getAction(): proto_types_action_pb.Action | undefined;
-  setAction(value?: proto_types_action_pb.Action): void;
+  setAction(value?: proto_types_action_pb.Action): SendActionRequest;
   hasAction(): boolean;
-  clearAction(): void;
+  clearAction(): SendActionRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): SendActionRequest.AsObject;
@@ -646,7 +640,7 @@ export namespace SendActionRequest {
 
 export class SendSignedActionBytesRequest extends jspb.Message {
   getSignedactionbytes(): string;
-  setSignedactionbytes(value: string): void;
+  setSignedactionbytes(value: string): SendSignedActionBytesRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): SendSignedActionBytesRequest.AsObject;
@@ -664,7 +658,7 @@ export namespace SendSignedActionBytesRequest {
 
 export class SendActionResponse extends jspb.Message {
   getActionhash(): string;
-  setActionhash(value: string): void;
+  setActionhash(value: string): SendActionResponse;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): SendActionResponse.AsObject;
@@ -682,7 +676,7 @@ export namespace SendActionResponse {
 
 export class GetReceiptByActionRequest extends jspb.Message {
   getActionhash(): string;
-  setActionhash(value: string): void;
+  setActionhash(value: string): GetReceiptByActionRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetReceiptByActionRequest.AsObject;
@@ -700,9 +694,9 @@ export namespace GetReceiptByActionRequest {
 
 export class GetReceiptByActionResponse extends jspb.Message {
   getReceiptinfo(): ReceiptInfo | undefined;
-  setReceiptinfo(value?: ReceiptInfo): void;
+  setReceiptinfo(value?: ReceiptInfo): GetReceiptByActionResponse;
   hasReceiptinfo(): boolean;
-  clearReceiptinfo(): void;
+  clearReceiptinfo(): GetReceiptByActionResponse;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetReceiptByActionResponse.AsObject;
@@ -720,12 +714,12 @@ export namespace GetReceiptByActionResponse {
 
 export class ReadContractRequest extends jspb.Message {
   getExecution(): proto_types_action_pb.Execution | undefined;
-  setExecution(value?: proto_types_action_pb.Execution): void;
+  setExecution(value?: proto_types_action_pb.Execution): ReadContractRequest;
   hasExecution(): boolean;
-  clearExecution(): void;
+  clearExecution(): ReadContractRequest;
 
   getCalleraddress(): string;
-  setCalleraddress(value: string): void;
+  setCalleraddress(value: string): ReadContractRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ReadContractRequest.AsObject;
@@ -744,12 +738,12 @@ export namespace ReadContractRequest {
 
 export class ReadContractResponse extends jspb.Message {
   getData(): string;
-  setData(value: string): void;
+  setData(value: string): ReadContractResponse;
 
   getReceipt(): proto_types_action_pb.Receipt | undefined;
-  setReceipt(value?: proto_types_action_pb.Receipt): void;
+  setReceipt(value?: proto_types_action_pb.Receipt): ReadContractResponse;
   hasReceipt(): boolean;
-  clearReceipt(): void;
+  clearReceipt(): ReadContractResponse;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ReadContractResponse.AsObject;
@@ -782,7 +776,7 @@ export namespace SuggestGasPriceRequest {
 
 export class SuggestGasPriceResponse extends jspb.Message {
   getGasprice(): number;
-  setGasprice(value: number): void;
+  setGasprice(value: number): SuggestGasPriceResponse;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): SuggestGasPriceResponse.AsObject;
@@ -800,9 +794,9 @@ export namespace SuggestGasPriceResponse {
 
 export class EstimateGasForActionRequest extends jspb.Message {
   getAction(): proto_types_action_pb.Action | undefined;
-  setAction(value?: proto_types_action_pb.Action): void;
+  setAction(value?: proto_types_action_pb.Action): EstimateGasForActionRequest;
   hasAction(): boolean;
-  clearAction(): void;
+  clearAction(): EstimateGasForActionRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): EstimateGasForActionRequest.AsObject;
@@ -820,19 +814,17 @@ export namespace EstimateGasForActionRequest {
 
 export class EstimateActionGasConsumptionRequest extends jspb.Message {
   getTransfer(): proto_types_action_pb.Transfer | undefined;
-  setTransfer(value?: proto_types_action_pb.Transfer): void;
+  setTransfer(value?: proto_types_action_pb.Transfer): EstimateActionGasConsumptionRequest;
   hasTransfer(): boolean;
-  clearTransfer(): void;
-  hasTransfer(): boolean;
+  clearTransfer(): EstimateActionGasConsumptionRequest;
 
   getExecution(): proto_types_action_pb.Execution | undefined;
-  setExecution(value?: proto_types_action_pb.Execution): void;
+  setExecution(value?: proto_types_action_pb.Execution): EstimateActionGasConsumptionRequest;
   hasExecution(): boolean;
-  clearExecution(): void;
-  hasExecution(): boolean;
+  clearExecution(): EstimateActionGasConsumptionRequest;
 
   getCalleraddress(): string;
-  setCalleraddress(value: string): void;
+  setCalleraddress(value: string): EstimateActionGasConsumptionRequest;
 
   getActionCase(): EstimateActionGasConsumptionRequest.ActionCase;
 
@@ -860,7 +852,7 @@ export namespace EstimateActionGasConsumptionRequest {
 
 export class EstimateActionGasConsumptionResponse extends jspb.Message {
   getGas(): number;
-  setGas(value: number): void;
+  setGas(value: number): EstimateActionGasConsumptionResponse;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): EstimateActionGasConsumptionResponse.AsObject;
@@ -878,7 +870,7 @@ export namespace EstimateActionGasConsumptionResponse {
 
 export class EstimateGasForActionResponse extends jspb.Message {
   getGas(): number;
-  setGas(value: number): void;
+  setGas(value: number): EstimateGasForActionResponse;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): EstimateGasForActionResponse.AsObject;
@@ -898,20 +890,20 @@ export class ReadStateRequest extends jspb.Message {
   getProtocolid(): Uint8Array | string;
   getProtocolid_asU8(): Uint8Array;
   getProtocolid_asB64(): string;
-  setProtocolid(value: Uint8Array | string): void;
+  setProtocolid(value: Uint8Array | string): ReadStateRequest;
 
   getMethodname(): Uint8Array | string;
   getMethodname_asU8(): Uint8Array;
   getMethodname_asB64(): string;
-  setMethodname(value: Uint8Array | string): void;
+  setMethodname(value: Uint8Array | string): ReadStateRequest;
 
   getArgumentsList(): Array<Uint8Array | string>;
-  setArgumentsList(value: Array<Uint8Array | string>): void;
-  clearArgumentsList(): void;
-  addArguments(value: Uint8Array | string, index?: number): void;
+  setArgumentsList(value: Array<Uint8Array | string>): ReadStateRequest;
+  clearArgumentsList(): ReadStateRequest;
+  addArguments(value: Uint8Array | string, index?: number): ReadStateRequest;
 
   getHeight(): string;
-  setHeight(value: string): void;
+  setHeight(value: string): ReadStateRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ReadStateRequest.AsObject;
@@ -934,7 +926,7 @@ export class ReadStateResponse extends jspb.Message {
   getData(): Uint8Array | string;
   getData_asU8(): Uint8Array;
   getData_asB64(): string;
-  setData(value: Uint8Array | string): void;
+  setData(value: Uint8Array | string): ReadStateResponse;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ReadStateResponse.AsObject;
@@ -952,7 +944,7 @@ export namespace ReadStateResponse {
 
 export class GetEpochMetaRequest extends jspb.Message {
   getEpochnumber(): number;
-  setEpochnumber(value: number): void;
+  setEpochnumber(value: number): GetEpochMetaRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetEpochMetaRequest.AsObject;
@@ -970,16 +962,16 @@ export namespace GetEpochMetaRequest {
 
 export class GetEpochMetaResponse extends jspb.Message {
   getEpochdata(): proto_types_blockchain_pb.EpochData | undefined;
-  setEpochdata(value?: proto_types_blockchain_pb.EpochData): void;
+  setEpochdata(value?: proto_types_blockchain_pb.EpochData): GetEpochMetaResponse;
   hasEpochdata(): boolean;
-  clearEpochdata(): void;
+  clearEpochdata(): GetEpochMetaResponse;
 
   getTotalblocks(): number;
-  setTotalblocks(value: number): void;
+  setTotalblocks(value: number): GetEpochMetaResponse;
 
   getBlockproducersinfoList(): Array<BlockProducerInfo>;
-  setBlockproducersinfoList(value: Array<BlockProducerInfo>): void;
-  clearBlockproducersinfoList(): void;
+  setBlockproducersinfoList(value: Array<BlockProducerInfo>): GetEpochMetaResponse;
+  clearBlockproducersinfoList(): GetEpochMetaResponse;
   addBlockproducersinfo(value?: BlockProducerInfo, index?: number): BlockProducerInfo;
 
   serializeBinary(): Uint8Array;
@@ -1000,13 +992,13 @@ export namespace GetEpochMetaResponse {
 
 export class GetRawBlocksRequest extends jspb.Message {
   getStartheight(): number;
-  setStartheight(value: number): void;
+  setStartheight(value: number): GetRawBlocksRequest;
 
   getCount(): number;
-  setCount(value: number): void;
+  setCount(value: number): GetRawBlocksRequest;
 
   getWithreceipts(): boolean;
-  setWithreceipts(value: boolean): void;
+  setWithreceipts(value: boolean): GetRawBlocksRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetRawBlocksRequest.AsObject;
@@ -1026,8 +1018,8 @@ export namespace GetRawBlocksRequest {
 
 export class GetRawBlocksResponse extends jspb.Message {
   getBlocksList(): Array<BlockInfo>;
-  setBlocksList(value: Array<BlockInfo>): void;
-  clearBlocksList(): void;
+  setBlocksList(value: Array<BlockInfo>): GetRawBlocksResponse;
+  clearBlocksList(): GetRawBlocksResponse;
   addBlocks(value?: BlockInfo, index?: number): BlockInfo;
 
   serializeBinary(): Uint8Array;
@@ -1048,7 +1040,7 @@ export class GetLogsByBlock extends jspb.Message {
   getBlockhash(): Uint8Array | string;
   getBlockhash_asU8(): Uint8Array;
   getBlockhash_asB64(): string;
-  setBlockhash(value: Uint8Array | string): void;
+  setBlockhash(value: Uint8Array | string): GetLogsByBlock;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetLogsByBlock.AsObject;
@@ -1066,10 +1058,13 @@ export namespace GetLogsByBlock {
 
 export class GetLogsByRange extends jspb.Message {
   getFromblock(): number;
-  setFromblock(value: number): void;
+  setFromblock(value: number): GetLogsByRange;
 
-  getCount(): number;
-  setCount(value: number): void;
+  getToblock(): number;
+  setToblock(value: number): GetLogsByRange;
+
+  getPaginationsize(): number;
+  setPaginationsize(value: number): GetLogsByRange;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetLogsByRange.AsObject;
@@ -1082,15 +1077,16 @@ export class GetLogsByRange extends jspb.Message {
 export namespace GetLogsByRange {
   export type AsObject = {
     fromblock: number,
-    count: number,
+    toblock: number,
+    paginationsize: number,
   }
 }
 
 export class Topics extends jspb.Message {
   getTopicList(): Array<Uint8Array | string>;
-  setTopicList(value: Array<Uint8Array | string>): void;
-  clearTopicList(): void;
-  addTopic(value: Uint8Array | string, index?: number): void;
+  setTopicList(value: Array<Uint8Array | string>): Topics;
+  clearTopicList(): Topics;
+  addTopic(value: Uint8Array | string, index?: number): Topics;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Topics.AsObject;
@@ -1108,13 +1104,13 @@ export namespace Topics {
 
 export class LogsFilter extends jspb.Message {
   getAddressList(): Array<string>;
-  setAddressList(value: Array<string>): void;
-  clearAddressList(): void;
-  addAddress(value: string, index?: number): void;
+  setAddressList(value: Array<string>): LogsFilter;
+  clearAddressList(): LogsFilter;
+  addAddress(value: string, index?: number): LogsFilter;
 
   getTopicsList(): Array<Topics>;
-  setTopicsList(value: Array<Topics>): void;
-  clearTopicsList(): void;
+  setTopicsList(value: Array<Topics>): LogsFilter;
+  clearTopicsList(): LogsFilter;
   addTopics(value?: Topics, index?: number): Topics;
 
   serializeBinary(): Uint8Array;
@@ -1134,21 +1130,19 @@ export namespace LogsFilter {
 
 export class GetLogsRequest extends jspb.Message {
   getFilter(): LogsFilter | undefined;
-  setFilter(value?: LogsFilter): void;
+  setFilter(value?: LogsFilter): GetLogsRequest;
   hasFilter(): boolean;
-  clearFilter(): void;
+  clearFilter(): GetLogsRequest;
 
   getByblock(): GetLogsByBlock | undefined;
-  setByblock(value?: GetLogsByBlock): void;
+  setByblock(value?: GetLogsByBlock): GetLogsRequest;
   hasByblock(): boolean;
-  clearByblock(): void;
-  hasByblock(): boolean;
+  clearByblock(): GetLogsRequest;
 
   getByrange(): GetLogsByRange | undefined;
-  setByrange(value?: GetLogsByRange): void;
+  setByrange(value?: GetLogsByRange): GetLogsRequest;
   hasByrange(): boolean;
-  clearByrange(): void;
-  hasByrange(): boolean;
+  clearByrange(): GetLogsRequest;
 
   getLookupCase(): GetLogsRequest.LookupCase;
 
@@ -1176,8 +1170,8 @@ export namespace GetLogsRequest {
 
 export class GetLogsResponse extends jspb.Message {
   getLogsList(): Array<proto_types_action_pb.Log>;
-  setLogsList(value: Array<proto_types_action_pb.Log>): void;
-  clearLogsList(): void;
+  setLogsList(value: Array<proto_types_action_pb.Log>): GetLogsResponse;
+  clearLogsList(): GetLogsResponse;
   addLogs(value?: proto_types_action_pb.Log, index?: number): proto_types_action_pb.Log;
 
   serializeBinary(): Uint8Array;
@@ -1196,7 +1190,7 @@ export namespace GetLogsResponse {
 
 export class GetEvmTransfersByActionHashRequest extends jspb.Message {
   getActionhash(): string;
-  setActionhash(value: string): void;
+  setActionhash(value: string): GetEvmTransfersByActionHashRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetEvmTransfersByActionHashRequest.AsObject;
@@ -1214,9 +1208,9 @@ export namespace GetEvmTransfersByActionHashRequest {
 
 export class GetEvmTransfersByActionHashResponse extends jspb.Message {
   getActionevmtransfers(): proto_types_action_pb.ActionEvmTransfer | undefined;
-  setActionevmtransfers(value?: proto_types_action_pb.ActionEvmTransfer): void;
+  setActionevmtransfers(value?: proto_types_action_pb.ActionEvmTransfer): GetEvmTransfersByActionHashResponse;
   hasActionevmtransfers(): boolean;
-  clearActionevmtransfers(): void;
+  clearActionevmtransfers(): GetEvmTransfersByActionHashResponse;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetEvmTransfersByActionHashResponse.AsObject;
@@ -1234,7 +1228,7 @@ export namespace GetEvmTransfersByActionHashResponse {
 
 export class GetEvmTransfersByBlockHeightRequest extends jspb.Message {
   getBlockheight(): number;
-  setBlockheight(value: number): void;
+  setBlockheight(value: number): GetEvmTransfersByBlockHeightRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetEvmTransfersByBlockHeightRequest.AsObject;
@@ -1252,9 +1246,9 @@ export namespace GetEvmTransfersByBlockHeightRequest {
 
 export class GetEvmTransfersByBlockHeightResponse extends jspb.Message {
   getBlockevmtransfers(): proto_types_action_pb.BlockEvmTransfer | undefined;
-  setBlockevmtransfers(value?: proto_types_action_pb.BlockEvmTransfer): void;
+  setBlockevmtransfers(value?: proto_types_action_pb.BlockEvmTransfer): GetEvmTransfersByBlockHeightResponse;
   hasBlockevmtransfers(): boolean;
-  clearBlockevmtransfers(): void;
+  clearBlockevmtransfers(): GetEvmTransfersByBlockHeightResponse;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetEvmTransfersByBlockHeightResponse.AsObject;
@@ -1286,9 +1280,9 @@ export namespace StreamBlocksRequest {
 
 export class StreamBlocksResponse extends jspb.Message {
   getBlock(): BlockInfo | undefined;
-  setBlock(value?: BlockInfo): void;
+  setBlock(value?: BlockInfo): StreamBlocksResponse;
   hasBlock(): boolean;
-  clearBlock(): void;
+  clearBlock(): StreamBlocksResponse;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): StreamBlocksResponse.AsObject;
@@ -1306,9 +1300,9 @@ export namespace StreamBlocksResponse {
 
 export class StreamLogsRequest extends jspb.Message {
   getFilter(): LogsFilter | undefined;
-  setFilter(value?: LogsFilter): void;
+  setFilter(value?: LogsFilter): StreamLogsRequest;
   hasFilter(): boolean;
-  clearFilter(): void;
+  clearFilter(): StreamLogsRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): StreamLogsRequest.AsObject;
@@ -1326,9 +1320,9 @@ export namespace StreamLogsRequest {
 
 export class StreamLogsResponse extends jspb.Message {
   getLog(): proto_types_action_pb.Log | undefined;
-  setLog(value?: proto_types_action_pb.Log): void;
+  setLog(value?: proto_types_action_pb.Log): StreamLogsResponse;
   hasLog(): boolean;
-  clearLog(): void;
+  clearLog(): StreamLogsResponse;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): StreamLogsResponse.AsObject;
@@ -1346,7 +1340,7 @@ export namespace StreamLogsResponse {
 
 export class GetElectionBucketsRequest extends jspb.Message {
   getEpochnum(): number;
-  setEpochnum(value: number): void;
+  setEpochnum(value: number): GetElectionBucketsRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetElectionBucketsRequest.AsObject;
@@ -1364,8 +1358,8 @@ export namespace GetElectionBucketsRequest {
 
 export class GetElectionBucketsResponse extends jspb.Message {
   getBucketsList(): Array<proto_types_election_pb.ElectionBucket>;
-  setBucketsList(value: Array<proto_types_election_pb.ElectionBucket>): void;
-  clearBucketsList(): void;
+  setBucketsList(value: Array<proto_types_election_pb.ElectionBucket>): GetElectionBucketsResponse;
+  clearBucketsList(): GetElectionBucketsResponse;
   addBuckets(value?: proto_types_election_pb.ElectionBucket, index?: number): proto_types_election_pb.ElectionBucket;
 
   serializeBinary(): Uint8Array;

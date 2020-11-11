@@ -1,17 +1,18 @@
-import * as jspb from "google-protobuf"
+import * as jspb from 'google-protobuf'
 
 import * as proto_types_blockchain_pb from '../../proto/types/blockchain_pb';
 import * as proto_types_endorsement_pb from '../../proto/types/endorsement_pb';
 
+
 export class BlockProposal extends jspb.Message {
   getBlock(): proto_types_blockchain_pb.Block | undefined;
-  setBlock(value?: proto_types_blockchain_pb.Block): void;
+  setBlock(value?: proto_types_blockchain_pb.Block): BlockProposal;
   hasBlock(): boolean;
-  clearBlock(): void;
+  clearBlock(): BlockProposal;
 
   getEndorsementsList(): Array<proto_types_endorsement_pb.Endorsement>;
-  setEndorsementsList(value: Array<proto_types_endorsement_pb.Endorsement>): void;
-  clearEndorsementsList(): void;
+  setEndorsementsList(value: Array<proto_types_endorsement_pb.Endorsement>): BlockProposal;
+  clearEndorsementsList(): BlockProposal;
   addEndorsements(value?: proto_types_endorsement_pb.Endorsement, index?: number): proto_types_endorsement_pb.Endorsement;
 
   serializeBinary(): Uint8Array;
@@ -33,10 +34,10 @@ export class ConsensusVote extends jspb.Message {
   getBlockhash(): Uint8Array | string;
   getBlockhash_asU8(): Uint8Array;
   getBlockhash_asB64(): string;
-  setBlockhash(value: Uint8Array | string): void;
+  setBlockhash(value: Uint8Array | string): ConsensusVote;
 
   getTopic(): ConsensusVote.Topic;
-  setTopic(value: ConsensusVote.Topic): void;
+  setTopic(value: ConsensusVote.Topic): ConsensusVote;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ConsensusVote.AsObject;
@@ -61,24 +62,22 @@ export namespace ConsensusVote {
 
 export class ConsensusMessage extends jspb.Message {
   getHeight(): number;
-  setHeight(value: number): void;
+  setHeight(value: number): ConsensusMessage;
 
   getEndorsement(): proto_types_endorsement_pb.Endorsement | undefined;
-  setEndorsement(value?: proto_types_endorsement_pb.Endorsement): void;
+  setEndorsement(value?: proto_types_endorsement_pb.Endorsement): ConsensusMessage;
   hasEndorsement(): boolean;
-  clearEndorsement(): void;
+  clearEndorsement(): ConsensusMessage;
 
   getBlockproposal(): BlockProposal | undefined;
-  setBlockproposal(value?: BlockProposal): void;
+  setBlockproposal(value?: BlockProposal): ConsensusMessage;
   hasBlockproposal(): boolean;
-  clearBlockproposal(): void;
-  hasBlockproposal(): boolean;
+  clearBlockproposal(): ConsensusMessage;
 
   getVote(): ConsensusVote | undefined;
-  setVote(value?: ConsensusVote): void;
+  setVote(value?: ConsensusVote): ConsensusMessage;
   hasVote(): boolean;
-  clearVote(): void;
-  hasVote(): boolean;
+  clearVote(): ConsensusMessage;
 
   getMsgCase(): ConsensusMessage.MsgCase;
 

@@ -1,36 +1,37 @@
-import * as jspb from "google-protobuf"
+import * as jspb from 'google-protobuf'
 
 import * as google_protobuf_duration_pb from 'google-protobuf/google/protobuf/duration_pb';
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
+
 
 export class ElectionBucket extends jspb.Message {
   getVoter(): Uint8Array | string;
   getVoter_asU8(): Uint8Array;
   getVoter_asB64(): string;
-  setVoter(value: Uint8Array | string): void;
+  setVoter(value: Uint8Array | string): ElectionBucket;
 
   getCandidate(): Uint8Array | string;
   getCandidate_asU8(): Uint8Array;
   getCandidate_asB64(): string;
-  setCandidate(value: Uint8Array | string): void;
+  setCandidate(value: Uint8Array | string): ElectionBucket;
 
   getAmount(): Uint8Array | string;
   getAmount_asU8(): Uint8Array;
   getAmount_asB64(): string;
-  setAmount(value: Uint8Array | string): void;
+  setAmount(value: Uint8Array | string): ElectionBucket;
 
   getStarttime(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setStarttime(value?: google_protobuf_timestamp_pb.Timestamp): void;
+  setStarttime(value?: google_protobuf_timestamp_pb.Timestamp): ElectionBucket;
   hasStarttime(): boolean;
-  clearStarttime(): void;
+  clearStarttime(): ElectionBucket;
 
   getDuration(): google_protobuf_duration_pb.Duration | undefined;
-  setDuration(value?: google_protobuf_duration_pb.Duration): void;
+  setDuration(value?: google_protobuf_duration_pb.Duration): ElectionBucket;
   hasDuration(): boolean;
-  clearDuration(): void;
+  clearDuration(): ElectionBucket;
 
   getDecay(): boolean;
-  setDecay(value: boolean): void;
+  setDecay(value: boolean): ElectionBucket;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ElectionBucket.AsObject;

@@ -1,3 +1,4 @@
+// source: proto/types/consensus.proto
 /**
  * @fileoverview
  * @enhanceable
@@ -17,6 +18,7 @@ var proto_types_endorsement_pb = require('../../proto/types/endorsement_pb.js');
 goog.object.extend(proto, proto_types_endorsement_pb);
 goog.exportSymbol('proto.iotextypes.BlockProposal', null, global);
 goog.exportSymbol('proto.iotextypes.ConsensusMessage', null, global);
+goog.exportSymbol('proto.iotextypes.ConsensusMessage.MsgCase', null, global);
 goog.exportSymbol('proto.iotextypes.ConsensusVote', null, global);
 goog.exportSymbol('proto.iotextypes.ConsensusVote.Topic', null, global);
 /**
@@ -94,13 +96,15 @@ proto.iotextypes.BlockProposal.repeatedFields_ = [2];
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.BlockProposal.prototype.toObject = function(opt_includeInstance) {
@@ -110,8 +114,8 @@ proto.iotextypes.BlockProposal.prototype.toObject = function(opt_includeInstance
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.BlockProposal} msg The msg instance to transform.
  * @return {!Object}
@@ -226,17 +230,21 @@ proto.iotextypes.BlockProposal.prototype.getBlock = function() {
 };
 
 
-/** @param {?proto.iotextypes.Block|undefined} value */
+/**
+ * @param {?proto.iotextypes.Block|undefined} value
+ * @return {!proto.iotextypes.BlockProposal} returns this
+*/
 proto.iotextypes.BlockProposal.prototype.setBlock = function(value) {
-  jspb.Message.setWrapperField(this, 1, value);
+  return jspb.Message.setWrapperField(this, 1, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotextypes.BlockProposal} returns this
  */
 proto.iotextypes.BlockProposal.prototype.clearBlock = function() {
-  this.setBlock(undefined);
+  return this.setBlock(undefined);
 };
 
 
@@ -259,9 +267,12 @@ proto.iotextypes.BlockProposal.prototype.getEndorsementsList = function() {
 };
 
 
-/** @param {!Array<!proto.iotextypes.Endorsement>} value */
+/**
+ * @param {!Array<!proto.iotextypes.Endorsement>} value
+ * @return {!proto.iotextypes.BlockProposal} returns this
+*/
 proto.iotextypes.BlockProposal.prototype.setEndorsementsList = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 2, value);
+  return jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
 
@@ -277,9 +288,10 @@ proto.iotextypes.BlockProposal.prototype.addEndorsements = function(opt_value, o
 
 /**
  * Clears the list making it empty but non-null.
+ * @return {!proto.iotextypes.BlockProposal} returns this
  */
 proto.iotextypes.BlockProposal.prototype.clearEndorsementsList = function() {
-  this.setEndorsementsList([]);
+  return this.setEndorsementsList([]);
 };
 
 
@@ -288,13 +300,15 @@ proto.iotextypes.BlockProposal.prototype.clearEndorsementsList = function() {
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.ConsensusVote.prototype.toObject = function(opt_includeInstance) {
@@ -304,8 +318,8 @@ proto.iotextypes.ConsensusVote.prototype.toObject = function(opt_includeInstance
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.ConsensusVote} msg The msg instance to transform.
  * @return {!Object}
@@ -447,9 +461,12 @@ proto.iotextypes.ConsensusVote.prototype.getBlockhash_asU8 = function() {
 };
 
 
-/** @param {!(string|Uint8Array)} value */
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.iotextypes.ConsensusVote} returns this
+ */
 proto.iotextypes.ConsensusVote.prototype.setBlockhash = function(value) {
-  jspb.Message.setProto3BytesField(this, 1, value);
+  return jspb.Message.setProto3BytesField(this, 1, value);
 };
 
 
@@ -462,9 +479,12 @@ proto.iotextypes.ConsensusVote.prototype.getTopic = function() {
 };
 
 
-/** @param {!proto.iotextypes.ConsensusVote.Topic} value */
+/**
+ * @param {!proto.iotextypes.ConsensusVote.Topic} value
+ * @return {!proto.iotextypes.ConsensusVote} returns this
+ */
 proto.iotextypes.ConsensusVote.prototype.setTopic = function(value) {
-  jspb.Message.setProto3EnumField(this, 2, value);
+  return jspb.Message.setProto3EnumField(this, 2, value);
 };
 
 
@@ -499,13 +519,15 @@ proto.iotextypes.ConsensusMessage.prototype.getMsgCase = function() {
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.ConsensusMessage.prototype.toObject = function(opt_includeInstance) {
@@ -515,8 +537,8 @@ proto.iotextypes.ConsensusMessage.prototype.toObject = function(opt_includeInsta
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.ConsensusMessage} msg The msg instance to transform.
  * @return {!Object}
@@ -655,9 +677,12 @@ proto.iotextypes.ConsensusMessage.prototype.getHeight = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.ConsensusMessage} returns this
+ */
 proto.iotextypes.ConsensusMessage.prototype.setHeight = function(value) {
-  jspb.Message.setProto3IntField(this, 1, value);
+  return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
@@ -671,17 +696,21 @@ proto.iotextypes.ConsensusMessage.prototype.getEndorsement = function() {
 };
 
 
-/** @param {?proto.iotextypes.Endorsement|undefined} value */
+/**
+ * @param {?proto.iotextypes.Endorsement|undefined} value
+ * @return {!proto.iotextypes.ConsensusMessage} returns this
+*/
 proto.iotextypes.ConsensusMessage.prototype.setEndorsement = function(value) {
-  jspb.Message.setWrapperField(this, 2, value);
+  return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotextypes.ConsensusMessage} returns this
  */
 proto.iotextypes.ConsensusMessage.prototype.clearEndorsement = function() {
-  this.setEndorsement(undefined);
+  return this.setEndorsement(undefined);
 };
 
 
@@ -704,17 +733,21 @@ proto.iotextypes.ConsensusMessage.prototype.getBlockproposal = function() {
 };
 
 
-/** @param {?proto.iotextypes.BlockProposal|undefined} value */
+/**
+ * @param {?proto.iotextypes.BlockProposal|undefined} value
+ * @return {!proto.iotextypes.ConsensusMessage} returns this
+*/
 proto.iotextypes.ConsensusMessage.prototype.setBlockproposal = function(value) {
-  jspb.Message.setOneofWrapperField(this, 100, proto.iotextypes.ConsensusMessage.oneofGroups_[0], value);
+  return jspb.Message.setOneofWrapperField(this, 100, proto.iotextypes.ConsensusMessage.oneofGroups_[0], value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotextypes.ConsensusMessage} returns this
  */
 proto.iotextypes.ConsensusMessage.prototype.clearBlockproposal = function() {
-  this.setBlockproposal(undefined);
+  return this.setBlockproposal(undefined);
 };
 
 
@@ -737,17 +770,21 @@ proto.iotextypes.ConsensusMessage.prototype.getVote = function() {
 };
 
 
-/** @param {?proto.iotextypes.ConsensusVote|undefined} value */
+/**
+ * @param {?proto.iotextypes.ConsensusVote|undefined} value
+ * @return {!proto.iotextypes.ConsensusMessage} returns this
+*/
 proto.iotextypes.ConsensusMessage.prototype.setVote = function(value) {
-  jspb.Message.setOneofWrapperField(this, 101, proto.iotextypes.ConsensusMessage.oneofGroups_[0], value);
+  return jspb.Message.setOneofWrapperField(this, 101, proto.iotextypes.ConsensusMessage.oneofGroups_[0], value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotextypes.ConsensusMessage} returns this
  */
 proto.iotextypes.ConsensusMessage.prototype.clearVote = function() {
-  this.setVote(undefined);
+  return this.setVote(undefined);
 };
 
 

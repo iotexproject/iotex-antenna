@@ -1,25 +1,27 @@
-import * as jspb from "google-protobuf"
+import * as jspb from 'google-protobuf'
+
+
 
 export class Genesis extends jspb.Message {
   getBlockchain(): GenesisBlockchain | undefined;
-  setBlockchain(value?: GenesisBlockchain): void;
+  setBlockchain(value?: GenesisBlockchain): Genesis;
   hasBlockchain(): boolean;
-  clearBlockchain(): void;
+  clearBlockchain(): Genesis;
 
   getAccount(): GenesisAccount | undefined;
-  setAccount(value?: GenesisAccount): void;
+  setAccount(value?: GenesisAccount): Genesis;
   hasAccount(): boolean;
-  clearAccount(): void;
+  clearAccount(): Genesis;
 
   getPoll(): GenesisPoll | undefined;
-  setPoll(value?: GenesisPoll): void;
+  setPoll(value?: GenesisPoll): Genesis;
   hasPoll(): boolean;
-  clearPoll(): void;
+  clearPoll(): Genesis;
 
   getRewarding(): GenesisRewarding | undefined;
-  setRewarding(value?: GenesisRewarding): void;
+  setRewarding(value?: GenesisRewarding): Genesis;
   hasRewarding(): boolean;
-  clearRewarding(): void;
+  clearRewarding(): Genesis;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Genesis.AsObject;
@@ -40,28 +42,28 @@ export namespace Genesis {
 
 export class GenesisBlockchain extends jspb.Message {
   getTimestamp(): number;
-  setTimestamp(value: number): void;
+  setTimestamp(value: number): GenesisBlockchain;
 
   getBlockgaslimit(): number;
-  setBlockgaslimit(value: number): void;
+  setBlockgaslimit(value: number): GenesisBlockchain;
 
   getActiongaslimit(): number;
-  setActiongaslimit(value: number): void;
+  setActiongaslimit(value: number): GenesisBlockchain;
 
   getBlockinterval(): number;
-  setBlockinterval(value: number): void;
+  setBlockinterval(value: number): GenesisBlockchain;
 
   getNumsubepochs(): number;
-  setNumsubepochs(value: number): void;
+  setNumsubepochs(value: number): GenesisBlockchain;
 
   getNumdelegates(): number;
-  setNumdelegates(value: number): void;
+  setNumdelegates(value: number): GenesisBlockchain;
 
   getNumcandidatedelegates(): number;
-  setNumcandidatedelegates(value: number): void;
+  setNumcandidatedelegates(value: number): GenesisBlockchain;
 
   getTimebasedrotation(): boolean;
-  setTimebasedrotation(value: boolean): void;
+  setTimebasedrotation(value: boolean): GenesisBlockchain;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GenesisBlockchain.AsObject;
@@ -86,14 +88,14 @@ export namespace GenesisBlockchain {
 
 export class GenesisAccount extends jspb.Message {
   getInitbalanceaddrsList(): Array<string>;
-  setInitbalanceaddrsList(value: Array<string>): void;
-  clearInitbalanceaddrsList(): void;
-  addInitbalanceaddrs(value: string, index?: number): void;
+  setInitbalanceaddrsList(value: Array<string>): GenesisAccount;
+  clearInitbalanceaddrsList(): GenesisAccount;
+  addInitbalanceaddrs(value: string, index?: number): GenesisAccount;
 
   getInitbalancesList(): Array<string>;
-  setInitbalancesList(value: Array<string>): void;
-  clearInitbalancesList(): void;
-  addInitbalances(value: string, index?: number): void;
+  setInitbalancesList(value: Array<string>): GenesisAccount;
+  clearInitbalancesList(): GenesisAccount;
+  addInitbalances(value: string, index?: number): GenesisAccount;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GenesisAccount.AsObject;
@@ -112,29 +114,29 @@ export namespace GenesisAccount {
 
 export class GenesisPoll extends jspb.Message {
   getEnablegravitychainvoting(): boolean;
-  setEnablegravitychainvoting(value: boolean): void;
+  setEnablegravitychainvoting(value: boolean): GenesisPoll;
 
   getGravitychainstartheight(): number;
-  setGravitychainstartheight(value: number): void;
+  setGravitychainstartheight(value: number): GenesisPoll;
 
   getRegistercontractaddress(): string;
-  setRegistercontractaddress(value: string): void;
+  setRegistercontractaddress(value: string): GenesisPoll;
 
   getStakingcontractaddress(): string;
-  setStakingcontractaddress(value: string): void;
+  setStakingcontractaddress(value: string): GenesisPoll;
 
   getVotethreshold(): string;
-  setVotethreshold(value: string): void;
+  setVotethreshold(value: string): GenesisPoll;
 
   getScorethreshold(): string;
-  setScorethreshold(value: string): void;
+  setScorethreshold(value: string): GenesisPoll;
 
   getSelfstakingthreshold(): string;
-  setSelfstakingthreshold(value: string): void;
+  setSelfstakingthreshold(value: string): GenesisPoll;
 
   getDelegatesList(): Array<GenesisDelegate>;
-  setDelegatesList(value: Array<GenesisDelegate>): void;
-  clearDelegatesList(): void;
+  setDelegatesList(value: Array<GenesisDelegate>): GenesisPoll;
+  clearDelegatesList(): GenesisPoll;
   addDelegates(value?: GenesisDelegate, index?: number): GenesisDelegate;
 
   serializeBinary(): Uint8Array;
@@ -160,13 +162,13 @@ export namespace GenesisPoll {
 
 export class GenesisDelegate extends jspb.Message {
   getOperatoraddr(): string;
-  setOperatoraddr(value: string): void;
+  setOperatoraddr(value: string): GenesisDelegate;
 
   getRewardaddr(): string;
-  setRewardaddr(value: string): void;
+  setRewardaddr(value: string): GenesisDelegate;
 
   getVotes(): string;
-  setVotes(value: string): void;
+  setVotes(value: string): GenesisDelegate;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GenesisDelegate.AsObject;
@@ -186,31 +188,31 @@ export namespace GenesisDelegate {
 
 export class GenesisRewarding extends jspb.Message {
   getInitadminaddr(): string;
-  setInitadminaddr(value: string): void;
+  setInitadminaddr(value: string): GenesisRewarding;
 
   getInitbalance(): string;
-  setInitbalance(value: string): void;
+  setInitbalance(value: string): GenesisRewarding;
 
   getBlockreward(): string;
-  setBlockreward(value: string): void;
+  setBlockreward(value: string): GenesisRewarding;
 
   getEpochreward(): string;
-  setEpochreward(value: string): void;
+  setEpochreward(value: string): GenesisRewarding;
 
   getNumdelegatesforepochreward(): number;
-  setNumdelegatesforepochreward(value: number): void;
+  setNumdelegatesforepochreward(value: number): GenesisRewarding;
 
   getFoundationbonus(): string;
-  setFoundationbonus(value: string): void;
+  setFoundationbonus(value: string): GenesisRewarding;
 
   getNumdelegatesforfoundationbonus(): number;
-  setNumdelegatesforfoundationbonus(value: number): void;
+  setNumdelegatesforfoundationbonus(value: number): GenesisRewarding;
 
   getFoundationbonuslastepoch(): number;
-  setFoundationbonuslastepoch(value: number): void;
+  setFoundationbonuslastepoch(value: number): GenesisRewarding;
 
   getProductivitythreshold(): number;
-  setProductivitythreshold(value: number): void;
+  setProductivitythreshold(value: number): GenesisRewarding;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GenesisRewarding.AsObject;

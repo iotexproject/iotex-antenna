@@ -1,16 +1,18 @@
-import * as jspb from "google-protobuf"
+import * as jspb from 'google-protobuf'
+
+
 
 export class Transfer extends jspb.Message {
   getAmount(): string;
-  setAmount(value: string): void;
+  setAmount(value: string): Transfer;
 
   getRecipient(): string;
-  setRecipient(value: string): void;
+  setRecipient(value: string): Transfer;
 
   getPayload(): Uint8Array | string;
   getPayload_asU8(): Uint8Array;
   getPayload_asB64(): string;
-  setPayload(value: Uint8Array | string): void;
+  setPayload(value: Uint8Array | string): Transfer;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Transfer.AsObject;
@@ -30,20 +32,20 @@ export namespace Transfer {
 
 export class Candidate extends jspb.Message {
   getAddress(): string;
-  setAddress(value: string): void;
+  setAddress(value: string): Candidate;
 
   getVotes(): Uint8Array | string;
   getVotes_asU8(): Uint8Array;
   getVotes_asB64(): string;
-  setVotes(value: Uint8Array | string): void;
+  setVotes(value: Uint8Array | string): Candidate;
 
   getPubkey(): Uint8Array | string;
   getPubkey_asU8(): Uint8Array;
   getPubkey_asB64(): string;
-  setPubkey(value: Uint8Array | string): void;
+  setPubkey(value: Uint8Array | string): Candidate;
 
   getRewardaddress(): string;
-  setRewardaddress(value: string): void;
+  setRewardaddress(value: string): Candidate;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Candidate.AsObject;
@@ -64,8 +66,8 @@ export namespace Candidate {
 
 export class CandidateList extends jspb.Message {
   getCandidatesList(): Array<Candidate>;
-  setCandidatesList(value: Array<Candidate>): void;
-  clearCandidatesList(): void;
+  setCandidatesList(value: Array<Candidate>): CandidateList;
+  clearCandidatesList(): CandidateList;
   addCandidates(value?: Candidate, index?: number): Candidate;
 
   serializeBinary(): Uint8Array;
@@ -84,12 +86,12 @@ export namespace CandidateList {
 
 export class PutPollResult extends jspb.Message {
   getHeight(): number;
-  setHeight(value: number): void;
+  setHeight(value: number): PutPollResult;
 
   getCandidates(): CandidateList | undefined;
-  setCandidates(value?: CandidateList): void;
+  setCandidates(value?: CandidateList): PutPollResult;
   hasCandidates(): boolean;
-  clearCandidates(): void;
+  clearCandidates(): PutPollResult;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PutPollResult.AsObject;
@@ -108,15 +110,15 @@ export namespace PutPollResult {
 
 export class Execution extends jspb.Message {
   getAmount(): string;
-  setAmount(value: string): void;
+  setAmount(value: string): Execution;
 
   getContract(): string;
-  setContract(value: string): void;
+  setContract(value: string): Execution;
 
   getData(): Uint8Array | string;
   getData_asU8(): Uint8Array;
   getData_asB64(): string;
-  setData(value: Uint8Array | string): void;
+  setData(value: Uint8Array | string): Execution;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Execution.AsObject;
@@ -136,21 +138,21 @@ export namespace Execution {
 
 export class StakeCreate extends jspb.Message {
   getCandidatename(): string;
-  setCandidatename(value: string): void;
+  setCandidatename(value: string): StakeCreate;
 
   getStakedamount(): string;
-  setStakedamount(value: string): void;
+  setStakedamount(value: string): StakeCreate;
 
   getStakedduration(): number;
-  setStakedduration(value: number): void;
+  setStakedduration(value: number): StakeCreate;
 
   getAutostake(): boolean;
-  setAutostake(value: boolean): void;
+  setAutostake(value: boolean): StakeCreate;
 
   getPayload(): Uint8Array | string;
   getPayload_asU8(): Uint8Array;
   getPayload_asB64(): string;
-  setPayload(value: Uint8Array | string): void;
+  setPayload(value: Uint8Array | string): StakeCreate;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): StakeCreate.AsObject;
@@ -172,12 +174,12 @@ export namespace StakeCreate {
 
 export class StakeReclaim extends jspb.Message {
   getBucketindex(): number;
-  setBucketindex(value: number): void;
+  setBucketindex(value: number): StakeReclaim;
 
   getPayload(): Uint8Array | string;
   getPayload_asU8(): Uint8Array;
   getPayload_asB64(): string;
-  setPayload(value: Uint8Array | string): void;
+  setPayload(value: Uint8Array | string): StakeReclaim;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): StakeReclaim.AsObject;
@@ -196,15 +198,15 @@ export namespace StakeReclaim {
 
 export class StakeAddDeposit extends jspb.Message {
   getBucketindex(): number;
-  setBucketindex(value: number): void;
+  setBucketindex(value: number): StakeAddDeposit;
 
   getAmount(): string;
-  setAmount(value: string): void;
+  setAmount(value: string): StakeAddDeposit;
 
   getPayload(): Uint8Array | string;
   getPayload_asU8(): Uint8Array;
   getPayload_asB64(): string;
-  setPayload(value: Uint8Array | string): void;
+  setPayload(value: Uint8Array | string): StakeAddDeposit;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): StakeAddDeposit.AsObject;
@@ -224,18 +226,18 @@ export namespace StakeAddDeposit {
 
 export class StakeRestake extends jspb.Message {
   getBucketindex(): number;
-  setBucketindex(value: number): void;
+  setBucketindex(value: number): StakeRestake;
 
   getStakedduration(): number;
-  setStakedduration(value: number): void;
+  setStakedduration(value: number): StakeRestake;
 
   getAutostake(): boolean;
-  setAutostake(value: boolean): void;
+  setAutostake(value: boolean): StakeRestake;
 
   getPayload(): Uint8Array | string;
   getPayload_asU8(): Uint8Array;
   getPayload_asB64(): string;
-  setPayload(value: Uint8Array | string): void;
+  setPayload(value: Uint8Array | string): StakeRestake;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): StakeRestake.AsObject;
@@ -256,15 +258,15 @@ export namespace StakeRestake {
 
 export class StakeChangeCandidate extends jspb.Message {
   getBucketindex(): number;
-  setBucketindex(value: number): void;
+  setBucketindex(value: number): StakeChangeCandidate;
 
   getCandidatename(): string;
-  setCandidatename(value: string): void;
+  setCandidatename(value: string): StakeChangeCandidate;
 
   getPayload(): Uint8Array | string;
   getPayload_asU8(): Uint8Array;
   getPayload_asB64(): string;
-  setPayload(value: Uint8Array | string): void;
+  setPayload(value: Uint8Array | string): StakeChangeCandidate;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): StakeChangeCandidate.AsObject;
@@ -284,15 +286,15 @@ export namespace StakeChangeCandidate {
 
 export class StakeTransferOwnership extends jspb.Message {
   getBucketindex(): number;
-  setBucketindex(value: number): void;
+  setBucketindex(value: number): StakeTransferOwnership;
 
   getVoteraddress(): string;
-  setVoteraddress(value: string): void;
+  setVoteraddress(value: string): StakeTransferOwnership;
 
   getPayload(): Uint8Array | string;
   getPayload_asU8(): Uint8Array;
   getPayload_asB64(): string;
-  setPayload(value: Uint8Array | string): void;
+  setPayload(value: Uint8Array | string): StakeTransferOwnership;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): StakeTransferOwnership.AsObject;
@@ -312,13 +314,13 @@ export namespace StakeTransferOwnership {
 
 export class CandidateBasicInfo extends jspb.Message {
   getName(): string;
-  setName(value: string): void;
+  setName(value: string): CandidateBasicInfo;
 
   getOperatoraddress(): string;
-  setOperatoraddress(value: string): void;
+  setOperatoraddress(value: string): CandidateBasicInfo;
 
   getRewardaddress(): string;
-  setRewardaddress(value: string): void;
+  setRewardaddress(value: string): CandidateBasicInfo;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CandidateBasicInfo.AsObject;
@@ -338,26 +340,26 @@ export namespace CandidateBasicInfo {
 
 export class CandidateRegister extends jspb.Message {
   getCandidate(): CandidateBasicInfo | undefined;
-  setCandidate(value?: CandidateBasicInfo): void;
+  setCandidate(value?: CandidateBasicInfo): CandidateRegister;
   hasCandidate(): boolean;
-  clearCandidate(): void;
+  clearCandidate(): CandidateRegister;
 
   getStakedamount(): string;
-  setStakedamount(value: string): void;
+  setStakedamount(value: string): CandidateRegister;
 
   getStakedduration(): number;
-  setStakedduration(value: number): void;
+  setStakedduration(value: number): CandidateRegister;
 
   getAutostake(): boolean;
-  setAutostake(value: boolean): void;
+  setAutostake(value: boolean): CandidateRegister;
 
   getOwneraddress(): string;
-  setOwneraddress(value: string): void;
+  setOwneraddress(value: string): CandidateRegister;
 
   getPayload(): Uint8Array | string;
   getPayload_asU8(): Uint8Array;
   getPayload_asB64(): string;
-  setPayload(value: Uint8Array | string): void;
+  setPayload(value: Uint8Array | string): CandidateRegister;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CandidateRegister.AsObject;
@@ -380,19 +382,19 @@ export namespace CandidateRegister {
 
 export class StartSubChain extends jspb.Message {
   getChainid(): number;
-  setChainid(value: number): void;
+  setChainid(value: number): StartSubChain;
 
   getSecuritydeposit(): string;
-  setSecuritydeposit(value: string): void;
+  setSecuritydeposit(value: string): StartSubChain;
 
   getOperationdeposit(): string;
-  setOperationdeposit(value: string): void;
+  setOperationdeposit(value: string): StartSubChain;
 
   getStartheight(): number;
-  setStartheight(value: number): void;
+  setStartheight(value: number): StartSubChain;
 
   getParentheightoffset(): number;
-  setParentheightoffset(value: number): void;
+  setParentheightoffset(value: number): StartSubChain;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): StartSubChain.AsObject;
@@ -414,13 +416,13 @@ export namespace StartSubChain {
 
 export class StopSubChain extends jspb.Message {
   getChainid(): number;
-  setChainid(value: number): void;
+  setChainid(value: number): StopSubChain;
 
   getStopheight(): number;
-  setStopheight(value: number): void;
+  setStopheight(value: number): StopSubChain;
 
   getSubchainaddress(): string;
-  setSubchainaddress(value: string): void;
+  setSubchainaddress(value: string): StopSubChain;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): StopSubChain.AsObject;
@@ -440,12 +442,12 @@ export namespace StopSubChain {
 
 export class MerkleRoot extends jspb.Message {
   getName(): string;
-  setName(value: string): void;
+  setName(value: string): MerkleRoot;
 
   getValue(): Uint8Array | string;
   getValue_asU8(): Uint8Array;
   getValue_asB64(): string;
-  setValue(value: Uint8Array | string): void;
+  setValue(value: Uint8Array | string): MerkleRoot;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): MerkleRoot.AsObject;
@@ -464,14 +466,14 @@ export namespace MerkleRoot {
 
 export class PutBlock extends jspb.Message {
   getSubchainaddress(): string;
-  setSubchainaddress(value: string): void;
+  setSubchainaddress(value: string): PutBlock;
 
   getHeight(): number;
-  setHeight(value: number): void;
+  setHeight(value: number): PutBlock;
 
   getRootsList(): Array<MerkleRoot>;
-  setRootsList(value: Array<MerkleRoot>): void;
-  clearRootsList(): void;
+  setRootsList(value: Array<MerkleRoot>): PutBlock;
+  clearRootsList(): PutBlock;
   addRoots(value?: MerkleRoot, index?: number): MerkleRoot;
 
   serializeBinary(): Uint8Array;
@@ -492,13 +494,13 @@ export namespace PutBlock {
 
 export class CreateDeposit extends jspb.Message {
   getChainid(): number;
-  setChainid(value: number): void;
+  setChainid(value: number): CreateDeposit;
 
   getAmount(): string;
-  setAmount(value: string): void;
+  setAmount(value: string): CreateDeposit;
 
   getRecipient(): string;
-  setRecipient(value: string): void;
+  setRecipient(value: string): CreateDeposit;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CreateDeposit.AsObject;
@@ -518,13 +520,13 @@ export namespace CreateDeposit {
 
 export class SettleDeposit extends jspb.Message {
   getAmount(): string;
-  setAmount(value: string): void;
+  setAmount(value: string): SettleDeposit;
 
   getRecipient(): string;
-  setRecipient(value: string): void;
+  setRecipient(value: string): SettleDeposit;
 
   getIndex(): number;
-  setIndex(value: number): void;
+  setIndex(value: number): SettleDeposit;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): SettleDeposit.AsObject;
@@ -558,7 +560,7 @@ export namespace CreatePlumChain {
 
 export class TerminatePlumChain extends jspb.Message {
   getSubchainaddress(): string;
-  setSubchainaddress(value: string): void;
+  setSubchainaddress(value: string): TerminatePlumChain;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): TerminatePlumChain.AsObject;
@@ -576,13 +578,13 @@ export namespace TerminatePlumChain {
 
 export class PlumPutBlock extends jspb.Message {
   getSubchainaddress(): string;
-  setSubchainaddress(value: string): void;
+  setSubchainaddress(value: string): PlumPutBlock;
 
   getHeight(): number;
-  setHeight(value: number): void;
+  setHeight(value: number): PlumPutBlock;
 
   getRootsMap(): jspb.Map<string, Uint8Array | string>;
-  clearRootsMap(): void;
+  clearRootsMap(): PlumPutBlock;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PlumPutBlock.AsObject;
@@ -602,13 +604,13 @@ export namespace PlumPutBlock {
 
 export class PlumCreateDeposit extends jspb.Message {
   getSubchainaddress(): string;
-  setSubchainaddress(value: string): void;
+  setSubchainaddress(value: string): PlumCreateDeposit;
 
   getAmount(): string;
-  setAmount(value: string): void;
+  setAmount(value: string): PlumCreateDeposit;
 
   getRecipient(): string;
-  setRecipient(value: string): void;
+  setRecipient(value: string): PlumCreateDeposit;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PlumCreateDeposit.AsObject;
@@ -628,33 +630,33 @@ export namespace PlumCreateDeposit {
 
 export class PlumStartExit extends jspb.Message {
   getSubchainaddress(): string;
-  setSubchainaddress(value: string): void;
+  setSubchainaddress(value: string): PlumStartExit;
 
   getPrevioustransfer(): Uint8Array | string;
   getPrevioustransfer_asU8(): Uint8Array;
   getPrevioustransfer_asB64(): string;
-  setPrevioustransfer(value: Uint8Array | string): void;
+  setPrevioustransfer(value: Uint8Array | string): PlumStartExit;
 
   getPrevioustransferblockproof(): Uint8Array | string;
   getPrevioustransferblockproof_asU8(): Uint8Array;
   getPrevioustransferblockproof_asB64(): string;
-  setPrevioustransferblockproof(value: Uint8Array | string): void;
+  setPrevioustransferblockproof(value: Uint8Array | string): PlumStartExit;
 
   getPrevioustransferblockheight(): number;
-  setPrevioustransferblockheight(value: number): void;
+  setPrevioustransferblockheight(value: number): PlumStartExit;
 
   getExittransfer(): Uint8Array | string;
   getExittransfer_asU8(): Uint8Array;
   getExittransfer_asB64(): string;
-  setExittransfer(value: Uint8Array | string): void;
+  setExittransfer(value: Uint8Array | string): PlumStartExit;
 
   getExittransferblockproof(): Uint8Array | string;
   getExittransferblockproof_asU8(): Uint8Array;
   getExittransferblockproof_asB64(): string;
-  setExittransferblockproof(value: Uint8Array | string): void;
+  setExittransferblockproof(value: Uint8Array | string): PlumStartExit;
 
   getExittransferblockheight(): number;
-  setExittransferblockheight(value: number): void;
+  setExittransferblockheight(value: number): PlumStartExit;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PlumStartExit.AsObject;
@@ -678,23 +680,23 @@ export namespace PlumStartExit {
 
 export class PlumChallengeExit extends jspb.Message {
   getSubchainaddress(): string;
-  setSubchainaddress(value: string): void;
+  setSubchainaddress(value: string): PlumChallengeExit;
 
   getCoinid(): number;
-  setCoinid(value: number): void;
+  setCoinid(value: number): PlumChallengeExit;
 
   getChallengetransfer(): Uint8Array | string;
   getChallengetransfer_asU8(): Uint8Array;
   getChallengetransfer_asB64(): string;
-  setChallengetransfer(value: Uint8Array | string): void;
+  setChallengetransfer(value: Uint8Array | string): PlumChallengeExit;
 
   getChallengetransferblockproof(): Uint8Array | string;
   getChallengetransferblockproof_asU8(): Uint8Array;
   getChallengetransferblockproof_asB64(): string;
-  setChallengetransferblockproof(value: Uint8Array | string): void;
+  setChallengetransferblockproof(value: Uint8Array | string): PlumChallengeExit;
 
   getChallengetransferblockheight(): number;
-  setChallengetransferblockheight(value: number): void;
+  setChallengetransferblockheight(value: number): PlumChallengeExit;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PlumChallengeExit.AsObject;
@@ -716,28 +718,28 @@ export namespace PlumChallengeExit {
 
 export class PlumResponseChallengeExit extends jspb.Message {
   getSubchainaddress(): string;
-  setSubchainaddress(value: string): void;
+  setSubchainaddress(value: string): PlumResponseChallengeExit;
 
   getCoinid(): number;
-  setCoinid(value: number): void;
+  setCoinid(value: number): PlumResponseChallengeExit;
 
   getChallengetransfer(): Uint8Array | string;
   getChallengetransfer_asU8(): Uint8Array;
   getChallengetransfer_asB64(): string;
-  setChallengetransfer(value: Uint8Array | string): void;
+  setChallengetransfer(value: Uint8Array | string): PlumResponseChallengeExit;
 
   getResponsetransfer(): Uint8Array | string;
   getResponsetransfer_asU8(): Uint8Array;
   getResponsetransfer_asB64(): string;
-  setResponsetransfer(value: Uint8Array | string): void;
+  setResponsetransfer(value: Uint8Array | string): PlumResponseChallengeExit;
 
   getResponsetransferblockproof(): Uint8Array | string;
   getResponsetransferblockproof_asU8(): Uint8Array;
   getResponsetransferblockproof_asB64(): string;
-  setResponsetransferblockproof(value: Uint8Array | string): void;
+  setResponsetransferblockproof(value: Uint8Array | string): PlumResponseChallengeExit;
 
   getPrevioustransferblockheight(): number;
-  setPrevioustransferblockheight(value: number): void;
+  setPrevioustransferblockheight(value: number): PlumResponseChallengeExit;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PlumResponseChallengeExit.AsObject;
@@ -760,10 +762,10 @@ export namespace PlumResponseChallengeExit {
 
 export class PlumFinalizeExit extends jspb.Message {
   getSubchainaddress(): string;
-  setSubchainaddress(value: string): void;
+  setSubchainaddress(value: string): PlumFinalizeExit;
 
   getCoinid(): number;
-  setCoinid(value: number): void;
+  setCoinid(value: number): PlumFinalizeExit;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PlumFinalizeExit.AsObject;
@@ -782,7 +784,7 @@ export namespace PlumFinalizeExit {
 
 export class PlumSettleDeposit extends jspb.Message {
   getCoinid(): number;
-  setCoinid(value: number): void;
+  setCoinid(value: number): PlumSettleDeposit;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PlumSettleDeposit.AsObject;
@@ -800,18 +802,18 @@ export namespace PlumSettleDeposit {
 
 export class PlumTransfer extends jspb.Message {
   getCoinid(): number;
-  setCoinid(value: number): void;
+  setCoinid(value: number): PlumTransfer;
 
   getDenomination(): Uint8Array | string;
   getDenomination_asU8(): Uint8Array;
   getDenomination_asB64(): string;
-  setDenomination(value: Uint8Array | string): void;
+  setDenomination(value: Uint8Array | string): PlumTransfer;
 
   getOwner(): string;
-  setOwner(value: string): void;
+  setOwner(value: string): PlumTransfer;
 
   getRecipient(): string;
-  setRecipient(value: string): void;
+  setRecipient(value: string): PlumTransfer;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PlumTransfer.AsObject;
@@ -832,196 +834,166 @@ export namespace PlumTransfer {
 
 export class ActionCore extends jspb.Message {
   getVersion(): number;
-  setVersion(value: number): void;
+  setVersion(value: number): ActionCore;
 
   getNonce(): number;
-  setNonce(value: number): void;
+  setNonce(value: number): ActionCore;
 
   getGaslimit(): number;
-  setGaslimit(value: number): void;
+  setGaslimit(value: number): ActionCore;
 
   getGasprice(): string;
-  setGasprice(value: string): void;
+  setGasprice(value: string): ActionCore;
 
   getTransfer(): Transfer | undefined;
-  setTransfer(value?: Transfer): void;
+  setTransfer(value?: Transfer): ActionCore;
   hasTransfer(): boolean;
-  clearTransfer(): void;
-  hasTransfer(): boolean;
+  clearTransfer(): ActionCore;
 
   getExecution(): Execution | undefined;
-  setExecution(value?: Execution): void;
+  setExecution(value?: Execution): ActionCore;
   hasExecution(): boolean;
-  clearExecution(): void;
-  hasExecution(): boolean;
+  clearExecution(): ActionCore;
 
   getStartsubchain(): StartSubChain | undefined;
-  setStartsubchain(value?: StartSubChain): void;
+  setStartsubchain(value?: StartSubChain): ActionCore;
   hasStartsubchain(): boolean;
-  clearStartsubchain(): void;
-  hasStartsubchain(): boolean;
+  clearStartsubchain(): ActionCore;
 
   getStopsubchain(): StopSubChain | undefined;
-  setStopsubchain(value?: StopSubChain): void;
+  setStopsubchain(value?: StopSubChain): ActionCore;
   hasStopsubchain(): boolean;
-  clearStopsubchain(): void;
-  hasStopsubchain(): boolean;
+  clearStopsubchain(): ActionCore;
 
   getPutblock(): PutBlock | undefined;
-  setPutblock(value?: PutBlock): void;
+  setPutblock(value?: PutBlock): ActionCore;
   hasPutblock(): boolean;
-  clearPutblock(): void;
-  hasPutblock(): boolean;
+  clearPutblock(): ActionCore;
 
   getCreatedeposit(): CreateDeposit | undefined;
-  setCreatedeposit(value?: CreateDeposit): void;
+  setCreatedeposit(value?: CreateDeposit): ActionCore;
   hasCreatedeposit(): boolean;
-  clearCreatedeposit(): void;
-  hasCreatedeposit(): boolean;
+  clearCreatedeposit(): ActionCore;
 
   getSettledeposit(): SettleDeposit | undefined;
-  setSettledeposit(value?: SettleDeposit): void;
+  setSettledeposit(value?: SettleDeposit): ActionCore;
   hasSettledeposit(): boolean;
-  clearSettledeposit(): void;
-  hasSettledeposit(): boolean;
+  clearSettledeposit(): ActionCore;
 
   getCreateplumchain(): CreatePlumChain | undefined;
-  setCreateplumchain(value?: CreatePlumChain): void;
+  setCreateplumchain(value?: CreatePlumChain): ActionCore;
   hasCreateplumchain(): boolean;
-  clearCreateplumchain(): void;
-  hasCreateplumchain(): boolean;
+  clearCreateplumchain(): ActionCore;
 
   getTerminateplumchain(): TerminatePlumChain | undefined;
-  setTerminateplumchain(value?: TerminatePlumChain): void;
+  setTerminateplumchain(value?: TerminatePlumChain): ActionCore;
   hasTerminateplumchain(): boolean;
-  clearTerminateplumchain(): void;
-  hasTerminateplumchain(): boolean;
+  clearTerminateplumchain(): ActionCore;
 
   getPlumputblock(): PlumPutBlock | undefined;
-  setPlumputblock(value?: PlumPutBlock): void;
+  setPlumputblock(value?: PlumPutBlock): ActionCore;
   hasPlumputblock(): boolean;
-  clearPlumputblock(): void;
-  hasPlumputblock(): boolean;
+  clearPlumputblock(): ActionCore;
 
   getPlumcreatedeposit(): PlumCreateDeposit | undefined;
-  setPlumcreatedeposit(value?: PlumCreateDeposit): void;
+  setPlumcreatedeposit(value?: PlumCreateDeposit): ActionCore;
   hasPlumcreatedeposit(): boolean;
-  clearPlumcreatedeposit(): void;
-  hasPlumcreatedeposit(): boolean;
+  clearPlumcreatedeposit(): ActionCore;
 
   getPlumstartexit(): PlumStartExit | undefined;
-  setPlumstartexit(value?: PlumStartExit): void;
+  setPlumstartexit(value?: PlumStartExit): ActionCore;
   hasPlumstartexit(): boolean;
-  clearPlumstartexit(): void;
-  hasPlumstartexit(): boolean;
+  clearPlumstartexit(): ActionCore;
 
   getPlumchallengeexit(): PlumChallengeExit | undefined;
-  setPlumchallengeexit(value?: PlumChallengeExit): void;
+  setPlumchallengeexit(value?: PlumChallengeExit): ActionCore;
   hasPlumchallengeexit(): boolean;
-  clearPlumchallengeexit(): void;
-  hasPlumchallengeexit(): boolean;
+  clearPlumchallengeexit(): ActionCore;
 
   getPlumresponsechallengeexit(): PlumResponseChallengeExit | undefined;
-  setPlumresponsechallengeexit(value?: PlumResponseChallengeExit): void;
+  setPlumresponsechallengeexit(value?: PlumResponseChallengeExit): ActionCore;
   hasPlumresponsechallengeexit(): boolean;
-  clearPlumresponsechallengeexit(): void;
-  hasPlumresponsechallengeexit(): boolean;
+  clearPlumresponsechallengeexit(): ActionCore;
 
   getPlumfinalizeexit(): PlumFinalizeExit | undefined;
-  setPlumfinalizeexit(value?: PlumFinalizeExit): void;
+  setPlumfinalizeexit(value?: PlumFinalizeExit): ActionCore;
   hasPlumfinalizeexit(): boolean;
-  clearPlumfinalizeexit(): void;
-  hasPlumfinalizeexit(): boolean;
+  clearPlumfinalizeexit(): ActionCore;
 
   getPlumsettledeposit(): PlumSettleDeposit | undefined;
-  setPlumsettledeposit(value?: PlumSettleDeposit): void;
+  setPlumsettledeposit(value?: PlumSettleDeposit): ActionCore;
   hasPlumsettledeposit(): boolean;
-  clearPlumsettledeposit(): void;
-  hasPlumsettledeposit(): boolean;
+  clearPlumsettledeposit(): ActionCore;
 
   getPlumtransfer(): PlumTransfer | undefined;
-  setPlumtransfer(value?: PlumTransfer): void;
+  setPlumtransfer(value?: PlumTransfer): ActionCore;
   hasPlumtransfer(): boolean;
-  clearPlumtransfer(): void;
-  hasPlumtransfer(): boolean;
+  clearPlumtransfer(): ActionCore;
 
   getDeposittorewardingfund(): DepositToRewardingFund | undefined;
-  setDeposittorewardingfund(value?: DepositToRewardingFund): void;
+  setDeposittorewardingfund(value?: DepositToRewardingFund): ActionCore;
   hasDeposittorewardingfund(): boolean;
-  clearDeposittorewardingfund(): void;
-  hasDeposittorewardingfund(): boolean;
+  clearDeposittorewardingfund(): ActionCore;
 
   getClaimfromrewardingfund(): ClaimFromRewardingFund | undefined;
-  setClaimfromrewardingfund(value?: ClaimFromRewardingFund): void;
+  setClaimfromrewardingfund(value?: ClaimFromRewardingFund): ActionCore;
   hasClaimfromrewardingfund(): boolean;
-  clearClaimfromrewardingfund(): void;
-  hasClaimfromrewardingfund(): boolean;
+  clearClaimfromrewardingfund(): ActionCore;
 
   getGrantreward(): GrantReward | undefined;
-  setGrantreward(value?: GrantReward): void;
+  setGrantreward(value?: GrantReward): ActionCore;
   hasGrantreward(): boolean;
-  clearGrantreward(): void;
-  hasGrantreward(): boolean;
+  clearGrantreward(): ActionCore;
 
   getStakecreate(): StakeCreate | undefined;
-  setStakecreate(value?: StakeCreate): void;
+  setStakecreate(value?: StakeCreate): ActionCore;
   hasStakecreate(): boolean;
-  clearStakecreate(): void;
-  hasStakecreate(): boolean;
+  clearStakecreate(): ActionCore;
 
   getStakeunstake(): StakeReclaim | undefined;
-  setStakeunstake(value?: StakeReclaim): void;
+  setStakeunstake(value?: StakeReclaim): ActionCore;
   hasStakeunstake(): boolean;
-  clearStakeunstake(): void;
-  hasStakeunstake(): boolean;
+  clearStakeunstake(): ActionCore;
 
   getStakewithdraw(): StakeReclaim | undefined;
-  setStakewithdraw(value?: StakeReclaim): void;
+  setStakewithdraw(value?: StakeReclaim): ActionCore;
   hasStakewithdraw(): boolean;
-  clearStakewithdraw(): void;
-  hasStakewithdraw(): boolean;
+  clearStakewithdraw(): ActionCore;
 
   getStakeadddeposit(): StakeAddDeposit | undefined;
-  setStakeadddeposit(value?: StakeAddDeposit): void;
+  setStakeadddeposit(value?: StakeAddDeposit): ActionCore;
   hasStakeadddeposit(): boolean;
-  clearStakeadddeposit(): void;
-  hasStakeadddeposit(): boolean;
+  clearStakeadddeposit(): ActionCore;
 
   getStakerestake(): StakeRestake | undefined;
-  setStakerestake(value?: StakeRestake): void;
+  setStakerestake(value?: StakeRestake): ActionCore;
   hasStakerestake(): boolean;
-  clearStakerestake(): void;
-  hasStakerestake(): boolean;
+  clearStakerestake(): ActionCore;
 
   getStakechangecandidate(): StakeChangeCandidate | undefined;
-  setStakechangecandidate(value?: StakeChangeCandidate): void;
+  setStakechangecandidate(value?: StakeChangeCandidate): ActionCore;
   hasStakechangecandidate(): boolean;
-  clearStakechangecandidate(): void;
-  hasStakechangecandidate(): boolean;
+  clearStakechangecandidate(): ActionCore;
 
   getStaketransferownership(): StakeTransferOwnership | undefined;
-  setStaketransferownership(value?: StakeTransferOwnership): void;
+  setStaketransferownership(value?: StakeTransferOwnership): ActionCore;
   hasStaketransferownership(): boolean;
-  clearStaketransferownership(): void;
-  hasStaketransferownership(): boolean;
+  clearStaketransferownership(): ActionCore;
 
   getCandidateregister(): CandidateRegister | undefined;
-  setCandidateregister(value?: CandidateRegister): void;
+  setCandidateregister(value?: CandidateRegister): ActionCore;
   hasCandidateregister(): boolean;
-  clearCandidateregister(): void;
-  hasCandidateregister(): boolean;
+  clearCandidateregister(): ActionCore;
 
   getCandidateupdate(): CandidateBasicInfo | undefined;
-  setCandidateupdate(value?: CandidateBasicInfo): void;
+  setCandidateupdate(value?: CandidateBasicInfo): ActionCore;
   hasCandidateupdate(): boolean;
-  clearCandidateupdate(): void;
-  hasCandidateupdate(): boolean;
+  clearCandidateupdate(): ActionCore;
 
   getPutpollresult(): PutPollResult | undefined;
-  setPutpollresult(value?: PutPollResult): void;
+  setPutpollresult(value?: PutPollResult): ActionCore;
   hasPutpollresult(): boolean;
-  clearPutpollresult(): void;
-  hasPutpollresult(): boolean;
+  clearPutpollresult(): ActionCore;
 
   getActionCase(): ActionCore.ActionCase;
 
@@ -1108,19 +1080,19 @@ export namespace ActionCore {
 
 export class Action extends jspb.Message {
   getCore(): ActionCore | undefined;
-  setCore(value?: ActionCore): void;
+  setCore(value?: ActionCore): Action;
   hasCore(): boolean;
-  clearCore(): void;
+  clearCore(): Action;
 
   getSenderpubkey(): Uint8Array | string;
   getSenderpubkey_asU8(): Uint8Array;
   getSenderpubkey_asB64(): string;
-  setSenderpubkey(value: Uint8Array | string): void;
+  setSenderpubkey(value: Uint8Array | string): Action;
 
   getSignature(): Uint8Array | string;
   getSignature_asU8(): Uint8Array;
   getSignature_asB64(): string;
-  setSignature(value: Uint8Array | string): void;
+  setSignature(value: Uint8Array | string): Action;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Action.AsObject;
@@ -1140,25 +1112,25 @@ export namespace Action {
 
 export class Receipt extends jspb.Message {
   getStatus(): number;
-  setStatus(value: number): void;
+  setStatus(value: number): Receipt;
 
   getBlkheight(): number;
-  setBlkheight(value: number): void;
+  setBlkheight(value: number): Receipt;
 
   getActhash(): Uint8Array | string;
   getActhash_asU8(): Uint8Array;
   getActhash_asB64(): string;
-  setActhash(value: Uint8Array | string): void;
+  setActhash(value: Uint8Array | string): Receipt;
 
   getGasconsumed(): number;
-  setGasconsumed(value: number): void;
+  setGasconsumed(value: number): Receipt;
 
   getContractaddress(): string;
-  setContractaddress(value: string): void;
+  setContractaddress(value: string): Receipt;
 
   getLogsList(): Array<Log>;
-  setLogsList(value: Array<Log>): void;
-  clearLogsList(): void;
+  setLogsList(value: Array<Log>): Receipt;
+  clearLogsList(): Receipt;
   addLogs(value?: Log, index?: number): Log;
 
   serializeBinary(): Uint8Array;
@@ -1182,28 +1154,28 @@ export namespace Receipt {
 
 export class Log extends jspb.Message {
   getContractaddress(): string;
-  setContractaddress(value: string): void;
+  setContractaddress(value: string): Log;
 
   getTopicsList(): Array<Uint8Array | string>;
-  setTopicsList(value: Array<Uint8Array | string>): void;
-  clearTopicsList(): void;
-  addTopics(value: Uint8Array | string, index?: number): void;
+  setTopicsList(value: Array<Uint8Array | string>): Log;
+  clearTopicsList(): Log;
+  addTopics(value: Uint8Array | string, index?: number): Log;
 
   getData(): Uint8Array | string;
   getData_asU8(): Uint8Array;
   getData_asB64(): string;
-  setData(value: Uint8Array | string): void;
+  setData(value: Uint8Array | string): Log;
 
   getBlkheight(): number;
-  setBlkheight(value: number): void;
+  setBlkheight(value: number): Log;
 
   getActhash(): Uint8Array | string;
   getActhash_asU8(): Uint8Array;
   getActhash_asB64(): string;
-  setActhash(value: Uint8Array | string): void;
+  setActhash(value: Uint8Array | string): Log;
 
   getIndex(): number;
-  setIndex(value: number): void;
+  setIndex(value: number): Log;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Log.AsObject;
@@ -1228,13 +1200,13 @@ export class EvmTransfer extends jspb.Message {
   getAmount(): Uint8Array | string;
   getAmount_asU8(): Uint8Array;
   getAmount_asB64(): string;
-  setAmount(value: Uint8Array | string): void;
+  setAmount(value: Uint8Array | string): EvmTransfer;
 
   getFrom(): string;
-  setFrom(value: string): void;
+  setFrom(value: string): EvmTransfer;
 
   getTo(): string;
-  setTo(value: string): void;
+  setTo(value: string): EvmTransfer;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): EvmTransfer.AsObject;
@@ -1254,8 +1226,8 @@ export namespace EvmTransfer {
 
 export class EvmTransferList extends jspb.Message {
   getEvmtransfersList(): Array<EvmTransfer>;
-  setEvmtransfersList(value: Array<EvmTransfer>): void;
-  clearEvmtransfersList(): void;
+  setEvmtransfersList(value: Array<EvmTransfer>): EvmTransferList;
+  clearEvmtransfersList(): EvmTransferList;
   addEvmtransfers(value?: EvmTransfer, index?: number): EvmTransfer;
 
   serializeBinary(): Uint8Array;
@@ -1276,14 +1248,14 @@ export class ActionEvmTransfer extends jspb.Message {
   getActionhash(): Uint8Array | string;
   getActionhash_asU8(): Uint8Array;
   getActionhash_asB64(): string;
-  setActionhash(value: Uint8Array | string): void;
+  setActionhash(value: Uint8Array | string): ActionEvmTransfer;
 
   getNumevmtransfers(): number;
-  setNumevmtransfers(value: number): void;
+  setNumevmtransfers(value: number): ActionEvmTransfer;
 
   getEvmtransfersList(): Array<EvmTransfer>;
-  setEvmtransfersList(value: Array<EvmTransfer>): void;
-  clearEvmtransfersList(): void;
+  setEvmtransfersList(value: Array<EvmTransfer>): ActionEvmTransfer;
+  clearEvmtransfersList(): ActionEvmTransfer;
   addEvmtransfers(value?: EvmTransfer, index?: number): EvmTransfer;
 
   serializeBinary(): Uint8Array;
@@ -1304,14 +1276,14 @@ export namespace ActionEvmTransfer {
 
 export class BlockEvmTransfer extends jspb.Message {
   getBlockheight(): number;
-  setBlockheight(value: number): void;
+  setBlockheight(value: number): BlockEvmTransfer;
 
   getNumevmtransfers(): number;
-  setNumevmtransfers(value: number): void;
+  setNumevmtransfers(value: number): BlockEvmTransfer;
 
   getActionevmtransfersList(): Array<ActionEvmTransfer>;
-  setActionevmtransfersList(value: Array<ActionEvmTransfer>): void;
-  clearActionevmtransfersList(): void;
+  setActionevmtransfersList(value: Array<ActionEvmTransfer>): BlockEvmTransfer;
+  clearActionevmtransfersList(): BlockEvmTransfer;
   addActionevmtransfers(value?: ActionEvmTransfer, index?: number): ActionEvmTransfer;
 
   serializeBinary(): Uint8Array;
@@ -1332,12 +1304,12 @@ export namespace BlockEvmTransfer {
 
 export class DepositToRewardingFund extends jspb.Message {
   getAmount(): string;
-  setAmount(value: string): void;
+  setAmount(value: string): DepositToRewardingFund;
 
   getData(): Uint8Array | string;
   getData_asU8(): Uint8Array;
   getData_asB64(): string;
-  setData(value: Uint8Array | string): void;
+  setData(value: Uint8Array | string): DepositToRewardingFund;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): DepositToRewardingFund.AsObject;
@@ -1356,12 +1328,12 @@ export namespace DepositToRewardingFund {
 
 export class ClaimFromRewardingFund extends jspb.Message {
   getAmount(): string;
-  setAmount(value: string): void;
+  setAmount(value: string): ClaimFromRewardingFund;
 
   getData(): Uint8Array | string;
   getData_asU8(): Uint8Array;
   getData_asB64(): string;
-  setData(value: Uint8Array | string): void;
+  setData(value: Uint8Array | string): ClaimFromRewardingFund;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ClaimFromRewardingFund.AsObject;
@@ -1380,10 +1352,10 @@ export namespace ClaimFromRewardingFund {
 
 export class GrantReward extends jspb.Message {
   getType(): RewardType;
-  setType(value: RewardType): void;
+  setType(value: RewardType): GrantReward;
 
   getHeight(): number;
-  setHeight(value: number): void;
+  setHeight(value: number): GrantReward;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GrantReward.AsObject;
@@ -1401,6 +1373,6 @@ export namespace GrantReward {
 }
 
 export enum RewardType { 
-  BlockReward = 0,
-  EpochReward = 1,
+  BLOCKREWARD = 0,
+  EPOCHREWARD = 1,
 }

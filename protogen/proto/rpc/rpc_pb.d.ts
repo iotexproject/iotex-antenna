@@ -1,13 +1,14 @@
-import * as jspb from "google-protobuf"
+import * as jspb from 'google-protobuf'
 
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
 
+
 export class BlockSync extends jspb.Message {
   getStart(): number;
-  setStart(value: number): void;
+  setStart(value: number): BlockSync;
 
   getEnd(): number;
-  setEnd(value: number): void;
+  setEnd(value: number): BlockSync;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockSync.AsObject;
@@ -26,23 +27,23 @@ export namespace BlockSync {
 
 export class BroadcastMsg extends jspb.Message {
   getChainId(): number;
-  setChainId(value: number): void;
+  setChainId(value: number): BroadcastMsg;
 
   getMsgType(): MessageType;
-  setMsgType(value: MessageType): void;
+  setMsgType(value: MessageType): BroadcastMsg;
 
   getMsgBody(): Uint8Array | string;
   getMsgBody_asU8(): Uint8Array;
   getMsgBody_asB64(): string;
-  setMsgBody(value: Uint8Array | string): void;
+  setMsgBody(value: Uint8Array | string): BroadcastMsg;
 
   getPeerId(): string;
-  setPeerId(value: string): void;
+  setPeerId(value: string): BroadcastMsg;
 
   getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): void;
+  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): BroadcastMsg;
   hasTimestamp(): boolean;
-  clearTimestamp(): void;
+  clearTimestamp(): BroadcastMsg;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BroadcastMsg.AsObject;
@@ -64,26 +65,26 @@ export namespace BroadcastMsg {
 
 export class UnicastMsg extends jspb.Message {
   getChainId(): number;
-  setChainId(value: number): void;
+  setChainId(value: number): UnicastMsg;
 
   getAddr(): string;
-  setAddr(value: string): void;
+  setAddr(value: string): UnicastMsg;
 
   getMsgType(): MessageType;
-  setMsgType(value: MessageType): void;
+  setMsgType(value: MessageType): UnicastMsg;
 
   getMsgBody(): Uint8Array | string;
   getMsgBody_asU8(): Uint8Array;
   getMsgBody_asB64(): string;
-  setMsgBody(value: Uint8Array | string): void;
+  setMsgBody(value: Uint8Array | string): UnicastMsg;
 
   getPeerId(): string;
-  setPeerId(value: string): void;
+  setPeerId(value: string): UnicastMsg;
 
   getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): void;
+  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): UnicastMsg;
   hasTimestamp(): boolean;
-  clearTimestamp(): void;
+  clearTimestamp(): UnicastMsg;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): UnicastMsg.AsObject;
