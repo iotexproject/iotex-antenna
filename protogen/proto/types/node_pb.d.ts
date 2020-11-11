@@ -1,20 +1,22 @@
-import * as jspb from "google-protobuf"
+import * as jspb from 'google-protobuf'
+
+
 
 export class ServerMeta extends jspb.Message {
   getPackageversion(): string;
-  setPackageversion(value: string): void;
+  setPackageversion(value: string): ServerMeta;
 
   getPackagecommitid(): string;
-  setPackagecommitid(value: string): void;
+  setPackagecommitid(value: string): ServerMeta;
 
   getGitstatus(): string;
-  setGitstatus(value: string): void;
+  setGitstatus(value: string): ServerMeta;
 
   getGoversion(): string;
-  setGoversion(value: string): void;
+  setGoversion(value: string): ServerMeta;
 
   getBuildtime(): string;
-  setBuildtime(value: string): void;
+  setBuildtime(value: string): ServerMeta;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ServerMeta.AsObject;

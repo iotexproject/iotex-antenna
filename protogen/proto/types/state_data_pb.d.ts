@@ -1,15 +1,16 @@
-import * as jspb from "google-protobuf"
+import * as jspb from 'google-protobuf'
 
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
 
+
 export class ProbationCandidateList extends jspb.Message {
   getProbationlistList(): Array<ProbationCandidateList.Info>;
-  setProbationlistList(value: Array<ProbationCandidateList.Info>): void;
-  clearProbationlistList(): void;
+  setProbationlistList(value: Array<ProbationCandidateList.Info>): ProbationCandidateList;
+  clearProbationlistList(): ProbationCandidateList;
   addProbationlist(value?: ProbationCandidateList.Info, index?: number): ProbationCandidateList.Info;
 
   getIntensityrate(): number;
-  setIntensityrate(value: number): void;
+  setIntensityrate(value: number): ProbationCandidateList;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ProbationCandidateList.AsObject;
@@ -27,10 +28,10 @@ export namespace ProbationCandidateList {
 
   export class Info extends jspb.Message {
     getAddress(): string;
-    setAddress(value: string): void;
+    setAddress(value: string): Info;
 
     getCount(): number;
-    setCount(value: number): void;
+    setCount(value: number): Info;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Info.AsObject;
@@ -51,37 +52,37 @@ export namespace ProbationCandidateList {
 
 export class VoteBucket extends jspb.Message {
   getIndex(): number;
-  setIndex(value: number): void;
+  setIndex(value: number): VoteBucket;
 
   getCandidateaddress(): string;
-  setCandidateaddress(value: string): void;
+  setCandidateaddress(value: string): VoteBucket;
 
   getStakedamount(): string;
-  setStakedamount(value: string): void;
+  setStakedamount(value: string): VoteBucket;
 
   getStakedduration(): number;
-  setStakedduration(value: number): void;
+  setStakedduration(value: number): VoteBucket;
 
   getCreatetime(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setCreatetime(value?: google_protobuf_timestamp_pb.Timestamp): void;
+  setCreatetime(value?: google_protobuf_timestamp_pb.Timestamp): VoteBucket;
   hasCreatetime(): boolean;
-  clearCreatetime(): void;
+  clearCreatetime(): VoteBucket;
 
   getStakestarttime(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setStakestarttime(value?: google_protobuf_timestamp_pb.Timestamp): void;
+  setStakestarttime(value?: google_protobuf_timestamp_pb.Timestamp): VoteBucket;
   hasStakestarttime(): boolean;
-  clearStakestarttime(): void;
+  clearStakestarttime(): VoteBucket;
 
   getUnstakestarttime(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setUnstakestarttime(value?: google_protobuf_timestamp_pb.Timestamp): void;
+  setUnstakestarttime(value?: google_protobuf_timestamp_pb.Timestamp): VoteBucket;
   hasUnstakestarttime(): boolean;
-  clearUnstakestarttime(): void;
+  clearUnstakestarttime(): VoteBucket;
 
   getAutostake(): boolean;
-  setAutostake(value: boolean): void;
+  setAutostake(value: boolean): VoteBucket;
 
   getOwner(): string;
-  setOwner(value: string): void;
+  setOwner(value: string): VoteBucket;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): VoteBucket.AsObject;
@@ -107,8 +108,8 @@ export namespace VoteBucket {
 
 export class VoteBucketList extends jspb.Message {
   getBucketsList(): Array<VoteBucket>;
-  setBucketsList(value: Array<VoteBucket>): void;
-  clearBucketsList(): void;
+  setBucketsList(value: Array<VoteBucket>): VoteBucketList;
+  clearBucketsList(): VoteBucketList;
   addBuckets(value?: VoteBucket, index?: number): VoteBucket;
 
   serializeBinary(): Uint8Array;
@@ -127,25 +128,25 @@ export namespace VoteBucketList {
 
 export class CandidateV2 extends jspb.Message {
   getOwneraddress(): string;
-  setOwneraddress(value: string): void;
+  setOwneraddress(value: string): CandidateV2;
 
   getOperatoraddress(): string;
-  setOperatoraddress(value: string): void;
+  setOperatoraddress(value: string): CandidateV2;
 
   getRewardaddress(): string;
-  setRewardaddress(value: string): void;
+  setRewardaddress(value: string): CandidateV2;
 
   getName(): string;
-  setName(value: string): void;
+  setName(value: string): CandidateV2;
 
   getTotalweightedvotes(): string;
-  setTotalweightedvotes(value: string): void;
+  setTotalweightedvotes(value: string): CandidateV2;
 
   getSelfstakebucketidx(): number;
-  setSelfstakebucketidx(value: number): void;
+  setSelfstakebucketidx(value: number): CandidateV2;
 
   getSelfstakingtokens(): string;
-  setSelfstakingtokens(value: string): void;
+  setSelfstakingtokens(value: string): CandidateV2;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CandidateV2.AsObject;
@@ -169,8 +170,8 @@ export namespace CandidateV2 {
 
 export class CandidateListV2 extends jspb.Message {
   getCandidatesList(): Array<CandidateV2>;
-  setCandidatesList(value: Array<CandidateV2>): void;
-  clearCandidatesList(): void;
+  setCandidatesList(value: Array<CandidateV2>): CandidateListV2;
+  clearCandidatesList(): CandidateListV2;
   addCandidates(value?: CandidateV2, index?: number): CandidateV2;
 
   serializeBinary(): Uint8Array;

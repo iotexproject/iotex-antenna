@@ -1,3 +1,4 @@
+// source: proto/types/receiptstatus.proto
 /**
  * @fileoverview
  * @enhanceable

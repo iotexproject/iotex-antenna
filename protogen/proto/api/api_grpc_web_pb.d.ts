@@ -1,314 +1,267 @@
 import * as grpcWeb from 'grpc-web';
 
-import * as proto_types_action_pb from '../../proto/types/action_pb';
-import * as proto_types_blockchain_pb from '../../proto/types/blockchain_pb';
-import * as proto_types_node_pb from '../../proto/types/node_pb';
-import * as proto_types_election_pb from '../../proto/types/election_pb';
-import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
+import * as proto_api_api_pb from '../../proto/api/api_pb';
 
-import {
-  EstimateActionGasConsumptionRequest,
-  EstimateActionGasConsumptionResponse,
-  EstimateGasForActionRequest,
-  EstimateGasForActionResponse,
-  GetAccountRequest,
-  GetAccountResponse,
-  GetActionsRequest,
-  GetActionsResponse,
-  GetBlockMetasRequest,
-  GetBlockMetasResponse,
-  GetChainMetaRequest,
-  GetChainMetaResponse,
-  GetElectionBucketsRequest,
-  GetElectionBucketsResponse,
-  GetEpochMetaRequest,
-  GetEpochMetaResponse,
-  GetEvmTransfersByActionHashRequest,
-  GetEvmTransfersByActionHashResponse,
-  GetEvmTransfersByBlockHeightRequest,
-  GetEvmTransfersByBlockHeightResponse,
-  GetLogsRequest,
-  GetLogsResponse,
-  GetRawBlocksRequest,
-  GetRawBlocksResponse,
-  GetReceiptByActionRequest,
-  GetReceiptByActionResponse,
-  GetServerMetaRequest,
-  GetServerMetaResponse,
-  GetVotesRequest,
-  GetVotesResponse,
-  ReadContractRequest,
-  ReadContractResponse,
-  ReadStateRequest,
-  ReadStateResponse,
-  SendActionRequest,
-  SendActionResponse,
-  StreamBlocksRequest,
-  StreamBlocksResponse,
-  StreamLogsRequest,
-  StreamLogsResponse,
-  SuggestGasPriceRequest,
-  SuggestGasPriceResponse} from './api_pb';
 
 export class APIServiceClient {
   constructor (hostname: string,
-               credentials: null | { [index: string]: string; },
-               options: null | { [index: string]: string; });
+               credentials?: null | { [index: string]: string; },
+               options?: null | { [index: string]: any; });
 
   getAccount(
-    request: GetAccountRequest,
+    request: proto_api_api_pb.GetAccountRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: GetAccountResponse) => void
-  ): grpcWeb.ClientReadableStream<GetAccountResponse>;
+               response: proto_api_api_pb.GetAccountResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetAccountResponse>;
 
   getActions(
-    request: GetActionsRequest,
+    request: proto_api_api_pb.GetActionsRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: GetActionsResponse) => void
-  ): grpcWeb.ClientReadableStream<GetActionsResponse>;
+               response: proto_api_api_pb.GetActionsResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetActionsResponse>;
 
   getBlockMetas(
-    request: GetBlockMetasRequest,
+    request: proto_api_api_pb.GetBlockMetasRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: GetBlockMetasResponse) => void
-  ): grpcWeb.ClientReadableStream<GetBlockMetasResponse>;
+               response: proto_api_api_pb.GetBlockMetasResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetBlockMetasResponse>;
 
   getChainMeta(
-    request: GetChainMetaRequest,
+    request: proto_api_api_pb.GetChainMetaRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: GetChainMetaResponse) => void
-  ): grpcWeb.ClientReadableStream<GetChainMetaResponse>;
+               response: proto_api_api_pb.GetChainMetaResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetChainMetaResponse>;
 
   getServerMeta(
-    request: GetServerMetaRequest,
+    request: proto_api_api_pb.GetServerMetaRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: GetServerMetaResponse) => void
-  ): grpcWeb.ClientReadableStream<GetServerMetaResponse>;
+               response: proto_api_api_pb.GetServerMetaResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetServerMetaResponse>;
 
   sendAction(
-    request: SendActionRequest,
+    request: proto_api_api_pb.SendActionRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: SendActionResponse) => void
-  ): grpcWeb.ClientReadableStream<SendActionResponse>;
+               response: proto_api_api_pb.SendActionResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.SendActionResponse>;
 
   getReceiptByAction(
-    request: GetReceiptByActionRequest,
+    request: proto_api_api_pb.GetReceiptByActionRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: GetReceiptByActionResponse) => void
-  ): grpcWeb.ClientReadableStream<GetReceiptByActionResponse>;
+               response: proto_api_api_pb.GetReceiptByActionResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetReceiptByActionResponse>;
 
   readContract(
-    request: ReadContractRequest,
+    request: proto_api_api_pb.ReadContractRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: ReadContractResponse) => void
-  ): grpcWeb.ClientReadableStream<ReadContractResponse>;
+               response: proto_api_api_pb.ReadContractResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.ReadContractResponse>;
 
   suggestGasPrice(
-    request: SuggestGasPriceRequest,
+    request: proto_api_api_pb.SuggestGasPriceRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: SuggestGasPriceResponse) => void
-  ): grpcWeb.ClientReadableStream<SuggestGasPriceResponse>;
+               response: proto_api_api_pb.SuggestGasPriceResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.SuggestGasPriceResponse>;
 
   estimateGasForAction(
-    request: EstimateGasForActionRequest,
+    request: proto_api_api_pb.EstimateGasForActionRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: EstimateGasForActionResponse) => void
-  ): grpcWeb.ClientReadableStream<EstimateGasForActionResponse>;
+               response: proto_api_api_pb.EstimateGasForActionResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.EstimateGasForActionResponse>;
 
   estimateActionGasConsumption(
-    request: EstimateActionGasConsumptionRequest,
+    request: proto_api_api_pb.EstimateActionGasConsumptionRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: EstimateActionGasConsumptionResponse) => void
-  ): grpcWeb.ClientReadableStream<EstimateActionGasConsumptionResponse>;
+               response: proto_api_api_pb.EstimateActionGasConsumptionResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.EstimateActionGasConsumptionResponse>;
 
   readState(
-    request: ReadStateRequest,
+    request: proto_api_api_pb.ReadStateRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: ReadStateResponse) => void
-  ): grpcWeb.ClientReadableStream<ReadStateResponse>;
+               response: proto_api_api_pb.ReadStateResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.ReadStateResponse>;
 
   getEpochMeta(
-    request: GetEpochMetaRequest,
+    request: proto_api_api_pb.GetEpochMetaRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: GetEpochMetaResponse) => void
-  ): grpcWeb.ClientReadableStream<GetEpochMetaResponse>;
+               response: proto_api_api_pb.GetEpochMetaResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetEpochMetaResponse>;
 
   getRawBlocks(
-    request: GetRawBlocksRequest,
+    request: proto_api_api_pb.GetRawBlocksRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: GetRawBlocksResponse) => void
-  ): grpcWeb.ClientReadableStream<GetRawBlocksResponse>;
+               response: proto_api_api_pb.GetRawBlocksResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetRawBlocksResponse>;
 
   getLogs(
-    request: GetLogsRequest,
+    request: proto_api_api_pb.GetLogsRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: GetLogsResponse) => void
-  ): grpcWeb.ClientReadableStream<GetLogsResponse>;
+               response: proto_api_api_pb.GetLogsResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetLogsResponse>;
 
   getVotes(
-    request: GetVotesRequest,
+    request: proto_api_api_pb.GetVotesRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: GetVotesResponse) => void
-  ): grpcWeb.ClientReadableStream<GetVotesResponse>;
+               response: proto_api_api_pb.GetVotesResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetVotesResponse>;
 
   getEvmTransfersByActionHash(
-    request: GetEvmTransfersByActionHashRequest,
+    request: proto_api_api_pb.GetEvmTransfersByActionHashRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: GetEvmTransfersByActionHashResponse) => void
-  ): grpcWeb.ClientReadableStream<GetEvmTransfersByActionHashResponse>;
+               response: proto_api_api_pb.GetEvmTransfersByActionHashResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetEvmTransfersByActionHashResponse>;
 
   getEvmTransfersByBlockHeight(
-    request: GetEvmTransfersByBlockHeightRequest,
+    request: proto_api_api_pb.GetEvmTransfersByBlockHeightRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: GetEvmTransfersByBlockHeightResponse) => void
-  ): grpcWeb.ClientReadableStream<GetEvmTransfersByBlockHeightResponse>;
+               response: proto_api_api_pb.GetEvmTransfersByBlockHeightResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetEvmTransfersByBlockHeightResponse>;
 
   streamBlocks(
-    request: StreamBlocksRequest,
+    request: proto_api_api_pb.StreamBlocksRequest,
     metadata?: grpcWeb.Metadata
-  ): grpcWeb.ClientReadableStream<StreamBlocksResponse>;
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.StreamBlocksResponse>;
 
   streamLogs(
-    request: StreamLogsRequest,
+    request: proto_api_api_pb.StreamLogsRequest,
     metadata?: grpcWeb.Metadata
-  ): grpcWeb.ClientReadableStream<StreamLogsResponse>;
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.StreamLogsResponse>;
 
   getElectionBuckets(
-    request: GetElectionBucketsRequest,
+    request: proto_api_api_pb.GetElectionBucketsRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: GetElectionBucketsResponse) => void
-  ): grpcWeb.ClientReadableStream<GetElectionBucketsResponse>;
+               response: proto_api_api_pb.GetElectionBucketsResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetElectionBucketsResponse>;
 
 }
 
 export class APIServicePromiseClient {
   constructor (hostname: string,
-               credentials: null | { [index: string]: string; },
-               options: null | { [index: string]: string; });
+               credentials?: null | { [index: string]: string; },
+               options?: null | { [index: string]: any; });
 
   getAccount(
-    request: GetAccountRequest,
+    request: proto_api_api_pb.GetAccountRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<GetAccountResponse>;
+  ): Promise<proto_api_api_pb.GetAccountResponse>;
 
   getActions(
-    request: GetActionsRequest,
+    request: proto_api_api_pb.GetActionsRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<GetActionsResponse>;
+  ): Promise<proto_api_api_pb.GetActionsResponse>;
 
   getBlockMetas(
-    request: GetBlockMetasRequest,
+    request: proto_api_api_pb.GetBlockMetasRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<GetBlockMetasResponse>;
+  ): Promise<proto_api_api_pb.GetBlockMetasResponse>;
 
   getChainMeta(
-    request: GetChainMetaRequest,
+    request: proto_api_api_pb.GetChainMetaRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<GetChainMetaResponse>;
+  ): Promise<proto_api_api_pb.GetChainMetaResponse>;
 
   getServerMeta(
-    request: GetServerMetaRequest,
+    request: proto_api_api_pb.GetServerMetaRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<GetServerMetaResponse>;
+  ): Promise<proto_api_api_pb.GetServerMetaResponse>;
 
   sendAction(
-    request: SendActionRequest,
+    request: proto_api_api_pb.SendActionRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<SendActionResponse>;
+  ): Promise<proto_api_api_pb.SendActionResponse>;
 
   getReceiptByAction(
-    request: GetReceiptByActionRequest,
+    request: proto_api_api_pb.GetReceiptByActionRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<GetReceiptByActionResponse>;
+  ): Promise<proto_api_api_pb.GetReceiptByActionResponse>;
 
   readContract(
-    request: ReadContractRequest,
+    request: proto_api_api_pb.ReadContractRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<ReadContractResponse>;
+  ): Promise<proto_api_api_pb.ReadContractResponse>;
 
   suggestGasPrice(
-    request: SuggestGasPriceRequest,
+    request: proto_api_api_pb.SuggestGasPriceRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<SuggestGasPriceResponse>;
+  ): Promise<proto_api_api_pb.SuggestGasPriceResponse>;
 
   estimateGasForAction(
-    request: EstimateGasForActionRequest,
+    request: proto_api_api_pb.EstimateGasForActionRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<EstimateGasForActionResponse>;
+  ): Promise<proto_api_api_pb.EstimateGasForActionResponse>;
 
   estimateActionGasConsumption(
-    request: EstimateActionGasConsumptionRequest,
+    request: proto_api_api_pb.EstimateActionGasConsumptionRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<EstimateActionGasConsumptionResponse>;
+  ): Promise<proto_api_api_pb.EstimateActionGasConsumptionResponse>;
 
   readState(
-    request: ReadStateRequest,
+    request: proto_api_api_pb.ReadStateRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<ReadStateResponse>;
+  ): Promise<proto_api_api_pb.ReadStateResponse>;
 
   getEpochMeta(
-    request: GetEpochMetaRequest,
+    request: proto_api_api_pb.GetEpochMetaRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<GetEpochMetaResponse>;
+  ): Promise<proto_api_api_pb.GetEpochMetaResponse>;
 
   getRawBlocks(
-    request: GetRawBlocksRequest,
+    request: proto_api_api_pb.GetRawBlocksRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<GetRawBlocksResponse>;
+  ): Promise<proto_api_api_pb.GetRawBlocksResponse>;
 
   getLogs(
-    request: GetLogsRequest,
+    request: proto_api_api_pb.GetLogsRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<GetLogsResponse>;
+  ): Promise<proto_api_api_pb.GetLogsResponse>;
 
   getVotes(
-    request: GetVotesRequest,
+    request: proto_api_api_pb.GetVotesRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<GetVotesResponse>;
+  ): Promise<proto_api_api_pb.GetVotesResponse>;
 
   getEvmTransfersByActionHash(
-    request: GetEvmTransfersByActionHashRequest,
+    request: proto_api_api_pb.GetEvmTransfersByActionHashRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<GetEvmTransfersByActionHashResponse>;
+  ): Promise<proto_api_api_pb.GetEvmTransfersByActionHashResponse>;
 
   getEvmTransfersByBlockHeight(
-    request: GetEvmTransfersByBlockHeightRequest,
+    request: proto_api_api_pb.GetEvmTransfersByBlockHeightRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<GetEvmTransfersByBlockHeightResponse>;
+  ): Promise<proto_api_api_pb.GetEvmTransfersByBlockHeightResponse>;
 
   streamBlocks(
-    request: StreamBlocksRequest,
+    request: proto_api_api_pb.StreamBlocksRequest,
     metadata?: grpcWeb.Metadata
-  ): grpcWeb.ClientReadableStream<StreamBlocksResponse>;
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.StreamBlocksResponse>;
 
   streamLogs(
-    request: StreamLogsRequest,
+    request: proto_api_api_pb.StreamLogsRequest,
     metadata?: grpcWeb.Metadata
-  ): grpcWeb.ClientReadableStream<StreamLogsResponse>;
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.StreamLogsResponse>;
 
   getElectionBuckets(
-    request: GetElectionBucketsRequest,
+    request: proto_api_api_pb.GetElectionBucketsRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<GetElectionBucketsResponse>;
+  ): Promise<proto_api_api_pb.GetElectionBucketsResponse>;
 
 }
 

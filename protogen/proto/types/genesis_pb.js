@@ -1,3 +1,4 @@
+// source: proto/types/genesis.proto
 /**
  * @fileoverview
  * @enhanceable
@@ -148,13 +149,15 @@ if (goog.DEBUG && !COMPILED) {
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.Genesis.prototype.toObject = function(opt_includeInstance) {
@@ -164,8 +167,8 @@ proto.iotextypes.Genesis.prototype.toObject = function(opt_includeInstance) {
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.Genesis} msg The msg instance to transform.
  * @return {!Object}
@@ -307,17 +310,21 @@ proto.iotextypes.Genesis.prototype.getBlockchain = function() {
 };
 
 
-/** @param {?proto.iotextypes.GenesisBlockchain|undefined} value */
+/**
+ * @param {?proto.iotextypes.GenesisBlockchain|undefined} value
+ * @return {!proto.iotextypes.Genesis} returns this
+*/
 proto.iotextypes.Genesis.prototype.setBlockchain = function(value) {
-  jspb.Message.setWrapperField(this, 1, value);
+  return jspb.Message.setWrapperField(this, 1, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotextypes.Genesis} returns this
  */
 proto.iotextypes.Genesis.prototype.clearBlockchain = function() {
-  this.setBlockchain(undefined);
+  return this.setBlockchain(undefined);
 };
 
 
@@ -340,17 +347,21 @@ proto.iotextypes.Genesis.prototype.getAccount = function() {
 };
 
 
-/** @param {?proto.iotextypes.GenesisAccount|undefined} value */
+/**
+ * @param {?proto.iotextypes.GenesisAccount|undefined} value
+ * @return {!proto.iotextypes.Genesis} returns this
+*/
 proto.iotextypes.Genesis.prototype.setAccount = function(value) {
-  jspb.Message.setWrapperField(this, 2, value);
+  return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotextypes.Genesis} returns this
  */
 proto.iotextypes.Genesis.prototype.clearAccount = function() {
-  this.setAccount(undefined);
+  return this.setAccount(undefined);
 };
 
 
@@ -373,17 +384,21 @@ proto.iotextypes.Genesis.prototype.getPoll = function() {
 };
 
 
-/** @param {?proto.iotextypes.GenesisPoll|undefined} value */
+/**
+ * @param {?proto.iotextypes.GenesisPoll|undefined} value
+ * @return {!proto.iotextypes.Genesis} returns this
+*/
 proto.iotextypes.Genesis.prototype.setPoll = function(value) {
-  jspb.Message.setWrapperField(this, 3, value);
+  return jspb.Message.setWrapperField(this, 3, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotextypes.Genesis} returns this
  */
 proto.iotextypes.Genesis.prototype.clearPoll = function() {
-  this.setPoll(undefined);
+  return this.setPoll(undefined);
 };
 
 
@@ -406,17 +421,21 @@ proto.iotextypes.Genesis.prototype.getRewarding = function() {
 };
 
 
-/** @param {?proto.iotextypes.GenesisRewarding|undefined} value */
+/**
+ * @param {?proto.iotextypes.GenesisRewarding|undefined} value
+ * @return {!proto.iotextypes.Genesis} returns this
+*/
 proto.iotextypes.Genesis.prototype.setRewarding = function(value) {
-  jspb.Message.setWrapperField(this, 4, value);
+  return jspb.Message.setWrapperField(this, 4, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
+ * @return {!proto.iotextypes.Genesis} returns this
  */
 proto.iotextypes.Genesis.prototype.clearRewarding = function() {
-  this.setRewarding(undefined);
+  return this.setRewarding(undefined);
 };
 
 
@@ -434,13 +453,15 @@ proto.iotextypes.Genesis.prototype.hasRewarding = function() {
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.GenesisBlockchain.prototype.toObject = function(opt_includeInstance) {
@@ -450,8 +471,8 @@ proto.iotextypes.GenesisBlockchain.prototype.toObject = function(opt_includeInst
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.GenesisBlockchain} msg The msg instance to transform.
  * @return {!Object}
@@ -466,7 +487,7 @@ proto.iotextypes.GenesisBlockchain.toObject = function(includeInstance, msg) {
     numsubepochs: jspb.Message.getFieldWithDefault(msg, 5, 0),
     numdelegates: jspb.Message.getFieldWithDefault(msg, 6, 0),
     numcandidatedelegates: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    timebasedrotation: jspb.Message.getFieldWithDefault(msg, 8, false)
+    timebasedrotation: jspb.Message.getBooleanFieldWithDefault(msg, 8, false)
   };
 
   if (includeInstance) {
@@ -632,9 +653,12 @@ proto.iotextypes.GenesisBlockchain.prototype.getTimestamp = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.GenesisBlockchain} returns this
+ */
 proto.iotextypes.GenesisBlockchain.prototype.setTimestamp = function(value) {
-  jspb.Message.setProto3IntField(this, 1, value);
+  return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
@@ -647,9 +671,12 @@ proto.iotextypes.GenesisBlockchain.prototype.getBlockgaslimit = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.GenesisBlockchain} returns this
+ */
 proto.iotextypes.GenesisBlockchain.prototype.setBlockgaslimit = function(value) {
-  jspb.Message.setProto3IntField(this, 2, value);
+  return jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -662,9 +689,12 @@ proto.iotextypes.GenesisBlockchain.prototype.getActiongaslimit = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.GenesisBlockchain} returns this
+ */
 proto.iotextypes.GenesisBlockchain.prototype.setActiongaslimit = function(value) {
-  jspb.Message.setProto3IntField(this, 3, value);
+  return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
@@ -677,9 +707,12 @@ proto.iotextypes.GenesisBlockchain.prototype.getBlockinterval = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.GenesisBlockchain} returns this
+ */
 proto.iotextypes.GenesisBlockchain.prototype.setBlockinterval = function(value) {
-  jspb.Message.setProto3IntField(this, 4, value);
+  return jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
@@ -692,9 +725,12 @@ proto.iotextypes.GenesisBlockchain.prototype.getNumsubepochs = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.GenesisBlockchain} returns this
+ */
 proto.iotextypes.GenesisBlockchain.prototype.setNumsubepochs = function(value) {
-  jspb.Message.setProto3IntField(this, 5, value);
+  return jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
@@ -707,9 +743,12 @@ proto.iotextypes.GenesisBlockchain.prototype.getNumdelegates = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.GenesisBlockchain} returns this
+ */
 proto.iotextypes.GenesisBlockchain.prototype.setNumdelegates = function(value) {
-  jspb.Message.setProto3IntField(this, 6, value);
+  return jspb.Message.setProto3IntField(this, 6, value);
 };
 
 
@@ -722,26 +761,30 @@ proto.iotextypes.GenesisBlockchain.prototype.getNumcandidatedelegates = function
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.GenesisBlockchain} returns this
+ */
 proto.iotextypes.GenesisBlockchain.prototype.setNumcandidatedelegates = function(value) {
-  jspb.Message.setProto3IntField(this, 7, value);
+  return jspb.Message.setProto3IntField(this, 7, value);
 };
 
 
 /**
  * optional bool timeBasedRotation = 8;
- * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
- * You should avoid comparisons like {@code val === true/false} in those cases.
  * @return {boolean}
  */
 proto.iotextypes.GenesisBlockchain.prototype.getTimebasedrotation = function() {
-  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 8, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 8, false));
 };
 
 
-/** @param {boolean} value */
+/**
+ * @param {boolean} value
+ * @return {!proto.iotextypes.GenesisBlockchain} returns this
+ */
 proto.iotextypes.GenesisBlockchain.prototype.setTimebasedrotation = function(value) {
-  jspb.Message.setProto3BooleanField(this, 8, value);
+  return jspb.Message.setProto3BooleanField(this, 8, value);
 };
 
 
@@ -757,13 +800,15 @@ proto.iotextypes.GenesisAccount.repeatedFields_ = [1,2];
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.GenesisAccount.prototype.toObject = function(opt_includeInstance) {
@@ -773,8 +818,8 @@ proto.iotextypes.GenesisAccount.prototype.toObject = function(opt_includeInstanc
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.GenesisAccount} msg The msg instance to transform.
  * @return {!Object}
@@ -782,8 +827,8 @@ proto.iotextypes.GenesisAccount.prototype.toObject = function(opt_includeInstanc
  */
 proto.iotextypes.GenesisAccount.toObject = function(includeInstance, msg) {
   var f, obj = {
-    initbalanceaddrsList: jspb.Message.getRepeatedField(msg, 1),
-    initbalancesList: jspb.Message.getRepeatedField(msg, 2)
+    initbalanceaddrsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
+    initbalancesList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -883,26 +928,31 @@ proto.iotextypes.GenesisAccount.prototype.getInitbalanceaddrsList = function() {
 };
 
 
-/** @param {!Array<string>} value */
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.iotextypes.GenesisAccount} returns this
+ */
 proto.iotextypes.GenesisAccount.prototype.setInitbalanceaddrsList = function(value) {
-  jspb.Message.setField(this, 1, value || []);
+  return jspb.Message.setField(this, 1, value || []);
 };
 
 
 /**
  * @param {string} value
  * @param {number=} opt_index
+ * @return {!proto.iotextypes.GenesisAccount} returns this
  */
 proto.iotextypes.GenesisAccount.prototype.addInitbalanceaddrs = function(value, opt_index) {
-  jspb.Message.addToRepeatedField(this, 1, value, opt_index);
+  return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
+ * @return {!proto.iotextypes.GenesisAccount} returns this
  */
 proto.iotextypes.GenesisAccount.prototype.clearInitbalanceaddrsList = function() {
-  this.setInitbalanceaddrsList([]);
+  return this.setInitbalanceaddrsList([]);
 };
 
 
@@ -915,26 +965,31 @@ proto.iotextypes.GenesisAccount.prototype.getInitbalancesList = function() {
 };
 
 
-/** @param {!Array<string>} value */
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.iotextypes.GenesisAccount} returns this
+ */
 proto.iotextypes.GenesisAccount.prototype.setInitbalancesList = function(value) {
-  jspb.Message.setField(this, 2, value || []);
+  return jspb.Message.setField(this, 2, value || []);
 };
 
 
 /**
  * @param {string} value
  * @param {number=} opt_index
+ * @return {!proto.iotextypes.GenesisAccount} returns this
  */
 proto.iotextypes.GenesisAccount.prototype.addInitbalances = function(value, opt_index) {
-  jspb.Message.addToRepeatedField(this, 2, value, opt_index);
+  return jspb.Message.addToRepeatedField(this, 2, value, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
+ * @return {!proto.iotextypes.GenesisAccount} returns this
  */
 proto.iotextypes.GenesisAccount.prototype.clearInitbalancesList = function() {
-  this.setInitbalancesList([]);
+  return this.setInitbalancesList([]);
 };
 
 
@@ -950,13 +1005,15 @@ proto.iotextypes.GenesisPoll.repeatedFields_ = [8];
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.GenesisPoll.prototype.toObject = function(opt_includeInstance) {
@@ -966,8 +1023,8 @@ proto.iotextypes.GenesisPoll.prototype.toObject = function(opt_includeInstance) 
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.GenesisPoll} msg The msg instance to transform.
  * @return {!Object}
@@ -975,7 +1032,7 @@ proto.iotextypes.GenesisPoll.prototype.toObject = function(opt_includeInstance) 
  */
 proto.iotextypes.GenesisPoll.toObject = function(includeInstance, msg) {
   var f, obj = {
-    enablegravitychainvoting: jspb.Message.getFieldWithDefault(msg, 1, false),
+    enablegravitychainvoting: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
     gravitychainstartheight: jspb.Message.getFieldWithDefault(msg, 2, 0),
     registercontractaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
     stakingcontractaddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
@@ -1144,18 +1201,19 @@ proto.iotextypes.GenesisPoll.serializeBinaryToWriter = function(message, writer)
 
 /**
  * optional bool enableGravityChainVoting = 1;
- * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
- * You should avoid comparisons like {@code val === true/false} in those cases.
  * @return {boolean}
  */
 proto.iotextypes.GenesisPoll.prototype.getEnablegravitychainvoting = function() {
-  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 1, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 1, false));
 };
 
 
-/** @param {boolean} value */
+/**
+ * @param {boolean} value
+ * @return {!proto.iotextypes.GenesisPoll} returns this
+ */
 proto.iotextypes.GenesisPoll.prototype.setEnablegravitychainvoting = function(value) {
-  jspb.Message.setProto3BooleanField(this, 1, value);
+  return jspb.Message.setProto3BooleanField(this, 1, value);
 };
 
 
@@ -1168,9 +1226,12 @@ proto.iotextypes.GenesisPoll.prototype.getGravitychainstartheight = function() {
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.GenesisPoll} returns this
+ */
 proto.iotextypes.GenesisPoll.prototype.setGravitychainstartheight = function(value) {
-  jspb.Message.setProto3IntField(this, 2, value);
+  return jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -1183,9 +1244,12 @@ proto.iotextypes.GenesisPoll.prototype.getRegistercontractaddress = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.GenesisPoll} returns this
+ */
 proto.iotextypes.GenesisPoll.prototype.setRegistercontractaddress = function(value) {
-  jspb.Message.setProto3StringField(this, 3, value);
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
@@ -1198,9 +1262,12 @@ proto.iotextypes.GenesisPoll.prototype.getStakingcontractaddress = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.GenesisPoll} returns this
+ */
 proto.iotextypes.GenesisPoll.prototype.setStakingcontractaddress = function(value) {
-  jspb.Message.setProto3StringField(this, 4, value);
+  return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
@@ -1213,9 +1280,12 @@ proto.iotextypes.GenesisPoll.prototype.getVotethreshold = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.GenesisPoll} returns this
+ */
 proto.iotextypes.GenesisPoll.prototype.setVotethreshold = function(value) {
-  jspb.Message.setProto3StringField(this, 5, value);
+  return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
@@ -1228,9 +1298,12 @@ proto.iotextypes.GenesisPoll.prototype.getScorethreshold = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.GenesisPoll} returns this
+ */
 proto.iotextypes.GenesisPoll.prototype.setScorethreshold = function(value) {
-  jspb.Message.setProto3StringField(this, 6, value);
+  return jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
@@ -1243,9 +1316,12 @@ proto.iotextypes.GenesisPoll.prototype.getSelfstakingthreshold = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.GenesisPoll} returns this
+ */
 proto.iotextypes.GenesisPoll.prototype.setSelfstakingthreshold = function(value) {
-  jspb.Message.setProto3StringField(this, 7, value);
+  return jspb.Message.setProto3StringField(this, 7, value);
 };
 
 
@@ -1259,9 +1335,12 @@ proto.iotextypes.GenesisPoll.prototype.getDelegatesList = function() {
 };
 
 
-/** @param {!Array<!proto.iotextypes.GenesisDelegate>} value */
+/**
+ * @param {!Array<!proto.iotextypes.GenesisDelegate>} value
+ * @return {!proto.iotextypes.GenesisPoll} returns this
+*/
 proto.iotextypes.GenesisPoll.prototype.setDelegatesList = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 8, value);
+  return jspb.Message.setRepeatedWrapperField(this, 8, value);
 };
 
 
@@ -1277,9 +1356,10 @@ proto.iotextypes.GenesisPoll.prototype.addDelegates = function(opt_value, opt_in
 
 /**
  * Clears the list making it empty but non-null.
+ * @return {!proto.iotextypes.GenesisPoll} returns this
  */
 proto.iotextypes.GenesisPoll.prototype.clearDelegatesList = function() {
-  this.setDelegatesList([]);
+  return this.setDelegatesList([]);
 };
 
 
@@ -1288,13 +1368,15 @@ proto.iotextypes.GenesisPoll.prototype.clearDelegatesList = function() {
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.GenesisDelegate.prototype.toObject = function(opt_includeInstance) {
@@ -1304,8 +1386,8 @@ proto.iotextypes.GenesisDelegate.prototype.toObject = function(opt_includeInstan
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.GenesisDelegate} msg The msg instance to transform.
  * @return {!Object}
@@ -1426,9 +1508,12 @@ proto.iotextypes.GenesisDelegate.prototype.getOperatoraddr = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.GenesisDelegate} returns this
+ */
 proto.iotextypes.GenesisDelegate.prototype.setOperatoraddr = function(value) {
-  jspb.Message.setProto3StringField(this, 1, value);
+  return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
@@ -1441,9 +1526,12 @@ proto.iotextypes.GenesisDelegate.prototype.getRewardaddr = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.GenesisDelegate} returns this
+ */
 proto.iotextypes.GenesisDelegate.prototype.setRewardaddr = function(value) {
-  jspb.Message.setProto3StringField(this, 2, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
@@ -1456,9 +1544,12 @@ proto.iotextypes.GenesisDelegate.prototype.getVotes = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.GenesisDelegate} returns this
+ */
 proto.iotextypes.GenesisDelegate.prototype.setVotes = function(value) {
-  jspb.Message.setProto3StringField(this, 3, value);
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
@@ -1467,13 +1558,15 @@ proto.iotextypes.GenesisDelegate.prototype.setVotes = function(value) {
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
- * Creates an object representation of this proto suitable for use in Soy templates.
+ * Creates an object representation of this proto.
  * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
  * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
  * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
  * @return {!Object}
  */
 proto.iotextypes.GenesisRewarding.prototype.toObject = function(opt_includeInstance) {
@@ -1483,8 +1576,8 @@ proto.iotextypes.GenesisRewarding.prototype.toObject = function(opt_includeInsta
 
 /**
  * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
  * @param {!proto.iotextypes.GenesisRewarding} msg The msg instance to transform.
  * @return {!Object}
@@ -1677,9 +1770,12 @@ proto.iotextypes.GenesisRewarding.prototype.getInitadminaddr = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.GenesisRewarding} returns this
+ */
 proto.iotextypes.GenesisRewarding.prototype.setInitadminaddr = function(value) {
-  jspb.Message.setProto3StringField(this, 1, value);
+  return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
@@ -1692,9 +1788,12 @@ proto.iotextypes.GenesisRewarding.prototype.getInitbalance = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.GenesisRewarding} returns this
+ */
 proto.iotextypes.GenesisRewarding.prototype.setInitbalance = function(value) {
-  jspb.Message.setProto3StringField(this, 2, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
@@ -1707,9 +1806,12 @@ proto.iotextypes.GenesisRewarding.prototype.getBlockreward = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.GenesisRewarding} returns this
+ */
 proto.iotextypes.GenesisRewarding.prototype.setBlockreward = function(value) {
-  jspb.Message.setProto3StringField(this, 3, value);
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
@@ -1722,9 +1824,12 @@ proto.iotextypes.GenesisRewarding.prototype.getEpochreward = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.GenesisRewarding} returns this
+ */
 proto.iotextypes.GenesisRewarding.prototype.setEpochreward = function(value) {
-  jspb.Message.setProto3StringField(this, 4, value);
+  return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
@@ -1737,9 +1842,12 @@ proto.iotextypes.GenesisRewarding.prototype.getNumdelegatesforepochreward = func
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.GenesisRewarding} returns this
+ */
 proto.iotextypes.GenesisRewarding.prototype.setNumdelegatesforepochreward = function(value) {
-  jspb.Message.setProto3IntField(this, 5, value);
+  return jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
@@ -1752,9 +1860,12 @@ proto.iotextypes.GenesisRewarding.prototype.getFoundationbonus = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.GenesisRewarding} returns this
+ */
 proto.iotextypes.GenesisRewarding.prototype.setFoundationbonus = function(value) {
-  jspb.Message.setProto3StringField(this, 6, value);
+  return jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
@@ -1767,9 +1878,12 @@ proto.iotextypes.GenesisRewarding.prototype.getNumdelegatesforfoundationbonus = 
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.GenesisRewarding} returns this
+ */
 proto.iotextypes.GenesisRewarding.prototype.setNumdelegatesforfoundationbonus = function(value) {
-  jspb.Message.setProto3IntField(this, 7, value);
+  return jspb.Message.setProto3IntField(this, 7, value);
 };
 
 
@@ -1782,9 +1896,12 @@ proto.iotextypes.GenesisRewarding.prototype.getFoundationbonuslastepoch = functi
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.GenesisRewarding} returns this
+ */
 proto.iotextypes.GenesisRewarding.prototype.setFoundationbonuslastepoch = function(value) {
-  jspb.Message.setProto3IntField(this, 8, value);
+  return jspb.Message.setProto3IntField(this, 8, value);
 };
 
 
@@ -1797,9 +1914,12 @@ proto.iotextypes.GenesisRewarding.prototype.getProductivitythreshold = function(
 };
 
 
-/** @param {number} value */
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.GenesisRewarding} returns this
+ */
 proto.iotextypes.GenesisRewarding.prototype.setProductivitythreshold = function(value) {
-  jspb.Message.setProto3IntField(this, 9, value);
+  return jspb.Message.setProto3IntField(this, 9, value);
 };
 
 

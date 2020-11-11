@@ -1,22 +1,23 @@
-import * as jspb from "google-protobuf"
+import * as jspb from 'google-protobuf'
 
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
 
+
 export class Endorsement extends jspb.Message {
   getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): void;
+  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): Endorsement;
   hasTimestamp(): boolean;
-  clearTimestamp(): void;
+  clearTimestamp(): Endorsement;
 
   getEndorser(): Uint8Array | string;
   getEndorser_asU8(): Uint8Array;
   getEndorser_asB64(): string;
-  setEndorser(value: Uint8Array | string): void;
+  setEndorser(value: Uint8Array | string): Endorsement;
 
   getSignature(): Uint8Array | string;
   getSignature_asU8(): Uint8Array;
   getSignature_asB64(): string;
-  setSignature(value: Uint8Array | string): void;
+  setSignature(value: Uint8Array | string): Endorsement;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Endorsement.AsObject;

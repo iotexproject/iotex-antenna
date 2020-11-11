@@ -288,7 +288,7 @@ test.serial("RpcMethod.getLogs", async t => {
     },
     byRange: {
       fromBlock: 1,
-      count: 100
+      toBlock: 100
     }
   });
   t.truthy(getLogs);
