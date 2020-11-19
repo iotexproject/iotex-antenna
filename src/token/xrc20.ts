@@ -1,10 +1,12 @@
 import BigNumber from "bignumber.js";
-import ethereumjs from "ethereumjs-abi";
+import Web3Abi, { AbiCoder } from "web3-eth-abi";
 import { Account } from "../account/account";
 import { getArgTypes, getHeaderHash } from "../contract/abi-to-byte";
 import { Contract, Options } from "../contract/contract";
 import { fromBytes } from "../crypto/address";
 import { XRC20_ABI } from "./abi";
+
+const Abi = (Web3Abi as unknown) as AbiCoder;
 
 export interface Method {
   name: string;
@@ -68,7 +70,7 @@ export class XRC20 {
       return this.tokenName;
     }
     const result = await this.readMethod("name", this.address);
-    const data = ethereumjs.rawDecode(["string"], Buffer.from(result, "hex"));
+    const data = Abi.decodeParameter("string", result);
     if (data.length > 0) {
       this.tokenName = data[0];
       return this.tokenName;
@@ -81,7 +83,7 @@ export class XRC20 {
       return this.tokenSymbol;
     }
     const result = await this.readMethod("symbol", this.address);
-    const data = ethereumjs.rawDecode(["string"], Buffer.from(result, "hex"));
+    const data = Abi.decodeParameter("string", result);
     if (data.length > 0) {
       this.tokenSymbol = data[0];
       return this.tokenSymbol;
@@ -224,16 +226,13 @@ export class XRC20 {
     if (!method) {
       throw new Error(`method ${methodKey} is not erc20 method`);
     }
-    const params = ethereumjs.rawDecode(
-      method.inputsTypes,
-      Buffer.from(data.substring(8), "hex")
-    );
+    const params = Abi.decodeParameters(method.inputsTypes, data.substring(8));
     const values = {};
 
     for (let i = 0; i < method.inputsTypes.length; i++) {
       if (method.inputsTypes[i] === "address") {
         params[i] = fromBytes(
-          Buffer.from(params[i].toString(), "hex")
+          Buffer.from(params[i].substring(2), "hex")
         ).string();
       }
       // @ts-ignore
