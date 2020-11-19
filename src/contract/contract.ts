@@ -1,5 +1,5 @@
 /* tslint:disable:no-any */
-import ethereumjs from "ethereumjs-abi";
+import Web3Abi, { AbiCoder } from "web3-eth-abi";
 import { IAccount } from "../account/account";
 import { ExecutionMethod, SignerPlugin } from "../action/method";
 import { Execution } from "../action/types";
@@ -16,6 +16,7 @@ import {
   getHeaderHash
 } from "./abi-to-byte";
 
+const Abi = (Web3Abi as unknown) as AbiCoder;
 export type Options = {
   // The byte code of the contract. Used when the contract gets deployed
   data?: Buffer;
@@ -262,18 +263,18 @@ export class Contract {
       return null;
     }
 
-    const results = ethereumjs.rawDecode(outTypes, Buffer.from(result, "hex"));
+    const results = Abi.decodeParameters(outTypes, result);
 
     for (let i = 0; i < outTypes.length; i++) {
       if (outTypes[i] === "address") {
         results[i] = fromBytes(
-          Buffer.from(results[i].toString(), "hex")
+          Buffer.from(results[i].substring(2), "hex")
         ).string();
       }
       if (outTypes[i] === "address[]") {
         for (let j = 0; j < results[i].length; j++) {
           results[i][j] = fromBytes(
-            Buffer.from(results[i][j].toString(), "hex")
+            Buffer.from(results[i][j].substring(2), "hex")
           ).string();
         }
       }
@@ -294,16 +295,13 @@ export class Contract {
     if (!method) {
       throw new Error(`method ${methodKey} is not contract method`);
     }
-    const params = ethereumjs.rawDecode(
-      method.inputsTypes,
-      Buffer.from(data.substring(8), "hex")
-    );
+    const params = Abi.decodeParameters(method.inputsTypes, data.substring(8));
     const values = {};
 
     for (let i = 0; i < method.inputsTypes.length; i++) {
       if (method.inputsTypes[i] === "address") {
         params[i] = fromBytes(
-          Buffer.from(params[i].toString(), "hex")
+          Buffer.from(params[i].substring(2), "hex")
         ).string();
       }
       // @ts-ignore

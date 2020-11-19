@@ -1,8 +1,10 @@
 /* tslint:disable:no-any */
-import ethereumjs from "ethereumjs-abi";
+import Web3Abi, { AbiCoder } from "web3-eth-abi";
 import * as address from "../crypto/address";
 import { hash256b } from "../crypto/hash";
 import { EthAbiDecodeParametersType } from "./abi";
+
+const Abi = (Web3Abi as unknown) as AbiCoder;
 
 export type AbiByFunc = {
   [func: string]: any;
@@ -77,8 +79,8 @@ export function encodeArguments(
     }
   });
   try {
-    const encoded = ethereumjs.rawEncode(types, values);
-    return encoded.toString("hex");
+    const encoded = Abi.encodeParameters(types, values);
+    return encoded.substring(2);
   } catch (e) {
     throw new Error(
       `failed to rawEncode: ${e.stack}, types: ${types}, values: ${values}`
