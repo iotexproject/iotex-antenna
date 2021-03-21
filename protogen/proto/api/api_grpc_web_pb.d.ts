@@ -113,12 +113,36 @@ export class APIServiceClient {
                response: proto_api_api_pb.GetLogsResponse) => void
   ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetLogsResponse>;
 
-  getVotes(
-    request: proto_api_api_pb.GetVotesRequest,
+  getTransactionLogByActionHash(
+    request: proto_api_api_pb.GetTransactionLogByActionHashRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: proto_api_api_pb.GetVotesResponse) => void
-  ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetVotesResponse>;
+               response: proto_api_api_pb.GetTransactionLogByActionHashResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetTransactionLogByActionHashResponse>;
+
+  getTransactionLogByBlockHeight(
+    request: proto_api_api_pb.GetTransactionLogByBlockHeightRequest,
+    metadata: grpcWeb.Metadata | undefined,
+    callback: (err: grpcWeb.Error,
+               response: proto_api_api_pb.GetTransactionLogByBlockHeightResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetTransactionLogByBlockHeightResponse>;
+
+  streamBlocks(
+    request: proto_api_api_pb.StreamBlocksRequest,
+    metadata?: grpcWeb.Metadata
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.StreamBlocksResponse>;
+
+  streamLogs(
+    request: proto_api_api_pb.StreamLogsRequest,
+    metadata?: grpcWeb.Metadata
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.StreamLogsResponse>;
+
+  getActPoolActions(
+    request: proto_api_api_pb.GetActPoolActionsRequest,
+    metadata: grpcWeb.Metadata | undefined,
+    callback: (err: grpcWeb.Error,
+               response: proto_api_api_pb.GetActPoolActionsResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetActPoolActionsResponse>;
 
   getEvmTransfersByActionHash(
     request: proto_api_api_pb.GetEvmTransfersByActionHashRequest,
@@ -134,22 +158,33 @@ export class APIServiceClient {
                response: proto_api_api_pb.GetEvmTransfersByBlockHeightResponse) => void
   ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetEvmTransfersByBlockHeightResponse>;
 
-  streamBlocks(
-    request: proto_api_api_pb.StreamBlocksRequest,
-    metadata?: grpcWeb.Metadata
-  ): grpcWeb.ClientReadableStream<proto_api_api_pb.StreamBlocksResponse>;
-
-  streamLogs(
-    request: proto_api_api_pb.StreamLogsRequest,
-    metadata?: grpcWeb.Metadata
-  ): grpcWeb.ClientReadableStream<proto_api_api_pb.StreamLogsResponse>;
-
   getElectionBuckets(
     request: proto_api_api_pb.GetElectionBucketsRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
                response: proto_api_api_pb.GetElectionBucketsResponse) => void
   ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetElectionBucketsResponse>;
+
+}
+
+export class TransactionLogServiceClient {
+  constructor (hostname: string,
+               credentials?: null | { [index: string]: string; },
+               options?: null | { [index: string]: any; });
+
+  getTransactionLogByActionHash(
+    request: proto_api_api_pb.GetTransactionLogByActionHashRequest,
+    metadata: grpcWeb.Metadata | undefined,
+    callback: (err: grpcWeb.Error,
+               response: proto_api_api_pb.GetTransactionLogByActionHashResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetTransactionLogByActionHashResponse>;
+
+  getTransactionLogByBlockHeight(
+    request: proto_api_api_pb.GetTransactionLogByBlockHeightRequest,
+    metadata: grpcWeb.Metadata | undefined,
+    callback: (err: grpcWeb.Error,
+               response: proto_api_api_pb.GetTransactionLogByBlockHeightResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetTransactionLogByBlockHeightResponse>;
 
 }
 
@@ -233,20 +268,15 @@ export class APIServicePromiseClient {
     metadata?: grpcWeb.Metadata
   ): Promise<proto_api_api_pb.GetLogsResponse>;
 
-  getVotes(
-    request: proto_api_api_pb.GetVotesRequest,
+  getTransactionLogByActionHash(
+    request: proto_api_api_pb.GetTransactionLogByActionHashRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<proto_api_api_pb.GetVotesResponse>;
+  ): Promise<proto_api_api_pb.GetTransactionLogByActionHashResponse>;
 
-  getEvmTransfersByActionHash(
-    request: proto_api_api_pb.GetEvmTransfersByActionHashRequest,
+  getTransactionLogByBlockHeight(
+    request: proto_api_api_pb.GetTransactionLogByBlockHeightRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<proto_api_api_pb.GetEvmTransfersByActionHashResponse>;
-
-  getEvmTransfersByBlockHeight(
-    request: proto_api_api_pb.GetEvmTransfersByBlockHeightRequest,
-    metadata?: grpcWeb.Metadata
-  ): Promise<proto_api_api_pb.GetEvmTransfersByBlockHeightResponse>;
+  ): Promise<proto_api_api_pb.GetTransactionLogByBlockHeightResponse>;
 
   streamBlocks(
     request: proto_api_api_pb.StreamBlocksRequest,
@@ -258,10 +288,42 @@ export class APIServicePromiseClient {
     metadata?: grpcWeb.Metadata
   ): grpcWeb.ClientReadableStream<proto_api_api_pb.StreamLogsResponse>;
 
+  getActPoolActions(
+    request: proto_api_api_pb.GetActPoolActionsRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<proto_api_api_pb.GetActPoolActionsResponse>;
+
+  getEvmTransfersByActionHash(
+    request: proto_api_api_pb.GetEvmTransfersByActionHashRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<proto_api_api_pb.GetEvmTransfersByActionHashResponse>;
+
+  getEvmTransfersByBlockHeight(
+    request: proto_api_api_pb.GetEvmTransfersByBlockHeightRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<proto_api_api_pb.GetEvmTransfersByBlockHeightResponse>;
+
   getElectionBuckets(
     request: proto_api_api_pb.GetElectionBucketsRequest,
     metadata?: grpcWeb.Metadata
   ): Promise<proto_api_api_pb.GetElectionBucketsResponse>;
+
+}
+
+export class TransactionLogServicePromiseClient {
+  constructor (hostname: string,
+               credentials?: null | { [index: string]: string; },
+               options?: null | { [index: string]: any; });
+
+  getTransactionLogByActionHash(
+    request: proto_api_api_pb.GetTransactionLogByActionHashRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<proto_api_api_pb.GetTransactionLogByActionHashResponse>;
+
+  getTransactionLogByBlockHeight(
+    request: proto_api_api_pb.GetTransactionLogByBlockHeightRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<proto_api_api_pb.GetTransactionLogByBlockHeightResponse>;
 
 }
 

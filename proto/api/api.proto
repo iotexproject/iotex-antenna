@@ -9,11 +9,14 @@
 syntax = "proto3";
 package iotexapi;
 option go_package = "github.com/iotexproject/iotex-proto/golang/iotexapi";
+option java_multiple_files = true;
+option java_package = "com.github.iotexproject.grpc.api";
 
 import "proto/types/action.proto";
 import "proto/types/blockchain.proto";
 import "proto/types/node.proto";
 import "proto/types/election.proto";
+import "proto/types/transaction_log.proto";
 import "google/protobuf/timestamp.proto";
 
 service APIService {
@@ -69,18 +72,10 @@ service APIService {
   // get logs filtered by contract address and topics
   rpc GetLogs(GetLogsRequest) returns (GetLogsResponse) {}
 
-  // GetVotes get a single address' votes
-  rpc GetVotes(GetVotesRequest) returns (GetVotesResponse) {}
 
-  /*
-   * evm transfers APIs
-   */
+  rpc GetTransactionLogByActionHash(GetTransactionLogByActionHashRequest) returns (GetTransactionLogByActionHashResponse) {}
 
-  // get evm transfers by action hash
-  rpc GetEvmTransfersByActionHash(GetEvmTransfersByActionHashRequest) returns (GetEvmTransfersByActionHashResponse) {}
-
-  // get evm transfers by block height
-  rpc GetEvmTransfersByBlockHeight(GetEvmTransfersByBlockHeightRequest) returns (GetEvmTransfersByBlockHeightResponse) {}
+  rpc GetTransactionLogByBlockHeight(GetTransactionLogByBlockHeightRequest) returns (GetTransactionLogByBlockHeightResponse) {}
 
   /*
    * below are streaming APIs
@@ -92,21 +87,29 @@ service APIService {
   // get logs filtered by contract address and topics in stream
   rpc StreamLogs(StreamLogsRequest) returns (stream StreamLogsResponse) {}
 
+  // get actions from act pool
+  rpc GetActPoolActions(GetActPoolActionsRequest) returns (GetActPoolActionsResponse) {}
+
   /*
-   * election APIs
+   * evm transfers APIs
+   */
+  // Deprecated
+  rpc GetEvmTransfersByActionHash(GetEvmTransfersByActionHashRequest) returns (GetEvmTransfersByActionHashResponse) {}
+
+  // Deprecated
+  rpc GetEvmTransfersByBlockHeight(GetEvmTransfersByBlockHeightRequest) returns (GetEvmTransfersByBlockHeightResponse) {}
+
+  /*
+   * election APIs, Deprecated
    */
   rpc GetElectionBuckets(GetElectionBucketsRequest) returns (GetElectionBucketsResponse) {}
 }
 
-message GetVotesRequest {
-  string votee = 1;
-  string height = 2;
-  uint32 offset = 3;
-  uint32 limit = 4;
-}
+// experiment
+service TransactionLogService {
+  rpc GetTransactionLogByActionHash(GetTransactionLogByActionHashRequest) returns (GetTransactionLogByActionHashResponse) {}
 
-message GetVotesResponse {
-  repeated Bucket buckets = 1;
+  rpc GetTransactionLogByBlockHeight(GetTransactionLogByBlockHeightRequest) returns (GetTransactionLogByBlockHeightResponse) {}
 }
 
 message Bucket {
@@ -124,6 +127,7 @@ message GetAccountRequest {
 
 message GetAccountResponse {
   iotextypes.AccountMeta accountMeta = 1;
+  iotextypes.BlockIdentifier blockIdentifier = 2;
 }
 
 message GetActionsRequest {
@@ -189,6 +193,7 @@ message BlockProducerInfo {
 message BlockInfo {
   iotextypes.Block block = 1;
   repeated iotextypes.Receipt receipts = 2;
+  iotextypes.TransactionLogs transactionLogs = 3;
 }
 
 message GetActionsResponse {
@@ -221,6 +226,7 @@ message GetChainMetaRequest {}
 
 message GetChainMetaResponse {
   iotextypes.ChainMeta chainMeta = 1;
+  string syncStage = 2; // sync stage
 }
 
 message GetServerMetaRequest  {}
@@ -274,6 +280,16 @@ message EstimateActionGasConsumptionRequest {
   oneof action {
     iotextypes.Transfer transfer = 1;
     iotextypes.Execution execution = 2;
+    // Native staking
+    iotextypes.StakeCreate stakeCreate = 40;
+    iotextypes.StakeReclaim stakeUnstake = 41;
+    iotextypes.StakeReclaim stakeWithdraw = 42;
+    iotextypes.StakeAddDeposit stakeAddDeposit = 43;
+    iotextypes.StakeRestake stakeRestake = 44;
+    iotextypes.StakeChangeCandidate stakeChangeCandidate = 45;
+    iotextypes.StakeTransferOwnership stakeTransferOwnership = 46;
+    iotextypes.CandidateRegister candidateRegister = 47;
+    iotextypes.CandidateBasicInfo candidateUpdate = 48;
   }
   string callerAddress = 100;
 }
@@ -295,6 +311,7 @@ message ReadStateRequest {
 
 message ReadStateResponse {
   bytes data = 1;
+  iotextypes.BlockIdentifier blockIdentifier = 2;
 }
 
 message GetEpochMetaRequest {
@@ -311,6 +328,7 @@ message GetRawBlocksRequest {
   uint64 startHeight = 1;
   uint64 count = 2;
   bool withReceipts = 3;
+  bool withTransactionLogs = 4;
 }
 
 message GetRawBlocksResponse {
@@ -348,20 +366,21 @@ message GetLogsResponse {
   repeated iotextypes.Log logs = 1;
 }
 
-message GetEvmTransfersByActionHashRequest {
+message GetTransactionLogByActionHashRequest {
   string actionHash = 1;
 }
 
-message GetEvmTransfersByActionHashResponse {
-  iotextypes.ActionEvmTransfer actionEvmTransfers = 1;
+message GetTransactionLogByActionHashResponse {
+  iotextypes.TransactionLog transactionLog = 1;
 }
 
-message GetEvmTransfersByBlockHeightRequest {
+message GetTransactionLogByBlockHeightRequest {
   uint64 blockHeight = 1;
 }
 
-message GetEvmTransfersByBlockHeightResponse {
-  iotextypes.BlockEvmTransfer blockEvmTransfers = 1;
+message GetTransactionLogByBlockHeightResponse {
+  iotextypes.TransactionLogs transactionLogs = 1;
+  iotextypes.BlockIdentifier blockIdentifier = 2;
 }
 
 /*
@@ -381,6 +400,14 @@ message StreamLogsResponse {
     iotextypes.Log log = 1;
 }
 
+message GetActPoolActionsRequest {
+  repeated string actionHashes = 1;  // if this field is absent, get all actions from actpool
+}
+
+message GetActPoolActionsResponse {
+  repeated iotextypes.Action actions = 1;
+}
+
  /*
   * election APIs
   */
@@ -390,4 +417,24 @@ message GetElectionBucketsRequest{
 
 message GetElectionBucketsResponse{
   repeated iotextypes.ElectionBucket buckets = 1;
+}
+
+// Deprecated
+message GetEvmTransfersByActionHashRequest {
+  string actionHash = 1;
+}
+
+// Deprecated
+message GetEvmTransfersByActionHashResponse {
+  iotextypes.ActionEvmTransfer actionEvmTransfers = 1;
+}
+
+// Deprecated
+message GetEvmTransfersByBlockHeightRequest {
+  uint64 blockHeight = 1;
+}
+
+// Deprecated
+message GetEvmTransfersByBlockHeightResponse {
+  iotextypes.BlockEvmTransfer blockEvmTransfers = 1;
 }

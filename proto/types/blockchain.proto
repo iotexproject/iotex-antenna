@@ -9,6 +9,8 @@
 syntax = "proto3";
 package iotextypes;
 option go_package = "github.com/iotexproject/iotex-proto/golang/iotextypes";
+option java_multiple_files = true;
+option java_package = "com.github.iotexproject.grpc.types";
 
 import "proto/types/action.proto";
 import "proto/types/endorsement.proto";
@@ -83,6 +85,13 @@ message BlockMeta {
   string receiptRoot = 8;
   string deltaStateDigest = 9;
   string logsBloom = 10;
+  string previousBlockHash = 11;
+}
+
+// BlockIdentifier Metadata
+message BlockIdentifier {
+  string hash = 1;
+  uint64 height = 2;
 }
 
 // Account Metadata
@@ -92,4 +101,14 @@ message AccountMeta {
   uint64 nonce = 3;
   uint64 pendingNonce = 4;
   uint64 numActions = 5;
+  bool isContract = 6;
+}
+
+message BlockStore {
+  Block block = 1;
+  repeated Receipt receipts = 2;
+}
+
+message BlockStores {
+  repeated BlockStore blockStores = 1;
 }

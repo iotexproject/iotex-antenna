@@ -188,3 +188,25 @@ export namespace CandidateListV2 {
   }
 }
 
+export class BucketsCount extends jspb.Message {
+  getTotal(): number;
+  setTotal(value: number): BucketsCount;
+
+  getActive(): number;
+  setActive(value: number): BucketsCount;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): BucketsCount.AsObject;
+  static toObject(includeInstance: boolean, msg: BucketsCount): BucketsCount.AsObject;
+  static serializeBinaryToWriter(message: BucketsCount, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): BucketsCount;
+  static deserializeBinaryFromReader(message: BucketsCount, reader: jspb.BinaryReader): BucketsCount;
+}
+
+export namespace BucketsCount {
+  export type AsObject = {
+    total: number,
+    active: number,
+  }
+}
+

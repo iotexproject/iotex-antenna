@@ -1,4 +1,4 @@
-// Copyright (c) 2019 IoTeX
+// Copyright (c) 2020 IoTeX
 // This is an alpha (internal) release and is not suitable for production. This source code is provided 'as is' and no
 // warranties are given as to title or non-infringement, merchantability or fitness for purpose and, to the extent
 // permitted by law, all liability for your use of the code is disclaimed. This source code is governed by Apache
@@ -6,21 +6,38 @@
 
 // To compile the proto, run:
 //      protoc --go_out=plugins=grpc:$GOPATH/src *.proto
-
 syntax = "proto3";
 package iotextypes;
 option go_package = "github.com/iotexproject/iotex-proto/golang/iotextypes";
 option java_multiple_files = true;
 option java_package = "com.github.iotexproject.grpc.types";
 
-import "google/protobuf/duration.proto";
-import "google/protobuf/timestamp.proto";
+message TransactionLog {
+  message Transaction {
+    bytes topic = 1;
+    string amount = 2;
+    string sender = 3;
+    string recipient = 4;
+    TransactionLogType type = 5;
+  }
+  bytes actionHash = 1;
+  uint64 numTransactions = 2;
+  repeated Transaction transactions = 3;
+}
 
-message ElectionBucket {
-  bytes voter = 1;
-  bytes candidate = 2;
-  bytes amount = 3;
-  google.protobuf.Timestamp startTime = 4;
-  google.protobuf.Duration duration = 5;
-  bool decay = 6;
+message TransactionLogs {
+  repeated TransactionLog logs = 1;
+}
+
+enum TransactionLogType {
+	IN_CONTRACT_TRANSFER = 0;
+	WITHDRAW_BUCKET = 1;
+	CREATE_BUCKET = 2;
+	DEPOSIT_TO_BUCKET = 3;
+	CANDIDATE_SELF_STAKE = 4;
+	CANDIDATE_REGISTRATION_FEE = 5;
+	GAS_FEE = 6;
+	NATIVE_TRANSFER = 7;
+	DEPOSIT_TO_REWARDING_FUND = 8;
+	CLAIM_FROM_REWARDING_FUND = 9;
 }

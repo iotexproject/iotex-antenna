@@ -4,58 +4,9 @@ import * as proto_types_action_pb from '../../proto/types/action_pb';
 import * as proto_types_blockchain_pb from '../../proto/types/blockchain_pb';
 import * as proto_types_node_pb from '../../proto/types/node_pb';
 import * as proto_types_election_pb from '../../proto/types/election_pb';
+import * as proto_types_transaction_log_pb from '../../proto/types/transaction_log_pb';
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
 
-
-export class GetVotesRequest extends jspb.Message {
-  getVotee(): string;
-  setVotee(value: string): GetVotesRequest;
-
-  getHeight(): string;
-  setHeight(value: string): GetVotesRequest;
-
-  getOffset(): number;
-  setOffset(value: number): GetVotesRequest;
-
-  getLimit(): number;
-  setLimit(value: number): GetVotesRequest;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetVotesRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: GetVotesRequest): GetVotesRequest.AsObject;
-  static serializeBinaryToWriter(message: GetVotesRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetVotesRequest;
-  static deserializeBinaryFromReader(message: GetVotesRequest, reader: jspb.BinaryReader): GetVotesRequest;
-}
-
-export namespace GetVotesRequest {
-  export type AsObject = {
-    votee: string,
-    height: string,
-    offset: number,
-    limit: number,
-  }
-}
-
-export class GetVotesResponse extends jspb.Message {
-  getBucketsList(): Array<Bucket>;
-  setBucketsList(value: Array<Bucket>): GetVotesResponse;
-  clearBucketsList(): GetVotesResponse;
-  addBuckets(value?: Bucket, index?: number): Bucket;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetVotesResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: GetVotesResponse): GetVotesResponse.AsObject;
-  static serializeBinaryToWriter(message: GetVotesResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetVotesResponse;
-  static deserializeBinaryFromReader(message: GetVotesResponse, reader: jspb.BinaryReader): GetVotesResponse;
-}
-
-export namespace GetVotesResponse {
-  export type AsObject = {
-    bucketsList: Array<Bucket.AsObject>,
-  }
-}
 
 export class Bucket extends jspb.Message {
   getVoter(): string;
@@ -111,6 +62,11 @@ export class GetAccountResponse extends jspb.Message {
   hasAccountmeta(): boolean;
   clearAccountmeta(): GetAccountResponse;
 
+  getBlockidentifier(): proto_types_blockchain_pb.BlockIdentifier | undefined;
+  setBlockidentifier(value?: proto_types_blockchain_pb.BlockIdentifier): GetAccountResponse;
+  hasBlockidentifier(): boolean;
+  clearBlockidentifier(): GetAccountResponse;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetAccountResponse.AsObject;
   static toObject(includeInstance: boolean, msg: GetAccountResponse): GetAccountResponse.AsObject;
@@ -122,6 +78,7 @@ export class GetAccountResponse extends jspb.Message {
 export namespace GetAccountResponse {
   export type AsObject = {
     accountmeta?: proto_types_blockchain_pb.AccountMeta.AsObject,
+    blockidentifier?: proto_types_blockchain_pb.BlockIdentifier.AsObject,
   }
 }
 
@@ -413,6 +370,11 @@ export class BlockInfo extends jspb.Message {
   clearReceiptsList(): BlockInfo;
   addReceipts(value?: proto_types_action_pb.Receipt, index?: number): proto_types_action_pb.Receipt;
 
+  getTransactionlogs(): proto_types_transaction_log_pb.TransactionLogs | undefined;
+  setTransactionlogs(value?: proto_types_transaction_log_pb.TransactionLogs): BlockInfo;
+  hasTransactionlogs(): boolean;
+  clearTransactionlogs(): BlockInfo;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockInfo.AsObject;
   static toObject(includeInstance: boolean, msg: BlockInfo): BlockInfo.AsObject;
@@ -425,6 +387,7 @@ export namespace BlockInfo {
   export type AsObject = {
     block?: proto_types_blockchain_pb.Block.AsObject,
     receiptsList: Array<proto_types_action_pb.Receipt.AsObject>,
+    transactionlogs?: proto_types_transaction_log_pb.TransactionLogs.AsObject,
   }
 }
 
@@ -570,6 +533,9 @@ export class GetChainMetaResponse extends jspb.Message {
   hasChainmeta(): boolean;
   clearChainmeta(): GetChainMetaResponse;
 
+  getSyncstage(): string;
+  setSyncstage(value: string): GetChainMetaResponse;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetChainMetaResponse.AsObject;
   static toObject(includeInstance: boolean, msg: GetChainMetaResponse): GetChainMetaResponse.AsObject;
@@ -581,6 +547,7 @@ export class GetChainMetaResponse extends jspb.Message {
 export namespace GetChainMetaResponse {
   export type AsObject = {
     chainmeta?: proto_types_blockchain_pb.ChainMeta.AsObject,
+    syncstage: string,
   }
 }
 
@@ -823,6 +790,51 @@ export class EstimateActionGasConsumptionRequest extends jspb.Message {
   hasExecution(): boolean;
   clearExecution(): EstimateActionGasConsumptionRequest;
 
+  getStakecreate(): proto_types_action_pb.StakeCreate | undefined;
+  setStakecreate(value?: proto_types_action_pb.StakeCreate): EstimateActionGasConsumptionRequest;
+  hasStakecreate(): boolean;
+  clearStakecreate(): EstimateActionGasConsumptionRequest;
+
+  getStakeunstake(): proto_types_action_pb.StakeReclaim | undefined;
+  setStakeunstake(value?: proto_types_action_pb.StakeReclaim): EstimateActionGasConsumptionRequest;
+  hasStakeunstake(): boolean;
+  clearStakeunstake(): EstimateActionGasConsumptionRequest;
+
+  getStakewithdraw(): proto_types_action_pb.StakeReclaim | undefined;
+  setStakewithdraw(value?: proto_types_action_pb.StakeReclaim): EstimateActionGasConsumptionRequest;
+  hasStakewithdraw(): boolean;
+  clearStakewithdraw(): EstimateActionGasConsumptionRequest;
+
+  getStakeadddeposit(): proto_types_action_pb.StakeAddDeposit | undefined;
+  setStakeadddeposit(value?: proto_types_action_pb.StakeAddDeposit): EstimateActionGasConsumptionRequest;
+  hasStakeadddeposit(): boolean;
+  clearStakeadddeposit(): EstimateActionGasConsumptionRequest;
+
+  getStakerestake(): proto_types_action_pb.StakeRestake | undefined;
+  setStakerestake(value?: proto_types_action_pb.StakeRestake): EstimateActionGasConsumptionRequest;
+  hasStakerestake(): boolean;
+  clearStakerestake(): EstimateActionGasConsumptionRequest;
+
+  getStakechangecandidate(): proto_types_action_pb.StakeChangeCandidate | undefined;
+  setStakechangecandidate(value?: proto_types_action_pb.StakeChangeCandidate): EstimateActionGasConsumptionRequest;
+  hasStakechangecandidate(): boolean;
+  clearStakechangecandidate(): EstimateActionGasConsumptionRequest;
+
+  getStaketransferownership(): proto_types_action_pb.StakeTransferOwnership | undefined;
+  setStaketransferownership(value?: proto_types_action_pb.StakeTransferOwnership): EstimateActionGasConsumptionRequest;
+  hasStaketransferownership(): boolean;
+  clearStaketransferownership(): EstimateActionGasConsumptionRequest;
+
+  getCandidateregister(): proto_types_action_pb.CandidateRegister | undefined;
+  setCandidateregister(value?: proto_types_action_pb.CandidateRegister): EstimateActionGasConsumptionRequest;
+  hasCandidateregister(): boolean;
+  clearCandidateregister(): EstimateActionGasConsumptionRequest;
+
+  getCandidateupdate(): proto_types_action_pb.CandidateBasicInfo | undefined;
+  setCandidateupdate(value?: proto_types_action_pb.CandidateBasicInfo): EstimateActionGasConsumptionRequest;
+  hasCandidateupdate(): boolean;
+  clearCandidateupdate(): EstimateActionGasConsumptionRequest;
+
   getCalleraddress(): string;
   setCalleraddress(value: string): EstimateActionGasConsumptionRequest;
 
@@ -840,6 +852,15 @@ export namespace EstimateActionGasConsumptionRequest {
   export type AsObject = {
     transfer?: proto_types_action_pb.Transfer.AsObject,
     execution?: proto_types_action_pb.Execution.AsObject,
+    stakecreate?: proto_types_action_pb.StakeCreate.AsObject,
+    stakeunstake?: proto_types_action_pb.StakeReclaim.AsObject,
+    stakewithdraw?: proto_types_action_pb.StakeReclaim.AsObject,
+    stakeadddeposit?: proto_types_action_pb.StakeAddDeposit.AsObject,
+    stakerestake?: proto_types_action_pb.StakeRestake.AsObject,
+    stakechangecandidate?: proto_types_action_pb.StakeChangeCandidate.AsObject,
+    staketransferownership?: proto_types_action_pb.StakeTransferOwnership.AsObject,
+    candidateregister?: proto_types_action_pb.CandidateRegister.AsObject,
+    candidateupdate?: proto_types_action_pb.CandidateBasicInfo.AsObject,
     calleraddress: string,
   }
 
@@ -847,6 +868,15 @@ export namespace EstimateActionGasConsumptionRequest {
     ACTION_NOT_SET = 0,
     TRANSFER = 1,
     EXECUTION = 2,
+    STAKECREATE = 40,
+    STAKEUNSTAKE = 41,
+    STAKEWITHDRAW = 42,
+    STAKEADDDEPOSIT = 43,
+    STAKERESTAKE = 44,
+    STAKECHANGECANDIDATE = 45,
+    STAKETRANSFEROWNERSHIP = 46,
+    CANDIDATEREGISTER = 47,
+    CANDIDATEUPDATE = 48,
   }
 }
 
@@ -928,6 +958,11 @@ export class ReadStateResponse extends jspb.Message {
   getData_asB64(): string;
   setData(value: Uint8Array | string): ReadStateResponse;
 
+  getBlockidentifier(): proto_types_blockchain_pb.BlockIdentifier | undefined;
+  setBlockidentifier(value?: proto_types_blockchain_pb.BlockIdentifier): ReadStateResponse;
+  hasBlockidentifier(): boolean;
+  clearBlockidentifier(): ReadStateResponse;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ReadStateResponse.AsObject;
   static toObject(includeInstance: boolean, msg: ReadStateResponse): ReadStateResponse.AsObject;
@@ -939,6 +974,7 @@ export class ReadStateResponse extends jspb.Message {
 export namespace ReadStateResponse {
   export type AsObject = {
     data: Uint8Array | string,
+    blockidentifier?: proto_types_blockchain_pb.BlockIdentifier.AsObject,
   }
 }
 
@@ -1000,6 +1036,9 @@ export class GetRawBlocksRequest extends jspb.Message {
   getWithreceipts(): boolean;
   setWithreceipts(value: boolean): GetRawBlocksRequest;
 
+  getWithtransactionlogs(): boolean;
+  setWithtransactionlogs(value: boolean): GetRawBlocksRequest;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetRawBlocksRequest.AsObject;
   static toObject(includeInstance: boolean, msg: GetRawBlocksRequest): GetRawBlocksRequest.AsObject;
@@ -1013,6 +1052,7 @@ export namespace GetRawBlocksRequest {
     startheight: number,
     count: number,
     withreceipts: boolean,
+    withtransactionlogs: boolean,
   }
 }
 
@@ -1188,79 +1228,85 @@ export namespace GetLogsResponse {
   }
 }
 
-export class GetEvmTransfersByActionHashRequest extends jspb.Message {
+export class GetTransactionLogByActionHashRequest extends jspb.Message {
   getActionhash(): string;
-  setActionhash(value: string): GetEvmTransfersByActionHashRequest;
+  setActionhash(value: string): GetTransactionLogByActionHashRequest;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetEvmTransfersByActionHashRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: GetEvmTransfersByActionHashRequest): GetEvmTransfersByActionHashRequest.AsObject;
-  static serializeBinaryToWriter(message: GetEvmTransfersByActionHashRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetEvmTransfersByActionHashRequest;
-  static deserializeBinaryFromReader(message: GetEvmTransfersByActionHashRequest, reader: jspb.BinaryReader): GetEvmTransfersByActionHashRequest;
+  toObject(includeInstance?: boolean): GetTransactionLogByActionHashRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetTransactionLogByActionHashRequest): GetTransactionLogByActionHashRequest.AsObject;
+  static serializeBinaryToWriter(message: GetTransactionLogByActionHashRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetTransactionLogByActionHashRequest;
+  static deserializeBinaryFromReader(message: GetTransactionLogByActionHashRequest, reader: jspb.BinaryReader): GetTransactionLogByActionHashRequest;
 }
 
-export namespace GetEvmTransfersByActionHashRequest {
+export namespace GetTransactionLogByActionHashRequest {
   export type AsObject = {
     actionhash: string,
   }
 }
 
-export class GetEvmTransfersByActionHashResponse extends jspb.Message {
-  getActionevmtransfers(): proto_types_action_pb.ActionEvmTransfer | undefined;
-  setActionevmtransfers(value?: proto_types_action_pb.ActionEvmTransfer): GetEvmTransfersByActionHashResponse;
-  hasActionevmtransfers(): boolean;
-  clearActionevmtransfers(): GetEvmTransfersByActionHashResponse;
+export class GetTransactionLogByActionHashResponse extends jspb.Message {
+  getTransactionlog(): proto_types_transaction_log_pb.TransactionLog | undefined;
+  setTransactionlog(value?: proto_types_transaction_log_pb.TransactionLog): GetTransactionLogByActionHashResponse;
+  hasTransactionlog(): boolean;
+  clearTransactionlog(): GetTransactionLogByActionHashResponse;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetEvmTransfersByActionHashResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: GetEvmTransfersByActionHashResponse): GetEvmTransfersByActionHashResponse.AsObject;
-  static serializeBinaryToWriter(message: GetEvmTransfersByActionHashResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetEvmTransfersByActionHashResponse;
-  static deserializeBinaryFromReader(message: GetEvmTransfersByActionHashResponse, reader: jspb.BinaryReader): GetEvmTransfersByActionHashResponse;
+  toObject(includeInstance?: boolean): GetTransactionLogByActionHashResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetTransactionLogByActionHashResponse): GetTransactionLogByActionHashResponse.AsObject;
+  static serializeBinaryToWriter(message: GetTransactionLogByActionHashResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetTransactionLogByActionHashResponse;
+  static deserializeBinaryFromReader(message: GetTransactionLogByActionHashResponse, reader: jspb.BinaryReader): GetTransactionLogByActionHashResponse;
 }
 
-export namespace GetEvmTransfersByActionHashResponse {
+export namespace GetTransactionLogByActionHashResponse {
   export type AsObject = {
-    actionevmtransfers?: proto_types_action_pb.ActionEvmTransfer.AsObject,
+    transactionlog?: proto_types_transaction_log_pb.TransactionLog.AsObject,
   }
 }
 
-export class GetEvmTransfersByBlockHeightRequest extends jspb.Message {
+export class GetTransactionLogByBlockHeightRequest extends jspb.Message {
   getBlockheight(): number;
-  setBlockheight(value: number): GetEvmTransfersByBlockHeightRequest;
+  setBlockheight(value: number): GetTransactionLogByBlockHeightRequest;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetEvmTransfersByBlockHeightRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: GetEvmTransfersByBlockHeightRequest): GetEvmTransfersByBlockHeightRequest.AsObject;
-  static serializeBinaryToWriter(message: GetEvmTransfersByBlockHeightRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetEvmTransfersByBlockHeightRequest;
-  static deserializeBinaryFromReader(message: GetEvmTransfersByBlockHeightRequest, reader: jspb.BinaryReader): GetEvmTransfersByBlockHeightRequest;
+  toObject(includeInstance?: boolean): GetTransactionLogByBlockHeightRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetTransactionLogByBlockHeightRequest): GetTransactionLogByBlockHeightRequest.AsObject;
+  static serializeBinaryToWriter(message: GetTransactionLogByBlockHeightRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetTransactionLogByBlockHeightRequest;
+  static deserializeBinaryFromReader(message: GetTransactionLogByBlockHeightRequest, reader: jspb.BinaryReader): GetTransactionLogByBlockHeightRequest;
 }
 
-export namespace GetEvmTransfersByBlockHeightRequest {
+export namespace GetTransactionLogByBlockHeightRequest {
   export type AsObject = {
     blockheight: number,
   }
 }
 
-export class GetEvmTransfersByBlockHeightResponse extends jspb.Message {
-  getBlockevmtransfers(): proto_types_action_pb.BlockEvmTransfer | undefined;
-  setBlockevmtransfers(value?: proto_types_action_pb.BlockEvmTransfer): GetEvmTransfersByBlockHeightResponse;
-  hasBlockevmtransfers(): boolean;
-  clearBlockevmtransfers(): GetEvmTransfersByBlockHeightResponse;
+export class GetTransactionLogByBlockHeightResponse extends jspb.Message {
+  getTransactionlogs(): proto_types_transaction_log_pb.TransactionLogs | undefined;
+  setTransactionlogs(value?: proto_types_transaction_log_pb.TransactionLogs): GetTransactionLogByBlockHeightResponse;
+  hasTransactionlogs(): boolean;
+  clearTransactionlogs(): GetTransactionLogByBlockHeightResponse;
+
+  getBlockidentifier(): proto_types_blockchain_pb.BlockIdentifier | undefined;
+  setBlockidentifier(value?: proto_types_blockchain_pb.BlockIdentifier): GetTransactionLogByBlockHeightResponse;
+  hasBlockidentifier(): boolean;
+  clearBlockidentifier(): GetTransactionLogByBlockHeightResponse;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetEvmTransfersByBlockHeightResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: GetEvmTransfersByBlockHeightResponse): GetEvmTransfersByBlockHeightResponse.AsObject;
-  static serializeBinaryToWriter(message: GetEvmTransfersByBlockHeightResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetEvmTransfersByBlockHeightResponse;
-  static deserializeBinaryFromReader(message: GetEvmTransfersByBlockHeightResponse, reader: jspb.BinaryReader): GetEvmTransfersByBlockHeightResponse;
+  toObject(includeInstance?: boolean): GetTransactionLogByBlockHeightResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetTransactionLogByBlockHeightResponse): GetTransactionLogByBlockHeightResponse.AsObject;
+  static serializeBinaryToWriter(message: GetTransactionLogByBlockHeightResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetTransactionLogByBlockHeightResponse;
+  static deserializeBinaryFromReader(message: GetTransactionLogByBlockHeightResponse, reader: jspb.BinaryReader): GetTransactionLogByBlockHeightResponse;
 }
 
-export namespace GetEvmTransfersByBlockHeightResponse {
+export namespace GetTransactionLogByBlockHeightResponse {
   export type AsObject = {
-    blockevmtransfers?: proto_types_action_pb.BlockEvmTransfer.AsObject,
+    transactionlogs?: proto_types_transaction_log_pb.TransactionLogs.AsObject,
+    blockidentifier?: proto_types_blockchain_pb.BlockIdentifier.AsObject,
   }
 }
 
@@ -1338,6 +1384,46 @@ export namespace StreamLogsResponse {
   }
 }
 
+export class GetActPoolActionsRequest extends jspb.Message {
+  getActionhashesList(): Array<string>;
+  setActionhashesList(value: Array<string>): GetActPoolActionsRequest;
+  clearActionhashesList(): GetActPoolActionsRequest;
+  addActionhashes(value: string, index?: number): GetActPoolActionsRequest;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetActPoolActionsRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetActPoolActionsRequest): GetActPoolActionsRequest.AsObject;
+  static serializeBinaryToWriter(message: GetActPoolActionsRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetActPoolActionsRequest;
+  static deserializeBinaryFromReader(message: GetActPoolActionsRequest, reader: jspb.BinaryReader): GetActPoolActionsRequest;
+}
+
+export namespace GetActPoolActionsRequest {
+  export type AsObject = {
+    actionhashesList: Array<string>,
+  }
+}
+
+export class GetActPoolActionsResponse extends jspb.Message {
+  getActionsList(): Array<proto_types_action_pb.Action>;
+  setActionsList(value: Array<proto_types_action_pb.Action>): GetActPoolActionsResponse;
+  clearActionsList(): GetActPoolActionsResponse;
+  addActions(value?: proto_types_action_pb.Action, index?: number): proto_types_action_pb.Action;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetActPoolActionsResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetActPoolActionsResponse): GetActPoolActionsResponse.AsObject;
+  static serializeBinaryToWriter(message: GetActPoolActionsResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetActPoolActionsResponse;
+  static deserializeBinaryFromReader(message: GetActPoolActionsResponse, reader: jspb.BinaryReader): GetActPoolActionsResponse;
+}
+
+export namespace GetActPoolActionsResponse {
+  export type AsObject = {
+    actionsList: Array<proto_types_action_pb.Action.AsObject>,
+  }
+}
+
 export class GetElectionBucketsRequest extends jspb.Message {
   getEpochnum(): number;
   setEpochnum(value: number): GetElectionBucketsRequest;
@@ -1373,6 +1459,82 @@ export class GetElectionBucketsResponse extends jspb.Message {
 export namespace GetElectionBucketsResponse {
   export type AsObject = {
     bucketsList: Array<proto_types_election_pb.ElectionBucket.AsObject>,
+  }
+}
+
+export class GetEvmTransfersByActionHashRequest extends jspb.Message {
+  getActionhash(): string;
+  setActionhash(value: string): GetEvmTransfersByActionHashRequest;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetEvmTransfersByActionHashRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetEvmTransfersByActionHashRequest): GetEvmTransfersByActionHashRequest.AsObject;
+  static serializeBinaryToWriter(message: GetEvmTransfersByActionHashRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetEvmTransfersByActionHashRequest;
+  static deserializeBinaryFromReader(message: GetEvmTransfersByActionHashRequest, reader: jspb.BinaryReader): GetEvmTransfersByActionHashRequest;
+}
+
+export namespace GetEvmTransfersByActionHashRequest {
+  export type AsObject = {
+    actionhash: string,
+  }
+}
+
+export class GetEvmTransfersByActionHashResponse extends jspb.Message {
+  getActionevmtransfers(): proto_types_action_pb.ActionEvmTransfer | undefined;
+  setActionevmtransfers(value?: proto_types_action_pb.ActionEvmTransfer): GetEvmTransfersByActionHashResponse;
+  hasActionevmtransfers(): boolean;
+  clearActionevmtransfers(): GetEvmTransfersByActionHashResponse;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetEvmTransfersByActionHashResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetEvmTransfersByActionHashResponse): GetEvmTransfersByActionHashResponse.AsObject;
+  static serializeBinaryToWriter(message: GetEvmTransfersByActionHashResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetEvmTransfersByActionHashResponse;
+  static deserializeBinaryFromReader(message: GetEvmTransfersByActionHashResponse, reader: jspb.BinaryReader): GetEvmTransfersByActionHashResponse;
+}
+
+export namespace GetEvmTransfersByActionHashResponse {
+  export type AsObject = {
+    actionevmtransfers?: proto_types_action_pb.ActionEvmTransfer.AsObject,
+  }
+}
+
+export class GetEvmTransfersByBlockHeightRequest extends jspb.Message {
+  getBlockheight(): number;
+  setBlockheight(value: number): GetEvmTransfersByBlockHeightRequest;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetEvmTransfersByBlockHeightRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetEvmTransfersByBlockHeightRequest): GetEvmTransfersByBlockHeightRequest.AsObject;
+  static serializeBinaryToWriter(message: GetEvmTransfersByBlockHeightRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetEvmTransfersByBlockHeightRequest;
+  static deserializeBinaryFromReader(message: GetEvmTransfersByBlockHeightRequest, reader: jspb.BinaryReader): GetEvmTransfersByBlockHeightRequest;
+}
+
+export namespace GetEvmTransfersByBlockHeightRequest {
+  export type AsObject = {
+    blockheight: number,
+  }
+}
+
+export class GetEvmTransfersByBlockHeightResponse extends jspb.Message {
+  getBlockevmtransfers(): proto_types_action_pb.BlockEvmTransfer | undefined;
+  setBlockevmtransfers(value?: proto_types_action_pb.BlockEvmTransfer): GetEvmTransfersByBlockHeightResponse;
+  hasBlockevmtransfers(): boolean;
+  clearBlockevmtransfers(): GetEvmTransfersByBlockHeightResponse;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetEvmTransfersByBlockHeightResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetEvmTransfersByBlockHeightResponse): GetEvmTransfersByBlockHeightResponse.AsObject;
+  static serializeBinaryToWriter(message: GetEvmTransfersByBlockHeightResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetEvmTransfersByBlockHeightResponse;
+  static deserializeBinaryFromReader(message: GetEvmTransfersByBlockHeightResponse, reader: jspb.BinaryReader): GetEvmTransfersByBlockHeightResponse;
+}
+
+export namespace GetEvmTransfersByBlockHeightResponse {
+  export type AsObject = {
+    blockevmtransfers?: proto_types_action_pb.BlockEvmTransfer.AsObject,
   }
 }
 

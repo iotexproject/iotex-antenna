@@ -56,6 +56,9 @@ export interface IAccountMeta {
   // AccountMeta balance
   balance: string;
 
+  // AccountMeta isContract
+  isContract: boolean;
+
   // AccountMeta nonce. Type is string in node but number in browser.
   nonce: string | number;
 
@@ -66,10 +69,19 @@ export interface IAccountMeta {
   numActions: string | number;
 }
 
+// Properties of an BlockIdentifier.
+export interface IBlockIdentifier {
+  hash: string;
+  height: string | number;
+}
+
 // Properties of a GetAccountResponse.
 export interface IGetAccountResponse {
   // GetAccountResponse accountMeta
   accountMeta: IAccountMeta | undefined;
+
+  // GetAccountResponse blockIdentifier
+  blockIdentifier: IBlockIdentifier | undefined;
 }
 
 export const GetAccountRequest = {
@@ -83,7 +95,17 @@ export const GetAccountRequest = {
     const meta = pbRes.getAccountmeta();
     if (!meta) {
       return {
-        accountMeta: undefined
+        accountMeta: undefined,
+        blockIdentifier: undefined
+      };
+    }
+
+    const blockIdentifierPb = pbRes.getBlockidentifier();
+    let blockIdentifier = undefined;
+    if (blockIdentifierPb) {
+      blockIdentifier = {
+        hash: blockIdentifierPb.getHash(),
+        height: blockIdentifierPb.getHeight()
       };
     }
 
@@ -91,10 +113,12 @@ export const GetAccountRequest = {
       accountMeta: {
         address: meta.getAddress(),
         balance: meta.getBalance(),
+        isContract: meta.getIscontract(),
         nonce: meta.getNonce(),
         pendingNonce: meta.getPendingnonce(),
         numActions: meta.getNumactions()
-      }
+      },
+      blockIdentifier
     };
   }
 };

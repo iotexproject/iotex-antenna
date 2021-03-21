@@ -24,6 +24,8 @@ var proto_types_node_pb = require('../../proto/types/node_pb.js')
 
 var proto_types_election_pb = require('../../proto/types/election_pb.js')
 
+var proto_types_transaction_log_pb = require('../../proto/types/transaction_log_pb.js')
+
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js')
 const proto = {};
 proto.iotexapi = require('./api_pb.js');
@@ -1283,80 +1285,390 @@ proto.iotexapi.APIServicePromiseClient.prototype.getLogs =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.GetVotesRequest,
- *   !proto.iotexapi.GetVotesResponse>}
+ *   !proto.iotexapi.GetTransactionLogByActionHashRequest,
+ *   !proto.iotexapi.GetTransactionLogByActionHashResponse>}
  */
-const methodDescriptor_APIService_GetVotes = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/GetVotes',
+const methodDescriptor_APIService_GetTransactionLogByActionHash = new grpc.web.MethodDescriptor(
+  '/iotexapi.APIService/GetTransactionLogByActionHash',
   grpc.web.MethodType.UNARY,
-  proto.iotexapi.GetVotesRequest,
-  proto.iotexapi.GetVotesResponse,
+  proto.iotexapi.GetTransactionLogByActionHashRequest,
+  proto.iotexapi.GetTransactionLogByActionHashResponse,
   /**
-   * @param {!proto.iotexapi.GetVotesRequest} request
+   * @param {!proto.iotexapi.GetTransactionLogByActionHashRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
     return request.serializeBinary();
   },
-  proto.iotexapi.GetVotesResponse.deserializeBinary
+  proto.iotexapi.GetTransactionLogByActionHashResponse.deserializeBinary
 );
 
 
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.iotexapi.GetVotesRequest,
- *   !proto.iotexapi.GetVotesResponse>}
+ *   !proto.iotexapi.GetTransactionLogByActionHashRequest,
+ *   !proto.iotexapi.GetTransactionLogByActionHashResponse>}
  */
-const methodInfo_APIService_GetVotes = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.iotexapi.GetVotesResponse,
+const methodInfo_APIService_GetTransactionLogByActionHash = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.iotexapi.GetTransactionLogByActionHashResponse,
   /**
-   * @param {!proto.iotexapi.GetVotesRequest} request
+   * @param {!proto.iotexapi.GetTransactionLogByActionHashRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
     return request.serializeBinary();
   },
-  proto.iotexapi.GetVotesResponse.deserializeBinary
+  proto.iotexapi.GetTransactionLogByActionHashResponse.deserializeBinary
 );
 
 
 /**
- * @param {!proto.iotexapi.GetVotesRequest} request The
+ * @param {!proto.iotexapi.GetTransactionLogByActionHashRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.iotexapi.GetVotesResponse)}
+ * @param {function(?grpc.web.Error, ?proto.iotexapi.GetTransactionLogByActionHashResponse)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetVotesResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetTransactionLogByActionHashResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.iotexapi.APIServiceClient.prototype.getVotes =
+proto.iotexapi.APIServiceClient.prototype.getTransactionLogByActionHash =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/iotexapi.APIService/GetVotes',
+      '/iotexapi.APIService/GetTransactionLogByActionHash',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetVotes,
+      methodDescriptor_APIService_GetTransactionLogByActionHash,
       callback);
 };
 
 
 /**
- * @param {!proto.iotexapi.GetVotesRequest} request The
+ * @param {!proto.iotexapi.GetTransactionLogByActionHashRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.iotexapi.GetVotesResponse>}
+ * @return {!Promise<!proto.iotexapi.GetTransactionLogByActionHashResponse>}
  *     Promise that resolves to the response
  */
-proto.iotexapi.APIServicePromiseClient.prototype.getVotes =
+proto.iotexapi.APIServicePromiseClient.prototype.getTransactionLogByActionHash =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/iotexapi.APIService/GetVotes',
+      '/iotexapi.APIService/GetTransactionLogByActionHash',
       request,
       metadata || {},
-      methodDescriptor_APIService_GetVotes);
+      methodDescriptor_APIService_GetTransactionLogByActionHash);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.iotexapi.GetTransactionLogByBlockHeightRequest,
+ *   !proto.iotexapi.GetTransactionLogByBlockHeightResponse>}
+ */
+const methodDescriptor_APIService_GetTransactionLogByBlockHeight = new grpc.web.MethodDescriptor(
+  '/iotexapi.APIService/GetTransactionLogByBlockHeight',
+  grpc.web.MethodType.UNARY,
+  proto.iotexapi.GetTransactionLogByBlockHeightRequest,
+  proto.iotexapi.GetTransactionLogByBlockHeightResponse,
+  /**
+   * @param {!proto.iotexapi.GetTransactionLogByBlockHeightRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.GetTransactionLogByBlockHeightResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.iotexapi.GetTransactionLogByBlockHeightRequest,
+ *   !proto.iotexapi.GetTransactionLogByBlockHeightResponse>}
+ */
+const methodInfo_APIService_GetTransactionLogByBlockHeight = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.iotexapi.GetTransactionLogByBlockHeightResponse,
+  /**
+   * @param {!proto.iotexapi.GetTransactionLogByBlockHeightRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.GetTransactionLogByBlockHeightResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.iotexapi.GetTransactionLogByBlockHeightRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.iotexapi.GetTransactionLogByBlockHeightResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetTransactionLogByBlockHeightResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.iotexapi.APIServiceClient.prototype.getTransactionLogByBlockHeight =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/GetTransactionLogByBlockHeight',
+      request,
+      metadata || {},
+      methodDescriptor_APIService_GetTransactionLogByBlockHeight,
+      callback);
+};
+
+
+/**
+ * @param {!proto.iotexapi.GetTransactionLogByBlockHeightRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.iotexapi.GetTransactionLogByBlockHeightResponse>}
+ *     Promise that resolves to the response
+ */
+proto.iotexapi.APIServicePromiseClient.prototype.getTransactionLogByBlockHeight =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/iotexapi.APIService/GetTransactionLogByBlockHeight',
+      request,
+      metadata || {},
+      methodDescriptor_APIService_GetTransactionLogByBlockHeight);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.iotexapi.StreamBlocksRequest,
+ *   !proto.iotexapi.StreamBlocksResponse>}
+ */
+const methodDescriptor_APIService_StreamBlocks = new grpc.web.MethodDescriptor(
+  '/iotexapi.APIService/StreamBlocks',
+  grpc.web.MethodType.SERVER_STREAMING,
+  proto.iotexapi.StreamBlocksRequest,
+  proto.iotexapi.StreamBlocksResponse,
+  /**
+   * @param {!proto.iotexapi.StreamBlocksRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.StreamBlocksResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.iotexapi.StreamBlocksRequest,
+ *   !proto.iotexapi.StreamBlocksResponse>}
+ */
+const methodInfo_APIService_StreamBlocks = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.iotexapi.StreamBlocksResponse,
+  /**
+   * @param {!proto.iotexapi.StreamBlocksRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.StreamBlocksResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.iotexapi.StreamBlocksRequest} request The request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.StreamBlocksResponse>}
+ *     The XHR Node Readable Stream
+ */
+proto.iotexapi.APIServiceClient.prototype.streamBlocks =
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
+      '/iotexapi.APIService/StreamBlocks',
+      request,
+      metadata || {},
+      methodDescriptor_APIService_StreamBlocks);
+};
+
+
+/**
+ * @param {!proto.iotexapi.StreamBlocksRequest} request The request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.StreamBlocksResponse>}
+ *     The XHR Node Readable Stream
+ */
+proto.iotexapi.APIServicePromiseClient.prototype.streamBlocks =
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
+      '/iotexapi.APIService/StreamBlocks',
+      request,
+      metadata || {},
+      methodDescriptor_APIService_StreamBlocks);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.iotexapi.StreamLogsRequest,
+ *   !proto.iotexapi.StreamLogsResponse>}
+ */
+const methodDescriptor_APIService_StreamLogs = new grpc.web.MethodDescriptor(
+  '/iotexapi.APIService/StreamLogs',
+  grpc.web.MethodType.SERVER_STREAMING,
+  proto.iotexapi.StreamLogsRequest,
+  proto.iotexapi.StreamLogsResponse,
+  /**
+   * @param {!proto.iotexapi.StreamLogsRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.StreamLogsResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.iotexapi.StreamLogsRequest,
+ *   !proto.iotexapi.StreamLogsResponse>}
+ */
+const methodInfo_APIService_StreamLogs = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.iotexapi.StreamLogsResponse,
+  /**
+   * @param {!proto.iotexapi.StreamLogsRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.StreamLogsResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.iotexapi.StreamLogsRequest} request The request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.StreamLogsResponse>}
+ *     The XHR Node Readable Stream
+ */
+proto.iotexapi.APIServiceClient.prototype.streamLogs =
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
+      '/iotexapi.APIService/StreamLogs',
+      request,
+      metadata || {},
+      methodDescriptor_APIService_StreamLogs);
+};
+
+
+/**
+ * @param {!proto.iotexapi.StreamLogsRequest} request The request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.StreamLogsResponse>}
+ *     The XHR Node Readable Stream
+ */
+proto.iotexapi.APIServicePromiseClient.prototype.streamLogs =
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
+      '/iotexapi.APIService/StreamLogs',
+      request,
+      metadata || {},
+      methodDescriptor_APIService_StreamLogs);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.iotexapi.GetActPoolActionsRequest,
+ *   !proto.iotexapi.GetActPoolActionsResponse>}
+ */
+const methodDescriptor_APIService_GetActPoolActions = new grpc.web.MethodDescriptor(
+  '/iotexapi.APIService/GetActPoolActions',
+  grpc.web.MethodType.UNARY,
+  proto.iotexapi.GetActPoolActionsRequest,
+  proto.iotexapi.GetActPoolActionsResponse,
+  /**
+   * @param {!proto.iotexapi.GetActPoolActionsRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.GetActPoolActionsResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.iotexapi.GetActPoolActionsRequest,
+ *   !proto.iotexapi.GetActPoolActionsResponse>}
+ */
+const methodInfo_APIService_GetActPoolActions = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.iotexapi.GetActPoolActionsResponse,
+  /**
+   * @param {!proto.iotexapi.GetActPoolActionsRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.GetActPoolActionsResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.iotexapi.GetActPoolActionsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.iotexapi.GetActPoolActionsResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetActPoolActionsResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.iotexapi.APIServiceClient.prototype.getActPoolActions =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/GetActPoolActions',
+      request,
+      metadata || {},
+      methodDescriptor_APIService_GetActPoolActions,
+      callback);
+};
+
+
+/**
+ * @param {!proto.iotexapi.GetActPoolActionsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.iotexapi.GetActPoolActionsResponse>}
+ *     Promise that resolves to the response
+ */
+proto.iotexapi.APIServicePromiseClient.prototype.getActPoolActions =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/iotexapi.APIService/GetActPoolActions',
+      request,
+      metadata || {},
+      methodDescriptor_APIService_GetActPoolActions);
 };
 
 
@@ -1523,156 +1835,6 @@ proto.iotexapi.APIServicePromiseClient.prototype.getEvmTransfersByBlockHeight =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.StreamBlocksRequest,
- *   !proto.iotexapi.StreamBlocksResponse>}
- */
-const methodDescriptor_APIService_StreamBlocks = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/StreamBlocks',
-  grpc.web.MethodType.SERVER_STREAMING,
-  proto.iotexapi.StreamBlocksRequest,
-  proto.iotexapi.StreamBlocksResponse,
-  /**
-   * @param {!proto.iotexapi.StreamBlocksRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.StreamBlocksResponse.deserializeBinary
-);
-
-
-/**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.iotexapi.StreamBlocksRequest,
- *   !proto.iotexapi.StreamBlocksResponse>}
- */
-const methodInfo_APIService_StreamBlocks = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.iotexapi.StreamBlocksResponse,
-  /**
-   * @param {!proto.iotexapi.StreamBlocksRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.StreamBlocksResponse.deserializeBinary
-);
-
-
-/**
- * @param {!proto.iotexapi.StreamBlocksRequest} request The request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.StreamBlocksResponse>}
- *     The XHR Node Readable Stream
- */
-proto.iotexapi.APIServiceClient.prototype.streamBlocks =
-    function(request, metadata) {
-  return this.client_.serverStreaming(this.hostname_ +
-      '/iotexapi.APIService/StreamBlocks',
-      request,
-      metadata || {},
-      methodDescriptor_APIService_StreamBlocks);
-};
-
-
-/**
- * @param {!proto.iotexapi.StreamBlocksRequest} request The request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.StreamBlocksResponse>}
- *     The XHR Node Readable Stream
- */
-proto.iotexapi.APIServicePromiseClient.prototype.streamBlocks =
-    function(request, metadata) {
-  return this.client_.serverStreaming(this.hostname_ +
-      '/iotexapi.APIService/StreamBlocks',
-      request,
-      metadata || {},
-      methodDescriptor_APIService_StreamBlocks);
-};
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.iotexapi.StreamLogsRequest,
- *   !proto.iotexapi.StreamLogsResponse>}
- */
-const methodDescriptor_APIService_StreamLogs = new grpc.web.MethodDescriptor(
-  '/iotexapi.APIService/StreamLogs',
-  grpc.web.MethodType.SERVER_STREAMING,
-  proto.iotexapi.StreamLogsRequest,
-  proto.iotexapi.StreamLogsResponse,
-  /**
-   * @param {!proto.iotexapi.StreamLogsRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.StreamLogsResponse.deserializeBinary
-);
-
-
-/**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.iotexapi.StreamLogsRequest,
- *   !proto.iotexapi.StreamLogsResponse>}
- */
-const methodInfo_APIService_StreamLogs = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.iotexapi.StreamLogsResponse,
-  /**
-   * @param {!proto.iotexapi.StreamLogsRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.iotexapi.StreamLogsResponse.deserializeBinary
-);
-
-
-/**
- * @param {!proto.iotexapi.StreamLogsRequest} request The request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.StreamLogsResponse>}
- *     The XHR Node Readable Stream
- */
-proto.iotexapi.APIServiceClient.prototype.streamLogs =
-    function(request, metadata) {
-  return this.client_.serverStreaming(this.hostname_ +
-      '/iotexapi.APIService/StreamLogs',
-      request,
-      metadata || {},
-      methodDescriptor_APIService_StreamLogs);
-};
-
-
-/**
- * @param {!proto.iotexapi.StreamLogsRequest} request The request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.StreamLogsResponse>}
- *     The XHR Node Readable Stream
- */
-proto.iotexapi.APIServicePromiseClient.prototype.streamLogs =
-    function(request, metadata) {
-  return this.client_.serverStreaming(this.hostname_ +
-      '/iotexapi.APIService/StreamLogs',
-      request,
-      metadata || {},
-      methodDescriptor_APIService_StreamLogs);
-};
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
  *   !proto.iotexapi.GetElectionBucketsRequest,
  *   !proto.iotexapi.GetElectionBucketsResponse>}
  */
@@ -1747,6 +1909,218 @@ proto.iotexapi.APIServicePromiseClient.prototype.getElectionBuckets =
       request,
       metadata || {},
       methodDescriptor_APIService_GetElectionBuckets);
+};
+
+
+/**
+ * @param {string} hostname
+ * @param {?Object} credentials
+ * @param {?Object} options
+ * @constructor
+ * @struct
+ * @final
+ */
+proto.iotexapi.TransactionLogServiceClient =
+    function(hostname, credentials, options) {
+  if (!options) options = {};
+  options['format'] = 'text';
+
+  /**
+   * @private @const {!grpc.web.GrpcWebClientBase} The client
+   */
+  this.client_ = new grpc.web.GrpcWebClientBase(options);
+
+  /**
+   * @private @const {string} The hostname
+   */
+  this.hostname_ = hostname;
+
+};
+
+
+/**
+ * @param {string} hostname
+ * @param {?Object} credentials
+ * @param {?Object} options
+ * @constructor
+ * @struct
+ * @final
+ */
+proto.iotexapi.TransactionLogServicePromiseClient =
+    function(hostname, credentials, options) {
+  if (!options) options = {};
+  options['format'] = 'text';
+
+  /**
+   * @private @const {!grpc.web.GrpcWebClientBase} The client
+   */
+  this.client_ = new grpc.web.GrpcWebClientBase(options);
+
+  /**
+   * @private @const {string} The hostname
+   */
+  this.hostname_ = hostname;
+
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.iotexapi.GetTransactionLogByActionHashRequest,
+ *   !proto.iotexapi.GetTransactionLogByActionHashResponse>}
+ */
+const methodDescriptor_TransactionLogService_GetTransactionLogByActionHash = new grpc.web.MethodDescriptor(
+  '/iotexapi.TransactionLogService/GetTransactionLogByActionHash',
+  grpc.web.MethodType.UNARY,
+  proto.iotexapi.GetTransactionLogByActionHashRequest,
+  proto.iotexapi.GetTransactionLogByActionHashResponse,
+  /**
+   * @param {!proto.iotexapi.GetTransactionLogByActionHashRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.GetTransactionLogByActionHashResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.iotexapi.GetTransactionLogByActionHashRequest,
+ *   !proto.iotexapi.GetTransactionLogByActionHashResponse>}
+ */
+const methodInfo_TransactionLogService_GetTransactionLogByActionHash = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.iotexapi.GetTransactionLogByActionHashResponse,
+  /**
+   * @param {!proto.iotexapi.GetTransactionLogByActionHashRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.GetTransactionLogByActionHashResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.iotexapi.GetTransactionLogByActionHashRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.iotexapi.GetTransactionLogByActionHashResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetTransactionLogByActionHashResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.iotexapi.TransactionLogServiceClient.prototype.getTransactionLogByActionHash =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.TransactionLogService/GetTransactionLogByActionHash',
+      request,
+      metadata || {},
+      methodDescriptor_TransactionLogService_GetTransactionLogByActionHash,
+      callback);
+};
+
+
+/**
+ * @param {!proto.iotexapi.GetTransactionLogByActionHashRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.iotexapi.GetTransactionLogByActionHashResponse>}
+ *     Promise that resolves to the response
+ */
+proto.iotexapi.TransactionLogServicePromiseClient.prototype.getTransactionLogByActionHash =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/iotexapi.TransactionLogService/GetTransactionLogByActionHash',
+      request,
+      metadata || {},
+      methodDescriptor_TransactionLogService_GetTransactionLogByActionHash);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.iotexapi.GetTransactionLogByBlockHeightRequest,
+ *   !proto.iotexapi.GetTransactionLogByBlockHeightResponse>}
+ */
+const methodDescriptor_TransactionLogService_GetTransactionLogByBlockHeight = new grpc.web.MethodDescriptor(
+  '/iotexapi.TransactionLogService/GetTransactionLogByBlockHeight',
+  grpc.web.MethodType.UNARY,
+  proto.iotexapi.GetTransactionLogByBlockHeightRequest,
+  proto.iotexapi.GetTransactionLogByBlockHeightResponse,
+  /**
+   * @param {!proto.iotexapi.GetTransactionLogByBlockHeightRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.GetTransactionLogByBlockHeightResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.iotexapi.GetTransactionLogByBlockHeightRequest,
+ *   !proto.iotexapi.GetTransactionLogByBlockHeightResponse>}
+ */
+const methodInfo_TransactionLogService_GetTransactionLogByBlockHeight = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.iotexapi.GetTransactionLogByBlockHeightResponse,
+  /**
+   * @param {!proto.iotexapi.GetTransactionLogByBlockHeightRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.GetTransactionLogByBlockHeightResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.iotexapi.GetTransactionLogByBlockHeightRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.iotexapi.GetTransactionLogByBlockHeightResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.GetTransactionLogByBlockHeightResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.iotexapi.TransactionLogServiceClient.prototype.getTransactionLogByBlockHeight =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.TransactionLogService/GetTransactionLogByBlockHeight',
+      request,
+      metadata || {},
+      methodDescriptor_TransactionLogService_GetTransactionLogByBlockHeight,
+      callback);
+};
+
+
+/**
+ * @param {!proto.iotexapi.GetTransactionLogByBlockHeightRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.iotexapi.GetTransactionLogByBlockHeightResponse>}
+ *     Promise that resolves to the response
+ */
+proto.iotexapi.TransactionLogServicePromiseClient.prototype.getTransactionLogByBlockHeight =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/iotexapi.TransactionLogService/GetTransactionLogByBlockHeight',
+      request,
+      metadata || {},
+      methodDescriptor_TransactionLogService_GetTransactionLogByBlockHeight);
 };
 
 

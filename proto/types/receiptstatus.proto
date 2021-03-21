@@ -9,6 +9,8 @@
 syntax = "proto3";
 package iotextypes;
 option go_package = "github.com/iotexproject/iotex-proto/golang/iotextypes";
+option java_multiple_files = true;
+option java_package = "com.github.iotexproject.grpc.types";
 
 
 // BELOW ARE DEFINITIONS FOR EVM ERROR CLASSIFICATION IN RECEIPT STATUS 
@@ -40,4 +42,8 @@ enum ReceiptStatus {
   ErrWithdrawBeforeMaturity         = 209;
   ErrCandidateAlreadyExist          = 210;
   ErrCandidateConflict              = 211;
+  ErrInvalidBucketAmount            = 212;
+  ErrWriteAccount                   = 213;
+  ErrWriteBucket                    = 214;
+  ErrWriteCandidate                 = 215;
 }

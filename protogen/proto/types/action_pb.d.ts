@@ -136,6 +136,30 @@ export namespace Execution {
   }
 }
 
+export class RlpTransaction extends jspb.Message {
+  getChainid(): number;
+  setChainid(value: number): RlpTransaction;
+
+  getData(): Uint8Array | string;
+  getData_asU8(): Uint8Array;
+  getData_asB64(): string;
+  setData(value: Uint8Array | string): RlpTransaction;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): RlpTransaction.AsObject;
+  static toObject(includeInstance: boolean, msg: RlpTransaction): RlpTransaction.AsObject;
+  static serializeBinaryToWriter(message: RlpTransaction, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): RlpTransaction;
+  static deserializeBinaryFromReader(message: RlpTransaction, reader: jspb.BinaryReader): RlpTransaction;
+}
+
+export namespace RlpTransaction {
+  export type AsObject = {
+    chainid: number,
+    data: Uint8Array | string,
+  }
+}
+
 export class StakeCreate extends jspb.Message {
   getCandidatename(): string;
   setCandidatename(value: string): StakeCreate;
@@ -850,6 +874,11 @@ export class ActionCore extends jspb.Message {
   hasTransfer(): boolean;
   clearTransfer(): ActionCore;
 
+  getRlptransaction(): RlpTransaction | undefined;
+  setRlptransaction(value?: RlpTransaction): ActionCore;
+  hasRlptransaction(): boolean;
+  clearRlptransaction(): ActionCore;
+
   getExecution(): Execution | undefined;
   setExecution(value?: Execution): ActionCore;
   hasExecution(): boolean;
@@ -1012,6 +1041,7 @@ export namespace ActionCore {
     gaslimit: number,
     gasprice: string,
     transfer?: Transfer.AsObject,
+    rlptransaction?: RlpTransaction.AsObject,
     execution?: Execution.AsObject,
     startsubchain?: StartSubChain.AsObject,
     stopsubchain?: StopSubChain.AsObject,
@@ -1046,6 +1076,7 @@ export namespace ActionCore {
   export enum ActionCase { 
     ACTION_NOT_SET = 0,
     TRANSFER = 10,
+    RLPTRANSACTION = 11,
     EXECUTION = 12,
     STARTSUBCHAIN = 13,
     STOPSUBCHAIN = 14,
@@ -1133,6 +1164,9 @@ export class Receipt extends jspb.Message {
   clearLogsList(): Receipt;
   addLogs(value?: Log, index?: number): Log;
 
+  getExecutionrevertmsg(): string;
+  setExecutionrevertmsg(value: string): Receipt;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Receipt.AsObject;
   static toObject(includeInstance: boolean, msg: Receipt): Receipt.AsObject;
@@ -1149,6 +1183,7 @@ export namespace Receipt {
     gasconsumed: number,
     contractaddress: string,
     logsList: Array<Log.AsObject>,
+    executionrevertmsg: string,
   }
 }
 
@@ -1193,6 +1228,26 @@ export namespace Log {
     blkheight: number,
     acthash: Uint8Array | string,
     index: number,
+  }
+}
+
+export class Logs extends jspb.Message {
+  getLogsList(): Array<Log>;
+  setLogsList(value: Array<Log>): Logs;
+  clearLogsList(): Logs;
+  addLogs(value?: Log, index?: number): Log;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): Logs.AsObject;
+  static toObject(includeInstance: boolean, msg: Logs): Logs.AsObject;
+  static serializeBinaryToWriter(message: Logs, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Logs;
+  static deserializeBinaryFromReader(message: Logs, reader: jspb.BinaryReader): Logs;
+}
+
+export namespace Logs {
+  export type AsObject = {
+    logsList: Array<Log.AsObject>,
   }
 }
 

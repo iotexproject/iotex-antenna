@@ -9,6 +9,8 @@
 syntax = "proto3";
 package iotextypes;
 option go_package = "github.com/iotexproject/iotex-proto/golang/iotextypes";
+option java_multiple_files = true;
+option java_package = "com.github.iotexproject.grpc.types";
 
 message Transfer {
   // used by state-based model
@@ -38,6 +40,11 @@ message Execution {
   string amount = 1;
   string contract = 2;
   bytes data = 3;
+}
+
+message RlpTransaction {
+  uint32 chainID = 1;
+  bytes data = 2;
 }
 
 // create stake
@@ -207,6 +214,7 @@ message ActionCore {
   string gasPrice = 4;
   oneof action {
     Transfer transfer = 10;
+    RlpTransaction rlpTransaction = 11;
     Execution execution = 12;
     // FedChain
     StartSubChain startSubChain = 13;
@@ -260,9 +268,10 @@ message Receipt {
   uint64 gasConsumed = 4;
   string contractAddress = 5;
   repeated Log logs = 6;
+  string executionRevertMsg = 7;
 }
 
-message Log{
+message Log {
   string contractAddress = 1;
   repeated bytes topics = 2;
   bytes data = 3;
@@ -271,22 +280,30 @@ message Log{
   uint32 index = 6;
 }
 
+message Logs {
+  repeated Log logs = 1;
+}
+
+// Deprecated
 message EvmTransfer {
   bytes amount = 1;
   string from = 2;
   string to = 3;
 }
 
+// Deprecated
 message EvmTransferList {
   repeated EvmTransfer evmTransfers = 1;
 }
 
+// Deprecated
 message ActionEvmTransfer {
   bytes actionHash = 1;
   uint64 numEvmTransfers = 2;
   repeated EvmTransfer evmTransfers = 3;
 }
 
+// Deprecated
 message BlockEvmTransfer {
   uint64 blockHeight = 1;
   uint64 numEvmTransfers = 2;

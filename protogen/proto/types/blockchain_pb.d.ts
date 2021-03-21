@@ -288,6 +288,9 @@ export class BlockMeta extends jspb.Message {
   getLogsbloom(): string;
   setLogsbloom(value: string): BlockMeta;
 
+  getPreviousblockhash(): string;
+  setPreviousblockhash(value: string): BlockMeta;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockMeta.AsObject;
   static toObject(includeInstance: boolean, msg: BlockMeta): BlockMeta.AsObject;
@@ -308,6 +311,29 @@ export namespace BlockMeta {
     receiptroot: string,
     deltastatedigest: string,
     logsbloom: string,
+    previousblockhash: string,
+  }
+}
+
+export class BlockIdentifier extends jspb.Message {
+  getHash(): string;
+  setHash(value: string): BlockIdentifier;
+
+  getHeight(): number;
+  setHeight(value: number): BlockIdentifier;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): BlockIdentifier.AsObject;
+  static toObject(includeInstance: boolean, msg: BlockIdentifier): BlockIdentifier.AsObject;
+  static serializeBinaryToWriter(message: BlockIdentifier, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): BlockIdentifier;
+  static deserializeBinaryFromReader(message: BlockIdentifier, reader: jspb.BinaryReader): BlockIdentifier;
+}
+
+export namespace BlockIdentifier {
+  export type AsObject = {
+    hash: string,
+    height: number,
   }
 }
 
@@ -327,6 +353,9 @@ export class AccountMeta extends jspb.Message {
   getNumactions(): number;
   setNumactions(value: number): AccountMeta;
 
+  getIscontract(): boolean;
+  setIscontract(value: boolean): AccountMeta;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): AccountMeta.AsObject;
   static toObject(includeInstance: boolean, msg: AccountMeta): AccountMeta.AsObject;
@@ -342,6 +371,53 @@ export namespace AccountMeta {
     nonce: number,
     pendingnonce: number,
     numactions: number,
+    iscontract: boolean,
+  }
+}
+
+export class BlockStore extends jspb.Message {
+  getBlock(): Block | undefined;
+  setBlock(value?: Block): BlockStore;
+  hasBlock(): boolean;
+  clearBlock(): BlockStore;
+
+  getReceiptsList(): Array<proto_types_action_pb.Receipt>;
+  setReceiptsList(value: Array<proto_types_action_pb.Receipt>): BlockStore;
+  clearReceiptsList(): BlockStore;
+  addReceipts(value?: proto_types_action_pb.Receipt, index?: number): proto_types_action_pb.Receipt;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): BlockStore.AsObject;
+  static toObject(includeInstance: boolean, msg: BlockStore): BlockStore.AsObject;
+  static serializeBinaryToWriter(message: BlockStore, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): BlockStore;
+  static deserializeBinaryFromReader(message: BlockStore, reader: jspb.BinaryReader): BlockStore;
+}
+
+export namespace BlockStore {
+  export type AsObject = {
+    block?: Block.AsObject,
+    receiptsList: Array<proto_types_action_pb.Receipt.AsObject>,
+  }
+}
+
+export class BlockStores extends jspb.Message {
+  getBlockstoresList(): Array<BlockStore>;
+  setBlockstoresList(value: Array<BlockStore>): BlockStores;
+  clearBlockstoresList(): BlockStores;
+  addBlockstores(value?: BlockStore, index?: number): BlockStore;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): BlockStores.AsObject;
+  static toObject(includeInstance: boolean, msg: BlockStores): BlockStores.AsObject;
+  static serializeBinaryToWriter(message: BlockStores, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): BlockStores;
+  static deserializeBinaryFromReader(message: BlockStores, reader: jspb.BinaryReader): BlockStores;
+}
+
+export namespace BlockStores {
+  export type AsObject = {
+    blockstoresList: Array<BlockStore.AsObject>,
   }
 }
 
