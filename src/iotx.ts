@@ -13,8 +13,12 @@ import {
   ClaimFromRewardingFundRequset,
   ContractRequest,
   ExecuteContractRequest,
+  RawTransactionRequest,
   TransferRequest
 } from "./types";
+import * as rlp from "rlp";
+import BigNumber from "bignumber.js";
+import { ecrecover, keccakFromHexString } from "ethereumjs-util";
 
 type IotxOpts = {
   signer?: SignerPlugin;
@@ -80,6 +84,34 @@ export class Iotx extends RpcMethod {
       },
       { signer: this.signer }
     ).execute();
+  }
+
+  public async sendRawTransaction(req: RawTransactionRequest): Promise<string> {
+    // @ts-ignore
+    const tx: Buffer[] = rlp.decode(req.data);
+
+    const nonce = new BigNumber(`0x${tx[0].toString("hex")}`);
+    const gasPrice = new BigNumber(`0x${tx[1].toString("hex")}`);
+    const gasLimit = new BigNumber(`0x${tx[2].toString("hex")}`);
+
+    const hash = keccakFromHexString(req.data);
+    const publicKey = ecrecover(hash, tx[6], tx[7], tx[8], req.chainID);
+    return (await this.sendAction({
+      action: {
+        core: {
+          version: 0,
+          nonce: nonce.toString(),
+          gasLimit: gasLimit.toString(),
+          gasPrice: gasPrice.toString(),
+          rlpTransaction: {
+            chainID: req.chainID,
+            data: req.data
+          }
+        },
+        senderPubKey: publicKey,
+        signature: "0x0"
+      }
+    })).actionHash;
   }
 
   // return action hash

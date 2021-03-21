@@ -50,6 +50,11 @@ export interface TransferRequest {
   gasPrice?: string;
 }
 
+export interface RawTransactionRequest {
+  chainID: number;
+  data: string;
+}
+
 export interface ContractRequest {
   from: string;
   amount?: string;
