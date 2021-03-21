@@ -419,6 +419,15 @@ export interface IExecution {
   data: Buffer | string;
 }
 
+// Properties of a IRlpTransaction.
+export interface IRlpTransaction {
+  // RlpTransaction amount
+  chainID: number;
+
+  // RlpTransaction data
+  data: Buffer | string;
+}
+
 // create stake
 export interface IStakeCreate {
   candidateName: string;
@@ -760,6 +769,8 @@ export interface IActionCore {
   transfer?: ITransfer | undefined;
   // ActionCore execution
   execution?: IExecution | undefined;
+  // ActionCore rlpTransaction
+  rlpTransaction?: IRlpTransaction | undefined;
 
   // FedChain
   // ActionCore startSubChain
