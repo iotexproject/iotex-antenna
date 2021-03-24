@@ -81,7 +81,8 @@ export class Iotx extends RpcMethod {
         gasPrice: req.gasPrice,
         amount: req.value,
         recipient: req.to,
-        payload: payload
+        payload: payload,
+        externChainID: 0
       },
       { signer: this.signer }
     ).execute();

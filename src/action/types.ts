@@ -7,6 +7,7 @@ export interface Transfer extends BaseActionRequest {
   amount: string;
   recipient: string;
   payload: string;
+  externChainID: number;
 }
 
 export interface Execution extends BaseActionRequest {
@@ -18,6 +19,9 @@ export interface Execution extends BaseActionRequest {
 
   // Execution data
   data: Buffer;
+
+  // Execution externChainID
+  externChainID: number;
 }
 
 export interface ClaimFromRewardingFund extends BaseActionRequest {

@@ -27,14 +27,13 @@ test.serial("RpcMethod.getAccount", async t => {
   const resp = await client.getAccount({
     address: "io126xcrjhtp27end76ac9nmx6px2072c3vgz6suw"
   });
-  t.deepEqual(resp, {
-    accountMeta: {
-      address: "io126xcrjhtp27end76ac9nmx6px2072c3vgz6suw",
-      balance: "0",
-      nonce: 0,
-      pendingNonce: 1,
-      numActions: 0
-    }
+  t.deepEqual(resp.accountMeta, {
+    address: "io126xcrjhtp27end76ac9nmx6px2072c3vgz6suw",
+    balance: "0",
+    isContract: false,
+    nonce: 0,
+    pendingNonce: 1,
+    numActions: 0
   });
 });
 

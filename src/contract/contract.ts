@@ -193,7 +193,8 @@ export class Contract {
       gasPrice: gasPrice,
       contract: "",
       amount: amount || "0",
-      data: data
+      data: data,
+      externChainID: 0
     };
     return new ExecutionMethod(this.provider, account, contractEnvelop, {
       signer: this.options && this.options.signer
@@ -247,7 +248,8 @@ export class Contract {
       gasPrice: gasPrice,
       contract: this.address,
       amount: amount,
-      data: Buffer.from(encodeInputData(this.abi, method, input), "hex")
+      data: Buffer.from(encodeInputData(this.abi, method, input), "hex"),
+      externChainID: 0
     };
   }
 

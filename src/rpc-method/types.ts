@@ -1512,7 +1512,8 @@ export const GetActionsRequest = {
       amount: pbRes.getAmount(),
       contract: pbRes.getContract(),
       // @ts-ignore
-      data: Buffer.from(pbRes.getData())
+      data: Buffer.from(pbRes.getData()),
+      externChainID: pbRes.getExternchainid()
     };
   },
 
