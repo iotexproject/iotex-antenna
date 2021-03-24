@@ -405,6 +405,9 @@ export interface ITransfer {
 
   // Transfer payload
   payload: Buffer | string;
+
+  // Transfer externChainID
+  externChainID: number;
 }
 
 // Properties of a Execution.
@@ -417,6 +420,9 @@ export interface IExecution {
 
   // Execution data
   data: Buffer | string;
+
+  // Execution externChainID
+  externChainID: number;
 }
 
 // Properties of a IRlpTransaction.
@@ -769,8 +775,6 @@ export interface IActionCore {
   transfer?: ITransfer | undefined;
   // ActionCore execution
   execution?: IExecution | undefined;
-  // ActionCore rlpTransaction
-  rlpTransaction?: IRlpTransaction | undefined;
 
   // FedChain
   // ActionCore startSubChain

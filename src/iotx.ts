@@ -16,9 +16,10 @@ import {
   RawTransactionRequest,
   TransferRequest
 } from "./types";
+import { fromBytes } from "./crypto/address";
 import * as rlp from "rlp";
 import BigNumber from "bignumber.js";
-import { ecrecover, keccakFromHexString } from "ethereumjs-util";
+import { ecrecover, keccakFromHexString, toBuffer } from "ethereumjs-util";
 
 type IotxOpts = {
   signer?: SignerPlugin;
@@ -93,25 +94,55 @@ export class Iotx extends RpcMethod {
     const nonce = new BigNumber(`0x${tx[0].toString("hex")}`);
     const gasPrice = new BigNumber(`0x${tx[1].toString("hex")}`);
     const gasLimit = new BigNumber(`0x${tx[2].toString("hex")}`);
+    const to = fromBytes(tx[3]).string();
+    const value = new BigNumber(`0x${tx[4].toString("hex")}`);
+    const data = tx[5];
+    let v = new BigNumber(`0x${tx[6].toString("hex")}`);
+    v = v.minus(req.chainID * 2 - 8);
 
     const hash = keccakFromHexString(req.data);
     const publicKey = ecrecover(hash, tx[6], tx[7], tx[8], req.chainID);
-    return (await this.sendAction({
+    const signature = Buffer.concat([tx[7], tx[8], toBuffer(v.toNumber())], 65);
+
+    const account = await this.getAccount({
+      address: to
+    });
+    if (!account.accountMeta) {
+      throw new Error(`can't fetch ${to} account info`);
+    }
+
+    const sendActionReq = {
       action: {
         core: {
           version: 0,
           nonce: nonce.toString(),
           gasLimit: gasLimit.toString(),
-          gasPrice: gasPrice.toString(),
-          rlpTransaction: {
-            chainID: req.chainID,
-            data: req.data
-          }
+          gasPrice: gasPrice.toString()
         },
         senderPubKey: publicKey,
-        signature: "0x0"
+        signature: signature
       }
-    })).actionHash;
+    };
+
+    if (!account.accountMeta.isContract) {
+      // @ts-ignore
+      sendActionReq.action.core.transfer = {
+        amount: value.toString(),
+        recipient: to,
+        payload: data,
+        externChainID: req.chainID
+      };
+    } else {
+      // @ts-ignore
+      sendActionReq.action.core.execution = {
+        amount: value.toString(),
+        contract: to,
+        data: data,
+        externChainID: req.chainID
+      };
+    }
+
+    return (await this.sendAction(sendActionReq)).actionHash;
   }
 
   // return action hash

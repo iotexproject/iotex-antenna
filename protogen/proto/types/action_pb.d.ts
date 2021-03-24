@@ -14,6 +14,9 @@ export class Transfer extends jspb.Message {
   getPayload_asB64(): string;
   setPayload(value: Uint8Array | string): Transfer;
 
+  getExternchainid(): number;
+  setExternchainid(value: number): Transfer;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Transfer.AsObject;
   static toObject(includeInstance: boolean, msg: Transfer): Transfer.AsObject;
@@ -27,6 +30,7 @@ export namespace Transfer {
     amount: string,
     recipient: string,
     payload: Uint8Array | string,
+    externchainid: number,
   }
 }
 
@@ -120,6 +124,9 @@ export class Execution extends jspb.Message {
   getData_asB64(): string;
   setData(value: Uint8Array | string): Execution;
 
+  getExternchainid(): number;
+  setExternchainid(value: number): Execution;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Execution.AsObject;
   static toObject(includeInstance: boolean, msg: Execution): Execution.AsObject;
@@ -133,30 +140,7 @@ export namespace Execution {
     amount: string,
     contract: string,
     data: Uint8Array | string,
-  }
-}
-
-export class RlpTransaction extends jspb.Message {
-  getChainid(): number;
-  setChainid(value: number): RlpTransaction;
-
-  getData(): Uint8Array | string;
-  getData_asU8(): Uint8Array;
-  getData_asB64(): string;
-  setData(value: Uint8Array | string): RlpTransaction;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): RlpTransaction.AsObject;
-  static toObject(includeInstance: boolean, msg: RlpTransaction): RlpTransaction.AsObject;
-  static serializeBinaryToWriter(message: RlpTransaction, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): RlpTransaction;
-  static deserializeBinaryFromReader(message: RlpTransaction, reader: jspb.BinaryReader): RlpTransaction;
-}
-
-export namespace RlpTransaction {
-  export type AsObject = {
-    chainid: number,
-    data: Uint8Array | string,
+    externchainid: number,
   }
 }
 
@@ -874,11 +858,6 @@ export class ActionCore extends jspb.Message {
   hasTransfer(): boolean;
   clearTransfer(): ActionCore;
 
-  getRlptransaction(): RlpTransaction | undefined;
-  setRlptransaction(value?: RlpTransaction): ActionCore;
-  hasRlptransaction(): boolean;
-  clearRlptransaction(): ActionCore;
-
   getExecution(): Execution | undefined;
   setExecution(value?: Execution): ActionCore;
   hasExecution(): boolean;
@@ -1041,7 +1020,6 @@ export namespace ActionCore {
     gaslimit: number,
     gasprice: string,
     transfer?: Transfer.AsObject,
-    rlptransaction?: RlpTransaction.AsObject,
     execution?: Execution.AsObject,
     startsubchain?: StartSubChain.AsObject,
     stopsubchain?: StopSubChain.AsObject,
@@ -1076,7 +1054,6 @@ export namespace ActionCore {
   export enum ActionCase { 
     ACTION_NOT_SET = 0,
     TRANSFER = 10,
-    RLPTRANSACTION = 11,
     EXECUTION = 12,
     STARTSUBCHAIN = 13,
     STOPSUBCHAIN = 14,
