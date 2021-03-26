@@ -99,7 +99,7 @@ export class Iotx extends RpcMethod {
     const value = new BigNumber(`0x${tx[4].toString("hex")}`);
     const data = tx[5];
     let v = new BigNumber(`0x${tx[6].toString("hex")}`);
-    v = v.minus(req.chainID * 2 - 8);
+    v = v.minus(req.chainID * 2 + 8);
 
     const rawTx: Array<string | Uint8Array> = [];
     rawTx.push(tx[0]);
