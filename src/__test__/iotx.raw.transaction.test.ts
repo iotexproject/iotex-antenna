@@ -20,9 +20,9 @@ test.skip("iotx-raw-transaction", async t => {
   await sleepPromise(3000);
 
   const hash = await antenna.iotx.sendRawTransaction({
-    chainID: 1000,
+    chainID: 1,
     data:
-      "0xf86e8085e8d4a51000825208943141df3f2e4415533bb6d6be2a351b2db9ee84ef88016345785d8a0000808207f4a0472bb8bb3a60ca1194b9a232a364e674c8b21da193d9c9d10fbb576f99dbcc60a06d6cda231ca31678dac394aa20a8a190adb9bc9325192c17049fc9730e90b0c2"
+      "0xf86c0185218711a000825208943141df3f2e4415533bb6d6be2a351b2db9ee84ef88016345785d8a00008026a083b94b8037a61a52ffac093e62d7bbd0de5b26b742d0d45d3c56a5f2f4a85f6da065f2ec464a4fdd2fccf86d7803148f8d61119eb140c27bb7d2286ef5e1e66950"
   });
 
   t.truthy(hash);

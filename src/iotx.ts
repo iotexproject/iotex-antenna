@@ -101,8 +101,22 @@ export class Iotx extends RpcMethod {
     let v = new BigNumber(`0x${tx[6].toString("hex")}`);
     v = v.minus(req.chainID * 2 - 8);
 
-    const hash = keccakFromHexString(req.data);
+    const rawTx: Array<string | Uint8Array> = [];
+    rawTx.push(tx[0]);
+    rawTx.push(tx[1]);
+    rawTx.push(tx[2]);
+    rawTx.push(tx[3]);
+    rawTx.push(tx[4]);
+    rawTx.push(tx[5]);
+    rawTx.push(toBuffer(req.chainID));
+    rawTx.push("0x");
+    rawTx.push("0x");
+
+    const raw = rlp.encode(rawTx);
+    const hash = keccakFromHexString(`0x${raw.toString("hex")}`);
+
     const publicKey = ecrecover(hash, tx[6], tx[7], tx[8], req.chainID);
+    const compactPublicKey = Buffer.concat([toBuffer(4), publicKey]);
     const signature = Buffer.concat([tx[7], tx[8], toBuffer(v.toNumber())], 65);
 
     const account = await this.getAccount({
@@ -120,7 +134,7 @@ export class Iotx extends RpcMethod {
           gasLimit: gasLimit.toString(),
           gasPrice: gasPrice.toString()
         },
-        senderPubKey: publicKey,
+        senderPubKey: compactPublicKey,
         signature: signature
       }
     };
