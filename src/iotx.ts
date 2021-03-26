@@ -95,7 +95,7 @@ export class Iotx extends RpcMethod {
     const nonce = new BigNumber(`0x${tx[0].toString("hex")}`);
     const gasPrice = new BigNumber(`0x${tx[1].toString("hex")}`);
     const gasLimit = new BigNumber(`0x${tx[2].toString("hex")}`);
-    const to = fromBytes(tx[3]).string();
+    let to = tx[3].length > 0 ? fromBytes(tx[3]).string() : "";
     const value = new BigNumber(`0x${tx[4].toString("hex")}`);
     const data = tx[5];
     let v = new BigNumber(`0x${tx[6].toString("hex")}`);
@@ -119,11 +119,15 @@ export class Iotx extends RpcMethod {
     const compactPublicKey = Buffer.concat([toBuffer(4), publicKey]);
     const signature = Buffer.concat([tx[7], tx[8], toBuffer(v.toNumber())], 65);
 
-    const account = await this.getAccount({
-      address: to
-    });
-    if (!account.accountMeta) {
-      throw new Error(`can't fetch ${to} account info`);
+    let isContract = true;
+    if (to !== "") {
+      const account = await this.getAccount({
+        address: to
+      });
+      if (!account.accountMeta) {
+        throw new Error(`can't fetch ${to} account info`);
+      }
+      isContract = account.accountMeta.isContract;
     }
 
     const sendActionReq = {
@@ -139,7 +143,7 @@ export class Iotx extends RpcMethod {
       }
     };
 
-    if (!account.accountMeta.isContract) {
+    if (!isContract) {
       // @ts-ignore
       sendActionReq.action.core.transfer = {
         amount: value.toString(),
