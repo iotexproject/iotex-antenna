@@ -14,7 +14,8 @@ import {
   ContractRequest,
   ExecuteContractRequest,
   RawTransactionRequest,
-  TransferRequest
+  TransferRequest,
+  EstimateGasRequest
 } from "./types";
 import { fromBytes } from "./crypto/address";
 import * as rlp from "rlp";
@@ -162,6 +163,56 @@ export class Iotx extends RpcMethod {
     }
 
     return (await this.sendAction(sendActionReq)).actionHash;
+  }
+
+  public async estimateGas(req: EstimateGasRequest): Promise<string> {
+    const { to, value, data, chainID } = req;
+    let isContract = true;
+    if (to !== '') {
+      const account = await this.getAccount({
+        address: to
+      });
+      if (!account.accountMeta) {
+        throw new Error(`can't fetch ${to} account info`);
+      }
+      isContract = account.accountMeta.isContract;
+    }
+
+    const v = new BigNumber(`0x${value || 0}`);
+    const amount = v.toString();
+
+    const act = {
+      action: {
+        core: {
+          version: 0,
+          nonce: '0',
+          gasLimit: '1000000',
+          gasPrice: '1000000000000'
+        },
+        senderPubKey: '',
+        signature: ''
+      }
+    };
+
+    if (!isContract) {
+      // @ts-ignore
+      act.action.core.transfer = {
+        amount,
+        recipient: to,
+        payload: data,
+        externChainID: chainID
+      };
+    } else {
+      // @ts-ignore
+      act.action.core.execution = {
+        amount,
+        contract: to,
+        data,
+        externChainID: chainID
+      };
+    }
+
+    return (await this.estimateGasForAction(act)).gas;
   }
 
   // return action hash
