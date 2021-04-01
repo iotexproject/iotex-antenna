@@ -55,6 +55,15 @@ export interface RawTransactionRequest {
   data: string;
 }
 
+export interface EstimateGasRequest {
+  from?: string;
+  to: string;
+  gas?: string;
+  gasPrice?: string;
+  value?: string;
+  data?: string;
+}
+
 export interface ContractRequest {
   from: string;
   amount?: string;

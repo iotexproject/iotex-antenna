@@ -12,6 +12,7 @@ import { IRpcMethod } from "./rpc-method/types";
 import {
   ClaimFromRewardingFundRequset,
   ContractRequest,
+  EstimateGasRequest,
   ExecuteContractRequest,
   RawTransactionRequest,
   TransferRequest
@@ -160,6 +161,42 @@ export class Iotx extends RpcMethod {
     }
 
     return (await this.sendAction(sendActionReq)).actionHash;
+  }
+
+  public async estimateGas(req: EstimateGasRequest): Promise<number> {
+    const to = fromBytes(Buffer.from(req.to.substring(2), "hex")).string();
+    let from = "io1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqd39ym7";
+    if (req.from) {
+      from = fromBytes(Buffer.from(req.from.substring(2), "hex")).string();
+    }
+    const account = await this.getAccount({
+      address: to
+    });
+    if (!account.accountMeta) {
+      throw new Error(`can't fetch ${to} account info`);
+    }
+    const isContract = account.accountMeta.isContract;
+
+    const estimateReq = {
+      callerAddress: from
+    };
+    if (!isContract) {
+      // @ts-ignore
+      req.transfer = {
+        amount: new BigNumber(req.value!).toString(),
+        recipient: to,
+        payload: req.data ? Buffer.from(req.data.substring(2), "hex") : ""
+      };
+    } else {
+      // @ts-ignore
+      req.execution = {
+        amount: req.value ? new BigNumber(req.value).toString() : "0",
+        contract: to,
+        data: req.data ? Buffer.from(req.data.substring(2), "hex") : ""
+      };
+    }
+
+    return (await this.estimateActionGasConsumption(estimateReq)).gas;
   }
 
   // return action hash
