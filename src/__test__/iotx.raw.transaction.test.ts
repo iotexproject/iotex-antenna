@@ -2,6 +2,7 @@ import test from "ava";
 import dotenv from "dotenv";
 import sleepPromise from "sleep-promise";
 import Antenna from "../antenna";
+import { fromString } from "../crypto/address";
 
 dotenv.config();
 const { IOTEX_CORE = "" } = process.env;
@@ -26,4 +27,18 @@ test.skip("iotx-raw-transaction", async t => {
   });
 
   t.truthy(hash);
+});
+
+test.skip("estimateGas", async t => {
+  const antenna = new Antenna(IOTEX_CORE);
+
+  const gas = await antenna.iotx.estimateGas({
+    to: fromString("io1u9fpf5yxya78eays79h2sy0lrf4kfewjn95mej").stringEth(),
+    from: fromString("io13zt8sznez2pf0q0hqdz2hyl938wak2fsjgdeml").stringEth(),
+    value: "0x0",
+    data:
+      "0xa9059cbb0000000000000000000000003141df3f2e4415533bb6d6be2a351b2db9ee84ef0000000000000000000000000000000000000000000000000000000000000000"
+  });
+
+  t.truthy(gas);
 });

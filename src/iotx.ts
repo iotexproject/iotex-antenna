@@ -182,14 +182,14 @@ export class Iotx extends RpcMethod {
     };
     if (!isContract) {
       // @ts-ignore
-      req.transfer = {
+      estimateReq.transfer = {
         amount: new BigNumber(req.value!).toString(),
         recipient: to,
         payload: req.data ? Buffer.from(req.data.substring(2), "hex") : ""
       };
     } else {
       // @ts-ignore
-      req.execution = {
+      estimateReq.execution = {
         amount: req.value ? new BigNumber(req.value).toString() : "0",
         contract: to,
         data: req.data ? Buffer.from(req.data.substring(2), "hex") : ""
