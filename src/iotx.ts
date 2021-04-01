@@ -81,8 +81,7 @@ export class Iotx extends RpcMethod {
         gasPrice: req.gasPrice,
         amount: req.value,
         recipient: req.to,
-        payload: payload,
-        externChainID: 0
+        payload: payload
       },
       { signer: this.signer }
     ).execute();
@@ -136,7 +135,8 @@ export class Iotx extends RpcMethod {
           version: 0,
           nonce: nonce.toString(),
           gasLimit: gasLimit.toString(),
-          gasPrice: gasPrice.toString()
+          gasPrice: gasPrice.toString(),
+          chainID: req.chainID
         },
         senderPubKey: compactPublicKey,
         signature: signature
@@ -148,16 +148,14 @@ export class Iotx extends RpcMethod {
       sendActionReq.action.core.transfer = {
         amount: value.toString(),
         recipient: to,
-        payload: data,
-        externChainID: req.chainID
+        payload: data
       };
     } else {
       // @ts-ignore
       sendActionReq.action.core.execution = {
         amount: value.toString(),
         contract: to,
-        data: data,
-        externChainID: req.chainID
+        data: data
       };
     }
 

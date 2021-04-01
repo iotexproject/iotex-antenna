@@ -14,9 +14,6 @@ export class Transfer extends jspb.Message {
   getPayload_asB64(): string;
   setPayload(value: Uint8Array | string): Transfer;
 
-  getExternchainid(): number;
-  setExternchainid(value: number): Transfer;
-
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Transfer.AsObject;
   static toObject(includeInstance: boolean, msg: Transfer): Transfer.AsObject;
@@ -30,7 +27,6 @@ export namespace Transfer {
     amount: string,
     recipient: string,
     payload: Uint8Array | string,
-    externchainid: number,
   }
 }
 
@@ -124,9 +120,6 @@ export class Execution extends jspb.Message {
   getData_asB64(): string;
   setData(value: Uint8Array | string): Execution;
 
-  getExternchainid(): number;
-  setExternchainid(value: number): Execution;
-
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Execution.AsObject;
   static toObject(includeInstance: boolean, msg: Execution): Execution.AsObject;
@@ -140,7 +133,6 @@ export namespace Execution {
     amount: string,
     contract: string,
     data: Uint8Array | string,
-    externchainid: number,
   }
 }
 
@@ -853,6 +845,9 @@ export class ActionCore extends jspb.Message {
   getGasprice(): string;
   setGasprice(value: string): ActionCore;
 
+  getChainid(): number;
+  setChainid(value: number): ActionCore;
+
   getTransfer(): Transfer | undefined;
   setTransfer(value?: Transfer): ActionCore;
   hasTransfer(): boolean;
@@ -1019,6 +1014,7 @@ export namespace ActionCore {
     nonce: number,
     gaslimit: number,
     gasprice: string,
+    chainid: number,
     transfer?: Transfer.AsObject,
     execution?: Execution.AsObject,
     startsubchain?: StartSubChain.AsObject,

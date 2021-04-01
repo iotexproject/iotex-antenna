@@ -186,8 +186,7 @@ export class TransferMethod extends AbstractMethod {
     envelop.transfer = {
       amount: this.transfer.amount,
       recipient: this.transfer.recipient,
-      payload: Buffer.from(this.transfer.payload, "hex"),
-      externChainID: 0
+      payload: Buffer.from(this.transfer.payload, "hex")
     };
 
     return this.sendAction(envelop);
@@ -215,8 +214,7 @@ export class ExecutionMethod extends AbstractMethod {
     envelop.execution = {
       amount: this.execution.amount,
       contract: this.execution.contract,
-      data: this.execution.data,
-      externChainID: 0
+      data: this.execution.data
     };
 
     return this.sendAction(envelop);
@@ -230,8 +228,7 @@ export class ExecutionMethod extends AbstractMethod {
     envelop.execution = {
       amount: this.execution.amount,
       contract: this.execution.contract,
-      data: this.execution.data,
-      externChainID: 0
+      data: this.execution.data
     };
 
     const selp = await this.signAction(envelop);

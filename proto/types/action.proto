@@ -17,7 +17,6 @@ message Transfer {
   string amount = 1;
   string recipient = 2;
   bytes payload = 3;
-  uint32 externChainID = 4;
 }
 
 // Candidates and list of candidates
@@ -41,7 +40,6 @@ message Execution {
   string amount = 1;
   string contract = 2;
   bytes data = 3;
-  uint32 externChainID = 4;
 }
 
 // create stake
@@ -209,6 +207,7 @@ message ActionCore {
   uint64 nonce = 2;
   uint64 gasLimit = 3;
   string gasPrice = 4;
+  uint32 chainID = 5;
   oneof action {
     Transfer transfer = 10;
     Execution execution = 12;

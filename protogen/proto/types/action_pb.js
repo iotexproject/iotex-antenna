@@ -953,8 +953,7 @@ proto.iotextypes.Transfer.toObject = function(includeInstance, msg) {
   var f, obj = {
     amount: jspb.Message.getFieldWithDefault(msg, 1, ""),
     recipient: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    payload: msg.getPayload_asB64(),
-    externchainid: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    payload: msg.getPayload_asB64()
   };
 
   if (includeInstance) {
@@ -1003,10 +1002,6 @@ proto.iotextypes.Transfer.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setPayload(value);
       break;
-    case 4:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setExternchainid(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -1054,13 +1049,6 @@ proto.iotextypes.Transfer.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeBytes(
       3,
-      f
-    );
-  }
-  f = message.getExternchainid();
-  if (f !== 0) {
-    writer.writeUint32(
-      4,
       f
     );
   }
@@ -1142,24 +1130,6 @@ proto.iotextypes.Transfer.prototype.getPayload_asU8 = function() {
  */
 proto.iotextypes.Transfer.prototype.setPayload = function(value) {
   return jspb.Message.setProto3BytesField(this, 3, value);
-};
-
-
-/**
- * optional uint32 externChainID = 4;
- * @return {number}
- */
-proto.iotextypes.Transfer.prototype.getExternchainid = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.iotextypes.Transfer} returns this
- */
-proto.iotextypes.Transfer.prototype.setExternchainid = function(value) {
-  return jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
@@ -1806,8 +1776,7 @@ proto.iotextypes.Execution.toObject = function(includeInstance, msg) {
   var f, obj = {
     amount: jspb.Message.getFieldWithDefault(msg, 1, ""),
     contract: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    data: msg.getData_asB64(),
-    externchainid: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    data: msg.getData_asB64()
   };
 
   if (includeInstance) {
@@ -1856,10 +1825,6 @@ proto.iotextypes.Execution.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setData(value);
       break;
-    case 4:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setExternchainid(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -1907,13 +1872,6 @@ proto.iotextypes.Execution.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeBytes(
       3,
-      f
-    );
-  }
-  f = message.getExternchainid();
-  if (f !== 0) {
-    writer.writeUint32(
-      4,
       f
     );
   }
@@ -1995,24 +1953,6 @@ proto.iotextypes.Execution.prototype.getData_asU8 = function() {
  */
 proto.iotextypes.Execution.prototype.setData = function(value) {
   return jspb.Message.setProto3BytesField(this, 3, value);
-};
-
-
-/**
- * optional uint32 externChainID = 4;
- * @return {number}
- */
-proto.iotextypes.Execution.prototype.getExternchainid = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.iotextypes.Execution} returns this
- */
-proto.iotextypes.Execution.prototype.setExternchainid = function(value) {
-  return jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
@@ -7393,6 +7333,7 @@ proto.iotextypes.ActionCore.toObject = function(includeInstance, msg) {
     nonce: jspb.Message.getFieldWithDefault(msg, 2, 0),
     gaslimit: jspb.Message.getFieldWithDefault(msg, 3, 0),
     gasprice: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    chainid: jspb.Message.getFieldWithDefault(msg, 5, 0),
     transfer: (f = msg.getTransfer()) && proto.iotextypes.Transfer.toObject(includeInstance, f),
     execution: (f = msg.getExecution()) && proto.iotextypes.Execution.toObject(includeInstance, f),
     startsubchain: (f = msg.getStartsubchain()) && proto.iotextypes.StartSubChain.toObject(includeInstance, f),
@@ -7474,6 +7415,10 @@ proto.iotextypes.ActionCore.deserializeBinaryFromReader = function(msg, reader) 
     case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setGasprice(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setChainid(value);
       break;
     case 10:
       var value = new proto.iotextypes.Transfer;
@@ -7679,6 +7624,13 @@ proto.iotextypes.ActionCore.serializeBinaryToWriter = function(message, writer) 
   if (f.length > 0) {
     writer.writeString(
       4,
+      f
+    );
+  }
+  f = message.getChainid();
+  if (f !== 0) {
+    writer.writeUint32(
+      5,
       f
     );
   }
@@ -7994,6 +7946,24 @@ proto.iotextypes.ActionCore.prototype.getGasprice = function() {
  */
 proto.iotextypes.ActionCore.prototype.setGasprice = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional uint32 chainID = 5;
+ * @return {number}
+ */
+proto.iotextypes.ActionCore.prototype.getChainid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.ActionCore} returns this
+ */
+proto.iotextypes.ActionCore.prototype.setChainid = function(value) {
+  return jspb.Message.setProto3IntField(this, 5, value);
 };
 
 

@@ -405,9 +405,6 @@ export interface ITransfer {
 
   // Transfer payload
   payload: Buffer | string;
-
-  // Transfer externChainID
-  externChainID: number;
 }
 
 // Properties of a Execution.
@@ -420,9 +417,6 @@ export interface IExecution {
 
   // Execution data
   data: Buffer | string;
-
-  // Execution externChainID
-  externChainID: number;
 }
 
 // Properties of a IRlpTransaction.
@@ -769,6 +763,9 @@ export interface IActionCore {
 
   // ActionCore gasPrice
   gasPrice: string;
+
+  // ActionCore chainID
+  chainID: number;
 
   // Action detail fields
   // ActionCore transfer
@@ -1512,8 +1509,7 @@ export const GetActionsRequest = {
       amount: pbRes.getAmount(),
       contract: pbRes.getContract(),
       // @ts-ignore
-      data: Buffer.from(pbRes.getData()),
-      externChainID: pbRes.getExternchainid()
+      data: Buffer.from(pbRes.getData())
     };
   },
 
@@ -1933,6 +1929,7 @@ export const GetActionsRequest = {
             nonce: String(rawActionCore.getNonce()),
             gasLimit: String(rawActionCore.getGaslimit()),
             gasPrice: rawActionCore.getGasprice(),
+            chainID: rawActionCore.getChainid(),
             transfer: GetActionsRequest.fromTransfer(
               rawActionCore.getTransfer()
             ),
@@ -2598,6 +2595,7 @@ function fromPbBlockBody(
           nonce: String(rawActionCore.getNonce()),
           gasLimit: String(rawActionCore.getGaslimit()),
           gasPrice: rawActionCore.getGasprice(),
+          chainID: rawActionCore.getChainid(),
           transfer: GetActionsRequest.fromTransfer(rawActionCore.getTransfer()),
           execution: GetActionsRequest.fromExecution(
             rawActionCore.getExecution()
