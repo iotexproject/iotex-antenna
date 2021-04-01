@@ -302,6 +302,7 @@ export class SealedEnvelop {
         nonce: this.act.nonce,
         gasLimit: gasLimit,
         gasPrice: gasPrice,
+        chainID: 0,
         transfer: this.act.transfer,
         execution: this.act.execution,
         startSubChain: this.act.startSubChain,
