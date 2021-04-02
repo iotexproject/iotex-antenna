@@ -164,18 +164,24 @@ export class Iotx extends RpcMethod {
   }
 
   public async estimateGas(req: EstimateGasRequest): Promise<number> {
-    const to = fromBytes(Buffer.from(req.to.substring(2), "hex")).string();
+    const to = req.to
+      ? fromBytes(Buffer.from(req.to.substring(2), "hex")).string()
+      : "";
     let from = "io1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqd39ym7";
     if (req.from) {
       from = fromBytes(Buffer.from(req.from.substring(2), "hex")).string();
     }
-    const account = await this.getAccount({
-      address: to
-    });
-    if (!account.accountMeta) {
-      throw new Error(`can't fetch ${to} account info`);
+
+    let isContract = true;
+    if (to !== "") {
+      const account = await this.getAccount({
+        address: to
+      });
+      if (!account.accountMeta) {
+        throw new Error(`can't fetch ${to} account info`);
+      }
+      isContract = account.accountMeta.isContract;
     }
-    const isContract = account.accountMeta.isContract;
 
     const estimateReq = {
       callerAddress: from
