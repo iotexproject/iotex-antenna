@@ -172,10 +172,11 @@ message ActionInfo {
   iotextypes.Action action = 1;
   string actHash = 2;
   string blkHash = 3;
+  google.protobuf.Timestamp timestamp = 4;
   uint64 blkHeight = 5;
   string sender = 6;
   string gasFee = 7;
-  google.protobuf.Timestamp timestamp = 4;
+  uint32 index = 8;
 }
 
 message ReceiptInfo {

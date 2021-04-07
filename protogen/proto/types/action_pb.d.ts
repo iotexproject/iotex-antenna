@@ -845,8 +845,8 @@ export class ActionCore extends jspb.Message {
   getGasprice(): string;
   setGasprice(value: string): ActionCore;
 
-  getChainid(): number;
-  setChainid(value: number): ActionCore;
+  getEncoding(): number;
+  setEncoding(value: number): ActionCore;
 
   getTransfer(): Transfer | undefined;
   setTransfer(value?: Transfer): ActionCore;
@@ -1014,7 +1014,7 @@ export namespace ActionCore {
     nonce: number,
     gaslimit: number,
     gasprice: string,
-    chainid: number,
+    encoding: number,
     transfer?: Transfer.AsObject,
     execution?: Execution.AsObject,
     startsubchain?: StartSubChain.AsObject,
@@ -1185,6 +1185,11 @@ export class Log extends jspb.Message {
   getIndex(): number;
   setIndex(value: number): Log;
 
+  getBlkhash(): Uint8Array | string;
+  getBlkhash_asU8(): Uint8Array;
+  getBlkhash_asB64(): string;
+  setBlkhash(value: Uint8Array | string): Log;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Log.AsObject;
   static toObject(includeInstance: boolean, msg: Log): Log.AsObject;
@@ -1201,6 +1206,7 @@ export namespace Log {
     blkheight: number,
     acthash: Uint8Array | string,
     index: number,
+    blkhash: Uint8Array | string,
   }
 }
 
@@ -1400,6 +1406,10 @@ export namespace GrantReward {
   }
 }
 
+export enum WireEncoding { 
+  IOTEX_PROTOBUF = 0,
+  ETHER_RLP = 1,
+}
 export enum RewardType { 
   BLOCKREWARD = 0,
   EPOCHREWARD = 1,

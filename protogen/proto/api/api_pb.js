@@ -3278,10 +3278,11 @@ proto.iotexapi.ActionInfo.toObject = function(includeInstance, msg) {
     action: (f = msg.getAction()) && proto_types_action_pb.Action.toObject(includeInstance, f),
     acthash: jspb.Message.getFieldWithDefault(msg, 2, ""),
     blkhash: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     blkheight: jspb.Message.getFieldWithDefault(msg, 5, 0),
     sender: jspb.Message.getFieldWithDefault(msg, 6, ""),
     gasfee: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
+    index: jspb.Message.getFieldWithDefault(msg, 8, 0)
   };
 
   if (includeInstance) {
@@ -3331,6 +3332,11 @@ proto.iotexapi.ActionInfo.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setBlkhash(value);
       break;
+    case 4:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setTimestamp(value);
+      break;
     case 5:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setBlkheight(value);
@@ -3343,10 +3349,9 @@ proto.iotexapi.ActionInfo.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setGasfee(value);
       break;
-    case 4:
-      var value = new google_protobuf_timestamp_pb.Timestamp;
-      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
-      msg.setTimestamp(value);
+    case 8:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setIndex(value);
       break;
     default:
       reader.skipField();
@@ -3399,6 +3404,14 @@ proto.iotexapi.ActionInfo.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getTimestamp();
+  if (f != null) {
+    writer.writeMessage(
+      4,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
+    );
+  }
   f = message.getBlkheight();
   if (f !== 0) {
     writer.writeUint64(
@@ -3420,12 +3433,11 @@ proto.iotexapi.ActionInfo.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getTimestamp();
-  if (f != null) {
-    writer.writeMessage(
-      4,
-      f,
-      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
+  f = message.getIndex();
+  if (f !== 0) {
+    writer.writeUint32(
+      8,
+      f
     );
   }
 };
@@ -3505,6 +3517,43 @@ proto.iotexapi.ActionInfo.prototype.setBlkhash = function(value) {
 
 
 /**
+ * optional google.protobuf.Timestamp timestamp = 4;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.iotexapi.ActionInfo.prototype.getTimestamp = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 4));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.iotexapi.ActionInfo} returns this
+*/
+proto.iotexapi.ActionInfo.prototype.setTimestamp = function(value) {
+  return jspb.Message.setWrapperField(this, 4, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.iotexapi.ActionInfo} returns this
+ */
+proto.iotexapi.ActionInfo.prototype.clearTimestamp = function() {
+  return this.setTimestamp(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.iotexapi.ActionInfo.prototype.hasTimestamp = function() {
+  return jspb.Message.getField(this, 4) != null;
+};
+
+
+/**
  * optional uint64 blkHeight = 5;
  * @return {number}
  */
@@ -3559,39 +3608,20 @@ proto.iotexapi.ActionInfo.prototype.setGasfee = function(value) {
 
 
 /**
- * optional google.protobuf.Timestamp timestamp = 4;
- * @return {?proto.google.protobuf.Timestamp}
+ * optional uint32 index = 8;
+ * @return {number}
  */
-proto.iotexapi.ActionInfo.prototype.getTimestamp = function() {
-  return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 4));
+proto.iotexapi.ActionInfo.prototype.getIndex = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
 };
 
 
 /**
- * @param {?proto.google.protobuf.Timestamp|undefined} value
- * @return {!proto.iotexapi.ActionInfo} returns this
-*/
-proto.iotexapi.ActionInfo.prototype.setTimestamp = function(value) {
-  return jspb.Message.setWrapperField(this, 4, value);
-};
-
-
-/**
- * Clears the message field making it undefined.
+ * @param {number} value
  * @return {!proto.iotexapi.ActionInfo} returns this
  */
-proto.iotexapi.ActionInfo.prototype.clearTimestamp = function() {
-  return this.setTimestamp(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.iotexapi.ActionInfo.prototype.hasTimestamp = function() {
-  return jspb.Message.getField(this, 4) != null;
+proto.iotexapi.ActionInfo.prototype.setIndex = function(value) {
+  return jspb.Message.setProto3IntField(this, 8, value);
 };
 
 

@@ -419,15 +419,6 @@ export interface IExecution {
   data: Buffer | string;
 }
 
-// Properties of a IRlpTransaction.
-export interface IRlpTransaction {
-  // RlpTransaction amount
-  chainID: number;
-
-  // RlpTransaction data
-  data: Buffer | string;
-}
-
 // create stake
 export interface IStakeCreate {
   candidateName: string;
@@ -764,8 +755,8 @@ export interface IActionCore {
   // ActionCore gasPrice
   gasPrice: string;
 
-  // ActionCore chainID
-  chainID: number;
+  // ActionCore encoding
+  encoding: number;
 
   // Action detail fields
   // ActionCore transfer
@@ -1305,6 +1296,7 @@ export function toAction(req: IAction): any {
     pbActionCore.setNonce(Number(core.nonce));
     pbActionCore.setGaslimit(Number(core.gasLimit));
     pbActionCore.setGasprice(core.gasPrice);
+    pbActionCore.setEncoding(core.encoding);
     pbActionCore.setTransfer(toActionTransfer(core.transfer));
     pbActionCore.setExecution(toActionExecution(core.execution));
     pbActionCore.setStartsubchain(toActionStartSubChain(core.startSubChain));
@@ -1929,7 +1921,7 @@ export const GetActionsRequest = {
             nonce: String(rawActionCore.getNonce()),
             gasLimit: String(rawActionCore.getGaslimit()),
             gasPrice: rawActionCore.getGasprice(),
-            chainID: rawActionCore.getChainid(),
+            encoding: rawActionCore.getEncoding(),
             transfer: GetActionsRequest.fromTransfer(
               rawActionCore.getTransfer()
             ),
@@ -2595,7 +2587,7 @@ function fromPbBlockBody(
           nonce: String(rawActionCore.getNonce()),
           gasLimit: String(rawActionCore.getGaslimit()),
           gasPrice: rawActionCore.getGasprice(),
-          chainID: rawActionCore.getChainid(),
+          encoding: rawActionCore.getEncoding(),
           transfer: GetActionsRequest.fromTransfer(rawActionCore.getTransfer()),
           execution: GetActionsRequest.fromExecution(
             rawActionCore.getExecution()

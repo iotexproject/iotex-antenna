@@ -271,6 +271,11 @@ export class ActionInfo extends jspb.Message {
   getBlkhash(): string;
   setBlkhash(value: string): ActionInfo;
 
+  getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): ActionInfo;
+  hasTimestamp(): boolean;
+  clearTimestamp(): ActionInfo;
+
   getBlkheight(): number;
   setBlkheight(value: number): ActionInfo;
 
@@ -280,10 +285,8 @@ export class ActionInfo extends jspb.Message {
   getGasfee(): string;
   setGasfee(value: string): ActionInfo;
 
-  getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): ActionInfo;
-  hasTimestamp(): boolean;
-  clearTimestamp(): ActionInfo;
+  getIndex(): number;
+  setIndex(value: number): ActionInfo;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ActionInfo.AsObject;
@@ -298,10 +301,11 @@ export namespace ActionInfo {
     action?: proto_types_action_pb.Action.AsObject,
     acthash: string,
     blkhash: string,
+    timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     blkheight: number,
     sender: string,
     gasfee: string,
-    timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+    index: number,
   }
 }
 

@@ -123,6 +123,7 @@ export class Envelop {
     pbActionCore.setNonce(Number(this.nonce));
     pbActionCore.setGaslimit(Number(gasLimit));
     pbActionCore.setGasprice(gasPrice);
+    pbActionCore.setEncoding(0);
 
     // oneof action
     if (this.transfer) {
@@ -302,7 +303,7 @@ export class SealedEnvelop {
         nonce: this.act.nonce,
         gasLimit: gasLimit,
         gasPrice: gasPrice,
-        chainID: 0,
+        encoding: 0,
         transfer: this.act.transfer,
         execution: this.act.execution,
         startSubChain: this.act.startSubChain,

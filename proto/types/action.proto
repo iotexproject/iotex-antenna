@@ -202,12 +202,17 @@ message PlumTransfer {
   string recipient = 4;
 }
 
+enum WireEncoding {
+  IOTEX_PROTOBUF = 0;
+  ETHER_RLP = 1;
+}
+
 message ActionCore {
   uint32 version = 1;
   uint64 nonce = 2;
   uint64 gasLimit = 3;
   string gasPrice = 4;
-  uint32 chainID = 5;
+  uint32 encoding = 5;
   oneof action {
     Transfer transfer = 10;
     Execution execution = 12;
@@ -273,6 +278,7 @@ message Log {
   uint64 blkHeight = 4;
   bytes actHash = 5;
   uint32 index = 6;
+  bytes blkHash = 7;
 }
 
 message Logs {
