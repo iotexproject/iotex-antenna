@@ -138,7 +138,7 @@ export class Iotx extends RpcMethod {
           gasLimit: gasLimit.toString(),
           gasPrice: gasPrice.toString(),
           encoding: 1,
-          chainID: 0
+          chainID: req.chainID
         },
         senderPubKey: compactPublicKey,
         signature: signature
