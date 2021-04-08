@@ -7334,7 +7334,8 @@ proto.iotextypes.ActionCore.toObject = function(includeInstance, msg) {
     nonce: jspb.Message.getFieldWithDefault(msg, 2, 0),
     gaslimit: jspb.Message.getFieldWithDefault(msg, 3, 0),
     gasprice: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    encoding: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    chainid: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    encoding: jspb.Message.getFieldWithDefault(msg, 6, 0),
     transfer: (f = msg.getTransfer()) && proto.iotextypes.Transfer.toObject(includeInstance, f),
     execution: (f = msg.getExecution()) && proto.iotextypes.Execution.toObject(includeInstance, f),
     startsubchain: (f = msg.getStartsubchain()) && proto.iotextypes.StartSubChain.toObject(includeInstance, f),
@@ -7418,6 +7419,10 @@ proto.iotextypes.ActionCore.deserializeBinaryFromReader = function(msg, reader) 
       msg.setGasprice(value);
       break;
     case 5:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setChainid(value);
+      break;
+    case 6:
       var value = /** @type {number} */ (reader.readUint32());
       msg.setEncoding(value);
       break;
@@ -7628,10 +7633,17 @@ proto.iotextypes.ActionCore.serializeBinaryToWriter = function(message, writer) 
       f
     );
   }
-  f = message.getEncoding();
+  f = message.getChainid();
   if (f !== 0) {
     writer.writeUint32(
       5,
+      f
+    );
+  }
+  f = message.getEncoding();
+  if (f !== 0) {
+    writer.writeUint32(
+      6,
       f
     );
   }
@@ -7951,10 +7963,10 @@ proto.iotextypes.ActionCore.prototype.setGasprice = function(value) {
 
 
 /**
- * optional uint32 encoding = 5;
+ * optional uint32 chainID = 5;
  * @return {number}
  */
-proto.iotextypes.ActionCore.prototype.getEncoding = function() {
+proto.iotextypes.ActionCore.prototype.getChainid = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
@@ -7963,8 +7975,26 @@ proto.iotextypes.ActionCore.prototype.getEncoding = function() {
  * @param {number} value
  * @return {!proto.iotextypes.ActionCore} returns this
  */
-proto.iotextypes.ActionCore.prototype.setEncoding = function(value) {
+proto.iotextypes.ActionCore.prototype.setChainid = function(value) {
   return jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+/**
+ * optional uint32 encoding = 6;
+ * @return {number}
+ */
+proto.iotextypes.ActionCore.prototype.getEncoding = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.ActionCore} returns this
+ */
+proto.iotextypes.ActionCore.prototype.setEncoding = function(value) {
+  return jspb.Message.setProto3IntField(this, 6, value);
 };
 
 

@@ -758,6 +758,9 @@ export interface IActionCore {
   // ActionCore encoding
   encoding: number;
 
+  // ActionCore chainID
+  chainID: number;
+
   // Action detail fields
   // ActionCore transfer
   transfer?: ITransfer | undefined;
@@ -1297,6 +1300,7 @@ export function toAction(req: IAction): any {
     pbActionCore.setGaslimit(Number(core.gasLimit));
     pbActionCore.setGasprice(core.gasPrice);
     pbActionCore.setEncoding(core.encoding);
+    pbActionCore.setChainid(core.chainID);
     pbActionCore.setTransfer(toActionTransfer(core.transfer));
     pbActionCore.setExecution(toActionExecution(core.execution));
     pbActionCore.setStartsubchain(toActionStartSubChain(core.startSubChain));
@@ -1922,6 +1926,7 @@ export const GetActionsRequest = {
             gasLimit: String(rawActionCore.getGaslimit()),
             gasPrice: rawActionCore.getGasprice(),
             encoding: rawActionCore.getEncoding(),
+            chainID: rawActionCore.getChainid(),
             transfer: GetActionsRequest.fromTransfer(
               rawActionCore.getTransfer()
             ),
@@ -2588,6 +2593,7 @@ function fromPbBlockBody(
           gasLimit: String(rawActionCore.getGaslimit()),
           gasPrice: rawActionCore.getGasprice(),
           encoding: rawActionCore.getEncoding(),
+          chainID: rawActionCore.getChainid(),
           transfer: GetActionsRequest.fromTransfer(rawActionCore.getTransfer()),
           execution: GetActionsRequest.fromExecution(
             rawActionCore.getExecution()

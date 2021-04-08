@@ -845,6 +845,9 @@ export class ActionCore extends jspb.Message {
   getGasprice(): string;
   setGasprice(value: string): ActionCore;
 
+  getChainid(): number;
+  setChainid(value: number): ActionCore;
+
   getEncoding(): number;
   setEncoding(value: number): ActionCore;
 
@@ -1014,6 +1017,7 @@ export namespace ActionCore {
     nonce: number,
     gaslimit: number,
     gasprice: string,
+    chainid: number,
     encoding: number,
     transfer?: Transfer.AsObject,
     execution?: Execution.AsObject,

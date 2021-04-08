@@ -124,6 +124,7 @@ export class Envelop {
     pbActionCore.setGaslimit(Number(gasLimit));
     pbActionCore.setGasprice(gasPrice);
     pbActionCore.setEncoding(0);
+    pbActionCore.setChainid(0);
 
     // oneof action
     if (this.transfer) {
@@ -304,6 +305,7 @@ export class SealedEnvelop {
         gasLimit: gasLimit,
         gasPrice: gasPrice,
         encoding: 0,
+        chainID: 0,
         transfer: this.act.transfer,
         execution: this.act.execution,
         startSubChain: this.act.startSubChain,
