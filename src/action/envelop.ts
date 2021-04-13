@@ -123,7 +123,6 @@ export class Envelop {
     pbActionCore.setNonce(Number(this.nonce));
     pbActionCore.setGaslimit(Number(gasLimit));
     pbActionCore.setGasprice(gasPrice);
-    pbActionCore.setEncoding(0);
     pbActionCore.setChainid(0);
 
     // oneof action
@@ -287,6 +286,7 @@ export class SealedEnvelop {
     pbAction.setCore(pbActionCore);
     pbAction.setSenderpubkey(this.senderPubKey);
     pbAction.setSignature(this.signature);
+    pbAction.setEncoding(0);
     return pbAction.serializeBinary();
   }
 
@@ -304,7 +304,6 @@ export class SealedEnvelop {
         nonce: this.act.nonce,
         gasLimit: gasLimit,
         gasPrice: gasPrice,
-        encoding: 0,
         chainID: 0,
         transfer: this.act.transfer,
         execution: this.act.execution,
@@ -338,7 +337,8 @@ export class SealedEnvelop {
         putPollResult: this.act.putPollResult
       },
       senderPubKey: this.senderPubKey,
-      signature: this.signature
+      signature: this.signature,
+      encoding: 0
     };
   }
 

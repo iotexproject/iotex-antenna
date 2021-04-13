@@ -202,18 +202,12 @@ message PlumTransfer {
   string recipient = 4;
 }
 
-enum WireEncoding {
-  IOTEX_PROTOBUF = 0;
-  ETHER_RLP = 1;
-}
-
 message ActionCore {
   uint32 version = 1;
   uint64 nonce = 2;
   uint64 gasLimit = 3;
   string gasPrice = 4;
   uint32 chainID = 5;
-  uint32 encoding = 6;
   oneof action {
     Transfer transfer = 10;
     Execution execution = 12;
@@ -256,10 +250,16 @@ message ActionCore {
   }
 }
 
+enum Encoding {
+  IOTEX_PROTOBUF = 0;
+  ETHEREUM_RLP = 1;
+}
+
 message Action {
   ActionCore core = 1;
   bytes senderPubKey = 2;
   bytes signature = 3;
+  Encoding encoding = 4;
 }
 
 message Receipt {

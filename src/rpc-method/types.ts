@@ -135,6 +135,7 @@ export interface IChainMeta {
   numActions: string;
   tps: string;
   epoch: IEpochData;
+  chainID: number;
 }
 
 export interface IGetChainMetaRequest {}
@@ -755,9 +756,6 @@ export interface IActionCore {
   // ActionCore gasPrice
   gasPrice: string;
 
-  // ActionCore encoding
-  encoding: number;
-
   // ActionCore chainID
   chainID: number;
 
@@ -833,6 +831,9 @@ export interface IAction {
 
   // Action signature
   signature: Uint8Array | string;
+
+  // Action encoding
+  encoding: number;
 }
 
 // read state
@@ -1299,7 +1300,6 @@ export function toAction(req: IAction): any {
     pbActionCore.setNonce(Number(core.nonce));
     pbActionCore.setGaslimit(Number(core.gasLimit));
     pbActionCore.setGasprice(core.gasPrice);
-    pbActionCore.setEncoding(core.encoding);
     pbActionCore.setChainid(core.chainID);
     pbActionCore.setTransfer(toActionTransfer(core.transfer));
     pbActionCore.setExecution(toActionExecution(core.execution));
@@ -1371,6 +1371,8 @@ export function toAction(req: IAction): any {
   if (req.signature) {
     pbAction.setSignature(req.signature);
   }
+
+  if (req.encoding) pbAction.setEncoding(req.encoding);
 
   return pbAction;
 }
@@ -1925,7 +1927,6 @@ export const GetActionsRequest = {
             nonce: String(rawActionCore.getNonce()),
             gasLimit: String(rawActionCore.getGaslimit()),
             gasPrice: rawActionCore.getGasprice(),
-            encoding: rawActionCore.getEncoding(),
             chainID: rawActionCore.getChainid(),
             transfer: GetActionsRequest.fromTransfer(
               rawActionCore.getTransfer()
@@ -2023,7 +2024,8 @@ export const GetActionsRequest = {
         actionInfo.action = {
           core: actionCore,
           senderPubKey: rawAction.getSenderpubkey(),
-          signature: rawAction.getSignature()
+          signature: rawAction.getSignature(),
+          encoding: rawAction.getEncoding()
         };
       }
 
@@ -2592,7 +2594,6 @@ function fromPbBlockBody(
           nonce: String(rawActionCore.getNonce()),
           gasLimit: String(rawActionCore.getGaslimit()),
           gasPrice: rawActionCore.getGasprice(),
-          encoding: rawActionCore.getEncoding(),
           chainID: rawActionCore.getChainid(),
           transfer: GetActionsRequest.fromTransfer(rawActionCore.getTransfer()),
           execution: GetActionsRequest.fromExecution(
@@ -2659,7 +2660,8 @@ function fromPbBlockBody(
       const action = {
         core: actionCore,
         senderPubKey: rawAction.getSenderpubkey(),
-        signature: rawAction.getSignature()
+        signature: rawAction.getSignature(),
+        encoding: rawAction.getEncoding()
       };
       res.push(action);
     }

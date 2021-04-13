@@ -2058,8 +2058,7 @@ proto.iotextypes.ChainMeta.toObject = function(includeInstance, msg) {
     tps: jspb.Message.getFieldWithDefault(msg, 3, 0),
     epoch: (f = msg.getEpoch()) && proto.iotextypes.EpochData.toObject(includeInstance, f),
     tpsfloat: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
-    chainid: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    encoding: jspb.Message.getFieldWithDefault(msg, 7, 0)
+    chainid: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
   if (includeInstance) {
@@ -2120,10 +2119,6 @@ proto.iotextypes.ChainMeta.deserializeBinaryFromReader = function(msg, reader) {
     case 6:
       var value = /** @type {number} */ (reader.readUint32());
       msg.setChainid(value);
-      break;
-    case 7:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setEncoding(value);
       break;
     default:
       reader.skipField();
@@ -2194,13 +2189,6 @@ proto.iotextypes.ChainMeta.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0) {
     writer.writeUint32(
       6,
-      f
-    );
-  }
-  f = message.getEncoding();
-  if (f !== 0) {
-    writer.writeUint32(
-      7,
       f
     );
   }
@@ -2331,24 +2319,6 @@ proto.iotextypes.ChainMeta.prototype.getChainid = function() {
  */
 proto.iotextypes.ChainMeta.prototype.setChainid = function(value) {
   return jspb.Message.setProto3IntField(this, 6, value);
-};
-
-
-/**
- * optional uint32 encoding = 7;
- * @return {number}
- */
-proto.iotextypes.ChainMeta.prototype.getEncoding = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.iotextypes.ChainMeta} returns this
- */
-proto.iotextypes.ChainMeta.prototype.setEncoding = function(value) {
-  return jspb.Message.setProto3IntField(this, 7, value);
 };
 
 

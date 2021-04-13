@@ -848,9 +848,6 @@ export class ActionCore extends jspb.Message {
   getChainid(): number;
   setChainid(value: number): ActionCore;
 
-  getEncoding(): number;
-  setEncoding(value: number): ActionCore;
-
   getTransfer(): Transfer | undefined;
   setTransfer(value?: Transfer): ActionCore;
   hasTransfer(): boolean;
@@ -1018,7 +1015,6 @@ export namespace ActionCore {
     gaslimit: number,
     gasprice: string,
     chainid: number,
-    encoding: number,
     transfer?: Transfer.AsObject,
     execution?: Execution.AsObject,
     startsubchain?: StartSubChain.AsObject,
@@ -1102,6 +1098,9 @@ export class Action extends jspb.Message {
   getSignature_asB64(): string;
   setSignature(value: Uint8Array | string): Action;
 
+  getEncoding(): Encoding;
+  setEncoding(value: Encoding): Action;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Action.AsObject;
   static toObject(includeInstance: boolean, msg: Action): Action.AsObject;
@@ -1115,6 +1114,7 @@ export namespace Action {
     core?: ActionCore.AsObject,
     senderpubkey: Uint8Array | string,
     signature: Uint8Array | string,
+    encoding: Encoding,
   }
 }
 
@@ -1410,9 +1410,9 @@ export namespace GrantReward {
   }
 }
 
-export enum WireEncoding { 
+export enum Encoding { 
   IOTEX_PROTOBUF = 0,
-  ETHER_RLP = 1,
+  ETHEREUM_RLP = 1,
 }
 export enum RewardType { 
   BLOCKREWARD = 0,
