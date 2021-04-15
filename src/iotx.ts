@@ -20,7 +20,7 @@ import {
 import { fromBytes } from "./crypto/address";
 import * as rlp from "rlp";
 import BigNumber from "bignumber.js";
-import { ecrecover, keccakFromHexString, toBuffer } from "ethereumjs-util";
+import { ecrecover, keccakFromHexString, toBuffer, unpadBuffer, bufferToInt, setLength } from "ethereumjs-util";
 
 type IotxOpts = {
   signer?: SignerPlugin;
@@ -90,7 +90,7 @@ export class Iotx extends RpcMethod {
 
   public async sendRawTransaction(req: RawTransactionRequest): Promise<string> {
     // @ts-ignore
-    const tx: Buffer[] = rlp.decode(req.data);
+    const tx = rlp.decode(req.data);
 
     const nonce = new BigNumber(`0x${tx[0].toString("hex")}`);
     const gasPrice = new BigNumber(`0x${tx[1].toString("hex")}`);
@@ -101,23 +101,16 @@ export class Iotx extends RpcMethod {
     let v = new BigNumber(`0x${tx[6].toString("hex")}`);
     v = v.minus(req.chainID * 2 + 8);
 
-    const rawTx: Array<string | Uint8Array> = [];
-    rawTx.push(tx[0]);
-    rawTx.push(tx[1]);
-    rawTx.push(tx[2]);
-    rawTx.push(tx[3]);
-    rawTx.push(tx[4]);
-    rawTx.push(tx[5]);
-    rawTx.push(toBuffer(req.chainID));
-    rawTx.push("0x");
-    rawTx.push("0x");
+    const pad = unpadBuffer(toBuffer(0));
+    const rawTx = [ ...tx.slice(0, 6), toBuffer(req.chainID), pad, pad ];
 
     const raw = rlp.encode(rawTx);
     const hash = keccakFromHexString(`0x${raw.toString("hex")}`);
 
-    const publicKey = ecrecover(hash, tx[6], tx[7], tx[8], req.chainID);
+    const vv = bufferToInt(tx[6]);
+    const publicKey = ecrecover(hash, vv, tx[7], tx[8], req.chainID);
     const compactPublicKey = Buffer.concat([toBuffer(4), publicKey]);
-    const signature = Buffer.concat([tx[7], tx[8], toBuffer(v.toNumber())], 65);
+    const signature = Buffer.concat([setLength(tx[7], 32), setLength(tx[8], 32), toBuffer(v.toNumber())]);
 
     let isContract = true;
     if (to !== "") {
