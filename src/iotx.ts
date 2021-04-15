@@ -20,7 +20,14 @@ import {
 import { fromBytes } from "./crypto/address";
 import * as rlp from "rlp";
 import BigNumber from "bignumber.js";
-import { ecrecover, keccakFromHexString, toBuffer, unpadBuffer, bufferToInt, setLength } from "ethereumjs-util";
+import {
+  ecrecover,
+  keccakFromHexString,
+  toBuffer,
+  unpadBuffer,
+  bufferToInt,
+  setLengthLeft
+} from "ethereumjs-util";
 
 type IotxOpts = {
   signer?: SignerPlugin;
@@ -90,7 +97,7 @@ export class Iotx extends RpcMethod {
 
   public async sendRawTransaction(req: RawTransactionRequest): Promise<string> {
     // @ts-ignore
-    const tx = rlp.decode(req.data);
+    const tx: Buffer[] = rlp.decode(req.data);
 
     const nonce = new BigNumber(`0x${tx[0].toString("hex")}`);
     const gasPrice = new BigNumber(`0x${tx[1].toString("hex")}`);
@@ -102,7 +109,7 @@ export class Iotx extends RpcMethod {
     v = v.minus(req.chainID * 2 + 8);
 
     const pad = unpadBuffer(toBuffer(0));
-    const rawTx = [ ...tx.slice(0, 6), toBuffer(req.chainID), pad, pad ];
+    const rawTx = [...tx.slice(0, 6), toBuffer(req.chainID), pad, pad];
 
     const raw = rlp.encode(rawTx);
     const hash = keccakFromHexString(`0x${raw.toString("hex")}`);
@@ -110,7 +117,11 @@ export class Iotx extends RpcMethod {
     const vv = bufferToInt(tx[6]);
     const publicKey = ecrecover(hash, vv, tx[7], tx[8], req.chainID);
     const compactPublicKey = Buffer.concat([toBuffer(4), publicKey]);
-    const signature = Buffer.concat([setLength(tx[7], 32), setLength(tx[8], 32), toBuffer(v.toNumber())]);
+    const signature = Buffer.concat([
+      setLengthLeft(tx[7], 32),
+      setLengthLeft(tx[8], 32),
+      toBuffer(v.toNumber())
+    ]);
 
     let isContract = true;
     if (to !== "") {
