@@ -295,6 +295,12 @@ export class BlockMeta extends jspb.Message {
   getPreviousblockhash(): string;
   setPreviousblockhash(value: string): BlockMeta;
 
+  getGaslimit(): number;
+  setGaslimit(value: number): BlockMeta;
+
+  getGasused(): number;
+  setGasused(value: number): BlockMeta;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockMeta.AsObject;
   static toObject(includeInstance: boolean, msg: BlockMeta): BlockMeta.AsObject;
@@ -316,6 +322,8 @@ export namespace BlockMeta {
     deltastatedigest: string,
     logsbloom: string,
     previousblockhash: string,
+    gaslimit: number,
+    gasused: number,
   }
 }
 
@@ -360,6 +368,11 @@ export class AccountMeta extends jspb.Message {
   getIscontract(): boolean;
   setIscontract(value: boolean): AccountMeta;
 
+  getContractbytecode(): Uint8Array | string;
+  getContractbytecode_asU8(): Uint8Array;
+  getContractbytecode_asB64(): string;
+  setContractbytecode(value: Uint8Array | string): AccountMeta;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): AccountMeta.AsObject;
   static toObject(includeInstance: boolean, msg: AccountMeta): AccountMeta.AsObject;
@@ -376,6 +389,7 @@ export namespace AccountMeta {
     pendingnonce: number,
     numactions: number,
     iscontract: boolean,
+    contractbytecode: Uint8Array | string,
   }
 }
 

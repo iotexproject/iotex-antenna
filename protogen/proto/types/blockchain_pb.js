@@ -2364,7 +2364,9 @@ proto.iotextypes.BlockMeta.toObject = function(includeInstance, msg) {
     receiptroot: jspb.Message.getFieldWithDefault(msg, 8, ""),
     deltastatedigest: jspb.Message.getFieldWithDefault(msg, 9, ""),
     logsbloom: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    previousblockhash: jspb.Message.getFieldWithDefault(msg, 11, "")
+    previousblockhash: jspb.Message.getFieldWithDefault(msg, 11, ""),
+    gaslimit: jspb.Message.getFieldWithDefault(msg, 12, 0),
+    gasused: jspb.Message.getFieldWithDefault(msg, 13, 0)
   };
 
   if (includeInstance) {
@@ -2445,6 +2447,14 @@ proto.iotextypes.BlockMeta.deserializeBinaryFromReader = function(msg, reader) {
     case 11:
       var value = /** @type {string} */ (reader.readString());
       msg.setPreviousblockhash(value);
+      break;
+    case 12:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setGaslimit(value);
+      break;
+    case 13:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setGasused(value);
       break;
     default:
       reader.skipField();
@@ -2550,6 +2560,20 @@ proto.iotextypes.BlockMeta.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       11,
+      f
+    );
+  }
+  f = message.getGaslimit();
+  if (f !== 0) {
+    writer.writeUint64(
+      12,
+      f
+    );
+  }
+  f = message.getGasused();
+  if (f !== 0) {
+    writer.writeUint64(
+      13,
       f
     );
   }
@@ -2773,6 +2797,42 @@ proto.iotextypes.BlockMeta.prototype.setPreviousblockhash = function(value) {
 };
 
 
+/**
+ * optional uint64 gasLimit = 12;
+ * @return {number}
+ */
+proto.iotextypes.BlockMeta.prototype.getGaslimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.BlockMeta} returns this
+ */
+proto.iotextypes.BlockMeta.prototype.setGaslimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 12, value);
+};
+
+
+/**
+ * optional uint64 gasUsed = 13;
+ * @return {number}
+ */
+proto.iotextypes.BlockMeta.prototype.getGasused = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 13, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.BlockMeta} returns this
+ */
+proto.iotextypes.BlockMeta.prototype.setGasused = function(value) {
+  return jspb.Message.setProto3IntField(this, 13, value);
+};
+
+
 
 
 
@@ -2970,7 +3030,8 @@ proto.iotextypes.AccountMeta.toObject = function(includeInstance, msg) {
     nonce: jspb.Message.getFieldWithDefault(msg, 3, 0),
     pendingnonce: jspb.Message.getFieldWithDefault(msg, 4, 0),
     numactions: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    iscontract: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
+    iscontract: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
+    contractbytecode: msg.getContractbytecode_asB64()
   };
 
   if (includeInstance) {
@@ -3030,6 +3091,10 @@ proto.iotextypes.AccountMeta.deserializeBinaryFromReader = function(msg, reader)
     case 6:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIscontract(value);
+      break;
+    case 7:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setContractbytecode(value);
       break;
     default:
       reader.skipField();
@@ -3099,6 +3164,13 @@ proto.iotextypes.AccountMeta.serializeBinaryToWriter = function(message, writer)
   if (f) {
     writer.writeBool(
       6,
+      f
+    );
+  }
+  f = message.getContractbytecode_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      7,
       f
     );
   }
@@ -3210,6 +3282,48 @@ proto.iotextypes.AccountMeta.prototype.getIscontract = function() {
  */
 proto.iotextypes.AccountMeta.prototype.setIscontract = function(value) {
   return jspb.Message.setProto3BooleanField(this, 6, value);
+};
+
+
+/**
+ * optional bytes contractByteCode = 7;
+ * @return {string}
+ */
+proto.iotextypes.AccountMeta.prototype.getContractbytecode = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/**
+ * optional bytes contractByteCode = 7;
+ * This is a type-conversion wrapper around `getContractbytecode()`
+ * @return {string}
+ */
+proto.iotextypes.AccountMeta.prototype.getContractbytecode_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getContractbytecode()));
+};
+
+
+/**
+ * optional bytes contractByteCode = 7;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getContractbytecode()`
+ * @return {!Uint8Array}
+ */
+proto.iotextypes.AccountMeta.prototype.getContractbytecode_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getContractbytecode()));
+};
+
+
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.iotextypes.AccountMeta} returns this
+ */
+proto.iotextypes.AccountMeta.prototype.setContractbytecode = function(value) {
+  return jspb.Message.setProto3BytesField(this, 7, value);
 };
 
 

@@ -87,6 +87,8 @@ message BlockMeta {
   string deltaStateDigest = 9;
   string logsBloom = 10;
   string previousBlockHash = 11;
+  uint64 gasLimit = 12;
+  uint64 gasUsed = 13;
 }
 
 // BlockIdentifier Metadata
@@ -103,6 +105,7 @@ message AccountMeta {
   uint64 pendingNonce = 4;
   uint64 numActions = 5;
   bool isContract = 6;
+  bytes contractByteCode = 7;
 }
 
 message BlockStore {
