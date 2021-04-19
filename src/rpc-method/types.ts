@@ -69,7 +69,7 @@ export interface IAccountMeta {
   numActions: string | number;
 
   // AccountMeta contract bytes
-  contractByteCode: string;
+  contractByteCode: Buffer | {};
 }
 
 // Properties of an BlockIdentifier.
@@ -120,7 +120,7 @@ export const GetAccountRequest = {
         nonce: meta.getNonce(),
         pendingNonce: meta.getPendingnonce(),
         numActions: meta.getNumactions(),
-        contractByteCode: meta.getContractbytecode_asB64()
+        contractByteCode: meta.getContractbytecode()
       },
       blockIdentifier
     };
@@ -1394,6 +1394,7 @@ export interface IActionInfo {
   actHash: string;
   blkHash: string;
   timestamp: ITimestamp;
+  index: number;
 }
 
 export interface IGetActionsResponse {
@@ -1926,7 +1927,8 @@ export const GetActionsRequest = {
       const actionInfo = ({
         actHash: rawActionInfo.getActhash(),
         blkHash: rawActionInfo.getBlkhash(),
-        timestamp: rawActionInfo.getTimestamp()
+        timestamp: rawActionInfo.getTimestamp(),
+        index: rawActionInfo.getIndex()
       } as any) as IActionInfo;
 
       const rawAction = rawActionInfo.getAction();
@@ -2096,6 +2098,9 @@ export interface ILog {
 
   // Log index
   index: number;
+
+  // Log blkHash
+  blkHash: Buffer | {};
 }
 
 export enum ReceiptStatus {
@@ -2221,7 +2226,8 @@ function fromPbLogList(
       data: log.getData(),
       blkHeight: log.getBlkheight(),
       actHash: log.getActhash(),
-      index: log.getIndex()
+      index: log.getIndex(),
+      blkHash: log.getBlkhash()
     });
   }
   return res;
@@ -2796,7 +2802,8 @@ export const StreamLogsRequest = {
         data: log.getData(),
         blkHeight: log.getBlkheight(),
         actHash: log.getActhash(),
-        index: log.getIndex()
+        index: log.getIndex(),
+        blkHash: log.getBlkhash()
       };
     }
     return undefined;
