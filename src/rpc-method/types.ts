@@ -67,6 +67,9 @@ export interface IAccountMeta {
 
   // AccountMeta numActions related to the account. Type is string in node but number in browser.
   numActions: string | number;
+
+  // AccountMeta contract bytes
+  contractByteCode: string;
 }
 
 // Properties of an BlockIdentifier.
@@ -116,7 +119,8 @@ export const GetAccountRequest = {
         isContract: meta.getIscontract(),
         nonce: meta.getNonce(),
         pendingNonce: meta.getPendingnonce(),
-        numActions: meta.getNumactions()
+        numActions: meta.getNumactions(),
+        contractByteCode: meta.getContractbytecode_asB64()
       },
       blockIdentifier
     };
@@ -267,6 +271,12 @@ export interface IBlockMeta {
 
   // BlockMeta deltaStateDigest
   deltaStateDigest: string;
+
+  // BlockMeta GasLimit
+  gasLimit: number;
+
+  // BlockMeta GasUsed
+  gasUsed: number;
 }
 
 // Properties of a GetBlockMetasResponse.
@@ -314,7 +324,9 @@ export const GetBlockMetasRequest = {
           transferAmount: metas[i].getTransferamount(),
           txRoot: metas[i].getTxroot(),
           receiptRoot: metas[i].getReceiptroot(),
-          deltaStateDigest: metas[i].getDeltastatedigest()
+          deltaStateDigest: metas[i].getDeltastatedigest(),
+          gasLimit: metas[i].getGasLimit(),
+          gasUsed: metas[i].getGasUsed()
         };
       }
       res.blkMetas = parsedMetas;
