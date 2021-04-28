@@ -138,9 +138,9 @@ export class Iotx extends RpcMethod {
       action: {
         core: {
           version: 0,
-          nonce: nonce.toString(),
-          gasLimit: gasLimit.toString(),
-          gasPrice: gasPrice.toString(),
+          nonce: nonce.toString(10),
+          gasLimit: gasLimit.toString(10),
+          gasPrice: gasPrice.toString(10),
           chainID: 0
         },
         senderPubKey: compactPublicKey,
@@ -152,14 +152,14 @@ export class Iotx extends RpcMethod {
     if (!isContract) {
       // @ts-ignore
       sendActionReq.action.core.transfer = {
-        amount: value.toString(),
+        amount: value.toString(10),
         recipient: to,
         payload: data
       };
     } else {
       // @ts-ignore
       sendActionReq.action.core.execution = {
-        amount: value.toString(),
+        amount: value.toString(10),
         contract: to,
         data: data
       };
@@ -194,14 +194,14 @@ export class Iotx extends RpcMethod {
     if (!isContract) {
       // @ts-ignore
       estimateReq.transfer = {
-        amount: new BigNumber(req.value!).toString(),
+        amount: new BigNumber(req.value!).toString(10),
         recipient: to,
         payload: req.data ? Buffer.from(req.data.substring(2), "hex") : ""
       };
     } else {
       // @ts-ignore
       estimateReq.execution = {
-        amount: req.value ? new BigNumber(req.value).toString() : "0",
+        amount: req.value ? new BigNumber(req.value).toString(10) : "0",
         contract: to,
         data: req.data ? Buffer.from(req.data.substring(2), "hex") : ""
       };

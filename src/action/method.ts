@@ -75,7 +75,7 @@ export class AbstractMethod {
         execution: envelop.execution,
         callerAddress: this.account.address
       });
-      envelop.gasLimit = limit.gas.toString();
+      envelop.gasLimit = limit.gas.toString(10);
     }
 
     if (this.account && this.account.address) {
