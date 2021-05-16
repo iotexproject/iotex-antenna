@@ -72,7 +72,7 @@ export class XRC20 {
     const result = await this.readMethod("name", this.address);
     const data = Abi.decodeParameter("string", result);
     if (data.length > 0) {
-      this.tokenName = data[0];
+      this.tokenName = String(data);
       return this.tokenName;
     }
     return "";
@@ -85,7 +85,7 @@ export class XRC20 {
     const result = await this.readMethod("symbol", this.address);
     const data = Abi.decodeParameter("string", result);
     if (data.length > 0) {
-      this.tokenSymbol = data[0];
+      this.tokenSymbol = String(data);
       return this.tokenSymbol;
     }
     return "";
