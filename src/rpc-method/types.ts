@@ -313,8 +313,8 @@ export interface IGetActionsByHashRequest {
   // GetActionsByHashRequest actionHash
   actionHash: string;
 
-  // GetActionsByHashRequest checkingPending
-  checkingPending: boolean;
+  // GetActionsByHashRequest checkPending
+  checkPending: boolean;
 }
 
 // Properties of a GetActionsByAddressRequest.
@@ -1388,8 +1388,8 @@ export const GetActionsRequest = {
     if (byHash.actionHash) {
       pbReqByHash.setActionhash(byHash.actionHash);
     }
-    if (byHash.checkingPending) {
-      pbReqByHash.setCheckpending(byHash.checkingPending);
+    if (byHash.checkPending) {
+      pbReqByHash.setCheckpending(byHash.checkPending);
     }
     return pbReqByHash;
   },

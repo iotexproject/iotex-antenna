@@ -81,7 +81,7 @@ test.skip("Contract_set_SimpleStorage", async t => {
   await sleepPromise(30000);
 
   const actions = await client.getActions({
-    byHash: { actionHash: reps, checkingPending: true }
+    byHash: { actionHash: reps, checkPending: true }
   });
   t.deepEqual(actions.actionInfo.length, 1, "contract action is empty");
   const result = await client.readContract({

@@ -135,7 +135,7 @@ test.skip("RpcMethod.getActionsByHash", async t => {
     byHash: {
       actionHash:
         "5526eea2aac8f22afebb67058c45e55d1ddc9c4c1f8db055ec04c52edb8ed23f",
-      checkingPending: false
+      checkPending: false
     }
   });
   t.deepEqual(resp4.actionInfo.length, 0);
