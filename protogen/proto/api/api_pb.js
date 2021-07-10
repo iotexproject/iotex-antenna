@@ -11334,7 +11334,8 @@ proto.iotexapi.StreamBlocksResponse.prototype.toObject = function(opt_includeIns
  */
 proto.iotexapi.StreamBlocksResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    block: (f = msg.getBlock()) && proto.iotexapi.BlockInfo.toObject(includeInstance, f)
+    block: (f = msg.getBlock()) && proto.iotexapi.BlockInfo.toObject(includeInstance, f),
+    blockidentifier: (f = msg.getBlockidentifier()) && proto_types_blockchain_pb.BlockIdentifier.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -11376,6 +11377,11 @@ proto.iotexapi.StreamBlocksResponse.deserializeBinaryFromReader = function(msg, 
       reader.readMessage(value,proto.iotexapi.BlockInfo.deserializeBinaryFromReader);
       msg.setBlock(value);
       break;
+    case 2:
+      var value = new proto_types_blockchain_pb.BlockIdentifier;
+      reader.readMessage(value,proto_types_blockchain_pb.BlockIdentifier.deserializeBinaryFromReader);
+      msg.setBlockidentifier(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -11411,6 +11417,14 @@ proto.iotexapi.StreamBlocksResponse.serializeBinaryToWriter = function(message, 
       1,
       f,
       proto.iotexapi.BlockInfo.serializeBinaryToWriter
+    );
+  }
+  f = message.getBlockidentifier();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      proto_types_blockchain_pb.BlockIdentifier.serializeBinaryToWriter
     );
   }
 };
@@ -11450,6 +11464,43 @@ proto.iotexapi.StreamBlocksResponse.prototype.clearBlock = function() {
  */
 proto.iotexapi.StreamBlocksResponse.prototype.hasBlock = function() {
   return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional iotextypes.BlockIdentifier blockIdentifier = 2;
+ * @return {?proto.iotextypes.BlockIdentifier}
+ */
+proto.iotexapi.StreamBlocksResponse.prototype.getBlockidentifier = function() {
+  return /** @type{?proto.iotextypes.BlockIdentifier} */ (
+    jspb.Message.getWrapperField(this, proto_types_blockchain_pb.BlockIdentifier, 2));
+};
+
+
+/**
+ * @param {?proto.iotextypes.BlockIdentifier|undefined} value
+ * @return {!proto.iotexapi.StreamBlocksResponse} returns this
+*/
+proto.iotexapi.StreamBlocksResponse.prototype.setBlockidentifier = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.iotexapi.StreamBlocksResponse} returns this
+ */
+proto.iotexapi.StreamBlocksResponse.prototype.clearBlockidentifier = function() {
+  return this.setBlockidentifier(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.iotexapi.StreamBlocksResponse.prototype.hasBlockidentifier = function() {
+  return jspb.Message.getField(this, 2) != null;
 };
 
 

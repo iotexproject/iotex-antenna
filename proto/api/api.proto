@@ -391,6 +391,7 @@ message StreamBlocksRequest {}
 
 message StreamBlocksResponse {
     BlockInfo block = 1;
+    iotextypes.BlockIdentifier blockIdentifier = 2;
 }
 
 message StreamLogsRequest {

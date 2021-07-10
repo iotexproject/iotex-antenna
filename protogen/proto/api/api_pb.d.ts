@@ -1334,6 +1334,11 @@ export class StreamBlocksResponse extends jspb.Message {
   hasBlock(): boolean;
   clearBlock(): StreamBlocksResponse;
 
+  getBlockidentifier(): proto_types_blockchain_pb.BlockIdentifier | undefined;
+  setBlockidentifier(value?: proto_types_blockchain_pb.BlockIdentifier): StreamBlocksResponse;
+  hasBlockidentifier(): boolean;
+  clearBlockidentifier(): StreamBlocksResponse;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): StreamBlocksResponse.AsObject;
   static toObject(includeInstance: boolean, msg: StreamBlocksResponse): StreamBlocksResponse.AsObject;
@@ -1345,6 +1350,7 @@ export class StreamBlocksResponse extends jspb.Message {
 export namespace StreamBlocksResponse {
   export type AsObject = {
     block?: BlockInfo.AsObject,
+    blockidentifier?: proto_types_blockchain_pb.BlockIdentifier.AsObject,
   }
 }
 
