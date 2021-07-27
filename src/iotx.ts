@@ -207,7 +207,10 @@ export class Iotx extends RpcMethod {
       };
     }
 
-    return (await this.estimateActionGasConsumption(estimateReq)).gas;
+    let ret = (await this.estimateActionGasConsumption(estimateReq)).gas;
+    if (!isContract && ret < 21000) ret = 21000;
+
+    return ret;
   }
 
   // return action hash
