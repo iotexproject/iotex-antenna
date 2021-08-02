@@ -313,6 +313,24 @@ export class Contract {
       data: values
     };
   }
+
+  public async etismateGas(
+    callerAddress: string,
+    amount: string,
+    method: string,
+    ...args: Array<any>
+  ): Promise<number> {
+    const execution = this.pureEncodeMethod(amount, method, args);
+    const response = await this.provider!.estimateActionGasConsumption({
+      execution: {
+        contract: this.address!,
+        amount: amount,
+        data: execution.data
+      },
+      callerAddress
+    });
+    return response.gas;
+  }
 }
 
 export interface MethodExecuteParameter {
