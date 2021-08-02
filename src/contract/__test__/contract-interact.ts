@@ -164,3 +164,28 @@ test.skip("Contract_method_set_SimpleStorage", async t => {
   });
   t.truthy(result);
 });
+
+test.skip("Contract_estimateGas_set_SimpleStorage", async t => {
+  const solFile = "./SimpleStorage.sol";
+  const contractName = ":SimpleStorage";
+  const input = fs.readFileSync(path.resolve(__dirname, solFile));
+  const output = solc.compile(input.toString(), 1);
+  const contractDef = output.contracts[contractName];
+
+  const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
+
+  const contract = new Contract(
+    JSON.parse(contractDef.interface),
+    "io186s45j3rgvhxh25ec6xk9wap0drtthk3jq4du7",
+    { provider: client }
+  );
+
+  const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
+  const result = await contract.etismateGas(
+    "io13zt8sznez2pf0q0hqdz2hyl938wak2fsjgdeml",
+    "0",
+    "set",
+    101
+  );
+  t.truthy(result);
+});
