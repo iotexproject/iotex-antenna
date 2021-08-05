@@ -259,6 +259,8 @@ message GetReceiptByActionResponse {
 message ReadContractRequest {
   iotextypes.Execution execution = 1;
   string callerAddress = 2;
+  uint64 gasLimit = 3;
+  string gasPrice = 4;
 }
 
 message ReadContractResponse {

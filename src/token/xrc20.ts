@@ -193,7 +193,9 @@ export class XRC20 {
 
     const result = await this.contract.provider.readContract({
       execution: this.contract.pureEncodeMethod("0", method, ...args),
-      callerAddress: callerAddress
+      callerAddress: callerAddress,
+      gasLimit: 21000,
+      gasPrice: "1000000000000"
     });
 
     return result.data;

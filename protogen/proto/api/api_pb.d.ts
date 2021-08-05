@@ -692,6 +692,12 @@ export class ReadContractRequest extends jspb.Message {
   getCalleraddress(): string;
   setCalleraddress(value: string): ReadContractRequest;
 
+  getGaslimit(): number;
+  setGaslimit(value: number): ReadContractRequest;
+
+  getGasprice(): string;
+  setGasprice(value: string): ReadContractRequest;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ReadContractRequest.AsObject;
   static toObject(includeInstance: boolean, msg: ReadContractRequest): ReadContractRequest.AsObject;
@@ -704,6 +710,8 @@ export namespace ReadContractRequest {
   export type AsObject = {
     execution?: proto_types_action_pb.Execution.AsObject,
     calleraddress: string,
+    gaslimit: number,
+    gasprice: string,
   }
 }
 

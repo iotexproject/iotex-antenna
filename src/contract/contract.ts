@@ -119,7 +119,9 @@ export class Contract {
               func,
               ...args.slice(0, args.length - 1)
             ),
-            callerAddress: this.address
+            callerAddress: this.address,
+            gasLimit: 21000,
+            gasPrice: "1000000000000"
           });
           return this.decodeMethodResult(func, result.data);
         }

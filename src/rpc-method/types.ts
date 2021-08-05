@@ -2237,6 +2237,8 @@ function fromPbLogList(
 export interface IReadContractRequest {
   execution: IExecution;
   callerAddress: string;
+  gasLimit: number;
+  gasPrice: string;
 }
 
 // Properties of a ReadContractResponse.
@@ -2252,6 +2254,8 @@ export const ReadContractRequest = {
     if (req.execution) {
       pbReq.setExecution(toActionExecution(req.execution));
     }
+    pbReq.setGaslimit(req.gasLimit);
+    pbReq.setGasprice(req.gasPrice);
     return pbReq;
   },
 

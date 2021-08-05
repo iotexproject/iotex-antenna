@@ -208,7 +208,7 @@ export class Iotx extends RpcMethod {
     }
 
     let ret = (await this.estimateActionGasConsumption(estimateReq)).gas;
-    if (!isContract && ret < 21000) ret = 21000;
+    if (ret < 21000) ret = 21000;
 
     return ret;
   }
@@ -284,7 +284,9 @@ export class Iotx extends RpcMethod {
 
     const result = await this.readContract({
       execution: contract.pureEncodeMethod("0", req.method, ...args),
-      callerAddress: req.from
+      callerAddress: req.from,
+      gasLimit: Number(req.gasLimit) || 21000,
+      gasPrice: req.gasPrice || "1000000000000"
     });
 
     return contract.decodeMethodResult(req.method, result.data);
