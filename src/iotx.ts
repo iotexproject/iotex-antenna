@@ -29,6 +29,17 @@ import {
   setLengthLeft
 } from "ethereumjs-util";
 
+import {
+  StakeCreate,
+  StakeAddDeposit,
+  StakeChangeCandidate,
+  StakeReclaim,
+  StakeRestake,
+  StakeTransferOwnership,
+  CandidateRegister,
+  CandidateBasicInfo,
+} from "../protogen/proto/types/action_pb"
+
 type IotxOpts = {
   signer?: SignerPlugin;
   timeout?: number;
@@ -123,17 +134,6 @@ export class Iotx extends RpcMethod {
       toBuffer(v.toNumber())
     ]);
 
-    let isContract = true;
-    if (to !== "") {
-      const account = await this.getAccount({
-        address: to
-      });
-      if (!account.accountMeta) {
-        throw new Error(`can't fetch ${to} account info`);
-      }
-      isContract = account.accountMeta.isContract;
-    }
-
     const sendActionReq = {
       action: {
         core: {
@@ -149,20 +149,127 @@ export class Iotx extends RpcMethod {
       }
     };
 
-    if (!isContract) {
+    // stake create
+    if (to == "0x000000000000007374616b696E67437265617465") {
+      const stakeAct = StakeCreate.deserializeBinary(data)
       // @ts-ignore
-      sendActionReq.action.core.transfer = {
-        amount: value.toString(10),
-        recipient: to,
-        payload: data
+      sendActionReq.action.core.createDeposit = {
+        candidateName: stakeAct.getCandidatename(),
+        stakedAmount: stakeAct.getStakedamount(),
+        stakedDuration: stakeAct.getStakedduration(),
+        autoStake: stakeAct.getAutostake(),
+        payload: stakeAct.getPayload()
       };
-    } else {
+    } 
+    // stake add deposit
+    else if (to == "0x0000007374616b696E674164644465706F736974"){
+      const stakeAct = StakeAddDeposit.deserializeBinary(data)
       // @ts-ignore
-      sendActionReq.action.core.execution = {
-        amount: value.toString(10),
-        contract: to,
-        data: data
+      sendActionReq.action.core.stakeAddDeposit = {
+        bucketIndex: stakeAct.getBucketindex(),
+        amount: stakeAct.getAmount(),
+        payload: stakeAct.getPayload()
       };
+    } 
+    // stake change candidate
+    else if (to == "0x0000007374616B696E674368616E676543616E64") {
+      const stakeAct = StakeChangeCandidate.deserializeBinary(data)
+      // @ts-ignore
+      sendActionReq.action.core.stakeChangeCandidate = {
+        bucketIndex: stakeAct.getBucketindex(),
+        candidateName: stakeAct.getCandidatename(),
+        payload: stakeAct.getPayload()
+      };
+    }
+    // stake unstake
+    else if (to == "0x0000000000007374616b696E67556E7374616b65") {
+      const stakeAct = StakeReclaim.deserializeBinary(data)
+      // @ts-ignore
+      sendActionReq.action.core.stakeUnstake = {
+        bucketIndex: stakeAct.getBucketindex(),
+        payload: stakeAct.getPayload()
+      };
+    }
+    // stake withdraw stake
+    else if (to == "0x00000000007374616b696e675769746864726177") {
+      const stakeAct = StakeReclaim.deserializeBinary(data)
+      // @ts-ignore
+      sendActionReq.action.core.stakeWithdraw = {
+        bucketIndex: stakeAct.getBucketindex(),
+        payload: stakeAct.getPayload()
+      };
+    }
+    // stake restake
+    else if (to == "0x0000000000007374616b696e6752657374616b65") {
+      const stakeAct = StakeRestake.deserializeBinary(data)
+      // @ts-ignore
+      sendActionReq.action.core.stakeRestake = {
+        bucketIndex: stakeAct.getBucketindex(),
+        stakedDuration: stakeAct.getStakedduration(),
+        autoStake: stakeAct.getAutostake(),
+        payload: stakeAct.getPayload()
+      };
+    }
+    // stake transfer
+    else if (to == "0x00000000007374616B696e675472616e73666572") {
+      const stakeAct = StakeTransferOwnership.deserializeBinary(data)
+      // @ts-ignore
+      sendActionReq.action.core.stakeChangeCandidate = {
+        bucketIndex: stakeAct.getBucketindex(),
+        candidateName: stakeAct.getVoteraddress(),
+        payload: stakeAct.getPayload()
+      };
+    }
+    // stake candidate register
+    else if (to == "0x007374616B696E67526567697374657243616E64") {
+      const stakeAct = CandidateRegister.deserializeBinary(data)
+      // @ts-ignore
+      sendActionReq.action.core.candidateRegister = {
+        candidate: stakeAct.getCandidate(),
+        stakedAmount: stakeAct.getStakedamount(),
+        stakedDuration: stakeAct.getStakedduration(),
+        autoStake: stakeAct.getAutostake(),
+        ownerAddress: stakeAct.getOwneraddress(),
+        payload: stakeAct.getPayload()
+      };
+    }
+    // stake candidate update
+    else if (to == "0x0000007374616b696E6755706461746543616E64") {
+      const stakeAct = CandidateBasicInfo.deserializeBinary(data)
+      // @ts-ignore
+      sendActionReq.action.core.candidateUpdate = {
+        name: stakeAct.getName(),
+        operatorAddress: stakeAct.getOperatoraddress(),
+        rewardAddress: stakeAct.getRewardaddress(),
+      };
+    }
+    // transfer or execution
+    else {
+      let isContract = true;
+      if (to !== "") {
+        const account = await this.getAccount({
+          address: to
+        });
+        if (!account.accountMeta) {
+          throw new Error(`can't fetch ${to} account info`);
+        }
+        isContract = account.accountMeta.isContract;
+      }
+      if (!isContract) {
+        // @ts-ignore
+        sendActionReq.action.core.transfer = {
+          amount: value.toString(10),
+          recipient: to,
+          payload: data
+        };
+      } else {
+        // @ts-ignore
+        sendActionReq.action.core.execution = {
+          amount: value.toString(10),
+          contract: to,
+          data: data
+        };
+      }
     }
 
     return (await this.sendAction(sendActionReq)).actionHash;
