@@ -148,12 +148,11 @@ export class Iotx extends RpcMethod {
         encoding: 1
       }
     };
-
     // stake create
-    if (to == "0x000000000000007374616b696E67437265617465") {
-      const stakeAct = StakeCreate.deserializeBinary(data)
+    if (to == "io1qqqqqqqqqqq8xarpdd5kue6rwfjkzar9k0wk6t") {
+      const stakeAct = StakeCreate.deserializeBinary(data); 
       // @ts-ignore
-      sendActionReq.action.core.createDeposit = {
+      sendActionReq.action.core.stakeCreate = {
         candidateName: stakeAct.getCandidatename(),
         stakedAmount: stakeAct.getStakedamount(),
         stakedDuration: stakeAct.getStakedduration(),
@@ -162,8 +161,8 @@ export class Iotx extends RpcMethod {
       };
     } 
     // stake add deposit
-    else if (to == "0x0000007374616b696E674164644465706F736974"){
-      const stakeAct = StakeAddDeposit.deserializeBinary(data)
+    else if (to == "io1qqqqqum5v94kjmn8g9jxg3r9wphhx6t58x7tye") {
+      const stakeAct = StakeAddDeposit.deserializeBinary(data); 
       // @ts-ignore
       sendActionReq.action.core.stakeAddDeposit = {
         bucketIndex: stakeAct.getBucketindex(),
@@ -172,36 +171,36 @@ export class Iotx extends RpcMethod {
       };
     } 
     // stake change candidate
-    else if (to == "0x0000007374616B696E674368616E676543616E64") {
-      const stakeAct = StakeChangeCandidate.deserializeBinary(data)
+    else if (to == "io1qqqqqum5v94kjmn8gd5xzmn8v4pkzmnye5v3fh") {
+      const stakeAct = StakeChangeCandidate.deserializeBinary(data); 
       // @ts-ignore
       sendActionReq.action.core.stakeChangeCandidate = {
         bucketIndex: stakeAct.getBucketindex(),
         candidateName: stakeAct.getCandidatename(),
         payload: stakeAct.getPayload()
       };
-    }
+    } 
     // stake unstake
-    else if (to == "0x0000000000007374616b696E67556E7374616b65") {
-      const stakeAct = StakeReclaim.deserializeBinary(data)
+    else if (to == "io1qqqqqqqqqpehgcttd9hxw4twwd6xz6m9pl4r27") {
+      const stakeAct = StakeReclaim.deserializeBinary(data); 
       // @ts-ignore
       sendActionReq.action.core.stakeUnstake = {
         bucketIndex: stakeAct.getBucketindex(),
         payload: stakeAct.getPayload()
       };
-    }
+    } 
     // stake withdraw stake
-    else if (to == "0x00000000007374616b696e675769746864726177") {
-      const stakeAct = StakeReclaim.deserializeBinary(data)
+    else if (to == "io1qqqqqqqqwd6xz6mfden4w6t5dpj8ycthwsq5ng") {
+      const stakeAct = StakeReclaim.deserializeBinary(data); 
       // @ts-ignore
       sendActionReq.action.core.stakeWithdraw = {
         bucketIndex: stakeAct.getBucketindex(),
         payload: stakeAct.getPayload()
       };
-    }
+    } 
     // stake restake
-    else if (to == "0x0000000000007374616b696e6752657374616b65") {
-      const stakeAct = StakeRestake.deserializeBinary(data)
+    else if (to == "io1qqqqqqqqqpehgcttd9hxw5n9wd6xz6m995w4zm") {
+      const stakeAct = StakeRestake.deserializeBinary(data); 
       // @ts-ignore
       sendActionReq.action.core.stakeRestake = {
         bucketIndex: stakeAct.getBucketindex(),
@@ -209,20 +208,20 @@ export class Iotx extends RpcMethod {
         autoStake: stakeAct.getAutostake(),
         payload: stakeAct.getPayload()
       };
-    }
+    } 
     // stake transfer
-    else if (to == "0x00000000007374616B696e675472616e73666572") {
-      const stakeAct = StakeTransferOwnership.deserializeBinary(data)
+    else if (to == "io1qqqqqqqqwd6xz6mfden4gunpdeekvetjzwh99y") {
+      const stakeAct = StakeTransferOwnership.deserializeBinary(data); 
       // @ts-ignore
-      sendActionReq.action.core.stakeChangeCandidate = {
+      sendActionReq.action.core.stakeTransferOwnership = {
         bucketIndex: stakeAct.getBucketindex(),
-        candidateName: stakeAct.getVoteraddress(),
+        voterAddress: stakeAct.getVoteraddress(),
         payload: stakeAct.getPayload()
       };
-    }
+    } 
     // stake candidate register
-    else if (to == "0x007374616B696E67526567697374657243616E64") {
-      const stakeAct = CandidateRegister.deserializeBinary(data)
+    else if (to == "io1qpehgcttd9hxw5n9va5hxar9wfpkzmnyahxhjk") {
+      const stakeAct = CandidateRegister.deserializeBinary(data); 
       // @ts-ignore
       sendActionReq.action.core.candidateRegister = {
         candidate: stakeAct.getCandidate(),
@@ -232,17 +231,16 @@ export class Iotx extends RpcMethod {
         ownerAddress: stakeAct.getOwneraddress(),
         payload: stakeAct.getPayload()
       };
-    }
-    // stake candidate update
-    else if (to == "0x0000007374616b696E6755706461746543616E64") {
-      const stakeAct = CandidateBasicInfo.deserializeBinary(data)
+    } // stake candidate update
+    else if (to == "io1qqqqqum5v94kjmn824cxgct5v4pkzmnyxxj98n") {
+      const stakeAct = CandidateBasicInfo.deserializeBinary(data); 
       // @ts-ignore
       sendActionReq.action.core.candidateUpdate = {
         name: stakeAct.getName(),
         operatorAddress: stakeAct.getOperatoraddress(),
-        rewardAddress: stakeAct.getRewardaddress(),
+        rewardAddress: stakeAct.getRewardaddress()
       };
-    }
+    } 
     // transfer or execution
     else {
       let isContract = true;
@@ -271,7 +269,6 @@ export class Iotx extends RpcMethod {
         };
       }
     }
-
     return (await this.sendAction(sendActionReq)).actionHash;
   }
 

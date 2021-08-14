@@ -1,5 +1,5 @@
 import * as protoLoader from "@grpc/proto-loader";
-import grpc from "grpc";
+import grpc from "@grpc/grpc-js";
 import { promisify } from "util";
 import { ROOT_CERTS } from "./root-certs";
 import {
