@@ -131,7 +131,6 @@
     "eth-lib": "0.2.8",
     "ethereumjs-util": "^7.0.9",
     "google-protobuf": "3.8.0",
-    "grpc": "^1.24.3",
     "grpc-web": "^1.2.1",
     "isomorphic-ws": "^4.0.1",
     "protoc": "^1.0.4",
