@@ -19,15 +19,22 @@ enum ReceiptStatus {
   Success              = 1;
 
   //1xx for EVM ErrorCode
-  ErrUnknown                  		= 100;
-  ErrOutOfGas                 		= 101;
-  ErrCodeStoreOutOfGas        		= 102;
-  ErrDepth                    		= 103;
-  ErrContractAddressCollision 		= 104;
-  ErrNoCompatibleInterpreter  		= 105;
-  ErrExecutionReverted        		= 106;
-  ErrMaxCodeSizeExceeded      		= 107;
-  ErrWriteProtection          		= 108;
+  ErrUnknown                        = 100;
+  ErrOutOfGas                       = 101;
+  ErrCodeStoreOutOfGas              = 102;
+  ErrDepth                          = 103;
+  ErrContractAddressCollision       = 104;
+  ErrNoCompatibleInterpreter        = 105;
+  ErrExecutionReverted              = 106;
+  ErrMaxCodeSizeExceeded            = 107;
+  ErrWriteProtection                = 108;
+  ErrInvalidSubroutineEntry         = 109;
+  ErrInsufficientBalance            = 110;
+  ErrInvalidJump                    = 111;
+  ErrReturnDataOutOfBounds          = 112;
+  ErrGasUintOverflow                = 113;
+  ErrInvalidRetsub                  = 114;
+  ErrReturnStackExceeded            = 115;
 
   //2xx for Staking ErrorCode
   ErrLoadAccount                    = 200;

@@ -72,7 +72,6 @@ service APIService {
   // get logs filtered by contract address and topics
   rpc GetLogs(GetLogsRequest) returns (GetLogsResponse) {}
 
-
   rpc GetTransactionLogByActionHash(GetTransactionLogByActionHashRequest) returns (GetTransactionLogByActionHashResponse) {}
 
   rpc GetTransactionLogByBlockHeight(GetTransactionLogByBlockHeightRequest) returns (GetTransactionLogByBlockHeightResponse) {}
@@ -90,19 +89,16 @@ service APIService {
   // get actions from act pool
   rpc GetActPoolActions(GetActPoolActionsRequest) returns (GetActPoolActionsResponse) {}
 
-  /*
-   * evm transfers APIs
-   */
   // Deprecated
   rpc GetEvmTransfersByActionHash(GetEvmTransfersByActionHashRequest) returns (GetEvmTransfersByActionHashResponse) {}
 
   // Deprecated
   rpc GetEvmTransfersByBlockHeight(GetEvmTransfersByBlockHeightRequest) returns (GetEvmTransfersByBlockHeightResponse) {}
 
-  /*
-   * election APIs, Deprecated
-   */
+  // Deprecated
   rpc GetElectionBuckets(GetElectionBucketsRequest) returns (GetElectionBucketsResponse) {}
+
+  rpc ReadContractStorage(ReadContractStorageRequest) returns (ReadContractStorageResponse) {}
 }
 
 // experiment
@@ -441,4 +437,13 @@ message GetEvmTransfersByBlockHeightRequest {
 // Deprecated
 message GetEvmTransfersByBlockHeightResponse {
   iotextypes.BlockEvmTransfer blockEvmTransfers = 1;
+}
+
+message ReadContractStorageRequest {
+  string contract = 1;
+  bytes key = 2;
+}
+
+message ReadContractStorageResponse {
+  bytes data = 1;
 }

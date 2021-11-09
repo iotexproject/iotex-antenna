@@ -165,6 +165,13 @@ export class APIServiceClient {
                response: proto_api_api_pb.GetElectionBucketsResponse) => void
   ): grpcWeb.ClientReadableStream<proto_api_api_pb.GetElectionBucketsResponse>;
 
+  readContractStorage(
+    request: proto_api_api_pb.ReadContractStorageRequest,
+    metadata: grpcWeb.Metadata | undefined,
+    callback: (err: grpcWeb.Error,
+               response: proto_api_api_pb.ReadContractStorageResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.ReadContractStorageResponse>;
+
 }
 
 export class TransactionLogServiceClient {
@@ -307,6 +314,11 @@ export class APIServicePromiseClient {
     request: proto_api_api_pb.GetElectionBucketsRequest,
     metadata?: grpcWeb.Metadata
   ): Promise<proto_api_api_pb.GetElectionBucketsResponse>;
+
+  readContractStorage(
+    request: proto_api_api_pb.ReadContractStorageRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<proto_api_api_pb.ReadContractStorageResponse>;
 
 }
 

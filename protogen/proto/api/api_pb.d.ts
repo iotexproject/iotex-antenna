@@ -1556,3 +1556,47 @@ export namespace GetEvmTransfersByBlockHeightResponse {
   }
 }
 
+export class ReadContractStorageRequest extends jspb.Message {
+  getContract(): string;
+  setContract(value: string): ReadContractStorageRequest;
+
+  getKey(): Uint8Array | string;
+  getKey_asU8(): Uint8Array;
+  getKey_asB64(): string;
+  setKey(value: Uint8Array | string): ReadContractStorageRequest;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ReadContractStorageRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: ReadContractStorageRequest): ReadContractStorageRequest.AsObject;
+  static serializeBinaryToWriter(message: ReadContractStorageRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ReadContractStorageRequest;
+  static deserializeBinaryFromReader(message: ReadContractStorageRequest, reader: jspb.BinaryReader): ReadContractStorageRequest;
+}
+
+export namespace ReadContractStorageRequest {
+  export type AsObject = {
+    contract: string,
+    key: Uint8Array | string,
+  }
+}
+
+export class ReadContractStorageResponse extends jspb.Message {
+  getData(): Uint8Array | string;
+  getData_asU8(): Uint8Array;
+  getData_asB64(): string;
+  setData(value: Uint8Array | string): ReadContractStorageResponse;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ReadContractStorageResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: ReadContractStorageResponse): ReadContractStorageResponse.AsObject;
+  static serializeBinaryToWriter(message: ReadContractStorageResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ReadContractStorageResponse;
+  static deserializeBinaryFromReader(message: ReadContractStorageResponse, reader: jspb.BinaryReader): ReadContractStorageResponse;
+}
+
+export namespace ReadContractStorageResponse {
+  export type AsObject = {
+    data: Uint8Array | string,
+  }
+}
+

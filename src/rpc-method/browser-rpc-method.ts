@@ -26,6 +26,8 @@ import {
   IGetServerMetaResponse,
   IReadContractRequest,
   IReadContractResponse,
+  IReadContractStorageRequest,
+  IReadContractStorageResponse,
   IReadStateRequest,
   IReadStateResponse,
   IRpcMethod,
@@ -50,6 +52,7 @@ import {
   GetEpochMetaRequest,
   GetReceiptByActionRequest,
   ReadContractRequest,
+  ReadContractStorageRequest,
   SendActionRequest,
   StreamBlocksRequest,
   StreamLogsRequest,
@@ -168,6 +171,17 @@ export default class RpcMethod implements IRpcMethod {
     const pbReq = ReadContractRequest.to(req);
     const pbResp = await this.client.readContract(pbReq, this.getMetadata());
     return ReadContractRequest.from(pbResp);
+  }
+
+  public async readContractStorage(
+    req: IReadContractStorageRequest
+  ): Promise<IReadContractStorageResponse> {
+    const pbReq = ReadContractStorageRequest.to(req);
+    const pbResp = await this.client.readContractStorage(
+      pbReq,
+      this.getMetadata()
+    );
+    return ReadContractStorageRequest.from(pbResp);
   }
 
   public async sendAction(

@@ -2267,6 +2267,30 @@ export const ReadContractRequest = {
   }
 };
 
+export interface IReadContractStorageRequest {
+  contract: string;
+  key: Buffer;
+}
+
+export interface IReadContractStorageResponse {
+  data: Buffer | {};
+}
+
+export const ReadContractStorageRequest = {
+  to(req: IReadContractStorageRequest): any {
+    const pbReq = new apiPb.ReadContractStorageRequest();
+    pbReq.setContract(req.contract);
+    pbReq.setKey(req.key);
+    return pbReq;
+  },
+
+  from(pbRes: apiPb.ReadContractStorageResponse): IReadContractStorageResponse {
+    return {
+      data: pbRes.getData()
+    };
+  }
+};
+
 // Properties of a SendActionRequest.
 export interface ISendActionRequest {
   // SendActionRequest action
@@ -3009,6 +3033,10 @@ export interface IRpcMethod {
   ): Promise<IGetReceiptByActionResponse>;
 
   readContract(req: IReadContractRequest): Promise<IReadContractResponse>;
+
+  readContractStorage(
+    req: IReadContractStorageRequest
+  ): Promise<IReadContractStorageResponse>;
 
   sendAction(req: ISendActionRequest): Promise<ISendActionResponse>;
   readState(req: IReadStateRequest): Promise<IReadStateResponse>;

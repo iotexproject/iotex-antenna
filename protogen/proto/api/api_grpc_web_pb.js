@@ -1913,6 +1913,86 @@ proto.iotexapi.APIServicePromiseClient.prototype.getElectionBuckets =
 
 
 /**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.iotexapi.ReadContractStorageRequest,
+ *   !proto.iotexapi.ReadContractStorageResponse>}
+ */
+const methodDescriptor_APIService_ReadContractStorage = new grpc.web.MethodDescriptor(
+  '/iotexapi.APIService/ReadContractStorage',
+  grpc.web.MethodType.UNARY,
+  proto.iotexapi.ReadContractStorageRequest,
+  proto.iotexapi.ReadContractStorageResponse,
+  /**
+   * @param {!proto.iotexapi.ReadContractStorageRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.ReadContractStorageResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.iotexapi.ReadContractStorageRequest,
+ *   !proto.iotexapi.ReadContractStorageResponse>}
+ */
+const methodInfo_APIService_ReadContractStorage = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.iotexapi.ReadContractStorageResponse,
+  /**
+   * @param {!proto.iotexapi.ReadContractStorageRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.ReadContractStorageResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.iotexapi.ReadContractStorageRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.iotexapi.ReadContractStorageResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.ReadContractStorageResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.iotexapi.APIServiceClient.prototype.readContractStorage =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.APIService/ReadContractStorage',
+      request,
+      metadata || {},
+      methodDescriptor_APIService_ReadContractStorage,
+      callback);
+};
+
+
+/**
+ * @param {!proto.iotexapi.ReadContractStorageRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.iotexapi.ReadContractStorageResponse>}
+ *     Promise that resolves to the response
+ */
+proto.iotexapi.APIServicePromiseClient.prototype.readContractStorage =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/iotexapi.APIService/ReadContractStorage',
+      request,
+      metadata || {},
+      methodDescriptor_APIService_ReadContractStorage);
+};
+
+
+/**
  * @param {string} hostname
  * @param {?Object} credentials
  * @param {?Object} options

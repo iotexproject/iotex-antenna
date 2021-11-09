@@ -26,6 +26,8 @@ import {
   IGetServerMetaResponse,
   IReadContractRequest,
   IReadContractResponse,
+  IReadContractStorageRequest,
+  IReadContractStorageResponse,
   IReadStateRequest,
   IReadStateResponse,
   IRpcMethod,
@@ -190,6 +192,16 @@ export default class RpcMethod implements IRpcMethod {
     const readContract = promisify(this.client.readContract.bind(this.client));
     // @ts-ignore
     return readContract(req, this.getMetadata());
+  }
+
+  public async readContractStorage(
+    req: IReadContractStorageRequest
+  ): Promise<IReadContractStorageResponse> {
+    const readContractStorage = promisify(
+      this.client.readContractStorage.bind(this.client)
+    );
+    // @ts-ignore
+    return readContractStorage(req, this.getMetadata());
   }
 
   public async sendAction(
