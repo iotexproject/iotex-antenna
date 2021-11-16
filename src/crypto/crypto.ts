@@ -63,3 +63,18 @@ export const recover = (hash: Buffer, signature: Buffer) => {
   const publicKey = ecPublicKey.encode("hex", false);
   return publicKeyToAddress(publicKey);
 };
+
+export const recoverPublicKey = (hash: Buffer, signature: Buffer) => {
+  const vals = decodeSignature(`0x${signature.toString("hex")}`);
+  const vrs = {
+    v: Bytes.toNumber(vals[0]),
+    r: vals[1].slice(2),
+    s: vals[2].slice(2)
+  };
+  const ecPublicKey = secp256k1.recoverPubKey(
+    hash,
+    vrs,
+    vrs.v < 2 ? vrs.v : 1 - (vrs.v % 2)
+  );
+  return ecPublicKey.encode("hex", false);
+};

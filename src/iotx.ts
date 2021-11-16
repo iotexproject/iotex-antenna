@@ -28,6 +28,9 @@ import {
   bufferToInt,
   setLengthLeft
 } from "ethereumjs-util";
+import { Envelop } from "./action/envelop";
+import { hash256b } from "./crypto/hash";
+import { recoverPublicKey, recover } from "./crypto/crypto";
 
 type IotxOpts = {
   signer?: SignerPlugin;
@@ -107,21 +110,10 @@ export class Iotx extends RpcMethod {
     const data = tx[5];
     let v = new BigNumber(`0x${tx[6].toString("hex")}`);
     v = v.minus(req.chainID * 2 + 8);
-
-    const pad = unpadBuffer(toBuffer(0));
-    const rawTx = [...tx.slice(0, 6), toBuffer(req.chainID), pad, pad];
-
-    const raw = rlp.encode(rawTx);
-    const hash = keccakFromHexString(`0x${raw.toString("hex")}`);
-
-    const vv = bufferToInt(tx[6]);
-    const publicKey = ecrecover(hash, vv, tx[7], tx[8], req.chainID);
-    const compactPublicKey = Buffer.concat([toBuffer(4), publicKey]);
-    const signature = Buffer.concat([
-      setLengthLeft(tx[7], 32),
-      setLengthLeft(tx[8], 32),
-      toBuffer(v.toNumber())
-    ]);
+    let web3 = false;
+    if (v.toString() === "27" || v.toString() === "28") {
+      web3 = true;
+    }
 
     let isContract = true;
     if (to !== "") {
@@ -134,10 +126,61 @@ export class Iotx extends RpcMethod {
       isContract = account.accountMeta.isContract;
     }
 
+    let compactPublicKey;
+    let signature;
+    if (web3) {
+      const pad = unpadBuffer(toBuffer(0));
+      const rawTx = [...tx.slice(0, 6), toBuffer(req.chainID), pad, pad];
+
+      const raw = rlp.encode(rawTx);
+      const hash = keccakFromHexString(`0x${raw.toString("hex")}`);
+
+      const vv = bufferToInt(tx[6]);
+      const publicKey = ecrecover(hash, vv, tx[7], tx[8], req.chainID);
+      compactPublicKey = Buffer.concat([toBuffer(4), publicKey]);
+      signature = Buffer.concat([
+        setLengthLeft(tx[7], 32),
+        setLengthLeft(tx[8], 32),
+        toBuffer(v.toNumber())
+      ]);
+    } else {
+      v = new BigNumber(`0x${tx[6].toString("hex")}`);
+      v = v.minus(999999 * 2 + 35);
+      const envelop = new Envelop(
+        1,
+        nonce.toString(10),
+        gasLimit.toString(),
+        gasPrice.toString()
+      );
+      if (isContract) {
+        envelop.execution = {
+          amount: value.toString(10),
+          contract: to,
+          data: data
+        };
+      } else {
+        envelop.transfer = {
+          amount: value.toString(10),
+          recipient: to,
+          payload: data
+        };
+      }
+
+      signature = Buffer.concat([
+        setLengthLeft(tx[7], 32),
+        setLengthLeft(tx[8], 32),
+        toBuffer(v.toNumber())
+      ]);
+      compactPublicKey = Buffer.from(
+        recoverPublicKey(hash256b(envelop.bytestream()), signature),
+        "hex"
+      );
+    }
+
     const sendActionReq = {
       action: {
         core: {
-          version: 0,
+          version: 1,
           nonce: nonce.toString(10),
           gasLimit: gasLimit.toString(10),
           gasPrice: gasPrice.toString(10),
@@ -145,7 +188,7 @@ export class Iotx extends RpcMethod {
         },
         senderPubKey: compactPublicKey,
         signature: signature,
-        encoding: 1
+        encoding: web3 ? 1 : 0
       }
     };
 
