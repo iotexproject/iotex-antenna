@@ -1,6 +1,6 @@
 {
   "name": "iotex-antenna",
-  "version": "0.31.0-beta-rlp-26",
+  "version": "0.31.0-beta-rlp-27",
   "description": "IoTeX blockchain SDK",
   "iotexCoreVersion": "iotex-core v0.7.1",
   "main": "lib/index.js",
@@ -131,7 +131,7 @@
     "ethereumjs-util": "^7.0.9",
     "google-protobuf": "3.8.0",
     "grpc": "^1.24.3",
-    "grpc-web": "^1.2.1",
+    "grpc-web": "1.2.1",
     "isomorphic-ws": "^4.0.1",
     "protoc": "^1.0.4",
     "randombytes": "^2.1.0",
