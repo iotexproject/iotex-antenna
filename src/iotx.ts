@@ -30,7 +30,7 @@ import {
 } from "ethereumjs-util";
 import { Envelop } from "./action/envelop";
 import { hash256b } from "./crypto/hash";
-import { recoverPublicKey } from "./crypto/crypto";
+import { recoverPublicKey, recover } from "./crypto/crypto";
 
 type IotxOpts = {
   signer?: SignerPlugin;
@@ -106,7 +106,10 @@ export class Iotx extends RpcMethod {
     const gasPrice = new BigNumber(`0x${tx[1].toString("hex")}`);
     const gasLimit = new BigNumber(`0x${tx[2].toString("hex")}`);
     let to = tx[3].length > 0 ? fromBytes(tx[3]).string() : "";
-    const value = new BigNumber(`0x${tx[4].toString("hex")}`);
+    const value =
+      tx[4].length > 0
+        ? new BigNumber(`0x${tx[4].toString("hex")}`)
+        : new BigNumber("0x0");
     const data = tx[5];
     let v = new BigNumber(`0x${tx[6].toString("hex")}`);
     v = v.minus(req.chainID * 2 + 8);
