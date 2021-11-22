@@ -30,7 +30,7 @@ import {
 } from "ethereumjs-util";
 import { Envelop } from "./action/envelop";
 import { hash256b } from "./crypto/hash";
-import { recoverPublicKey, recover } from "./crypto/crypto";
+import { recoverPublicKey } from "./crypto/crypto";
 
 type IotxOpts = {
   signer?: SignerPlugin;
