@@ -113,9 +113,10 @@ export class Iotx extends RpcMethod {
     const data = tx[5];
     let v = new BigNumber(`0x${tx[6].toString("hex")}`);
     v = v.minus(req.chainID * 2 + 8);
-    let web3 = false;
-    if (v.toString() === "27" || v.toString() === "28") {
-      web3 = true;
+    let web3 = true;
+
+    if (tx.length == 10 && tx[9].toString("hex") === "01") {
+      web3 = false;
     }
 
     let isContract = true;
@@ -147,8 +148,6 @@ export class Iotx extends RpcMethod {
         toBuffer(v.toNumber())
       ]);
     } else {
-      v = new BigNumber(`0x${tx[6].toString("hex")}`);
-      v = v.minus(999999 * 2 + 35);
       const envelop = new Envelop(
         1,
         nonce.toString(10),
