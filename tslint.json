@@ -11,6 +11,7 @@
   ],
   "rules": {
     "no-null-keyword": false,
+    "no-non-null-assertion": false,
     "no-for-in-array": [false],
     "restrict-plus-operands": [false],
     "no-floating-promises": false,
