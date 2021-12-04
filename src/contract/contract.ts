@@ -272,11 +272,13 @@ export class Contract {
         ).string();
       }
       if (outTypes[i] === "address[]") {
+        const transform = [];
         for (let j = 0; j < results[i].length; j++) {
-          results[i][j] = fromBytes(
-            Buffer.from(results[i][j].substring(2), "hex")
-          ).string();
+          transform.push(
+            fromBytes(Buffer.from(results[i][j].substring(2), "hex")).string()
+          );
         }
+        results[i] = transform;
       }
     }
 
