@@ -2,11 +2,14 @@
 /**
  * @fileoverview
  * @enhanceable
+ * @suppress {missingRequire} reports error on implicit type usages.
  * @suppress {messageConventions} JS Compiler reports an error if a variable or
  *     field starts with 'MSG_' and isn't a translatable message.
  * @public
  */
 // GENERATED CODE -- DO NOT EDIT!
+/* eslint-disable */
+// @ts-nocheck
 
 var jspb = require('google-protobuf');
 var goog = jspb;
@@ -28,6 +31,14 @@ proto.iotextypes.ReceiptStatus = {
   ERREXECUTIONREVERTED: 106,
   ERRMAXCODESIZEEXCEEDED: 107,
   ERRWRITEPROTECTION: 108,
+  ERRINVALIDSUBROUTINEENTRY: 109,
+  ERRINSUFFICIENTBALANCE: 110,
+  ERRINVALIDJUMP: 111,
+  ERRRETURNDATAOUTOFBOUNDS: 112,
+  ERRGASUINTOVERFLOW: 113,
+  ERRINVALIDRETSUB: 114,
+  ERRRETURNSTACKEXCEEDED: 115,
+  ERRINVALIDCODE: 116,
   ERRLOADACCOUNT: 200,
   ERRNOTENOUGHBALANCE: 201,
   ERRINVALIDBUCKETINDEX: 202,
@@ -39,7 +50,11 @@ proto.iotextypes.ReceiptStatus = {
   ERRWITHDRAWBEFOREUNSTAKE: 208,
   ERRWITHDRAWBEFOREMATURITY: 209,
   ERRCANDIDATEALREADYEXIST: 210,
-  ERRCANDIDATECONFLICT: 211
+  ERRCANDIDATECONFLICT: 211,
+  ERRINVALIDBUCKETAMOUNT: 212,
+  ERRWRITEACCOUNT: 213,
+  ERRWRITEBUCKET: 214,
+  ERRWRITECANDIDATE: 215
 };
 
 goog.object.extend(exports, proto.iotextypes);

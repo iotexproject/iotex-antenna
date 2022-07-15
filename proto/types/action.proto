@@ -9,6 +9,8 @@
 syntax = "proto3";
 package iotextypes;
 option go_package = "github.com/iotexproject/iotex-proto/golang/iotextypes";
+option java_multiple_files = true;
+option java_package = "com.github.iotexproject.grpc.types";
 
 message Transfer {
   // used by state-based model
@@ -38,6 +40,12 @@ message Execution {
   string amount = 1;
   string contract = 2;
   bytes data = 3;
+  repeated AccessTuple accessList = 4;
+}
+
+message AccessTuple {
+  string address = 1;
+  repeated string storageKeys = 2;
 }
 
 // create stake
@@ -205,6 +213,7 @@ message ActionCore {
   uint64 nonce = 2;
   uint64 gasLimit = 3;
   string gasPrice = 4;
+  uint32 chainID = 5;
   oneof action {
     Transfer transfer = 10;
     Execution execution = 12;
@@ -247,10 +256,16 @@ message ActionCore {
   }
 }
 
+enum Encoding {
+  IOTEX_PROTOBUF = 0;
+  ETHEREUM_RLP = 1;
+}
+
 message Action {
   ActionCore core = 1;
   bytes senderPubKey = 2;
   bytes signature = 3;
+  Encoding encoding = 4;
 }
 
 message Receipt {
@@ -260,33 +275,45 @@ message Receipt {
   uint64 gasConsumed = 4;
   string contractAddress = 5;
   repeated Log logs = 6;
+  string executionRevertMsg = 7;
+  uint32 txIndex = 8;
 }
 
-message Log{
+message Log {
   string contractAddress = 1;
   repeated bytes topics = 2;
   bytes data = 3;
   uint64 blkHeight = 4;
   bytes actHash = 5;
   uint32 index = 6;
+  bytes blkHash = 7;
+  uint32 txIndex = 8;
 }
 
+message Logs {
+  repeated Log logs = 1;
+}
+
+// Deprecated
 message EvmTransfer {
   bytes amount = 1;
   string from = 2;
   string to = 3;
 }
 
+// Deprecated
 message EvmTransferList {
   repeated EvmTransfer evmTransfers = 1;
 }
 
+// Deprecated
 message ActionEvmTransfer {
   bytes actionHash = 1;
   uint64 numEvmTransfers = 2;
   repeated EvmTransfer evmTransfers = 3;
 }
 
+// Deprecated
 message BlockEvmTransfer {
   uint64 blockHeight = 1;
   uint64 numEvmTransfers = 2;
