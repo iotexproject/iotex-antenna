@@ -1,0 +1,58 @@
+// Copyright (c) 2020 IoTeX
+// This is an alpha (internal) release and is not suitable for production. This source code is provided 'as is' and no
+// warranties are given as to title or non-infringement, merchantability or fitness for purpose and, to the extent
+// permitted by law, all liability for your use of the code is disclaimed. This source code is governed by Apache
+// License 2.0 that can be found in the LICENSE file.
+
+// To compile the proto, run:
+//      protoc --go_out=plugins=grpc:$GOPATH/src *.proto
+syntax = "proto3";
+package iotextypes;
+option go_package = "github.com/iotexproject/iotex-proto/golang/iotextypes";
+option java_multiple_files = true;
+option java_package = "com.github.iotexproject.grpc.types";
+
+message TransactionLog {
+  message Transaction {
+    bytes topic = 1;
+    string amount = 2;
+    string sender = 3;
+    string recipient = 4;
+    TransactionLogType type = 5;
+  }
+  bytes actionHash = 1;
+  uint64 numTransactions = 2;
+  repeated Transaction transactions = 3;
+}
+
+message TransactionLogs {
+  repeated TransactionLog logs = 1;
+}
+
+enum TransactionLogType {
+	IN_CONTRACT_TRANSFER = 0;
+	WITHDRAW_BUCKET = 1;
+	CREATE_BUCKET = 2;
+	DEPOSIT_TO_BUCKET = 3;
+	CANDIDATE_SELF_STAKE = 4;
+	CANDIDATE_REGISTRATION_FEE = 5;
+	GAS_FEE = 6;
+	NATIVE_TRANSFER = 7;
+	DEPOSIT_TO_REWARDING_FUND = 8;
+	CLAIM_FROM_REWARDING_FUND = 9;
+}
+
+message TransactionStructLog {
+  uint64 pc = 1;
+  uint64 op = 2;
+  uint64 gas = 3;
+  uint64 gasCost = 4;
+  string memory = 5;
+  int32 memSize = 6;
+  repeated string stack = 7;
+  string returnData = 8;
+  int32 depth = 9;
+  uint64 refund = 10;
+  string opName = 11;
+  string error = 12;
+}

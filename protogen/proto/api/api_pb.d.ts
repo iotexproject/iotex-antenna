@@ -4,58 +4,9 @@ import * as proto_types_action_pb from '../../proto/types/action_pb';
 import * as proto_types_blockchain_pb from '../../proto/types/blockchain_pb';
 import * as proto_types_node_pb from '../../proto/types/node_pb';
 import * as proto_types_election_pb from '../../proto/types/election_pb';
+import * as proto_types_transaction_log_pb from '../../proto/types/transaction_log_pb';
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
 
-
-export class GetVotesRequest extends jspb.Message {
-  getVotee(): string;
-  setVotee(value: string): GetVotesRequest;
-
-  getHeight(): string;
-  setHeight(value: string): GetVotesRequest;
-
-  getOffset(): number;
-  setOffset(value: number): GetVotesRequest;
-
-  getLimit(): number;
-  setLimit(value: number): GetVotesRequest;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetVotesRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: GetVotesRequest): GetVotesRequest.AsObject;
-  static serializeBinaryToWriter(message: GetVotesRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetVotesRequest;
-  static deserializeBinaryFromReader(message: GetVotesRequest, reader: jspb.BinaryReader): GetVotesRequest;
-}
-
-export namespace GetVotesRequest {
-  export type AsObject = {
-    votee: string,
-    height: string,
-    offset: number,
-    limit: number,
-  }
-}
-
-export class GetVotesResponse extends jspb.Message {
-  getBucketsList(): Array<Bucket>;
-  setBucketsList(value: Array<Bucket>): GetVotesResponse;
-  clearBucketsList(): GetVotesResponse;
-  addBuckets(value?: Bucket, index?: number): Bucket;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetVotesResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: GetVotesResponse): GetVotesResponse.AsObject;
-  static serializeBinaryToWriter(message: GetVotesResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetVotesResponse;
-  static deserializeBinaryFromReader(message: GetVotesResponse, reader: jspb.BinaryReader): GetVotesResponse;
-}
-
-export namespace GetVotesResponse {
-  export type AsObject = {
-    bucketsList: Array<Bucket.AsObject>,
-  }
-}
 
 export class Bucket extends jspb.Message {
   getVoter(): string;
@@ -111,6 +62,11 @@ export class GetAccountResponse extends jspb.Message {
   hasAccountmeta(): boolean;
   clearAccountmeta(): GetAccountResponse;
 
+  getBlockidentifier(): proto_types_blockchain_pb.BlockIdentifier | undefined;
+  setBlockidentifier(value?: proto_types_blockchain_pb.BlockIdentifier): GetAccountResponse;
+  hasBlockidentifier(): boolean;
+  clearBlockidentifier(): GetAccountResponse;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetAccountResponse.AsObject;
   static toObject(includeInstance: boolean, msg: GetAccountResponse): GetAccountResponse.AsObject;
@@ -122,6 +78,7 @@ export class GetAccountResponse extends jspb.Message {
 export namespace GetAccountResponse {
   export type AsObject = {
     accountmeta?: proto_types_blockchain_pb.AccountMeta.AsObject,
+    blockidentifier?: proto_types_blockchain_pb.BlockIdentifier.AsObject,
   }
 }
 
@@ -314,6 +271,11 @@ export class ActionInfo extends jspb.Message {
   getBlkhash(): string;
   setBlkhash(value: string): ActionInfo;
 
+  getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): ActionInfo;
+  hasTimestamp(): boolean;
+  clearTimestamp(): ActionInfo;
+
   getBlkheight(): number;
   setBlkheight(value: number): ActionInfo;
 
@@ -323,10 +285,8 @@ export class ActionInfo extends jspb.Message {
   getGasfee(): string;
   setGasfee(value: string): ActionInfo;
 
-  getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): ActionInfo;
-  hasTimestamp(): boolean;
-  clearTimestamp(): ActionInfo;
+  getIndex(): number;
+  setIndex(value: number): ActionInfo;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ActionInfo.AsObject;
@@ -341,10 +301,11 @@ export namespace ActionInfo {
     action?: proto_types_action_pb.Action.AsObject,
     acthash: string,
     blkhash: string,
+    timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     blkheight: number,
     sender: string,
     gasfee: string,
-    timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+    index: number,
   }
 }
 
@@ -413,6 +374,11 @@ export class BlockInfo extends jspb.Message {
   clearReceiptsList(): BlockInfo;
   addReceipts(value?: proto_types_action_pb.Receipt, index?: number): proto_types_action_pb.Receipt;
 
+  getTransactionlogs(): proto_types_transaction_log_pb.TransactionLogs | undefined;
+  setTransactionlogs(value?: proto_types_transaction_log_pb.TransactionLogs): BlockInfo;
+  hasTransactionlogs(): boolean;
+  clearTransactionlogs(): BlockInfo;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockInfo.AsObject;
   static toObject(includeInstance: boolean, msg: BlockInfo): BlockInfo.AsObject;
@@ -425,6 +391,7 @@ export namespace BlockInfo {
   export type AsObject = {
     block?: proto_types_blockchain_pb.Block.AsObject,
     receiptsList: Array<proto_types_action_pb.Receipt.AsObject>,
+    transactionlogs?: proto_types_transaction_log_pb.TransactionLogs.AsObject,
   }
 }
 
@@ -570,6 +537,9 @@ export class GetChainMetaResponse extends jspb.Message {
   hasChainmeta(): boolean;
   clearChainmeta(): GetChainMetaResponse;
 
+  getSyncstage(): string;
+  setSyncstage(value: string): GetChainMetaResponse;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetChainMetaResponse.AsObject;
   static toObject(includeInstance: boolean, msg: GetChainMetaResponse): GetChainMetaResponse.AsObject;
@@ -581,6 +551,7 @@ export class GetChainMetaResponse extends jspb.Message {
 export namespace GetChainMetaResponse {
   export type AsObject = {
     chainmeta?: proto_types_blockchain_pb.ChainMeta.AsObject,
+    syncstage: string,
   }
 }
 
@@ -721,6 +692,12 @@ export class ReadContractRequest extends jspb.Message {
   getCalleraddress(): string;
   setCalleraddress(value: string): ReadContractRequest;
 
+  getGaslimit(): number;
+  setGaslimit(value: number): ReadContractRequest;
+
+  getGasprice(): string;
+  setGasprice(value: string): ReadContractRequest;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ReadContractRequest.AsObject;
   static toObject(includeInstance: boolean, msg: ReadContractRequest): ReadContractRequest.AsObject;
@@ -733,6 +710,8 @@ export namespace ReadContractRequest {
   export type AsObject = {
     execution?: proto_types_action_pb.Execution.AsObject,
     calleraddress: string,
+    gaslimit: number,
+    gasprice: string,
   }
 }
 
@@ -823,6 +802,51 @@ export class EstimateActionGasConsumptionRequest extends jspb.Message {
   hasExecution(): boolean;
   clearExecution(): EstimateActionGasConsumptionRequest;
 
+  getStakecreate(): proto_types_action_pb.StakeCreate | undefined;
+  setStakecreate(value?: proto_types_action_pb.StakeCreate): EstimateActionGasConsumptionRequest;
+  hasStakecreate(): boolean;
+  clearStakecreate(): EstimateActionGasConsumptionRequest;
+
+  getStakeunstake(): proto_types_action_pb.StakeReclaim | undefined;
+  setStakeunstake(value?: proto_types_action_pb.StakeReclaim): EstimateActionGasConsumptionRequest;
+  hasStakeunstake(): boolean;
+  clearStakeunstake(): EstimateActionGasConsumptionRequest;
+
+  getStakewithdraw(): proto_types_action_pb.StakeReclaim | undefined;
+  setStakewithdraw(value?: proto_types_action_pb.StakeReclaim): EstimateActionGasConsumptionRequest;
+  hasStakewithdraw(): boolean;
+  clearStakewithdraw(): EstimateActionGasConsumptionRequest;
+
+  getStakeadddeposit(): proto_types_action_pb.StakeAddDeposit | undefined;
+  setStakeadddeposit(value?: proto_types_action_pb.StakeAddDeposit): EstimateActionGasConsumptionRequest;
+  hasStakeadddeposit(): boolean;
+  clearStakeadddeposit(): EstimateActionGasConsumptionRequest;
+
+  getStakerestake(): proto_types_action_pb.StakeRestake | undefined;
+  setStakerestake(value?: proto_types_action_pb.StakeRestake): EstimateActionGasConsumptionRequest;
+  hasStakerestake(): boolean;
+  clearStakerestake(): EstimateActionGasConsumptionRequest;
+
+  getStakechangecandidate(): proto_types_action_pb.StakeChangeCandidate | undefined;
+  setStakechangecandidate(value?: proto_types_action_pb.StakeChangeCandidate): EstimateActionGasConsumptionRequest;
+  hasStakechangecandidate(): boolean;
+  clearStakechangecandidate(): EstimateActionGasConsumptionRequest;
+
+  getStaketransferownership(): proto_types_action_pb.StakeTransferOwnership | undefined;
+  setStaketransferownership(value?: proto_types_action_pb.StakeTransferOwnership): EstimateActionGasConsumptionRequest;
+  hasStaketransferownership(): boolean;
+  clearStaketransferownership(): EstimateActionGasConsumptionRequest;
+
+  getCandidateregister(): proto_types_action_pb.CandidateRegister | undefined;
+  setCandidateregister(value?: proto_types_action_pb.CandidateRegister): EstimateActionGasConsumptionRequest;
+  hasCandidateregister(): boolean;
+  clearCandidateregister(): EstimateActionGasConsumptionRequest;
+
+  getCandidateupdate(): proto_types_action_pb.CandidateBasicInfo | undefined;
+  setCandidateupdate(value?: proto_types_action_pb.CandidateBasicInfo): EstimateActionGasConsumptionRequest;
+  hasCandidateupdate(): boolean;
+  clearCandidateupdate(): EstimateActionGasConsumptionRequest;
+
   getCalleraddress(): string;
   setCalleraddress(value: string): EstimateActionGasConsumptionRequest;
 
@@ -840,6 +864,15 @@ export namespace EstimateActionGasConsumptionRequest {
   export type AsObject = {
     transfer?: proto_types_action_pb.Transfer.AsObject,
     execution?: proto_types_action_pb.Execution.AsObject,
+    stakecreate?: proto_types_action_pb.StakeCreate.AsObject,
+    stakeunstake?: proto_types_action_pb.StakeReclaim.AsObject,
+    stakewithdraw?: proto_types_action_pb.StakeReclaim.AsObject,
+    stakeadddeposit?: proto_types_action_pb.StakeAddDeposit.AsObject,
+    stakerestake?: proto_types_action_pb.StakeRestake.AsObject,
+    stakechangecandidate?: proto_types_action_pb.StakeChangeCandidate.AsObject,
+    staketransferownership?: proto_types_action_pb.StakeTransferOwnership.AsObject,
+    candidateregister?: proto_types_action_pb.CandidateRegister.AsObject,
+    candidateupdate?: proto_types_action_pb.CandidateBasicInfo.AsObject,
     calleraddress: string,
   }
 
@@ -847,6 +880,15 @@ export namespace EstimateActionGasConsumptionRequest {
     ACTION_NOT_SET = 0,
     TRANSFER = 1,
     EXECUTION = 2,
+    STAKECREATE = 40,
+    STAKEUNSTAKE = 41,
+    STAKEWITHDRAW = 42,
+    STAKEADDDEPOSIT = 43,
+    STAKERESTAKE = 44,
+    STAKECHANGECANDIDATE = 45,
+    STAKETRANSFEROWNERSHIP = 46,
+    CANDIDATEREGISTER = 47,
+    CANDIDATEUPDATE = 48,
   }
 }
 
@@ -928,6 +970,11 @@ export class ReadStateResponse extends jspb.Message {
   getData_asB64(): string;
   setData(value: Uint8Array | string): ReadStateResponse;
 
+  getBlockidentifier(): proto_types_blockchain_pb.BlockIdentifier | undefined;
+  setBlockidentifier(value?: proto_types_blockchain_pb.BlockIdentifier): ReadStateResponse;
+  hasBlockidentifier(): boolean;
+  clearBlockidentifier(): ReadStateResponse;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ReadStateResponse.AsObject;
   static toObject(includeInstance: boolean, msg: ReadStateResponse): ReadStateResponse.AsObject;
@@ -939,6 +986,7 @@ export class ReadStateResponse extends jspb.Message {
 export namespace ReadStateResponse {
   export type AsObject = {
     data: Uint8Array | string,
+    blockidentifier?: proto_types_blockchain_pb.BlockIdentifier.AsObject,
   }
 }
 
@@ -1000,6 +1048,9 @@ export class GetRawBlocksRequest extends jspb.Message {
   getWithreceipts(): boolean;
   setWithreceipts(value: boolean): GetRawBlocksRequest;
 
+  getWithtransactionlogs(): boolean;
+  setWithtransactionlogs(value: boolean): GetRawBlocksRequest;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetRawBlocksRequest.AsObject;
   static toObject(includeInstance: boolean, msg: GetRawBlocksRequest): GetRawBlocksRequest.AsObject;
@@ -1013,6 +1064,7 @@ export namespace GetRawBlocksRequest {
     startheight: number,
     count: number,
     withreceipts: boolean,
+    withtransactionlogs: boolean,
   }
 }
 
@@ -1188,6 +1240,246 @@ export namespace GetLogsResponse {
   }
 }
 
+export class GetTransactionLogByActionHashRequest extends jspb.Message {
+  getActionhash(): string;
+  setActionhash(value: string): GetTransactionLogByActionHashRequest;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetTransactionLogByActionHashRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetTransactionLogByActionHashRequest): GetTransactionLogByActionHashRequest.AsObject;
+  static serializeBinaryToWriter(message: GetTransactionLogByActionHashRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetTransactionLogByActionHashRequest;
+  static deserializeBinaryFromReader(message: GetTransactionLogByActionHashRequest, reader: jspb.BinaryReader): GetTransactionLogByActionHashRequest;
+}
+
+export namespace GetTransactionLogByActionHashRequest {
+  export type AsObject = {
+    actionhash: string,
+  }
+}
+
+export class GetTransactionLogByActionHashResponse extends jspb.Message {
+  getTransactionlog(): proto_types_transaction_log_pb.TransactionLog | undefined;
+  setTransactionlog(value?: proto_types_transaction_log_pb.TransactionLog): GetTransactionLogByActionHashResponse;
+  hasTransactionlog(): boolean;
+  clearTransactionlog(): GetTransactionLogByActionHashResponse;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetTransactionLogByActionHashResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetTransactionLogByActionHashResponse): GetTransactionLogByActionHashResponse.AsObject;
+  static serializeBinaryToWriter(message: GetTransactionLogByActionHashResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetTransactionLogByActionHashResponse;
+  static deserializeBinaryFromReader(message: GetTransactionLogByActionHashResponse, reader: jspb.BinaryReader): GetTransactionLogByActionHashResponse;
+}
+
+export namespace GetTransactionLogByActionHashResponse {
+  export type AsObject = {
+    transactionlog?: proto_types_transaction_log_pb.TransactionLog.AsObject,
+  }
+}
+
+export class GetTransactionLogByBlockHeightRequest extends jspb.Message {
+  getBlockheight(): number;
+  setBlockheight(value: number): GetTransactionLogByBlockHeightRequest;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetTransactionLogByBlockHeightRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetTransactionLogByBlockHeightRequest): GetTransactionLogByBlockHeightRequest.AsObject;
+  static serializeBinaryToWriter(message: GetTransactionLogByBlockHeightRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetTransactionLogByBlockHeightRequest;
+  static deserializeBinaryFromReader(message: GetTransactionLogByBlockHeightRequest, reader: jspb.BinaryReader): GetTransactionLogByBlockHeightRequest;
+}
+
+export namespace GetTransactionLogByBlockHeightRequest {
+  export type AsObject = {
+    blockheight: number,
+  }
+}
+
+export class GetTransactionLogByBlockHeightResponse extends jspb.Message {
+  getTransactionlogs(): proto_types_transaction_log_pb.TransactionLogs | undefined;
+  setTransactionlogs(value?: proto_types_transaction_log_pb.TransactionLogs): GetTransactionLogByBlockHeightResponse;
+  hasTransactionlogs(): boolean;
+  clearTransactionlogs(): GetTransactionLogByBlockHeightResponse;
+
+  getBlockidentifier(): proto_types_blockchain_pb.BlockIdentifier | undefined;
+  setBlockidentifier(value?: proto_types_blockchain_pb.BlockIdentifier): GetTransactionLogByBlockHeightResponse;
+  hasBlockidentifier(): boolean;
+  clearBlockidentifier(): GetTransactionLogByBlockHeightResponse;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetTransactionLogByBlockHeightResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetTransactionLogByBlockHeightResponse): GetTransactionLogByBlockHeightResponse.AsObject;
+  static serializeBinaryToWriter(message: GetTransactionLogByBlockHeightResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetTransactionLogByBlockHeightResponse;
+  static deserializeBinaryFromReader(message: GetTransactionLogByBlockHeightResponse, reader: jspb.BinaryReader): GetTransactionLogByBlockHeightResponse;
+}
+
+export namespace GetTransactionLogByBlockHeightResponse {
+  export type AsObject = {
+    transactionlogs?: proto_types_transaction_log_pb.TransactionLogs.AsObject,
+    blockidentifier?: proto_types_blockchain_pb.BlockIdentifier.AsObject,
+  }
+}
+
+export class StreamBlocksRequest extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StreamBlocksRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: StreamBlocksRequest): StreamBlocksRequest.AsObject;
+  static serializeBinaryToWriter(message: StreamBlocksRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StreamBlocksRequest;
+  static deserializeBinaryFromReader(message: StreamBlocksRequest, reader: jspb.BinaryReader): StreamBlocksRequest;
+}
+
+export namespace StreamBlocksRequest {
+  export type AsObject = {
+  }
+}
+
+export class StreamBlocksResponse extends jspb.Message {
+  getBlock(): BlockInfo | undefined;
+  setBlock(value?: BlockInfo): StreamBlocksResponse;
+  hasBlock(): boolean;
+  clearBlock(): StreamBlocksResponse;
+
+  getBlockidentifier(): proto_types_blockchain_pb.BlockIdentifier | undefined;
+  setBlockidentifier(value?: proto_types_blockchain_pb.BlockIdentifier): StreamBlocksResponse;
+  hasBlockidentifier(): boolean;
+  clearBlockidentifier(): StreamBlocksResponse;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StreamBlocksResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: StreamBlocksResponse): StreamBlocksResponse.AsObject;
+  static serializeBinaryToWriter(message: StreamBlocksResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StreamBlocksResponse;
+  static deserializeBinaryFromReader(message: StreamBlocksResponse, reader: jspb.BinaryReader): StreamBlocksResponse;
+}
+
+export namespace StreamBlocksResponse {
+  export type AsObject = {
+    block?: BlockInfo.AsObject,
+    blockidentifier?: proto_types_blockchain_pb.BlockIdentifier.AsObject,
+  }
+}
+
+export class StreamLogsRequest extends jspb.Message {
+  getFilter(): LogsFilter | undefined;
+  setFilter(value?: LogsFilter): StreamLogsRequest;
+  hasFilter(): boolean;
+  clearFilter(): StreamLogsRequest;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StreamLogsRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: StreamLogsRequest): StreamLogsRequest.AsObject;
+  static serializeBinaryToWriter(message: StreamLogsRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StreamLogsRequest;
+  static deserializeBinaryFromReader(message: StreamLogsRequest, reader: jspb.BinaryReader): StreamLogsRequest;
+}
+
+export namespace StreamLogsRequest {
+  export type AsObject = {
+    filter?: LogsFilter.AsObject,
+  }
+}
+
+export class StreamLogsResponse extends jspb.Message {
+  getLog(): proto_types_action_pb.Log | undefined;
+  setLog(value?: proto_types_action_pb.Log): StreamLogsResponse;
+  hasLog(): boolean;
+  clearLog(): StreamLogsResponse;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StreamLogsResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: StreamLogsResponse): StreamLogsResponse.AsObject;
+  static serializeBinaryToWriter(message: StreamLogsResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StreamLogsResponse;
+  static deserializeBinaryFromReader(message: StreamLogsResponse, reader: jspb.BinaryReader): StreamLogsResponse;
+}
+
+export namespace StreamLogsResponse {
+  export type AsObject = {
+    log?: proto_types_action_pb.Log.AsObject,
+  }
+}
+
+export class GetActPoolActionsRequest extends jspb.Message {
+  getActionhashesList(): Array<string>;
+  setActionhashesList(value: Array<string>): GetActPoolActionsRequest;
+  clearActionhashesList(): GetActPoolActionsRequest;
+  addActionhashes(value: string, index?: number): GetActPoolActionsRequest;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetActPoolActionsRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetActPoolActionsRequest): GetActPoolActionsRequest.AsObject;
+  static serializeBinaryToWriter(message: GetActPoolActionsRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetActPoolActionsRequest;
+  static deserializeBinaryFromReader(message: GetActPoolActionsRequest, reader: jspb.BinaryReader): GetActPoolActionsRequest;
+}
+
+export namespace GetActPoolActionsRequest {
+  export type AsObject = {
+    actionhashesList: Array<string>,
+  }
+}
+
+export class GetActPoolActionsResponse extends jspb.Message {
+  getActionsList(): Array<proto_types_action_pb.Action>;
+  setActionsList(value: Array<proto_types_action_pb.Action>): GetActPoolActionsResponse;
+  clearActionsList(): GetActPoolActionsResponse;
+  addActions(value?: proto_types_action_pb.Action, index?: number): proto_types_action_pb.Action;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetActPoolActionsResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetActPoolActionsResponse): GetActPoolActionsResponse.AsObject;
+  static serializeBinaryToWriter(message: GetActPoolActionsResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetActPoolActionsResponse;
+  static deserializeBinaryFromReader(message: GetActPoolActionsResponse, reader: jspb.BinaryReader): GetActPoolActionsResponse;
+}
+
+export namespace GetActPoolActionsResponse {
+  export type AsObject = {
+    actionsList: Array<proto_types_action_pb.Action.AsObject>,
+  }
+}
+
+export class GetElectionBucketsRequest extends jspb.Message {
+  getEpochnum(): number;
+  setEpochnum(value: number): GetElectionBucketsRequest;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetElectionBucketsRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetElectionBucketsRequest): GetElectionBucketsRequest.AsObject;
+  static serializeBinaryToWriter(message: GetElectionBucketsRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetElectionBucketsRequest;
+  static deserializeBinaryFromReader(message: GetElectionBucketsRequest, reader: jspb.BinaryReader): GetElectionBucketsRequest;
+}
+
+export namespace GetElectionBucketsRequest {
+  export type AsObject = {
+    epochnum: number,
+  }
+}
+
+export class GetElectionBucketsResponse extends jspb.Message {
+  getBucketsList(): Array<proto_types_election_pb.ElectionBucket>;
+  setBucketsList(value: Array<proto_types_election_pb.ElectionBucket>): GetElectionBucketsResponse;
+  clearBucketsList(): GetElectionBucketsResponse;
+  addBuckets(value?: proto_types_election_pb.ElectionBucket, index?: number): proto_types_election_pb.ElectionBucket;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetElectionBucketsResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetElectionBucketsResponse): GetElectionBucketsResponse.AsObject;
+  static serializeBinaryToWriter(message: GetElectionBucketsResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetElectionBucketsResponse;
+  static deserializeBinaryFromReader(message: GetElectionBucketsResponse, reader: jspb.BinaryReader): GetElectionBucketsResponse;
+}
+
+export namespace GetElectionBucketsResponse {
+  export type AsObject = {
+    bucketsList: Array<proto_types_election_pb.ElectionBucket.AsObject>,
+  }
+}
+
 export class GetEvmTransfersByActionHashRequest extends jspb.Message {
   getActionhash(): string;
   setActionhash(value: string): GetEvmTransfersByActionHashRequest;
@@ -1264,115 +1556,85 @@ export namespace GetEvmTransfersByBlockHeightResponse {
   }
 }
 
-export class StreamBlocksRequest extends jspb.Message {
+export class ReadContractStorageRequest extends jspb.Message {
+  getContract(): string;
+  setContract(value: string): ReadContractStorageRequest;
+
+  getKey(): Uint8Array | string;
+  getKey_asU8(): Uint8Array;
+  getKey_asB64(): string;
+  setKey(value: Uint8Array | string): ReadContractStorageRequest;
+
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): StreamBlocksRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: StreamBlocksRequest): StreamBlocksRequest.AsObject;
-  static serializeBinaryToWriter(message: StreamBlocksRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): StreamBlocksRequest;
-  static deserializeBinaryFromReader(message: StreamBlocksRequest, reader: jspb.BinaryReader): StreamBlocksRequest;
+  toObject(includeInstance?: boolean): ReadContractStorageRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: ReadContractStorageRequest): ReadContractStorageRequest.AsObject;
+  static serializeBinaryToWriter(message: ReadContractStorageRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ReadContractStorageRequest;
+  static deserializeBinaryFromReader(message: ReadContractStorageRequest, reader: jspb.BinaryReader): ReadContractStorageRequest;
 }
 
-export namespace StreamBlocksRequest {
+export namespace ReadContractStorageRequest {
   export type AsObject = {
+    contract: string,
+    key: Uint8Array | string,
   }
 }
 
-export class StreamBlocksResponse extends jspb.Message {
-  getBlock(): BlockInfo | undefined;
-  setBlock(value?: BlockInfo): StreamBlocksResponse;
-  hasBlock(): boolean;
-  clearBlock(): StreamBlocksResponse;
+export class ReadContractStorageResponse extends jspb.Message {
+  getData(): Uint8Array | string;
+  getData_asU8(): Uint8Array;
+  getData_asB64(): string;
+  setData(value: Uint8Array | string): ReadContractStorageResponse;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): StreamBlocksResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: StreamBlocksResponse): StreamBlocksResponse.AsObject;
-  static serializeBinaryToWriter(message: StreamBlocksResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): StreamBlocksResponse;
-  static deserializeBinaryFromReader(message: StreamBlocksResponse, reader: jspb.BinaryReader): StreamBlocksResponse;
+  toObject(includeInstance?: boolean): ReadContractStorageResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: ReadContractStorageResponse): ReadContractStorageResponse.AsObject;
+  static serializeBinaryToWriter(message: ReadContractStorageResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ReadContractStorageResponse;
+  static deserializeBinaryFromReader(message: ReadContractStorageResponse, reader: jspb.BinaryReader): ReadContractStorageResponse;
 }
 
-export namespace StreamBlocksResponse {
+export namespace ReadContractStorageResponse {
   export type AsObject = {
-    block?: BlockInfo.AsObject,
+    data: Uint8Array | string,
   }
 }
 
-export class StreamLogsRequest extends jspb.Message {
-  getFilter(): LogsFilter | undefined;
-  setFilter(value?: LogsFilter): StreamLogsRequest;
-  hasFilter(): boolean;
-  clearFilter(): StreamLogsRequest;
+export class TraceTransactionStructLogsRequest extends jspb.Message {
+  getActionhash(): string;
+  setActionhash(value: string): TraceTransactionStructLogsRequest;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): StreamLogsRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: StreamLogsRequest): StreamLogsRequest.AsObject;
-  static serializeBinaryToWriter(message: StreamLogsRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): StreamLogsRequest;
-  static deserializeBinaryFromReader(message: StreamLogsRequest, reader: jspb.BinaryReader): StreamLogsRequest;
+  toObject(includeInstance?: boolean): TraceTransactionStructLogsRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: TraceTransactionStructLogsRequest): TraceTransactionStructLogsRequest.AsObject;
+  static serializeBinaryToWriter(message: TraceTransactionStructLogsRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): TraceTransactionStructLogsRequest;
+  static deserializeBinaryFromReader(message: TraceTransactionStructLogsRequest, reader: jspb.BinaryReader): TraceTransactionStructLogsRequest;
 }
 
-export namespace StreamLogsRequest {
+export namespace TraceTransactionStructLogsRequest {
   export type AsObject = {
-    filter?: LogsFilter.AsObject,
+    actionhash: string,
   }
 }
 
-export class StreamLogsResponse extends jspb.Message {
-  getLog(): proto_types_action_pb.Log | undefined;
-  setLog(value?: proto_types_action_pb.Log): StreamLogsResponse;
-  hasLog(): boolean;
-  clearLog(): StreamLogsResponse;
+export class TraceTransactionStructLogsResponse extends jspb.Message {
+  getStructlogsList(): Array<proto_types_transaction_log_pb.TransactionStructLog>;
+  setStructlogsList(value: Array<proto_types_transaction_log_pb.TransactionStructLog>): TraceTransactionStructLogsResponse;
+  clearStructlogsList(): TraceTransactionStructLogsResponse;
+  addStructlogs(value?: proto_types_transaction_log_pb.TransactionStructLog, index?: number): proto_types_transaction_log_pb.TransactionStructLog;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): StreamLogsResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: StreamLogsResponse): StreamLogsResponse.AsObject;
-  static serializeBinaryToWriter(message: StreamLogsResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): StreamLogsResponse;
-  static deserializeBinaryFromReader(message: StreamLogsResponse, reader: jspb.BinaryReader): StreamLogsResponse;
+  toObject(includeInstance?: boolean): TraceTransactionStructLogsResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: TraceTransactionStructLogsResponse): TraceTransactionStructLogsResponse.AsObject;
+  static serializeBinaryToWriter(message: TraceTransactionStructLogsResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): TraceTransactionStructLogsResponse;
+  static deserializeBinaryFromReader(message: TraceTransactionStructLogsResponse, reader: jspb.BinaryReader): TraceTransactionStructLogsResponse;
 }
 
-export namespace StreamLogsResponse {
+export namespace TraceTransactionStructLogsResponse {
   export type AsObject = {
-    log?: proto_types_action_pb.Log.AsObject,
-  }
-}
-
-export class GetElectionBucketsRequest extends jspb.Message {
-  getEpochnum(): number;
-  setEpochnum(value: number): GetElectionBucketsRequest;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetElectionBucketsRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: GetElectionBucketsRequest): GetElectionBucketsRequest.AsObject;
-  static serializeBinaryToWriter(message: GetElectionBucketsRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetElectionBucketsRequest;
-  static deserializeBinaryFromReader(message: GetElectionBucketsRequest, reader: jspb.BinaryReader): GetElectionBucketsRequest;
-}
-
-export namespace GetElectionBucketsRequest {
-  export type AsObject = {
-    epochnum: number,
-  }
-}
-
-export class GetElectionBucketsResponse extends jspb.Message {
-  getBucketsList(): Array<proto_types_election_pb.ElectionBucket>;
-  setBucketsList(value: Array<proto_types_election_pb.ElectionBucket>): GetElectionBucketsResponse;
-  clearBucketsList(): GetElectionBucketsResponse;
-  addBuckets(value?: proto_types_election_pb.ElectionBucket, index?: number): proto_types_election_pb.ElectionBucket;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetElectionBucketsResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: GetElectionBucketsResponse): GetElectionBucketsResponse.AsObject;
-  static serializeBinaryToWriter(message: GetElectionBucketsResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetElectionBucketsResponse;
-  static deserializeBinaryFromReader(message: GetElectionBucketsResponse, reader: jspb.BinaryReader): GetElectionBucketsResponse;
-}
-
-export namespace GetElectionBucketsResponse {
-  export type AsObject = {
-    bucketsList: Array<proto_types_election_pb.ElectionBucket.AsObject>,
+    structlogsList: Array<proto_types_transaction_log_pb.TransactionStructLog.AsObject>,
   }
 }
 

@@ -9,6 +9,8 @@
 syntax = "proto3";
 package testingpb;
 option go_package = "github.com/iotexproject/iotex-proto/golang/testingpb";
+option java_multiple_files = true;
+option java_package = "com.github.iotexproject.grpc.testing";
 
 message TestPayload {
   bytes msg_body = 1;

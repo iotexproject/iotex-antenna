@@ -120,6 +120,11 @@ export class Execution extends jspb.Message {
   getData_asB64(): string;
   setData(value: Uint8Array | string): Execution;
 
+  getAccesslistList(): Array<AccessTuple>;
+  setAccesslistList(value: Array<AccessTuple>): Execution;
+  clearAccesslistList(): Execution;
+  addAccesslist(value?: AccessTuple, index?: number): AccessTuple;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Execution.AsObject;
   static toObject(includeInstance: boolean, msg: Execution): Execution.AsObject;
@@ -133,6 +138,31 @@ export namespace Execution {
     amount: string,
     contract: string,
     data: Uint8Array | string,
+    accesslistList: Array<AccessTuple.AsObject>,
+  }
+}
+
+export class AccessTuple extends jspb.Message {
+  getAddress(): string;
+  setAddress(value: string): AccessTuple;
+
+  getStoragekeysList(): Array<string>;
+  setStoragekeysList(value: Array<string>): AccessTuple;
+  clearStoragekeysList(): AccessTuple;
+  addStoragekeys(value: string, index?: number): AccessTuple;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): AccessTuple.AsObject;
+  static toObject(includeInstance: boolean, msg: AccessTuple): AccessTuple.AsObject;
+  static serializeBinaryToWriter(message: AccessTuple, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): AccessTuple;
+  static deserializeBinaryFromReader(message: AccessTuple, reader: jspb.BinaryReader): AccessTuple;
+}
+
+export namespace AccessTuple {
+  export type AsObject = {
+    address: string,
+    storagekeysList: Array<string>,
   }
 }
 
@@ -845,6 +875,9 @@ export class ActionCore extends jspb.Message {
   getGasprice(): string;
   setGasprice(value: string): ActionCore;
 
+  getChainid(): number;
+  setChainid(value: number): ActionCore;
+
   getTransfer(): Transfer | undefined;
   setTransfer(value?: Transfer): ActionCore;
   hasTransfer(): boolean;
@@ -1011,6 +1044,7 @@ export namespace ActionCore {
     nonce: number,
     gaslimit: number,
     gasprice: string,
+    chainid: number,
     transfer?: Transfer.AsObject,
     execution?: Execution.AsObject,
     startsubchain?: StartSubChain.AsObject,
@@ -1094,6 +1128,9 @@ export class Action extends jspb.Message {
   getSignature_asB64(): string;
   setSignature(value: Uint8Array | string): Action;
 
+  getEncoding(): Encoding;
+  setEncoding(value: Encoding): Action;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Action.AsObject;
   static toObject(includeInstance: boolean, msg: Action): Action.AsObject;
@@ -1107,6 +1144,7 @@ export namespace Action {
     core?: ActionCore.AsObject,
     senderpubkey: Uint8Array | string,
     signature: Uint8Array | string,
+    encoding: Encoding,
   }
 }
 
@@ -1133,6 +1171,12 @@ export class Receipt extends jspb.Message {
   clearLogsList(): Receipt;
   addLogs(value?: Log, index?: number): Log;
 
+  getExecutionrevertmsg(): string;
+  setExecutionrevertmsg(value: string): Receipt;
+
+  getTxindex(): number;
+  setTxindex(value: number): Receipt;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Receipt.AsObject;
   static toObject(includeInstance: boolean, msg: Receipt): Receipt.AsObject;
@@ -1149,6 +1193,8 @@ export namespace Receipt {
     gasconsumed: number,
     contractaddress: string,
     logsList: Array<Log.AsObject>,
+    executionrevertmsg: string,
+    txindex: number,
   }
 }
 
@@ -1177,6 +1223,14 @@ export class Log extends jspb.Message {
   getIndex(): number;
   setIndex(value: number): Log;
 
+  getBlkhash(): Uint8Array | string;
+  getBlkhash_asU8(): Uint8Array;
+  getBlkhash_asB64(): string;
+  setBlkhash(value: Uint8Array | string): Log;
+
+  getTxindex(): number;
+  setTxindex(value: number): Log;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Log.AsObject;
   static toObject(includeInstance: boolean, msg: Log): Log.AsObject;
@@ -1193,6 +1247,28 @@ export namespace Log {
     blkheight: number,
     acthash: Uint8Array | string,
     index: number,
+    blkhash: Uint8Array | string,
+    txindex: number,
+  }
+}
+
+export class Logs extends jspb.Message {
+  getLogsList(): Array<Log>;
+  setLogsList(value: Array<Log>): Logs;
+  clearLogsList(): Logs;
+  addLogs(value?: Log, index?: number): Log;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): Logs.AsObject;
+  static toObject(includeInstance: boolean, msg: Logs): Logs.AsObject;
+  static serializeBinaryToWriter(message: Logs, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Logs;
+  static deserializeBinaryFromReader(message: Logs, reader: jspb.BinaryReader): Logs;
+}
+
+export namespace Logs {
+  export type AsObject = {
+    logsList: Array<Log.AsObject>,
   }
 }
 
@@ -1372,6 +1448,10 @@ export namespace GrantReward {
   }
 }
 
+export enum Encoding { 
+  IOTEX_PROTOBUF = 0,
+  ETHEREUM_RLP = 1,
+}
 export enum RewardType { 
   BLOCKREWARD = 0,
   EPOCHREWARD = 1,
