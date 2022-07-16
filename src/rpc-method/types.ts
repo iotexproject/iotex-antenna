@@ -731,6 +731,9 @@ export interface IActionCore {
   // ActionCore gasPrice
   gasPrice: string;
 
+  // ActionCore chainID
+  chainID: number;
+
   // Action detail fields
   // ActionCore transfer
   transfer?: ITransfer | undefined;
@@ -1891,6 +1894,7 @@ export const GetActionsRequest = {
           actionCore = {
             version: rawActionCore.getVersion(),
             nonce: String(rawActionCore.getNonce()),
+            chainID: rawActionCore.getChainid(),
             gasLimit: String(rawActionCore.getGaslimit()),
             gasPrice: rawActionCore.getGasprice(),
             transfer: GetActionsRequest.fromTransfer(
@@ -2556,6 +2560,7 @@ function fromPbBlockBody(
         actionCore = {
           version: rawActionCore.getVersion(),
           nonce: String(rawActionCore.getNonce()),
+          chainID: rawActionCore.getChainid(),
           gasLimit: String(rawActionCore.getGaslimit()),
           gasPrice: rawActionCore.getGasprice(),
           transfer: GetActionsRequest.fromTransfer(rawActionCore.getTransfer()),

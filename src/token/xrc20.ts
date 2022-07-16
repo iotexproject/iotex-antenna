@@ -35,9 +35,9 @@ export class XRC20 {
   private tokenDecimals: BigNumber;
   private tokenTotalSupply: BigNumber;
 
-  constructor(address: string, options?: Options) {
+  constructor(chainID: number, address: string, options?: Options) {
     this.address = address;
-    this.contract = new Contract(XRC20_ABI, address, options);
+    this.contract = new Contract(chainID, XRC20_ABI, address, options);
 
     const methods = {};
     // @ts-ignore

@@ -43,6 +43,7 @@ test.skip("Contract_deploy_SimpleStorage", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
   const method = new ExecutionMethod(client, sender, {
+    chainID: 2,
     gasPrice: "1000000000000",
     gasLimit: "1000000",
     contract: "",
@@ -69,6 +70,7 @@ test.skip("Contract_set_SimpleStorage", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
   const method = new ExecutionMethod(client, sender, {
+    chainID: 2,
     gasPrice: "1000000000000",
     gasLimit: "1000000",
     contract: "io186s45j3rgvhxh25ec6xk9wap0drtthk3jq4du7",
@@ -85,7 +87,7 @@ test.skip("Contract_set_SimpleStorage", async t => {
   });
   t.deepEqual(actions.actionInfo.length, 1, "contract action is empty");
   const result = await client.readContract({
-    execution: actions.actionInfo[0].action.core.execution,
+    execution: actions.actionInfo[0].action.core!.execution!,
     callerAddress: TEST_ACCOUNT.address
   });
   t.truthy(result);
@@ -104,6 +106,7 @@ test.skip("Contract_get_SimpleStorage", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
   const method = new ExecutionMethod(client, sender, {
+    chainID: 2,
     gasPrice: "1000000000000",
     gasLimit: "1000000",
     contract: "io186s45j3rgvhxh25ec6xk9wap0drtthk3jq4du7",
@@ -113,7 +116,7 @@ test.skip("Contract_get_SimpleStorage", async t => {
   const action = await method.sign();
 
   const result = await client.readContract({
-    execution: action.core.execution,
+    execution: action.core!.execution!,
     callerAddress: TEST_ACCOUNT.address
   });
   t.truthy(result);
@@ -128,6 +131,7 @@ test.skip("Contract_method_get_SimpleStorage", async t => {
 
   const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const contract = new Contract(
+    2,
     JSON.parse(contractDef.interface),
     "io186s45j3rgvhxh25ec6xk9wap0drtthk3jq4du7",
     { provider: client }
@@ -151,6 +155,7 @@ test.skip("Contract_method_set_SimpleStorage", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
 
   const contract = new Contract(
+    2,
     JSON.parse(contractDef.interface),
     "io186s45j3rgvhxh25ec6xk9wap0drtthk3jq4du7",
     { provider: client }
@@ -175,6 +180,7 @@ test.skip("Contract_estimateGas_set_SimpleStorage", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
 
   const contract = new Contract(
+    2,
     JSON.parse(contractDef.interface),
     "io186s45j3rgvhxh25ec6xk9wap0drtthk3jq4du7",
     { provider: client }

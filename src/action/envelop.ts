@@ -68,6 +68,7 @@ export class Envelop {
   public nonce: string;
   public gasLimit?: string | undefined;
   public gasPrice?: string | undefined;
+  public chainID: number;
 
   // optional fields
   public transfer?: ITransfer | undefined;
@@ -104,6 +105,7 @@ export class Envelop {
   constructor(
     version: number,
     nonce: string,
+    chainID: number,
     gasLimit?: string,
     gasPrice?: string
   ) {
@@ -111,8 +113,10 @@ export class Envelop {
     this.nonce = nonce;
     this.gasLimit = gasLimit;
     this.gasPrice = gasPrice;
+    this.chainID = chainID;
   }
 
+  // tslint:disable:max-func-body-length
   // tslint:disable-next-line:cyclomatic-complexity
   public core(): actionPb.ActionCore {
     const gasLimit = this.gasLimit || "0";
@@ -123,6 +127,7 @@ export class Envelop {
     pbActionCore.setNonce(Number(this.nonce));
     pbActionCore.setGaslimit(Number(gasLimit));
     pbActionCore.setGasprice(gasPrice);
+    pbActionCore.setChainid(this.chainID);
 
     // oneof action
     if (this.transfer) {
@@ -224,6 +229,7 @@ export class Envelop {
     const envelop = new Envelop(
       pbActionCore.getVersion(),
       String(pbActionCore.getNonce()),
+      pbActionCore.getChainid(),
       String(pbActionCore.getGaslimit()),
       pbActionCore.getGasprice()
     );
@@ -302,6 +308,7 @@ export class SealedEnvelop {
         nonce: this.act.nonce,
         gasLimit: gasLimit,
         gasPrice: gasPrice,
+        chainID: this.act.chainID,
         transfer: this.act.transfer,
         execution: this.act.execution,
         startSubChain: this.act.startSubChain,
