@@ -27,6 +27,7 @@ test.skip("TransferMethod_execute", async t => {
     amount: "8500000000000000",
     recipient: "io13zt8sznez2pf0q0hqdz2hyl938wak2fsjgdeml",
     payload: "68656c6c6f20776f726c6421",
+    chainID: 2,
     gasLimit: "100000",
     gasPrice: "10000000000000"
   });
@@ -38,6 +39,7 @@ test.skip("TransferMethod_execute_nogas", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
   const method = new TransferMethod(client, sender, {
+    chainID: 2,
     amount: "1000000000000000000",
     recipient: "io13zt8sznez2pf0q0hqdz2hyl938wak2fsjgdeml",
     payload: "68656c6c6f20776f726c6421"
@@ -50,6 +52,7 @@ test.skip("Execution_execute", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
   const method = new ExecutionMethod(client, sender, {
+    chainID: 2,
     contract: "",
     amount: "0",
     data: Buffer.from(
@@ -65,6 +68,7 @@ test.skip("ClaimFronRewardingFundMethod_execute", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, { timeout: 10000 });
   const sender = Account.fromPrivateKey(TEST_ACCOUNT.privateKey);
   const method = new ClaimFromRewardingFundMethod(client, sender, {
+    chainID: 2,
     amount: "0",
     gasLimit: "100000",
     gasPrice: "10000000000000",

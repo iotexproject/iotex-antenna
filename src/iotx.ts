@@ -72,6 +72,7 @@ export class Iotx extends RpcMethod {
       this,
       sender,
       {
+        chainID: req.chainID,
         gasLimit: req.gasLimit,
         gasPrice: req.gasPrice,
         amount: req.value,
@@ -168,6 +169,7 @@ export class Iotx extends RpcMethod {
       this,
       sender,
       {
+        chainID: req.chainID,
         gasLimit: req.gasLimit,
         gasPrice: req.gasPrice,
         amount: req.amount,

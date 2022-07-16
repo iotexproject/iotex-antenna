@@ -2,7 +2,7 @@ import test from "ava";
 import { Envelop } from "../envelop";
 
 test("envelop serialize deserialize", async t => {
-  const envelop = new Envelop(1, "2", "3", "4");
+  const envelop = new Envelop(1, "2", 2, "3", "4");
   envelop.transfer = {
     amount: "1",
     recipient: "io14jyvf4stclr80nmgx9hrkdr0c4hptfwl7ljxdz",

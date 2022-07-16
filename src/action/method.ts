@@ -49,6 +49,7 @@ export class AbstractMethod {
   }
 
   public async baseEnvelop(
+    chainID: number,
     gasLimit?: string,
     gasPrice?: string
   ): Promise<Envelop> {
@@ -60,7 +61,7 @@ export class AbstractMethod {
       nonce = String((meta.accountMeta && meta.accountMeta.pendingNonce) || "");
     }
 
-    return new Envelop(1, nonce, gasLimit, gasPrice);
+    return new Envelop(1, nonce, chainID, gasLimit, gasPrice);
   }
 
   public async signAction(envelop: Envelop): Promise<SealedEnvelop> {
@@ -180,6 +181,7 @@ export class TransferMethod extends AbstractMethod {
 
   public async execute(): Promise<string> {
     const envelop = await this.baseEnvelop(
+      this.transfer.chainID,
       this.transfer.gasLimit,
       this.transfer.gasPrice
     );
@@ -208,6 +210,7 @@ export class ExecutionMethod extends AbstractMethod {
 
   public async execute(): Promise<string> {
     const envelop = await this.baseEnvelop(
+      this.execution.chainID,
       this.execution.gasLimit,
       this.execution.gasPrice
     );
@@ -222,6 +225,7 @@ export class ExecutionMethod extends AbstractMethod {
 
   public async sign(): Promise<IAction> {
     const envelop = await this.baseEnvelop(
+      this.execution.chainID,
       this.execution.gasLimit,
       this.execution.gasPrice
     );
@@ -251,6 +255,7 @@ export class ClaimFromRewardingFundMethod extends AbstractMethod {
 
   public async execute(): Promise<string> {
     const envelop = await this.baseEnvelop(
+      this.claimFronRewardFund.chainID,
       this.claimFronRewardFund.gasLimit,
       this.claimFronRewardFund.gasPrice
     );
@@ -264,6 +269,7 @@ export class ClaimFromRewardingFundMethod extends AbstractMethod {
 
   public async sign(): Promise<IAction> {
     const envelop = await this.baseEnvelop(
+      this.claimFronRewardFund.chainID,
       this.claimFronRewardFund.gasLimit,
       this.claimFronRewardFund.gasPrice
     );
@@ -292,6 +298,7 @@ export class StakeCreateMethod extends AbstractMethod {
 
   public async execute(): Promise<string> {
     const envelop = await this.baseEnvelop(
+      this.target.chainID,
       this.target.gasLimit,
       this.target.gasPrice
     );
@@ -308,6 +315,7 @@ export class StakeCreateMethod extends AbstractMethod {
 
   public async sign(): Promise<IAction> {
     const envelop = await this.baseEnvelop(
+      this.target.chainID,
       this.target.gasLimit,
       this.target.gasPrice
     );
@@ -339,6 +347,7 @@ export class StakeUnstakeMethod extends AbstractMethod {
 
   public async execute(): Promise<string> {
     const envelop = await this.baseEnvelop(
+      this.target.chainID,
       this.target.gasLimit,
       this.target.gasPrice
     );
@@ -352,6 +361,7 @@ export class StakeUnstakeMethod extends AbstractMethod {
 
   public async sign(): Promise<IAction> {
     const envelop = await this.baseEnvelop(
+      this.target.chainID,
       this.target.gasLimit,
       this.target.gasPrice
     );
@@ -380,6 +390,7 @@ export class StakeWithdrawMethod extends AbstractMethod {
 
   public async execute(): Promise<string> {
     const envelop = await this.baseEnvelop(
+      this.target.chainID,
       this.target.gasLimit,
       this.target.gasPrice
     );
@@ -393,6 +404,7 @@ export class StakeWithdrawMethod extends AbstractMethod {
 
   public async sign(): Promise<IAction> {
     const envelop = await this.baseEnvelop(
+      this.target.chainID,
       this.target.gasLimit,
       this.target.gasPrice
     );
@@ -421,6 +433,7 @@ export class StakeAddDepositMethod extends AbstractMethod {
 
   public async execute(): Promise<string> {
     const envelop = await this.baseEnvelop(
+      this.target.chainID,
       this.target.gasLimit,
       this.target.gasPrice
     );
@@ -435,6 +448,7 @@ export class StakeAddDepositMethod extends AbstractMethod {
 
   public async sign(): Promise<IAction> {
     const envelop = await this.baseEnvelop(
+      this.target.chainID,
       this.target.gasLimit,
       this.target.gasPrice
     );
@@ -464,6 +478,7 @@ export class StakeRestakeMethod extends AbstractMethod {
 
   public async execute(): Promise<string> {
     const envelop = await this.baseEnvelop(
+      this.target.chainID,
       this.target.gasLimit,
       this.target.gasPrice
     );
@@ -479,6 +494,7 @@ export class StakeRestakeMethod extends AbstractMethod {
 
   public async sign(): Promise<IAction> {
     const envelop = await this.baseEnvelop(
+      this.target.chainID,
       this.target.gasLimit,
       this.target.gasPrice
     );
@@ -509,6 +525,7 @@ export class StakeChangeCandidateMethod extends AbstractMethod {
 
   public async execute(): Promise<string> {
     const envelop = await this.baseEnvelop(
+      this.target.chainID,
       this.target.gasLimit,
       this.target.gasPrice
     );
@@ -523,6 +540,7 @@ export class StakeChangeCandidateMethod extends AbstractMethod {
 
   public async sign(): Promise<IAction> {
     const envelop = await this.baseEnvelop(
+      this.target.chainID,
       this.target.gasLimit,
       this.target.gasPrice
     );
@@ -552,6 +570,7 @@ export class StakeTransferOwnershipMethod extends AbstractMethod {
 
   public async execute(): Promise<string> {
     const envelop = await this.baseEnvelop(
+      this.target.chainID,
       this.target.gasLimit,
       this.target.gasPrice
     );
@@ -566,6 +585,7 @@ export class StakeTransferOwnershipMethod extends AbstractMethod {
 
   public async sign(): Promise<IAction> {
     const envelop = await this.baseEnvelop(
+      this.target.chainID,
       this.target.gasLimit,
       this.target.gasPrice
     );
@@ -595,6 +615,7 @@ export class CandidateRegisterMethod extends AbstractMethod {
 
   public async execute(): Promise<string> {
     const envelop = await this.baseEnvelop(
+      this.target.chainID,
       this.target.gasLimit,
       this.target.gasPrice
     );
@@ -616,6 +637,7 @@ export class CandidateRegisterMethod extends AbstractMethod {
 
   public async sign(): Promise<IAction> {
     const envelop = await this.baseEnvelop(
+      this.target.chainID,
       this.target.gasLimit,
       this.target.gasPrice
     );
@@ -652,6 +674,7 @@ export class CandidateUpdateMethod extends AbstractMethod {
 
   public async execute(): Promise<string> {
     const envelop = await this.baseEnvelop(
+      this.target.chainID,
       this.target.gasLimit,
       this.target.gasPrice
     );
@@ -666,6 +689,7 @@ export class CandidateUpdateMethod extends AbstractMethod {
 
   public async sign(): Promise<IAction> {
     const envelop = await this.baseEnvelop(
+      this.target.chainID,
       this.target.gasLimit,
       this.target.gasPrice
     );

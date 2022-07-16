@@ -45,6 +45,7 @@ export interface TransferRequest {
   from: string;
   to: string;
   value: string;
+  chainID: number;
   payload?: string;
   gasLimit?: string;
   gasPrice?: string;
@@ -56,6 +57,7 @@ export interface ContractRequest {
   abi: Array<ABIDefinition> | string;
   // contract bytecode
   data: Buffer;
+  chainID: number;
   gasLimit?: string;
   gasPrice?: string;
 }
@@ -66,6 +68,7 @@ export interface ExecuteContractRequest {
   abi: Array<ABIDefinition> | string;
   contractAddress: string;
   method: string;
+  chainID: number;
   gasLimit?: string;
   gasPrice?: string;
 }
@@ -74,6 +77,7 @@ export interface ClaimFromRewardingFundRequset {
   from: string;
   amount: string;
   data: Buffer;
+  chainID: number;
   gasLimit?: string;
   gasPrice?: string;
 }
