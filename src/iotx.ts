@@ -26,8 +26,8 @@ export class Iotx extends RpcMethod {
   public accounts: Accounts;
   public signer?: SignerPlugin;
 
-  constructor(hostname: string, opts?: IotxOpts) {
-    super(hostname, {
+  constructor(hostname: string, chainID: number, opts?: IotxOpts) {
+    super(hostname, chainID, {
       timeout: opts && opts.timeout,
       apiToken: opts && opts.apiToken
     });
@@ -72,7 +72,6 @@ export class Iotx extends RpcMethod {
       this,
       sender,
       {
-        chainID: req.chainID,
         gasLimit: req.gasLimit,
         gasPrice: req.gasPrice,
         amount: req.value,
@@ -169,7 +168,6 @@ export class Iotx extends RpcMethod {
       this,
       sender,
       {
-        chainID: req.chainID,
         gasLimit: req.gasLimit,
         gasPrice: req.gasPrice,
         amount: req.amount,
