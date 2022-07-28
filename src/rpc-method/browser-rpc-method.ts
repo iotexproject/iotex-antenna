@@ -62,22 +62,33 @@ type Opts = {
 };
 
 export default class RpcMethod implements IRpcMethod {
+  private chainID: number;
   public client: grpcWeb.APIServicePromiseClient;
   public timeout: number;
   public apiToken?: string;
 
-  constructor(hostname: string, options: Opts = {}) {
+  constructor(hostname: string, chainID: number, options: Opts = {}) {
     this.client = new grpcWeb.APIServicePromiseClient(hostname, null, null);
     this.timeout = options.timeout || 300000;
     this.apiToken = options.apiToken;
+    this.chainID = chainID;
   }
 
-  public setProvider(provider: string | IRpcMethod): void {
+  public getChainID(): number {
+    return this.chainID;
+  }
+
+  public setProvider(provider: string | IRpcMethod, chainID?: number): void {
     if (typeof provider === "string") {
       this.client = new grpcWeb.APIServicePromiseClient(provider, null, null);
+      if (!chainID) {
+        throw new Error("require chainID");
+      }
+      this.chainID = chainID;
     } else {
-      const origin = provider as RpcMethod;
+      const origin = (provider as unknown) as RpcMethod;
       this.client = origin.client;
+      this.chainID = origin.chainID;
     }
   }
 

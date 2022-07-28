@@ -2922,7 +2922,9 @@ export const IReadStakingDataRequestToBuffer = (
 };
 
 export interface IRpcMethod {
-  setProvider(provider: string | IRpcMethod): void;
+  getChainID(): number;
+
+  setProvider(provider: string | IRpcMethod, chainID?: number): void;
 
   getAccount(req: IGetAccountRequest): Promise<IGetAccountResponse>;
 

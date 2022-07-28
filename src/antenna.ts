@@ -13,8 +13,8 @@ export type Opts = {
 export default class Antenna {
   public iotx: Iotx;
 
-  constructor(provider: string, opts?: Opts) {
-    this.iotx = new Iotx(provider, {
+  constructor(provider: string, chainID: number, opts?: Opts) {
+    this.iotx = new Iotx(provider, chainID, {
       signer: opts && opts.signer,
       timeout: opts && opts.timeout,
       apiToken: opts && opts.apiToken
@@ -31,13 +31,13 @@ export default class Antenna {
     Contract
   };
 
-  public setProvider(provider: string | IRpcMethod): void {
+  public setProvider(provider: string | IRpcMethod, chainID?: number): void {
     if (typeof provider === "object") {
       if (provider === this.iotx.currentProvider()) {
         return;
       }
     }
-    this.iotx.setProvider(provider);
+    this.iotx.setProvider(provider, chainID);
   }
 
   public currentProvider(): IRpcMethod {

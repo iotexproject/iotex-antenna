@@ -19,7 +19,7 @@ const { IOTEX_CORE = "", TEST_PRIVATE_KEY_HAVING_IOTX = "" } = process.env;
 const accountTest = TEST_PRIVATE_KEY_HAVING_IOTX ? test.serial : test.skip;
 
 test.serial("create account", async t => {
-  const antenna = new Antenna(IOTEX_CORE);
+  const antenna = new Antenna(IOTEX_CORE, 2);
   const acct = antenna.iotx.accounts.create();
   t.truthy(acct.address);
   t.truthy(acct.publicKey);
@@ -27,14 +27,14 @@ test.serial("create account", async t => {
 });
 
 test.serial("unlock account", async t => {
-  const antenna = new Antenna(IOTEX_CORE);
+  const antenna = new Antenna(IOTEX_CORE, 2);
   const acct = antenna.iotx.accounts.create();
   const another = antenna.iotx.accounts.privateKeyToAccount(acct.privateKey);
   t.deepEqual(acct, another);
 });
 
 test.serial("transfer throws if no account", async t => {
-  const antenna = new Antenna(IOTEX_CORE);
+  const antenna = new Antenna(IOTEX_CORE, 2);
   await t.throwsAsync(
     async () => {
       await antenna.iotx.sendTransfer({
@@ -51,17 +51,17 @@ test.serial("transfer throws if no account", async t => {
 
 test.serial("change provider", async t => {
   // tslint:disable-next-line:no-http-string
-  const antenna = new Antenna("http://api.testnet.iotex.one:80");
+  const antenna = new Antenna("http://api.testnet.iotex.one:80", 2);
   let chainMeta = await antenna.iotx.getChainMeta({});
   t.truthy(chainMeta);
   // tslint:disable-next-line:no-http-string
-  antenna.setProvider("http://api.iotex.one:80");
+  antenna.setProvider("http://api.iotex.one:80", 2);
   chainMeta = await antenna.iotx.getChainMeta({});
   t.truthy(chainMeta);
 });
 
 accountTest("transfer", async t => {
-  const antenna = new Antenna(IOTEX_CORE);
+  const antenna = new Antenna(IOTEX_CORE, 2);
   const acctHavingIotx = antenna.iotx.accounts.privateKeyToAccount(
     TEST_PRIVATE_KEY_HAVING_IOTX
   );
@@ -110,7 +110,7 @@ accountTest("transfer", async t => {
 });
 
 accountTest("deployContract", async t => {
-  const antenna = new Antenna(IOTEX_CORE);
+  const antenna = new Antenna(IOTEX_CORE, 2);
   const creator = antenna.iotx.accounts.privateKeyToAccount(
     TEST_PRIVATE_KEY_HAVING_IOTX
   );
@@ -138,7 +138,7 @@ accountTest("deployContract", async t => {
 });
 
 accountTest("executeContract", async t => {
-  const antenna = new Antenna(IOTEX_CORE);
+  const antenna = new Antenna(IOTEX_CORE, 2);
   const creator = antenna.iotx.accounts.privateKeyToAccount(
     TEST_PRIVATE_KEY_HAVING_IOTX
   );
@@ -167,7 +167,7 @@ accountTest("executeContract", async t => {
 });
 
 accountTest("readContractByMethod", async t => {
-  const antenna = new Antenna(IOTEX_CORE);
+  const antenna = new Antenna(IOTEX_CORE, 2);
 
   const solFile = "../contract/__test__/SimpleStorage.sol";
   const contractName = ":SimpleStorage";
@@ -187,12 +187,11 @@ accountTest("readContractByMethod", async t => {
 });
 
 accountTest("claim from rewarding fund", async t => {
-  const antenna = new Antenna(IOTEX_CORE);
+  const antenna = new Antenna(IOTEX_CORE, 2);
   const sender = antenna.iotx.accounts.privateKeyToAccount(
     TEST_PRIVATE_KEY_HAVING_IOTX
   );
   const hash = await antenna.iotx.claimFromRewardingFund({
-    chainID: 2,
     from: sender.address,
     amount: "0",
     gasPrice: "1000000000000",
@@ -203,9 +202,8 @@ accountTest("claim from rewarding fund", async t => {
 });
 
 test("decode method one result", async t => {
-  const antenna = new Antenna(IOTEX_CORE);
+  const antenna = new Antenna(IOTEX_CORE, 2);
   const contract = new Contract(
-    2,
     ABI,
     "io15rxn7xdmtxgpe76lcka49za00kuutwxyqvwupx"
   );
@@ -218,7 +216,6 @@ test("decode method one result", async t => {
 
 test("decode method multiple result", async t => {
   const contract = new Contract(
-    2,
     ABI,
     "io15rxn7xdmtxgpe76lcka49za00kuutwxyqvwupx"
   );

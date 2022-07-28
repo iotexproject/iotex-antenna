@@ -59,12 +59,13 @@ type Opts = {
 };
 
 export default class RpcMethod implements IRpcMethod {
+  private chainID: number;
   public client: IRpcMethod;
   public timeout: number;
   public apiToken?: string;
   private credentials: grpc.ChannelCredentials;
 
-  constructor(hostname: string, options: Opts = {}) {
+  constructor(hostname: string, chainID: number, options: Opts = {}) {
     const normalizedHostname = String(hostname).replace(
       /^(http:\/\/|https:\/\/)/,
       ""
@@ -84,9 +85,14 @@ export default class RpcMethod implements IRpcMethod {
     );
     this.timeout = options.timeout || 300000;
     this.apiToken = options.apiToken;
+    this.chainID = chainID;
   }
 
-  public setProvider(provider: string | IRpcMethod): void {
+  public getChainID(): number {
+    return this.chainID;
+  }
+
+  public setProvider(provider: string | IRpcMethod, chainID?: number): void {
     if (typeof provider === "string") {
       const normalizedHostname = String(provider).replace(
         /^(http:\/\/|https:\/\/)/,
@@ -101,9 +107,14 @@ export default class RpcMethod implements IRpcMethod {
         this.credentials,
         null
       );
+      if (!chainID) {
+        throw new Error("require chainID");
+      }
+      this.chainID = chainID;
     } else {
       const origin = provider as RpcMethod;
       this.client = origin.client;
+      this.chainID = origin.chainID;
     }
   }
 

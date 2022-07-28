@@ -10,8 +10,8 @@ dotenv.config();
 const { IOTEX_CORE = "", TEST_PRIVATE_KEY_HAVING_VITA = "" } = process.env;
 
 test.skip("test_xrc20_contant_method", async t => {
-  const vita = new XRC20(2, "io14j96vg9pkx28htpgt2jx0tf3v9etpg4j9h384m", {
-    provider: new RpcMethod(IOTEX_CORE, { timeout: 10000 })
+  const vita = new XRC20("io14j96vg9pkx28htpgt2jx0tf3v9etpg4j9h384m", {
+    provider: new RpcMethod(IOTEX_CORE, 2, { timeout: 10000 })
   });
   t.truthy(vita);
   const name = await vita.name();
@@ -29,10 +29,10 @@ test.skip("test_xrc20_contant_method", async t => {
 });
 
 test.skip("test_transer", async t => {
-  const antenna = new Antenna(IOTEX_CORE);
+  const antenna = new Antenna(IOTEX_CORE, 2);
   antenna.iotx.accounts.privateKeyToAccount(TEST_PRIVATE_KEY_HAVING_VITA);
 
-  const vita = new XRC20(2, "io14j96vg9pkx28htpgt2jx0tf3v9etpg4j9h384m", {
+  const vita = new XRC20("io14j96vg9pkx28htpgt2jx0tf3v9etpg4j9h384m", {
     provider: antenna.iotx
   });
 

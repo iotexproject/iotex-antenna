@@ -9,7 +9,7 @@ dotenv.config();
 const TEST_HOSTNAME = process.env.IOTEX_CORE || "http://localhost:14014";
 
 test.skip("RpcMethod.StreamBlocks", async t => {
-  const client = new RpcMethod(TEST_HOSTNAME);
+  const client = new RpcMethod(TEST_HOSTNAME, 2);
   const resp = client.streamBlocks({});
 
   resp.on("data", (res: IStreamBlocksResponse) => {
@@ -28,7 +28,7 @@ test.skip("RpcMethod.StreamBlocks", async t => {
 });
 
 test.skip("RpcMethod.StreamLogs", async t => {
-  const client = new RpcMethod(TEST_HOSTNAME);
+  const client = new RpcMethod(TEST_HOSTNAME, 2);
   const resp = client.streamLogs({
     filter: {
       address: [],

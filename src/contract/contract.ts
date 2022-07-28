@@ -34,8 +34,6 @@ export class Contract {
   // The options of the contract.
   private readonly options?: Options;
 
-  public readonly chainID: number;
-
   public provider?: IRpcMethod;
 
   public readonly methods: { [funcName: string]: Function };
@@ -47,13 +45,11 @@ export class Contract {
   }
 
   constructor(
-    chainID: number,
     // tslint:disable-next-line: no-any
     jsonInterface?: Array<ABIDefinition>,
     address?: string,
     options?: Options
   ) {
-    this.chainID = chainID;
     this.provider = options && options.provider;
     if (jsonInterface) {
       this.abi = getAbiFunctions(jsonInterface);
@@ -193,7 +189,6 @@ export class Contract {
     }
 
     const contractEnvelop = {
-      chainID: this.chainID,
       gasLimit: gasLimit,
       gasPrice: gasPrice,
       contract: "",
@@ -248,7 +243,6 @@ export class Contract {
     }
 
     return {
-      chainID: this.chainID,
       gasLimit: gasLimit,
       gasPrice: gasPrice,
       contract: this.address,

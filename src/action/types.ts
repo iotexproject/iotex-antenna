@@ -1,5 +1,4 @@
 export interface BaseActionRequest {
-  chainID: number;
   gasLimit?: string | undefined;
   gasPrice?: string | undefined;
 }
