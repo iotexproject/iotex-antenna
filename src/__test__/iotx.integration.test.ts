@@ -38,7 +38,6 @@ test.serial("transfer throws if no account", async t => {
   await t.throwsAsync(
     async () => {
       await antenna.iotx.sendTransfer({
-        chainID: 2,
         from: "empty from",
         to: "empty to",
         value: "1"
@@ -79,7 +78,6 @@ accountTest("transfer", async t => {
   const acctNew = antenna.iotx.accounts.create("any entropy");
   // @ts-ignore
   const hash = await antenna.iotx.sendTransfer({
-    chainID: 2,
     from: acctHavingIotx.address,
     to: acctNew.address,
     value: oneIotx,
@@ -127,7 +125,6 @@ accountTest("deployContract", async t => {
       amount: "0",
       abi: JSON.parse(contract.interface),
       data: Buffer.from(contract.bytecode, "hex"),
-      chainID: 2,
       gasPrice: "1000000000000",
       gasLimit: "1000000"
     },
@@ -156,7 +153,6 @@ accountTest("executeContract", async t => {
       abi: contract.interface,
       amount: "0",
       method: "set",
-      chainID: 2,
       gasPrice: "1000000000000",
       gasLimit: "1000000"
     },
@@ -176,7 +172,6 @@ accountTest("readContractByMethod", async t => {
   const contract = output.contracts[contractName];
 
   const result = await antenna.iotx.readContractByMethod({
-    chainID: 2,
     from: "io13zt8sznez2pf0q0hqdz2hyl938wak2fsjgdeml",
     contractAddress: "io186s45j3rgvhxh25ec6xk9wap0drtthk3jq4du7",
     abi: contract.interface,
