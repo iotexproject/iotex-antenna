@@ -1272,6 +1272,7 @@ export function toAction(req: IAction): any {
     pbActionCore.setNonce(Number(core.nonce));
     pbActionCore.setGaslimit(Number(core.gasLimit));
     pbActionCore.setGasprice(core.gasPrice);
+    pbActionCore.setChainid(core.chainID);
     pbActionCore.setTransfer(toActionTransfer(core.transfer));
     pbActionCore.setExecution(toActionExecution(core.execution));
     pbActionCore.setStartsubchain(toActionStartSubChain(core.startSubChain));

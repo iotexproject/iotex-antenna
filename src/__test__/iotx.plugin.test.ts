@@ -18,7 +18,7 @@ export const TEST_ACCOUNT = {
 };
 
 test.skip("signer-plugin-test", async t => {
-  const antenna = new Antenna(IOTEX_CORE, {
+  const antenna = new Antenna(IOTEX_CORE, 2, {
     signer: {
       getAccounts: async () => {
         const account = new Account();
