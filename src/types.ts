@@ -77,3 +77,11 @@ export interface ClaimFromRewardingFundRequset {
   gasLimit?: string;
   gasPrice?: string;
 }
+
+export interface DepositToRewardingFundRequset {
+  from: string;
+  amount: string;
+  data: Buffer;
+  gasLimit?: string;
+  gasPrice?: string;
+}
