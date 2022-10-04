@@ -699,7 +699,7 @@ export class DepositToRewardingFundMethod extends AbstractMethod {
       this.depositToRewardingFund.gasLimit,
       this.depositToRewardingFund.gasPrice
     );
-    envelop.claimFromRewardingFund = {
+    envelop.depositToRewardingFund = {
       amount: this.depositToRewardingFund.amount,
       data: this.depositToRewardingFund.data
     };

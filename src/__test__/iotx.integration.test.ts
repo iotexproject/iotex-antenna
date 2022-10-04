@@ -196,6 +196,21 @@ accountTest("claim from rewarding fund", async t => {
   t.truthy(hash);
 });
 
+accountTest("deposit to rewarding fund", async t => {
+  const antenna = new Antenna(IOTEX_CORE, 2);
+  const sender = antenna.iotx.accounts.privateKeyToAccount(
+    TEST_PRIVATE_KEY_HAVING_IOTX
+  );
+  const hash = await antenna.iotx.depositToRewardingFund({
+    from: sender.address,
+    amount: "1000000000000000000",
+    gasPrice: "1000000000000",
+    gasLimit: "1000000",
+    data: Buffer.from("test")
+  });
+  t.truthy(hash);
+});
+
 test("decode method one result", async t => {
   const antenna = new Antenna(IOTEX_CORE, 2);
   const contract = new Contract(
