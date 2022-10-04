@@ -8,6 +8,7 @@ import {
   CandidateRegister,
   CandidateUpdate,
   ClaimFromRewardingFund,
+  DepositToRewardingFund,
   Execution,
   StakeAddDeposit,
   StakeChangeCandidate,
@@ -673,6 +674,47 @@ export class CandidateUpdateMethod extends AbstractMethod {
       name: this.target.name,
       operatorAddress: this.target.operatorAddress,
       rewardAddress: this.target.rewardAddress
+    };
+
+    const selp = await this.signAction(envelop);
+    return selp.action();
+  }
+}
+
+export class DepositToRewardingFundMethod extends AbstractMethod {
+  public depositToRewardingFund: DepositToRewardingFund;
+
+  constructor(
+    client: IRpcMethod,
+    account: Account,
+    deposit: DepositToRewardingFund,
+    opts?: AbstractMethodOpts
+  ) {
+    super(client, account, opts);
+    this.depositToRewardingFund = deposit;
+  }
+
+  public async execute(): Promise<string> {
+    const envelop = await this.baseEnvelop(
+      this.depositToRewardingFund.gasLimit,
+      this.depositToRewardingFund.gasPrice
+    );
+    envelop.claimFromRewardingFund = {
+      amount: this.depositToRewardingFund.amount,
+      data: this.depositToRewardingFund.data
+    };
+
+    return this.sendAction(envelop);
+  }
+
+  public async sign(): Promise<IAction> {
+    const envelop = await this.baseEnvelop(
+      this.depositToRewardingFund.gasLimit,
+      this.depositToRewardingFund.gasPrice
+    );
+    envelop.depositToRewardingFund = {
+      amount: this.depositToRewardingFund.amount,
+      data: this.depositToRewardingFund.data
     };
 
     const selp = await this.signAction(envelop);

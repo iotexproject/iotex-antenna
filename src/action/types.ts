@@ -105,3 +105,8 @@ export class ActionError extends Error {
     Object.setPrototypeOf(this, ActionError.prototype);
   }
 }
+
+export interface DepositToRewardingFund extends BaseActionRequest {
+  amount: string;
+  data: Buffer;
+}

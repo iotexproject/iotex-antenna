@@ -3,6 +3,7 @@ import { Account, RemoteAccount } from "./account/account";
 import { Accounts } from "./account/accounts";
 import {
   ClaimFromRewardingFundMethod,
+  DepositToRewardingFundMethod,
   SignerPlugin,
   TransferMethod
 } from "./action/method";
@@ -12,6 +13,7 @@ import { IRpcMethod } from "./rpc-method/types";
 import {
   ClaimFromRewardingFundRequset,
   ContractRequest,
+  DepositToRewardingFundRequset,
   ExecuteContractRequest,
   TransferRequest
 } from "./types";
@@ -165,6 +167,24 @@ export class Iotx extends RpcMethod {
     const sender = await this.tryGetAccount(req.from);
 
     return new ClaimFromRewardingFundMethod(
+      this,
+      sender,
+      {
+        gasLimit: req.gasLimit,
+        gasPrice: req.gasPrice,
+        amount: req.amount,
+        data: req.data
+      },
+      { signer: this.signer }
+    ).execute();
+  }
+
+  public async depositToRewardingFund(
+    req: DepositToRewardingFundRequset
+  ): Promise<string> {
+    const sender = await this.tryGetAccount(req.from);
+
+    return new DepositToRewardingFundMethod(
       this,
       sender,
       {
