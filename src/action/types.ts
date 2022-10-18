@@ -22,7 +22,7 @@ export interface Execution extends BaseActionRequest {
 
 export interface ClaimFromRewardingFund extends BaseActionRequest {
   amount: string;
-  data: Buffer | {};
+  data: Buffer | string;
 }
 
 export interface StakeCreate extends BaseActionRequest {
@@ -108,5 +108,5 @@ export class ActionError extends Error {
 
 export interface DepositToRewardingFund extends BaseActionRequest {
   amount: string;
-  data: Buffer;
+  data: Buffer | string;
 }
