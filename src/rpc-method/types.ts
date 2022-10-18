@@ -665,7 +665,7 @@ export interface IDepositToRewardingFund {
   amount: string;
 
   // DepositToRewardingFund data
-  data: Buffer;
+  data: Buffer | string;
 }
 
 // Properties of a ClaimFromRewardingFund.
@@ -674,7 +674,7 @@ export interface IClaimFromRewardingFund {
   amount: string;
 
   // ClaimFromRewardingFund data
-  data: Buffer | {};
+  data: Buffer | string;
 }
 
 export interface RewardType {
@@ -1140,9 +1140,7 @@ export function toActionClaimFromRewardingFund(
     return undefined;
   }
   const pbClaimFromRewardingFund = new actionPb.ClaimFromRewardingFund();
-  // @ts-ignore
   pbClaimFromRewardingFund.setAmount(req.amount);
-  // @ts-ignore
   pbClaimFromRewardingFund.setData(req.data);
   return pbClaimFromRewardingFund;
 }
@@ -1677,8 +1675,8 @@ export const GetActionsRequest = {
     let depositToRewardingFundData = pbRes;
     if (depositToRewardingFundData) {
       depositToRewardingFundData = {
-        amount: pbRes.amount,
-        data: pbRes.data
+        amount: pbRes.getAmount(),
+        data: pbRes.getData()
       };
     }
     return depositToRewardingFundData;
@@ -1688,8 +1686,8 @@ export const GetActionsRequest = {
     let claimFromRewardingFundData = pbRes;
     if (claimFromRewardingFundData) {
       claimFromRewardingFundData = {
-        amount: pbRes.amount,
-        data: pbRes.data
+        amount: pbRes.getAmount(),
+        data: pbRes.getData()
       };
     }
     return claimFromRewardingFundData;

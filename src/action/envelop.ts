@@ -239,6 +239,9 @@ export class Envelop {
     envelop.execution = GetActionsRequest.fromExecution(
       pbActionCore.getExecution()
     );
+    envelop.depositToRewardingFund = GetActionsRequest.fromDepositToRewardingFund(
+      pbActionCore.getDeposittorewardingfund()
+    );
     envelop.claimFromRewardingFund = GetActionsRequest.fromClaimFromRewardingFund(
       pbActionCore.getClaimfromrewardingfund()
     );
