@@ -132,7 +132,7 @@
     "grpc": "^1.24.3",
     "grpc-web": "1.2.1",
     "isomorphic-ws": "^4.0.1",
-    "protoc": "^1.0.4",
+    "protoc": "git+ssh://git@github.com:iotexproject/node-protoc-patch.git",
     "randombytes": "^2.1.0",
     "scrypt.js": "0.3.0",
     "sha3": "2.0.1",
