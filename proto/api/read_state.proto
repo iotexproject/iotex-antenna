@@ -29,6 +29,14 @@ message ReadStakingDataMethod {
 		CANDIDATE_BY_ADDRESS = 7;
 		TOTAL_STAKING_AMOUNT = 8;
 		BUCKETS_COUNT = 9;
+		// 10-19 reserved for native staking
+		COMPOSITE_BUCKETS = 20;
+		COMPOSITE_BUCKETS_BY_VOTER = 21;
+		COMPOSITE_BUCKETS_BY_CANDIDATE = 22;
+		COMPOSITE_BUCKETS_BY_INDEXES = 23;
+		COMPOSITE_BUCKETS_COUNT = 24;
+		COMPOSITE_TOTAL_STAKING_AMOUNT = 25;
+		CONTRACT_STAKING_BUCKET_TYPES = 26;
 	}
 	Name method = 1;
 }
@@ -68,6 +76,10 @@ message ReadStakingDataRequest {
 
 	message BucketsCount {}
 
+	message ContractStakingBucketTypes {
+		string contractAddress = 1;
+	}
+
 	oneof request {
 		VoteBuckets buckets = 1;
 		VoteBucketsByVoter bucketsByVoter = 2;
@@ -78,5 +90,6 @@ message ReadStakingDataRequest {
 		CandidateByAddress candidateByAddress = 7;
 		TotalStakingAmount totalStakingAmount = 8;
 		BucketsCount bucketsCount = 9;
+		ContractStakingBucketTypes contractStakingBucketTypes = 10;
 	}
 }

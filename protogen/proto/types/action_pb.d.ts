@@ -1148,6 +1148,26 @@ export namespace Action {
   }
 }
 
+export class Actions extends jspb.Message {
+  getActionsList(): Array<Action>;
+  setActionsList(value: Array<Action>): Actions;
+  clearActionsList(): Actions;
+  addActions(value?: Action, index?: number): Action;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): Actions.AsObject;
+  static toObject(includeInstance: boolean, msg: Actions): Actions.AsObject;
+  static serializeBinaryToWriter(message: Actions, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Actions;
+  static deserializeBinaryFromReader(message: Actions, reader: jspb.BinaryReader): Actions;
+}
+
+export namespace Actions {
+  export type AsObject = {
+    actionsList: Array<Action.AsObject>,
+  }
+}
+
 export class Receipt extends jspb.Message {
   getStatus(): number;
   setStatus(value: number): Receipt;
