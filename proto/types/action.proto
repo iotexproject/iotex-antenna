@@ -268,6 +268,11 @@ message Action {
   Encoding encoding = 4;
 }
 
+// a pack of actions
+message Actions {
+  repeated Action actions = 1;
+}
+
 message Receipt {
   uint64 status = 1;
   uint64 blkHeight = 2;

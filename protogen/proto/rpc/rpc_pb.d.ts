@@ -111,5 +111,8 @@ export enum MessageType {
   BLOCK = 2,
   CONSENSUS = 3,
   BLOCK_REQUEST = 4,
+  NODE_INFO_REQUEST = 5,
+  NODE_INFO = 6,
+  ACTIONS = 7,
   TEST = 10001,
 }

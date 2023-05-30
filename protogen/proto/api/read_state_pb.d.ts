@@ -52,6 +52,13 @@ export namespace ReadStakingDataMethod {
     CANDIDATE_BY_ADDRESS = 7,
     TOTAL_STAKING_AMOUNT = 8,
     BUCKETS_COUNT = 9,
+    COMPOSITE_BUCKETS = 20,
+    COMPOSITE_BUCKETS_BY_VOTER = 21,
+    COMPOSITE_BUCKETS_BY_CANDIDATE = 22,
+    COMPOSITE_BUCKETS_BY_INDEXES = 23,
+    COMPOSITE_BUCKETS_COUNT = 24,
+    COMPOSITE_TOTAL_STAKING_AMOUNT = 25,
+    CONTRACT_STAKING_BUCKET_TYPES = 26,
   }
 }
 
@@ -101,6 +108,11 @@ export class ReadStakingDataRequest extends jspb.Message {
   hasBucketscount(): boolean;
   clearBucketscount(): ReadStakingDataRequest;
 
+  getContractstakingbuckettypes(): ReadStakingDataRequest.ContractStakingBucketTypes | undefined;
+  setContractstakingbuckettypes(value?: ReadStakingDataRequest.ContractStakingBucketTypes): ReadStakingDataRequest;
+  hasContractstakingbuckettypes(): boolean;
+  clearContractstakingbuckettypes(): ReadStakingDataRequest;
+
   getRequestCase(): ReadStakingDataRequest.RequestCase;
 
   serializeBinary(): Uint8Array;
@@ -122,6 +134,7 @@ export namespace ReadStakingDataRequest {
     candidatebyaddress?: ReadStakingDataRequest.CandidateByAddress.AsObject,
     totalstakingamount?: ReadStakingDataRequest.TotalStakingAmount.AsObject,
     bucketscount?: ReadStakingDataRequest.BucketsCount.AsObject,
+    contractstakingbuckettypes?: ReadStakingDataRequest.ContractStakingBucketTypes.AsObject,
   }
 
   export class VoteBuckets extends jspb.Message {
@@ -305,6 +318,25 @@ export namespace ReadStakingDataRequest {
   }
 
 
+  export class ContractStakingBucketTypes extends jspb.Message {
+    getContractaddress(): string;
+    setContractaddress(value: string): ContractStakingBucketTypes;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): ContractStakingBucketTypes.AsObject;
+    static toObject(includeInstance: boolean, msg: ContractStakingBucketTypes): ContractStakingBucketTypes.AsObject;
+    static serializeBinaryToWriter(message: ContractStakingBucketTypes, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): ContractStakingBucketTypes;
+    static deserializeBinaryFromReader(message: ContractStakingBucketTypes, reader: jspb.BinaryReader): ContractStakingBucketTypes;
+  }
+
+  export namespace ContractStakingBucketTypes {
+    export type AsObject = {
+      contractaddress: string,
+    }
+  }
+
+
   export enum RequestCase { 
     REQUEST_NOT_SET = 0,
     BUCKETS = 1,
@@ -316,6 +348,7 @@ export namespace ReadStakingDataRequest {
     CANDIDATEBYADDRESS = 7,
     TOTALSTAKINGAMOUNT = 8,
     BUCKETSCOUNT = 9,
+    CONTRACTSTAKINGBUCKETTYPES = 10,
   }
 }
 

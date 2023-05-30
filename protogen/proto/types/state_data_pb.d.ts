@@ -84,6 +84,21 @@ export class VoteBucket extends jspb.Message {
   getOwner(): string;
   setOwner(value: string): VoteBucket;
 
+  getContractaddress(): string;
+  setContractaddress(value: string): VoteBucket;
+
+  getStakeddurationblocknumber(): number;
+  setStakeddurationblocknumber(value: number): VoteBucket;
+
+  getCreateblockheight(): number;
+  setCreateblockheight(value: number): VoteBucket;
+
+  getStakestartblockheight(): number;
+  setStakestartblockheight(value: number): VoteBucket;
+
+  getUnstakestartblockheight(): number;
+  setUnstakestartblockheight(value: number): VoteBucket;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): VoteBucket.AsObject;
   static toObject(includeInstance: boolean, msg: VoteBucket): VoteBucket.AsObject;
@@ -103,6 +118,11 @@ export namespace VoteBucket {
     unstakestarttime?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     autostake: boolean,
     owner: string,
+    contractaddress: string,
+    stakeddurationblocknumber: number,
+    createblockheight: number,
+    stakestartblockheight: number,
+    unstakestartblockheight: number,
   }
 }
 
@@ -207,6 +227,48 @@ export namespace BucketsCount {
   export type AsObject = {
     total: number,
     active: number,
+  }
+}
+
+export class ContractStakingBucketType extends jspb.Message {
+  getStakedamount(): string;
+  setStakedamount(value: string): ContractStakingBucketType;
+
+  getStakedduration(): number;
+  setStakedduration(value: number): ContractStakingBucketType;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ContractStakingBucketType.AsObject;
+  static toObject(includeInstance: boolean, msg: ContractStakingBucketType): ContractStakingBucketType.AsObject;
+  static serializeBinaryToWriter(message: ContractStakingBucketType, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ContractStakingBucketType;
+  static deserializeBinaryFromReader(message: ContractStakingBucketType, reader: jspb.BinaryReader): ContractStakingBucketType;
+}
+
+export namespace ContractStakingBucketType {
+  export type AsObject = {
+    stakedamount: string,
+    stakedduration: number,
+  }
+}
+
+export class ContractStakingBucketTypeList extends jspb.Message {
+  getBuckettypesList(): Array<ContractStakingBucketType>;
+  setBuckettypesList(value: Array<ContractStakingBucketType>): ContractStakingBucketTypeList;
+  clearBuckettypesList(): ContractStakingBucketTypeList;
+  addBuckettypes(value?: ContractStakingBucketType, index?: number): ContractStakingBucketType;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ContractStakingBucketTypeList.AsObject;
+  static toObject(includeInstance: boolean, msg: ContractStakingBucketTypeList): ContractStakingBucketTypeList.AsObject;
+  static serializeBinaryToWriter(message: ContractStakingBucketTypeList, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ContractStakingBucketTypeList;
+  static deserializeBinaryFromReader(message: ContractStakingBucketTypeList, reader: jspb.BinaryReader): ContractStakingBucketTypeList;
+}
+
+export namespace ContractStakingBucketTypeList {
+  export type AsObject = {
+    buckettypesList: Array<ContractStakingBucketType.AsObject>,
   }
 }
 
