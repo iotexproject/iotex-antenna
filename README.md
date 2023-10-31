@@ -1,8 +1,6 @@
-[![CircleCI](https://circleci.com/gh/iotexproject/iotex-antenna.svg?style=svg&circle-token=9793be645e0d890924fee61fa5e3bfaff8d19942)](https://circleci.com/gh/iotexproject/iotex-antenna)
-
 # iotex-antenna
 
-iotex-antenna is our SDK allowing you to interact with a local or remote iotex blockchain node, using a gRPC or gRPC-web connection.
+iotex-antenna is iotex native SDK allowing you to interact with a local or remote iotex blockchain node, using a gRPC or gRPC-web connection.
 
 - [Documentation](https://docs.iotex.io/native-development/antenna-overview)
 - [Reference](https://iotexproject.github.io/iotex-antenna/)
