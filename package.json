@@ -128,7 +128,7 @@
     "blakejs": "1.1.0",
     "elliptic": "6.5.3",
     "eth-lib": "0.2.8",
-    "google-protobuf": "3.8.0",
+    "google-protobuf": "3.16.0",
     "grpc": "^1.24.3",
     "grpc-web": "1.2.1",
     "isomorphic-ws": "^4.0.1",
