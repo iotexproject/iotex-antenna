@@ -113,6 +113,13 @@ export function encrypt(
   password: string,
   opts: EncryptOptions = {}
 ): PrivateKey {
+  if (privateKey === "") {
+    throw new Error("private key can not empty.");
+  }
+  if (password.length === 0) {
+    throw new Error("password can not empty.");
+  }
+
   const account = privateKeyToAccount(privateKey);
 
   const salt = opts.salt || randomBytes(32);

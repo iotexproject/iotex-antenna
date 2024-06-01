@@ -19,6 +19,9 @@ export function publicKeyToAddress(publicKey: string): string {
 export function privateKeyToAccount(
   privateKey: string
 ): { address: string; publicKey: string; privateKey: string } {
+  if (privateKey === "") {
+    throw new Error("private key can not empty.");
+  }
   const buffer = Buffer.from(privateKey, "hex");
   const ecKey = secp256k1.keyFromPrivate(buffer);
   const publicKey = ecKey.getPublic(false, "hex");
@@ -36,6 +39,12 @@ export const makeSigner = (addToV: number) => (
   hash: string,
   privateKey: string
 ) => {
+  if (hash.length === 0) {
+    throw new Error("hash can not empty.");
+  }
+  if (privateKey === "") {
+    throw new Error("private key can not empty.");
+  }
   const signature = secp256k1
     .keyFromPrivate(Buffer.from(privateKey, "hex"))
     .sign(Buffer.from(hash, "hex"), { canonical: true, pers: undefined });
