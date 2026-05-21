@@ -4,7 +4,12 @@ import { IAccount } from "../account/account";
 import { ExecutionMethod, SignerPlugin } from "../action/method";
 import { Execution } from "../action/types";
 import { fromBytes } from "../crypto/address";
-import { IRpcMethod } from "../rpc-method/types";
+import {
+  IAccessTuple,
+  IBlobTxData,
+  IRpcMethod,
+  ISetCodeAuthorization
+} from "../rpc-method/types";
 import { ABIDefinition } from "./abi";
 import {
   AbiByFunc,
@@ -131,6 +136,27 @@ export class Contract {
           executeParameter.gasLimit,
           executeParameter.gasPrice
         );
+        if (executeParameter.txType !== undefined) {
+          methodEnvelop.txType = executeParameter.txType;
+        }
+        if (executeParameter.chainID !== undefined) {
+          methodEnvelop.chainID = executeParameter.chainID;
+        }
+        if (executeParameter.gasTipCap !== undefined) {
+          methodEnvelop.gasTipCap = executeParameter.gasTipCap;
+        }
+        if (executeParameter.gasFeeCap !== undefined) {
+          methodEnvelop.gasFeeCap = executeParameter.gasFeeCap;
+        }
+        if (executeParameter.accessList !== undefined) {
+          methodEnvelop.accessList = executeParameter.accessList;
+        }
+        if (executeParameter.blobTxData !== undefined) {
+          methodEnvelop.blobTxData = executeParameter.blobTxData;
+        }
+        if (executeParameter.setCodeAuthList !== undefined) {
+          methodEnvelop.setCodeAuthList = executeParameter.setCodeAuthList;
+        }
         const method = new ExecutionMethod(
           this.provider,
           executeParameter.account,
@@ -158,7 +184,14 @@ export class Contract {
     inputs: Array<any>,
     amount?: string,
     gasLimit?: string | undefined,
-    gasPrice?: string
+    gasPrice?: string,
+    typedTx?: {
+      txType?: number;
+      chainID?: number;
+      gasTipCap?: string;
+      gasFeeCap?: string;
+      accessList?: IAccessTuple[];
+    }
   ): Promise<string> {
     if (!this.options) {
       throw new Error("must set contract byte code");
@@ -188,13 +221,30 @@ export class Contract {
       ]);
     }
 
-    const contractEnvelop = {
+    const contractEnvelop: Execution = {
       gasLimit: gasLimit,
       gasPrice: gasPrice,
       contract: "",
       amount: amount || "0",
       data: data
     };
+    if (typedTx) {
+      if (typedTx.txType !== undefined) {
+        contractEnvelop.txType = typedTx.txType;
+      }
+      if (typedTx.chainID !== undefined) {
+        contractEnvelop.chainID = typedTx.chainID;
+      }
+      if (typedTx.gasTipCap !== undefined) {
+        contractEnvelop.gasTipCap = typedTx.gasTipCap;
+      }
+      if (typedTx.gasFeeCap !== undefined) {
+        contractEnvelop.gasFeeCap = typedTx.gasFeeCap;
+      }
+      if (typedTx.accessList !== undefined) {
+        contractEnvelop.accessList = typedTx.accessList;
+      }
+    }
     return new ExecutionMethod(this.provider, account, contractEnvelop, {
       signer: this.options && this.options.signer
     }).execute();
@@ -340,6 +390,15 @@ export interface MethodExecuteParameter {
   amount?: string;
   gasLimit?: string;
   gasPrice?: string;
+  // Eth typed-tx fields; when txType is set, the call is signed and sent as
+  // TX_CONTAINER (raw eth tx bytes) instead of iotex protobuf encoding.
+  txType?: number;
+  chainID?: number;
+  gasTipCap?: string;
+  gasFeeCap?: string;
+  accessList?: IAccessTuple[];
+  blobTxData?: IBlobTxData;
+  setCodeAuthList?: ISetCodeAuthorization[];
 }
 
 export interface DecodeData {

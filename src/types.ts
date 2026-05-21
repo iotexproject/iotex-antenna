@@ -1,4 +1,29 @@
+import {
+  IAccessTuple,
+  IBlobTxData,
+  ISetCodeAuthorization
+} from "./rpc-method/types";
 import { ABIDefinition } from "./contract/abi";
+
+// Typed-tx options shared by sendTransfer, deployContract, executeContract.
+// Set txType (0/1/2/3/4) plus the corresponding fee fields to route through
+// the TX_CONTAINER signing path instead of the iotex protobuf path.
+export interface TypedTxOptions {
+  // Eth tx envelope type: 0 legacy, 1 access-list (EIP-2930),
+  // 2 dynamic-fee (EIP-1559), 3 blob (EIP-4844), 4 set-code (EIP-7702).
+  txType?: number;
+  // Eth chain id. Required when txType is set.
+  chainID?: number;
+  // EIP-1559 / blob / setcode fees.
+  gasTipCap?: string;
+  gasFeeCap?: string;
+  // EIP-2930 access list.
+  accessList?: IAccessTuple[];
+  // EIP-4844 blob data (executeContract only).
+  blobTxData?: IBlobTxData;
+  // EIP-7702 auth list (executeContract only).
+  setCodeAuthList?: ISetCodeAuthorization[];
+}
 
 export interface Log {
   address: string;
@@ -41,7 +66,7 @@ export interface TransactionReceipt {
   status: boolean;
 }
 
-export interface TransferRequest {
+export interface TransferRequest extends TypedTxOptions {
   from: string;
   to: string;
   value: string;
@@ -50,7 +75,7 @@ export interface TransferRequest {
   gasPrice?: string;
 }
 
-export interface ContractRequest {
+export interface ContractRequest extends TypedTxOptions {
   from: string;
   amount?: string;
   abi: Array<ABIDefinition> | string;
@@ -60,7 +85,7 @@ export interface ContractRequest {
   gasPrice?: string;
 }
 
-export interface ExecuteContractRequest {
+export interface ExecuteContractRequest extends TypedTxOptions {
   from: string;
   amount?: string;
   abi: Array<ABIDefinition> | string;
