@@ -81,9 +81,10 @@ export function encodeArguments(
   try {
     const encoded = Abi.encodeParameters(types, values);
     return encoded.substring(2);
-  } catch (e) {
+  } catch (err) {
+    const stack = (err as { stack?: string }).stack;
     throw new Error(
-      `failed to rawEncode: ${e.stack}, types: ${types}, values: ${values}`
+      `failed to rawEncode: ${stack}, types: ${types}, values: ${values}`
     );
   }
 }
