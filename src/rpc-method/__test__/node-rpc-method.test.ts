@@ -16,7 +16,8 @@ dotenv.config();
 
 const TEST_HOSTNAME = process.env.IOTEX_CORE || "http://localhost:14014";
 const TEST_HOSTNAME_SSL = "api.testnet.iotex.one:443";
-const serial = process.env.IOTEX_CORE ? test.serial : test.skip;
+const serial =
+  process.env.IOTEX_CORE && !process.env.CI ? test.serial : test.skip;
 
 // throttle requests for the ratelimit
 test.beforeEach(async _ => {

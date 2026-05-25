@@ -21,7 +21,8 @@ test.beforeEach(async _ => {
 });
 
 const TEST_HOSTNAME = process.env.IOTEX_CORE || "http://localhost:14014";
-const serial = process.env.IOTEX_CORE ? test.serial : test.skip;
+const serial =
+  process.env.IOTEX_CORE && !process.env.CI ? test.serial : test.skip;
 
 serial("RpcMethod.getAccount", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, 2);

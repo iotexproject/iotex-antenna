@@ -17,7 +17,7 @@ dotenv.config();
 const { IOTEX_CORE = "", TEST_PRIVATE_KEY_HAVING_IOTX = "" } = process.env;
 
 const accountTest = TEST_PRIVATE_KEY_HAVING_IOTX ? test.serial : test.skip;
-const serial = IOTEX_CORE ? test.serial : test.skip;
+const serial = IOTEX_CORE && !process.env.CI ? test.serial : test.skip;
 
 test.serial("create account", async t => {
   const antenna = new Antenna(IOTEX_CORE, 2);
