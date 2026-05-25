@@ -1,8 +1,4 @@
-import fs from "fs";
-import path from "path";
 import test from "ava";
-// @ts-ignore
-import solc from "solc";
 import {
   encodeArguments,
   encodeInputData,
@@ -10,13 +6,52 @@ import {
   getHeaderHash
 } from "../abi-to-byte";
 
+// ABI that solc 0.4.25 produces for RollDice.sol, hardcoded so the test
+// doesn't depend on the solc 0.4.25 runtime (asm.js crashes on Node >=12).
+const ROLLDICE_ABI = [
+  {
+    constant: false,
+    inputs: [
+      { name: "requestId", type: "string" },
+      { name: "target", type: "address" }
+    ],
+    name: "rollAward",
+    outputs: [{ name: "", type: "uint256" }],
+    payable: true,
+    stateMutability: "payable",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [{ name: "requestId", type: "string" }],
+    name: "roll",
+    outputs: [{ name: "", type: "uint256" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, name: "_from", type: "address" },
+      { indexed: false, name: "_value", type: "uint256" }
+    ],
+    name: "Deposit",
+    type: "event"
+  },
+  {
+    constant: false,
+    inputs: [],
+    name: "deposit",
+    outputs: [],
+    payable: true,
+    stateMutability: "payable",
+    type: "function"
+  }
+];
+
 test("getAbiFunctions", async t => {
-  const solFile = "./RollDice.sol";
-  const contractName = ":RollDice";
-  const input = fs.readFileSync(path.resolve(__dirname, solFile));
-  const output = solc.compile(input.toString(), 1);
-  const abi = JSON.parse(output.contracts[contractName].interface);
-  const abiFunctions = getAbiFunctions(abi);
+  const abiFunctions = getAbiFunctions(ROLLDICE_ABI);
   t.deepEqual(
     {
       rollAward: {
