@@ -17,6 +17,7 @@ dotenv.config();
 const { IOTEX_CORE = "", TEST_PRIVATE_KEY_HAVING_IOTX = "" } = process.env;
 
 const accountTest = TEST_PRIVATE_KEY_HAVING_IOTX ? test.serial : test.skip;
+const serial = IOTEX_CORE ? test.serial : test.skip;
 
 test.serial("create account", async t => {
   const antenna = new Antenna(IOTEX_CORE, 2);
@@ -48,7 +49,7 @@ test.serial("transfer throws if no account", async t => {
   );
 });
 
-test.serial("change provider", async t => {
+serial("change provider", async t => {
   // tslint:disable-next-line:no-http-string
   const antenna = new Antenna("http://api.testnet.iotex.one:80", 2);
   let chainMeta = await antenna.iotx.getChainMeta({});

@@ -21,8 +21,9 @@ test.beforeEach(async _ => {
 });
 
 const TEST_HOSTNAME = process.env.IOTEX_CORE || "http://localhost:14014";
+const serial = process.env.IOTEX_CORE ? test.serial : test.skip;
 
-test.serial("RpcMethod.getAccount", async t => {
+serial("RpcMethod.getAccount", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, 2);
   const resp = await client.getAccount({
     address: "io126xcrjhtp27end76ac9nmx6px2072c3vgz6suw"
@@ -38,7 +39,7 @@ test.serial("RpcMethod.getAccount", async t => {
   });
 });
 
-test.serial("RpcMethod.getBlockMetas", async t => {
+serial("RpcMethod.getBlockMetas", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, 2);
   // test getMetasByIndex
   const resp1 = await client.getBlockMetas({
@@ -57,13 +58,13 @@ test.serial("RpcMethod.getBlockMetas", async t => {
   t.deepEqual(resp1.blkMetas[0], resp4.blkMetas[0]);
 });
 
-test.serial("RpcMethod.suggestGasPrice", async t => {
+serial("RpcMethod.suggestGasPrice", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, 2);
   const resp = await client.suggestGasPrice({});
   t.truthy(resp.gasPrice > 0);
 });
 
-test.serial("RpcMethod.readContract", async t => {
+serial("RpcMethod.readContract", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, 2);
   const resp1 = await client.getActions({ byIndex: { start: 0, count: 30 } });
   const actionInfo = resp1 && resp1.actionInfo;
@@ -77,7 +78,7 @@ test.serial("RpcMethod.readContract", async t => {
   }
 });
 
-test.serial("RpcMethod.getActionsByIndex", async t => {
+serial("RpcMethod.getActionsByIndex", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, 2);
   // test getActionsByIndex
   const resp1 = await client.getActions({ byIndex: { start: 10, count: 1 } });
@@ -86,7 +87,7 @@ test.serial("RpcMethod.getActionsByIndex", async t => {
   t.deepEqual(get(resp2, "actionInfo.length"), 10);
 });
 
-test.serial("RpcMethod.getActionsByAddress", async t => {
+serial("RpcMethod.getActionsByAddress", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, 2);
   const blks = await client.getBlockMetas({ byIndex: { start: 10, count: 1 } });
   t.deepEqual(blks.blkMetas.length, 1);
@@ -141,7 +142,7 @@ test.skip("RpcMethod.getActionsByHash", async t => {
   t.deepEqual(resp4.actionInfo.length, 0);
 });
 
-test.serial("RpcMethod.getActionsByBlock", async t => {
+serial("RpcMethod.getActionsByBlock", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, 2);
   // test getActionsByBlock
   const blks = await client.getBlockMetas({ byIndex: { start: 10, count: 1 } });
@@ -152,13 +153,13 @@ test.serial("RpcMethod.getActionsByBlock", async t => {
   t.deepEqual(resp7.actionInfo.length, 1);
 });
 
-test.serial("RpcMethod.getChainMeta", async t => {
+serial("RpcMethod.getChainMeta", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, 2);
   const resp = await client.getChainMeta({});
   t.truthy(resp.chainMeta);
 });
 
-test.serial("RpcMethod.estimateGasForAction", async t => {
+serial("RpcMethod.estimateGasForAction", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, 2);
   const blks = await client.getBlockMetas({ byIndex: { start: 10, count: 1 } });
   t.deepEqual(blks.blkMetas.length, 1);
@@ -177,7 +178,7 @@ test.serial("RpcMethod.estimateGasForAction", async t => {
   }
 });
 
-test.serial("RpcMethod.readState", async t => {
+serial("RpcMethod.readState", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, 2);
   const state = await client.readState({
     protocolID: Buffer.from("rewarding"),
@@ -210,7 +211,7 @@ test.skip("RpcMethod.readStateStaking", async t => {
   t.truthy(state.data);
 });
 
-test.serial("RpcMethod.getEpochMeta", async t => {
+serial("RpcMethod.getEpochMeta", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, 2);
   const latest = await client.getChainMeta({});
   const epochData = await client.getEpochMeta({
@@ -221,7 +222,7 @@ test.serial("RpcMethod.getEpochMeta", async t => {
   t.truthy(epochData.epochData);
 });
 
-test.serial("RpcMethod.getLogs", async t => {
+serial("RpcMethod.getLogs", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, 2);
   const getLogs = await client.getLogs({
     filter: {
@@ -236,7 +237,7 @@ test.serial("RpcMethod.getLogs", async t => {
   t.truthy(getLogs);
 });
 
-test.serial("RpcMethod.estimateActionGasConsumption", async t => {
+serial("RpcMethod.estimateActionGasConsumption", async t => {
   const client = new RpcMethod(TEST_HOSTNAME, 2);
   const response = await client.estimateActionGasConsumption({
     transfer: {
