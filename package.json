@@ -53,6 +53,18 @@
     "cache": true,
     "temp-directory": "./coverage/.nyc_output"
   },
+  "ava": {
+    "require": [
+      "ts-node/register"
+    ],
+    "files": [
+      "src/**/*.test.ts"
+    ],
+    "compileEnhancements": false,
+    "extensions": [
+      "ts"
+    ]
+  },
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"

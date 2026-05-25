@@ -73,8 +73,8 @@ import {
   ISetCodeAuthorization as ITypedSetCodeAuthorization,
   ITypedTxFields,
   signTypedTx,
-  txContainerHash,
-  TX_TYPE_LEGACY
+  TX_TYPE_LEGACY,
+  txContainerHash
 } from "./typed-tx";
 
 export class Envelop {
@@ -89,9 +89,9 @@ export class Envelop {
   public txType?: number | undefined;
   public gasTipCap?: string | undefined;
   public gasFeeCap?: string | undefined;
-  public accessList?: IAccessTuple[] | undefined;
+  public accessList?: Array<IAccessTuple> | undefined;
   public blobTxData?: IBlobTxData | undefined;
-  public setCodeAuthList?: ISetCodeAuthorization[] | undefined;
+  public setCodeAuthList?: Array<ISetCodeAuthorization> | undefined;
 
   // optional fields
   public transfer?: ITransfer | undefined;
@@ -301,8 +301,8 @@ export class Envelop {
 }
 
 function toTypedAccessList(
-  list: IAccessTuple[] | undefined
-): ITypedAccessTuple[] | undefined {
+  list: Array<IAccessTuple> | undefined
+): Array<ITypedAccessTuple> | undefined {
   if (!list || list.length === 0) {
     return undefined;
   }
@@ -337,8 +337,8 @@ function toTypedBlobData(
 }
 
 function toTypedAuthList(
-  list: ISetCodeAuthorization[] | undefined
-): ITypedSetCodeAuthorization[] | undefined {
+  list: Array<ISetCodeAuthorization> | undefined
+): Array<ITypedSetCodeAuthorization> | undefined {
   if (!list || list.length === 0) {
     return undefined;
   }

@@ -7,8 +7,8 @@
 // raw tx with go-ethereum directly — no proto-field reconstruction is involved,
 // which is the whole point of TX_CONTAINER.
 
-import { Transaction, Signature, getBytes, hexlify, keccak256 } from "ethers";
 import elliptic from "elliptic";
+import { getBytes, hexlify, keccak256, Signature, Transaction } from "ethers";
 
 import { fromString } from "../crypto/address";
 
@@ -22,7 +22,7 @@ export const TX_TYPE_SET_CODE = 4;
 
 export interface IAccessTuple {
   address: string;
-  storageKeys: string[];
+  storageKeys: Array<string>;
 }
 
 export interface IBlobTxSidecar {
@@ -33,7 +33,7 @@ export interface IBlobTxSidecar {
 
 export interface IBlobData {
   blobFeeCap: string;
-  blobHashes: string[]; // 0x-prefixed 32-byte hex
+  blobHashes: Array<string>; // 0x-prefixed 32-byte hex
   sidecar?: IBlobTxSidecar;
 }
 
@@ -60,9 +60,9 @@ export interface ITypedTxFields {
   to?: string; // 0x... or iotex bech32 (omit for legacy contract creation)
   value: string; // wei
   data?: Uint8Array | Buffer | string;
-  accessList?: IAccessTuple[];
+  accessList?: Array<IAccessTuple>;
   blobTxData?: IBlobData;
-  setCodeAuthList?: ISetCodeAuthorization[];
+  setCodeAuthList?: Array<ISetCodeAuthorization>;
 }
 
 // ioAddressToEth converts an iotex bech32 address to a 0x-prefixed hex string.
@@ -95,8 +95,8 @@ function normalizeHash(h: string): string {
 }
 
 function normalizeAccessList(
-  list: IAccessTuple[] | undefined
-): Array<{ address: string; storageKeys: string[] }> {
+  list: Array<IAccessTuple> | undefined
+): Array<{ address: string; storageKeys: Array<string> }> {
   if (!list || list.length === 0) {
     return [];
   }
@@ -116,6 +116,7 @@ function pad32Hex(hex: string): string {
 
 // buildTypedTx maps an ITypedTxFields description into an ethers v6 Transaction
 // instance (unsigned). The caller is responsible for signing.
+// tslint:disable-next-line:cyclomatic-complexity
 export function buildTypedTx(t: ITypedTxFields): Transaction {
   const tx = new Transaction();
   tx.type = t.txType;
@@ -191,9 +192,9 @@ export function buildTypedTx(t: ITypedTxFields): Transaction {
 // which we don't pull in here; the blob hashes are validated server-side
 // against the sidecar.
 function attachSidecar(tx: Transaction, sc: IBlobTxSidecar): void {
-  const blobs = sc.blobs.map(b => hexlify(b));
-  const commitments = sc.commitments.map(c => hexlify(c));
-  const proofs = sc.proofs.map(p => hexlify(p));
+  const blobs = sc.blobs.map(hexlify);
+  const commitments = sc.commitments.map(hexlify);
+  const proofs = sc.proofs.map(hexlify);
   if (commitments.length !== blobs.length || proofs.length !== blobs.length) {
     throw new Error("blob sidecar arrays must be parallel");
   }
@@ -239,7 +240,7 @@ export function extractEthTxSig(tx: Transaction): Buffer {
   }
   const rBytes = getBytes(tx.signature.r);
   const sBytes = getBytes(tx.signature.s);
-  const v = 27 + tx.signature.yParity;
+  const v = tx.signature.yParity + 27;
   if (v > 0xff) {
     throw new Error("invalid signature V value");
   }

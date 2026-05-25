@@ -49,6 +49,7 @@ export class Contract {
     this.provider = provider;
   }
 
+  // tslint:disable-next-line:max-func-body-length
   constructor(
     // tslint:disable-next-line: no-any
     jsonInterface?: Array<ABIDefinition>,
@@ -190,7 +191,7 @@ export class Contract {
       chainID?: number;
       gasTipCap?: string;
       gasFeeCap?: string;
-      accessList?: IAccessTuple[];
+      accessList?: Array<IAccessTuple>;
     }
   ): Promise<string> {
     if (!this.options) {
@@ -396,9 +397,9 @@ export interface MethodExecuteParameter {
   chainID?: number;
   gasTipCap?: string;
   gasFeeCap?: string;
-  accessList?: IAccessTuple[];
+  accessList?: Array<IAccessTuple>;
   blobTxData?: IBlobTxData;
-  setCodeAuthList?: ISetCodeAuthorization[];
+  setCodeAuthList?: Array<ISetCodeAuthorization>;
 }
 
 export interface DecodeData {

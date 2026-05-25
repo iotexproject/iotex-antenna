@@ -13,9 +13,9 @@ export interface BaseActionRequest {
   chainID?: number | undefined;
   gasTipCap?: string | undefined;
   gasFeeCap?: string | undefined;
-  accessList?: IAccessTuple[] | undefined;
+  accessList?: Array<IAccessTuple> | undefined;
   blobTxData?: IBlobTxData | undefined;
-  setCodeAuthList?: ISetCodeAuthorization[] | undefined;
+  setCodeAuthList?: Array<ISetCodeAuthorization> | undefined;
 }
 
 export interface Transfer extends BaseActionRequest {

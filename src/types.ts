@@ -1,9 +1,9 @@
+import { ABIDefinition } from "./contract/abi";
 import {
   IAccessTuple,
   IBlobTxData,
   ISetCodeAuthorization
 } from "./rpc-method/types";
-import { ABIDefinition } from "./contract/abi";
 
 // Typed-tx options shared by sendTransfer, deployContract, executeContract.
 // Set txType (0/1/2/3/4) plus the corresponding fee fields to route through
@@ -18,11 +18,11 @@ export interface TypedTxOptions {
   gasTipCap?: string;
   gasFeeCap?: string;
   // EIP-2930 access list.
-  accessList?: IAccessTuple[];
+  accessList?: Array<IAccessTuple>;
   // EIP-4844 blob data (executeContract only).
   blobTxData?: IBlobTxData;
   // EIP-7702 auth list (executeContract only).
-  setCodeAuthList?: ISetCodeAuthorization[];
+  setCodeAuthList?: Array<ISetCodeAuthorization>;
 }
 
 export interface Log {

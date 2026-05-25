@@ -725,7 +725,7 @@ export interface ITxContainer {
 // Properties of an iotex AccessTuple (eth EIP-2930).
 export interface IAccessTuple {
   address: string;
-  storageKeys: string[];
+  storageKeys: Array<string>;
 }
 
 // Properties of an iotex BlobTxSidecar (eth EIP-4844).
@@ -773,9 +773,9 @@ export interface IActionCore {
   txType?: number;
   gasTipCap?: string;
   gasFeeCap?: string;
-  accessList?: IAccessTuple[];
+  accessList?: Array<IAccessTuple>;
   blobTxData?: IBlobTxData;
-  setCodeAuthList?: ISetCodeAuthorization[];
+  setCodeAuthList?: Array<ISetCodeAuthorization>;
 
   // Action detail fields
   // ActionCore transfer
@@ -1320,7 +1320,7 @@ export function toActionCandidateBasicInfo(
 }
 
 function toActionAccessList(
-  list: IAccessTuple[] | undefined
+  list: Array<IAccessTuple> | undefined
 ): Array<actionPb.AccessTuple> {
   if (!list || list.length === 0) {
     return [];
@@ -1355,7 +1355,7 @@ function toActionBlobTxData(
 }
 
 function toActionSetCodeAuthList(
-  list: ISetCodeAuthorization[] | undefined
+  list: Array<ISetCodeAuthorization> | undefined
 ): Array<actionPb.SetCodeAuthorization> {
   if (!list || list.length === 0) {
     return [];
@@ -1372,6 +1372,7 @@ function toActionSetCodeAuthList(
   });
 }
 
+// tslint:disable-next-line:max-func-body-length
 export function toAction(req: IAction): any {
   const pbActionCore = new actionPb.ActionCore();
 
@@ -1485,7 +1486,7 @@ export function toAction(req: IAction): any {
   }
 
   if (req.encoding !== undefined) {
-    pbAction.setEncoding(req.encoding as number);
+    pbAction.setEncoding(req.encoding);
   }
 
   return pbAction;
