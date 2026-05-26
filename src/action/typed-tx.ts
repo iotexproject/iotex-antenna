@@ -20,6 +20,19 @@ export const TX_TYPE_DYNAMIC_FEE = 2;
 export const TX_TYPE_BLOB = 3;
 export const TX_TYPE_SET_CODE = 4;
 
+// IoTeX chain IDs: 1 = mainnet, 2 = testnet, 3 = nightly.
+// EVM network IDs exposed over JSON-RPC: 4689 / 4690 / 4691.
+const EVM_CHAIN_ID_OFFSET = 4688;
+
+export function toEvmChainId(iotexChainID: number): number {
+  if (iotexChainID < 1 || iotexChainID > 3) {
+    throw new Error(
+      `invalid IoTeX chain id ${iotexChainID}: expected 1, 2, or 3`
+    );
+  }
+  return EVM_CHAIN_ID_OFFSET + iotexChainID;
+}
+
 export interface IAccessTuple {
   address: string;
   storageKeys: Array<string>;
@@ -120,7 +133,7 @@ function pad32Hex(hex: string): string {
 export function buildTypedTx(t: ITypedTxFields): Transaction {
   const tx = new Transaction();
   tx.type = t.txType;
-  tx.chainId = BigInt(t.chainID);
+  tx.chainId = BigInt(toEvmChainId(t.chainID));
   tx.nonce = Number(t.nonce);
   tx.gasLimit = BigInt(t.gasLimit);
   tx.value = BigInt(t.value || "0");
@@ -170,7 +183,7 @@ export function buildTypedTx(t: ITypedTxFields): Transaction {
       tx.authorizationList = t.setCodeAuthList.map(a => ({
         address: ioAddressToEth(a.address),
         nonce: Number(a.nonce),
-        chainId: BigInt(a.chainID),
+        chainId: BigInt(toEvmChainId(a.chainID)),
         signature: Signature.from({
           r: pad32Hex(a.r),
           s: pad32Hex(a.s),

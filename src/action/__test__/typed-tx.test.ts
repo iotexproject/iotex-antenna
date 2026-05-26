@@ -9,6 +9,7 @@ import {
   extractEthTxSig,
   ioAddressToEth,
   signTypedTx,
+  toEvmChainId,
   txContainerHash,
   TX_TYPE_ACCESS_LIST,
   TX_TYPE_BLOB,
@@ -24,6 +25,14 @@ const TEST_PUB =
   "046791faf87db669c1e67e6b338fcb41d02b80336da4ac17a57d83453b4ec439c2fb3c86a25d745dabd37ecc9f5f5ac1371c9f20e8ea0ae1e4feeacf47ffaca469";
 const TEST_ADDR = "io1ph0u2psnd7muq5xv9623rmxdsxc4uapxhzpg02";
 const TEST_ETH_ADDR = getAddress(ioAddressToEth(TEST_ADDR));
+
+test("toEvmChainId maps IoTeX chain IDs to EVM network IDs", t => {
+  t.is(toEvmChainId(1), 4689);
+  t.is(toEvmChainId(2), 4690);
+  t.is(toEvmChainId(3), 4691);
+  t.throws(() => toEvmChainId(0));
+  t.throws(() => toEvmChainId(4));
+});
 
 test("ioAddressToEth converts io1... to 0x-hex", t => {
   const eth = ioAddressToEth(TEST_ADDR);
@@ -52,7 +61,7 @@ test("buildTypedTx + signTypedTx round-trips legacy tx", t => {
   const tx = signTypedTx(
     {
       txType: TX_TYPE_LEGACY,
-      chainID: 4689,
+      chainID: 1,
       nonce: 1,
       gasLimit: 21000,
       gasPrice: "1000000000000",
@@ -74,7 +83,7 @@ test("buildTypedTx + signTypedTx round-trips access-list tx", t => {
   const tx = signTypedTx(
     {
       txType: TX_TYPE_ACCESS_LIST,
-      chainID: 4689,
+      chainID: 1,
       nonce: 2,
       gasLimit: 30000,
       gasPrice: "1000000000000",
@@ -101,7 +110,7 @@ test("buildTypedTx + signTypedTx round-trips dynamic-fee tx", t => {
   const tx = signTypedTx(
     {
       txType: TX_TYPE_DYNAMIC_FEE,
-      chainID: 4689,
+      chainID: 1,
       nonce: 3,
       gasLimit: 21000,
       gasTipCap: "1000000000",
@@ -121,7 +130,7 @@ test("buildTypedTx blob tx requires recipient and blobTxData", t => {
   t.throws(() =>
     buildTypedTx({
       txType: TX_TYPE_BLOB,
-      chainID: 4689,
+      chainID: 1,
       nonce: 0,
       gasLimit: 21000,
       value: "0"
@@ -133,7 +142,7 @@ test("buildTypedTx setcode tx requires recipient and auth list", t => {
   t.throws(() =>
     buildTypedTx({
       txType: TX_TYPE_SET_CODE,
-      chainID: 4689,
+      chainID: 1,
       nonce: 0,
       gasLimit: 21000,
       value: "0",
@@ -146,7 +155,7 @@ test("extractEthTxSig produces 65 bytes ending in 27/28 for typed tx", t => {
   const tx = signTypedTx(
     {
       txType: TX_TYPE_DYNAMIC_FEE,
-      chainID: 4689,
+      chainID: 1,
       nonce: 4,
       gasLimit: 21000,
       gasTipCap: "1",
@@ -165,7 +174,7 @@ test("txContainerHash matches keccak256(serialized)", t => {
   const tx = signTypedTx(
     {
       txType: TX_TYPE_LEGACY,
-      chainID: 4689,
+      chainID: 1,
       nonce: 5,
       gasLimit: 21000,
       gasPrice: "1000000000",
@@ -182,7 +191,7 @@ test("txContainerHash matches keccak256(serialized)", t => {
 });
 
 test("SealedEnvelop.sign routes typed-tx through TX_CONTAINER", t => {
-  const envelop = new Envelop(1, "10", 4689, "21000", "1000000000");
+  const envelop = new Envelop(1, "10", 1, "21000", "1000000000");
   envelop.transfer = {
     amount: "100",
     recipient: TEST_ADDR,
@@ -206,7 +215,7 @@ test("SealedEnvelop.sign routes typed-tx through TX_CONTAINER", t => {
 });
 
 test("SealedEnvelop.sign keeps legacy iotex protobuf path when txType=0", t => {
-  const envelop = new Envelop(1, "10", 4689, "21000", "1000000000");
+  const envelop = new Envelop(1, "10", 1, "21000", "1000000000");
   envelop.transfer = {
     amount: "100",
     recipient: TEST_ADDR,
@@ -244,7 +253,7 @@ test("blob tx with sidecar round-trips through serialized bytes", t => {
   const tx = signTypedTx(
     {
       txType: TX_TYPE_BLOB,
-      chainID: 4689,
+      chainID: 1,
       nonce: 7,
       gasLimit: 100000,
       gasTipCap: "1",
@@ -277,7 +286,7 @@ test("setcode tx accepts auth list and serializes", t => {
   const tx = signTypedTx(
     {
       txType: TX_TYPE_SET_CODE,
-      chainID: 4689,
+      chainID: 1,
       nonce: 8,
       gasLimit: 100000,
       gasTipCap: "1",
@@ -286,7 +295,7 @@ test("setcode tx accepts auth list and serializes", t => {
       value: "0",
       setCodeAuthList: [
         {
-          chainID: 4689,
+          chainID: 1,
           address: `0x${dummyAddr.toString("hex")}`,
           nonce: 0,
           v: 0,
@@ -304,7 +313,7 @@ test("setcode tx accepts auth list and serializes", t => {
 test("toAction populates txContainer + encoding on signed eth tx", t => {
   // tslint:disable-next-line:no-require-imports
   const { toAction } = require("../../rpc-method/types");
-  const envelop = new Envelop(1, "10", 4689, "21000", "1000000000");
+  const envelop = new Envelop(1, "10", 1, "21000", "1000000000");
   envelop.transfer = {
     amount: "100",
     recipient: TEST_ADDR,
@@ -346,7 +355,7 @@ test("signature recovers to TEST_ADDR for legacy", t => {
   t.is(
     signAndRecover({
       txType: TX_TYPE_LEGACY,
-      chainID: 4689,
+      chainID: 1,
       nonce: 20,
       gasLimit: 21000,
       gasPrice: "1000000000",
@@ -361,7 +370,7 @@ test("signature recovers to TEST_ADDR for access-list", t => {
   t.is(
     signAndRecover({
       txType: TX_TYPE_ACCESS_LIST,
-      chainID: 4689,
+      chainID: 1,
       nonce: 21,
       gasLimit: 21000,
       gasPrice: "1000000000",
@@ -377,7 +386,7 @@ test("signature recovers to TEST_ADDR for dynamic-fee", t => {
   t.is(
     signAndRecover({
       txType: TX_TYPE_DYNAMIC_FEE,
-      chainID: 4689,
+      chainID: 1,
       nonce: 22,
       gasLimit: 21000,
       gasTipCap: "1",
@@ -398,7 +407,7 @@ test("signature recovers to TEST_ADDR for blob", t => {
   t.is(
     signAndRecover({
       txType: TX_TYPE_BLOB,
-      chainID: 4689,
+      chainID: 1,
       nonce: 23,
       gasLimit: 100000,
       gasTipCap: "1",
@@ -428,7 +437,7 @@ test("signature recovers to TEST_ADDR for setcode", t => {
   t.is(
     signAndRecover({
       txType: TX_TYPE_SET_CODE,
-      chainID: 4689,
+      chainID: 1,
       nonce: 24,
       gasLimit: 100000,
       gasTipCap: "1",
@@ -437,7 +446,7 @@ test("signature recovers to TEST_ADDR for setcode", t => {
       value: "0",
       setCodeAuthList: [
         {
-          chainID: 4689,
+          chainID: 1,
           address: `0x${dummy.toString("hex")}`,
           nonce: 0,
           v: 0,
@@ -456,7 +465,7 @@ test("extractEthTxSig produces 65 bytes ending in 27/28 for legacy", t => {
   const tx = signTypedTx(
     {
       txType: TX_TYPE_LEGACY,
-      chainID: 4689,
+      chainID: 1,
       nonce: 11,
       gasLimit: 21000,
       gasPrice: "1000000000",
@@ -480,7 +489,7 @@ function signedActionFor(
   extras: any = {}
   // tslint:disable-next-line:no-any
 ): any {
-  const envelop = new Envelop(1, "10", 4689, "21000", "1000000000");
+  const envelop = new Envelop(1, "10", 1, "21000", "1000000000");
   envelop.transfer = {
     amount: "0",
     recipient: TEST_ADDR,
@@ -552,7 +561,7 @@ test("toAction propagates txContainer for setcode", t => {
   const action = signedActionFor(TX_TYPE_SET_CODE, {
     gasTipCap: "1",
     gasFeeCap: "2",
-    setCodeAuthList: [{ chainID: 4689, address: dummy, nonce: 0, v: 0, r, s }]
+    setCodeAuthList: [{ chainID: 1, address: dummy, nonce: 0, v: 0, r, s }]
   });
   const pb = toAction(action);
   t.is(pb.getEncoding(), 128);
@@ -564,7 +573,7 @@ test("toAction propagates txContainer for setcode", t => {
 // tslint:disable-next-line:no-any
 function mockClient(captured: { last?: any }): any {
   return {
-    getChainID: () => 4689,
+    getChainID: () => 1,
     getAccount: async () => ({
       accountMeta: {
         balance: "1000000000000000000000",
@@ -596,7 +605,7 @@ test("TransferMethod.execute routes through TX_CONTAINER when txType set", async
     gasLimit: "21000",
     gasPrice: "1000000000",
     txType: TX_TYPE_DYNAMIC_FEE,
-    chainID: 4689,
+    chainID: 1,
     gasTipCap: "1",
     gasFeeCap: "2"
   }).execute();
@@ -618,7 +627,7 @@ test("ExecutionMethod.execute routes through TX_CONTAINER when txType set", asyn
     gasLimit: "100000",
     gasPrice: "1000000000",
     txType: TX_TYPE_ACCESS_LIST,
-    chainID: 4689,
+    chainID: 1,
     accessList: [{ address: TEST_ADDR, storageKeys: [] }]
   }).execute();
   t.truthy(captured.last);
@@ -649,7 +658,7 @@ test("legacy tx supports contract creation (to undefined)", t => {
   const tx = signTypedTx(
     {
       txType: TX_TYPE_LEGACY,
-      chainID: 4689,
+      chainID: 1,
       nonce: 30,
       gasLimit: 500000,
       gasPrice: "1000000000",
@@ -672,7 +681,7 @@ test("blob sidecar with mismatched lengths throws", t => {
   t.throws(() =>
     buildTypedTx({
       txType: TX_TYPE_BLOB,
-      chainID: 4689,
+      chainID: 1,
       nonce: 0,
       gasLimit: 100000,
       gasTipCap: "1",
@@ -694,7 +703,7 @@ test("blob sidecar with mismatched lengths throws", t => {
 
 test("signing the same envelop twice is deterministic", t => {
   const make = () => {
-    const e = new Envelop(1, "55", 4689, "21000", "1000000000");
+    const e = new Envelop(1, "55", 1, "21000", "1000000000");
     e.transfer = {
       amount: "0",
       recipient: TEST_ADDR,
