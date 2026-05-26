@@ -51,7 +51,7 @@ export interface IBlobData {
 }
 
 export interface ISetCodeAuthorization {
-  chainID: number;
+  chainID: number; // IoTeX chain ID (1=mainnet, 2=testnet, 3=nightly)
   address: string; // 0x... eth-style or io... bech32
   nonce: number | string;
   v: number;
