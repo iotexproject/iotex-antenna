@@ -31,6 +31,7 @@ import {
   BlockHeaderCore
 } from "../../protogen/proto/types/blockchain_pb";
 import { Endorsement } from "../../protogen/proto/types/endorsement_pb";
+import { toEvmChainId } from "../action/typed-tx";
 
 // Properties of a Timestamp.
 export interface ITimestamp {
@@ -1362,7 +1363,7 @@ function toActionSetCodeAuthList(
   }
   return list.map(a => {
     const pb = new actionPb.SetCodeAuthorization();
-    pb.setChainid(a.chainID);
+    pb.setChainid(toEvmChainId(a.chainID));
     pb.setAddress(new Uint8Array(a.address));
     pb.setNonce(Number(a.nonce));
     pb.setV(Number(a.v));

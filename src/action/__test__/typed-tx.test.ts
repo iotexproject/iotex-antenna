@@ -568,6 +568,27 @@ test("toAction propagates txContainer for setcode", t => {
   t.true(pb.getCore().hasTxcontainer());
 });
 
+test("toAction setcode auth list uses EVM chain ID in proto", t => {
+  // tslint:disable-next-line:no-require-imports
+  const { toAction } = require("../../rpc-method/types");
+  const dummy = Buffer.alloc(20);
+  const r = Buffer.alloc(32);
+  r[31] = 1;
+  const s = Buffer.alloc(32);
+  s[31] = 2;
+  // chainID: 2 (IoTeX testnet) → should become 4690 in the proto field
+  const action = signedActionFor(TX_TYPE_SET_CODE, {
+    gasTipCap: "1",
+    gasFeeCap: "2",
+    setCodeAuthList: [{ chainID: 2, address: dummy, nonce: 5, v: 0, r, s }]
+  });
+  const pb = toAction(action);
+  const authList = pb.getCore().getSetcodeauthlistList();
+  t.is(authList.length, 1);
+  t.is(authList[0].getChainid(), 4690);
+  t.is(authList[0].getNonce(), 5);
+});
+
 // --- caller-level routing through TransferMethod and ExecutionMethod ---
 
 // tslint:disable-next-line:no-any
