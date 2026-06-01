@@ -5,6 +5,7 @@ import { Envelop, SealedEnvelop } from "./envelop";
 import {
   ActionError,
   ActionErrorCode,
+  BaseActionRequest,
   CandidateRegister,
   CandidateUpdate,
   ClaimFromRewardingFund,
@@ -19,6 +20,32 @@ import {
   StakeWithdraw,
   Transfer
 } from "./types";
+
+// applyTypedTxFields copies eth typed-tx options off a request onto the
+// envelop so SealedEnvelop.sign routes through the TX_CONTAINER path.
+function applyTypedTxFields(envelop: Envelop, req: BaseActionRequest): void {
+  if (req.txType !== undefined) {
+    envelop.txType = req.txType;
+  }
+  if (req.chainID !== undefined) {
+    envelop.chainID = req.chainID;
+  }
+  if (req.gasTipCap !== undefined) {
+    envelop.gasTipCap = req.gasTipCap;
+  }
+  if (req.gasFeeCap !== undefined) {
+    envelop.gasFeeCap = req.gasFeeCap;
+  }
+  if (req.accessList !== undefined) {
+    envelop.accessList = req.accessList;
+  }
+  if (req.blobTxData !== undefined) {
+    envelop.blobTxData = req.blobTxData;
+  }
+  if (req.setCodeAuthList !== undefined) {
+    envelop.setCodeAuthList = req.setCodeAuthList;
+  }
+}
 
 export interface PluginOpts {
   address: string;
@@ -140,9 +167,10 @@ export class AbstractMethod {
       await this.client.sendAction({
         action: selp.action()
       });
-    } catch (e) {
+    } catch (err) {
+      const e = err as { details?: string };
       let code = ActionErrorCode.ErrUnknown;
-      let message = `send action error: ${JSON.stringify(e)}`;
+      let message = `send action error: ${JSON.stringify(err)}`;
       if (e.details) {
         message = e.details;
         if (e.details.match(/^reject existed action .*/)) {
@@ -189,6 +217,7 @@ export class TransferMethod extends AbstractMethod {
       recipient: this.transfer.recipient,
       payload: Buffer.from(this.transfer.payload, "hex")
     };
+    applyTypedTxFields(envelop, this.transfer);
 
     return this.sendAction(envelop);
   }
@@ -217,6 +246,7 @@ export class ExecutionMethod extends AbstractMethod {
       contract: this.execution.contract,
       data: this.execution.data
     };
+    applyTypedTxFields(envelop, this.execution);
 
     return this.sendAction(envelop);
   }
@@ -231,6 +261,7 @@ export class ExecutionMethod extends AbstractMethod {
       contract: this.execution.contract,
       data: this.execution.data
     };
+    applyTypedTxFields(envelop, this.execution);
 
     const selp = await this.signAction(envelop);
     return selp.action();

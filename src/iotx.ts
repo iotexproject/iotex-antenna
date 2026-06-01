@@ -78,7 +78,14 @@ export class Iotx extends RpcMethod {
         gasPrice: req.gasPrice,
         amount: req.value,
         recipient: req.to,
-        payload: payload
+        payload: payload,
+        txType: req.txType,
+        chainID: req.chainID,
+        gasTipCap: req.gasTipCap,
+        gasFeeCap: req.gasFeeCap,
+        accessList: req.accessList,
+        blobTxData: req.blobTxData,
+        setCodeAuthList: req.setCodeAuthList
       },
       { signer: this.signer }
     ).execute();
@@ -104,7 +111,13 @@ export class Iotx extends RpcMethod {
       data: req.data,
       provider: this,
       signer: this.signer
-    }).deploy(sender, args, req.amount, req.gasLimit, req.gasPrice);
+    }).deploy(sender, args, req.amount, req.gasLimit, req.gasPrice, {
+      txType: req.txType,
+      chainID: req.chainID,
+      gasTipCap: req.gasTipCap,
+      gasFeeCap: req.gasFeeCap,
+      accessList: req.accessList
+    });
   }
 
   // return action hash
@@ -131,7 +144,14 @@ export class Iotx extends RpcMethod {
       account: sender,
       amount: req.amount,
       gasLimit: req.gasLimit,
-      gasPrice: req.gasPrice
+      gasPrice: req.gasPrice,
+      txType: req.txType,
+      chainID: req.chainID,
+      gasTipCap: req.gasTipCap,
+      gasFeeCap: req.gasFeeCap,
+      accessList: req.accessList,
+      blobTxData: req.blobTxData,
+      setCodeAuthList: req.setCodeAuthList
     });
   }
 

@@ -41,7 +41,7 @@ export interface PrivateKey {
 
 function runCipherBuffer(
   cipher: Cipher | Decipher,
-  data: crypto.Binary
+  data: NodeJS.ArrayBufferView
 ): Buffer {
   return Buffer.concat([cipher.update(data), cipher.final()]);
 }
@@ -71,8 +71,10 @@ export default class Wallet {
     this.accountsIndex = 0;
 
     return new Proxy(this, {
-      get: (target, name: string | number) => {
+      get: (target, name: string | symbol) => {
+        // @ts-ignore
         if (target.accounts[name]) {
+          // @ts-ignore
           return target.accounts[name];
         }
 

@@ -36,6 +36,10 @@ message PutPollResult {
   CandidateList candidates = 2;
 }
 
+message TxContainer {
+  bytes raw = 1;
+}
+
 message Execution {
   string amount = 1;
   string contract = 2;
@@ -46,6 +50,27 @@ message Execution {
 message AccessTuple {
   string address = 1;
   repeated string storageKeys = 2;
+}
+
+message BlobTxSidecar {
+  repeated bytes blobs = 1;       // Blobs needed by the blob pool
+  repeated bytes commitments = 2; // Commitments needed by the blob pool
+  repeated bytes proofs = 3;      // Proofs needed by the blob pool
+}
+
+message BlobTxData {
+  string blobFeeCap = 1;
+  repeated bytes blobHashes = 2;
+  BlobTxSidecar blobTxSidecar = 3;
+}
+
+message SetCodeAuthorization {
+  uint32 chainID = 1;
+  bytes address = 2;
+  uint64 nonce = 3;
+  uint64 v = 4;
+  bytes r = 5;
+  bytes s = 6;
 }
 
 // create stake
@@ -214,8 +239,15 @@ message ActionCore {
   uint64 gasLimit = 3;
   string gasPrice = 4;
   uint32 chainID = 5;
+  string gasTipCap = 6;
+  string gasFeeCap = 7;
+  BlobTxData blobTxData = 8;
+  repeated AccessTuple accessList = 9;
+  uint32 txType = 28;
+  repeated SetCodeAuthorization setCodeAuthList = 29;
   oneof action {
     Transfer transfer = 10;
+    TxContainer txContainer = 11;
     Execution execution = 12;
     // FedChain
     StartSubChain startSubChain = 13;
@@ -257,8 +289,12 @@ message ActionCore {
 }
 
 enum Encoding {
+  option allow_alias = true;
   IOTEX_PROTOBUF = 0;
+  ETHEREUM_EIP155 = 1;
   ETHEREUM_RLP = 1;
+  ETHEREUM_UNPROTECTED = 2;
+  TX_CONTAINER = 128;
 }
 
 message Action {

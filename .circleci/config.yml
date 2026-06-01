@@ -3,20 +3,23 @@ version: 2
 jobs:
   build:
     docker:
-      - image: "circleci/node:10.16.0-browsers-legacy@sha256:4474c6c720d43b92f4a80d5d9c0aa43ca39fdba39b9ab990246babb907ad2b5d"
+      - image: "cimg/node:16.20"
     steps:
+      - run:
+          name: configure git to use https
+          command: git config --global url."https://github.com/".insteadOf "git@github.com:"
       - checkout
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "package.json" }}
+            - v3-dependencies-{{ checksum "package.json" }}
             # fallback to using the latest cache if no exact match is found
-            - v2-dependencies-
-      - run: npm install
+            - v3-dependencies-
+      - run: npm install --legacy-peer-deps
       - save_cache:
           paths:
             - node_modules
-          key: v2-dependencies-{{ checksum "package.json" }}
+          key: v3-dependencies-{{ checksum "package.json" }}
       - run: npm test
       - store_artifacts:
           path: coverage

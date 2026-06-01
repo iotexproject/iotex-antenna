@@ -1,6 +1,21 @@
+import {
+  IAccessTuple,
+  IBlobTxData,
+  ISetCodeAuthorization
+} from "../rpc-method/types";
+
 export interface BaseActionRequest {
   gasLimit?: string | undefined;
   gasPrice?: string | undefined;
+  // Eth typed-tx fields. When txType is set the action is signed and sent
+  // as TX_CONTAINER (raw eth tx bytes) instead of iotex protobuf encoding.
+  txType?: number | undefined;
+  chainID?: number | undefined;
+  gasTipCap?: string | undefined;
+  gasFeeCap?: string | undefined;
+  accessList?: Array<IAccessTuple> | undefined;
+  blobTxData?: IBlobTxData | undefined;
+  setCodeAuthList?: Array<ISetCodeAuthorization> | undefined;
 }
 
 export interface Transfer extends BaseActionRequest {

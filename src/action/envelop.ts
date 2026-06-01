@@ -3,7 +3,10 @@ import { makeSigner } from "../crypto/crypto";
 import { hash256b } from "../crypto/hash";
 import {
   GetActionsRequest,
+  IAccessTuple,
   IAction,
+  IActionEncoding,
+  IBlobTxData,
   ICandidateBasicInfo,
   ICandidateRegister,
   IClaimFromRewardingFund,
@@ -22,6 +25,7 @@ import {
   IPlumTransfer,
   IPutBlock,
   IPutPollResult,
+  ISetCodeAuthorization,
   ISettleDeposit,
   IStakeAddDeposit,
   IStakeChangeCandidate,
@@ -62,6 +66,16 @@ import {
   toActionTerminatePlumChain,
   toActionTransfer
 } from "../rpc-method/types";
+import {
+  extractEthTxSig,
+  IAccessTuple as ITypedAccessTuple,
+  IBlobData as ITypedBlobData,
+  ISetCodeAuthorization as ITypedSetCodeAuthorization,
+  ITypedTxFields,
+  signTypedTx,
+  TX_TYPE_LEGACY,
+  txContainerHash
+} from "./typed-tx";
 
 export class Envelop {
   public version: number;
@@ -69,6 +83,15 @@ export class Envelop {
   public gasLimit?: string | undefined;
   public gasPrice?: string | undefined;
   public chainID: number;
+
+  // Eth typed-tx fields. Set txType != 0 (or call setTxType) to route through
+  // the TX_CONTAINER signing path instead of the iotex protobuf path.
+  public txType?: number | undefined;
+  public gasTipCap?: string | undefined;
+  public gasFeeCap?: string | undefined;
+  public accessList?: Array<IAccessTuple> | undefined;
+  public blobTxData?: IBlobTxData | undefined;
+  public setCodeAuthList?: Array<ISetCodeAuthorization> | undefined;
 
   // optional fields
   public transfer?: ITransfer | undefined;
@@ -277,10 +300,66 @@ export class Envelop {
   }
 }
 
+function toTypedAccessList(
+  list: Array<IAccessTuple> | undefined
+): Array<ITypedAccessTuple> | undefined {
+  if (!list || list.length === 0) {
+    return undefined;
+  }
+  return list.map(at => ({
+    address: at.address,
+    storageKeys: at.storageKeys
+  }));
+}
+
+function toTypedBlobData(
+  d: IBlobTxData | undefined
+): ITypedBlobData | undefined {
+  if (!d) {
+    return undefined;
+  }
+  const hashes = d.blobHashes.map(h => {
+    const buf = Buffer.from(h);
+    return `0x${buf.toString("hex")}`;
+  });
+  const out: ITypedBlobData = {
+    blobFeeCap: d.blobFeeCap,
+    blobHashes: hashes
+  };
+  if (d.blobTxSidecar) {
+    out.sidecar = {
+      blobs: d.blobTxSidecar.blobs.map(b => Buffer.from(b)),
+      commitments: d.blobTxSidecar.commitments.map(c => Buffer.from(c)),
+      proofs: d.blobTxSidecar.proofs.map(p => Buffer.from(p))
+    };
+  }
+  return out;
+}
+
+function toTypedAuthList(
+  list: Array<ISetCodeAuthorization> | undefined
+): Array<ITypedSetCodeAuthorization> | undefined {
+  if (!list || list.length === 0) {
+    return undefined;
+  }
+  return list.map(a => ({
+    chainID: a.chainID,
+    address: `0x${Buffer.from(a.address).toString("hex")}`,
+    nonce: a.nonce,
+    v: Number(a.v),
+    r: `0x${Buffer.from(a.r).toString("hex")}`,
+    s: `0x${Buffer.from(a.s).toString("hex")}`
+  }));
+}
+
 export class SealedEnvelop {
   public act: Envelop;
   public senderPubKey: Buffer;
   public signature: Buffer;
+  // When set, the action is encoded as TX_CONTAINER (raw eth tx bytes).
+  public rawEthTx?: Buffer;
+  public ethTxHash?: Buffer;
+  public encoding?: IActionEncoding;
 
   constructor(act: Envelop, senderPubKey: Buffer, signature: Buffer) {
     this.act = act;
@@ -290,14 +369,26 @@ export class SealedEnvelop {
 
   public bytestream(): Uint8Array {
     const pbActionCore = this.act.core();
+    if (this.rawEthTx) {
+      const tc = new actionPb.TxContainer();
+      tc.setRaw(this.rawEthTx);
+      pbActionCore.setTxcontainer(tc);
+    }
     const pbAction = new actionPb.Action();
     pbAction.setCore(pbActionCore);
     pbAction.setSenderpubkey(this.senderPubKey);
     pbAction.setSignature(this.signature);
+    if (this.encoding !== undefined) {
+      pbAction.setEncoding(this.encoding as number);
+    }
     return pbAction.serializeBinary();
   }
 
   public hash(): string {
+    if (this.ethTxHash) {
+      // TX_CONTAINER: the action hash is keccak256 of the raw signed eth tx.
+      return this.ethTxHash.toString("hex");
+    }
     return Buffer.from(hash256b(this.bytestream())).toString("hex");
   }
 
@@ -305,15 +396,22 @@ export class SealedEnvelop {
     const gasLimit = this.act.gasLimit || "0";
     const gasPrice = this.act.gasPrice || "0";
 
-    return {
+    const out: IAction = {
       core: {
         version: this.act.version,
         nonce: this.act.nonce,
         gasLimit: gasLimit,
         gasPrice: gasPrice,
         chainID: this.act.chainID,
+        txType: this.act.txType,
+        gasTipCap: this.act.gasTipCap,
+        gasFeeCap: this.act.gasFeeCap,
+        accessList: this.act.accessList,
+        blobTxData: this.act.blobTxData,
+        setCodeAuthList: this.act.setCodeAuthList,
         transfer: this.act.transfer,
         execution: this.act.execution,
+        txContainer: this.rawEthTx ? { raw: this.rawEthTx } : undefined,
         startSubChain: this.act.startSubChain,
         stopSubChain: this.act.stopSubChain,
         putBlock: this.act.putBlock,
@@ -346,6 +444,10 @@ export class SealedEnvelop {
       senderPubKey: this.senderPubKey,
       signature: this.signature
     };
+    if (this.encoding !== undefined) {
+      out.encoding = this.encoding;
+    }
+    return out;
   }
 
   public static sign(
@@ -353,11 +455,81 @@ export class SealedEnvelop {
     publicKey: string,
     act: Envelop
   ): SealedEnvelop {
+    if (act.txType !== undefined && act.txType !== TX_TYPE_LEGACY) {
+      return SealedEnvelop.signTxContainer(privateKey, publicKey, act);
+    }
     const h = hash256b(act.bytestream());
     const sign = Buffer.from(
       makeSigner(0)(h.toString("hex"), privateKey),
       "hex"
     );
     return new SealedEnvelop(act, Buffer.from(publicKey, "hex"), sign);
+  }
+
+  // signTxContainer builds an Ethereum typed tx out of the envelop's typed
+  // fields plus its transfer/execution payload, signs it, and wraps the raw
+  // bytes in a TX_CONTAINER. The Action.signature is set to the 65-byte
+  // [R||S||V] the node extracts from the raw tx so the two match.
+  public static signTxContainer(
+    privateKey: string,
+    publicKey: string,
+    act: Envelop
+  ): SealedEnvelop {
+    if (!act.chainID) {
+      throw new Error("typed eth tx requires chainID");
+    }
+    const txType = act.txType !== undefined ? act.txType : TX_TYPE_LEGACY;
+
+    let to: string | undefined;
+    let value = "0";
+    let data: Buffer | undefined;
+    if (act.transfer) {
+      to = act.transfer.recipient;
+      value = act.transfer.amount;
+      if (act.transfer.payload) {
+        data = Buffer.from(act.transfer.payload as Uint8Array);
+      }
+    } else if (act.execution) {
+      to = act.execution.contract || undefined;
+      value = act.execution.amount;
+      if (act.execution.data) {
+        data = Buffer.from(act.execution.data as Uint8Array);
+      }
+    } else {
+      throw new Error(
+        "typed eth tx requires transfer or execution action payload"
+      );
+    }
+
+    const fields: ITypedTxFields = {
+      txType,
+      chainID: act.chainID,
+      nonce: act.nonce,
+      gasLimit: act.gasLimit || "0",
+      gasPrice: act.gasPrice,
+      gasTipCap: act.gasTipCap,
+      gasFeeCap: act.gasFeeCap,
+      to,
+      value,
+      data,
+      accessList: toTypedAccessList(act.accessList),
+      blobTxData: toTypedBlobData(act.blobTxData),
+      setCodeAuthList: toTypedAuthList(act.setCodeAuthList)
+    };
+
+    const signedTx = signTypedTx(fields, privateKey);
+    const raw = Buffer.from(signedTx.serialized.replace(/^0x/, ""), "hex");
+    const actionSig = extractEthTxSig(signedTx);
+    const hash = txContainerHash(signedTx);
+
+    const selp = new SealedEnvelop(
+      act,
+      Buffer.from(publicKey, "hex"),
+      actionSig
+    );
+    selp.rawEthTx = raw;
+    selp.ethTxHash = hash;
+    selp.encoding = IActionEncoding.TX_CONTAINER;
+    return selp;
   }
 }

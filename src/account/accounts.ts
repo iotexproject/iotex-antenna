@@ -15,7 +15,7 @@ export class Accounts extends Array<IAccount> {
     this.wallet = new Wallet();
 
     return new Proxy(this, {
-      get: (target, name: string | number) => {
+      get: (target, name: string | symbol) => {
         // @ts-ignore
         if (target.wallet[name]) {
           // @ts-ignore

@@ -31,6 +31,7 @@ import {
   BlockHeaderCore
 } from "../../protogen/proto/types/blockchain_pb";
 import { Endorsement } from "../../protogen/proto/types/endorsement_pb";
+import { toEvmChainId } from "../action/typed-tx";
 
 // Properties of a Timestamp.
 export interface ITimestamp {
@@ -717,6 +718,41 @@ export interface IPutPollResult {
   candidates: ICandidateList | undefined;
 }
 
+// Properties of an iotex TxContainer (raw eth tx bytes).
+export interface ITxContainer {
+  raw: Uint8Array;
+}
+
+// Properties of an iotex AccessTuple (eth EIP-2930).
+export interface IAccessTuple {
+  address: string;
+  storageKeys: Array<string>;
+}
+
+// Properties of an iotex BlobTxSidecar (eth EIP-4844).
+export interface IBlobTxSidecar {
+  blobs: Array<Uint8Array | Buffer>;
+  commitments: Array<Uint8Array | Buffer>;
+  proofs: Array<Uint8Array | Buffer>;
+}
+
+// Properties of an iotex BlobTxData (eth EIP-4844).
+export interface IBlobTxData {
+  blobFeeCap: string;
+  blobHashes: Array<Uint8Array | Buffer>;
+  blobTxSidecar?: IBlobTxSidecar;
+}
+
+// Properties of an iotex SetCodeAuthorization (eth EIP-7702).
+export interface ISetCodeAuthorization {
+  chainID: number;
+  address: Uint8Array | Buffer;
+  nonce: number | string;
+  v: number | string;
+  r: Uint8Array | Buffer;
+  s: Uint8Array | Buffer;
+}
+
 // Properties of an ActionCore.
 export interface IActionCore {
   // ActionCore version
@@ -734,11 +770,21 @@ export interface IActionCore {
   // ActionCore chainID
   chainID: number;
 
+  // Eth typed-tx fields. Present only when the action is signed as TX_CONTAINER.
+  txType?: number;
+  gasTipCap?: string;
+  gasFeeCap?: string;
+  accessList?: Array<IAccessTuple>;
+  blobTxData?: IBlobTxData;
+  setCodeAuthList?: Array<ISetCodeAuthorization>;
+
   // Action detail fields
   // ActionCore transfer
   transfer?: ITransfer | undefined;
   // ActionCore execution
   execution?: IExecution | undefined;
+  // ActionCore txContainer (raw signed eth tx bytes, used with Encoding=TX_CONTAINER)
+  txContainer?: ITxContainer | undefined;
 
   // FedChain
   // ActionCore startSubChain
@@ -796,6 +842,16 @@ export interface IActionCore {
   putPollResult?: IPutPollResult | undefined;
 }
 
+// Encoding mirrors iotextypes.Encoding. Defaults to IOTEX_PROTOBUF=0 when
+// omitted, which is the historical wire format.
+export enum IActionEncoding {
+  IOTEX_PROTOBUF = 0,
+  ETHEREUM_EIP155 = 1,
+  ETHEREUM_RLP = 1,
+  ETHEREUM_UNPROTECTED = 2,
+  TX_CONTAINER = 128
+}
+
 // Properties of an Action.
 export interface IAction {
   // Action core
@@ -806,6 +862,9 @@ export interface IAction {
 
   // Action signature
   signature: Uint8Array | string;
+
+  // Action encoding. Optional for backwards compatibility (defaults to IOTEX_PROTOBUF).
+  encoding?: IActionEncoding | number;
 }
 
 // read state
@@ -1261,6 +1320,60 @@ export function toActionCandidateBasicInfo(
   return pbCandidateBasicInfo;
 }
 
+function toActionAccessList(
+  list: Array<IAccessTuple> | undefined
+): Array<actionPb.AccessTuple> {
+  if (!list || list.length === 0) {
+    return [];
+  }
+  return list.map(at => {
+    const pb = new actionPb.AccessTuple();
+    pb.setAddress(at.address);
+    pb.setStoragekeysList(at.storageKeys);
+    return pb;
+  });
+}
+
+function toActionBlobTxData(
+  d: IBlobTxData | undefined
+): actionPb.BlobTxData | undefined {
+  if (!d) {
+    return undefined;
+  }
+  const pb = new actionPb.BlobTxData();
+  pb.setBlobfeecap(d.blobFeeCap);
+  pb.setBlobhashesList(d.blobHashes.map(h => new Uint8Array(h)));
+  if (d.blobTxSidecar) {
+    const sc = new actionPb.BlobTxSidecar();
+    sc.setBlobsList(d.blobTxSidecar.blobs.map(b => new Uint8Array(b)));
+    sc.setCommitmentsList(
+      d.blobTxSidecar.commitments.map(c => new Uint8Array(c))
+    );
+    sc.setProofsList(d.blobTxSidecar.proofs.map(p => new Uint8Array(p)));
+    pb.setBlobtxsidecar(sc);
+  }
+  return pb;
+}
+
+function toActionSetCodeAuthList(
+  list: Array<ISetCodeAuthorization> | undefined
+): Array<actionPb.SetCodeAuthorization> {
+  if (!list || list.length === 0) {
+    return [];
+  }
+  return list.map(a => {
+    const pb = new actionPb.SetCodeAuthorization();
+    pb.setChainid(toEvmChainId(a.chainID));
+    pb.setAddress(new Uint8Array(a.address));
+    pb.setNonce(Number(a.nonce));
+    pb.setV(Number(a.v));
+    pb.setR(new Uint8Array(a.r));
+    pb.setS(new Uint8Array(a.s));
+    return pb;
+  });
+}
+
+// tslint:disable-next-line:max-func-body-length
 export function toAction(req: IAction): any {
   const pbActionCore = new actionPb.ActionCore();
 
@@ -1271,64 +1384,95 @@ export function toAction(req: IAction): any {
     pbActionCore.setGaslimit(Number(core.gasLimit));
     pbActionCore.setGasprice(core.gasPrice);
     pbActionCore.setChainid(core.chainID);
-    pbActionCore.setTransfer(toActionTransfer(core.transfer));
-    pbActionCore.setExecution(toActionExecution(core.execution));
-    pbActionCore.setStartsubchain(toActionStartSubChain(core.startSubChain));
-    pbActionCore.setStopsubchain(toActionStopSubChain(core.stopSubChain));
-    pbActionCore.setPutblock(toActionPutBlock(core.putBlock));
-    pbActionCore.setCreatedeposit(toActionCreateDeposit(core.createDeposit));
-    pbActionCore.setSettledeposit(toActionSettleDeposit(core.settleDeposit));
-    pbActionCore.setCreateplumchain(
-      toActionCreatePlumChain(core.createPlumChain)
-    );
-    pbActionCore.setTerminateplumchain(
-      toActionTerminatePlumChain(core.terminatePlumChain)
-    );
-    pbActionCore.setPlumputblock(toActionPlumPutBlock(core.plumPutBlock));
-    pbActionCore.setPlumcreatedeposit(
-      toActionPlumCreateDeposit(core.plumCreateDeposit)
-    );
-    pbActionCore.setPlumstartexit(toActionPlumStartExit(core.plumStartExit));
-    pbActionCore.setPlumchallengeexit(
-      toActionPlumChallengeExit(core.plumChallengeExit)
-    );
-    pbActionCore.setPlumresponsechallengeexit(
-      toActionPlumResponseChallengeExit(core.plumResponseChallengeExit)
-    );
-    pbActionCore.setPlumfinalizeexit(
-      toActionPlumFinalizeExit(core.plumFinalizeExit)
-    );
-    pbActionCore.setPlumsettledeposit(
-      toActionPlumSettleDeposit(core.plumSettleDeposit)
-    );
-    pbActionCore.setPlumtransfer(toActionPlumTransfer(core.plumTransfer));
-    pbActionCore.setDeposittorewardingfund(
-      toActionDepositToRewardingFund(core.depositToRewardingFund)
-    );
-    pbActionCore.setClaimfromrewardingfund(
-      toActionClaimFromRewardingFund(core.claimFromRewardingFund)
-    );
-    pbActionCore.setGrantreward(toActionGrantReward(core.grantReward));
+    if (core.txType !== undefined) {
+      pbActionCore.setTxtype(core.txType);
+    }
+    if (core.gasTipCap !== undefined) {
+      pbActionCore.setGastipcap(core.gasTipCap);
+    }
+    if (core.gasFeeCap !== undefined) {
+      pbActionCore.setGasfeecap(core.gasFeeCap);
+    }
+    const accessList = toActionAccessList(core.accessList);
+    if (accessList.length > 0) {
+      pbActionCore.setAccesslistList(accessList);
+    }
+    const blob = toActionBlobTxData(core.blobTxData);
+    if (blob) {
+      pbActionCore.setBlobtxdata(blob);
+    }
+    const authList = toActionSetCodeAuthList(core.setCodeAuthList);
+    if (authList.length > 0) {
+      pbActionCore.setSetcodeauthlistList(authList);
+    }
+    // When the action body is a TX_CONTAINER (raw signed eth tx), it lives in
+    // the same `oneof action` as transfer/execution. Setting the body fields
+    // afterwards would clear the txContainer, so we short-circuit and skip
+    // the rest of the oneof setters.
+    if (core.txContainer) {
+      const tc = new actionPb.TxContainer();
+      tc.setRaw(core.txContainer.raw);
+      pbActionCore.setTxcontainer(tc);
+    } else {
+      pbActionCore.setTransfer(toActionTransfer(core.transfer));
+      pbActionCore.setExecution(toActionExecution(core.execution));
+      pbActionCore.setStartsubchain(toActionStartSubChain(core.startSubChain));
+      pbActionCore.setStopsubchain(toActionStopSubChain(core.stopSubChain));
+      pbActionCore.setPutblock(toActionPutBlock(core.putBlock));
+      pbActionCore.setCreatedeposit(toActionCreateDeposit(core.createDeposit));
+      pbActionCore.setSettledeposit(toActionSettleDeposit(core.settleDeposit));
+      pbActionCore.setCreateplumchain(
+        toActionCreatePlumChain(core.createPlumChain)
+      );
+      pbActionCore.setTerminateplumchain(
+        toActionTerminatePlumChain(core.terminatePlumChain)
+      );
+      pbActionCore.setPlumputblock(toActionPlumPutBlock(core.plumPutBlock));
+      pbActionCore.setPlumcreatedeposit(
+        toActionPlumCreateDeposit(core.plumCreateDeposit)
+      );
+      pbActionCore.setPlumstartexit(toActionPlumStartExit(core.plumStartExit));
+      pbActionCore.setPlumchallengeexit(
+        toActionPlumChallengeExit(core.plumChallengeExit)
+      );
+      pbActionCore.setPlumresponsechallengeexit(
+        toActionPlumResponseChallengeExit(core.plumResponseChallengeExit)
+      );
+      pbActionCore.setPlumfinalizeexit(
+        toActionPlumFinalizeExit(core.plumFinalizeExit)
+      );
+      pbActionCore.setPlumsettledeposit(
+        toActionPlumSettleDeposit(core.plumSettleDeposit)
+      );
+      pbActionCore.setPlumtransfer(toActionPlumTransfer(core.plumTransfer));
+      pbActionCore.setDeposittorewardingfund(
+        toActionDepositToRewardingFund(core.depositToRewardingFund)
+      );
+      pbActionCore.setClaimfromrewardingfund(
+        toActionClaimFromRewardingFund(core.claimFromRewardingFund)
+      );
+      pbActionCore.setGrantreward(toActionGrantReward(core.grantReward));
 
-    pbActionCore.setStakecreate(toActionStakeCreate(core.stakeCreate));
-    pbActionCore.setStakeunstake(toActionStakeReclaim(core.stakeUnstake));
-    pbActionCore.setStakewithdraw(toActionStakeReclaim(core.stakeWithdraw));
-    pbActionCore.setStakeadddeposit(
-      toActionStakeAddDeposit(core.stakeAddDeposit)
-    );
-    pbActionCore.setStakerestake(toActionStakeRestake(core.stakeRestake));
-    pbActionCore.setStakechangecandidate(
-      toActionStakeChangeCandidate(core.stakeChangeCandidate)
-    );
-    pbActionCore.setStaketransferownership(
-      toActionStakeTransferOwnership(core.stakeTransferOwnership)
-    );
-    pbActionCore.setCandidateregister(
-      toActionCandidateRegister(core.candidateRegister)
-    );
-    pbActionCore.setCandidateupdate(
-      toActionCandidateBasicInfo(core.candidateUpdate)
-    );
+      pbActionCore.setStakecreate(toActionStakeCreate(core.stakeCreate));
+      pbActionCore.setStakeunstake(toActionStakeReclaim(core.stakeUnstake));
+      pbActionCore.setStakewithdraw(toActionStakeReclaim(core.stakeWithdraw));
+      pbActionCore.setStakeadddeposit(
+        toActionStakeAddDeposit(core.stakeAddDeposit)
+      );
+      pbActionCore.setStakerestake(toActionStakeRestake(core.stakeRestake));
+      pbActionCore.setStakechangecandidate(
+        toActionStakeChangeCandidate(core.stakeChangeCandidate)
+      );
+      pbActionCore.setStaketransferownership(
+        toActionStakeTransferOwnership(core.stakeTransferOwnership)
+      );
+      pbActionCore.setCandidateregister(
+        toActionCandidateRegister(core.candidateRegister)
+      );
+      pbActionCore.setCandidateupdate(
+        toActionCandidateBasicInfo(core.candidateUpdate)
+      );
+    }
   }
 
   const pbAction = new actionPb.Action();
@@ -1340,6 +1484,10 @@ export function toAction(req: IAction): any {
 
   if (req.signature) {
     pbAction.setSignature(req.signature);
+  }
+
+  if (req.encoding !== undefined) {
+    pbAction.setEncoding(req.encoding);
   }
 
   return pbAction;
