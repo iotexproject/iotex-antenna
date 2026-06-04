@@ -1,6 +1,6 @@
 # iotex-antenna
 
-iotex-antenna is iotex native SDK allowing you to interact with a local or remote iotex blockchain node, using a gRPC or gRPC-web connection.
+iotex-antenna is IoTeX native SDK allowing you to interact with a local or remote IoTeX blockchain node, using a gRPC or gRPC-web connection.
 
 - [Documentation](https://docs.iotex.io/native-development/antenna-overview)
 - [Reference](https://iotexproject.github.io/iotex-antenna/)
@@ -76,3 +76,16 @@ $ chmod +x /usr/local/bin/protoc-gen-grpc-web
 ```bash
 npm run build-proto
 ```
+
+## What is IoTeX?
+
+IoTeX is the modular infrastructure for DePIN projects to deploy in full or integrate modules into existing frameworks. Please visit [IoTeX hompage](https://iotex.io) official website to learn more about IoTeX network.
+
+## What is DePIN?
+
+DePIN stands for Decentralized Physical Infrastructure Networks, a new approach to building and maintaining physical world infrastructure. This infrastructure can range from WiFi hotspots in wireless networks to solar-powered home batteries in energy networks. DePINs are developed in a decentralized manner by individuals and companies globally, making them accessible to everyone. In return, contributors receive financial compensation and an ownership stake in the network they’re building and the services they provide through token incentives. DePINs are enabled by widespread internet connectivity and advancements in blockchain infrastructure and cryptography. To learn more about DePIN, please visit [What is DePIN?](https://iotex.io/blog/what-are-decentralized-physical-infrastructure-networks-depin/).
+
+## Explore DePIN Projects?
+
+[DePIN Scan](https://depinscan.io/)  is the go-to explorer for DePIN projects. DePIN Scan tracks crypto token prices, real-time device data, and offers a variety of views for DePIN projects.
+
