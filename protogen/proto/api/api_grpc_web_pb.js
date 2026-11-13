@@ -27,6 +27,8 @@ var proto_types_election_pb = require('../../proto/types/election_pb.js')
 var proto_types_transaction_log_pb = require('../../proto/types/transaction_log_pb.js')
 
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js')
+
+var proto_types_bundle_pb = require('../../proto/types/bundle_pb.js')
 const proto = {};
 proto.iotexapi = require('./api_pb.js');
 
@@ -2281,6 +2283,138 @@ proto.iotexapi.TransactionLogServicePromiseClient.prototype.getTransactionLogByB
       request,
       metadata || {},
       methodDescriptor_TransactionLogService_GetTransactionLogByBlockHeight);
+};
+
+
+/**
+ * @param {string} hostname
+ * @param {?Object} credentials
+ * @param {?Object} options
+ * @constructor
+ * @struct
+ * @final
+ */
+proto.iotexapi.BundleAPIServiceClient =
+    function(hostname, credentials, options) {
+  if (!options) options = {};
+  options['format'] = 'text';
+
+  /**
+   * @private @const {!grpc.web.GrpcWebClientBase} The client
+   */
+  this.client_ = new grpc.web.GrpcWebClientBase(options);
+
+  /**
+   * @private @const {string} The hostname
+   */
+  this.hostname_ = hostname;
+
+};
+
+
+/**
+ * @param {string} hostname
+ * @param {?Object} credentials
+ * @param {?Object} options
+ * @constructor
+ * @struct
+ * @final
+ */
+proto.iotexapi.BundleAPIServicePromiseClient =
+    function(hostname, credentials, options) {
+  if (!options) options = {};
+  options['format'] = 'text';
+
+  /**
+   * @private @const {!grpc.web.GrpcWebClientBase} The client
+   */
+  this.client_ = new grpc.web.GrpcWebClientBase(options);
+
+  /**
+   * @private @const {string} The hostname
+   */
+  this.hostname_ = hostname;
+
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.iotexapi.SendBundleRequest,
+ *   !proto.iotexapi.SendBundleResponse>}
+ */
+const methodDescriptor_BundleAPIService_SendBundle = new grpc.web.MethodDescriptor(
+  '/iotexapi.BundleAPIService/SendBundle',
+  grpc.web.MethodType.UNARY,
+  proto.iotexapi.SendBundleRequest,
+  proto.iotexapi.SendBundleResponse,
+  /**
+   * @param {!proto.iotexapi.SendBundleRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.SendBundleResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.iotexapi.SendBundleRequest,
+ *   !proto.iotexapi.SendBundleResponse>}
+ */
+const methodInfo_BundleAPIService_SendBundle = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.iotexapi.SendBundleResponse,
+  /**
+   * @param {!proto.iotexapi.SendBundleRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.iotexapi.SendBundleResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.iotexapi.SendBundleRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.iotexapi.SendBundleResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.iotexapi.SendBundleResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.iotexapi.BundleAPIServiceClient.prototype.sendBundle =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/iotexapi.BundleAPIService/SendBundle',
+      request,
+      metadata || {},
+      methodDescriptor_BundleAPIService_SendBundle,
+      callback);
+};
+
+
+/**
+ * @param {!proto.iotexapi.SendBundleRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.iotexapi.SendBundleResponse>}
+ *     Promise that resolves to the response
+ */
+proto.iotexapi.BundleAPIServicePromiseClient.prototype.sendBundle =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/iotexapi.BundleAPIService/SendBundle',
+      request,
+      metadata || {},
+      methodDescriptor_BundleAPIService_SendBundle);
 };
 
 

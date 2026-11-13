@@ -43,33 +43,30 @@ To run a single test case, follow instructions [here](https://github.com/avajs/a
 
 ## Update Proto
 
-1. Prerequisite
+The proto files under `proto/` are copied from
+[iotex-proto](https://github.com/iotexproject/iotex-proto) at the version that
+the targeted iotex-core release depends on (see `iotexCoreVersion` in
+`package.json`; check `github.com/iotexproject/iotex-proto` in iotex-core's
+`go.mod`).
 
-```bash
-npm install grpc
-npm install grpc-web
-npm install protoc
+1. Prerequisite: the generated code depends on the exact plugin versions below
+   (they must match the `google-protobuf` 4.x and `grpc-web` 1.2.1 runtimes),
+   so put these binaries on your `PATH`:
 
-npm i grpc-web
-```
+   - `protoc-gen-js` **4.0.1** from
+     [protobuf-javascript releases](https://github.com/protocolbuffers/protobuf-javascript/releases/tag/v4.0.1)
+   - `protoc-gen-grpc-web` **1.2.1** from
+     [grpc-web releases](https://github.com/grpc/grpc-web/releases/tag/1.2.1)
 
-(original link: https://github.com/grpc/grpc-web/tree/master/packages/grpc-web)
-Download protoc and the protoc-gen-grpc-web protoc plugin.
-You can download the protoc binary from the official protocolbuffers release page.
+   `protoc` itself comes from the `protoc` devDependency. Because that protoc
+   still ships a built-in (older) JS generator, the `build-proto:js` script
+   invokes `protoc-gen-js` under the alias `jsv4` so the 4.x plugin is used.
 
-You can download the protoc-gen-grpc-web protoc plugin from our Github release page.
-
-Make sure they are both executable and are discoverable from your PATH.
-
-For example, in MacOS, you can do:
-
-```bash
-$ sudo mv ~/Downloads/protoc-gen-grpc-web-1.0.3-darwin-x86_64 \
-  /usr/local/bin/protoc-gen-grpc-web
-$ chmod +x /usr/local/bin/protoc-gen-grpc-web
-```
-
-2. copy proto files from iotex-core master branch to /iotex-antenna/proto/
+2. Copy the proto files of the matching iotex-proto tag into `proto/`.
+   Note: `proto/api/api.proto` imports `proto/types/bundle.proto` at the
+   bottom of the file upstream; move that import up to the other imports,
+   otherwise `@grpc/proto-loader` (used by the Node.js client) fails to parse
+   the file.
 
 3. Run
 

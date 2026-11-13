@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package iotextypes;
+
+option go_package = "github.com/iotexproject/iotex-proto/golang/iotextypes";
+option java_multiple_files = true;
+option java_package = "com.github.iotexproject.grpc.types";
+import "proto/types/action.proto";
+
+// Bundle represents a collection of actions with a target block.
+message Bundle {
+    repeated Action actions = 1;      // Actions included in the bundle
+    uint64 targetBlockNumber = 2;           // Target block number
+}

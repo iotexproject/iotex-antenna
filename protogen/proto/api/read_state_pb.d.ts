@@ -273,6 +273,9 @@ export namespace ReadStakingDataRequest {
     getOwneraddr(): string;
     setOwneraddr(value: string): CandidateByAddress;
 
+    getId(): string;
+    setId(value: string): CandidateByAddress;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): CandidateByAddress.AsObject;
     static toObject(includeInstance: boolean, msg: CandidateByAddress): CandidateByAddress.AsObject;
@@ -284,6 +287,7 @@ export namespace ReadStakingDataRequest {
   export namespace CandidateByAddress {
     export type AsObject = {
       owneraddr: string,
+      id: string,
     }
   }
 
