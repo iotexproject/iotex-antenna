@@ -67,14 +67,17 @@ export function toAddressBytes(addr: string): Buffer {
   if (!addr) {
     return Buffer.alloc(0);
   }
-  if (addr.startsWith("0x") || addr.startsWith("0X")) {
-    const bytes = Buffer.from(addr.slice(2), "hex");
-    if (bytes.length !== 20) {
+  if (/^0x/i.test(addr)) {
+    if (!/^0x[0-9a-fA-F]{40}$/.test(addr)) {
       throw new Error(`invalid address ${addr}`);
     }
-    return bytes;
+    return Buffer.from(addr.slice(2), "hex");
   }
-  return Buffer.from(fromString(addr).bytes());
+  const bytes = Buffer.from(fromString(addr).bytes());
+  if (bytes.length !== 20) {
+    throw new Error(`invalid address ${addr}`);
+  }
+  return bytes;
 }
 
 // applyTypedTxFields copies eth typed-tx options off a request onto the

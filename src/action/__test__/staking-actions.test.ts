@@ -11,6 +11,7 @@ import {
   IRpcMethod,
   toAction
 } from "../../rpc-method/types";
+import { Iotx } from "../../iotx";
 import { Envelop } from "../envelop";
 import {
   CandidateActivateMethod,
@@ -241,6 +242,12 @@ test("toAddressBytes accepts io and 0x addresses", t => {
   t.deepEqual(toAddressBytes("0xbdcbe4abd19dcd801fb21603c92d7e0942024da9"), io);
   t.is(toAddressBytes("").length, 0);
   t.throws(() => toAddressBytes("0x1234"));
+  // trailing garbage must not be silently truncated
+  t.throws(() =>
+    toAddressBytes("0xbdcbe4abd19dcd801fb21603c92d7e0942024da9zz")
+  );
+  // a valid bech32 string with an empty payload must not mean "clear"
+  t.throws(() => toAddressBytes("io1t4z8zg"));
 });
 
 test("IReadStakingDataMethodToBuffer supports composite methods", t => {
@@ -314,4 +321,31 @@ test("legacy staking methods forward their body to the estimate API", async t =>
   t.is(estimated[0].stakeCreate.candidateName, "robotbp00000");
   t.is(estimated[0].callerAddress, TEST_ACCOUNT.address);
   t.is(act.core!.gasLimit, "12345");
+});
+
+test("Iotx.claimFromRewardingFund forwards the claim address", async t => {
+  let captured: Envelop | undefined;
+  const iotx = new Iotx("localhost:1", 2, {
+    signer: {
+      getAccount: async () => TEST_ACCOUNT,
+      signAndSend: async (envelop: Envelop) => {
+        captured = envelop;
+        return "hash";
+      }
+    }
+  });
+  // avoid network access for the nonce lookup
+  iotx.getAccount = async () => ({
+    // tslint:disable-next-line:no-any
+    accountMeta: { pendingNonce: 1 } as any
+  });
+  await iotx.claimFromRewardingFund({
+    from: TEST_ACCOUNT.address,
+    amount: "100",
+    data: Buffer.alloc(0),
+    address: A3,
+    gasLimit: "10000",
+    gasPrice: "1000000000000"
+  });
+  t.is(captured!.claimFromRewardingFund!.address, A3);
 });
