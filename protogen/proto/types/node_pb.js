@@ -13,7 +13,7 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = Function('return this')();
+var global = globalThis;
 
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 goog.object.extend(proto, google_protobuf_timestamp_pb);
@@ -137,11 +137,11 @@ proto.iotextypes.ServerMeta.prototype.toObject = function(opt_includeInstance) {
  */
 proto.iotextypes.ServerMeta.toObject = function(includeInstance, msg) {
   var f, obj = {
-    packageversion: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    packagecommitid: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    gitstatus: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    goversion: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    buildtime: jspb.Message.getFieldWithDefault(msg, 5, "")
+packageversion: jspb.Message.getFieldWithDefault(msg, 1, ""),
+packagecommitid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+gitstatus: jspb.Message.getFieldWithDefault(msg, 3, ""),
+goversion: jspb.Message.getFieldWithDefault(msg, 4, ""),
+buildtime: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {
@@ -154,7 +154,7 @@ proto.iotextypes.ServerMeta.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.ServerMeta}
  */
 proto.iotextypes.ServerMeta.deserializeBinary = function(bytes) {
@@ -179,23 +179,23 @@ proto.iotextypes.ServerMeta.deserializeBinaryFromReader = function(msg, reader) 
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setPackageversion(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setPackagecommitid(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setGitstatus(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setGoversion(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setBuildtime(value);
       break;
     default:
@@ -387,10 +387,10 @@ proto.iotextypes.NodeInfoCore.prototype.toObject = function(opt_includeInstance)
  */
 proto.iotextypes.NodeInfoCore.toObject = function(includeInstance, msg) {
   var f, obj = {
-    version: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    height: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    address: jspb.Message.getFieldWithDefault(msg, 4, "")
+version: jspb.Message.getFieldWithDefault(msg, 1, ""),
+height: jspb.Message.getFieldWithDefault(msg, 2, 0),
+timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+address: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -403,7 +403,7 @@ proto.iotextypes.NodeInfoCore.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.NodeInfoCore}
  */
 proto.iotextypes.NodeInfoCore.deserializeBinary = function(bytes) {
@@ -428,7 +428,7 @@ proto.iotextypes.NodeInfoCore.deserializeBinaryFromReader = function(msg, reader
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setVersion(value);
       break;
     case 2:
@@ -441,7 +441,7 @@ proto.iotextypes.NodeInfoCore.deserializeBinaryFromReader = function(msg, reader
       msg.setTimestamp(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setAddress(value);
       break;
     default:
@@ -628,8 +628,8 @@ proto.iotextypes.NodeInfo.prototype.toObject = function(opt_includeInstance) {
  */
 proto.iotextypes.NodeInfo.toObject = function(includeInstance, msg) {
   var f, obj = {
-    info: (f = msg.getInfo()) && proto.iotextypes.NodeInfoCore.toObject(includeInstance, f),
-    signature: msg.getSignature_asB64()
+info: (f = msg.getInfo()) && proto.iotextypes.NodeInfoCore.toObject(includeInstance, f),
+signature: msg.getSignature_asB64()
   };
 
   if (includeInstance) {
@@ -642,7 +642,7 @@ proto.iotextypes.NodeInfo.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.NodeInfo}
  */
 proto.iotextypes.NodeInfo.deserializeBinary = function(bytes) {
@@ -846,7 +846,7 @@ proto.iotextypes.NodeInfoRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.NodeInfoRequest}
  */
 proto.iotextypes.NodeInfoRequest.deserializeBinary = function(bytes) {

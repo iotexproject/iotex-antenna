@@ -24,10 +24,10 @@ export class Transfer extends jspb.Message {
 
 export namespace Transfer {
   export type AsObject = {
-    amount: string;
-    recipient: string;
-    payload: Uint8Array | string;
-  };
+    amount: string,
+    recipient: string,
+    payload: Uint8Array | string,
+  }
 }
 
 export class Candidate extends jspb.Message {
@@ -47,6 +47,17 @@ export class Candidate extends jspb.Message {
   getRewardaddress(): string;
   setRewardaddress(value: string): Candidate;
 
+  getBlspubkey(): Uint8Array | string;
+  getBlspubkey_asU8(): Uint8Array;
+  getBlspubkey_asB64(): string;
+  setBlspubkey(value: Uint8Array | string): Candidate;
+
+  getIdentity(): string;
+  setIdentity(value: string): Candidate;
+
+  getCommissionrate(): number;
+  setCommissionrate(value: number): Candidate;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Candidate.AsObject;
   static toObject(includeInstance: boolean, msg: Candidate): Candidate.AsObject;
@@ -57,11 +68,14 @@ export class Candidate extends jspb.Message {
 
 export namespace Candidate {
   export type AsObject = {
-    address: string;
-    votes: Uint8Array | string;
-    pubkey: Uint8Array | string;
-    rewardaddress: string;
-  };
+    address: string,
+    votes: Uint8Array | string,
+    pubkey: Uint8Array | string,
+    rewardaddress: string,
+    blspubkey: Uint8Array | string,
+    identity: string,
+    commissionrate: number,
+  }
 }
 
 export class CandidateList extends jspb.Message {
@@ -80,8 +94,8 @@ export class CandidateList extends jspb.Message {
 
 export namespace CandidateList {
   export type AsObject = {
-    candidatesList: Array<Candidate.AsObject>;
-  };
+    candidatesList: Array<Candidate.AsObject>,
+  }
 }
 
 export class PutPollResult extends jspb.Message {
@@ -103,9 +117,9 @@ export class PutPollResult extends jspb.Message {
 
 export namespace PutPollResult {
   export type AsObject = {
-    height: number;
-    candidates?: CandidateList.AsObject;
-  };
+    height: number,
+    candidates?: CandidateList.AsObject,
+  }
 }
 
 export class TxContainer extends jspb.Message {
@@ -124,8 +138,8 @@ export class TxContainer extends jspb.Message {
 
 export namespace TxContainer {
   export type AsObject = {
-    raw: Uint8Array | string;
-  };
+    raw: Uint8Array | string,
+  }
 }
 
 export class Execution extends jspb.Message {
@@ -140,11 +154,6 @@ export class Execution extends jspb.Message {
   getData_asB64(): string;
   setData(value: Uint8Array | string): Execution;
 
-  getAccesslistList(): Array<AccessTuple>;
-  setAccesslistList(value: Array<AccessTuple>): Execution;
-  clearAccesslistList(): Execution;
-  addAccesslist(value?: AccessTuple, index?: number): AccessTuple;
-
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Execution.AsObject;
   static toObject(includeInstance: boolean, msg: Execution): Execution.AsObject;
@@ -155,11 +164,10 @@ export class Execution extends jspb.Message {
 
 export namespace Execution {
   export type AsObject = {
-    amount: string;
-    contract: string;
-    data: Uint8Array | string;
-    accesslistList: Array<AccessTuple.AsObject>;
-  };
+    amount: string,
+    contract: string,
+    data: Uint8Array | string,
+  }
 }
 
 export class AccessTuple extends jspb.Message {
@@ -181,9 +189,9 @@ export class AccessTuple extends jspb.Message {
 
 export namespace AccessTuple {
   export type AsObject = {
-    address: string;
-    storagekeysList: Array<string>;
-  };
+    address: string,
+    storagekeysList: Array<string>,
+  }
 }
 
 export class BlobTxSidecar extends jspb.Message {
@@ -212,10 +220,10 @@ export class BlobTxSidecar extends jspb.Message {
 
 export namespace BlobTxSidecar {
   export type AsObject = {
-    blobsList: Array<Uint8Array | string>;
-    commitmentsList: Array<Uint8Array | string>;
-    proofsList: Array<Uint8Array | string>;
-  };
+    blobsList: Array<Uint8Array | string>,
+    commitmentsList: Array<Uint8Array | string>,
+    proofsList: Array<Uint8Array | string>,
+  }
 }
 
 export class BlobTxData extends jspb.Message {
@@ -242,10 +250,36 @@ export class BlobTxData extends jspb.Message {
 
 export namespace BlobTxData {
   export type AsObject = {
-    blobfeecap: string;
-    blobhashesList: Array<Uint8Array | string>;
-    blobtxsidecar?: BlobTxSidecar.AsObject;
-  };
+    blobfeecap: string,
+    blobhashesList: Array<Uint8Array | string>,
+    blobtxsidecar?: BlobTxSidecar.AsObject,
+  }
+}
+
+export class BlobTxSidecars extends jspb.Message {
+  getTxhashList(): Array<Uint8Array | string>;
+  setTxhashList(value: Array<Uint8Array | string>): BlobTxSidecars;
+  clearTxhashList(): BlobTxSidecars;
+  addTxhash(value: Uint8Array | string, index?: number): BlobTxSidecars;
+
+  getSidecarsList(): Array<BlobTxSidecar>;
+  setSidecarsList(value: Array<BlobTxSidecar>): BlobTxSidecars;
+  clearSidecarsList(): BlobTxSidecars;
+  addSidecars(value?: BlobTxSidecar, index?: number): BlobTxSidecar;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): BlobTxSidecars.AsObject;
+  static toObject(includeInstance: boolean, msg: BlobTxSidecars): BlobTxSidecars.AsObject;
+  static serializeBinaryToWriter(message: BlobTxSidecars, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): BlobTxSidecars;
+  static deserializeBinaryFromReader(message: BlobTxSidecars, reader: jspb.BinaryReader): BlobTxSidecars;
+}
+
+export namespace BlobTxSidecars {
+  export type AsObject = {
+    txhashList: Array<Uint8Array | string>,
+    sidecarsList: Array<BlobTxSidecar.AsObject>,
+  }
 }
 
 export class SetCodeAuthorization extends jspb.Message {
@@ -283,13 +317,13 @@ export class SetCodeAuthorization extends jspb.Message {
 
 export namespace SetCodeAuthorization {
   export type AsObject = {
-    chainid: number;
-    address: Uint8Array | string;
-    nonce: number;
-    v: number;
-    r: Uint8Array | string;
-    s: Uint8Array | string;
-  };
+    chainid: number,
+    address: Uint8Array | string,
+    nonce: number,
+    v: number,
+    r: Uint8Array | string,
+    s: Uint8Array | string,
+  }
 }
 
 export class StakeCreate extends jspb.Message {
@@ -320,12 +354,30 @@ export class StakeCreate extends jspb.Message {
 
 export namespace StakeCreate {
   export type AsObject = {
-    candidatename: string;
-    stakedamount: string;
-    stakedduration: number;
-    autostake: boolean;
-    payload: Uint8Array | string;
-  };
+    candidatename: string,
+    stakedamount: string,
+    stakedduration: number,
+    autostake: boolean,
+    payload: Uint8Array | string,
+  }
+}
+
+export class StakeMigrate extends jspb.Message {
+  getBucketindex(): number;
+  setBucketindex(value: number): StakeMigrate;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StakeMigrate.AsObject;
+  static toObject(includeInstance: boolean, msg: StakeMigrate): StakeMigrate.AsObject;
+  static serializeBinaryToWriter(message: StakeMigrate, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StakeMigrate;
+  static deserializeBinaryFromReader(message: StakeMigrate, reader: jspb.BinaryReader): StakeMigrate;
+}
+
+export namespace StakeMigrate {
+  export type AsObject = {
+    bucketindex: number,
+  }
 }
 
 export class StakeReclaim extends jspb.Message {
@@ -347,9 +399,9 @@ export class StakeReclaim extends jspb.Message {
 
 export namespace StakeReclaim {
   export type AsObject = {
-    bucketindex: number;
-    payload: Uint8Array | string;
-  };
+    bucketindex: number,
+    payload: Uint8Array | string,
+  }
 }
 
 export class StakeAddDeposit extends jspb.Message {
@@ -374,10 +426,10 @@ export class StakeAddDeposit extends jspb.Message {
 
 export namespace StakeAddDeposit {
   export type AsObject = {
-    bucketindex: number;
-    amount: string;
-    payload: Uint8Array | string;
-  };
+    bucketindex: number,
+    amount: string,
+    payload: Uint8Array | string,
+  }
 }
 
 export class StakeRestake extends jspb.Message {
@@ -405,11 +457,11 @@ export class StakeRestake extends jspb.Message {
 
 export namespace StakeRestake {
   export type AsObject = {
-    bucketindex: number;
-    stakedduration: number;
-    autostake: boolean;
-    payload: Uint8Array | string;
-  };
+    bucketindex: number,
+    stakedduration: number,
+    autostake: boolean,
+    payload: Uint8Array | string,
+  }
 }
 
 export class StakeChangeCandidate extends jspb.Message {
@@ -434,10 +486,10 @@ export class StakeChangeCandidate extends jspb.Message {
 
 export namespace StakeChangeCandidate {
   export type AsObject = {
-    bucketindex: number;
-    candidatename: string;
-    payload: Uint8Array | string;
-  };
+    bucketindex: number,
+    candidatename: string,
+    payload: Uint8Array | string,
+  }
 }
 
 export class StakeTransferOwnership extends jspb.Message {
@@ -462,10 +514,10 @@ export class StakeTransferOwnership extends jspb.Message {
 
 export namespace StakeTransferOwnership {
   export type AsObject = {
-    bucketindex: number;
-    voteraddress: string;
-    payload: Uint8Array | string;
-  };
+    bucketindex: number,
+    voteraddress: string,
+    payload: Uint8Array | string,
+  }
 }
 
 export class CandidateBasicInfo extends jspb.Message {
@@ -478,6 +530,16 @@ export class CandidateBasicInfo extends jspb.Message {
   getRewardaddress(): string;
   setRewardaddress(value: string): CandidateBasicInfo;
 
+  getBlspubkey(): Uint8Array | string;
+  getBlspubkey_asU8(): Uint8Array;
+  getBlspubkey_asB64(): string;
+  setBlspubkey(value: Uint8Array | string): CandidateBasicInfo;
+
+  getBlspop(): Uint8Array | string;
+  getBlspop_asU8(): Uint8Array;
+  getBlspop_asB64(): string;
+  setBlspop(value: Uint8Array | string): CandidateBasicInfo;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CandidateBasicInfo.AsObject;
   static toObject(includeInstance: boolean, msg: CandidateBasicInfo): CandidateBasicInfo.AsObject;
@@ -488,10 +550,12 @@ export class CandidateBasicInfo extends jspb.Message {
 
 export namespace CandidateBasicInfo {
   export type AsObject = {
-    name: string;
-    operatoraddress: string;
-    rewardaddress: string;
-  };
+    name: string,
+    operatoraddress: string,
+    rewardaddress: string,
+    blspubkey: Uint8Array | string,
+    blspop: Uint8Array | string,
+  }
 }
 
 export class CandidateRegister extends jspb.Message {
@@ -527,13 +591,149 @@ export class CandidateRegister extends jspb.Message {
 
 export namespace CandidateRegister {
   export type AsObject = {
-    candidate?: CandidateBasicInfo.AsObject;
-    stakedamount: string;
-    stakedduration: number;
-    autostake: boolean;
-    owneraddress: string;
-    payload: Uint8Array | string;
-  };
+    candidate?: CandidateBasicInfo.AsObject,
+    stakedamount: string,
+    stakedduration: number,
+    autostake: boolean,
+    owneraddress: string,
+    payload: Uint8Array | string,
+  }
+}
+
+export class CandidateTransferOwnership extends jspb.Message {
+  getNewowneraddress(): string;
+  setNewowneraddress(value: string): CandidateTransferOwnership;
+
+  getPayload(): Uint8Array | string;
+  getPayload_asU8(): Uint8Array;
+  getPayload_asB64(): string;
+  setPayload(value: Uint8Array | string): CandidateTransferOwnership;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): CandidateTransferOwnership.AsObject;
+  static toObject(includeInstance: boolean, msg: CandidateTransferOwnership): CandidateTransferOwnership.AsObject;
+  static serializeBinaryToWriter(message: CandidateTransferOwnership, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CandidateTransferOwnership;
+  static deserializeBinaryFromReader(message: CandidateTransferOwnership, reader: jspb.BinaryReader): CandidateTransferOwnership;
+}
+
+export namespace CandidateTransferOwnership {
+  export type AsObject = {
+    newowneraddress: string,
+    payload: Uint8Array | string,
+  }
+}
+
+export class CandidateActivate extends jspb.Message {
+  getBucketindex(): number;
+  setBucketindex(value: number): CandidateActivate;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): CandidateActivate.AsObject;
+  static toObject(includeInstance: boolean, msg: CandidateActivate): CandidateActivate.AsObject;
+  static serializeBinaryToWriter(message: CandidateActivate, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CandidateActivate;
+  static deserializeBinaryFromReader(message: CandidateActivate, reader: jspb.BinaryReader): CandidateActivate;
+}
+
+export namespace CandidateActivate {
+  export type AsObject = {
+    bucketindex: number,
+  }
+}
+
+export class CandidateDeactivate extends jspb.Message {
+  getOp(): number;
+  setOp(value: number): CandidateDeactivate;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): CandidateDeactivate.AsObject;
+  static toObject(includeInstance: boolean, msg: CandidateDeactivate): CandidateDeactivate.AsObject;
+  static serializeBinaryToWriter(message: CandidateDeactivate, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CandidateDeactivate;
+  static deserializeBinaryFromReader(message: CandidateDeactivate, reader: jspb.BinaryReader): CandidateDeactivate;
+}
+
+export namespace CandidateDeactivate {
+  export type AsObject = {
+    op: number,
+  }
+}
+
+export class ScheduleCandidateDeactivation extends jspb.Message {
+  getDelegate(): string;
+  setDelegate(value: string): ScheduleCandidateDeactivation;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ScheduleCandidateDeactivation.AsObject;
+  static toObject(includeInstance: boolean, msg: ScheduleCandidateDeactivation): ScheduleCandidateDeactivation.AsObject;
+  static serializeBinaryToWriter(message: ScheduleCandidateDeactivation, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ScheduleCandidateDeactivation;
+  static deserializeBinaryFromReader(message: ScheduleCandidateDeactivation, reader: jspb.BinaryReader): ScheduleCandidateDeactivation;
+}
+
+export namespace ScheduleCandidateDeactivation {
+  export type AsObject = {
+    delegate: string,
+  }
+}
+
+export class CandidateEndorsement extends jspb.Message {
+  getBucketindex(): number;
+  setBucketindex(value: number): CandidateEndorsement;
+
+  getEndorse(): boolean;
+  setEndorse(value: boolean): CandidateEndorsement;
+
+  getOp(): number;
+  setOp(value: number): CandidateEndorsement;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): CandidateEndorsement.AsObject;
+  static toObject(includeInstance: boolean, msg: CandidateEndorsement): CandidateEndorsement.AsObject;
+  static serializeBinaryToWriter(message: CandidateEndorsement, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CandidateEndorsement;
+  static deserializeBinaryFromReader(message: CandidateEndorsement, reader: jspb.BinaryReader): CandidateEndorsement;
+}
+
+export namespace CandidateEndorsement {
+  export type AsObject = {
+    bucketindex: number,
+    endorse: boolean,
+    op: number,
+  }
+}
+
+export class SetCommissionRate extends jspb.Message {
+  getRate(): number;
+  setRate(value: number): SetCommissionRate;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): SetCommissionRate.AsObject;
+  static toObject(includeInstance: boolean, msg: SetCommissionRate): SetCommissionRate.AsObject;
+  static serializeBinaryToWriter(message: SetCommissionRate, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): SetCommissionRate;
+  static deserializeBinaryFromReader(message: SetCommissionRate, reader: jspb.BinaryReader): SetCommissionRate;
+}
+
+export namespace SetCommissionRate {
+  export type AsObject = {
+    rate: number,
+  }
+}
+
+export class SetVoterRewardOptIn extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): SetVoterRewardOptIn.AsObject;
+  static toObject(includeInstance: boolean, msg: SetVoterRewardOptIn): SetVoterRewardOptIn.AsObject;
+  static serializeBinaryToWriter(message: SetVoterRewardOptIn, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): SetVoterRewardOptIn;
+  static deserializeBinaryFromReader(message: SetVoterRewardOptIn, reader: jspb.BinaryReader): SetVoterRewardOptIn;
+}
+
+export namespace SetVoterRewardOptIn {
+  export type AsObject = {
+  }
 }
 
 export class StartSubChain extends jspb.Message {
@@ -562,12 +762,12 @@ export class StartSubChain extends jspb.Message {
 
 export namespace StartSubChain {
   export type AsObject = {
-    chainid: number;
-    securitydeposit: string;
-    operationdeposit: string;
-    startheight: number;
-    parentheightoffset: number;
-  };
+    chainid: number,
+    securitydeposit: string,
+    operationdeposit: string,
+    startheight: number,
+    parentheightoffset: number,
+  }
 }
 
 export class StopSubChain extends jspb.Message {
@@ -590,10 +790,10 @@ export class StopSubChain extends jspb.Message {
 
 export namespace StopSubChain {
   export type AsObject = {
-    chainid: number;
-    stopheight: number;
-    subchainaddress: string;
-  };
+    chainid: number,
+    stopheight: number,
+    subchainaddress: string,
+  }
 }
 
 export class MerkleRoot extends jspb.Message {
@@ -615,9 +815,9 @@ export class MerkleRoot extends jspb.Message {
 
 export namespace MerkleRoot {
   export type AsObject = {
-    name: string;
-    value: Uint8Array | string;
-  };
+    name: string,
+    value: Uint8Array | string,
+  }
 }
 
 export class PutBlock extends jspb.Message {
@@ -642,10 +842,10 @@ export class PutBlock extends jspb.Message {
 
 export namespace PutBlock {
   export type AsObject = {
-    subchainaddress: string;
-    height: number;
-    rootsList: Array<MerkleRoot.AsObject>;
-  };
+    subchainaddress: string,
+    height: number,
+    rootsList: Array<MerkleRoot.AsObject>,
+  }
 }
 
 export class CreateDeposit extends jspb.Message {
@@ -668,10 +868,10 @@ export class CreateDeposit extends jspb.Message {
 
 export namespace CreateDeposit {
   export type AsObject = {
-    chainid: number;
-    amount: string;
-    recipient: string;
-  };
+    chainid: number,
+    amount: string,
+    recipient: string,
+  }
 }
 
 export class SettleDeposit extends jspb.Message {
@@ -694,10 +894,10 @@ export class SettleDeposit extends jspb.Message {
 
 export namespace SettleDeposit {
   export type AsObject = {
-    amount: string;
-    recipient: string;
-    index: number;
-  };
+    amount: string,
+    recipient: string,
+    index: number,
+  }
 }
 
 export class CreatePlumChain extends jspb.Message {
@@ -711,7 +911,7 @@ export class CreatePlumChain extends jspb.Message {
 
 export namespace CreatePlumChain {
   export type AsObject = {
-  };
+  }
 }
 
 export class TerminatePlumChain extends jspb.Message {
@@ -728,8 +928,8 @@ export class TerminatePlumChain extends jspb.Message {
 
 export namespace TerminatePlumChain {
   export type AsObject = {
-    subchainaddress: string;
-  };
+    subchainaddress: string,
+  }
 }
 
 export class PlumPutBlock extends jspb.Message {
@@ -752,10 +952,10 @@ export class PlumPutBlock extends jspb.Message {
 
 export namespace PlumPutBlock {
   export type AsObject = {
-    subchainaddress: string;
-    height: number;
-    rootsMap: Array<[string, Uint8Array | string]>;
-  };
+    subchainaddress: string,
+    height: number,
+    rootsMap: Array<[string, Uint8Array | string]>,
+  }
 }
 
 export class PlumCreateDeposit extends jspb.Message {
@@ -778,10 +978,10 @@ export class PlumCreateDeposit extends jspb.Message {
 
 export namespace PlumCreateDeposit {
   export type AsObject = {
-    subchainaddress: string;
-    amount: string;
-    recipient: string;
-  };
+    subchainaddress: string,
+    amount: string,
+    recipient: string,
+  }
 }
 
 export class PlumStartExit extends jspb.Message {
@@ -824,14 +1024,14 @@ export class PlumStartExit extends jspb.Message {
 
 export namespace PlumStartExit {
   export type AsObject = {
-    subchainaddress: string;
-    previoustransfer: Uint8Array | string;
-    previoustransferblockproof: Uint8Array | string;
-    previoustransferblockheight: number;
-    exittransfer: Uint8Array | string;
-    exittransferblockproof: Uint8Array | string;
-    exittransferblockheight: number;
-  };
+    subchainaddress: string,
+    previoustransfer: Uint8Array | string,
+    previoustransferblockproof: Uint8Array | string,
+    previoustransferblockheight: number,
+    exittransfer: Uint8Array | string,
+    exittransferblockproof: Uint8Array | string,
+    exittransferblockheight: number,
+  }
 }
 
 export class PlumChallengeExit extends jspb.Message {
@@ -864,12 +1064,12 @@ export class PlumChallengeExit extends jspb.Message {
 
 export namespace PlumChallengeExit {
   export type AsObject = {
-    subchainaddress: string;
-    coinid: number;
-    challengetransfer: Uint8Array | string;
-    challengetransferblockproof: Uint8Array | string;
-    challengetransferblockheight: number;
-  };
+    subchainaddress: string,
+    coinid: number,
+    challengetransfer: Uint8Array | string,
+    challengetransferblockproof: Uint8Array | string,
+    challengetransferblockheight: number,
+  }
 }
 
 export class PlumResponseChallengeExit extends jspb.Message {
@@ -907,13 +1107,13 @@ export class PlumResponseChallengeExit extends jspb.Message {
 
 export namespace PlumResponseChallengeExit {
   export type AsObject = {
-    subchainaddress: string;
-    coinid: number;
-    challengetransfer: Uint8Array | string;
-    responsetransfer: Uint8Array | string;
-    responsetransferblockproof: Uint8Array | string;
-    previoustransferblockheight: number;
-  };
+    subchainaddress: string,
+    coinid: number,
+    challengetransfer: Uint8Array | string,
+    responsetransfer: Uint8Array | string,
+    responsetransferblockproof: Uint8Array | string,
+    previoustransferblockheight: number,
+  }
 }
 
 export class PlumFinalizeExit extends jspb.Message {
@@ -933,9 +1133,9 @@ export class PlumFinalizeExit extends jspb.Message {
 
 export namespace PlumFinalizeExit {
   export type AsObject = {
-    subchainaddress: string;
-    coinid: number;
-  };
+    subchainaddress: string,
+    coinid: number,
+  }
 }
 
 export class PlumSettleDeposit extends jspb.Message {
@@ -952,8 +1152,8 @@ export class PlumSettleDeposit extends jspb.Message {
 
 export namespace PlumSettleDeposit {
   export type AsObject = {
-    coinid: number;
-  };
+    coinid: number,
+  }
 }
 
 export class PlumTransfer extends jspb.Message {
@@ -981,11 +1181,11 @@ export class PlumTransfer extends jspb.Message {
 
 export namespace PlumTransfer {
   export type AsObject = {
-    coinid: number;
-    denomination: Uint8Array | string;
-    owner: string;
-    recipient: string;
-  };
+    coinid: number,
+    denomination: Uint8Array | string,
+    owner: string,
+    recipient: string,
+  }
 }
 
 export class ActionCore extends jspb.Message {
@@ -1178,6 +1378,51 @@ export class ActionCore extends jspb.Message {
   hasCandidateupdate(): boolean;
   clearCandidateupdate(): ActionCore;
 
+  getCandidateactivate(): CandidateActivate | undefined;
+  setCandidateactivate(value?: CandidateActivate): ActionCore;
+  hasCandidateactivate(): boolean;
+  clearCandidateactivate(): ActionCore;
+
+  getCandidateendorsement(): CandidateEndorsement | undefined;
+  setCandidateendorsement(value?: CandidateEndorsement): ActionCore;
+  hasCandidateendorsement(): boolean;
+  clearCandidateendorsement(): ActionCore;
+
+  getCandidatetransferownership(): CandidateTransferOwnership | undefined;
+  setCandidatetransferownership(value?: CandidateTransferOwnership): ActionCore;
+  hasCandidatetransferownership(): boolean;
+  clearCandidatetransferownership(): ActionCore;
+
+  getStakemigrate(): StakeMigrate | undefined;
+  setStakemigrate(value?: StakeMigrate): ActionCore;
+  hasStakemigrate(): boolean;
+  clearStakemigrate(): ActionCore;
+
+  getCandidatedeactivate(): CandidateDeactivate | undefined;
+  setCandidatedeactivate(value?: CandidateDeactivate): ActionCore;
+  hasCandidatedeactivate(): boolean;
+  clearCandidatedeactivate(): ActionCore;
+
+  getSchedulecandidatedeactivation(): ScheduleCandidateDeactivation | undefined;
+  setSchedulecandidatedeactivation(value?: ScheduleCandidateDeactivation): ActionCore;
+  hasSchedulecandidatedeactivation(): boolean;
+  clearSchedulecandidatedeactivation(): ActionCore;
+
+  getSetcommissionrate(): SetCommissionRate | undefined;
+  setSetcommissionrate(value?: SetCommissionRate): ActionCore;
+  hasSetcommissionrate(): boolean;
+  clearSetcommissionrate(): ActionCore;
+
+  getSetvoterrewardoptin(): SetVoterRewardOptIn | undefined;
+  setSetvoterrewardoptin(value?: SetVoterRewardOptIn): ActionCore;
+  hasSetvoterrewardoptin(): boolean;
+  clearSetvoterrewardoptin(): ActionCore;
+
+  getSetvoterrewarddestination(): SetVoterRewardDestination | undefined;
+  setSetvoterrewarddestination(value?: SetVoterRewardDestination): ActionCore;
+  hasSetvoterrewarddestination(): boolean;
+  clearSetvoterrewarddestination(): ActionCore;
+
   getPutpollresult(): PutPollResult | undefined;
   setPutpollresult(value?: PutPollResult): ActionCore;
   hasPutpollresult(): boolean;
@@ -1195,51 +1440,60 @@ export class ActionCore extends jspb.Message {
 
 export namespace ActionCore {
   export type AsObject = {
-    version: number;
-    nonce: number;
-    gaslimit: number;
-    gasprice: string;
-    chainid: number;
-    gastipcap: string;
-    gasfeecap: string;
-    blobtxdata?: BlobTxData.AsObject;
-    accesslistList: Array<AccessTuple.AsObject>;
-    txtype: number;
-    setcodeauthlistList: Array<SetCodeAuthorization.AsObject>;
-    transfer?: Transfer.AsObject;
-    txcontainer?: TxContainer.AsObject;
-    execution?: Execution.AsObject;
-    startsubchain?: StartSubChain.AsObject;
-    stopsubchain?: StopSubChain.AsObject;
-    putblock?: PutBlock.AsObject;
-    createdeposit?: CreateDeposit.AsObject;
-    settledeposit?: SettleDeposit.AsObject;
-    createplumchain?: CreatePlumChain.AsObject;
-    terminateplumchain?: TerminatePlumChain.AsObject;
-    plumputblock?: PlumPutBlock.AsObject;
-    plumcreatedeposit?: PlumCreateDeposit.AsObject;
-    plumstartexit?: PlumStartExit.AsObject;
-    plumchallengeexit?: PlumChallengeExit.AsObject;
-    plumresponsechallengeexit?: PlumResponseChallengeExit.AsObject;
-    plumfinalizeexit?: PlumFinalizeExit.AsObject;
-    plumsettledeposit?: PlumSettleDeposit.AsObject;
-    plumtransfer?: PlumTransfer.AsObject;
-    deposittorewardingfund?: DepositToRewardingFund.AsObject;
-    claimfromrewardingfund?: ClaimFromRewardingFund.AsObject;
-    grantreward?: GrantReward.AsObject;
-    stakecreate?: StakeCreate.AsObject;
-    stakeunstake?: StakeReclaim.AsObject;
-    stakewithdraw?: StakeReclaim.AsObject;
-    stakeadddeposit?: StakeAddDeposit.AsObject;
-    stakerestake?: StakeRestake.AsObject;
-    stakechangecandidate?: StakeChangeCandidate.AsObject;
-    staketransferownership?: StakeTransferOwnership.AsObject;
-    candidateregister?: CandidateRegister.AsObject;
-    candidateupdate?: CandidateBasicInfo.AsObject;
-    putpollresult?: PutPollResult.AsObject;
-  };
+    version: number,
+    nonce: number,
+    gaslimit: number,
+    gasprice: string,
+    chainid: number,
+    gastipcap: string,
+    gasfeecap: string,
+    blobtxdata?: BlobTxData.AsObject,
+    accesslistList: Array<AccessTuple.AsObject>,
+    txtype: number,
+    setcodeauthlistList: Array<SetCodeAuthorization.AsObject>,
+    transfer?: Transfer.AsObject,
+    txcontainer?: TxContainer.AsObject,
+    execution?: Execution.AsObject,
+    startsubchain?: StartSubChain.AsObject,
+    stopsubchain?: StopSubChain.AsObject,
+    putblock?: PutBlock.AsObject,
+    createdeposit?: CreateDeposit.AsObject,
+    settledeposit?: SettleDeposit.AsObject,
+    createplumchain?: CreatePlumChain.AsObject,
+    terminateplumchain?: TerminatePlumChain.AsObject,
+    plumputblock?: PlumPutBlock.AsObject,
+    plumcreatedeposit?: PlumCreateDeposit.AsObject,
+    plumstartexit?: PlumStartExit.AsObject,
+    plumchallengeexit?: PlumChallengeExit.AsObject,
+    plumresponsechallengeexit?: PlumResponseChallengeExit.AsObject,
+    plumfinalizeexit?: PlumFinalizeExit.AsObject,
+    plumsettledeposit?: PlumSettleDeposit.AsObject,
+    plumtransfer?: PlumTransfer.AsObject,
+    deposittorewardingfund?: DepositToRewardingFund.AsObject,
+    claimfromrewardingfund?: ClaimFromRewardingFund.AsObject,
+    grantreward?: GrantReward.AsObject,
+    stakecreate?: StakeCreate.AsObject,
+    stakeunstake?: StakeReclaim.AsObject,
+    stakewithdraw?: StakeReclaim.AsObject,
+    stakeadddeposit?: StakeAddDeposit.AsObject,
+    stakerestake?: StakeRestake.AsObject,
+    stakechangecandidate?: StakeChangeCandidate.AsObject,
+    staketransferownership?: StakeTransferOwnership.AsObject,
+    candidateregister?: CandidateRegister.AsObject,
+    candidateupdate?: CandidateBasicInfo.AsObject,
+    candidateactivate?: CandidateActivate.AsObject,
+    candidateendorsement?: CandidateEndorsement.AsObject,
+    candidatetransferownership?: CandidateTransferOwnership.AsObject,
+    stakemigrate?: StakeMigrate.AsObject,
+    candidatedeactivate?: CandidateDeactivate.AsObject,
+    schedulecandidatedeactivation?: ScheduleCandidateDeactivation.AsObject,
+    setcommissionrate?: SetCommissionRate.AsObject,
+    setvoterrewardoptin?: SetVoterRewardOptIn.AsObject,
+    setvoterrewarddestination?: SetVoterRewardDestination.AsObject,
+    putpollresult?: PutPollResult.AsObject,
+  }
 
-  export enum ActionCase {
+  export enum ActionCase { 
     ACTION_NOT_SET = 0,
     TRANSFER = 10,
     TXCONTAINER = 11,
@@ -1271,6 +1525,15 @@ export namespace ActionCore {
     STAKETRANSFEROWNERSHIP = 46,
     CANDIDATEREGISTER = 47,
     CANDIDATEUPDATE = 48,
+    CANDIDATEACTIVATE = 49,
+    CANDIDATEENDORSEMENT = 51,
+    CANDIDATETRANSFEROWNERSHIP = 52,
+    STAKEMIGRATE = 53,
+    CANDIDATEDEACTIVATE = 54,
+    SCHEDULECANDIDATEDEACTIVATION = 55,
+    SETCOMMISSIONRATE = 56,
+    SETVOTERREWARDOPTIN = 57,
+    SETVOTERREWARDDESTINATION = 58,
     PUTPOLLRESULT = 50,
   }
 }
@@ -1304,11 +1567,11 @@ export class Action extends jspb.Message {
 
 export namespace Action {
   export type AsObject = {
-    core?: ActionCore.AsObject;
-    senderpubkey: Uint8Array | string;
-    signature: Uint8Array | string;
-    encoding: Encoding;
-  };
+    core?: ActionCore.AsObject,
+    senderpubkey: Uint8Array | string,
+    signature: Uint8Array | string,
+    encoding: Encoding,
+  }
 }
 
 export class Actions extends jspb.Message {
@@ -1327,8 +1590,28 @@ export class Actions extends jspb.Message {
 
 export namespace Actions {
   export type AsObject = {
-    actionsList: Array<Action.AsObject>;
-  };
+    actionsList: Array<Action.AsObject>,
+  }
+}
+
+export class ActionHash extends jspb.Message {
+  getHash(): Uint8Array | string;
+  getHash_asU8(): Uint8Array;
+  getHash_asB64(): string;
+  setHash(value: Uint8Array | string): ActionHash;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ActionHash.AsObject;
+  static toObject(includeInstance: boolean, msg: ActionHash): ActionHash.AsObject;
+  static serializeBinaryToWriter(message: ActionHash, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ActionHash;
+  static deserializeBinaryFromReader(message: ActionHash, reader: jspb.BinaryReader): ActionHash;
+}
+
+export namespace ActionHash {
+  export type AsObject = {
+    hash: Uint8Array | string,
+  }
 }
 
 export class Receipt extends jspb.Message {
@@ -1360,6 +1643,15 @@ export class Receipt extends jspb.Message {
   getTxindex(): number;
   setTxindex(value: number): Receipt;
 
+  getBlobgasused(): number;
+  setBlobgasused(value: number): Receipt;
+
+  getBlobgasprice(): string;
+  setBlobgasprice(value: string): Receipt;
+
+  getEffectivegasprice(): string;
+  setEffectivegasprice(value: string): Receipt;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Receipt.AsObject;
   static toObject(includeInstance: boolean, msg: Receipt): Receipt.AsObject;
@@ -1370,15 +1662,18 @@ export class Receipt extends jspb.Message {
 
 export namespace Receipt {
   export type AsObject = {
-    status: number;
-    blkheight: number;
-    acthash: Uint8Array | string;
-    gasconsumed: number;
-    contractaddress: string;
-    logsList: Array<Log.AsObject>;
-    executionrevertmsg: string;
-    txindex: number;
-  };
+    status: number,
+    blkheight: number,
+    acthash: Uint8Array | string,
+    gasconsumed: number,
+    contractaddress: string,
+    logsList: Array<Log.AsObject>,
+    executionrevertmsg: string,
+    txindex: number,
+    blobgasused: number,
+    blobgasprice: string,
+    effectivegasprice: string,
+  }
 }
 
 export class Log extends jspb.Message {
@@ -1424,15 +1719,15 @@ export class Log extends jspb.Message {
 
 export namespace Log {
   export type AsObject = {
-    contractaddress: string;
-    topicsList: Array<Uint8Array | string>;
-    data: Uint8Array | string;
-    blkheight: number;
-    acthash: Uint8Array | string;
-    index: number;
-    blkhash: Uint8Array | string;
-    txindex: number;
-  };
+    contractaddress: string,
+    topicsList: Array<Uint8Array | string>,
+    data: Uint8Array | string,
+    blkheight: number,
+    acthash: Uint8Array | string,
+    index: number,
+    blkhash: Uint8Array | string,
+    txindex: number,
+  }
 }
 
 export class Logs extends jspb.Message {
@@ -1451,8 +1746,8 @@ export class Logs extends jspb.Message {
 
 export namespace Logs {
   export type AsObject = {
-    logsList: Array<Log.AsObject>;
-  };
+    logsList: Array<Log.AsObject>,
+  }
 }
 
 export class EvmTransfer extends jspb.Message {
@@ -1477,10 +1772,10 @@ export class EvmTransfer extends jspb.Message {
 
 export namespace EvmTransfer {
   export type AsObject = {
-    amount: Uint8Array | string;
-    from: string;
-    to: string;
-  };
+    amount: Uint8Array | string,
+    from: string,
+    to: string,
+  }
 }
 
 export class EvmTransferList extends jspb.Message {
@@ -1499,8 +1794,8 @@ export class EvmTransferList extends jspb.Message {
 
 export namespace EvmTransferList {
   export type AsObject = {
-    evmtransfersList: Array<EvmTransfer.AsObject>;
-  };
+    evmtransfersList: Array<EvmTransfer.AsObject>,
+  }
 }
 
 export class ActionEvmTransfer extends jspb.Message {
@@ -1527,10 +1822,10 @@ export class ActionEvmTransfer extends jspb.Message {
 
 export namespace ActionEvmTransfer {
   export type AsObject = {
-    actionhash: Uint8Array | string;
-    numevmtransfers: number;
-    evmtransfersList: Array<EvmTransfer.AsObject>;
-  };
+    actionhash: Uint8Array | string,
+    numevmtransfers: number,
+    evmtransfersList: Array<EvmTransfer.AsObject>,
+  }
 }
 
 export class BlockEvmTransfer extends jspb.Message {
@@ -1555,10 +1850,10 @@ export class BlockEvmTransfer extends jspb.Message {
 
 export namespace BlockEvmTransfer {
   export type AsObject = {
-    blockheight: number;
-    numevmtransfers: number;
-    actionevmtransfersList: Array<ActionEvmTransfer.AsObject>;
-  };
+    blockheight: number,
+    numevmtransfers: number,
+    actionevmtransfersList: Array<ActionEvmTransfer.AsObject>,
+  }
 }
 
 export class DepositToRewardingFund extends jspb.Message {
@@ -1580,9 +1875,9 @@ export class DepositToRewardingFund extends jspb.Message {
 
 export namespace DepositToRewardingFund {
   export type AsObject = {
-    amount: string;
-    data: Uint8Array | string;
-  };
+    amount: string,
+    data: Uint8Array | string,
+  }
 }
 
 export class ClaimFromRewardingFund extends jspb.Message {
@@ -1594,6 +1889,9 @@ export class ClaimFromRewardingFund extends jspb.Message {
   getData_asB64(): string;
   setData(value: Uint8Array | string): ClaimFromRewardingFund;
 
+  getAddress(): string;
+  setAddress(value: string): ClaimFromRewardingFund;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ClaimFromRewardingFund.AsObject;
   static toObject(includeInstance: boolean, msg: ClaimFromRewardingFund): ClaimFromRewardingFund.AsObject;
@@ -1604,9 +1902,10 @@ export class ClaimFromRewardingFund extends jspb.Message {
 
 export namespace ClaimFromRewardingFund {
   export type AsObject = {
-    amount: string;
-    data: Uint8Array | string;
-  };
+    amount: string,
+    data: Uint8Array | string,
+    address: string,
+  }
 }
 
 export class GrantReward extends jspb.Message {
@@ -1626,19 +1925,40 @@ export class GrantReward extends jspb.Message {
 
 export namespace GrantReward {
   export type AsObject = {
-    type: RewardType;
-    height: number;
-  };
+    type: RewardType,
+    height: number,
+  }
 }
 
-export enum Encoding {
+export class SetVoterRewardDestination extends jspb.Message {
+  getRecipient(): Uint8Array | string;
+  getRecipient_asU8(): Uint8Array;
+  getRecipient_asB64(): string;
+  setRecipient(value: Uint8Array | string): SetVoterRewardDestination;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): SetVoterRewardDestination.AsObject;
+  static toObject(includeInstance: boolean, msg: SetVoterRewardDestination): SetVoterRewardDestination.AsObject;
+  static serializeBinaryToWriter(message: SetVoterRewardDestination, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): SetVoterRewardDestination;
+  static deserializeBinaryFromReader(message: SetVoterRewardDestination, reader: jspb.BinaryReader): SetVoterRewardDestination;
+}
+
+export namespace SetVoterRewardDestination {
+  export type AsObject = {
+    recipient: Uint8Array | string,
+  }
+}
+
+export enum Encoding { 
   IOTEX_PROTOBUF = 0,
   ETHEREUM_EIP155 = 1,
   ETHEREUM_RLP = 1,
   ETHEREUM_UNPROTECTED = 2,
   TX_CONTAINER = 128,
 }
-export enum RewardType {
+export enum RewardType { 
   BLOCKREWARD = 0,
   EPOCHREWARD = 1,
+  VOTERREWARDCHUNK = 2,
 }

@@ -13,7 +13,7 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = Function('return this')();
+var global = globalThis;
 
 var proto_types_action_pb = require('../../proto/types/action_pb.js');
 goog.object.extend(proto, proto_types_action_pb);
@@ -339,9 +339,9 @@ proto.iotextypes.BlockHeader.prototype.toObject = function(opt_includeInstance) 
  */
 proto.iotextypes.BlockHeader.toObject = function(includeInstance, msg) {
   var f, obj = {
-    core: (f = msg.getCore()) && proto.iotextypes.BlockHeaderCore.toObject(includeInstance, f),
-    producerpubkey: msg.getProducerpubkey_asB64(),
-    signature: msg.getSignature_asB64()
+core: (f = msg.getCore()) && proto.iotextypes.BlockHeaderCore.toObject(includeInstance, f),
+producerpubkey: msg.getProducerpubkey_asB64(),
+signature: msg.getSignature_asB64()
   };
 
   if (includeInstance) {
@@ -354,7 +354,7 @@ proto.iotextypes.BlockHeader.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.BlockHeader}
  */
 proto.iotextypes.BlockHeader.deserializeBinary = function(bytes) {
@@ -598,14 +598,18 @@ proto.iotextypes.BlockHeaderCore.prototype.toObject = function(opt_includeInstan
  */
 proto.iotextypes.BlockHeaderCore.toObject = function(includeInstance, msg) {
   var f, obj = {
-    version: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    height: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    prevblockhash: msg.getPrevblockhash_asB64(),
-    txroot: msg.getTxroot_asB64(),
-    deltastatedigest: msg.getDeltastatedigest_asB64(),
-    receiptroot: msg.getReceiptroot_asB64(),
-    logsbloom: msg.getLogsbloom_asB64()
+version: jspb.Message.getFieldWithDefault(msg, 1, 0),
+height: jspb.Message.getFieldWithDefault(msg, 2, 0),
+timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+prevblockhash: msg.getPrevblockhash_asB64(),
+txroot: msg.getTxroot_asB64(),
+deltastatedigest: msg.getDeltastatedigest_asB64(),
+receiptroot: msg.getReceiptroot_asB64(),
+logsbloom: msg.getLogsbloom_asB64(),
+gasused: jspb.Message.getFieldWithDefault(msg, 9, 0),
+basefee: msg.getBasefee_asB64(),
+blobgasused: jspb.Message.getFieldWithDefault(msg, 11, 0),
+excessblobgas: jspb.Message.getFieldWithDefault(msg, 12, 0)
   };
 
   if (includeInstance) {
@@ -618,7 +622,7 @@ proto.iotextypes.BlockHeaderCore.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.BlockHeaderCore}
  */
 proto.iotextypes.BlockHeaderCore.deserializeBinary = function(bytes) {
@@ -674,6 +678,22 @@ proto.iotextypes.BlockHeaderCore.deserializeBinaryFromReader = function(msg, rea
     case 8:
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setLogsbloom(value);
+      break;
+    case 9:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setGasused(value);
+      break;
+    case 10:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setBasefee(value);
+      break;
+    case 11:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setBlobgasused(value);
+      break;
+    case 12:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setExcessblobgas(value);
       break;
     default:
       reader.skipField();
@@ -758,6 +778,34 @@ proto.iotextypes.BlockHeaderCore.serializeBinaryToWriter = function(message, wri
   if (f.length > 0) {
     writer.writeBytes(
       8,
+      f
+    );
+  }
+  f = message.getGasused();
+  if (f !== 0) {
+    writer.writeUint64(
+      9,
+      f
+    );
+  }
+  f = message.getBasefee_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      10,
+      f
+    );
+  }
+  f = message.getBlobgasused();
+  if (f !== 0) {
+    writer.writeUint64(
+      11,
+      f
+    );
+  }
+  f = message.getExcessblobgas();
+  if (f !== 0) {
+    writer.writeUint64(
+      12,
       f
     );
   }
@@ -1047,6 +1095,102 @@ proto.iotextypes.BlockHeaderCore.prototype.setLogsbloom = function(value) {
 };
 
 
+/**
+ * optional uint64 gasUsed = 9;
+ * @return {number}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getGasused = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.BlockHeaderCore} returns this
+ */
+proto.iotextypes.BlockHeaderCore.prototype.setGasused = function(value) {
+  return jspb.Message.setProto3IntField(this, 9, value);
+};
+
+
+/**
+ * optional bytes baseFee = 10;
+ * @return {string}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getBasefee = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
+};
+
+
+/**
+ * optional bytes baseFee = 10;
+ * This is a type-conversion wrapper around `getBasefee()`
+ * @return {string}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getBasefee_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getBasefee()));
+};
+
+
+/**
+ * optional bytes baseFee = 10;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getBasefee()`
+ * @return {!Uint8Array}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getBasefee_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getBasefee()));
+};
+
+
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.iotextypes.BlockHeaderCore} returns this
+ */
+proto.iotextypes.BlockHeaderCore.prototype.setBasefee = function(value) {
+  return jspb.Message.setProto3BytesField(this, 10, value);
+};
+
+
+/**
+ * optional uint64 blobGasUsed = 11;
+ * @return {number}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getBlobgasused = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.BlockHeaderCore} returns this
+ */
+proto.iotextypes.BlockHeaderCore.prototype.setBlobgasused = function(value) {
+  return jspb.Message.setProto3IntField(this, 11, value);
+};
+
+
+/**
+ * optional uint64 excessBlobGas = 12;
+ * @return {number}
+ */
+proto.iotextypes.BlockHeaderCore.prototype.getExcessblobgas = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.BlockHeaderCore} returns this
+ */
+proto.iotextypes.BlockHeaderCore.prototype.setExcessblobgas = function(value) {
+  return jspb.Message.setProto3IntField(this, 12, value);
+};
+
+
 
 /**
  * List of repeated fields within this message type.
@@ -1086,9 +1230,9 @@ proto.iotextypes.BlockFooter.prototype.toObject = function(opt_includeInstance) 
  */
 proto.iotextypes.BlockFooter.toObject = function(includeInstance, msg) {
   var f, obj = {
-    endorsementsList: jspb.Message.toObjectList(msg.getEndorsementsList(),
+endorsementsList: jspb.Message.toObjectList(msg.getEndorsementsList(),
     proto_types_endorsement_pb.Endorsement.toObject, includeInstance),
-    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
+timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1101,7 +1245,7 @@ proto.iotextypes.BlockFooter.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.BlockFooter}
  */
 proto.iotextypes.BlockFooter.deserializeBinary = function(bytes) {
@@ -1297,7 +1441,7 @@ proto.iotextypes.BlockBody.prototype.toObject = function(opt_includeInstance) {
  */
 proto.iotextypes.BlockBody.toObject = function(includeInstance, msg) {
   var f, obj = {
-    actionsList: jspb.Message.toObjectList(msg.getActionsList(),
+actionsList: jspb.Message.toObjectList(msg.getActionsList(),
     proto_types_action_pb.Action.toObject, includeInstance)
   };
 
@@ -1311,7 +1455,7 @@ proto.iotextypes.BlockBody.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.BlockBody}
  */
 proto.iotextypes.BlockBody.deserializeBinary = function(bytes) {
@@ -1450,9 +1594,9 @@ proto.iotextypes.Block.prototype.toObject = function(opt_includeInstance) {
  */
 proto.iotextypes.Block.toObject = function(includeInstance, msg) {
   var f, obj = {
-    header: (f = msg.getHeader()) && proto.iotextypes.BlockHeader.toObject(includeInstance, f),
-    body: (f = msg.getBody()) && proto.iotextypes.BlockBody.toObject(includeInstance, f),
-    footer: (f = msg.getFooter()) && proto.iotextypes.BlockFooter.toObject(includeInstance, f)
+header: (f = msg.getHeader()) && proto.iotextypes.BlockHeader.toObject(includeInstance, f),
+body: (f = msg.getBody()) && proto.iotextypes.BlockBody.toObject(includeInstance, f),
+footer: (f = msg.getFooter()) && proto.iotextypes.BlockFooter.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1465,7 +1609,7 @@ proto.iotextypes.Block.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.Block}
  */
 proto.iotextypes.Block.deserializeBinary = function(bytes) {
@@ -1710,7 +1854,7 @@ proto.iotextypes.Receipts.prototype.toObject = function(opt_includeInstance) {
  */
 proto.iotextypes.Receipts.toObject = function(includeInstance, msg) {
   var f, obj = {
-    receiptsList: jspb.Message.toObjectList(msg.getReceiptsList(),
+receiptsList: jspb.Message.toObjectList(msg.getReceiptsList(),
     proto_types_action_pb.Receipt.toObject, includeInstance)
   };
 
@@ -1724,7 +1868,7 @@ proto.iotextypes.Receipts.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.Receipts}
  */
 proto.iotextypes.Receipts.deserializeBinary = function(bytes) {
@@ -1863,9 +2007,9 @@ proto.iotextypes.EpochData.prototype.toObject = function(opt_includeInstance) {
  */
 proto.iotextypes.EpochData.toObject = function(includeInstance, msg) {
   var f, obj = {
-    num: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    height: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    gravitychainstartheight: jspb.Message.getFieldWithDefault(msg, 3, 0)
+num: jspb.Message.getFieldWithDefault(msg, 1, 0),
+height: jspb.Message.getFieldWithDefault(msg, 2, 0),
+gravitychainstartheight: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -1878,7 +2022,7 @@ proto.iotextypes.EpochData.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.EpochData}
  */
 proto.iotextypes.EpochData.deserializeBinary = function(bytes) {
@@ -2053,12 +2197,12 @@ proto.iotextypes.ChainMeta.prototype.toObject = function(opt_includeInstance) {
  */
 proto.iotextypes.ChainMeta.toObject = function(includeInstance, msg) {
   var f, obj = {
-    height: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    numactions: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    tps: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    epoch: (f = msg.getEpoch()) && proto.iotextypes.EpochData.toObject(includeInstance, f),
-    tpsfloat: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
-    chainid: jspb.Message.getFieldWithDefault(msg, 6, 0)
+height: jspb.Message.getFieldWithDefault(msg, 1, 0),
+numactions: jspb.Message.getFieldWithDefault(msg, 2, 0),
+tps: jspb.Message.getFieldWithDefault(msg, 3, 0),
+epoch: (f = msg.getEpoch()) && proto.iotextypes.EpochData.toObject(includeInstance, f),
+tpsfloat: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
+chainid: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
   if (includeInstance) {
@@ -2071,7 +2215,7 @@ proto.iotextypes.ChainMeta.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.ChainMeta}
  */
 proto.iotextypes.ChainMeta.deserializeBinary = function(bytes) {
@@ -2354,19 +2498,19 @@ proto.iotextypes.BlockMeta.prototype.toObject = function(opt_includeInstance) {
  */
 proto.iotextypes.BlockMeta.toObject = function(includeInstance, msg) {
   var f, obj = {
-    hash: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    height: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    numactions: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    produceraddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    transferamount: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    txroot: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    receiptroot: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    deltastatedigest: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    logsbloom: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    previousblockhash: jspb.Message.getFieldWithDefault(msg, 11, ""),
-    gaslimit: jspb.Message.getFieldWithDefault(msg, 12, 0),
-    gasused: jspb.Message.getFieldWithDefault(msg, 13, 0)
+hash: jspb.Message.getFieldWithDefault(msg, 1, ""),
+height: jspb.Message.getFieldWithDefault(msg, 2, 0),
+timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+numactions: jspb.Message.getFieldWithDefault(msg, 4, 0),
+produceraddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
+transferamount: jspb.Message.getFieldWithDefault(msg, 6, ""),
+txroot: jspb.Message.getFieldWithDefault(msg, 7, ""),
+receiptroot: jspb.Message.getFieldWithDefault(msg, 8, ""),
+deltastatedigest: jspb.Message.getFieldWithDefault(msg, 9, ""),
+logsbloom: jspb.Message.getFieldWithDefault(msg, 10, ""),
+previousblockhash: jspb.Message.getFieldWithDefault(msg, 11, ""),
+gaslimit: jspb.Message.getFieldWithDefault(msg, 12, 0),
+gasused: jspb.Message.getFieldWithDefault(msg, 13, 0)
   };
 
   if (includeInstance) {
@@ -2379,7 +2523,7 @@ proto.iotextypes.BlockMeta.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.BlockMeta}
  */
 proto.iotextypes.BlockMeta.deserializeBinary = function(bytes) {
@@ -2404,7 +2548,7 @@ proto.iotextypes.BlockMeta.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setHash(value);
       break;
     case 2:
@@ -2421,31 +2565,31 @@ proto.iotextypes.BlockMeta.deserializeBinaryFromReader = function(msg, reader) {
       msg.setNumactions(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setProduceraddress(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setTransferamount(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setTxroot(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setReceiptroot(value);
       break;
     case 9:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setDeltastatedigest(value);
       break;
     case 10:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setLogsbloom(value);
       break;
     case 11:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setPreviousblockhash(value);
       break;
     case 12:
@@ -2865,8 +3009,8 @@ proto.iotextypes.BlockIdentifier.prototype.toObject = function(opt_includeInstan
  */
 proto.iotextypes.BlockIdentifier.toObject = function(includeInstance, msg) {
   var f, obj = {
-    hash: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    height: jspb.Message.getFieldWithDefault(msg, 2, 0)
+hash: jspb.Message.getFieldWithDefault(msg, 1, ""),
+height: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -2879,7 +3023,7 @@ proto.iotextypes.BlockIdentifier.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.BlockIdentifier}
  */
 proto.iotextypes.BlockIdentifier.deserializeBinary = function(bytes) {
@@ -2904,7 +3048,7 @@ proto.iotextypes.BlockIdentifier.deserializeBinaryFromReader = function(msg, rea
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setHash(value);
       break;
     case 2:
@@ -3025,13 +3169,13 @@ proto.iotextypes.AccountMeta.prototype.toObject = function(opt_includeInstance) 
  */
 proto.iotextypes.AccountMeta.toObject = function(includeInstance, msg) {
   var f, obj = {
-    address: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    balance: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    nonce: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    pendingnonce: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    numactions: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    iscontract: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
-    contractbytecode: msg.getContractbytecode_asB64()
+address: jspb.Message.getFieldWithDefault(msg, 1, ""),
+balance: jspb.Message.getFieldWithDefault(msg, 2, ""),
+nonce: jspb.Message.getFieldWithDefault(msg, 3, 0),
+pendingnonce: jspb.Message.getFieldWithDefault(msg, 4, 0),
+numactions: jspb.Message.getFieldWithDefault(msg, 5, 0),
+iscontract: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
+contractbytecode: msg.getContractbytecode_asB64()
   };
 
   if (includeInstance) {
@@ -3044,7 +3188,7 @@ proto.iotextypes.AccountMeta.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.AccountMeta}
  */
 proto.iotextypes.AccountMeta.deserializeBinary = function(bytes) {
@@ -3069,11 +3213,11 @@ proto.iotextypes.AccountMeta.deserializeBinaryFromReader = function(msg, reader)
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setAddress(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setBalance(value);
       break;
     case 3:
@@ -3366,8 +3510,8 @@ proto.iotextypes.BlockStore.prototype.toObject = function(opt_includeInstance) {
  */
 proto.iotextypes.BlockStore.toObject = function(includeInstance, msg) {
   var f, obj = {
-    block: (f = msg.getBlock()) && proto.iotextypes.Block.toObject(includeInstance, f),
-    receiptsList: jspb.Message.toObjectList(msg.getReceiptsList(),
+block: (f = msg.getBlock()) && proto.iotextypes.Block.toObject(includeInstance, f),
+receiptsList: jspb.Message.toObjectList(msg.getReceiptsList(),
     proto_types_action_pb.Receipt.toObject, includeInstance)
   };
 
@@ -3381,7 +3525,7 @@ proto.iotextypes.BlockStore.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.BlockStore}
  */
 proto.iotextypes.BlockStore.deserializeBinary = function(bytes) {
@@ -3577,7 +3721,7 @@ proto.iotextypes.BlockStores.prototype.toObject = function(opt_includeInstance) 
  */
 proto.iotextypes.BlockStores.toObject = function(includeInstance, msg) {
   var f, obj = {
-    blockstoresList: jspb.Message.toObjectList(msg.getBlockstoresList(),
+blockstoresList: jspb.Message.toObjectList(msg.getBlockstoresList(),
     proto.iotextypes.BlockStore.toObject, includeInstance)
   };
 
@@ -3591,7 +3735,7 @@ proto.iotextypes.BlockStores.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.BlockStores}
  */
 proto.iotextypes.BlockStores.deserializeBinary = function(bytes) {

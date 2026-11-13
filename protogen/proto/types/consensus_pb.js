@@ -13,7 +13,7 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = Function('return this')();
+var global = globalThis;
 
 var proto_types_blockchain_pb = require('../../proto/types/blockchain_pb.js');
 goog.object.extend(proto, proto_types_blockchain_pb);
@@ -126,8 +126,8 @@ proto.iotextypes.BlockProposal.prototype.toObject = function(opt_includeInstance
  */
 proto.iotextypes.BlockProposal.toObject = function(includeInstance, msg) {
   var f, obj = {
-    block: (f = msg.getBlock()) && proto_types_blockchain_pb.Block.toObject(includeInstance, f),
-    endorsementsList: jspb.Message.toObjectList(msg.getEndorsementsList(),
+block: (f = msg.getBlock()) && proto_types_blockchain_pb.Block.toObject(includeInstance, f),
+endorsementsList: jspb.Message.toObjectList(msg.getEndorsementsList(),
     proto_types_endorsement_pb.Endorsement.toObject, includeInstance)
   };
 
@@ -141,7 +141,7 @@ proto.iotextypes.BlockProposal.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.BlockProposal}
  */
 proto.iotextypes.BlockProposal.deserializeBinary = function(bytes) {
@@ -330,8 +330,8 @@ proto.iotextypes.ConsensusVote.prototype.toObject = function(opt_includeInstance
  */
 proto.iotextypes.ConsensusVote.toObject = function(includeInstance, msg) {
   var f, obj = {
-    blockhash: msg.getBlockhash_asB64(),
-    topic: jspb.Message.getFieldWithDefault(msg, 2, 0)
+blockhash: msg.getBlockhash_asB64(),
+topic: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -344,7 +344,7 @@ proto.iotextypes.ConsensusVote.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.ConsensusVote}
  */
 proto.iotextypes.ConsensusVote.deserializeBinary = function(bytes) {
@@ -549,10 +549,10 @@ proto.iotextypes.ConsensusMessage.prototype.toObject = function(opt_includeInsta
  */
 proto.iotextypes.ConsensusMessage.toObject = function(includeInstance, msg) {
   var f, obj = {
-    height: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    endorsement: (f = msg.getEndorsement()) && proto_types_endorsement_pb.Endorsement.toObject(includeInstance, f),
-    blockproposal: (f = msg.getBlockproposal()) && proto.iotextypes.BlockProposal.toObject(includeInstance, f),
-    vote: (f = msg.getVote()) && proto.iotextypes.ConsensusVote.toObject(includeInstance, f)
+height: jspb.Message.getFieldWithDefault(msg, 1, 0),
+endorsement: (f = msg.getEndorsement()) && proto_types_endorsement_pb.Endorsement.toObject(includeInstance, f),
+blockproposal: (f = msg.getBlockproposal()) && proto.iotextypes.BlockProposal.toObject(includeInstance, f),
+vote: (f = msg.getVote()) && proto.iotextypes.ConsensusVote.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -565,7 +565,7 @@ proto.iotextypes.ConsensusMessage.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.ConsensusMessage}
  */
 proto.iotextypes.ConsensusMessage.deserializeBinary = function(bytes) {

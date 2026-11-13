@@ -33,6 +33,9 @@ export namespace ProbationCandidateList {
     getCount(): number;
     setCount(value: number): Info;
 
+    getIdentity(): string;
+    setIdentity(value: string): Info;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Info.AsObject;
     static toObject(includeInstance: boolean, msg: Info): Info.AsObject;
@@ -45,6 +48,7 @@ export namespace ProbationCandidateList {
     export type AsObject = {
       address: string,
       count: number,
+      identity: string,
     }
   }
 
@@ -99,6 +103,9 @@ export class VoteBucket extends jspb.Message {
   getUnstakestartblockheight(): number;
   setUnstakestartblockheight(value: number): VoteBucket;
 
+  getEndorsementexpireblockheight(): number;
+  setEndorsementexpireblockheight(value: number): VoteBucket;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): VoteBucket.AsObject;
   static toObject(includeInstance: boolean, msg: VoteBucket): VoteBucket.AsObject;
@@ -123,6 +130,7 @@ export namespace VoteBucket {
     createblockheight: number,
     stakestartblockheight: number,
     unstakestartblockheight: number,
+    endorsementexpireblockheight: number,
   }
 }
 
@@ -168,6 +176,23 @@ export class CandidateV2 extends jspb.Message {
   getSelfstakingtokens(): string;
   setSelfstakingtokens(value: string): CandidateV2;
 
+  getId(): string;
+  setId(value: string): CandidateV2;
+
+  getBlspubkey(): Uint8Array | string;
+  getBlspubkey_asU8(): Uint8Array;
+  getBlspubkey_asB64(): string;
+  setBlspubkey(value: Uint8Array | string): CandidateV2;
+
+  getDeactivatedat(): number;
+  setDeactivatedat(value: number): CandidateV2;
+
+  getCommissionrate(): number;
+  setCommissionrate(value: number): CandidateV2;
+
+  getVoterrewardonchainoptin(): boolean;
+  setVoterrewardonchainoptin(value: boolean): CandidateV2;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CandidateV2.AsObject;
   static toObject(includeInstance: boolean, msg: CandidateV2): CandidateV2.AsObject;
@@ -185,6 +210,11 @@ export namespace CandidateV2 {
     totalweightedvotes: string,
     selfstakebucketidx: number,
     selfstakingtokens: string,
+    id: string,
+    blspubkey: Uint8Array | string,
+    deactivatedat: number,
+    commissionrate: number,
+    voterrewardonchainoptin: boolean,
   }
 }
 

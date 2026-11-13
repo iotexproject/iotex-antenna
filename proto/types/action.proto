@@ -25,6 +25,11 @@ message Candidate {
   bytes votes = 2;
   bytes pubKey = 3;
   string rewardAddress = 4;
+  bytes blsPubKey = 5; // BLS public key for the candidate
+  string identity = 6;
+  // IIP-59: voter reward commission rate (basis points, 0-10000) snapshotted
+  // for this epoch by PutPollResult. 0 = legacy (no auto-distribution).
+  uint64 commissionRate = 7;
 }
 
 message CandidateList {
@@ -44,7 +49,6 @@ message Execution {
   string amount = 1;
   string contract = 2;
   bytes data = 3;
-  repeated AccessTuple accessList = 4;
 }
 
 message AccessTuple {
@@ -64,6 +68,11 @@ message BlobTxData {
   BlobTxSidecar blobTxSidecar = 3;
 }
 
+message BlobTxSidecars {
+  repeated bytes txHash = 1;
+  repeated BlobTxSidecar sidecars = 2;
+}
+
 message SetCodeAuthorization {
   uint32 chainID = 1;
   bytes address = 2;
@@ -80,6 +89,11 @@ message StakeCreate {
   uint32 stakedDuration = 3;
   bool autoStake = 4;
   bytes payload = 5;
+}
+
+// migrate stake
+message StakeMigrate {
+  uint64 bucketIndex = 1;
 }
 
 // unstake or withdraw
@@ -120,6 +134,13 @@ message CandidateBasicInfo {
   string name = 1;
   string operatorAddress = 2;
   string rewardAddress = 3;
+  bytes blsPubKey = 4;
+  // BLS proof-of-possession: a 96-byte BLS signature over a
+  // domain-separated hash that includes blsPubKey and the candidate's
+  // owner address. Required (post-fork) for any action that introduces
+  // or rotates a blsPubKey, to prevent the classic BLS rogue-key
+  // aggregate forgery against IIP-52's same-message aggregation.
+  bytes blsPop = 5;
 }
 
 message CandidateRegister {
@@ -130,6 +151,40 @@ message CandidateRegister {
   string ownerAddress = 5; // if ownerAddress is absent, owner of candidate is the sender
   bytes payload = 6;
 }
+
+message CandidateTransferOwnership {
+  string newOwnerAddress = 1;
+  bytes payload = 2;
+}
+
+message CandidateActivate {
+  uint64 bucketIndex = 1;
+}
+
+message CandidateDeactivate {
+  uint32 op = 1;
+}
+
+message ScheduleCandidateDeactivation {
+  string delegate = 1;
+}
+
+message CandidateEndorsement {
+  uint64 bucketIndex = 1;
+  bool endorse = 2; // deprecated
+  uint32 op = 3;
+}
+
+// IIP-59: delegate sets the voter reward commission rate (basis points, 0-10000).
+// 0 = legacy (no auto-distribution); the protocol auto-splits the epoch reward
+// when rate > 0.
+message SetCommissionRate {
+  uint64 rate = 1;
+}
+
+// IIP-59: delegate enables protocol-native voter-reward distribution. This is
+// a one-way transition and only the candidate owner may submit the action.
+message SetVoterRewardOptIn {}
 
 message StartSubChain {
   // TODO: chainID chould be assigned by system and returned via a receipt
@@ -283,6 +338,15 @@ message ActionCore {
     StakeTransferOwnership stakeTransferOwnership = 46;
     CandidateRegister candidateRegister = 47;
     CandidateBasicInfo candidateUpdate = 48;
+    CandidateActivate candidateActivate = 49;
+    CandidateEndorsement candidateEndorsement = 51;
+    CandidateTransferOwnership candidateTransferOwnership = 52;
+    StakeMigrate stakeMigrate = 53;
+    CandidateDeactivate candidateDeactivate = 54;
+    ScheduleCandidateDeactivation scheduleCandidateDeactivation = 55;
+    SetCommissionRate setCommissionRate = 56;
+    SetVoterRewardOptIn setVoterRewardOptIn = 57;
+    SetVoterRewardDestination setVoterRewardDestination = 58;
 
     PutPollResult putPollResult = 50;
   }
@@ -309,6 +373,10 @@ message Actions {
   repeated Action actions = 1;
 }
 
+message ActionHash {
+  bytes hash = 1;
+}
+
 message Receipt {
   uint64 status = 1;
   uint64 blkHeight = 2;
@@ -318,6 +386,9 @@ message Receipt {
   repeated Log logs = 6;
   string executionRevertMsg = 7;
   uint32 txIndex = 8;
+  uint64 blobGasUsed = 9;
+  string blobGasPrice = 10;
+  string effectiveGasPrice = 11;
 }
 
 message Log {
@@ -373,14 +444,30 @@ message DepositToRewardingFund {
 message ClaimFromRewardingFund {
   string amount = 1;
   bytes data = 2;
+  // address the claim of rewards for, if empty denoting the sender's address
+  // more information see iip27: https://iotex.larksuite.com/wiki/EtDewVEz6i5BeCkyj6vudtdHsCh
+  string address = 3;
 }
 
 enum RewardType {
   BlockReward = 0;
   EpochReward = 1;
+  // VoterRewardChunk drives one chunk of the IIP-59 era-boundary
+  // voter-reward drain on a non-epoch-boundary block. Emitted only
+  // while a drain cursor is live in the rewarding namespace; consumed
+  // by the chain's rewarding protocol.
+  VoterRewardChunk = 2;
 }
 
 message GrantReward {
   RewardType type = 1;
   uint64 height = 2;
+}
+
+// IIP-59: voter selects the account that receives direct voter-reward
+// payouts. An empty recipient clears the override and restores the voter as
+// the effective destination. Compound payouts continue to use the voter's
+// configured native staking bucket.
+message SetVoterRewardDestination {
+  bytes recipient = 1;
 }

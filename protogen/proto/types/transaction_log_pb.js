@@ -13,7 +13,7 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = Function('return this')();
+var global = globalThis;
 
 goog.exportSymbol('proto.iotextypes.TransactionLog', null, global);
 goog.exportSymbol('proto.iotextypes.TransactionLog.Transaction', null, global);
@@ -143,9 +143,9 @@ proto.iotextypes.TransactionLog.prototype.toObject = function(opt_includeInstanc
  */
 proto.iotextypes.TransactionLog.toObject = function(includeInstance, msg) {
   var f, obj = {
-    actionhash: msg.getActionhash_asB64(),
-    numtransactions: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    transactionsList: jspb.Message.toObjectList(msg.getTransactionsList(),
+actionhash: msg.getActionhash_asB64(),
+numtransactions: jspb.Message.getFieldWithDefault(msg, 2, 0),
+transactionsList: jspb.Message.toObjectList(msg.getTransactionsList(),
     proto.iotextypes.TransactionLog.Transaction.toObject, includeInstance)
   };
 
@@ -159,7 +159,7 @@ proto.iotextypes.TransactionLog.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.TransactionLog}
  */
 proto.iotextypes.TransactionLog.deserializeBinary = function(bytes) {
@@ -282,11 +282,11 @@ proto.iotextypes.TransactionLog.Transaction.prototype.toObject = function(opt_in
  */
 proto.iotextypes.TransactionLog.Transaction.toObject = function(includeInstance, msg) {
   var f, obj = {
-    topic: msg.getTopic_asB64(),
-    amount: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    sender: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    recipient: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    type: jspb.Message.getFieldWithDefault(msg, 5, 0)
+topic: msg.getTopic_asB64(),
+amount: jspb.Message.getFieldWithDefault(msg, 2, ""),
+sender: jspb.Message.getFieldWithDefault(msg, 3, ""),
+recipient: jspb.Message.getFieldWithDefault(msg, 4, ""),
+type: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -299,7 +299,7 @@ proto.iotextypes.TransactionLog.Transaction.toObject = function(includeInstance,
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.TransactionLog.Transaction}
  */
 proto.iotextypes.TransactionLog.Transaction.deserializeBinary = function(bytes) {
@@ -328,15 +328,15 @@ proto.iotextypes.TransactionLog.Transaction.deserializeBinaryFromReader = functi
       msg.setTopic(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setAmount(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setSender(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setRecipient(value);
       break;
     case 5:
@@ -661,7 +661,7 @@ proto.iotextypes.TransactionLogs.prototype.toObject = function(opt_includeInstan
  */
 proto.iotextypes.TransactionLogs.toObject = function(includeInstance, msg) {
   var f, obj = {
-    logsList: jspb.Message.toObjectList(msg.getLogsList(),
+logsList: jspb.Message.toObjectList(msg.getLogsList(),
     proto.iotextypes.TransactionLog.toObject, includeInstance)
   };
 
@@ -675,7 +675,7 @@ proto.iotextypes.TransactionLogs.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.TransactionLogs}
  */
 proto.iotextypes.TransactionLogs.deserializeBinary = function(bytes) {
@@ -821,18 +821,18 @@ proto.iotextypes.TransactionStructLog.prototype.toObject = function(opt_includeI
  */
 proto.iotextypes.TransactionStructLog.toObject = function(includeInstance, msg) {
   var f, obj = {
-    pc: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    op: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    gas: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    gascost: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    memory: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    memsize: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    stackList: (f = jspb.Message.getRepeatedField(msg, 7)) == null ? undefined : f,
-    returndata: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    depth: jspb.Message.getFieldWithDefault(msg, 9, 0),
-    refund: jspb.Message.getFieldWithDefault(msg, 10, 0),
-    opname: jspb.Message.getFieldWithDefault(msg, 11, ""),
-    error: jspb.Message.getFieldWithDefault(msg, 12, "")
+pc: jspb.Message.getFieldWithDefault(msg, 1, 0),
+op: jspb.Message.getFieldWithDefault(msg, 2, 0),
+gas: jspb.Message.getFieldWithDefault(msg, 3, 0),
+gascost: jspb.Message.getFieldWithDefault(msg, 4, 0),
+memory: jspb.Message.getFieldWithDefault(msg, 5, ""),
+memsize: jspb.Message.getFieldWithDefault(msg, 6, 0),
+stackList: (f = jspb.Message.getRepeatedField(msg, 7)) == null ? undefined : f,
+returndata: jspb.Message.getFieldWithDefault(msg, 8, ""),
+depth: jspb.Message.getFieldWithDefault(msg, 9, 0),
+refund: jspb.Message.getFieldWithDefault(msg, 10, 0),
+opname: jspb.Message.getFieldWithDefault(msg, 11, ""),
+error: jspb.Message.getFieldWithDefault(msg, 12, "")
   };
 
   if (includeInstance) {
@@ -845,7 +845,7 @@ proto.iotextypes.TransactionStructLog.toObject = function(includeInstance, msg) 
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.TransactionStructLog}
  */
 proto.iotextypes.TransactionStructLog.deserializeBinary = function(bytes) {
@@ -886,7 +886,7 @@ proto.iotextypes.TransactionStructLog.deserializeBinaryFromReader = function(msg
       msg.setGascost(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMemory(value);
       break;
     case 6:
@@ -894,11 +894,11 @@ proto.iotextypes.TransactionStructLog.deserializeBinaryFromReader = function(msg
       msg.setMemsize(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addStack(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setReturndata(value);
       break;
     case 9:
@@ -910,11 +910,11 @@ proto.iotextypes.TransactionStructLog.deserializeBinaryFromReader = function(msg
       msg.setRefund(value);
       break;
     case 11:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setOpname(value);
       break;
     case 12:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setError(value);
       break;
     default:
@@ -1281,7 +1281,9 @@ proto.iotextypes.TransactionLogType = {
   GAS_FEE: 6,
   NATIVE_TRANSFER: 7,
   DEPOSIT_TO_REWARDING_FUND: 8,
-  CLAIM_FROM_REWARDING_FUND: 9
+  CLAIM_FROM_REWARDING_FUND: 9,
+  BLOB_FEE: 10,
+  PRIORITY_FEE: 11
 };
 
 goog.object.extend(exports, proto.iotextypes);

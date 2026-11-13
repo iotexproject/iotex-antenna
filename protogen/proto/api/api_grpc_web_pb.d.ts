@@ -202,6 +202,20 @@ export class TransactionLogServiceClient {
 
 }
 
+export class BundleAPIServiceClient {
+  constructor (hostname: string,
+               credentials?: null | { [index: string]: string; },
+               options?: null | { [index: string]: any; });
+
+  sendBundle(
+    request: proto_api_api_pb.SendBundleRequest,
+    metadata: grpcWeb.Metadata | undefined,
+    callback: (err: grpcWeb.Error,
+               response: proto_api_api_pb.SendBundleResponse) => void
+  ): grpcWeb.ClientReadableStream<proto_api_api_pb.SendBundleResponse>;
+
+}
+
 export class APIServicePromiseClient {
   constructor (hostname: string,
                credentials?: null | { [index: string]: string; },
@@ -348,6 +362,18 @@ export class TransactionLogServicePromiseClient {
     request: proto_api_api_pb.GetTransactionLogByBlockHeightRequest,
     metadata?: grpcWeb.Metadata
   ): Promise<proto_api_api_pb.GetTransactionLogByBlockHeightResponse>;
+
+}
+
+export class BundleAPIServicePromiseClient {
+  constructor (hostname: string,
+               credentials?: null | { [index: string]: string; },
+               options?: null | { [index: string]: any; });
+
+  sendBundle(
+    request: proto_api_api_pb.SendBundleRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<proto_api_api_pb.SendBundleResponse>;
 
 }
 

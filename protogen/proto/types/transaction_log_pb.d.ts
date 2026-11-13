@@ -164,4 +164,6 @@ export enum TransactionLogType {
   NATIVE_TRANSFER = 7,
   DEPOSIT_TO_REWARDING_FUND = 8,
   CLAIM_FROM_REWARDING_FUND = 9,
+  BLOB_FEE = 10,
+  PRIORITY_FEE = 11,
 }

@@ -2,13 +2,18 @@ import actionPb from "../../protogen/proto/types/action_pb";
 import { makeSigner } from "../crypto/crypto";
 import { hash256b } from "../crypto/hash";
 import {
-  GetActionsRequest,
+  fillActionCorePayload,
+  fromPbActionCore,
   IAccessTuple,
   IAction,
   IActionEncoding,
   IBlobTxData,
+  ICandidateActivate,
   ICandidateBasicInfo,
+  ICandidateDeactivate,
+  ICandidateEndorsement,
   ICandidateRegister,
+  ICandidateTransferOwnership,
   IClaimFromRewardingFund,
   ICreateDeposit,
   ICreatePlumChain,
@@ -25,46 +30,23 @@ import {
   IPlumTransfer,
   IPutBlock,
   IPutPollResult,
+  IScheduleCandidateDeactivation,
   ISetCodeAuthorization,
+  ISetCommissionRate,
   ISettleDeposit,
+  ISetVoterRewardDestination,
+  ISetVoterRewardOptIn,
   IStakeAddDeposit,
   IStakeChangeCandidate,
   IStakeCreate,
+  IStakeMigrate,
   IStakeReclaim,
   IStakeRestake,
   IStakeTransferOwnership,
   IStartSubChain,
   IStopSubChain,
   ITerminatePlumChain,
-  ITransfer,
-  toActionCandidateBasicInfo,
-  toActionCandidateRegister,
-  toActionClaimFromRewardingFund,
-  toActionCreateDeposit,
-  toActionCreatePlumChain,
-  toActionDepositToRewardingFund,
-  toActionExecution,
-  toActionGrantReward,
-  toActionPlumChallengeExit,
-  toActionPlumCreateDeposit,
-  toActionPlumFinalizeExit,
-  toActionPlumPutBlock,
-  toActionPlumResponseChallengeExit,
-  toActionPlumSettleDeposit,
-  toActionPlumStartExit,
-  toActionPlumTransfer,
-  toActionPutBlock,
-  toActionSettleDeposit,
-  toActionStakeAddDeposit,
-  toActionStakeChangeCandidate,
-  toActionStakeCreate,
-  toActionStakeReclaim,
-  toActionStakeRestake,
-  toActionStakeTransferOwnership,
-  toActionStartSubChain,
-  toActionStopSubChain,
-  toActionTerminatePlumChain,
-  toActionTransfer
+  ITransfer
 } from "../rpc-method/types";
 import {
   extractEthTxSig,
@@ -123,6 +105,17 @@ export class Envelop {
   public stakeTransferOwnership?: IStakeTransferOwnership | undefined;
   public candidateRegister?: ICandidateRegister | undefined;
   public candidateUpdate?: ICandidateBasicInfo | undefined;
+  public candidateActivate?: ICandidateActivate | undefined;
+  public candidateEndorsement?: ICandidateEndorsement | undefined;
+  public candidateTransferOwnership?: ICandidateTransferOwnership | undefined;
+  public stakeMigrate?: IStakeMigrate | undefined;
+  public candidateDeactivate?: ICandidateDeactivate | undefined;
+  public scheduleCandidateDeactivation?:
+    | IScheduleCandidateDeactivation
+    | undefined;
+  public setCommissionRate?: ISetCommissionRate | undefined;
+  public setVoterRewardOptIn?: ISetVoterRewardOptIn | undefined;
+  public setVoterRewardDestination?: ISetVoterRewardDestination | undefined;
   public putPollResult?: IPutPollResult | undefined;
 
   constructor(
@@ -139,8 +132,6 @@ export class Envelop {
     this.chainID = chainID;
   }
 
-  // tslint:disable:max-func-body-length
-  // tslint:disable-next-line:cyclomatic-complexity
   public core(): actionPb.ActionCore {
     const gasLimit = this.gasLimit || "0";
     const gasPrice = this.gasPrice || "0";
@@ -153,93 +144,7 @@ export class Envelop {
     pbActionCore.setChainid(this.chainID);
 
     // oneof action
-    if (this.transfer) {
-      pbActionCore.setTransfer(toActionTransfer(this.transfer));
-    } else if (this.execution) {
-      pbActionCore.setExecution(toActionExecution(this.execution));
-    } else if (this.startSubChain) {
-      pbActionCore.setStartsubchain(toActionStartSubChain(this.startSubChain));
-    } else if (this.stopSubChain) {
-      pbActionCore.setStopsubchain(toActionStopSubChain(this.stopSubChain));
-    } else if (this.putBlock) {
-      pbActionCore.setPutblock(toActionPutBlock(this.putBlock));
-    } else if (this.createDeposit) {
-      pbActionCore.setCreatedeposit(toActionCreateDeposit(this.createDeposit));
-    } else if (this.settleDeposit) {
-      pbActionCore.setSettledeposit(toActionSettleDeposit(this.settleDeposit));
-    } else if (this.createPlumChain) {
-      pbActionCore.setCreateplumchain(
-        toActionCreatePlumChain(this.createPlumChain)
-      );
-    } else if (this.terminatePlumChain) {
-      pbActionCore.setTerminateplumchain(
-        toActionTerminatePlumChain(this.terminatePlumChain)
-      );
-    } else if (this.plumPutBlock) {
-      pbActionCore.setPlumputblock(toActionPlumPutBlock(this.plumPutBlock));
-    } else if (this.plumCreateDeposit) {
-      pbActionCore.setPlumcreatedeposit(
-        toActionPlumCreateDeposit(this.plumCreateDeposit)
-      );
-    } else if (this.plumStartExit) {
-      pbActionCore.setPlumstartexit(toActionPlumStartExit(this.plumStartExit));
-    } else if (this.plumChallengeExit) {
-      pbActionCore.setPlumchallengeexit(
-        toActionPlumChallengeExit(this.plumChallengeExit)
-      );
-    } else if (this.plumResponseChallengeExit) {
-      pbActionCore.setPlumresponsechallengeexit(
-        toActionPlumResponseChallengeExit(this.plumResponseChallengeExit)
-      );
-    } else if (this.plumFinalizeExit) {
-      pbActionCore.setPlumfinalizeexit(
-        toActionPlumFinalizeExit(this.plumFinalizeExit)
-      );
-    } else if (this.plumSettleDeposit) {
-      pbActionCore.setPlumsettledeposit(
-        toActionPlumSettleDeposit(this.plumSettleDeposit)
-      );
-    } else if (this.plumTransfer) {
-      pbActionCore.setPlumtransfer(toActionPlumTransfer(this.plumTransfer));
-    } else if (this.depositToRewardingFund) {
-      pbActionCore.setDeposittorewardingfund(
-        toActionDepositToRewardingFund(this.depositToRewardingFund)
-      );
-    } else if (this.claimFromRewardingFund) {
-      pbActionCore.setClaimfromrewardingfund(
-        toActionClaimFromRewardingFund(this.claimFromRewardingFund)
-      );
-    } else if (this.grantReward) {
-      pbActionCore.setGrantreward(toActionGrantReward(this.grantReward));
-    } else if (this.stakeCreate) {
-      pbActionCore.setStakecreate(toActionStakeCreate(this.stakeCreate));
-    } else if (this.stakeUnstake) {
-      pbActionCore.setStakeunstake(toActionStakeReclaim(this.stakeUnstake));
-    } else if (this.stakeWithdraw) {
-      pbActionCore.setStakewithdraw(toActionStakeReclaim(this.stakeWithdraw));
-    } else if (this.stakeAddDeposit) {
-      pbActionCore.setStakeadddeposit(
-        toActionStakeAddDeposit(this.stakeAddDeposit)
-      );
-    } else if (this.stakeRestake) {
-      pbActionCore.setStakerestake(toActionStakeRestake(this.stakeRestake));
-    } else if (this.stakeChangeCandidate) {
-      pbActionCore.setStakechangecandidate(
-        toActionStakeChangeCandidate(this.stakeChangeCandidate)
-      );
-    } else if (this.stakeTransferOwnership) {
-      pbActionCore.setStaketransferownership(
-        toActionStakeTransferOwnership(this.stakeTransferOwnership)
-      );
-    } else if (this.candidateRegister) {
-      pbActionCore.setCandidateregister(
-        toActionCandidateRegister(this.candidateRegister)
-      );
-    } else if (this.candidateUpdate) {
-      pbActionCore.setCandidateupdate(
-        toActionCandidateBasicInfo(this.candidateUpdate)
-      );
-    }
+    fillActionCorePayload(pbActionCore, this);
     return pbActionCore;
   }
 
@@ -248,54 +153,26 @@ export class Envelop {
   }
 
   public static deserialize(bytes: Uint8Array): Envelop {
-    const pbActionCore = actionPb.ActionCore.deserializeBinary(bytes);
+    const core = fromPbActionCore(actionPb.ActionCore.deserializeBinary(bytes));
     const envelop = new Envelop(
-      pbActionCore.getVersion(),
-      String(pbActionCore.getNonce()),
-      pbActionCore.getChainid(),
-      String(pbActionCore.getGaslimit()),
-      pbActionCore.getGasprice()
+      core.version,
+      core.nonce,
+      core.chainID,
+      core.gasLimit,
+      core.gasPrice
     );
-    envelop.transfer = GetActionsRequest.fromTransfer(
-      pbActionCore.getTransfer()
-    );
-    envelop.execution = GetActionsRequest.fromExecution(
-      pbActionCore.getExecution()
-    );
-    envelop.depositToRewardingFund = GetActionsRequest.fromDepositToRewardingFund(
-      pbActionCore.getDeposittorewardingfund()
-    );
-    envelop.claimFromRewardingFund = GetActionsRequest.fromClaimFromRewardingFund(
-      pbActionCore.getClaimfromrewardingfund()
-    );
-    envelop.stakeCreate = GetActionsRequest.fromStakeCreate(
-      pbActionCore.getStakecreate()
-    );
-    envelop.stakeUnstake = GetActionsRequest.fromStakeReclaim(
-      pbActionCore.getStakeunstake()
-    );
-    envelop.stakeWithdraw = GetActionsRequest.fromStakeReclaim(
-      pbActionCore.getStakewithdraw()
-    );
-    envelop.stakeAddDeposit = GetActionsRequest.fromStakeAddDeposit(
-      pbActionCore.getStakeadddeposit()
-    );
-    envelop.stakeRestake = GetActionsRequest.fromStakeRestake(
-      pbActionCore.getStakerestake()
-    );
-    envelop.stakeChangeCandidate = GetActionsRequest.fromStakeChangeCandidate(
-      pbActionCore.getStakechangecandidate()
-    );
-    envelop.stakeTransferOwnership = GetActionsRequest.fromStakeTransferOwnership(
-      pbActionCore.getStaketransferownership()
-    );
-    envelop.candidateRegister = GetActionsRequest.fromCandidateRegister(
-      pbActionCore.getCandidateregister()
-    );
-    envelop.candidateUpdate = GetActionsRequest.fromCandidateUpdate(
-      pbActionCore.getCandidateupdate()
-    );
-    // TODO(tian): add more fields
+    const { version, nonce, chainID, gasLimit, gasPrice, ...rest } = core;
+    delete rest.txContainer;
+    Object.keys(rest).forEach(key => {
+      const value = rest[key as keyof typeof rest];
+      if (value !== undefined) {
+        // @ts-ignore
+        envelop[key] = value;
+      }
+    });
+    if (envelop.txType === 0) {
+      envelop.txType = undefined;
+    }
     return envelop;
   }
 }
@@ -439,6 +316,15 @@ export class SealedEnvelop {
         stakeTransferOwnership: this.act.stakeTransferOwnership,
         candidateRegister: this.act.candidateRegister,
         candidateUpdate: this.act.candidateUpdate,
+        candidateActivate: this.act.candidateActivate,
+        candidateEndorsement: this.act.candidateEndorsement,
+        candidateTransferOwnership: this.act.candidateTransferOwnership,
+        stakeMigrate: this.act.stakeMigrate,
+        candidateDeactivate: this.act.candidateDeactivate,
+        scheduleCandidateDeactivation: this.act.scheduleCandidateDeactivation,
+        setCommissionRate: this.act.setCommissionRate,
+        setVoterRewardOptIn: this.act.setVoterRewardOptIn,
+        setVoterRewardDestination: this.act.setVoterRewardDestination,
         putPollResult: this.act.putPollResult
       },
       senderPubKey: this.senderPubKey,

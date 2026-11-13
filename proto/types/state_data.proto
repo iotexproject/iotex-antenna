@@ -19,6 +19,7 @@ message ProbationCandidateList {
   message Info {
     string address = 1;
     uint32 count = 2;
+    string identity = 3;
   }
   repeated Info probationList = 1;
   uint32 intensityRate = 2;
@@ -39,6 +40,7 @@ message VoteBucket {
   uint64 createBlockHeight = 12;
   uint64 stakeStartBlockHeight = 13;
   uint64 unstakeStartBlockHeight = 14;
+  uint64 endorsementExpireBlockHeight = 15;
 }
 
 message VoteBucketList {
@@ -53,6 +55,21 @@ message CandidateV2 {
   string totalWeightedVotes = 5;
   uint64 selfStakeBucketIdx = 6;
   string selfStakingTokens = 7;
+  string id = 8;
+  bytes blsPubKey = 9;
+  uint64 deactivatedAt = 10;
+  // IIP-59: latest user-set voter reward commission rate (basis points, 0-10000).
+  // 0 = legacy (no auto-distribution). The per-epoch frozen value travels via
+  // iotextypes.Candidate.commissionRate inside PutPollResult.
+  uint64 commissionRate = 11;
+  // IIP-59: whether the candidate takes protocol-native voter reward
+  // distribution. Mirrors stakingpb.Candidate.voterRewardOnchainOptIn, which is
+  // the state this is read from. Without it a client has to ask the *rewarding*
+  // protocol about a *staking* property, and the view it would have to use
+  // (delegatePayoutAddress) reports whether a freeze snapshot exists for the
+  // current era, not whether the flag is set -- so between activation and the
+  // first freeze it answers false for delegates that are already opted in.
+  bool voterRewardOnchainOptIn = 12;
 }
 
 message CandidateListV2 {

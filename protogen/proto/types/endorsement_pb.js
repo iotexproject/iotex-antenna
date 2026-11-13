@@ -13,7 +13,7 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = Function('return this')();
+var global = globalThis;
 
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 goog.object.extend(proto, google_protobuf_timestamp_pb);
@@ -71,9 +71,9 @@ proto.iotextypes.Endorsement.prototype.toObject = function(opt_includeInstance) 
  */
 proto.iotextypes.Endorsement.toObject = function(includeInstance, msg) {
   var f, obj = {
-    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    endorser: msg.getEndorser_asB64(),
-    signature: msg.getSignature_asB64()
+timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+endorser: msg.getEndorser_asB64(),
+signature: msg.getSignature_asB64()
   };
 
   if (includeInstance) {
@@ -86,7 +86,7 @@ proto.iotextypes.Endorsement.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.Endorsement}
  */
 proto.iotextypes.Endorsement.deserializeBinary = function(bytes) {

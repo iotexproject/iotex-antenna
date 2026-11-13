@@ -6,6 +6,7 @@ import * as proto_types_node_pb from '../../proto/types/node_pb';
 import * as proto_types_election_pb from '../../proto/types/election_pb';
 import * as proto_types_transaction_log_pb from '../../proto/types/transaction_log_pb';
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
+import * as proto_types_bundle_pb from '../../proto/types/bundle_pb';
 
 
 export class Bucket extends jspb.Message {
@@ -847,8 +848,36 @@ export class EstimateActionGasConsumptionRequest extends jspb.Message {
   hasCandidateupdate(): boolean;
   clearCandidateupdate(): EstimateActionGasConsumptionRequest;
 
+  getCandidateactivate(): proto_types_action_pb.CandidateActivate | undefined;
+  setCandidateactivate(value?: proto_types_action_pb.CandidateActivate): EstimateActionGasConsumptionRequest;
+  hasCandidateactivate(): boolean;
+  clearCandidateactivate(): EstimateActionGasConsumptionRequest;
+
+  getCandidateendorsement(): proto_types_action_pb.CandidateEndorsement | undefined;
+  setCandidateendorsement(value?: proto_types_action_pb.CandidateEndorsement): EstimateActionGasConsumptionRequest;
+  hasCandidateendorsement(): boolean;
+  clearCandidateendorsement(): EstimateActionGasConsumptionRequest;
+
+  getCandidatetransferownership(): proto_types_action_pb.CandidateTransferOwnership | undefined;
+  setCandidatetransferownership(value?: proto_types_action_pb.CandidateTransferOwnership): EstimateActionGasConsumptionRequest;
+  hasCandidatetransferownership(): boolean;
+  clearCandidatetransferownership(): EstimateActionGasConsumptionRequest;
+
+  getStakemigrate(): proto_types_action_pb.StakeMigrate | undefined;
+  setStakemigrate(value?: proto_types_action_pb.StakeMigrate): EstimateActionGasConsumptionRequest;
+  hasStakemigrate(): boolean;
+  clearStakemigrate(): EstimateActionGasConsumptionRequest;
+
+  getCandidatedeactivate(): proto_types_action_pb.CandidateDeactivate | undefined;
+  setCandidatedeactivate(value?: proto_types_action_pb.CandidateDeactivate): EstimateActionGasConsumptionRequest;
+  hasCandidatedeactivate(): boolean;
+  clearCandidatedeactivate(): EstimateActionGasConsumptionRequest;
+
   getCalleraddress(): string;
   setCalleraddress(value: string): EstimateActionGasConsumptionRequest;
+
+  getGasprice(): string;
+  setGasprice(value: string): EstimateActionGasConsumptionRequest;
 
   getActionCase(): EstimateActionGasConsumptionRequest.ActionCase;
 
@@ -873,7 +902,13 @@ export namespace EstimateActionGasConsumptionRequest {
     staketransferownership?: proto_types_action_pb.StakeTransferOwnership.AsObject,
     candidateregister?: proto_types_action_pb.CandidateRegister.AsObject,
     candidateupdate?: proto_types_action_pb.CandidateBasicInfo.AsObject,
+    candidateactivate?: proto_types_action_pb.CandidateActivate.AsObject,
+    candidateendorsement?: proto_types_action_pb.CandidateEndorsement.AsObject,
+    candidatetransferownership?: proto_types_action_pb.CandidateTransferOwnership.AsObject,
+    stakemigrate?: proto_types_action_pb.StakeMigrate.AsObject,
+    candidatedeactivate?: proto_types_action_pb.CandidateDeactivate.AsObject,
     calleraddress: string,
+    gasprice: string,
   }
 
   export enum ActionCase { 
@@ -889,6 +924,11 @@ export namespace EstimateActionGasConsumptionRequest {
     STAKETRANSFEROWNERSHIP = 46,
     CANDIDATEREGISTER = 47,
     CANDIDATEUPDATE = 48,
+    CANDIDATEACTIVATE = 49,
+    CANDIDATEENDORSEMENT = 51,
+    CANDIDATETRANSFEROWNERSHIP = 52,
+    STAKEMIGRATE = 53,
+    CANDIDATEDEACTIVATE = 54,
   }
 }
 
@@ -1635,6 +1675,64 @@ export class TraceTransactionStructLogsResponse extends jspb.Message {
 export namespace TraceTransactionStructLogsResponse {
   export type AsObject = {
     structlogsList: Array<proto_types_transaction_log_pb.TransactionStructLog.AsObject>,
+  }
+}
+
+export class SendBundleRequest extends jspb.Message {
+  getBundle(): proto_types_bundle_pb.Bundle | undefined;
+  setBundle(value?: proto_types_bundle_pb.Bundle): SendBundleRequest;
+  hasBundle(): boolean;
+  clearBundle(): SendBundleRequest;
+
+  getUuid(): string;
+  setUuid(value: string): SendBundleRequest;
+
+  getMintimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setMintimestamp(value?: google_protobuf_timestamp_pb.Timestamp): SendBundleRequest;
+  hasMintimestamp(): boolean;
+  clearMintimestamp(): SendBundleRequest;
+
+  getMaxtimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setMaxtimestamp(value?: google_protobuf_timestamp_pb.Timestamp): SendBundleRequest;
+  hasMaxtimestamp(): boolean;
+  clearMaxtimestamp(): SendBundleRequest;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): SendBundleRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: SendBundleRequest): SendBundleRequest.AsObject;
+  static serializeBinaryToWriter(message: SendBundleRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): SendBundleRequest;
+  static deserializeBinaryFromReader(message: SendBundleRequest, reader: jspb.BinaryReader): SendBundleRequest;
+}
+
+export namespace SendBundleRequest {
+  export type AsObject = {
+    bundle?: proto_types_bundle_pb.Bundle.AsObject,
+    uuid: string,
+    mintimestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+    maxtimestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+  }
+}
+
+export class SendBundleResponse extends jspb.Message {
+  getBundlehash(): string;
+  setBundlehash(value: string): SendBundleResponse;
+
+  getUuid(): string;
+  setUuid(value: string): SendBundleResponse;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): SendBundleResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: SendBundleResponse): SendBundleResponse.AsObject;
+  static serializeBinaryToWriter(message: SendBundleResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): SendBundleResponse;
+  static deserializeBinaryFromReader(message: SendBundleResponse, reader: jspb.BinaryReader): SendBundleResponse;
+}
+
+export namespace SendBundleResponse {
+  export type AsObject = {
+    bundlehash: string,
+    uuid: string,
   }
 }
 
