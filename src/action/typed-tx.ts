@@ -33,6 +33,14 @@ export function toEvmChainId(iotexChainID: number): number {
   return EVM_CHAIN_ID_OFFSET + iotexChainID;
 }
 
+// fromEvmChainId is the inverse of toEvmChainId: it maps EVM network IDs
+// 4689/4690/4691 back to IoTeX chain IDs 1/2/3. Any other value (e.g. 0, the
+// EIP-7702 "any chain" wildcard) is returned unchanged.
+export function fromEvmChainId(evmChainID: number): number {
+  const id = evmChainID - EVM_CHAIN_ID_OFFSET;
+  return id >= 1 && id <= 3 ? id : evmChainID;
+}
+
 export interface IAccessTuple {
   address: string;
   storageKeys: Array<string>;

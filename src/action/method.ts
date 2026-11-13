@@ -1,25 +1,81 @@
 import BigNumber from "bignumber.js";
 import { Account, IAccount } from "../account/account";
-import { IAction, IRpcMethod } from "../rpc-method/types";
+import { fromString } from "../crypto/address";
+import {
+  IAction,
+  IRpcMethod,
+  toActionCandidateTransferOwnership
+} from "../rpc-method/types";
 import { Envelop, SealedEnvelop } from "./envelop";
 import {
   ActionError,
   ActionErrorCode,
   BaseActionRequest,
+  CandidateActivate,
+  CandidateDeactivate,
+  CandidateEndorsement,
   CandidateRegister,
+  CandidateTransferOwnership,
   CandidateUpdate,
   ClaimFromRewardingFund,
   DepositToRewardingFund,
   Execution,
+  SetVoterRewardDestination,
+  SetVoterRewardOptIn,
   StakeAddDeposit,
   StakeChangeCandidate,
   StakeCreate,
+  StakeMigrate,
   StakeRestake,
   StakeTransferOwnership,
   StakeUnstake,
   StakeWithdraw,
   Transfer
 } from "./types";
+
+// Intrinsic gas of staking actions that the node's
+// EstimateActionGasConsumption API does not cover (iotex-core action/*.go).
+const STAKING_BASE_INTRINSIC_GAS = 10000;
+const STAKING_PAYLOAD_GAS = 100;
+
+// intrinsicGasLimit returns the gas limit of actions whose gas consumption is
+// exactly their intrinsic gas and which cannot be estimated through the API.
+// It returns undefined for actions that should be estimated by the node.
+export function intrinsicGasLimit(envelop: Envelop): string | undefined {
+  if (envelop.candidateTransferOwnership) {
+    const pb = toActionCandidateTransferOwnership(
+      envelop.candidateTransferOwnership
+    );
+    const size = pb ? pb.getPayload_asU8().length : 0;
+    return String(STAKING_BASE_INTRINSIC_GAS + STAKING_PAYLOAD_GAS * size);
+  }
+  if (
+    envelop.candidateActivate ||
+    envelop.candidateEndorsement ||
+    envelop.candidateDeactivate ||
+    envelop.setVoterRewardOptIn ||
+    envelop.setVoterRewardDestination
+  ) {
+    return String(STAKING_BASE_INTRINSIC_GAS);
+  }
+  return undefined;
+}
+
+// toAddressBytes converts an io1.../0x... address into its 20 bytes.
+// An empty string yields empty bytes.
+export function toAddressBytes(addr: string): Buffer {
+  if (!addr) {
+    return Buffer.alloc(0);
+  }
+  if (addr.startsWith("0x") || addr.startsWith("0X")) {
+    const bytes = Buffer.from(addr.slice(2), "hex");
+    if (bytes.length !== 20) {
+      throw new Error(`invalid address ${addr}`);
+    }
+    return bytes;
+  }
+  return Buffer.from(fromString(addr).bytes());
+}
 
 // applyTypedTxFields copies eth typed-tx options off a request onto the
 // envelop so SealedEnvelop.sign routes through the TX_CONTAINER path.
@@ -98,10 +154,24 @@ export class AbstractMethod {
     }
 
     if (!envelop.gasLimit) {
+      envelop.gasLimit = intrinsicGasLimit(envelop);
+    }
+    if (!envelop.gasLimit) {
       const limit = await this.client.estimateActionGasConsumption({
         transfer: envelop.transfer,
         execution: envelop.execution,
-        callerAddress: this.account.address
+        stakeCreate: envelop.stakeCreate,
+        stakeUnstake: envelop.stakeUnstake,
+        stakeWithdraw: envelop.stakeWithdraw,
+        stakeAddDeposit: envelop.stakeAddDeposit,
+        stakeRestake: envelop.stakeRestake,
+        stakeChangeCandidate: envelop.stakeChangeCandidate,
+        stakeTransferOwnership: envelop.stakeTransferOwnership,
+        candidateRegister: envelop.candidateRegister,
+        candidateUpdate: envelop.candidateUpdate,
+        stakeMigrate: envelop.stakeMigrate,
+        callerAddress: this.account.address,
+        gasPrice: envelop.gasPrice
       });
       envelop.gasLimit = limit.gas.toString();
     }
@@ -288,7 +358,8 @@ export class ClaimFromRewardingFundMethod extends AbstractMethod {
     );
     envelop.claimFromRewardingFund = {
       amount: this.claimFronRewardFund.amount,
-      data: this.claimFronRewardFund.data
+      data: this.claimFronRewardFund.data,
+      address: this.claimFronRewardFund.address
     };
 
     return this.sendAction(envelop);
@@ -301,7 +372,8 @@ export class ClaimFromRewardingFundMethod extends AbstractMethod {
     );
     envelop.claimFromRewardingFund = {
       amount: this.claimFronRewardFund.amount,
-      data: this.claimFronRewardFund.data
+      data: this.claimFronRewardFund.data,
+      address: this.claimFronRewardFund.address
     };
 
     const selp = await this.signAction(envelop);
@@ -634,7 +706,9 @@ export class CandidateRegisterMethod extends AbstractMethod {
       candidate: {
         name: this.target.name,
         operatorAddress: this.target.operatorAddress,
-        rewardAddress: this.target.rewardAddress
+        rewardAddress: this.target.rewardAddress,
+        blsPubKey: this.target.blsPubKey,
+        blsPop: this.target.blsPop
       },
       stakedAmount: this.target.stakedAmount,
       stakedDuration: this.target.stakedDuration,
@@ -655,7 +729,9 @@ export class CandidateRegisterMethod extends AbstractMethod {
       candidate: {
         name: this.target.name,
         operatorAddress: this.target.operatorAddress,
-        rewardAddress: this.target.rewardAddress
+        rewardAddress: this.target.rewardAddress,
+        blsPubKey: this.target.blsPubKey,
+        blsPop: this.target.blsPop
       },
       stakedAmount: this.target.stakedAmount,
       stakedDuration: this.target.stakedDuration,
@@ -690,7 +766,9 @@ export class CandidateUpdateMethod extends AbstractMethod {
     envelop.candidateUpdate = {
       name: this.target.name,
       operatorAddress: this.target.operatorAddress,
-      rewardAddress: this.target.rewardAddress
+      rewardAddress: this.target.rewardAddress,
+      blsPubKey: this.target.blsPubKey,
+      blsPop: this.target.blsPop
     };
 
     return this.sendAction(envelop);
@@ -704,7 +782,9 @@ export class CandidateUpdateMethod extends AbstractMethod {
     envelop.candidateUpdate = {
       name: this.target.name,
       operatorAddress: this.target.operatorAddress,
-      rewardAddress: this.target.rewardAddress
+      rewardAddress: this.target.rewardAddress,
+      blsPubKey: this.target.blsPubKey,
+      blsPop: this.target.blsPop
     };
 
     const selp = await this.signAction(envelop);
@@ -750,5 +830,103 @@ export class DepositToRewardingFundMethod extends AbstractMethod {
 
     const selp = await this.signAction(envelop);
     return selp.action();
+  }
+}
+
+// PayloadMethod is the base of action methods that only need to fill the
+// action body on top of the base envelop.
+abstract class PayloadMethod<
+  T extends BaseActionRequest
+> extends AbstractMethod {
+  public target: T;
+
+  constructor(
+    client: IRpcMethod,
+    account: Account,
+    target: T,
+    opts?: AbstractMethodOpts
+  ) {
+    super(client, account, opts);
+    this.target = target;
+  }
+
+  public async execute(): Promise<string> {
+    return this.sendAction(await this.envelop());
+  }
+
+  public async sign(): Promise<IAction> {
+    const selp = await this.signAction(await this.envelop());
+    return selp.action();
+  }
+
+  protected abstract fill(envelop: Envelop): void;
+
+  private async envelop(): Promise<Envelop> {
+    const envelop = await this.baseEnvelop(
+      this.target.gasLimit,
+      this.target.gasPrice
+    );
+    this.fill(envelop);
+    return envelop;
+  }
+}
+
+export class CandidateActivateMethod extends PayloadMethod<CandidateActivate> {
+  protected fill(envelop: Envelop): void {
+    envelop.candidateActivate = { bucketIndex: this.target.bucketIndex };
+  }
+}
+
+export class CandidateEndorsementMethod extends PayloadMethod<
+  CandidateEndorsement
+> {
+  protected fill(envelop: Envelop): void {
+    envelop.candidateEndorsement = {
+      bucketIndex: this.target.bucketIndex,
+      op: this.target.op
+    };
+  }
+}
+
+export class CandidateTransferOwnershipMethod extends PayloadMethod<
+  CandidateTransferOwnership
+> {
+  protected fill(envelop: Envelop): void {
+    envelop.candidateTransferOwnership = {
+      newOwnerAddress: this.target.newOwnerAddress,
+      payload: this.target.payload || ""
+    };
+  }
+}
+
+export class CandidateDeactivateMethod extends PayloadMethod<
+  CandidateDeactivate
+> {
+  protected fill(envelop: Envelop): void {
+    envelop.candidateDeactivate = { op: this.target.op };
+  }
+}
+
+export class StakeMigrateMethod extends PayloadMethod<StakeMigrate> {
+  protected fill(envelop: Envelop): void {
+    envelop.stakeMigrate = { bucketIndex: this.target.bucketIndex };
+  }
+}
+
+export class SetVoterRewardOptInMethod extends PayloadMethod<
+  SetVoterRewardOptIn
+> {
+  protected fill(envelop: Envelop): void {
+    envelop.setVoterRewardOptIn = {};
+  }
+}
+
+export class SetVoterRewardDestinationMethod extends PayloadMethod<
+  SetVoterRewardDestination
+> {
+  protected fill(envelop: Envelop): void {
+    envelop.setVoterRewardDestination = {
+      recipient: toAddressBytes(this.target.recipient)
+    };
   }
 }

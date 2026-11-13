@@ -1,4 +1,6 @@
 import {
+  CandidateDeactivateOp,
+  CandidateEndorsementOp,
   IAccessTuple,
   IBlobTxData,
   ISetCodeAuthorization
@@ -38,6 +40,8 @@ export interface Execution extends BaseActionRequest {
 export interface ClaimFromRewardingFund extends BaseActionRequest {
   amount: string;
   data: Buffer | string;
+  // claim on behalf of this address (IIP-27), defaults to the sender
+  address?: string;
 }
 
 export interface StakeCreate extends BaseActionRequest {
@@ -83,7 +87,15 @@ export interface StakeTransferOwnership extends BaseActionRequest {
   payload: string;
 }
 
-export interface CandidateRegister extends BaseActionRequest {
+export interface CandidateBLSKey {
+  // BLS12-381 public key
+  blsPubKey?: Buffer | Uint8Array;
+  // BLS proof-of-possession for blsPubKey, required by the node whenever a
+  // BLS key is introduced or rotated (EnforceBLSPoP fork)
+  blsPop?: Buffer | Uint8Array;
+}
+
+export interface CandidateRegister extends BaseActionRequest, CandidateBLSKey {
   // CandidateBasicInfo
   name: string;
   operatorAddress: string;
@@ -96,10 +108,40 @@ export interface CandidateRegister extends BaseActionRequest {
   payload: string;
 }
 
-export interface CandidateUpdate extends BaseActionRequest {
+export interface CandidateUpdate extends BaseActionRequest, CandidateBLSKey {
   name: string;
   operatorAddress: string;
   rewardAddress: string;
+}
+
+export interface CandidateActivate extends BaseActionRequest {
+  // self-stake bucket of the candidate
+  bucketIndex: number;
+}
+
+export interface CandidateEndorsement extends BaseActionRequest {
+  bucketIndex: number;
+  op: CandidateEndorsementOp;
+}
+
+export interface CandidateTransferOwnership extends BaseActionRequest {
+  newOwnerAddress: string;
+  payload?: string;
+}
+
+export interface CandidateDeactivate extends BaseActionRequest {
+  op: CandidateDeactivateOp;
+}
+
+export interface StakeMigrate extends BaseActionRequest {
+  bucketIndex: number;
+}
+
+export interface SetVoterRewardOptIn extends BaseActionRequest {}
+
+export interface SetVoterRewardDestination extends BaseActionRequest {
+  // io1... or 0x... address; empty string clears the override
+  recipient: string;
 }
 
 export enum ActionErrorCode {
