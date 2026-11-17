@@ -41,6 +41,17 @@ export function fromEvmChainId(evmChainID: number): number {
   return id >= 1 && id <= 3 ? id : evmChainID;
 }
 
+// authorizationEvmChainId returns the EVM chain ID written into an EIP-7702
+// authorization. An explicit evmChainID (e.g. decoded from chain, which may
+// be 0 = "any chain") is used verbatim so that decoding and re-encoding an
+// authorization is lossless; otherwise the IoTeX chainID is mapped.
+export function authorizationEvmChainId(a: {
+  chainID: number;
+  evmChainID?: number;
+}): number {
+  return a.evmChainID !== undefined ? a.evmChainID : toEvmChainId(a.chainID);
+}
+
 export interface IAccessTuple {
   address: string;
   storageKeys: Array<string>;
@@ -60,6 +71,9 @@ export interface IBlobData {
 
 export interface ISetCodeAuthorization {
   chainID: number; // IoTeX chain ID (1=mainnet, 2=testnet, 3=nightly)
+  // raw EVM chain ID of the authorization; when set it is used verbatim
+  // instead of toEvmChainId(chainID) (see authorizationEvmChainId)
+  evmChainID?: number;
   address: string; // 0x... eth-style or io... bech32
   nonce: number | string;
   v: number;
@@ -191,7 +205,7 @@ export function buildTypedTx(t: ITypedTxFields): Transaction {
       tx.authorizationList = t.setCodeAuthList.map(a => ({
         address: ioAddressToEth(a.address),
         nonce: Number(a.nonce),
-        chainId: BigInt(toEvmChainId(a.chainID)),
+        chainId: BigInt(authorizationEvmChainId(a)),
         signature: Signature.from({
           r: pad32Hex(a.r),
           s: pad32Hex(a.s),

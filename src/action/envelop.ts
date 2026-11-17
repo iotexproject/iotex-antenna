@@ -221,6 +221,7 @@ function toTypedAuthList(
   }
   return list.map(a => ({
     chainID: a.chainID,
+    evmChainID: a.evmChainID,
     address: `0x${Buffer.from(a.address).toString("hex")}`,
     nonce: a.nonce,
     v: Number(a.v),

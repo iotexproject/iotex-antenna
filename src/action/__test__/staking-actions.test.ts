@@ -15,6 +15,7 @@ import { Iotx } from "../../iotx";
 import { Envelop } from "../envelop";
 import {
   CandidateActivateMethod,
+  CandidateEndorsementMethod,
   intrinsicGasLimit,
   SetVoterRewardDestinationMethod,
   StakeCreateMethod,
@@ -348,4 +349,93 @@ test("Iotx.claimFromRewardingFund forwards the claim address", async t => {
     gasPrice: "1000000000000"
   });
   t.is(captured!.claimFromRewardingFund!.address, A3);
+});
+
+test("CandidateEndorsementMethod rejects the LEGACY op", async t => {
+  const estimated: Array<any> = [];
+  const client = mockClient(estimated);
+  await t.throwsAsync(
+    new CandidateEndorsementMethod(client, TEST_ACCOUNT, {
+      bucketIndex: 7,
+      op: CandidateEndorsementOp.LEGACY
+    }).sign(),
+    { message: /invalid candidate endorsement op/ }
+  );
+  const act = await new CandidateEndorsementMethod(client, TEST_ACCOUNT, {
+    bucketIndex: 7,
+    op: CandidateEndorsementOp.ENDORSE
+  }).sign();
+  t.deepEqual(act.core!.candidateEndorsement, {
+    bucketIndex: 7,
+    op: CandidateEndorsementOp.ENDORSE
+  });
+});
+
+test("SetCode authorizations decode and re-encode losslessly", t => {
+  // wire chain IDs: 0 (EIP-7702 "any chain"), 1 (not an IoTeX EVM id), 4689
+  const pbCore = new actionPb.ActionCore();
+  pbCore.setVersion(1);
+  pbCore.setNonce(1);
+  pbCore.setGaslimit(50000);
+  pbCore.setChainid(1);
+  pbCore.setTxtype(4);
+  pbCore.setSetcodeauthlistList(
+    [0, 1, 4689].map(id => {
+      const a = new actionPb.SetCodeAuthorization();
+      a.setChainid(id);
+      a.setAddress(new Uint8Array(20).fill(0xab));
+      a.setNonce(2);
+      a.setV(1);
+      a.setR(new Uint8Array(32).fill(1));
+      a.setS(new Uint8Array(32).fill(2));
+      return a;
+    })
+  );
+  const pbAct = new actionPb.Action();
+  pbAct.setCore(pbCore);
+  const original = Buffer.from(pbAct.serializeBinary()).toString("hex");
+
+  const decoded = fromPbAction(
+    actionPb.Action.deserializeBinary(pbAct.serializeBinary())
+  );
+  const auths = decoded.core!.setCodeAuthList!;
+  t.deepEqual(auths.map(a => a.evmChainID), [0, 1, 4689]);
+  // IoTeX chain id is still derived for 4689
+  t.is(auths[2].chainID, 1);
+
+  const reencoded = Buffer.from(toAction(decoded).serializeBinary()).toString(
+    "hex"
+  );
+  t.is(reencoded, original);
+});
+
+test("new SetCode authorizations still map IoTeX chain IDs", t => {
+  const pb = toAction({
+    core: {
+      version: 1,
+      nonce: "1",
+      gasLimit: "50000",
+      gasPrice: "0",
+      chainID: 1,
+      setCodeAuthList: [
+        {
+          chainID: 2,
+          address: Buffer.alloc(20),
+          nonce: 0,
+          v: 0,
+          r: Buffer.alloc(32),
+          s: Buffer.alloc(32)
+        }
+      ]
+    },
+    senderPubKey: "",
+    signature: ""
+  });
+  t.is(
+    pb
+      .getCore()
+      .getSetcodeauthlistList()[0]
+      .getChainid(),
+    4690
+  );
 });

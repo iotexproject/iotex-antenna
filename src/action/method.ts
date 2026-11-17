@@ -2,6 +2,7 @@ import BigNumber from "bignumber.js";
 import { Account, IAccount } from "../account/account";
 import { fromString } from "../crypto/address";
 import {
+  CandidateEndorsementOp,
   IAction,
   IRpcMethod,
   toActionCandidateTransferOwnership
@@ -884,6 +885,20 @@ export class CandidateEndorsementMethod extends PayloadMethod<
   CandidateEndorsement
 > {
   protected fill(envelop: Envelop): void {
+    // LEGACY carries its meaning in the deprecated `endorse` bool, which a
+    // request cannot express; iotex-core would execute a LEGACY action with
+    // endorse=false as INTENT_TO_REVOKE, so only explicit ops are accepted.
+    if (
+      [
+        CandidateEndorsementOp.ENDORSE,
+        CandidateEndorsementOp.INTENT_TO_REVOKE,
+        CandidateEndorsementOp.REVOKE
+      ].indexOf(this.target.op) < 0
+    ) {
+      throw new Error(
+        `invalid candidate endorsement op ${this.target.op}: use ENDORSE, INTENT_TO_REVOKE or REVOKE`
+      );
+    }
     envelop.candidateEndorsement = {
       bucketIndex: this.target.bucketIndex,
       op: this.target.op

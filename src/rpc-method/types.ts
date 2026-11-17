@@ -31,7 +31,7 @@ import {
   BlockHeaderCore
 } from "../../protogen/proto/types/blockchain_pb";
 import { Endorsement } from "../../protogen/proto/types/endorsement_pb";
-import { fromEvmChainId, toEvmChainId } from "../action/typed-tx";
+import { authorizationEvmChainId, fromEvmChainId } from "../action/typed-tx";
 
 // Properties of a Timestamp.
 export interface ITimestamp {
@@ -820,7 +820,12 @@ export interface IBlobTxData {
 
 // Properties of an iotex SetCodeAuthorization (eth EIP-7702).
 export interface ISetCodeAuthorization {
+  // IoTeX chain ID (1=mainnet, 2=testnet, 3=nightly)
   chainID: number;
+  // raw EVM chain ID as carried on the wire. Set by the decoder so that a
+  // decoded authorization re-encodes unchanged; when building a new
+  // authorization leave it unset and chainID is mapped to 4689/4690/4691.
+  evmChainID?: number;
   address: Uint8Array | Buffer;
   nonce: number | string;
   v: number | string;
@@ -1708,7 +1713,7 @@ function toActionSetCodeAuthList(
   }
   return list.map(a => {
     const pb = new actionPb.SetCodeAuthorization();
-    pb.setChainid(toEvmChainId(a.chainID));
+    pb.setChainid(authorizationEvmChainId(a));
     pb.setAddress(new Uint8Array(a.address));
     pb.setNonce(Number(a.nonce));
     pb.setV(Number(a.v));
@@ -2473,6 +2478,7 @@ function fromPbSetCodeAuthList(
   }
   return list.map(a => ({
     chainID: fromEvmChainId(a.getChainid()),
+    evmChainID: a.getChainid(),
     address: Buffer.from(a.getAddress_asU8()),
     nonce: a.getNonce(),
     v: a.getV(),
