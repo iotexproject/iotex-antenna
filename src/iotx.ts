@@ -193,7 +193,8 @@ export class Iotx extends RpcMethod {
         gasLimit: req.gasLimit,
         gasPrice: req.gasPrice,
         amount: req.amount,
-        data: req.data
+        data: req.data,
+        address: req.address
       },
       { signer: this.signer }
     ).execute();

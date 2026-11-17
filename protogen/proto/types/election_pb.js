@@ -13,7 +13,7 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = Function('return this')();
+var global = globalThis;
 
 var google_protobuf_duration_pb = require('google-protobuf/google/protobuf/duration_pb.js');
 goog.object.extend(proto, google_protobuf_duration_pb);
@@ -73,12 +73,12 @@ proto.iotextypes.ElectionBucket.prototype.toObject = function(opt_includeInstanc
  */
 proto.iotextypes.ElectionBucket.toObject = function(includeInstance, msg) {
   var f, obj = {
-    voter: msg.getVoter_asB64(),
-    candidate: msg.getCandidate_asB64(),
-    amount: msg.getAmount_asB64(),
-    starttime: (f = msg.getStarttime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    duration: (f = msg.getDuration()) && google_protobuf_duration_pb.Duration.toObject(includeInstance, f),
-    decay: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
+voter: msg.getVoter_asB64(),
+candidate: msg.getCandidate_asB64(),
+amount: msg.getAmount_asB64(),
+starttime: (f = msg.getStarttime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+duration: (f = msg.getDuration()) && google_protobuf_duration_pb.Duration.toObject(includeInstance, f),
+decay: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
   };
 
   if (includeInstance) {
@@ -91,7 +91,7 @@ proto.iotextypes.ElectionBucket.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.ElectionBucket}
  */
 proto.iotextypes.ElectionBucket.deserializeBinary = function(bytes) {

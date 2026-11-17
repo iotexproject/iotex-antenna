@@ -99,6 +99,8 @@ export interface ClaimFromRewardingFundRequset {
   from: string;
   amount: string;
   data: Buffer;
+  // claim on behalf of this address (IIP-27), defaults to the sender
+  address?: string;
   gasLimit?: string;
   gasPrice?: string;
 }

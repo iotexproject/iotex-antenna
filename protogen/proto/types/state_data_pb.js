@@ -13,7 +13,7 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = Function('return this')();
+var global = globalThis;
 
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 goog.object.extend(proto, google_protobuf_timestamp_pb);
@@ -254,9 +254,9 @@ proto.iotextypes.ProbationCandidateList.prototype.toObject = function(opt_includ
  */
 proto.iotextypes.ProbationCandidateList.toObject = function(includeInstance, msg) {
   var f, obj = {
-    probationlistList: jspb.Message.toObjectList(msg.getProbationlistList(),
+probationlistList: jspb.Message.toObjectList(msg.getProbationlistList(),
     proto.iotextypes.ProbationCandidateList.Info.toObject, includeInstance),
-    intensityrate: jspb.Message.getFieldWithDefault(msg, 2, 0)
+intensityrate: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -269,7 +269,7 @@ proto.iotextypes.ProbationCandidateList.toObject = function(includeInstance, msg
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.ProbationCandidateList}
  */
 proto.iotextypes.ProbationCandidateList.deserializeBinary = function(bytes) {
@@ -381,8 +381,9 @@ proto.iotextypes.ProbationCandidateList.Info.prototype.toObject = function(opt_i
  */
 proto.iotextypes.ProbationCandidateList.Info.toObject = function(includeInstance, msg) {
   var f, obj = {
-    address: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    count: jspb.Message.getFieldWithDefault(msg, 2, 0)
+address: jspb.Message.getFieldWithDefault(msg, 1, ""),
+count: jspb.Message.getFieldWithDefault(msg, 2, 0),
+identity: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -395,7 +396,7 @@ proto.iotextypes.ProbationCandidateList.Info.toObject = function(includeInstance
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.ProbationCandidateList.Info}
  */
 proto.iotextypes.ProbationCandidateList.Info.deserializeBinary = function(bytes) {
@@ -420,12 +421,16 @@ proto.iotextypes.ProbationCandidateList.Info.deserializeBinaryFromReader = funct
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setAddress(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readUint32());
       msg.setCount(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      msg.setIdentity(value);
       break;
     default:
       reader.skipField();
@@ -470,6 +475,13 @@ proto.iotextypes.ProbationCandidateList.Info.serializeBinaryToWriter = function(
       f
     );
   }
+  f = message.getIdentity();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -506,6 +518,24 @@ proto.iotextypes.ProbationCandidateList.Info.prototype.getCount = function() {
  */
 proto.iotextypes.ProbationCandidateList.Info.prototype.setCount = function(value) {
   return jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+/**
+ * optional string identity = 3;
+ * @return {string}
+ */
+proto.iotextypes.ProbationCandidateList.Info.prototype.getIdentity = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.ProbationCandidateList.Info} returns this
+ */
+proto.iotextypes.ProbationCandidateList.Info.prototype.setIdentity = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
@@ -597,20 +627,21 @@ proto.iotextypes.VoteBucket.prototype.toObject = function(opt_includeInstance) {
  */
 proto.iotextypes.VoteBucket.toObject = function(includeInstance, msg) {
   var f, obj = {
-    index: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    candidateaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    stakedamount: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    stakedduration: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    createtime: (f = msg.getCreatetime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    stakestarttime: (f = msg.getStakestarttime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    unstakestarttime: (f = msg.getUnstakestarttime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    autostake: jspb.Message.getBooleanFieldWithDefault(msg, 8, false),
-    owner: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    contractaddress: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    stakeddurationblocknumber: jspb.Message.getFieldWithDefault(msg, 11, 0),
-    createblockheight: jspb.Message.getFieldWithDefault(msg, 12, 0),
-    stakestartblockheight: jspb.Message.getFieldWithDefault(msg, 13, 0),
-    unstakestartblockheight: jspb.Message.getFieldWithDefault(msg, 14, 0)
+index: jspb.Message.getFieldWithDefault(msg, 1, 0),
+candidateaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+stakedamount: jspb.Message.getFieldWithDefault(msg, 3, ""),
+stakedduration: jspb.Message.getFieldWithDefault(msg, 4, 0),
+createtime: (f = msg.getCreatetime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+stakestarttime: (f = msg.getStakestarttime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+unstakestarttime: (f = msg.getUnstakestarttime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+autostake: jspb.Message.getBooleanFieldWithDefault(msg, 8, false),
+owner: jspb.Message.getFieldWithDefault(msg, 9, ""),
+contractaddress: jspb.Message.getFieldWithDefault(msg, 10, ""),
+stakeddurationblocknumber: jspb.Message.getFieldWithDefault(msg, 11, 0),
+createblockheight: jspb.Message.getFieldWithDefault(msg, 12, 0),
+stakestartblockheight: jspb.Message.getFieldWithDefault(msg, 13, 0),
+unstakestartblockheight: jspb.Message.getFieldWithDefault(msg, 14, 0),
+endorsementexpireblockheight: jspb.Message.getFieldWithDefault(msg, 15, 0)
   };
 
   if (includeInstance) {
@@ -623,7 +654,7 @@ proto.iotextypes.VoteBucket.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.VoteBucket}
  */
 proto.iotextypes.VoteBucket.deserializeBinary = function(bytes) {
@@ -652,11 +683,11 @@ proto.iotextypes.VoteBucket.deserializeBinaryFromReader = function(msg, reader) 
       msg.setIndex(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setCandidateaddress(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setStakedamount(value);
       break;
     case 4:
@@ -683,11 +714,11 @@ proto.iotextypes.VoteBucket.deserializeBinaryFromReader = function(msg, reader) 
       msg.setAutostake(value);
       break;
     case 9:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setOwner(value);
       break;
     case 10:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setContractaddress(value);
       break;
     case 11:
@@ -705,6 +736,10 @@ proto.iotextypes.VoteBucket.deserializeBinaryFromReader = function(msg, reader) 
     case 14:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setUnstakestartblockheight(value);
+      break;
+    case 15:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setEndorsementexpireblockheight(value);
       break;
     default:
       reader.skipField();
@@ -833,6 +868,13 @@ proto.iotextypes.VoteBucket.serializeBinaryToWriter = function(message, writer) 
   if (f !== 0) {
     writer.writeUint64(
       14,
+      f
+    );
+  }
+  f = message.getEndorsementexpireblockheight();
+  if (f !== 0) {
+    writer.writeUint64(
+      15,
       f
     );
   }
@@ -1148,6 +1190,24 @@ proto.iotextypes.VoteBucket.prototype.setUnstakestartblockheight = function(valu
 };
 
 
+/**
+ * optional uint64 endorsementExpireBlockHeight = 15;
+ * @return {number}
+ */
+proto.iotextypes.VoteBucket.prototype.getEndorsementexpireblockheight = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 15, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.VoteBucket} returns this
+ */
+proto.iotextypes.VoteBucket.prototype.setEndorsementexpireblockheight = function(value) {
+  return jspb.Message.setProto3IntField(this, 15, value);
+};
+
+
 
 /**
  * List of repeated fields within this message type.
@@ -1187,7 +1247,7 @@ proto.iotextypes.VoteBucketList.prototype.toObject = function(opt_includeInstanc
  */
 proto.iotextypes.VoteBucketList.toObject = function(includeInstance, msg) {
   var f, obj = {
-    bucketsList: jspb.Message.toObjectList(msg.getBucketsList(),
+bucketsList: jspb.Message.toObjectList(msg.getBucketsList(),
     proto.iotextypes.VoteBucket.toObject, includeInstance)
   };
 
@@ -1201,7 +1261,7 @@ proto.iotextypes.VoteBucketList.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.VoteBucketList}
  */
 proto.iotextypes.VoteBucketList.deserializeBinary = function(bytes) {
@@ -1340,13 +1400,18 @@ proto.iotextypes.CandidateV2.prototype.toObject = function(opt_includeInstance) 
  */
 proto.iotextypes.CandidateV2.toObject = function(includeInstance, msg) {
   var f, obj = {
-    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    operatoraddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    rewardaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    totalweightedvotes: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    selfstakebucketidx: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    selfstakingtokens: jspb.Message.getFieldWithDefault(msg, 7, "")
+owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+operatoraddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+rewardaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
+name: jspb.Message.getFieldWithDefault(msg, 4, ""),
+totalweightedvotes: jspb.Message.getFieldWithDefault(msg, 5, ""),
+selfstakebucketidx: jspb.Message.getFieldWithDefault(msg, 6, 0),
+selfstakingtokens: jspb.Message.getFieldWithDefault(msg, 7, ""),
+id: jspb.Message.getFieldWithDefault(msg, 8, ""),
+blspubkey: msg.getBlspubkey_asB64(),
+deactivatedat: jspb.Message.getFieldWithDefault(msg, 10, 0),
+commissionrate: jspb.Message.getFieldWithDefault(msg, 11, 0),
+voterrewardonchainoptin: jspb.Message.getBooleanFieldWithDefault(msg, 12, false)
   };
 
   if (includeInstance) {
@@ -1359,7 +1424,7 @@ proto.iotextypes.CandidateV2.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.CandidateV2}
  */
 proto.iotextypes.CandidateV2.deserializeBinary = function(bytes) {
@@ -1384,23 +1449,23 @@ proto.iotextypes.CandidateV2.deserializeBinaryFromReader = function(msg, reader)
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setOwneraddress(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setOperatoraddress(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setRewardaddress(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setTotalweightedvotes(value);
       break;
     case 6:
@@ -1408,8 +1473,28 @@ proto.iotextypes.CandidateV2.deserializeBinaryFromReader = function(msg, reader)
       msg.setSelfstakebucketidx(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setSelfstakingtokens(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      msg.setId(value);
+      break;
+    case 9:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setBlspubkey(value);
+      break;
+    case 10:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setDeactivatedat(value);
+      break;
+    case 11:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setCommissionrate(value);
+      break;
+    case 12:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setVoterrewardonchainoptin(value);
       break;
     default:
       reader.skipField();
@@ -1486,6 +1571,41 @@ proto.iotextypes.CandidateV2.serializeBinaryToWriter = function(message, writer)
   if (f.length > 0) {
     writer.writeString(
       7,
+      f
+    );
+  }
+  f = message.getId();
+  if (f.length > 0) {
+    writer.writeString(
+      8,
+      f
+    );
+  }
+  f = message.getBlspubkey_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      9,
+      f
+    );
+  }
+  f = message.getDeactivatedat();
+  if (f !== 0) {
+    writer.writeUint64(
+      10,
+      f
+    );
+  }
+  f = message.getCommissionrate();
+  if (f !== 0) {
+    writer.writeUint64(
+      11,
+      f
+    );
+  }
+  f = message.getVoterrewardonchainoptin();
+  if (f) {
+    writer.writeBool(
+      12,
       f
     );
   }
@@ -1618,6 +1738,120 @@ proto.iotextypes.CandidateV2.prototype.setSelfstakingtokens = function(value) {
 };
 
 
+/**
+ * optional string id = 8;
+ * @return {string}
+ */
+proto.iotextypes.CandidateV2.prototype.getId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.iotextypes.CandidateV2} returns this
+ */
+proto.iotextypes.CandidateV2.prototype.setId = function(value) {
+  return jspb.Message.setProto3StringField(this, 8, value);
+};
+
+
+/**
+ * optional bytes blsPubKey = 9;
+ * @return {string}
+ */
+proto.iotextypes.CandidateV2.prototype.getBlspubkey = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+};
+
+
+/**
+ * optional bytes blsPubKey = 9;
+ * This is a type-conversion wrapper around `getBlspubkey()`
+ * @return {string}
+ */
+proto.iotextypes.CandidateV2.prototype.getBlspubkey_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getBlspubkey()));
+};
+
+
+/**
+ * optional bytes blsPubKey = 9;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getBlspubkey()`
+ * @return {!Uint8Array}
+ */
+proto.iotextypes.CandidateV2.prototype.getBlspubkey_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getBlspubkey()));
+};
+
+
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.iotextypes.CandidateV2} returns this
+ */
+proto.iotextypes.CandidateV2.prototype.setBlspubkey = function(value) {
+  return jspb.Message.setProto3BytesField(this, 9, value);
+};
+
+
+/**
+ * optional uint64 deactivatedAt = 10;
+ * @return {number}
+ */
+proto.iotextypes.CandidateV2.prototype.getDeactivatedat = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.CandidateV2} returns this
+ */
+proto.iotextypes.CandidateV2.prototype.setDeactivatedat = function(value) {
+  return jspb.Message.setProto3IntField(this, 10, value);
+};
+
+
+/**
+ * optional uint64 commissionRate = 11;
+ * @return {number}
+ */
+proto.iotextypes.CandidateV2.prototype.getCommissionrate = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.iotextypes.CandidateV2} returns this
+ */
+proto.iotextypes.CandidateV2.prototype.setCommissionrate = function(value) {
+  return jspb.Message.setProto3IntField(this, 11, value);
+};
+
+
+/**
+ * optional bool voterRewardOnchainOptIn = 12;
+ * @return {boolean}
+ */
+proto.iotextypes.CandidateV2.prototype.getVoterrewardonchainoptin = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 12, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.iotextypes.CandidateV2} returns this
+ */
+proto.iotextypes.CandidateV2.prototype.setVoterrewardonchainoptin = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 12, value);
+};
+
+
 
 /**
  * List of repeated fields within this message type.
@@ -1657,7 +1891,7 @@ proto.iotextypes.CandidateListV2.prototype.toObject = function(opt_includeInstan
  */
 proto.iotextypes.CandidateListV2.toObject = function(includeInstance, msg) {
   var f, obj = {
-    candidatesList: jspb.Message.toObjectList(msg.getCandidatesList(),
+candidatesList: jspb.Message.toObjectList(msg.getCandidatesList(),
     proto.iotextypes.CandidateV2.toObject, includeInstance)
   };
 
@@ -1671,7 +1905,7 @@ proto.iotextypes.CandidateListV2.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.CandidateListV2}
  */
 proto.iotextypes.CandidateListV2.deserializeBinary = function(bytes) {
@@ -1810,8 +2044,8 @@ proto.iotextypes.BucketsCount.prototype.toObject = function(opt_includeInstance)
  */
 proto.iotextypes.BucketsCount.toObject = function(includeInstance, msg) {
   var f, obj = {
-    total: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    active: jspb.Message.getFieldWithDefault(msg, 2, 0)
+total: jspb.Message.getFieldWithDefault(msg, 1, 0),
+active: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -1824,7 +2058,7 @@ proto.iotextypes.BucketsCount.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.BucketsCount}
  */
 proto.iotextypes.BucketsCount.deserializeBinary = function(bytes) {
@@ -1970,8 +2204,8 @@ proto.iotextypes.ContractStakingBucketType.prototype.toObject = function(opt_inc
  */
 proto.iotextypes.ContractStakingBucketType.toObject = function(includeInstance, msg) {
   var f, obj = {
-    stakedamount: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    stakedduration: jspb.Message.getFieldWithDefault(msg, 2, 0)
+stakedamount: jspb.Message.getFieldWithDefault(msg, 1, ""),
+stakedduration: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -1984,7 +2218,7 @@ proto.iotextypes.ContractStakingBucketType.toObject = function(includeInstance, 
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.ContractStakingBucketType}
  */
 proto.iotextypes.ContractStakingBucketType.deserializeBinary = function(bytes) {
@@ -2009,7 +2243,7 @@ proto.iotextypes.ContractStakingBucketType.deserializeBinaryFromReader = functio
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setStakedamount(value);
       break;
     case 2:
@@ -2137,7 +2371,7 @@ proto.iotextypes.ContractStakingBucketTypeList.prototype.toObject = function(opt
  */
 proto.iotextypes.ContractStakingBucketTypeList.toObject = function(includeInstance, msg) {
   var f, obj = {
-    buckettypesList: jspb.Message.toObjectList(msg.getBuckettypesList(),
+buckettypesList: jspb.Message.toObjectList(msg.getBuckettypesList(),
     proto.iotextypes.ContractStakingBucketType.toObject, includeInstance)
   };
 
@@ -2151,7 +2385,7 @@ proto.iotextypes.ContractStakingBucketTypeList.toObject = function(includeInstan
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.ContractStakingBucketTypeList}
  */
 proto.iotextypes.ContractStakingBucketTypeList.deserializeBinary = function(bytes) {

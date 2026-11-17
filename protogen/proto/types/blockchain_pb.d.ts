@@ -74,6 +74,20 @@ export class BlockHeaderCore extends jspb.Message {
   getLogsbloom_asB64(): string;
   setLogsbloom(value: Uint8Array | string): BlockHeaderCore;
 
+  getGasused(): number;
+  setGasused(value: number): BlockHeaderCore;
+
+  getBasefee(): Uint8Array | string;
+  getBasefee_asU8(): Uint8Array;
+  getBasefee_asB64(): string;
+  setBasefee(value: Uint8Array | string): BlockHeaderCore;
+
+  getBlobgasused(): number;
+  setBlobgasused(value: number): BlockHeaderCore;
+
+  getExcessblobgas(): number;
+  setExcessblobgas(value: number): BlockHeaderCore;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockHeaderCore.AsObject;
   static toObject(includeInstance: boolean, msg: BlockHeaderCore): BlockHeaderCore.AsObject;
@@ -92,6 +106,10 @@ export namespace BlockHeaderCore {
     deltastatedigest: Uint8Array | string,
     receiptroot: Uint8Array | string,
     logsbloom: Uint8Array | string,
+    gasused: number,
+    basefee: Uint8Array | string,
+    blobgasused: number,
+    excessblobgas: number,
   }
 }
 

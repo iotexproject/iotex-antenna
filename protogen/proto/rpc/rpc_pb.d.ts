@@ -25,6 +25,26 @@ export namespace BlockSync {
   }
 }
 
+export class ActionSync extends jspb.Message {
+  getHashesList(): Array<Uint8Array | string>;
+  setHashesList(value: Array<Uint8Array | string>): ActionSync;
+  clearHashesList(): ActionSync;
+  addHashes(value: Uint8Array | string, index?: number): ActionSync;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ActionSync.AsObject;
+  static toObject(includeInstance: boolean, msg: ActionSync): ActionSync.AsObject;
+  static serializeBinaryToWriter(message: ActionSync, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ActionSync;
+  static deserializeBinaryFromReader(message: ActionSync, reader: jspb.BinaryReader): ActionSync;
+}
+
+export namespace ActionSync {
+  export type AsObject = {
+    hashesList: Array<Uint8Array | string>,
+  }
+}
+
 export class BroadcastMsg extends jspb.Message {
   getChainId(): number;
   setChainId(value: number): BroadcastMsg;
@@ -114,5 +134,8 @@ export enum MessageType {
   NODE_INFO_REQUEST = 5,
   NODE_INFO = 6,
   ACTIONS = 7,
+  ACTION_HASH = 8,
+  ACTION_REQUEST = 9,
   TEST = 10001,
+  BUNDLE = 10002,
 }

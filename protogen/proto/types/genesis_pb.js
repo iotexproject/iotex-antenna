@@ -13,7 +13,7 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = Function('return this')();
+var global = globalThis;
 
 goog.exportSymbol('proto.iotextypes.Genesis', null, global);
 goog.exportSymbol('proto.iotextypes.GenesisAccount', null, global);
@@ -179,10 +179,10 @@ proto.iotextypes.Genesis.prototype.toObject = function(opt_includeInstance) {
  */
 proto.iotextypes.Genesis.toObject = function(includeInstance, msg) {
   var f, obj = {
-    blockchain: (f = msg.getBlockchain()) && proto.iotextypes.GenesisBlockchain.toObject(includeInstance, f),
-    account: (f = msg.getAccount()) && proto.iotextypes.GenesisAccount.toObject(includeInstance, f),
-    poll: (f = msg.getPoll()) && proto.iotextypes.GenesisPoll.toObject(includeInstance, f),
-    rewarding: (f = msg.getRewarding()) && proto.iotextypes.GenesisRewarding.toObject(includeInstance, f)
+blockchain: (f = msg.getBlockchain()) && proto.iotextypes.GenesisBlockchain.toObject(includeInstance, f),
+account: (f = msg.getAccount()) && proto.iotextypes.GenesisAccount.toObject(includeInstance, f),
+poll: (f = msg.getPoll()) && proto.iotextypes.GenesisPoll.toObject(includeInstance, f),
+rewarding: (f = msg.getRewarding()) && proto.iotextypes.GenesisRewarding.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -195,7 +195,7 @@ proto.iotextypes.Genesis.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.Genesis}
  */
 proto.iotextypes.Genesis.deserializeBinary = function(bytes) {
@@ -483,14 +483,14 @@ proto.iotextypes.GenesisBlockchain.prototype.toObject = function(opt_includeInst
  */
 proto.iotextypes.GenesisBlockchain.toObject = function(includeInstance, msg) {
   var f, obj = {
-    timestamp: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    blockgaslimit: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    actiongaslimit: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    blockinterval: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    numsubepochs: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    numdelegates: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    numcandidatedelegates: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    timebasedrotation: jspb.Message.getBooleanFieldWithDefault(msg, 8, false)
+timestamp: jspb.Message.getFieldWithDefault(msg, 1, 0),
+blockgaslimit: jspb.Message.getFieldWithDefault(msg, 2, 0),
+actiongaslimit: jspb.Message.getFieldWithDefault(msg, 3, 0),
+blockinterval: jspb.Message.getFieldWithDefault(msg, 4, 0),
+numsubepochs: jspb.Message.getFieldWithDefault(msg, 5, 0),
+numdelegates: jspb.Message.getFieldWithDefault(msg, 6, 0),
+numcandidatedelegates: jspb.Message.getFieldWithDefault(msg, 7, 0),
+timebasedrotation: jspb.Message.getBooleanFieldWithDefault(msg, 8, false)
   };
 
   if (includeInstance) {
@@ -503,7 +503,7 @@ proto.iotextypes.GenesisBlockchain.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.GenesisBlockchain}
  */
 proto.iotextypes.GenesisBlockchain.deserializeBinary = function(bytes) {
@@ -830,8 +830,8 @@ proto.iotextypes.GenesisAccount.prototype.toObject = function(opt_includeInstanc
  */
 proto.iotextypes.GenesisAccount.toObject = function(includeInstance, msg) {
   var f, obj = {
-    initbalanceaddrsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
-    initbalancesList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
+initbalanceaddrsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
+initbalancesList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -844,7 +844,7 @@ proto.iotextypes.GenesisAccount.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.GenesisAccount}
  */
 proto.iotextypes.GenesisAccount.deserializeBinary = function(bytes) {
@@ -869,11 +869,11 @@ proto.iotextypes.GenesisAccount.deserializeBinaryFromReader = function(msg, read
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addInitbalanceaddrs(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addInitbalances(value);
       break;
     default:
@@ -1035,14 +1035,14 @@ proto.iotextypes.GenesisPoll.prototype.toObject = function(opt_includeInstance) 
  */
 proto.iotextypes.GenesisPoll.toObject = function(includeInstance, msg) {
   var f, obj = {
-    enablegravitychainvoting: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
-    gravitychainstartheight: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    registercontractaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    stakingcontractaddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    votethreshold: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    scorethreshold: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    selfstakingthreshold: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    delegatesList: jspb.Message.toObjectList(msg.getDelegatesList(),
+enablegravitychainvoting: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
+gravitychainstartheight: jspb.Message.getFieldWithDefault(msg, 2, 0),
+registercontractaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
+stakingcontractaddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
+votethreshold: jspb.Message.getFieldWithDefault(msg, 5, ""),
+scorethreshold: jspb.Message.getFieldWithDefault(msg, 6, ""),
+selfstakingthreshold: jspb.Message.getFieldWithDefault(msg, 7, ""),
+delegatesList: jspb.Message.toObjectList(msg.getDelegatesList(),
     proto.iotextypes.GenesisDelegate.toObject, includeInstance)
   };
 
@@ -1056,7 +1056,7 @@ proto.iotextypes.GenesisPoll.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.GenesisPoll}
  */
 proto.iotextypes.GenesisPoll.deserializeBinary = function(bytes) {
@@ -1089,23 +1089,23 @@ proto.iotextypes.GenesisPoll.deserializeBinaryFromReader = function(msg, reader)
       msg.setGravitychainstartheight(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setRegistercontractaddress(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setStakingcontractaddress(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setVotethreshold(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setScorethreshold(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setSelfstakingthreshold(value);
       break;
     case 8:
@@ -1398,9 +1398,9 @@ proto.iotextypes.GenesisDelegate.prototype.toObject = function(opt_includeInstan
  */
 proto.iotextypes.GenesisDelegate.toObject = function(includeInstance, msg) {
   var f, obj = {
-    operatoraddr: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    rewardaddr: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    votes: jspb.Message.getFieldWithDefault(msg, 3, "")
+operatoraddr: jspb.Message.getFieldWithDefault(msg, 1, ""),
+rewardaddr: jspb.Message.getFieldWithDefault(msg, 2, ""),
+votes: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -1413,7 +1413,7 @@ proto.iotextypes.GenesisDelegate.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.GenesisDelegate}
  */
 proto.iotextypes.GenesisDelegate.deserializeBinary = function(bytes) {
@@ -1438,15 +1438,15 @@ proto.iotextypes.GenesisDelegate.deserializeBinaryFromReader = function(msg, rea
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setOperatoraddr(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setRewardaddr(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setVotes(value);
       break;
     default:
@@ -1588,15 +1588,15 @@ proto.iotextypes.GenesisRewarding.prototype.toObject = function(opt_includeInsta
  */
 proto.iotextypes.GenesisRewarding.toObject = function(includeInstance, msg) {
   var f, obj = {
-    initadminaddr: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    initbalance: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    blockreward: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    epochreward: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    numdelegatesforepochreward: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    foundationbonus: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    numdelegatesforfoundationbonus: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    foundationbonuslastepoch: jspb.Message.getFieldWithDefault(msg, 8, 0),
-    productivitythreshold: jspb.Message.getFieldWithDefault(msg, 9, 0)
+initadminaddr: jspb.Message.getFieldWithDefault(msg, 1, ""),
+initbalance: jspb.Message.getFieldWithDefault(msg, 2, ""),
+blockreward: jspb.Message.getFieldWithDefault(msg, 3, ""),
+epochreward: jspb.Message.getFieldWithDefault(msg, 4, ""),
+numdelegatesforepochreward: jspb.Message.getFieldWithDefault(msg, 5, 0),
+foundationbonus: jspb.Message.getFieldWithDefault(msg, 6, ""),
+numdelegatesforfoundationbonus: jspb.Message.getFieldWithDefault(msg, 7, 0),
+foundationbonuslastepoch: jspb.Message.getFieldWithDefault(msg, 8, 0),
+productivitythreshold: jspb.Message.getFieldWithDefault(msg, 9, 0)
   };
 
   if (includeInstance) {
@@ -1609,7 +1609,7 @@ proto.iotextypes.GenesisRewarding.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotextypes.GenesisRewarding}
  */
 proto.iotextypes.GenesisRewarding.deserializeBinary = function(bytes) {
@@ -1634,19 +1634,19 @@ proto.iotextypes.GenesisRewarding.deserializeBinaryFromReader = function(msg, re
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setInitadminaddr(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setInitbalance(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setBlockreward(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setEpochreward(value);
       break;
     case 5:
@@ -1654,7 +1654,7 @@ proto.iotextypes.GenesisRewarding.deserializeBinaryFromReader = function(msg, re
       msg.setNumdelegatesforepochreward(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setFoundationbonus(value);
       break;
     case 7:

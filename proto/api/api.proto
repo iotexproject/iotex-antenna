@@ -18,6 +18,9 @@ import "proto/types/node.proto";
 import "proto/types/election.proto";
 import "proto/types/transaction_log.proto";
 import "google/protobuf/timestamp.proto";
+// NOTE: hoisted from the bottom of the upstream file; protobufjs (used by
+// @grpc/proto-loader in node-rpc-method) rejects imports after definitions.
+import "proto/types/bundle.proto";
 
 service APIService {
   // get the address detail of an address
@@ -291,8 +294,14 @@ message EstimateActionGasConsumptionRequest {
     iotextypes.StakeTransferOwnership stakeTransferOwnership = 46;
     iotextypes.CandidateRegister candidateRegister = 47;
     iotextypes.CandidateBasicInfo candidateUpdate = 48;
+    iotextypes.CandidateActivate candidateActivate = 49;
+    iotextypes.CandidateEndorsement candidateEndorsement = 51;
+    iotextypes.CandidateTransferOwnership candidateTransferOwnership = 52;
+    iotextypes.StakeMigrate stakeMigrate = 53;
+    iotextypes.CandidateDeactivate candidateDeactivate = 54;
   }
   string callerAddress = 100;
+  string gasPrice = 101;
 }
 
 message EstimateActionGasConsumptionResponse {
@@ -347,7 +356,7 @@ message GetLogsByRange {
 }
 
 message Topics {
-    repeated bytes topic = 1;
+  repeated bytes topic = 1;
 }
 
 message LogsFilter {
@@ -457,3 +466,22 @@ message TraceTransactionStructLogsRequest {
 message TraceTransactionStructLogsResponse {
   repeated iotextypes.TransactionStructLog  structLogs = 1;
 }
+
+
+service BundleAPIService {
+  // SendBundle sends a bundle of actions to the blockchain.
+  rpc SendBundle(SendBundleRequest) returns (SendBundleResponse) {}
+}
+
+message SendBundleRequest {
+  iotextypes.Bundle bundle = 1;
+  string uuid = 2;
+  google.protobuf.Timestamp minTimestamp = 3;
+  google.protobuf.Timestamp maxTimestamp = 4;
+}
+
+message SendBundleResponse {
+  string bundleHash = 1;
+  string uuid = 2;
+}
+

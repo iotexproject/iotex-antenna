@@ -13,7 +13,7 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = Function('return this')();
+var global = globalThis;
 
 goog.exportSymbol('proto.iotexapi.PaginationParam', null, global);
 goog.exportSymbol('proto.iotexapi.ReadStakingDataMethod', null, global);
@@ -335,8 +335,8 @@ proto.iotexapi.PaginationParam.prototype.toObject = function(opt_includeInstance
  */
 proto.iotexapi.PaginationParam.toObject = function(includeInstance, msg) {
   var f, obj = {
-    offset: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    limit: jspb.Message.getFieldWithDefault(msg, 2, 0)
+offset: jspb.Message.getFieldWithDefault(msg, 1, 0),
+limit: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -349,7 +349,7 @@ proto.iotexapi.PaginationParam.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotexapi.PaginationParam}
  */
 proto.iotexapi.PaginationParam.deserializeBinary = function(bytes) {
@@ -495,7 +495,7 @@ proto.iotexapi.ReadStakingDataMethod.prototype.toObject = function(opt_includeIn
  */
 proto.iotexapi.ReadStakingDataMethod.toObject = function(includeInstance, msg) {
   var f, obj = {
-    method: jspb.Message.getFieldWithDefault(msg, 1, 0)
+method: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -508,7 +508,7 @@ proto.iotexapi.ReadStakingDataMethod.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotexapi.ReadStakingDataMethod}
  */
 proto.iotexapi.ReadStakingDataMethod.deserializeBinary = function(bytes) {
@@ -682,16 +682,16 @@ proto.iotexapi.ReadStakingDataRequest.prototype.toObject = function(opt_includeI
  */
 proto.iotexapi.ReadStakingDataRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    buckets: (f = msg.getBuckets()) && proto.iotexapi.ReadStakingDataRequest.VoteBuckets.toObject(includeInstance, f),
-    bucketsbyvoter: (f = msg.getBucketsbyvoter()) && proto.iotexapi.ReadStakingDataRequest.VoteBucketsByVoter.toObject(includeInstance, f),
-    bucketsbycandidate: (f = msg.getBucketsbycandidate()) && proto.iotexapi.ReadStakingDataRequest.VoteBucketsByCandidate.toObject(includeInstance, f),
-    candidates: (f = msg.getCandidates()) && proto.iotexapi.ReadStakingDataRequest.Candidates.toObject(includeInstance, f),
-    candidatebyname: (f = msg.getCandidatebyname()) && proto.iotexapi.ReadStakingDataRequest.CandidateByName.toObject(includeInstance, f),
-    bucketsbyindexes: (f = msg.getBucketsbyindexes()) && proto.iotexapi.ReadStakingDataRequest.VoteBucketsByIndexes.toObject(includeInstance, f),
-    candidatebyaddress: (f = msg.getCandidatebyaddress()) && proto.iotexapi.ReadStakingDataRequest.CandidateByAddress.toObject(includeInstance, f),
-    totalstakingamount: (f = msg.getTotalstakingamount()) && proto.iotexapi.ReadStakingDataRequest.TotalStakingAmount.toObject(includeInstance, f),
-    bucketscount: (f = msg.getBucketscount()) && proto.iotexapi.ReadStakingDataRequest.BucketsCount.toObject(includeInstance, f),
-    contractstakingbuckettypes: (f = msg.getContractstakingbuckettypes()) && proto.iotexapi.ReadStakingDataRequest.ContractStakingBucketTypes.toObject(includeInstance, f)
+buckets: (f = msg.getBuckets()) && proto.iotexapi.ReadStakingDataRequest.VoteBuckets.toObject(includeInstance, f),
+bucketsbyvoter: (f = msg.getBucketsbyvoter()) && proto.iotexapi.ReadStakingDataRequest.VoteBucketsByVoter.toObject(includeInstance, f),
+bucketsbycandidate: (f = msg.getBucketsbycandidate()) && proto.iotexapi.ReadStakingDataRequest.VoteBucketsByCandidate.toObject(includeInstance, f),
+candidates: (f = msg.getCandidates()) && proto.iotexapi.ReadStakingDataRequest.Candidates.toObject(includeInstance, f),
+candidatebyname: (f = msg.getCandidatebyname()) && proto.iotexapi.ReadStakingDataRequest.CandidateByName.toObject(includeInstance, f),
+bucketsbyindexes: (f = msg.getBucketsbyindexes()) && proto.iotexapi.ReadStakingDataRequest.VoteBucketsByIndexes.toObject(includeInstance, f),
+candidatebyaddress: (f = msg.getCandidatebyaddress()) && proto.iotexapi.ReadStakingDataRequest.CandidateByAddress.toObject(includeInstance, f),
+totalstakingamount: (f = msg.getTotalstakingamount()) && proto.iotexapi.ReadStakingDataRequest.TotalStakingAmount.toObject(includeInstance, f),
+bucketscount: (f = msg.getBucketscount()) && proto.iotexapi.ReadStakingDataRequest.BucketsCount.toObject(includeInstance, f),
+contractstakingbuckettypes: (f = msg.getContractstakingbuckettypes()) && proto.iotexapi.ReadStakingDataRequest.ContractStakingBucketTypes.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -704,7 +704,7 @@ proto.iotexapi.ReadStakingDataRequest.toObject = function(includeInstance, msg) 
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotexapi.ReadStakingDataRequest}
  */
 proto.iotexapi.ReadStakingDataRequest.deserializeBinary = function(bytes) {
@@ -922,7 +922,7 @@ proto.iotexapi.ReadStakingDataRequest.VoteBuckets.prototype.toObject = function(
  */
 proto.iotexapi.ReadStakingDataRequest.VoteBuckets.toObject = function(includeInstance, msg) {
   var f, obj = {
-    pagination: (f = msg.getPagination()) && proto.iotexapi.PaginationParam.toObject(includeInstance, f)
+pagination: (f = msg.getPagination()) && proto.iotexapi.PaginationParam.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -935,7 +935,7 @@ proto.iotexapi.ReadStakingDataRequest.VoteBuckets.toObject = function(includeIns
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotexapi.ReadStakingDataRequest.VoteBuckets}
  */
 proto.iotexapi.ReadStakingDataRequest.VoteBuckets.deserializeBinary = function(bytes) {
@@ -1073,8 +1073,8 @@ proto.iotexapi.ReadStakingDataRequest.VoteBucketsByVoter.prototype.toObject = fu
  */
 proto.iotexapi.ReadStakingDataRequest.VoteBucketsByVoter.toObject = function(includeInstance, msg) {
   var f, obj = {
-    voteraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    pagination: (f = msg.getPagination()) && proto.iotexapi.PaginationParam.toObject(includeInstance, f)
+voteraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+pagination: (f = msg.getPagination()) && proto.iotexapi.PaginationParam.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1087,7 +1087,7 @@ proto.iotexapi.ReadStakingDataRequest.VoteBucketsByVoter.toObject = function(inc
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotexapi.ReadStakingDataRequest.VoteBucketsByVoter}
  */
 proto.iotexapi.ReadStakingDataRequest.VoteBucketsByVoter.deserializeBinary = function(bytes) {
@@ -1112,7 +1112,7 @@ proto.iotexapi.ReadStakingDataRequest.VoteBucketsByVoter.deserializeBinaryFromRe
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setVoteraddress(value);
       break;
     case 2:
@@ -1254,8 +1254,8 @@ proto.iotexapi.ReadStakingDataRequest.VoteBucketsByCandidate.prototype.toObject 
  */
 proto.iotexapi.ReadStakingDataRequest.VoteBucketsByCandidate.toObject = function(includeInstance, msg) {
   var f, obj = {
-    candname: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    pagination: (f = msg.getPagination()) && proto.iotexapi.PaginationParam.toObject(includeInstance, f)
+candname: jspb.Message.getFieldWithDefault(msg, 1, ""),
+pagination: (f = msg.getPagination()) && proto.iotexapi.PaginationParam.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1268,7 +1268,7 @@ proto.iotexapi.ReadStakingDataRequest.VoteBucketsByCandidate.toObject = function
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotexapi.ReadStakingDataRequest.VoteBucketsByCandidate}
  */
 proto.iotexapi.ReadStakingDataRequest.VoteBucketsByCandidate.deserializeBinary = function(bytes) {
@@ -1293,7 +1293,7 @@ proto.iotexapi.ReadStakingDataRequest.VoteBucketsByCandidate.deserializeBinaryFr
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setCandname(value);
       break;
     case 2:
@@ -1435,7 +1435,7 @@ proto.iotexapi.ReadStakingDataRequest.Candidates.prototype.toObject = function(o
  */
 proto.iotexapi.ReadStakingDataRequest.Candidates.toObject = function(includeInstance, msg) {
   var f, obj = {
-    pagination: (f = msg.getPagination()) && proto.iotexapi.PaginationParam.toObject(includeInstance, f)
+pagination: (f = msg.getPagination()) && proto.iotexapi.PaginationParam.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1448,7 +1448,7 @@ proto.iotexapi.ReadStakingDataRequest.Candidates.toObject = function(includeInst
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotexapi.ReadStakingDataRequest.Candidates}
  */
 proto.iotexapi.ReadStakingDataRequest.Candidates.deserializeBinary = function(bytes) {
@@ -1586,7 +1586,7 @@ proto.iotexapi.ReadStakingDataRequest.CandidateByName.prototype.toObject = funct
  */
 proto.iotexapi.ReadStakingDataRequest.CandidateByName.toObject = function(includeInstance, msg) {
   var f, obj = {
-    candname: jspb.Message.getFieldWithDefault(msg, 1, "")
+candname: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -1599,7 +1599,7 @@ proto.iotexapi.ReadStakingDataRequest.CandidateByName.toObject = function(includ
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotexapi.ReadStakingDataRequest.CandidateByName}
  */
 proto.iotexapi.ReadStakingDataRequest.CandidateByName.deserializeBinary = function(bytes) {
@@ -1624,7 +1624,7 @@ proto.iotexapi.ReadStakingDataRequest.CandidateByName.deserializeBinaryFromReade
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setCandname(value);
       break;
     default:
@@ -1723,7 +1723,7 @@ proto.iotexapi.ReadStakingDataRequest.VoteBucketsByIndexes.prototype.toObject = 
  */
 proto.iotexapi.ReadStakingDataRequest.VoteBucketsByIndexes.toObject = function(includeInstance, msg) {
   var f, obj = {
-    indexList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
+indexList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -1736,7 +1736,7 @@ proto.iotexapi.ReadStakingDataRequest.VoteBucketsByIndexes.toObject = function(i
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotexapi.ReadStakingDataRequest.VoteBucketsByIndexes}
  */
 proto.iotexapi.ReadStakingDataRequest.VoteBucketsByIndexes.deserializeBinary = function(bytes) {
@@ -1761,10 +1761,7 @@ proto.iotexapi.ReadStakingDataRequest.VoteBucketsByIndexes.deserializeBinaryFrom
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedUint64() : [reader.readUint64()]);
-      for (var i = 0; i < values.length; i++) {
-        msg.addIndex(values[i]);
-      }
+      reader.readPackableUint64Into(msg.getIndexList());
       break;
     default:
       reader.skipField();
@@ -1874,7 +1871,8 @@ proto.iotexapi.ReadStakingDataRequest.CandidateByAddress.prototype.toObject = fu
  */
 proto.iotexapi.ReadStakingDataRequest.CandidateByAddress.toObject = function(includeInstance, msg) {
   var f, obj = {
-    owneraddr: jspb.Message.getFieldWithDefault(msg, 1, "")
+owneraddr: jspb.Message.getFieldWithDefault(msg, 1, ""),
+id: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -1887,7 +1885,7 @@ proto.iotexapi.ReadStakingDataRequest.CandidateByAddress.toObject = function(inc
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotexapi.ReadStakingDataRequest.CandidateByAddress}
  */
 proto.iotexapi.ReadStakingDataRequest.CandidateByAddress.deserializeBinary = function(bytes) {
@@ -1912,8 +1910,12 @@ proto.iotexapi.ReadStakingDataRequest.CandidateByAddress.deserializeBinaryFromRe
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setOwneraddr(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      msg.setId(value);
       break;
     default:
       reader.skipField();
@@ -1951,6 +1953,13 @@ proto.iotexapi.ReadStakingDataRequest.CandidateByAddress.serializeBinaryToWriter
       f
     );
   }
+  f = message.getId();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
 };
 
 
@@ -1969,6 +1978,24 @@ proto.iotexapi.ReadStakingDataRequest.CandidateByAddress.prototype.getOwneraddr 
  */
 proto.iotexapi.ReadStakingDataRequest.CandidateByAddress.prototype.setOwneraddr = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string id = 2;
+ * @return {string}
+ */
+proto.iotexapi.ReadStakingDataRequest.CandidateByAddress.prototype.getId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.iotexapi.ReadStakingDataRequest.CandidateByAddress} returns this
+ */
+proto.iotexapi.ReadStakingDataRequest.CandidateByAddress.prototype.setId = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
@@ -2017,7 +2044,7 @@ proto.iotexapi.ReadStakingDataRequest.TotalStakingAmount.toObject = function(inc
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotexapi.ReadStakingDataRequest.TotalStakingAmount}
  */
 proto.iotexapi.ReadStakingDataRequest.TotalStakingAmount.deserializeBinary = function(bytes) {
@@ -2118,7 +2145,7 @@ proto.iotexapi.ReadStakingDataRequest.BucketsCount.toObject = function(includeIn
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotexapi.ReadStakingDataRequest.BucketsCount}
  */
 proto.iotexapi.ReadStakingDataRequest.BucketsCount.deserializeBinary = function(bytes) {
@@ -2206,7 +2233,7 @@ proto.iotexapi.ReadStakingDataRequest.ContractStakingBucketTypes.prototype.toObj
  */
 proto.iotexapi.ReadStakingDataRequest.ContractStakingBucketTypes.toObject = function(includeInstance, msg) {
   var f, obj = {
-    contractaddress: jspb.Message.getFieldWithDefault(msg, 1, "")
+contractaddress: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -2219,7 +2246,7 @@ proto.iotexapi.ReadStakingDataRequest.ContractStakingBucketTypes.toObject = func
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.iotexapi.ReadStakingDataRequest.ContractStakingBucketTypes}
  */
 proto.iotexapi.ReadStakingDataRequest.ContractStakingBucketTypes.deserializeBinary = function(bytes) {
@@ -2244,7 +2271,7 @@ proto.iotexapi.ReadStakingDataRequest.ContractStakingBucketTypes.deserializeBina
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setContractaddress(value);
       break;
     default:
